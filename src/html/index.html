@@ -6,12 +6,78 @@
         <meta name="viewport" content="width=device-width">
         <meta name="keywords" content="web design developer dev programming programmer">
         <meta name="author" content="Matthew Maxwell">
-        
+
         <title>Welcome !</title>
         <link rel="stylesheet" href="./src/css/style.css">
     </head>
 
     <body>
+
+        <header>
+            <div class="container">
+                <div id="branding">
+                    <h1>
+                        Matthew Maxwell
+                    </h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">About</a></li>
+                        <li><a href="index.html">Skills</a></li> 
+                        <li><a href="index.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <section id="about">
+            <h2>Hello!</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="container">
+                <div class="container">
+                    <h3>Front-End</h3>
+                    <img>
+                    <p>Description</p>
+                    <p>Names</p>
+                </div>
+
+                <div class="container">
+                    <h3>Development</h3>
+                    <img>
+                    <p>Description</p>
+                    <p>Names</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <div class="container">
+                <form action="action_page.php">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name">
+
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email">
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message"></textarea>
+
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </section>
+
+        <section id="social-media">
+            <img href="./src/icons/github.svg">
+            <img href="./src/icons/linkedin.svg">
+            <img href="./src/icons/twitter.svg">
+            <img href="./src/icons/messenger.svg">
+        </section>
     </body>
 
 </html>
