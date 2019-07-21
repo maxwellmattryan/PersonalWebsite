@@ -1,10 +1,24 @@
-html {
-    font-family: "Arial";
+* {
+    font-family: "Louis George Cafe", "Arial";
+    letter-spacing: 0.75px;
+}
+
+@font-face {
+    font-family: "Louis George Cafe";
+    src: url("/src/css/fonts/louis-george-cafe.ttf");
+}
+
+.page-item {
+    background-color: #D3D3D3;
+    border-radius: 4px;
+    padding: 8px 15px 8px 15px;
+    margin: 20px 0px 20px 0px;
 }
 
 #branding {
     display: grid;
-    grid-template-areas: "header-logo - header-nav";
+    grid-template-areas: "header-logo header-nav";
+    margin: 15px 15px 15px 15px; 
 }
 
 h1 {
@@ -13,6 +27,22 @@ h1 {
 
 nav {
     grid-area: header-nav;
+    text-align: right;
+    font-size: 20px;
+}
+
+nav ul li a:link {
+    text-decoration: none;
+    color: #4E85AC;
+}
+
+nav ul li a:visited {
+    color: #4E85AC;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+    color: #76A8CB;
 }
 
 #nav-list {
@@ -21,13 +51,48 @@ nav {
 
 #nav-list li {
     display: inline-block;
-    margin: 0px 15px 0px 15px;
+    margin: 15px 0px 15px 15px;
+}
+
+.skill-item {
+    background-color: #F5F5F5;
+    padding: 10px 10px 10px 10px;
+    margin: 0px 0px 15px 0px;
+    border-radius: 4px;
+    display: grid;
+    grid-template-areas: 
+        "skill-type skill-description"
+        "skill-icons skill-description"
+        "skill-icons skill-names";
+    grid-template-columns: 50%;
+}
+
+.skill-item h3 {
+    margin: 15px 10px 0px 10px;
+    grid-area: skill-type;
+}
+
+.skill-item div {
+    display: flex;
+    justify-content: left;
+    grid-area: skill-icons;
+}
+
+.skill-item div img {
+    max-width: 45px;
+    margin: 0px 10px 0px 10px;
+}
+
+.skill-description {
+    grid-area: skill-description;
+}
+
+.skill-names {
+    grid-area: skill-names;
+    font-size: 14px;
 }
 
 #contact {
-    background-color: #D3D3D3;
-    padding: 8px 15px 15px 15px;
-    border-radius: 4px;
     display: grid;
 }
 
@@ -43,8 +108,8 @@ input[type=text] {
 
 #message {
     font-family: "Arial";
-    max-width: 100%;
     min-width: 100%;
+    resize: vertical;
     padding: 12px 20px;
     margin: 8px 0px;
     display: inline-block;
@@ -55,6 +120,7 @@ input[type=text] {
 
 input[type=submit] {
     width: 100%;
+    font-size: 16px;
     background-color: #4E85AC;
     color: white;
     padding: 14px 20px;
@@ -68,7 +134,7 @@ input[type=submit]:hover {
     background-color: #76A8CB;
 }
 
-#icons {
+#social-media-icons {
     display: flex;
     justify-content: center;
 }
@@ -76,5 +142,5 @@ input[type=submit]:hover {
 #social-media img {
     margin: 0px 20px;
     padding: 20px 20px;
-    max-width: 75%;
+    max-width: 45px;
 }
