@@ -8,22 +8,19 @@
         <meta name="author" content="Matthew Maxwell">
 
         <title>Welcome !</title>
-        <link rel="stylesheet" href="./src/css/style.css">
+        <link rel="stylesheet" href="/src/css/style.css">
     </head>
 
     <body>
 
         <header>
-            <div class="container">
-                <div id="branding">
-                    <h1>
-                        Matthew Maxwell
-                    </h1>
-                </div>
+            <div class="container" id="branding">
+                <h1>LOGO HERE</h1>
                 <nav>
-                    <ul>
+                    <ul id="nav-list">
                         <li><a href="index.html">About</a></li>
                         <li><a href="index.html">Skills</a></li> 
+                        <li><a href="index.html">Projects</a></li> 
                         <li><a href="index.html">Contact</a></li>
                     </ul>
                 </nav>
@@ -54,30 +51,36 @@
             </div>
         </section>
 
+        <section id="projects">
+            <h2>Projects</h2>
+        </section>
+
         <section id="contact">
             <h2>Contact Me</h2>
-            <div class="container">
-                <form action="action_page.php">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name">
+            <form action="action_page.php">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
 
-                    <label for="email">Email</label>
-                    <input type="text" id="email" name="email">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email">
 
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message"></textarea>
+                <label for="message">Message</label>
+                <textarea id="message" name="message"></textarea>
 
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
+                <input type="submit" value="Submit">
+            </form>
         </section>
 
         <section id="social-media">
-            <img href="./src/icons/github.svg">
-            <img href="./src/icons/linkedin.svg">
-            <img href="./src/icons/twitter.svg">
-            <img href="./src/icons/messenger.svg">
+            <div id="icons">
+                <a href="https://github.com/maxwellmattryan" target="_blank"><img src="/src/icons/github.svg" alt="GitHub"></a>
+                <a href="https://www.linkedin.com/in/maxwell-matthew/" target="_blank"><img src="/src/icons/linkedin.svg" alt="LinkedIn"></a>
+                <a href="https://www.messenger.com/t/matt.maxwell.982" target="_blank"><img src="/src/icons/messenger.svg" alt="Messenger"></a>
+                <a href="https://twitter.com/maxwellmattryan" target="_blank"><img src="/src/icons/twitter.svg" alt="Twitter"></a>
+                <a href="https://www.instagram.com/maxwellmattryan/" target="_blank"><img src="/src/icons/instagram.svg" alt="Instagram"></a>
+            </div>
         </section>
+
     </body>
 
 </html>
