@@ -1,6 +1,6 @@
 * {
     font-family: "Louis George Cafe", "Arial";
-    letter-spacing: 0.75px;
+    letter-spacing: 0.8px;
 }
 
 @font-face {
@@ -19,6 +19,10 @@
     display: grid;
     grid-template-areas: "header-logo header-nav";
     margin: 15px 15px 15px 15px; 
+}
+
+#main-logo {
+    max-width: 90px;
 }
 
 h1 {
@@ -67,9 +71,15 @@ nav ul li a:hover {
     grid-template-columns: 50%;
 }
 
+.skill-item:hover {
+    box-shadow: 0px 5px 5px grey;
+    transform: translateY(-2px);
+}
+
 .skill-item h3 {
     margin: 15px 10px 0px 10px;
     grid-area: skill-type;
+    text-decoration: underline;
 }
 
 .skill-item div {
@@ -79,8 +89,10 @@ nav ul li a:hover {
 }
 
 .skill-item div img {
-    max-width: 45px;
-    margin: 0px 10px 0px 10px;
+    height: 45px;
+    max-width: 145px;
+    margin: 22.5px 10px 22.5px 10px;
+    display: block;
 }
 
 .skill-description {
@@ -90,6 +102,7 @@ nav ul li a:hover {
 .skill-names {
     grid-area: skill-names;
     font-size: 14px;
+    font-style: italic;
 }
 
 #contact {
@@ -121,7 +134,7 @@ input[type=text] {
 input[type=submit] {
     width: 100%;
     font-size: 16px;
-    background-color: #4E85AC;
+    background-color: #0E7989;
     color: white;
     padding: 14px 20px;
     margin: 8px 0px;
@@ -131,7 +144,7 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-    background-color: #76A8CB;
+    background-color: #2C8996;
 }
 
 #social-media-icons {
@@ -142,5 +155,13 @@ input[type=submit]:hover {
 #social-media img {
     margin: 0px 20px;
     padding: 20px 20px;
-    max-width: 45px;
+    max-height: 45px;
+}
+
+#social-media img:hover {
+    transform: translateY(-2px);
+}
+
+#copyright {
+    text-align: center;
 }
