@@ -9,6 +9,8 @@
 
         <title>Welcome !</title>
         <link rel="stylesheet" href="/src/css/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+        <script src="/src/js/main.js"></script>
     </head>
 
     <body>
@@ -38,7 +40,7 @@
             <div class="skill-item">
                 <h3>Front-end</h3>
                 <div>
-                    <img src="/src/icons/html5.svg" title="HTML 5" alt="HTMl 5 logo">
+                    <img src="/src/icons/html5.svg" title="HTML 5" alt="HTML 5 logo">
                     <img src="/src/icons/css3.svg" title="CSS 3" alt="CSS 3 logo">
                     <img src="/src/icons/javascript.svg" title="Javascript" alt="Javascript logo">
                 </div>
@@ -64,17 +66,30 @@
 
         <section id="contact" class="page-item">
             <h2>Contact Me</h2>
-            <form enctype="text/plain" method="post" action="mailto:maxwellmattryan@gmail.com">
-                <label for="name">Name</label>
+            <form enctype="text/plain" method="POST" action="https://formspree.io/maxwellmattryan@gmail.com">
+                <label for="name">
+                    Name
                 <input type="text" id="name" name="name">
+                </label>
 
-                <label for="email">Email</label>
+                <label for="email">
+                    Email
                 <input type="text" id="email" name="email">
+                </label>    
 
-                <label for="message">Message</label>
+                <label for="email">
+                        Subject
+                    <input type="text" id="subject" name="subject">
+                    </label>  
+
+                <label for="message">
+                    Message
                 <textarea id="message" name="message"></textarea>
+                </label>
 
-                <input type="submit" value="Submit">
+                <div id="status"></div>
+
+                <input id="submit" type="submit" value="Submit">
             </form>
         </section>
 
@@ -82,11 +97,7 @@
             <div id="social-media-icons">
                 <a href="https://github.com/maxwellmattryan" target="_blank"><img src="/src/icons/github.svg" title="GitHub" alt="GitHub logo"></a>
                 <a href="https://www.linkedin.com/in/maxwell-matthew/" target="_blank"><img src="/src/icons/linkedin.svg" title="LinkedIn" alt="LinkedIn logo"></a>
-                <a href="https://www.messenger.com/t/matt.maxwell.982" target="_blank"><img src="/src/icons/messenger.svg" title="Messenger" alt="Messenger logo"></a>
                 <a href="https://twitter.com/maxwellmattryan" target="_blank"><img src="/src/icons/twitter.svg" title="Twitter" alt="Twitter logo"></a>
-                <a href="https://www.instagram.com/maxwellmattryan/" target="_blank"><img src="/src/icons/instagram.svg" title="Instagram" alt="Instagram logo"></a>
-                <a href="https://drive.google.com/open?id=13TesGsn6FfFJVw76BZVFeglvom8zNa7k" target="_blank"><img src="/src/icons/googledrive.svg" title="Google Drive" alt="Google Drive logo"></a>
-                <a href="https://maxwellmatt.itch.io/" target="_blank"><img src="/src/icons/itch-dot-io.svg" title="Itch.io" alt="Itch.io logo"></a>
             </div>
         </section>
 
