@@ -5,12 +5,18 @@ $(document).ready(function() {
         var subject = $("#subject").val();
         var message = $("#message").val();
 
-        var statusElm = $("#status")
-        statusElm.empty();
+        var nameStatusElm = $("#name-status");
+        nameStatusElm.empty();
+        var emailStatusElm = $("#email-status");
+        emailStatusElm.empty();
+        var subjectStatusElm = $("#subject-status");
+        subjectStatusElm.empty();
+        var messageStatusElm = $("#message-status");
+        messageStatusElm.empty();
 
         if(name.length < 1) {
             event.preventDefault();
-            statusElm.append("<div>Please enter a name</div>");
+            nameStatusElm.append("<div>*please enter a name</div>");
             document.getElementsByName("name")[0].style.border = "1px solid red";
         } else {
             event.preventDefault();
@@ -19,7 +25,7 @@ $(document).ready(function() {
 
         if(email.length < 5 || !email.includes("@") || !email.includes(".")) {
             event.preventDefault();
-            statusElm.append("<div>Please enter a valid email</div>");
+            emailStatusElm.append("<div>*please enter a valid email</div>");
             document.getElementsByName("email")[0].style.border = "1px solid red";
         } else {
             event.preventDefault();
@@ -28,7 +34,7 @@ $(document).ready(function() {
 
         if(subject < 1) {
             event.preventDefault();
-            statusElm.append("<div>Please enter a subject</div>");
+            subjectStatusElm.append("<div>*please enter a subject</div>");
             document.getElementsByName("subject")[0].style.border = "1px solid red";
         } else {
             event.preventDefault();
@@ -37,7 +43,7 @@ $(document).ready(function() {
 
         if(message < 10) {
             event.preventDefault();
-            statusElm.append("<div>Please enter a message</div>");
+            messageStatusElm.append("<div>*please enter a message</div>");
             document.getElementsByName("message")[0].style.border = "1px solid red";
         } else {
             event.preventDefault();

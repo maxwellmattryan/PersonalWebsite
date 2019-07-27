@@ -148,6 +148,10 @@ input[type=submit]:hover {
     background-color: #2C8996;
 }
 
+.form-input-status {
+    font-style: oblique;
+    padding: 0px 0px 0px 0px;
+}
 
 #social-media-icons {
     display: flex;

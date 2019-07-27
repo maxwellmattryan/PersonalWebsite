@@ -95,22 +95,26 @@
             <form enctype="text/plain" method="POST" action="https://formspree.io/maxwellmattryan@gmail.com">
                 <label for="name">
                     Name
-                <input type="text" id="name" name="name">
+                    <div id="name-status" class="form-input-status"></div>
+                    <input type="text" id="name" name="name">
                 </label>
 
                 <label for="email">
                     Email
-                <input type="text" id="email" name="email">
+                    <div id="email-status" class="form-input-status"></div>
+                    <input type="text" id="email" name="email">
                 </label>    
 
                 <label for="email">
-                        Subject
+                    Subject
+                    <div id="subject-status" class="form-input-status"></div>
                     <input type="text" id="subject" name="subject">
-                    </label>  
+                </label>  
 
                 <label for="message">
                     Message
-                <textarea id="message" name="message"></textarea>
+                    <div id="message-status" class="form-input-status"></div>
+                    <textarea id="message" name="message"></textarea>
                 </label>
 
                 <div id="status"></div>
