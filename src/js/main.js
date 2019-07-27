@@ -11,18 +11,37 @@ $(document).ready(function() {
         if(name.length < 1) {
             event.preventDefault();
             statusElm.append("<div>Please enter a name</div>");
-        }
-        else if(email.length < 5 || !email.includes("@") || !email.includes(".")) {
+            document.getElementsByName("name")[0].style.border = "1px solid red";
+        } else {
             event.preventDefault();
-            statusElm.append("<div>Invalid email</div>");
+            document.getElementsByName("name")[0].style.border = "0px solid red";
         }
-        else if(subject < 1) {
+
+        if(email.length < 5 || !email.includes("@") || !email.includes(".")) {
+            event.preventDefault();
+            statusElm.append("<div>Please enter a valid email</div>");
+            document.getElementsByName("email")[0].style.border = "1px solid red";
+        } else {
+            event.preventDefault();
+            document.getElementsByName("email")[0].style.border = "none";
+        }
+
+        if(subject < 1) {
             event.preventDefault();
             statusElm.append("<div>Please enter a subject</div>");
+            document.getElementsByName("subject")[0].style.border = "1px solid red";
+        } else {
+            event.preventDefault();
+            document.getElementsByName("subject")[0].style.border = "none";
         }
-        else if(message < 10) {
+
+        if(message < 10) {
             event.preventDefault();
             statusElm.append("<div>Please enter a message</div>");
+            document.getElementsByName("message")[0].style.border = "1px solid red";
+        } else {
+            event.preventDefault();
+            document.getElementsByName("message")[0].style.border = "none";
         }
     })
 })

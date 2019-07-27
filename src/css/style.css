@@ -37,16 +37,16 @@ nav {
 
 nav ul li a:link {
     text-decoration: none;
-    color: #4E85AC;
+    color: #0E7989;
 }
 
 nav ul li a:visited {
-    color: #4E85AC;
+    color: #0E7989;
 }
 
 nav ul li a:hover {
     text-decoration: underline;
-    color: #76A8CB;
+    color: #54A6B2;
 }
 
 #nav-list {
@@ -69,6 +69,7 @@ nav ul li a:hover {
         "skill-icons skill-description"
         "skill-icons skill-names";
     grid-template-columns: 50%;
+    transition: 0.25s;
 }
 
 .skill-item:hover {
@@ -147,18 +148,20 @@ input[type=submit]:hover {
     background-color: #2C8996;
 }
 
+
 #social-media-icons {
     display: flex;
     justify-content: center;
 }
 
-#social-media img {
+.social-media-icon {
     margin: 0px 20px;
     padding: 20px 20px;
     max-height: 45px;
+    transition: 0.25s;
 }
 
-#social-media img:hover {
+.social-media-icon:hover{
     transform: translateY(-2px);
 }
 
