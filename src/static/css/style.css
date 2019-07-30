@@ -1,93 +1,117 @@
-html, body {
-    font-family: "Louis George Cafe", "Arial";
-    letter-spacing: 0.8px;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    font-size: 100%;
-}
-
 @font-face {
     font-family: "Louis George Cafe";
     src: url("/src/static/fonts/louis-george-cafe.ttf");
 }
 
-.page-item {
-    background-color: #D3D3D3;
-    padding: 8px 15px 8px 15px;
-    margin: 20px 0px 20px 0px;
+body {
+    font-family: "Louis George Cafe", "Arial";
+    font-size: 100%;
+    letter-spacing: 0.85px;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+header {
+    background-color: #5b2c6f;
+    height: 85vh;
+}
+
+main {
+    padding: 15px 15px 15px 15px;
+    justify-content: center;
+    color: #202020; 
+}
+
+footer {
+    background-color: #202020;
+    padding: 10px 0px 10px 0px;
+}
+
+header, footer {
+    margin: 0px;
+    padding: 10px 0px 10px 0px;
+    color: #f4ecf7;
 }
 
 #branding {
     display: grid;
-    grid-template-areas: "header-logo header-nav";
-    margin: 15px 15px 15px 15px; 
+    grid-template-areas: "header-logo . . header-nav header-nav";
+    padding: 20px 20px 20px 20px; 
 }
 
-#main-logo {
-    max-width: 90px;
-}
-
-h1 {
+#header-logo {
+    max-width: 50px;
     grid-area: header-logo;
-}
-
-h2 {
-    text-align: center;
+    fill: #e8daef;
 }
 
 nav {
     grid-area: header-nav;
     text-align: right;
-    font-size: 20px;
-}
-
-nav ul li a:link {
-    text-decoration: none;
-    color: #0E7989;
-}
-
-nav ul li a:visited {
-    color: #0E7989;
-}
-
-nav ul li a:hover {
-    text-decoration: underline;
-    color: #54A6B2;
-}
-
-#nav-list {
-    list-style: none;
+    font-size: 24px;
 }
 
 #nav-list li {
     display: inline-block;
-    margin: 15px 0px 15px 15px;
+    margin: 0px 0px 0px 20px;
+}
+
+.nav-link:link {
+    color: #e8daef;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+.nav-link:visited {
+    color: #e8daef;
+    text-decoration: none;
+}
+
+#about {
+    padding: 0px 20px 20px 20px;
+    font-size: 28px;
+    width: 66%;
+}
+
+.colored-text {
+    color: #bb8fce;
+}
+
+#skills {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px;
+    transform: translateY(-40px);
 }
 
 .skill-item {
     background-color: #F5F5F5;
-    padding: 10px 10px 10px 10px;
-    margin: 0px 0px 15px 0px;
     border-radius: 4px;
+    padding: 10px;
     display: grid;
     grid-template-areas: 
         "skill-type skill-description"
         "skill-icons skill-description"
         "skill-icons skill-names";
     grid-template-columns: 50%;
-    transition: 0.25s;
+    transition: 0.3s;
 }
 
 .skill-item:hover {
     box-shadow: 0px 5px 5px grey;
     transform: translateY(-2px);
+    background-color: #FFFFFF;
 }
 
 .skill-item h3 {
-    margin: 15px 10px 0px 10px;
     grid-area: skill-type;
-    text-decoration: underline;
+    text-align: center;
+    font-size: 22px;
 }
 
 .skill-item div {
@@ -97,19 +121,20 @@ nav ul li a:hover {
 }
 
 .skill-item div img {
-    height: 45px;
-    max-width: 145px;
-    margin: 22.5px 10px 22.5px 10px;
-    display: block;
+    height: 50px;
+    max-width: 180px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .skill-description {
     grid-area: skill-description;
+    font-size: 18px;
 }
 
 .skill-names {
     grid-area: skill-names;
-    font-size: 14px;
+    font-size: px;
     font-style: italic;
 }
 
@@ -142,7 +167,7 @@ input[type=text] {
 input[type=submit] {
     width: 100%;
     font-size: 16px;
-    background-color: #0E7989;
+    background-color: #7d3c98;
     color: white;
     padding: 14px 20px;
     margin: 8px 0px;
@@ -152,38 +177,32 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-    background-color: #2C8996;
+    background-color: #8e44ad;
 }
 
 .form-input-status {
     font-style: oblique;
-    padding: 0px 0px 0px 0px;
-}
-
-footer {
-    background-color: #202020;
-    padding: 10px 0px 10px 0px;
 }
 
 #social-media-icons {
     display: flex;
     justify-content: center;
+    transform: translateX(-20px);
 }
 
 .social-media-icon {
     margin: 0px 20px 0px 20px;
-    padding: 20px 20px;
-    max-height: 45px;
-    transition: 0.25s;
-    fill: #ffffff;
+    padding: 20px;
+    max-height: 60px;
+    transition: 0.3s;
+    fill: #f4ecf7;
 }
 
 .social-media-icon:hover{
     transform: translateY(-3px);
-    fill: #F5F5F5;
 }
 
 #copyright {
     text-align: center;
-    color: #ffffff;
+    color: #f4ecf7;
 }
