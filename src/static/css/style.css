@@ -3,6 +3,23 @@
     src: url("/src/static/fonts/louis-george-cafe.ttf");
 }
 
+h2 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 26px;
+}
+
+p {
+    font-size: 24px;
+}
+
+a {
+    text-decoration: none;
+}
+
 body {
     font-family: "Louis George Cafe", "Arial";
     font-size: 100%;
@@ -15,7 +32,7 @@ body {
 
 header {
     background-color: #5b2c6f;
-    height: 90vh;
+    height: 92.5vh;
 }
 
 main {
@@ -62,7 +79,6 @@ nav {
 
 .nav-link:link {
     color: #e8daef;
-    text-decoration: none;
 }
 
 .nav-link:hover {
@@ -71,7 +87,6 @@ nav {
 
 .nav-link:visited {
     color: #e8daef;
-    text-decoration: none;
 }
 
 #about {
@@ -110,10 +125,9 @@ nav {
     background-color: #FFFFFF;
 }
 
-.skill-item h3 {
+.skill-item h2 {
     text-align: center;
-    font-size: 28px;
-    font-weight: bold;
+    margin: 20px 15px 20px 15px;
 }
 
 .skill-item div {
@@ -144,10 +158,48 @@ nav {
 .projects-wrapper {
     margin: 15px;
     padding: 30px 0px 30px 0px;
+    display: grid;
+    border-radius: 4px;
+    grid-template-areas: 
+        "projects-text project-grid";
+    grid-gap: 20px;
+}
+
+.projects-text {
+    grid-area: projects-text;
+}
+
+.project-grid {
+    grid-area: project-grid;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.project {
+    background-color: #5b2c6f;
+    color: #f5f5f5;
+    min-height: 30vh;
+    padding: 10px 30px 10px 30px;
+    transition: 0.2s;
+    box-shadow: 0px 1px 5px grey;
+}
+
+.project:hover {
+    background-color: #8e44ad;
+    box-shadow: 0px 4px 7.5px grey;
+    transform: translateY(-2px);
+}
+
+.project-tech {
+    font-size: 18px;
+    color: #ccd1d1;
+    font-style: italic;
 }
 
 #contact {
     display: grid;
+    padding: 30px 0px 0px 0px;
 }
 
 input[type=text] {
@@ -213,4 +265,5 @@ input[type=submit]:hover {
 #copyright {
     text-align: center;
     color: #f4ecf7;
+    font-size: 18px;
 }
