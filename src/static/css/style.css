@@ -20,6 +20,10 @@ a {
     text-decoration: none;
 }
 
+button, input:focus {
+    outline: 0;
+}
+
 body {
     font-family: "Louis George Cafe", "Arial";
     font-size: 100%;
@@ -54,7 +58,7 @@ header, footer {
 }
 
 .content {
-    width: 60%;
+    width: 100%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -62,8 +66,8 @@ header, footer {
 
 #branding {
     display: grid;
-    grid-template-areas: "header-logo . . header-nav header-nav";
-    padding: 20px;
+    grid-template-areas: "header-logo . . header-nav";
+    padding: 30px 0px 30px 30px;
     border-bottom: 1px solid #f4ecf7;
 }
 
@@ -75,25 +79,61 @@ header, footer {
 
 nav {
     grid-area: header-nav;
-    text-align: right;
-    font-size: 24px;
+    display: grid;    
+    align-self: end;
+    justify-self: end;
+    margin-right: 30px;
 }
 
-#nav-list li {
-    display: inline-block;
-    margin: 0px 0px 0px 20px;
+#navbar-nav {
+    position: fixed;
+    height: 100%;
+    width: 0%;
+    z-index: 1;
+    top: 0px;
+    right: 0px;
+    background-color: #202020;
+    overflow-x: hidden;
+    transition: 0.25s;
+    transition-property: width;
+    text-align: left;
+    padding: 30px 0px;
 }
 
-.nav-link:link {
+#navbar-nav a {
+    text-decoration: none;
+    margin: 0px 0px 40px 0px;
+    font-size: 32px;
     color: #e8daef;
+    display: block;
 }
 
-.nav-link:hover {
+#navbar-nav a:hover {
     text-decoration: underline;
 }
 
-.nav-link:visited {
+#navbar-close {
+    font-size: 25%;
+}
+
+#navbar-open {
+    cursor: pointer;
+    background: none;
+    border: none;
+    fill: #e8daef;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#navbar-open p {
+    font-size: 24px;
     color: #e8daef;
+}
+
+#navbar-open svg {
+    width: 36px;
+    margin-left: 15px;
 }
 
 #about {

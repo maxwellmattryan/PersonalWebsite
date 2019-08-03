@@ -16,16 +16,23 @@
     <body>
 
         <header>
-            <div class="container" id="branding">
+            <div id="branding">
                 <a id="header-logo" href="/src/static/html/index.html"><svg width="100%" height="100%" viewBox="0 0 12500 12500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g transform="matrix(4.16667,0,0,4.16667,0,0)"><g id="_1.0" serif:id="1.0" transform="matrix(1.55181,0,0,1.24269,-846.799,-577.564)"><g id="Big-M" serif:id="Big M" transform="matrix(4.95025,0,0,4.95025,-1333.48,-2539.84)"><g transform="matrix(431.054,0,0,431.054,364.041,1094.03)"><path d="M0.034,0L0.131,-0.741L0.487,-0.236L0.843,-0.741L0.94,0L0.797,0L0.75,-0.366L0.487,-0.014L0.225,-0.366L0.177,0L0.034,0Z" style="fill-rule:nonzero;"/></g></g><g id="Big-M1" serif:id="Big M" transform="matrix(4.32711,0,0,4.87558,-975.801,-3311.74)"><g transform="matrix(431.054,0,0,431.054,364.041,1094.03)"><path d="M0.034,0L0.131,-0.741L0.487,-0.236L0.843,-0.741L0.94,0L0.797,0L0.75,-0.366L0.487,-0.014L0.225,-0.366L0.177,0L0.034,0Z" style="fill-rule:nonzero;"/></g></g></g></g></svg></a>
+                
+                <!-- NAVBAR -->
                 <nav>
-                    <ul id="nav-list">
-                        <li><a class="nav-link" href="#about">About</a></li>
-                        <li><a class="nav-link" href="#skills">Skills</a></li> 
-                        <li><a class="nav-link" href="#projects">Projects</a></li> 
-                        <li><a class="nav-link" href="#blogs">Blog</a></li>
-                        <li><a class="nav-link" href="#contact">Contact</a></li>
-                    </ul>
+                    <!-- NAVBAR BUTTON -->
+                    <button id="navbar-open" type="button" onclick="openNav()">
+                        <p>MENU</p>
+                        <svg width="100%" height="100%" viewBox="0 0 2000 2000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g><path d="M2000,1673.76c0,-60.018 -48.727,-108.746 -108.746,-108.746l-1782.51,0c-60.019,0 -108.746,48.728 -108.746,108.746l0,217.491c0,60.019 48.727,108.746 108.746,108.746l1782.51,0c60.019,0 108.746,-48.727 108.746,-108.746l0,-217.491Z"/><path d="M2000,108.746c0,-60.019 -48.727,-108.746 -108.746,-108.746l-1782.51,0c-60.019,0 -108.746,48.727 -108.746,108.746l0,217.491c0,60.018 48.727,108.746 108.746,108.746l1782.51,0c60.019,0 108.746,-48.728 108.746,-108.746l0,-217.491Z"/><path d="M2000,891.254c0,-60.018 -48.727,-108.745 -108.746,-108.745l-1782.51,0c-60.019,0 -108.746,48.727 -108.746,108.745l0,217.492c0,60.018 48.727,108.745 108.746,108.745l1782.51,0c60.019,0 108.746,-48.727 108.746,-108.745l0,-217.492Z"/></g></svg>                    
+                    </button>
+                    <!-- NAVBAR LINKS -->
+                    <div id="navbar-nav">
+                        <a href="#about" onclick="closeNav()">About</a>
+                        <a href="#skills" onclick="closeNav()">Skills</a>
+                        <a href="#projects" onclick="closeNav()">Projects</a>
+                        <a href="#contact" onclick="closeNav()">Contact</a>
+                    </div>
                 </nav>
             </div>
 
