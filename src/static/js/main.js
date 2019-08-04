@@ -53,7 +53,7 @@ $(document).ready(function() {
 })
 
 $(document).click(function(event) {
-    if(navBarOpen && event.clientX < 0.685 * $(document).width()) {
+    if(navBarOpen && event.clientX < (0.585 * $(document).width())) {
         closeNav();
     }
 })
@@ -62,7 +62,7 @@ let navBarOpen = false;
 
 function openNav() {
     navBarOpen = true;
-    document.getElementById("navbar-nav").style.width = "25%";
+    document.getElementById("navbar-nav").style.width = "30%";
     document.getElementById("navbar-nav").style.padding = "30px";
 }
 

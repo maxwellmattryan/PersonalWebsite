@@ -14,9 +14,8 @@
     </head>
 
     <body>
-
         <header>
-            <div id="branding">
+            <section id="branding" class="light-text">
                 <a id="header-logo" href="/src/static/html/index.html"><svg width="100%" height="100%" viewBox="0 0 12500 12500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g transform="matrix(4.16667,0,0,4.16667,0,0)"><g id="_1.0" serif:id="1.0" transform="matrix(1.55181,0,0,1.24269,-846.799,-577.564)"><g id="Big-M" serif:id="Big M" transform="matrix(4.95025,0,0,4.95025,-1333.48,-2539.84)"><g transform="matrix(431.054,0,0,431.054,364.041,1094.03)"><path d="M0.034,0L0.131,-0.741L0.487,-0.236L0.843,-0.741L0.94,0L0.797,0L0.75,-0.366L0.487,-0.014L0.225,-0.366L0.177,0L0.034,0Z" style="fill-rule:nonzero;"/></g></g><g id="Big-M1" serif:id="Big M" transform="matrix(4.32711,0,0,4.87558,-975.801,-3311.74)"><g transform="matrix(431.054,0,0,431.054,364.041,1094.03)"><path d="M0.034,0L0.131,-0.741L0.487,-0.236L0.843,-0.741L0.94,0L0.797,0L0.75,-0.366L0.487,-0.014L0.225,-0.366L0.177,0L0.034,0Z" style="fill-rule:nonzero;"/></g></g></g></g></svg></a>
                 
                 <!-- NAVBAR -->
@@ -28,204 +27,197 @@
                     </button>
                     <!-- NAVBAR LINKS -->
                     <div id="navbar-nav">
-                        <a href="#about" onclick="closeNav()">About</a>
-                        <a href="#skills" onclick="closeNav()">Skills</a>
-                        <a href="#projects" onclick="closeNav()">Projects</a>
-                        <a href="#contact" onclick="closeNav()">Contact</a>
+                        <a class="light-text" href="#about" onclick="closeNav()">About</a>
+                        <a class="light-text" href="#skills" onclick="closeNav()">Skills</a>
+                        <a class="light-text" href="#projects" onclick="closeNav()">Projects</a>
+                        <a class="light-text" href="#contact" onclick="closeNav()">Contact</a>
                     </div>
                 </nav>
-            </div>
+            </section>
 
-            <div class="content">
-                <section id="about">
-                    <h1><span class="colored-text">Web developer</span> based out of Austin, Texas</h1>
-                    <p>
-                        I'm currently studying Computer Science, Art and 
-                        Entertainment Technologies, and Japanese at the 
-                        University of Texas at Austin.
-                    </p>
-                    <p>
-                        Please contact me should you have any questions!
-                    </p>
-                </section>
-            </div>
+            <section id="about" class="light-text">
+                <h1><span class="purple-text">Web developer</span> based out of Austin, Texas</h1>
+                <p>
+                    I'm currently studying Computer Science, Art and 
+                    Entertainment Technologies, and Japanese at the 
+                    University of Texas at Austin.
+                </p>
+                <p>
+                    Please contact me should you have any questions!
+                </p>
+            </section>
         </header>
 
         <main>
-            <div class="content">
-                <section id="skills">
-                    <div class="skill-item">
-                        <h2>Front-end</h2>
-                        <div>
-                            <img src="/src/static/icons/color_html5.svg" title="HTML 5" alt="HTML 5 logo">
-                            <img src="/src/static/icons/color_css3.svg" title="CSS 3" alt="CSS 3 logo">
-                            <img src="/src/static/icons/color_javascript.svg" title="Javascript" alt="Javascript logo">
-                            <img src="/src/static/icons/color_jquery.svg" title="jQuery" alt="jQuery logo">
-                        </div>
-                        <p class="skill-description">
-                            Establish the groundwork for a responsive and 
-                            professional website that runs smoothly and
-                            precisely.
-                        </p>
-                        <p class="skill-names">
-                            HTML 5, CSS 3, JavaScript, jQuery
-                        </p>
+            <section id="skills" class="section-grid">
+                <div class="skill-item box-item">
+                    <h2 class="dark-text">Front-end</h2>
+                    <div class="skill-icons">
+                        <img src="/src/static/icons/color_html5.svg" title="HTML 5" alt="HTML 5 logo">
+                        <img src="/src/static/icons/color_css3.svg" title="CSS 3" alt="CSS 3 logo">
+                        <img src="/src/static/icons/color_javascript.svg" title="Javascript" alt="Javascript logo">
+                        <img src="/src/static/icons/color_jquery.svg" title="jQuery" alt="jQuery logo">
                     </div>
+                    <p class="skill-description dark-text">
+                        Establish the groundwork for a responsive and 
+                        professional website that runs smoothly and
+                        precisely.
+                    </p>
+                    <p class="skill-names">
+                        HTML 5, CSS 3, JavaScript, jQuery
+                    </p>
+                </div>
+    
+                <div class="skill-item box-item">
+                    <h2>Development</h2>
+                    <div class="skill-icons">
+                        <img src="/src/static/icons/github.svg" title="GitHub" alt="GitHub logo" style="color:#202020;">
+                        <img src="/src/static/icons/color_git.svg" title="Git" alt="Git logo">
+                        <img src="/src/static/icons/color_visual-studio.svg" title="Visual Studio" alt="Visual Studio logo">
+                        <img src="/src/static/icons/color_visual-studio-code.svg" title="Visual Studio Code" alt="Visual Studio Code logo">
+                    </div>
+                    <p class="skill-description">
+                        Iterate on and monitor changes between code 
+                        revisions  to create a product that is as 
+                        polished as possible.
+                    </p>
+                    <p class="skill-names">
+                        GitHub, Git, Visual Studio, Visual Studio Code
+                    </p>
+                </div>
+    
+                <div class="skill-item box-item">
+                    <h2>Design</h2>
+                    <div class="skill-icons">
+                        <img src="/src/static/icons/affinity-designer.png" title="Affinity Designer" alt="Affinity Designer logo" style="color: #202020;">
+                        <img src="/src/static/icons/affinity-photo.png" title="Affinity Photo" alt="Affinity Photo logo">
+                    </div>
+                    <p class="skill-description">
+                        Compose a sleek and stylish web page to 
+                        complement both the front-end and user 
+                        experience.
+                    </p>
+                    <p class="skill-names">
+                        Affinity Designer, Affinity Photo
+                    </p>
+                </div>
+    
+                <div class="skill-item box-item">
+                    <h2>Audio Development</h2>
+                    <div class="skill-icons">
+                        <img src="/src/static/icons/color_juce.svg" title="JUCE" alt="JUCE logo">
+                        <img src="/src/static/icons/color_cpp.svg" title="C++" alt="C++ logo">
+                        <img src="/src/static/icons/ableton.svg" title="C++" alt="C++ logo">
+                    </div>
+                    <p class="skill-description">
+                        Expand and explore your musical ideas 
+                        limitlessly via optimally designed audio 
+                        plugins.
+                    </p>
+                    <p class="skill-names">
+                        JUCE (Projucer), C++, Ableton
+                    </p>
+                </div>
+            </section>
         
-                    <div class="skill-item">
-                        <h2>Development</h2>
-                        <div>
-                            <img src="/src/static/icons/github.svg" title="GitHub" alt="GitHub logo" style="color:#202020;">
-                            <img src="/src/static/icons/color_git.svg" title="Git" alt="Git logo">
-                            <img src="/src/static/icons/color_visual-studio.svg" title="Visual Studio" alt="Visual Studio logo">
-                            <img src="/src/static/icons/color_visual-studio-code.svg" title="Visual Studio Code" alt="Visual Studio Code logo">
-                        </div>
-                        <p class="skill-description">
-                            Iterate on and monitor changes between code 
-                            revisions  to create a product that is as 
-                            polished as possible.
-                        </p>
-                        <p class="skill-names">
-                            GitHub, Git, Visual Studio, Visual Studio Code
+            <section id="projects">
+                <div id="projects-background" class="section-grid">
+                    <div id="project-text">
+                        <h2>Featured Projects</h2>
+                        <p>
+                            Personal projects are a fantastic way for 
+                            me to expand upon my skills and learn new 
+                            ones along the way.
+                            <br><br>
+                            Please check out my GitHub to see more!
                         </p>
                     </div>
-        
-                    <div class="skill-item">
-                        <h2>Design</h2>
-                        <div>
-                            <img src="/src/static/icons/affinity-designer.png" title="Affinity Designer" alt="Affinity Designer logo" style="color: #202020;">
-                            <img src="/src/static/icons/affinity-photo.png" title="Affinity Photo" alt="Affinity Photo logo">
-                        </div>
-                        <p class="skill-description">
-                            Compose a sleek and stylish web page to 
-                            complement both the front-end and user 
-                            experience.
-                        </p>
-                        <p class="skill-names">
-                            Affinity Designer, Affinity Photo
-                        </p>
-                    </div>
-        
-                    <div class="skill-item">
-                        <h2>Audio Development</h2>
-                        <div>
-                            <img src="/src/static/icons/color_juce.svg" title="JUCE" alt="JUCE logo">
-                            <img src="/src/static/icons/color_cpp.svg" title="C++" alt="C++ logo">
-                            <img src="/src/static/icons/ableton.svg" title="C++" alt="C++ logo">
-                        </div>
-                        <p class="skill-description">
-                            Expand and explore your musical ideas 
-                            limitlessly via optimally designed audio 
-                            plugins.
-                        </p>
-                        <p class="skill-names">
-                            JUCE (Projucer), C++, Ableton
-                        </p>
-                    </div>
-                </section>
-            
-                <section id="projects">
-                    <div class="projects-wrapper">
-                        <div class="projects-text">
-                            <h2>Featured Projects</h2>
+                    <a target="_blank" href="https://maxwellmatt.itch.io/operation-home">
+                        <div class="project box-item">
+                            <h3>Operation H.O.M.E.</h3>
                             <p>
-                                Personal projects are a fantastic way for 
-                                me to expand upon my skills and learn new 
-                                ones along the way.
+                                Defend the earth as aliens are 
+                                attempting to invade and destroy 
+                                it!
                             </p>
+                            <p class="project-tech">
+                                Unity, C#, Ableton (sound design)
+                            </p>
+                        </div>
+                    </a>
+                    <a target="_blank" href="https://github.com/maxwellmattryan/JishoSearch">
+                        <div class="project box-item">
+                            <h3>JLPT Vocabulary Scraper</h3>
                             <p>
-                                Please check out my GitHub to see more !
+                                Scrape jisho.org to find and export 
+                                JLPT vocabulary words for studying.
+                            </p>
+                            <p class="project-tech">
+                                Python 3.7 and libraries (bs4, xlwt, 
+                                lxml)
                             </p>
                         </div>
-                        <div class="project-grid">
-                            <a target="_blank" href="https://maxwellmatt.itch.io/operation-home">
-                                <div class="project">
-                                    <h3>Operation H.O.M.E.</h3>
-                                    <p>
-                                        Defend the earth as aliens are 
-                                        attempting to invade and destroy 
-                                        it!
-                                    </p>
-                                    <p class="project-tech">
-                                        Unity, C#, Ableton (sound design)
-                                    </p>
-                                </div>
-                            </a>
-                            <a target="_blank" href="https://github.com/maxwellmattryan/JishoSearch">
-                            <div class="project">
-                                <h3>JLPT Vocabulary Scraper</h3>
-                                <p>
-                                    Scrape jisho.org to find and export 
-                                    JLPT vocabulary words for studying.
-                                </p>
-                                <p class="project-tech">
-                                    Python 3.7 and libraries (bs4, xlwt, 
-                                    lxml)
-                                </p>
-                            </div>
-                            </a>
-                            <a target="_blank" href="https://github.com/maxwellmattryan/BasicDistortion">
-                            <div class="project">
-                                <h3>Distortion Plug-in</h3>
-                                <p>
-                                    Distort audio in a gnarly way with 
-                                    control over the gain, drive, and mix.
-                                </p>
-                                <p class="project-tech">
-                                    JUCE, C++, Ableton
-                                </p>
-                            </div>
-                            </a>
-                            <a target="_blank" href="https://github.com/maxwellmattryan/BasicFilter">
-                            <div class="project">
-                                <h3>Filter Plug-in</h3>
-                                <p>
-                                    Filter audio in various modes while 
-                                    controlling the gain, cutoff, and 
-                                    resonance.
-                                </p>
-                                <p class="project-tech">
-                                    JUCE, C++, Ableton
-                                </p>
-                            </div>
-                            </a>
+                    </a>
+                    <a target="_blank" href="https://github.com/maxwellmattryan/BasicDistortion">
+                        <div class="project box-item">
+                            <h3>Distortion Plug-in</h3>
+                            <p>
+                                Distort audio in a gnarly way with 
+                                control over the gain, drive, and mix.
+                            </p>
+                            <p class="project-tech">
+                                JUCE, C++, Ableton
+                            </p>
                         </div>
-                    </div>
-                </section>
-        
-                <section id="contact">
-                    <h2>Contact Me</h2>
-                    <form enctype="text/plain" method="POST" action="https://formspree.io/maxwellmattryan@gmail.com">
-                        <label for="name">
-                            Name
-                            <div id="name-status" class="form-input-status"></div>
-                            <input type="text" id="name" name="name">
-                        </label>
-        
-                        <label for="email">
-                            Email
-                            <div id="email-status" class="form-input-status"></div>
-                            <input type="text" id="email" name="email">
-                        </label>    
-        
-                        <label for="email">
-                            Subject
-                            <div id="subject-status" class="form-input-status"></div>
-                            <input type="text" id="subject" name="subject">
-                        </label>  
-        
-                        <label for="message">
-                            Message
-                            <div id="message-status" class="form-input-status"></div>
-                            <textarea id="message" name="message"></textarea>
-                        </label>
-        
-                        <div id="status"></div>
-        
-                        <input id="submit" type="submit" value="Submit">
-                    </form>
-                </section>
-            </div>
+                    </a>
+                    <a target="_blank" href="https://github.com/maxwellmattryan/BasicFilter">
+                        <div class="project box-item">
+                            <h3>Filter Plug-in</h3>
+                            <p>
+                                Filter audio in various modes while 
+                                controlling the gain, cutoff, and 
+                                resonance.
+                            </p>
+                            <p class="project-tech">
+                                JUCE, C++, Ableton
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+    
+            <section id="contact" class="section-grid">
+                <h2>Contact Me</h2>
+                <form enctype="text/plain" method="POST" action="https://formspree.io/maxwellmattryan@gmail.com">
+                    <label for="name">
+                        Name
+                        <div id="name-status" class="form-input-status"></div>
+                        <input type="text" id="name" name="name">
+                    </label>
+    
+                    <label for="email">
+                        Email
+                        <div id="email-status" class="form-input-status"></div>
+                        <input type="text" id="email" name="email">
+                    </label>    
+    
+                    <label for="email">
+                        Subject
+                        <div id="subject-status" class="form-input-status"></div>
+                        <input type="text" id="subject" name="subject">
+                    </label>  
+    
+                    <label for="message">
+                        Message
+                        <div id="message-status" class="form-input-status"></div>
+                        <textarea id="message" name="message"></textarea>
+                    </label>
+    
+                    <div id="status"></div>
+    
+                    <input id="submit" type="submit" value="Submit">
+                </form>
+            </section>
         </main>
 
         <footer>
@@ -263,9 +255,9 @@
                     </a>
                 </div>
             </section>
-    
+
             <p id="copyright">
-                &copy; 2019 Matthew Maxwell. All rights reserved.
+                &copy; 2019 Matthew Maxwell.<br>All rights reserved.
             </p>
         </footer>
     </body>
