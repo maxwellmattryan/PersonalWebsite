@@ -3,7 +3,140 @@
     src: url("/src/static/fonts/louis-george-cafe.ttf");
 }
 
-body {
+html, body {
     font-family: "Louis George Cafe", "Sans-Serif", "Arial";
     overflow-x: hidden;
+}
+
+main {
+    transform: translateY(-3rem);
+    margin-bottom: -3.5rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+.icon {
+    height: 3rem;
+    width: 3rem;
+}
+
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 5rem);
+}
+
+.purple {
+    fill: #bb8fce;
+    color: #bb8fce;
+}
+
+.white {
+    fill: #f4ecf7;
+    color: #f4ecf7;
+}
+
+header {
+    background-color: #5b2c6f;
+    color: #f4ecf7;
+}
+
+footer {
+    background-color: #202020;
+}
+
+#branding {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #f4ecf7;
+}
+
+#navbar-nav {
+    position: fixed;
+    height: 100%;
+    width: 0%;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #202020;
+    color: #f4ecf7;
+    transition: 0.25s;
+    transition-property: width;
+    text-align: left;
+}
+
+#navbar-nav a {
+    display: block;
+}
+
+#navbar-open {
+    cursor: pointer;
+    background: none;
+    border: none;
+    fill: #f4ecf7;
+    display: flex;
+    align-items: center;
+}
+
+#about {
+    padding-bottom: 2.5rem;
+}
+
+.content-section {
+    padding: 1.5rem;
+}
+
+.item-grid {
+    display: grid;
+    grid-row-gap: 1.5rem;
+}
+
+.item-container {
+    padding: 1rem;
+    border-radius: 0.25rem;
+    box-shadow: 0px 1px 5px grey;
+    display: grid;
+    grid-gap: 0.75rem;
+}
+
+.item-footer {
+    font-style: oblique;
+}
+
+.skill {
+    background-color: #f5f5f5;
+    color: #202020;
+}
+
+.project {
+    background-color: #5b2c6f;
+    color: #f4ecf7;
+}
+
+input, #message {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    font-family: "Louis George Cafe", "Sans-Serif", "Arial";
+    margin: 0.75rem 0rem;
+    padding: 0.75rem 0.5rem;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #7d3c98;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#social-media {
+    justify-content: center;
+    justify-items: center;
+}
+
+#copyright {
+    text-align: center;
 }
