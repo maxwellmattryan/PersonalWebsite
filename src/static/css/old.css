@@ -12,13 +12,14 @@ h2 {
     text-align: center;
 }
 
-p, a {
+p {
     font-size: 1.5rem;
     text-decoration: none;
+    margin: 0rem 0rem;
 }
 
 .purple-text {
-    color: #bb8fce;
+    color: #b8adbd;
 }
 
 .light-text {

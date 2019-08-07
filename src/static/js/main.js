@@ -53,7 +53,7 @@ $(document).ready(function() {
 })
 
 $(document).click(function(event) {
-    if(navBarOpen && event.clientX < (0.585 * $(document).width())) {
+    if(navBarOpen && event.clientX < (0.575 * $(document).width())) {
         closeNav();
     }
 })
