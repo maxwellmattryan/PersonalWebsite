@@ -2,16 +2,16 @@
   "name": "mattmaxwell.tech",
   "version": "1.0.0",
   "description": "Codebase for my website.",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "deploy": "gh-pages -d src/static"
+    "deploy": "gh-pages -d src"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/maxwellmattryan/mattmaxwell.tech.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Matthew Maxwell",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/maxwellmattryan/mattmaxwell.tech/issues"
