@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maxwellmattryan/mattmaxwell.tech.git"
+    "url": "git+https://github.com/maxwellmattryan/mattmaxwell.git"
   },
   "keywords": [],
   "author": "Matthew Maxwell",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/maxwellmattryan/mattmaxwell.tech/issues"
+    "url": "https://github.com/maxwellmattryan/mattmaxwell/issues"
   },
-  "homepage": "https://github.com/maxwellmattryan/mattmaxwell.tech",
+  "homepage": "https://github.com/maxwellmattryan/mattmaxwell",
   "dependencies": {
     "gh-pages": "^2.1.1"
   }
