@@ -28,6 +28,7 @@
     }
 }
 
+/* DESKTOP */
 @media (min-width: 1152px) {
     #main-nav a:hover {
         text-decoration: underline;
@@ -47,9 +48,13 @@
         margin: auto auto;
     }
 
+    .social-media-icon:hover {
+        transform: translateY(-0.15rem);
+    }
+
     #branding, #projects {
         margin: 0;
-        padding: 1.5rem calc(50vw - 576px);
+        padding: 1.5rem calc(50vw - 584px);
     }
 }
 
@@ -57,7 +62,7 @@ html, body {
     font-family: "Louis George Cafe", "Sans-Serif", "Arial";
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-    overflow-x: visible;
+    overflow-x: hidden;
 }
 
 main {
@@ -71,6 +76,7 @@ a {
 
 h1 {
     font-size: 3rem;
+    margin-bottom: 2rem;
 }
 
 h2 {
@@ -83,8 +89,8 @@ p {
 }
 
 .icon {
-    height: 3rem;
-    width: 3rem;
+    height: 2.5rem;
+    width: 2.5rem;
 }
 
 .icon-grid {
@@ -119,7 +125,7 @@ footer {
 
 nav a {
     color: #eaf2ee;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 #mobile-nav #navbar-open {
@@ -243,6 +249,11 @@ input[type=submit] {
     justify-items: center;
 }
 
+.social-media-icon {
+    transition: 0.3s;
+}
+
 #copyright {
     text-align: center;
+    font-size: 1rem;
 }
