@@ -9,24 +9,26 @@
     }
 }
 
-@media (max-width: 999px) {
+@media (max-width: 970px) {
     #main-nav {
         display: none;
     }
 }
 
+@media (min-width: 971px) {
+    #mobile-nav {
+        display: none;
+    }
+}
+
 @media (min-width: 800px) {
-     .item-grid {
+    .item-grid {
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 1.5rem;
     }
 }
 
-@media (min-width: 1000px) {
-    #mobile-nav {
-        display: none;
-    }
-
+@media (min-width: 1152px) {
     #main-nav a:hover {
         text-decoration: underline;
     }
@@ -38,6 +40,16 @@
 
     #submit:hover {
         background-color: #738edf;
+    }
+
+    .content-section {
+        max-width: 1152px;
+        margin: auto auto;
+    }
+
+    #branding, #projects {
+        margin: 0;
+        padding: 1.5rem calc(50vw - 576px);
     }
 }
 
@@ -179,6 +191,7 @@ nav a {
 .item-footer {
     font-style: oblique;
     font-size: 1.25rem;
+    max-width: 100%;
 }
 
 .skill {
