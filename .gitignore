@@ -1,2 +1,3 @@
 *.txt
 *.afdesign
+node_modules

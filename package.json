@@ -1,0 +1,23 @@
+{
+  "name": "mattmaxwell.tech",
+  "version": "1.0.0",
+  "description": "Codebase for my website.",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "gh-pages -d src/static"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxwellmattryan/mattmaxwell.tech.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxwellmattryan/mattmaxwell.tech/issues"
+  },
+  "homepage": "https://github.com/maxwellmattryan/mattmaxwell.tech",
+  "dependencies": {
+    "gh-pages": "^2.1.1"
+  }
+}
