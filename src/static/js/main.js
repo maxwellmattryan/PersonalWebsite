@@ -52,21 +52,17 @@ $(document).ready(function() {
     })
 })
 
-$(document).click(function(event) {
-    if(navBarOpen && event.clientX < (0.575 * $(document).width())) {
-        closeNav();
-    }
-})
-
-let navBarOpen = false;
-
 function openNav() {
     navBarOpen = true;
-    document.getElementById("navbar-nav").style.width = "30%";
-    document.getElementById("navbar-nav").style.padding = "30px";
+    document.getElementById("sidebar-nav").style.width = "30%";
+    document.getElementById("sidebar-nav").style.padding = "2.5rem";
+
+    document.getElementById("navbar-close").style.width = "100%";
 }
 
 function closeNav() {
-    document.getElementById("navbar-nav").style.width = "0%";
-    document.getElementById("navbar-nav").style.padding = "30px 0px";
+    document.getElementById("sidebar-nav").style.width = "0%";
+    document.getElementById("sidebar-nav").style.padding = "2.5rem 0rem";
+
+    document.getElementById("navbar-close").style.width = "0%";
 }

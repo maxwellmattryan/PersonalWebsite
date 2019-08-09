@@ -3,9 +3,49 @@
     src: url("/src/static/fonts/louis-george-cafe.ttf");
 }
 
+@media (max-width: 400px) {
+    html {
+        font-size: 90%;
+    }
+}
+
+@media (max-width: 999px) {
+    #main-nav {
+        display: none;
+    }
+}
+
+@media (min-width: 800px) {
+     .item-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1000px) {
+    #mobile-nav {
+        display: none;
+    }
+
+    #main-nav a:hover {
+        text-decoration: underline;
+    }
+
+    .project:hover {
+        background-color: #485d9b;
+        transform: translateY(-0.15rem);
+    }
+
+    #submit:hover {
+        background-color: #738edf;
+    }
+}
+
 html, body {
     font-family: "Louis George Cafe", "Sans-Serif", "Arial";
-    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: visible;
 }
 
 main {
@@ -37,22 +77,22 @@ p {
 
 .icon-grid {
     display: grid;
-    grid-template-columns: repeat(5, 5rem);
+    grid-template-columns: repeat(4, 5rem);
 }
 
-.purple {
-    fill: #bb8fce;
-    color: #bb8fce;
+.blue {
+    fill: #a2b8fb;
+    color: #a2b8fb;
 }
 
 .white {
-    fill: #f4ecf7;
-    color: #f4ecf7;
+    fill: #e8eeff;
+    color: #e8eeff;
 }
 
 header {
-    background-color: #5b2c6f;
-    color: #f4ecf7;
+    background-color: #23355d;
+    color: #e8eeff;
 }
 
 footer {
@@ -62,37 +102,53 @@ footer {
 #branding {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid #f4ecf7;
+    border-bottom: 1px solid #eaf2ee;
 }
 
-#navbar-nav {
+nav a {
+    color: #eaf2ee;
+    font-size: 2rem;
+}
+
+#mobile-nav #navbar-open {
+    cursor: pointer;
+    background: none;
+    border: none;
+    fill: #e8eeff;
+}
+
+#mobile-nav #navbar-close, #mobile-nav ul {
     position: fixed;
     height: 100%;
     width: 0%;
     z-index: 1;
     top: 0;
+}
+
+#mobile-nav #navbar-close {
+    left: 0;
+    background-color: #202020;
+    opacity: 0.5;
+}
+
+#mobile-nav ul {
     right: 0;
     background-color: #202020;
-    color: #f4ecf7;
-    transition: 0.25s;
+    transition: 0.3s;
     transition-property: width;
     text-align: left;
+    list-style: none;
+    line-height: 4rem;
 }
 
-#navbar-nav a {
-    display: block;
-    color: #f4ecf7;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
+#main-nav {
+    text-align: right;
 }
 
-#navbar-open {
-    cursor: pointer;
-    background: none;
-    border: none;
-    fill: #f4ecf7;
-    display: flex;
-    align-items: center;
+#main-nav #inline-nav li {
+    display: inline;
+    list-style: none;
+    margin-left: 1.5rem;
 }
 
 #about {
@@ -131,14 +187,14 @@ footer {
 }
 
 #projects {
-    padding: 1.5rem 3rem;
-    margin: 0rem -1.5rem;
-    background-color: #e8daef;
+    padding: 1.5rem -1.5rem;
+    background-color: #e8eeff;
 }
 
 .project {
-    background-color: #5b2c6f;
-    color: #f4ecf7;
+    background-color: #23355d;
+    color: #e8eeff;
+    transition: 0.3s;
 }
 
 label {
@@ -163,7 +219,7 @@ input, #message {
 }
 
 input[type=submit] {
-    background-color: #7d3c98;
+    background-color: #485d9b;
     color: white;
     border: none;
     cursor: pointer;
