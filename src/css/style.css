@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Louis George Cafe";
-    src: url("/src/static/fonts/louis-george-cafe.ttf");
+    src: url("/src/fonts/louis-george-cafe.ttf");
 }
 
 @media (max-width: 400px) {
