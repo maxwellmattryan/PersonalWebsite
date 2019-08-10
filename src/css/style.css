@@ -63,7 +63,6 @@ html, body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
-    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 }
 
