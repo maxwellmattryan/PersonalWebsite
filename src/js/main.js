@@ -43,14 +43,14 @@ $(document).ready(function() {
 function openNav() {
     navBarOpen = true;
     document.getElementById("sidebar-nav").style.width = "30%";
-    document.getElementById("sidebar-nav").style.padding = "2.5rem";
+    document.getElementById("sidebar-nav").style.padding = "1rem 2.5rem";
 
     document.getElementById("navbar-close").style.width = "100%";
 }
 
 function closeNav() {
     document.getElementById("sidebar-nav").style.width = "0%";
-    document.getElementById("sidebar-nav").style.padding = "2.5rem 0rem";
+    document.getElementById("sidebar-nav").style.padding = "1rem 0rem";
 
     document.getElementById("navbar-close").style.width = "0%";
 }
