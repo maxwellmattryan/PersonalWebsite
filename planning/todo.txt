@@ -1,0 +1,56 @@
+------------------
+----- v1.1.0 -----
+------------------
+
+----- GOALS -----
+
+- make it more personable
+    - you want people to get a sense of who you are
+    - put your personality into it (not enough right now - pretty generic)
+
+----- FIXES -----
+
+- fix weird resizing issue at width=1152px
+    - see if you can find a clean solution
+
+- find svgs for affinity logos
+
+- switch skills and projects section
+
+- think about colors
+
+- think about text / font choice
+    - too big ?
+
+- make smooth transition when you click a menu item
+    - this might change when you add pages for individual items
+
+- add your name in more places other than footer
+
+- center projects header item, then grid the project items (2x2)
+
+- should skills just be three (design isn't that strong...)
+
+- is contact form too basic ?
+
+- is there too much whitespace ?
+    - make margins a bit smaller
+    - font size / placement
+    - idk...
+
+----- FEATURES -----
+
+- sass implementation
+
+- figure out ways to make links on mobile pop out
+    - should be just as effective as hover states for desktop
+
+- add pages for each menu item
+    - about (pictures, longer description)
+    - skills (describe all skills more in depth)
+    - projects (each project should have individual page ?)
+    * this will require for css to be modularized
+    ** make homepage more general / really expand on these specialized pages
+
+- add blog (laravel)
+
