@@ -24,6 +24,7 @@
 
 - make smooth transition when you click a menu item
     - this might change when you add pages for individual items
+    - scroll-behavior: smooth;
 
 - add your name in more places other than footer
 

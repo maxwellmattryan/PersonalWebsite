@@ -62,6 +62,7 @@ html, body {
     font-family: "Louis George Cafe", "Sans-Serif", "Arial";
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
 }
