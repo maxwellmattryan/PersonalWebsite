@@ -22,10 +22,6 @@
 - think about text / font choice
     - too big ?
 
-- make smooth transition when you click a menu item
-    - this might change when you add pages for individual items
-    - scroll-behavior: smooth;
-
 - add your name in more places other than footer
 
 - center projects header item, then grid the project items (2x2)
