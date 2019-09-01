@@ -1,18 +1,9 @@
 // Colors ===========
-$tintLight: #EBEDFF;
-$tintMed: #AFB6FF;
-$tintDark: #8792FF;
-$normal: #5F6DFF;
-$shadeLight: #4752BF;
-$shadeMed: #303780;
-$shadeDark: #0C0E20;
-//
-$white: #F8F9F9;
-$greyLight: #E5E7E9;
-$greyMed: #BDC3C7;
-$greyDark: #797D7F;
-$darkGrey: #626567;
+$offWhite: #F8F9F9;
 $black: #202020;
+$color-light: #AFB6FF;
+$color-normal: #5F6DFF;
+$color-dark: #303780;
 //==================
 
 @font-face {
@@ -52,12 +43,12 @@ $black: #202020;
     }
 
     .project:hover {
-        background-color: $shadeLight;
+        background-color: lighten($color-dark, 40);
         transform: translateY(-0.15rem);
     }
 
     #submit:hover {
-        background-color: $normal;
+        background-color: lighten($color-dark, 25);
     }
 
     .content-section {
@@ -84,15 +75,15 @@ html, body {
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     header {
-        background-color: $shadeMed;
-        color: $tintLight;
+        background-color: lighten($color-dark, 2.5);
+        color: lighten($color-light, 10);
     }
     main {
         transform: translateY(-3rem);
         margin-bottom: -3.5rem;
     }
     footer {
-        background-color: $shadeDark;
+        background-color: darken($color-dark, 25);
     }
     a {
         text-decoration: none;
@@ -133,8 +124,8 @@ html, body {
         appearance: none;
     }
     input[type=submit] {
-        background-color: $shadeLight;
-        color: $tintLight;
+        background-color: lighten($color-dark, 20);
+        color: lighten($color-light, 15);
         border: none;
         cursor: pointer;
     }
@@ -162,29 +153,29 @@ html, body {
 }
 
 .blue {
-    fill: $tintMed;
-    color: $tintMed;
+    fill: lighten($color-dark, 0);
+    color: lighten($color-dark, 40);
 }
 
 .white {
-    fill: $tintLight;
-    color: $tintLight;
+    fill: lighten($color-light, 10);
+    color: lighten($color-light, 10);
 }
 
 #branding {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid $tintLight;
+    border-bottom: 1px solid lighten($color-light, 10);
     #mobile-nav {
         #navbar-open {
             cursor: pointer;
             background: none;
             border: none;
-            fill: $tintLight;
+            fill: lighten($color-light, 10);
         }
         #navbar-close {
             left: 0;
-            background-color: $shadeDark;
+            background-color: darken($color-dark, 5);
             opacity: 0.5;
         }
         #navbar-close, #mobile-nav ul {
@@ -196,7 +187,7 @@ html, body {
         }
         ul {
             right: 0;
-            background-color: $shadeDark;
+            background-color: darken($color-dark, 5);
             transition: 0.3s;
             transition-property: width;
             text-align: left;
@@ -213,7 +204,7 @@ html, body {
         }
     }
     nav a {
-        color: $tintLight;
+        color: lighten($color-light, 10);
         font-size: 1.5rem;
     }
 }
@@ -227,7 +218,7 @@ html, body {
     .item-container {
         padding: 1rem;
         border-radius: 0.25rem;
-        box-shadow: 0px 1px 5px $darkGrey;
+        box-shadow: 0px 1px 5px lighten($color-dark, 5);
         display: grid;
         grid-gap: 0.75rem;
         .item-header {
@@ -247,16 +238,16 @@ html, body {
 }
 
 .skill {
-    background-color: $white;
-    color: $shadeDark;
+    background-color: $offWhite;
+    color: darken($color-dark, 25);
 }
 
 #projects {
     padding: 1.5rem -1.5rem;
-    background-color: $tintLight;
+    background-color: lighten($color-light, 13);
     .project {
-        background-color: $shadeMed;
-        color: $tintLight;
+        background-color: lighten($color-dark, 5);
+        color: lighten($color-light, 10);
         transition: 0.3s;
     }
 }

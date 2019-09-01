@@ -9,6 +9,7 @@
 ----- CURRENT -----
 ---- FEATURE(S) ---
 ===================
+Last updated: 09/01/2019
 
 - sass implementation
     - update logo in skills (see next)
@@ -17,6 +18,7 @@
         - variables (colors, sizes, margin sizes, header sizes, anything that needs a reference)
         - nesting code style (will need to think about css organization)
         - mixins (if you can use them)
+        - pseudo classes ("&:hover" nested within)
 
 ===================
 ---- FEATURES -----
