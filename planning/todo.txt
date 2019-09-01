@@ -11,14 +11,19 @@
 ===================
 Last updated: 09/01/2019
 
-- sass implementation
-    - update logo in skills (see next)
-    - add scss folder
-    - write scss 
-        - variables (colors, sizes, margin sizes, header sizes, anything that needs a reference)
-        - nesting code style (will need to think about css organization)
-        - mixins (if you can use them)
-        - pseudo classes ("&:hover" nested within)
+- SASS implementation
+    Objectives
+        - update logo in skills (see next)
+        - add scss folder
+        - write scss 
+            - variables (colors, sizes, margin sizes, header sizes, anything that needs a reference)
+            - nesting code style (will need to think about css organization)
+            - mixins (if you can use them)
+            - pseudo classes ("&:hover" nested within)
+    Notes
+        09-01-2019
+            - having fine control over color is nice
+            - hard to tell if I'm using the best sass that I could (but I think the redesign will help, especially in having a fresh start)
 
 ===================
 ---- FEATURES -----
