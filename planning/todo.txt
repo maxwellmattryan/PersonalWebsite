@@ -1,25 +1,27 @@
 
 ===================
-------------------
------ v1.1.0 -----
-------------------
+-------------------
+----- v1.1.0 ------
+-------------------
 ===================
 
 ===================
------ FIXES -----
-===================
-
-- NONE
-
-===================
------ ROADMAP -----
+----- CURRENT -----
+---- FEATURE(S) ---
 ===================
 
 - sass implementation
     - update logo in skills (see next)
     - add scss folder
     - write scss 
-        - think about modularizing it for ease later (see next)
+        - variables (colors, sizes, margin sizes, header sizes, anything that needs a reference)
+        - nesting code style (will need to think about css organization)
+        - mixins (if you can use them)
+
+===================
+---- FEATURES -----
+---TO BE ADDED----- 
+===================
 
 - website (organization, pages) / html (layout) / css (style) redesign
     Website 
