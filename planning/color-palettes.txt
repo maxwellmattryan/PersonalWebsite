@@ -13,6 +13,31 @@ PETER RIVER
 
 -----
 
+INDIGO
+
+    Tints
+        #EBEDFF
+        #D7DAFF
+        #C3C8FF
+        #AFB6FF
+        #9BA4FF
+        #8792FF
+        #737FFF
+
+    Middle
+        #5F6DFF
+
+    Shades
+        #535FDF
+        #4752BF
+        #3B449F
+        #303780
+        #242960
+        #181B40
+        #0C0E20
+
+-----
+
 WISTERIA
 
 #F4ECF7

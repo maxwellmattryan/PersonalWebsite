@@ -1,3 +1,20 @@
+// Colors ===========
+$tintLight: #EBEDFF;
+$tintMed: #AFB6FF;
+$tintDark: #8792FF;
+$normal: #5F6DFF;
+$shadeLight: #4752BF;
+$shadeMed: #303780;
+$shadeDark: #0C0E20;
+//
+$white: #F8F9F9;
+$greyLight: #E5E7E9;
+$greyMed: #BDC3C7;
+$greyDark: #797D7F;
+$darkGrey: #626567;
+$black: #202020;
+//==================
+
 @font-face {
     font-family: "Louis George Cafe";
     src: url("../fonts/louis-george-cafe.ttf");
@@ -35,12 +52,12 @@
     }
 
     .project:hover {
-        background-color: #485d9b;
+        background-color: $shadeLight;
         transform: translateY(-0.15rem);
     }
 
     #submit:hover {
-        background-color: #738edf;
+        background-color: $normal;
     }
 
     .content-section {
@@ -59,6 +76,7 @@
 }
 
 html, body {
+    font-size: 12px;
     font-family: "Louis George Cafe", "Sans-Serif", "Arial";
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -101,32 +119,32 @@ p {
 }
 
 .blue {
-    fill: #AFB6FF;
-    color: #AFB6FF;
+    fill: $tintMed;
+    color: $tintMed;
 }
 
 .white {
-    fill: #EBEDFF;
-    color: #EBEDFF;
+    fill: $tintLight;
+    color: $tintLight;
 }
 
 header {
-    background-color: #303780;
-    color: #EBEDFF;
+    background-color: $shadeMed;
+    color: $tintLight;
 }
 
 footer {
-    background-color: #0C0E20;
+    background-color: $shadeDark;
 }
 
 #branding {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid #eaf2ee;
+    border-bottom: 1px solid $tintLight;
 }
 
 nav a {
-    color: #eaf2ee;
+    color: $tintLight;
     font-size: 1.5rem;
 }
 
@@ -134,7 +152,7 @@ nav a {
     cursor: pointer;
     background: none;
     border: none;
-    fill: #e8eeff;
+    fill: $tintLight;
 }
 
 #mobile-nav #navbar-close, #mobile-nav ul {
@@ -147,13 +165,13 @@ nav a {
 
 #mobile-nav #navbar-close {
     left: 0;
-    background-color: #202020;
+    background-color: $shadeDark;
     opacity: 0.5;
 }
 
 #mobile-nav ul {
     right: 0;
-    background-color: #202020;
+    background-color: $shadeDark;
     transition: 0.3s;
     transition-property: width;
     text-align: left;
@@ -187,7 +205,7 @@ nav a {
 .item-container {
     padding: 1rem;
     border-radius: 0.25rem;
-    box-shadow: 0px 1px 5px grey;
+    box-shadow: 0px 1px 5px $darkGrey;
     display: grid;
     grid-gap: 0.75rem;
 }
@@ -203,17 +221,17 @@ nav a {
 }
 
 .skill {
-    background-color: #f5f5f5;
-    color: #202020;
+    background-color: $white;
+    color: $shadeDark;
 }
 
 #projects {
     padding: 1.5rem -1.5rem;
-    background-color: #e8eeff;
+    background-color: $tintLight;
 }
 
 .project {
-    background-color: #23355d;
+    background-color: $shadeMed;
     color: #e8eeff;
     transition: 0.3s;
 }
@@ -243,8 +261,8 @@ input, #message {
 }
 
 input[type=submit] {
-    background-color: #3B449F;
-    color: white;
+    background-color: $shadeLight;
+    color: $tintLight;
     border: none;
     cursor: pointer;
 }
