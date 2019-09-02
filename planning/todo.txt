@@ -17,9 +17,13 @@ Last updated: 09/01/2019
             - structure html / scss files more modularly
         Files
             - find svgs for affinity designer (if design skill is kept)
+        Features
+            - blog implementation
+                - laravel
+                - react / redux / node
     HTML 
         Structure
-            - Navigation (logo, links (home, about, ?)
+            - Branding / Navigation (logo, links (home, about, ?)
             - Landing (about-me statement, contact me, picture (?))
             - Projects (description side by side image, alternating sides)
             - Skills (icons, names below (or pop up in text bubble above on hover))
@@ -36,15 +40,13 @@ Last updated: 09/01/2019
         Issues
             - fix weird resizing issue at width=1152px
                 - see if you can find a clean solution
+    BLOG
 
 ===================
 ---- FEATURES -----
 ---TO BE ADDED----- 
 ===================
     
-- blog implementation
-    - laravel
-
 - langlanguage implementation 
     - English, Japanese
 
