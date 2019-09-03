@@ -5,31 +5,31 @@
 @import "_layout";
 
 .nav-container {
-    width: $minus-side-margins;
-    height: 10vh;
-    padding: 0 2rem;
+    width: 100%;
+    height: $nav-height;
+    display: inline-block;
+    padding: $padding-top $padding-side;
     background-color: lighten($offWhite, 5);
     display: flex;
+    box-sizing: border-box;
     flex-direction: row;
     justify-content: space-between;
     top: 0;
-
     a:visited {
         text-decoration: none;
-        color: $black;
+        color: $dark-text;
     }
 
     .logo-container {
         display: flex;
-        flex: 1;
         align-items: center;
     }
 
     .text-logo {
         text-decoration: none;
-        font-size: 2rem;
+        font-size: 2.5rem;
         font-family: "GT Sectra";
-        color: $black;
+        color: $dark-text;
     }
 
     .links-container {
@@ -43,6 +43,6 @@
         font-size: 1.2rem;
         margin-left: 3rem;
         text-decoration: none;
-        color: $black;
+        color: $dark-text;
     }
 }

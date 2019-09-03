@@ -56,10 +56,7 @@ class Footer extends Component {
 
                         <div className="back-to-top resume-section">
                             <h4 className="resume-section-title"></h4>
-                            <a>
-                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" className="uparrows" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                                " back to top"
-                            </a>
+                            <a class="back-to-top" href="#root">&uarr; back to top</a>
                         </div>
                     </div>
                 </div>

@@ -40,12 +40,46 @@ Last updated: 09/01/2019
         Issues
             - fix weird resizing issue at width=1152px
                 - see if you can find a clean solution
-    BLOG
+    Blog 
+        Parameters
+            - image(s)
+            - title, subtitle, description
+            - tags (for searching, for specificity)
+            - category (will keep things tidy)
+            - date created
+            - date last modified (?)
+        HTML
+            - IDK
+        CSS
+            - IDK
 
-    - fix project container
-    - grab icons for tech stack
-    - fill out resume section
-    - finish css styling
+    TODO:
+    - fix navigation padding
+        - change to rem unit
+        - change other things to rem units that might be benefitted by that
+    - project containers
+        - hover over picture greying out
+        - write more content
+        - edit images
+    - tech stack styling
+        - find icons (color or no color)
+        - responsive grid
+    - blog feature styling
+        - need to make it first haha...
+    - footer (resume) styling
+        - write html content
+        - write resume...
+        - style
+    - about me styling (and html writing)
+        - write html   
+        - write content
+        - social media icons for contact me
+    - add sidebar menu
+        - just like the previous iteration...
+        - use for mobile (below 541px width when text logo wraps to new line)
+        - make the button sleeker (maybe three bars in a circle)
+    - blog implementation
+        - ?
 
 ===================
 ---- FEATURES -----
