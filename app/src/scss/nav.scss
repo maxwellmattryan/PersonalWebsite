@@ -2,14 +2,16 @@
 
 @import "_colors";
 @import "_fonts";
+@import "_layout";
 
 .nav-container {
-    width: 95vw;
+    width: $minus-side-margins;
     height: 10vh;
-    padding: 0vh 2.5vw;
+    padding: 0 2rem;
     background-color: lighten($offWhite, 5);
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     top: 0;
 
     a:visited {
@@ -20,7 +22,6 @@
     .logo-container {
         display: flex;
         flex: 1;
-        justify-content: flex-start;
         align-items: center;
     }
 
@@ -33,7 +34,6 @@
 
     .links-container {
         display: flex;
-        flex: 3;
         justify-content: flex-end;
         align-items: center;
     }
@@ -41,7 +41,7 @@
     .link-item {
         font-family: "Louis George Cafe";
         font-size: 1.2rem;
-        margin-left: 5vw;
+        margin-left: 3rem;
         text-decoration: none;
         color: $black;
     }

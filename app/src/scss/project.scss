@@ -4,15 +4,65 @@
     height: 100vh;
     width: 100vw;
     display: block;
+    background-color: lighten($offWhite, 1);
+    box-sizing: border-box;
     .project-inner-container {
-        height: 100%;
         display: grid;
-        .project-text-container {
-            display: block;
-        }
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
         .project-img-container {
-            max-width: 50%;
-            object-fit: cover;
+            img {
+                height: 50vh;
+            }
+        }
+        .project-text-container {
+            height: 50vh;
+            color: $black;
+            padding: 4rem 0 0 2rem;
+            box-sizing: border-box;
+            .project-title {
+                margin-bottom: 1.5rem;
+                font-size: 2rem;
+            }
+            .project-subtitle {
+                font-size: 1.25rem;
+                font-style: italic;
+                font-family: "Louis George Cafe";
+                margin-bottom: 1.5rem;
+            }
+            .project-description {
+                font-family: "Louis George Cafe";
+                font-size: 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+            .read-more {
+                font-size: 1.5rem;
+                font-family: "Louis George Cafe";
+                text-decoration: none;
+                color: darken($color-light, 20);
+            }
+        }
+    }
+}
+
+@media (min-width: 1250px) {
+    .project-container {
+        padding: 5vh 0;
+        .project-inner-container {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+            .project-img-container {
+                img {
+                    width: 50vw;
+                    height: 90vh;
+                }
+            }
+            .project-text-container {
+                width: 50vw;
+                height: 90vh;
+                grid-row-start: 1;
+                padding: 15rem 0 0 5rem;
+            }
         }
     }
 }
