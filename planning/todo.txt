@@ -42,6 +42,11 @@ Last updated: 09/01/2019
                 - see if you can find a clean solution
     BLOG
 
+    - fix project container
+    - grab icons for tech stack
+    - fill out resume section
+    - finish css styling
+
 ===================
 ---- FEATURES -----
 ---TO BE ADDED----- 

@@ -2,20 +2,19 @@
 
 @import "_colors";
 @import "_fonts";
-@import "_reset";
 
 .nav-container {
-    width: 100vw;
-    height: 80px;
-    background-color: lighten($offWhite, 2.5);
+    width: 95vw;
+    height: 10vh;
+    padding: 0vh 2.5vw;
+    background-color: lighten($offWhite, 5);
     display: flex;
     flex-direction: row;
     top: 0;
-    grid-column-start: 1 / span 2;
 
     a:visited {
         text-decoration: none;
-        color: $color-dark;
+        color: $black;
     }
 
     .logo-container {
@@ -29,6 +28,7 @@
         text-decoration: none;
         font-size: 2rem;
         font-family: "GT Sectra";
+        color: $black;
     }
 
     .links-container {
@@ -39,8 +39,10 @@
     }
 
     .link-item {
-        margin-right: 2rem;
+        font-family: "Louis George Cafe";
+        font-size: 1.2rem;
+        margin-left: 5vw;
         text-decoration: none;
-        color: $color-dark;
+        color: $black;
     }
 }

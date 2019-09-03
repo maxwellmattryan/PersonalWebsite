@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+//import { NavLink } from "react-router-dom";
 import "../scss/nav.scss";
 
 class Navigation extends Component {
@@ -12,9 +13,9 @@ class Navigation extends Component {
                 </div>
 
                 <div className="links-container">
-                    <a aria-current="page" className="link-item" href="index.html">home</a>
-                    <a aria-current="page" className="link-item" href="index.html">about</a>
-                    <a aria-current="page" className="link-item" href="index.html">blog</a>
+                    <a aria-current="page" className="link-item" href="index.html">Home</a>
+                    <a aria-current="page" className="link-item" href="index.html">About</a>
+                    <a aria-current="page" className="link-item" href="index.html">Blog</a>
                 </div>
             </nav>
         )
