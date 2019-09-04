@@ -9,7 +9,7 @@
     height: $nav-height;
     display: inline-block;
     padding: $padding-top $padding-side;
-    background-color: lighten($offWhite, 5);
+    background-color: lighten($color-dark, 63);
     display: flex;
     box-sizing: border-box;
     flex-direction: row;
@@ -29,7 +29,7 @@
         text-decoration: none;
         font-size: 2.5rem;
         font-family: "GT Sectra";
-        color: $dark-text;
+        color: $light-text;
     }
 
     .links-container {
@@ -43,6 +43,6 @@
         font-size: 1.2rem;
         margin-left: 3rem;
         text-decoration: none;
-        color: $dark-text;
+        color: $color-light;
     }
 }

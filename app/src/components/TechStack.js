@@ -9,7 +9,7 @@ export default class TechStack extends Component {
                 </div>
                 <div className="tech-stack-logos">
                     <div className="tech-stack-logos-item">
-                        <img alt="logo image"/>
+                        <img src="../logos/color_html5.svg" alt="HTML5 Logo"/>
                         <p>logo name</p>
                     </div>
                     <div className="tech-stack-logos-item">

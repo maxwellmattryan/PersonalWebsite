@@ -1,0 +1,10 @@
+/* TECH STACK STYLING */
+
+.tech-stack-title {
+    text-align: center;
+}
+
+.tech-stack-logos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}

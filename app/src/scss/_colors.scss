@@ -2,8 +2,14 @@ $offWhite: #F8F9F9;
 $black: #202020;
 //================
 
-$color-light: #AFB6FF;
+$color-light: rgb(87, 95, 181);
 $color-normal: #5F6DFF;
 $color-dark: #303780;
+$light-text: lighten($color-light, 15);
 $dark-text: darken($color-dark, 15);
-//=====================
+//==================================
+
+$operation-home-background: rgb(0, 3, 21);
+$distortion-plugin-background: rgb(205, 92, 92);
+$jlpt-scrape-background: rgb(138, 188, 131);
+//============================================

@@ -1,8 +1,30 @@
+/* PROJECT STYLING */
+
 @import "_colors";
 @import "_layout";
 
+#operation-home {
+    .project-img-container {
+        background-color: $operation-home-background;
+        align-items: end;
+    }
+}
+
+#distortion-plugin {
+    .project-img-container {
+        background-color: $distortion-plugin-background;
+        align-items: center;
+    }
+}
+
+#jlpt-scrape {
+    .project-img-container {
+        background-color: $jlpt-scrape-background;
+    }
+}
+
 .project-container {
-    height: 100vh;
+    height: 130vh;
     width: 100vw;
     display: block;
     background-color: lighten($offWhite, 1);
@@ -15,9 +37,11 @@
             "text";
         .project-img-container {
             grid-area: image;
+            height: 80vh;
+            width: 100vw;
+            display: grid;
             img {
-                height: 50vh;
-                width: 100vw;
+                width: 100%;
             }
         }
         .project-text-container {
@@ -28,22 +52,23 @@
             box-sizing: border-box;
             grid-area: text;
             .project-title {
-                margin-bottom: 1.5rem;
-                font-size: 2rem;
+                margin-bottom: 3rem;
+                font-size: 2.5rem;
             }
             .project-subtitle {
-                font-size: 1.25rem;
+                font-size: 1.5rem;
                 font-style: italic;
                 font-family: "Louis George Cafe";
                 margin-bottom: 1.5rem;
             }
             .project-description {
                 font-family: "Louis George Cafe";
-                font-size: 1.2rem;
-                margin-bottom: 1.5rem;
+                font-size: 1.25rem;
+                line-height: 2rem;
+                margin-bottom: 3rem;
             }
             .read-more {
-                font-size: 1.5rem;
+                font-size: 1.25rem;
                 font-family: "Louis George Cafe";
                 text-decoration: none;
                 color: darken($color-light, 20);
@@ -54,6 +79,7 @@
 
 @media (min-width: 1000px) {
     .project-container {
+        height: 100vh;
         padding: $padding-top 0;
         .project-inner-container {
             grid-template-areas:
@@ -61,9 +87,10 @@
             align-items: center;
             justify-items: center;
             .project-img-container {
+                height: $project-height;
                 img {
                     width: 50vw;
-                    height: $project-height;
+                    height: auto;
                 }
             }
             .project-text-container {
