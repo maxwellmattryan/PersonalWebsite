@@ -80,6 +80,7 @@ Last updated: 09/01/2019
         - make the button sleeker (maybe three bars in a circle)
     - blog implementation
         - ?
+    - update the readme
 
 ===================
 ---- FEATURES -----

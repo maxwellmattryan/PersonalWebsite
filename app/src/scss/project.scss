@@ -24,7 +24,7 @@
 }
 
 .project-container {
-    height: 130vh;
+    height: 150vh;
     width: 100vw;
     display: block;
     background-color: lighten($offWhite, 1);
@@ -36,18 +36,19 @@
             "image"
             "text";
         .project-img-container {
+            color: lighten($color-dark, 50);
             grid-area: image;
             height: 80vh;
             width: 100vw;
             display: grid;
             img {
+                max-height: 80vh;
                 width: 100%;
             }
         }
         .project-text-container {
-            height: 50vh;
+            height: 100vh;
             width: 100%;
-            color: $dark-text;
             padding: $padding-top $padding-side;
             box-sizing: border-box;
             grid-area: text;
@@ -73,11 +74,25 @@
                 text-decoration: none;
                 color: darken($color-light, 20);
             }
+            .icon-container {
+                display: inline;
+                max-height: 1rem;
+                color: lighten($black, 20);
+                img {
+                    height: 3rem;
+                    margin-right: 2rem;
+                    transition: 0.3s;
+                    &:hover {
+                        transform: translateY(-0.25rem);
+                        filter: brightness(0.25);
+                    }
+                }
+            }
         }
     }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1025px) {
     .project-container {
         height: 100vh;
         padding: $padding-top 0;
@@ -90,7 +105,8 @@
                 height: $project-height;
                 img {
                     width: 50vw;
-                    height: auto;
+                    height: 60vh;
+                    transition: 0.3s;
                 }
             }
             .project-text-container {

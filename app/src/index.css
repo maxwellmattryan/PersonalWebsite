@@ -1,5 +1,8 @@
 @import "/scss/_reset";
 
+html, body {
+  font-size: 0.5rem;
+}
 body {
   margin: 0;
   padding: 0;
@@ -14,4 +17,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+@media (min-width: 700px) {
+  body, html {
+    font-size: 1rem;
+  }
 }
