@@ -19,8 +19,8 @@ code {
     monospace;
 }
 
-@media (min-width: 700px) {
+@media (max-width: 700px) {
   body, html {
-    font-size: 1rem;
+    font-size: 50rem;
   }
 }

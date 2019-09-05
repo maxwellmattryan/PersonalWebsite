@@ -31,7 +31,7 @@ class Main extends Component {
                 subtitle: "Global Game Jam 2019", 
                 description: [
                     "Operation H.O.M.E. (\"Heck Off My Earth\") is a simple arcade shooter created for the 2019 Global Game Jam. The theme of 2019 was \"home\" and what it means to you. Does home mean a sound, smell, feeling, or location? My team decided that for us it meant defending the Earth from invading aliens.",
-                    "My team used the Unity engine and I used Ableton Live 10 to design sounds. I oversaw mainly audio implementation via C# scripting to ensure that sounds were triggering as desired as well as sound design. Throughout the jam, I also wrote scripts for enemy spawning behavior and camera shake."
+                    "My team used the Unity engine and I used Ableton Live 10 to design sounds. I oversaw mainly audio implementation via C# scripting to ensure that sounds were triggering as desired as well as sound design. Things you'll hear include the UI/UX, a laser gun, and an arcade-y space atmosphere. If I wasn't working on sound, I was writing scripts for enemy spawning behavior and camera shake."
                 ],
                 links: [
                     {
@@ -56,8 +56,8 @@ class Main extends Component {
                 title: "Distortion VST Plugin", 
                 subtitle: "Music Production", 
                 description: [
-                    "Distortion can be created quite simply by multiplying a signal by a real number or itself. With such a simple calculation leading to an intriguing sound effect, building a distortion algorithm seemed like a lot of fun. The gain, drive, and mix settings allow for a bit moire control of the sounds.",
-                    "This plugin was created using the JUCE framework by ROLI and writing C++ in Visual Studio."
+                    "Distortion can be created quite simply by multiplying a signal by a real number. Using itself as that multiplier can sometimes results in pretty rough distortion, but can be adaptable for just about anything with the right mix adjustments. The gain, drive, and mix settings allow for a bit more meticulous control of the sounds.",
+                    "This plugin was created using the JUCE framework by ROLI, which operates in C++. Audio programming is something that I think is incredibly interesting and refreshing to do especially since it's using C++. It's kind of like my hobby within programming."
                 ], 
                 links: [
                     {
@@ -82,8 +82,8 @@ class Main extends Component {
                 title: "JLPT Vocabulary Scraper", 
                 subtitle: "Japanese Language Proficiency Test", 
                 description: [
-                    "Scrape jisho.org to find and export JLPT vocabulary words.",
-                    "Another paragraph..."
+                    "The Japanese Language Proficiency Test is rigorous. Passing the top level, referred to as N1, requires the vocabulary of roughly 8,226 words (according to jisho.org). In order to study more efficiently, I thought that a script for scraping all of these words and creating spreadsheets filled with their data would be helpful.",
+                    "Using Python 3.7.4 and some of its libraries (beautiful soup, xlwt, lxml), the script searches the words that belong to a JLPT level, which is defined by the user. From the page's requested html, the script extracts the kanji, furigana, meaning(s), part of speech, and whether or not it is a commonly used word."
                 ],
                 links: [
                     {

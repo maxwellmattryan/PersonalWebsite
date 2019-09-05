@@ -82,30 +82,28 @@
                     height: 3rem;
                     margin-right: 2rem;
                     transition: 0.3s;
-                    &:hover {
-                        transform: translateY(-0.25rem);
-                        filter: brightness(0.25);
-                    }
                 }
             }
         }
     }
 }
 
+// LOOK AT CHROME'S PAGE SOURCE THEN COME HERE AND FIGURE OUT WHY THE PICTURE SHIT 
+// ISN'T LIGNING UP /:
 @media (min-width: 1025px) {
     .project-container {
         height: 100vh;
-        padding: $padding-top 0;
+        padding: $padding-top 0 20vh;
         .project-inner-container {
             grid-template-areas:
                 "text image";
             align-items: center;
             justify-items: center;
             .project-img-container {
-                height: $project-height;
+                height: 90vh;
                 img {
                     width: 50vw;
-                    height: 60vh;
+                    height: auto;
                     transition: 0.3s;
                 }
             }
@@ -113,6 +111,13 @@
                 width: 50vw;
                 grid-row-start: 1;
                 padding: 0 $text-container-padding-side;
+                .icon-container {
+                    img {
+                        &:hover {
+                            transform: translateY(-0.25rem);
+                        }
+                    }
+                }
             }
         }
     }
