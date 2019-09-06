@@ -59,8 +59,7 @@ Last updated: 09/01/2019
         - change other things to rem units that might be benefitted by that
     - project containers
         - hover over picture greying out
-        - write more content
-        - edit images
+        - add color to hover state of readmore logos
     - tech stack styling
         - find icons (color or no color)
         - responsive grid
