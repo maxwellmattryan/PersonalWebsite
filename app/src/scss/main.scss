@@ -22,11 +22,12 @@
     }
     .scroll-container {
         text-align: center;
+        justify-content: flex-end;
     }
     a {
         font-family: "Louis George Cafe";
         font-size: 1.5rem;
-        color: lighten($black, 30);
+        color: lighten($black, 40);
         text-decoration: none;
     }
 }

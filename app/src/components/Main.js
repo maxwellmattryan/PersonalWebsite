@@ -11,6 +11,7 @@ import Footer from "./Footer.js";
 
 import GitHub from "../logos/github.svg";
 import ItchIO from "../logos/itch-dot-io.svg";
+import GoogleDrive from "../logos/color_google-drive.svg";
 
 import "../scss/style.scss";
 import "../scss/main.scss";
@@ -28,7 +29,7 @@ class Main extends Component {
                 index: "operation-home", 
                 source: OperationHome, 
                 title: "Operation H.O.M.E.", 
-                subtitle: "Global Game Jam 2019", 
+                subtitle: "Unity-built Arcade Shooter", 
                 description: [
                     "Operation H.O.M.E. (\"Heck Off My Earth\") is a simple arcade shooter created for the 2019 Global Game Jam. The theme of 2019 was \"home\" and what it means to you. Does home mean a sound, smell, feeling, or location? My team decided that for us it meant defending the Earth from invading aliens.",
                     "My team used the Unity engine and I used Ableton Live 10 to design sounds. I oversaw mainly audio implementation via C# scripting to ensure that sounds were triggering as desired as well as sound design. Things you'll hear include the UI/UX, a laser gun, and an arcade-y space atmosphere. If I wasn't working on sound, I was writing scripts for enemy spawning behavior and camera shake."
@@ -44,7 +45,7 @@ class Main extends Component {
                         title: "Itch.io",
                         url: "https://maxwellmatt.itch.io/operation-home",
                         icon: ItchIO,
-                        iconPath: "../logos/itch-dot-io.svg"
+                        iconPath: "../logos/color_itch-dot-io.svg"
                     }
                 ]
             },
@@ -54,7 +55,7 @@ class Main extends Component {
                 index: "distortion-plugin", 
                 source: DistortionPlugin, 
                 title: "Distortion VST Plugin", 
-                subtitle: "Music Production", 
+                subtitle: "C++ Audio Effect", 
                 description: [
                     "Distortion can be created quite simply by multiplying a signal by a real number. Using itself as that multiplier can sometimes results in pretty rough distortion, but can be adaptable for just about anything with the right mix adjustments. The gain, drive, and mix settings allow for a bit more meticulous control of the sounds.",
                     "This plugin was created using the JUCE framework by ROLI, which operates in C++. Audio programming is something that I think is incredibly interesting and refreshing to do especially since it's using C++. It's kind of like my hobby within programming."
@@ -67,10 +68,10 @@ class Main extends Component {
                         iconPath: "../logos/github.svg"
                     },
                     {
-                        title: "",
-                        url: "",
-                        icon: "",
-                        iconPath: ""
+                        title: "Google Drive",
+                        url: "https://drive.google.com/drive/folders/17C_JE0Ml55esPL3bPV167YPPwtijaJgN?usp=sharing",
+                        icon: GoogleDrive,
+                        iconPath: "../logos/color_google-drive.svg"
                     }
                 ]
             },
@@ -80,7 +81,7 @@ class Main extends Component {
                 index: "jlpt-scrape", 
                 source: JLPTScrape, 
                 title: "JLPT Vocabulary Scraper", 
-                subtitle: "Japanese Language Proficiency Test", 
+                subtitle: "Python Dictionary Scraper", 
                 description: [
                     "The Japanese Language Proficiency Test is rigorous. Passing the top level, referred to as N1, requires the vocabulary of roughly 8,226 words (according to jisho.org). In order to study more efficiently, I thought that a script for scraping all of these words and creating spreadsheets filled with their data would be helpful.",
                     "Using Python 3.7.4 and some of its libraries (beautiful soup, xlwt, lxml), the script searches the words that belong to a JLPT level, which is defined by the user. From the page's requested html, the script extracts the kanji, furigana, meaning(s), part of speech, and whether or not it is a commonly used word."
@@ -93,10 +94,10 @@ class Main extends Component {
                         iconPath: "../logos/github.svg"
                     },
                     {
-                        title: "",
-                        url: "",
-                        icon: "",
-                        iconPath: ""
+                        title: "Google Drive",
+                        url: "https://drive.google.com/drive/folders/1BAvCwVEkObtevfx9YwB0gGtDbqpndqsj?usp=sharing",
+                        icon: GoogleDrive,
+                        iconPath: "../logos/color_google-drive.svg"
                     }
                 ]
             },

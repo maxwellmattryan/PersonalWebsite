@@ -4,11 +4,16 @@
 @import "_fonts";
 @import "_layout";
 
-.tech-stack-title {
-    text-align: center;
-}
-
-.tech-stack-logos {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+.tech-stack-container {
+    padding-top: 10vh;
+    background-color: lighten($offWhite, 1);
+    .tech-stack-title {
+        text-align: center;
+    }
+    .tech-stack-logos {
+        display: grid;
+        padding: 18vh 18vw;
+        height: 50vh;
+        grid-template-columns: repeat(3, 1fr);
+    }
 }

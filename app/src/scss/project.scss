@@ -19,7 +19,8 @@
 
 #jlpt-scrape {
     .project-img-container {
-        background-color: $jlpt-scrape-background;
+        background-color: $black;
+        align-items: center;
     }
 }
 
@@ -61,6 +62,7 @@
                 font-style: italic;
                 font-family: "Louis George Cafe";
                 margin-bottom: 1.5rem;
+                color: lighten($black, 40);
             }
             .project-description {
                 font-family: "Louis George Cafe";
@@ -88,12 +90,10 @@
     }
 }
 
-// LOOK AT CHROME'S PAGE SOURCE THEN COME HERE AND FIGURE OUT WHY THE PICTURE SHIT 
-// ISN'T LIGNING UP /:
 @media (min-width: 1025px) {
     .project-container {
         height: 100vh;
-        padding: $padding-top 0 20vh;
+        padding: 0 0 20vh;
         .project-inner-container {
             grid-template-areas:
                 "text image";
@@ -110,7 +110,7 @@
             .project-text-container {
                 width: 50vw;
                 grid-row-start: 1;
-                padding: 0 $text-container-padding-side;
+                padding: $text-container-padding-top $text-container-padding-side;
                 .icon-container {
                     img {
                         &:hover {
@@ -121,4 +121,7 @@
             }
         }
     }
+}
+
+@media (max-width: 1523px) {
 }
