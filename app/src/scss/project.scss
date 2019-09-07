@@ -25,20 +25,19 @@
 }
 
 .project-container {
-    height: 150vh;
+    height: auto;
     width: 100vw;
-    display: block;
     background-color: lighten($offWhite, 1);
     box-sizing: border-box;
     .project-inner-container {
         box-sizing: border-box;
         display: grid;
-        grid-template-areas:
+        grid-template-areas: 
             "image"
             "text";
         .project-img-container {
-            color: lighten($color-dark, 50);
             grid-area: image;
+            color: lighten($color-dark, 50);
             height: 80vh;
             width: 100vw;
             display: grid;
@@ -48,24 +47,24 @@
             }
         }
         .project-text-container {
-            height: 100vh;
+            grid-area: text;
+            height: auto;
             width: 100%;
             padding: $padding-top $padding-side;
             box-sizing: border-box;
-            grid-area: text;
+            font-family: "Louis George Cafe";
             .project-title {
+                font-family: "GT Sectra";
                 margin-bottom: 3rem;
                 font-size: 2.5rem;
             }
             .project-subtitle {
                 font-size: 1.5rem;
                 font-style: italic;
-                font-family: "Louis George Cafe";
                 margin-bottom: 1.5rem;
                 color: lighten($black, 40);
             }
             .project-description {
-                font-family: "Louis George Cafe";
                 font-size: 1.25rem;
                 line-height: 2rem;
                 margin-bottom: 3rem;
@@ -92,15 +91,15 @@
 
 @media (min-width: 1025px) {
     .project-container {
-        height: 100vh;
-        padding: 0 0 20vh;
+        height: auto;
+        padding: 0 0;
         .project-inner-container {
-            grid-template-areas:
-                "text image";
+            display: flex;
+            flex-direction: row;
             align-items: center;
             justify-items: center;
             .project-img-container {
-                height: 90vh;
+                width: 50vw;
                 img {
                     width: 50vw;
                     height: auto;
@@ -109,6 +108,7 @@
             }
             .project-text-container {
                 width: 50vw;
+                height: auto;
                 grid-row-start: 1;
                 padding: $text-container-padding-top $text-container-padding-side;
                 .icon-container {

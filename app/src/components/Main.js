@@ -1,18 +1,23 @@
+// REACT IMPORT
 import React, { Component } from "react";
 
+// PROJECT IMPORTS
 import Project from "./Project.js"
 import OperationHome from "../img/operation-home.png";
 import DistortionPlugin from "../img/distortion-plugin.png";
 import JLPTScrape from "../img/jlpt-scrape.png";
 
+// COMPONENT IMPORTS
 import TechStack from "./TechStack.js";
 import BlogShowcase from "./BlogShowcase.js";
 import Footer from "./Footer.js";
 
+// LOGO IMPORTS
 import GitHub from "../logos/github.svg";
 import ItchIO from "../logos/itch-dot-io.svg";
 import GoogleDrive from "../logos/color_google-drive.svg";
 
+// SASS IMPORTS
 import "../scss/style.scss";
 import "../scss/main.scss";
 import "../scss/project.scss";
@@ -122,7 +127,7 @@ class Main extends Component {
 
                 <TechStack />
 
-                <BlogShowcase />
+                {/* <BlogShowcase /> */}
 
                 <Footer />
             </div>

@@ -9,11 +9,6 @@ class Project extends Component {
                 <div id={ project.index } className="project animated fade-in" key={ project.id }>
                     <section className="project-container">
                         <div className="project-inner-container">
-                            <a href={ project.links[0].url } className="read-more" target="_blank">
-                                <div className="project-img-container">
-                                    <img src={ project.source } alt={ project.title }/>
-                                </div>
-                            </a>
                             <div className="project-text-container">
                                 <p className="project-title">{ project.title }</p>
                                 <p className="project-subtitle">{ project.subtitle }</p>
@@ -27,6 +22,11 @@ class Project extends Component {
                                     </a> 
                                 </div>                           
                             </div>
+                            <a href={ project.links[0].url } className="read-more" target="_blank">
+                                <div className="project-img-container">
+                                    <img src={ project.source } alt={ project.title }/>
+                                </div>
+                            </a>
                         </div>
                     </section>
                 </div>
