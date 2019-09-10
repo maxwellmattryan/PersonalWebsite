@@ -9,19 +9,19 @@ class Navigation extends Component {
             <nav className="nav-container">
 
                 <div className="logo-container">
-                    <a aria-current="page" className="text-logo active" href="index.html">matt maxwell</a> 
+                    <a aria-current="page" className="text-logo active" href="/">matt maxwell</a> 
                 </div>
 
                 <div className="links-container">
                     <div className="link-item-container">
-                        <a aria-current="page" className="link-item" href="index.html">Home</a>
+                        <a aria-current="page" className="link-item" href="/">Home</a>
                     </div>
                     <div className="link-item-container">
-                        <a aria-current="page" className="link-item" href="index.html">About</a>
+                        <a aria-current="page" className="link-item" href="/about">About</a>
                     </div>
-                    <div className="link-item-container">
+                    {/* <div className="link-item-container">
                         <a aria-current="page" className="link-item" href="index.html">Blog</a>
-                    </div>
+                    </div> */}
                 </div>
             </nav>
         )
