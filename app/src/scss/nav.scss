@@ -9,7 +9,7 @@
     height: $nav-height;
     display: inline-block;
     padding: $padding-top $padding-side;
-    background-color: $offWhite;
+    background-color: darken($color-dark, 26);
     display: flex;
     box-sizing: border-box;
     flex-direction: row;
@@ -28,7 +28,7 @@
         text-decoration: none;
         font-size: 2.5rem;
         font-family: "GT Sectra";
-        color: lighten($dark-text, 1);
+        color: $light-text;
     }
 
     .links-container {
@@ -39,17 +39,30 @@
 
     .link-item {
         font-family: "Louis George Cafe";
-        font-size: 1.2rem;
+        font-size: 1rem;
         margin-left: 3rem;
         text-decoration: none;
-        color: lighten($black, 40);
+        color: $light-text;
     }
 }
 
-@media (max-width: 590px) {
+@media (max-width: 565px) {
     .nav-container {
         .text-logo {
             font-size: 7vw;
+        }
+    }
+}
+
+@media (min-width: 760px) {
+    .nav-container {
+        .link-item-container {
+            .link-item {
+                transition: 0.2s;
+                &:hover {
+                    color: lighten($light-text, 15);
+                }
+            }
         }
     }
 }

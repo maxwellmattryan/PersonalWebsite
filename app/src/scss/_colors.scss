@@ -7,8 +7,9 @@ $black: #202020;
 $color-light: rgb(87, 95, 181);
 $color-normal: #5F6DFF;
 $color-dark: #303780;
-$light-text: lighten($color-light, 15);
-$dark-text: darken($color-dark, 15);
+$light-text: darken($offWhite, 32);
+$dark-text: darken($color-dark, 24);
+$text-hover-red: darken(#F1948A, 12);
 //==================================
 
 $operation-home-background: rgb(0, 3, 21);

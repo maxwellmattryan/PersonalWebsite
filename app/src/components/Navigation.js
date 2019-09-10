@@ -13,9 +13,15 @@ class Navigation extends Component {
                 </div>
 
                 <div className="links-container">
-                    <a aria-current="page" className="link-item" href="index.html">Home</a>
-                    <a aria-current="page" className="link-item" href="index.html">About</a>
-                    <a aria-current="page" className="link-item" href="index.html">Blog</a>
+                    <div className="link-item-container">
+                        <a aria-current="page" className="link-item" href="index.html">Home</a>
+                    </div>
+                    <div className="link-item-container">
+                        <a aria-current="page" className="link-item" href="index.html">About</a>
+                    </div>
+                    <div className="link-item-container">
+                        <a aria-current="page" className="link-item" href="index.html">Blog</a>
+                    </div>
                 </div>
             </nav>
         )
