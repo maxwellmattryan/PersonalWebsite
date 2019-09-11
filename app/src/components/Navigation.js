@@ -1,5 +1,8 @@
+// REACT IMPORTS
 import React, { Component } from "react";
-//import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+
+// SASS IMPORT
 import "../scss/nav.scss";
 
 class Navigation extends Component {
@@ -14,10 +17,10 @@ class Navigation extends Component {
 
                 <div className="links-container">
                     <div className="link-item-container">
-                        <a aria-current="page" className="link-item" href="/">Home</a>
+                        <Link to="/" aria-current="page" className="link-item" href="/">Home</Link>
                     </div>
                     <div className="link-item-container">
-                        <a aria-current="page" className="link-item" href="/about">About</a>
+                        <Link to="/about" aria-current="page" className="link-item" href="/about">About</Link>
                     </div>
                     {/* <div className="link-item-container">
                         <a aria-current="page" className="link-item" href="index.html">Blog</a>

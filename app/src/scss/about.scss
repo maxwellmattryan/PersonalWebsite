@@ -1,0 +1,39 @@
+@import "_fonts";
+@import "_colors";
+@import "_layout";
+@import "_reset";
+
+.about-container {
+    height: auto;
+    min-height: 90vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column-reverse;
+    .about-text-container {
+        color: $dark-text;
+        h2 {
+            font-family: "GT Sectra";
+            margin-bottom: 1rem;
+        }
+        p {
+            font-family: "Louis George Cafe";
+            margin-bottom: 0.5rem;
+        }
+    }
+    .about-image-container {
+        height: auto;
+        img {
+            width: 100%;
+            height: auto;
+            border: 1px solid $black;
+        }
+    }
+    & > div {
+        height: 45vh;
+        padding: $padding-top $padding-side 0;
+    }
+}
+
+@media (min-width: 1025px) {
+
+}
