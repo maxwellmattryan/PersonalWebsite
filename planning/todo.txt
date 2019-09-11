@@ -54,37 +54,29 @@ Last updated: 09/01/2019
             - IDK
 
     TODO:
-    - fix navigation padding
-        - change to rem unit
-        - change other things to rem units that might be benefitted by that
-    - project containers
-        - hover over picture greying out
-        - add color to hover state of readmore logos
-    - tech stack styling
-        - find icons (color or no color)
-        - responsive grid
-    - blog feature styling
-        - need to make it first haha...
-    - footer (resume) styling
-        - write html content
-        - write resume...
-        - style
-    - about me styling (and html writing)
-        - write html   
-        - write content
-        - social media icons for contact me
-    - add sidebar menu
-        - just like the previous iteration...
-        - use for mobile (below 541px width when text logo wraps to new line)
-        - make the button sleeker (maybe three bars in a circle)
-    - blog implementation
-        - ?
-    - update the readme
+    - update readme
+    - add animations for certain containers
+    - make project layout more interesting (desktop view)
+        - needs to be staggered, feels off balance having all pictures on the right
+    - fix icons in tech stack container
+    - where should copyright stuff go ... ? 
+        - bottom and center feels great
+    - home page's footer has some issues at half screen width
+        - text margins are messed up
+        - fix contact icons (overflow to next line)
+    - fix image container background for JLPT project 
+        - color mismatch looks weird
+    - read / revise all text in website
+        - project descriptions could be better (more in-depth !)
+        - about-me section needs to be stronger
+    
 
 ===================
 ---- FEATURES -----
 ---TO BE ADDED----- 
 ===================
+
+- blog implementation
     
 - langlanguage implementation 
     - English, Japanese
