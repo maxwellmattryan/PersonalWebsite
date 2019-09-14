@@ -1,9 +1,6 @@
 // REACT IMPORT
 import React, { Component } from "react";
 
-// SASS IMPORT
-import "../scss/tech-stack.scss";
-
 // IMAGE IMPORTS
 import HTML from "../logos/color_html5.svg";
 import CSS from "../logos/color_css3.svg";

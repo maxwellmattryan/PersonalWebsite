@@ -1,9 +1,6 @@
 // REACT IMPORT
 import React, { Component } from "react";
 
-// SASS IMPORT
-import "../scss/about.scss";
-
 // IMAGE IMPORTS
 import Portrait from "../img/portrait.jpg";
 

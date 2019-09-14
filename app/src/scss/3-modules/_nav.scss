@@ -1,40 +1,36 @@
-/* NAV STYLING */
-
-@import "_colors";
-@import "_fonts";
-@import "_layout";
+// NAV MODULE
 
 .nav-container {
-    width: 100%;
-    height: $nav-height;
-    display: inline-block;
-    padding: $padding-top $padding-side;
     background-color: darken($color-dark, 26);
-    display: flex;
     box-sizing: border-box;
+    display: flex;
     flex-direction: row;
+    height: $nav-height;
     justify-content: space-between;
+    padding: $padding-top $padding-side;
     top: 0;
+    width: 100%;
+
     a:visited {
         text-decoration: none;
     }
 
     .logo-container {
-        display: flex;
         align-items: center;
+        display: flex;
     }
 
     .text-logo {
-        text-decoration: none;
-        font-size: 2.5rem;
-        font-family: "GT Sectra";
         color: $light-text;
+        font-family: "GT Sectra";
+        font-size: 2.5rem;
+        text-decoration: none;
     }
 
     .links-container {
+        align-items: center;
         display: flex;
         justify-content: flex-end;
-        align-items: center;
     }
 
     .link-item {

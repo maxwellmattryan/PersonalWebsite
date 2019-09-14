@@ -1,8 +1,5 @@
-/* REACT IMPORT */
+// REACT IMPORT
 import React, { Component } from "react";
-
-/* SASS IMPORT */
-import "../scss/footer.scss";
 
 class Footer extends Component {
     render() {

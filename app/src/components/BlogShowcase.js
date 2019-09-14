@@ -1,3 +1,4 @@
+// REACT IMPORT
 import React, { Component } from "react";
 
 class BlogShowcase extends Component {

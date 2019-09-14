@@ -1,8 +1,12 @@
+// REACT IMPORTS
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from "react-dom";
-import './index.css';
+
+// APP IMPORT
 import App from './App';
+
+// SERVICE WORKER IMPORT
 import * as serviceWorker from '../../app/src/serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));

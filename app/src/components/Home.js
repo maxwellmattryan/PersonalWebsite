@@ -17,15 +17,9 @@ import GitHub from "../logos/github.svg";
 import ItchIO from "../logos/itch-dot-io.svg";
 import GoogleDrive from "../logos/color_google-drive.svg";
 
-// SASS IMPORTS
-import "../scss/style.scss";
-import "../scss/main.scss";
-import "../scss/project.scss";
-import "../scss/footer.scss";
-import "../scss/tech-stack.scss";
 import { runInThisContext } from "vm";
 
-class Main extends Component {
+class Home extends Component {
     state = {
         projects : [
 
@@ -135,4 +129,4 @@ class Main extends Component {
     }
 }
 
-export default Main;
+export default Home;

@@ -1,5 +1,5 @@
+// REACT IMPORT
 import React, { Component } from "react";
-import "../scss/project.scss"
 
 class Project extends Component {
     render() {
