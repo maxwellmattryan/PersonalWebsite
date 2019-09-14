@@ -54,6 +54,13 @@ Last updated: 09/01/2019
             - IDK
 
     TODO:
+    - fix folder structure
+        - feels kinda messy ?
+    - refactor / redesign sass 
+        - alphabetized
+        - cleaner / more elegant handling of imports
+        - use the power of sass more !
+        - just feels messy and disorganized, even though it still "works"
     - update readme
     - add animations for certain containers
     - make project layout more interesting (desktop view)
