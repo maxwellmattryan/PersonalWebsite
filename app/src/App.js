@@ -1,21 +1,26 @@
 // REACT IMPORTS 
 import React from 'react';
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-// COMPONENT IMPORTS
-import Navigation from "./components/Navigation";
-import Home from "./components/Home";
-import About from "./components/About";
+// COMPONENT IMPORT
+import C from "./components";
 
 // SCSS IMPORT
-import "./scss/app.scss";
+import "./styles/app.scss";
 
 function App() {
   return (
     <BrowserRouter>
-      <Navigation />
-      <Route exact path="/" component={ Home } />
-      <Route path="/about" component={ About } />
+      <C.Navigation.MainNavBar />
+      <Switch>
+        <Route exact path="/">
+          <C.Sections.Landing />
+          <C.Sections.Project projects={ C.Data.Projects } />
+          <C.Sections.TechStack technologies={ C.Data.Technologies } />
+          <C.Sections.Footer />
+        </Route>
+        <Route path="/about" component={ C.Sections.About } />
+      </Switch>
     </BrowserRouter>
   );
 }
