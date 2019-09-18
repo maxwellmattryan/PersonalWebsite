@@ -56,21 +56,23 @@ Last updated: 09/01/2019
     TODO:
     - refactor / redesign sass 
         - alphabetized 
-        - use the power of sass more !
+        - use the power of sass / bourbon more !
         - just feels messy and disorganized, even though it still "works"
     - update readme
-    - add animations for certain containers
+    - change favicon
+    - add animations for animated sections
     - read / revise all text in website
         - project descriptions could be better (more in-depth !)
         - about-me section needs to be stronger
-    - fix about-me photo
+        - resume sections could be better
+            - add more general development / programming stuff
+    - about page
+        - fix styling, especially for mobile
         - mobile view is great, perfect size
         - photo gets too big as screen gets big (especially desktop view)
     - some issues on device rotation
         - iphoneX rotation messes up some margins /:
         - it's okay on ipads, but i think raising the media query width will help
-    - text is just a bit too big on mobile displays 
-    - change favicon
 
 ===================
 ---- FEATURES -----
