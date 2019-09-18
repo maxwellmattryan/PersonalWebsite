@@ -140,7 +140,7 @@ html, body {
   align-items: center; }
 
 #jlpt-scrape .project-img-container {
-  background-color: #202020;
+  background-color: #0e0e0e;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center; }
@@ -218,14 +218,20 @@ html, body {
   .project-container {
     height: auto;
     padding: 0 0; }
+    .project-container .image-first {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+      flex-direction: row-reverse; }
+    .project-container .text-first {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+      flex-direction: row; }
     .project-container .project-inner-container {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
-      -webkit-box-orient: horizontal;
-      -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-      flex-direction: row;
       -webkit-box-align: center;
       -ms-flex-align: center;
       align-items: center;
@@ -280,10 +286,7 @@ html, body {
       width: 5rem; }
       .tech-stack-container .tech-stack-logos .tech-stack-logos-item img {
         height: 4rem;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        margin-bottom: 0.75rem; }
+        margin: 0.75rem auto; }
       .tech-stack-container .tech-stack-logos .tech-stack-logos-item p {
         margin-top: 0rem;
         font-family: "Louis George Cafe";
@@ -427,30 +430,44 @@ html, body {
         color: #ea6253; } }
 
 .about-container {
-  height: auto;
-  min-height: 90vh;
-  width: 100vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: reverse;
   -ms-flex-direction: column-reverse;
-  flex-direction: column-reverse; }
+  flex-direction: column-reverse;
+  height: auto;
+  min-height: 90vh;
+  width: 100vw; }
   .about-container .about-text-container {
     color: #0f1127; }
     .about-container .about-text-container h2 {
       font-family: "GT Sectra";
       margin-bottom: 1rem; }
     .about-container .about-text-container p {
+      color: #868686;
       font-family: "Louis George Cafe";
       margin-bottom: 0.5rem; }
   .about-container .about-image-container {
     height: auto; }
     .about-container .about-image-container img {
-      width: 100%;
+      border: 1px solid #202020;
       height: auto;
-      border: 1px solid #202020; }
+      width: 100%; }
   .about-container > div {
     height: 45vh;
     padding: 5vh 2rem 0; }
+
+@media (min-width: 790px) {
+  .about-container {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 0px;
+    flex: 1 0 0;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row; }
+    .about-container .about-image-container img {
+      height: auto;
+      width: 35vw; } }

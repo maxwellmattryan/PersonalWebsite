@@ -10,7 +10,7 @@ export default class Project extends React.Component {
             return(
                 <div id={ project.id } className="project animated fade-in" key={ project.id }>
                     <section className="project-container">
-                        <div className="project-inner-container">
+                        <div className={ project.layout }>
                             <div className="project-text-container">
                                 <p className="project-title">{ project.title }</p>
                                 <p className="project-subtitle">{ project.subtitle }</p>

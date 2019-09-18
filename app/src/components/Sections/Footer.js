@@ -57,13 +57,13 @@ export default class Footer extends Component {
                             <h4 className="resume-section-title"></h4>
                             <a class="back-to-top" href="#root">&uarr; back to top</a>
                         </div>
-                        <div className="copyright-container resume-section">
-                            <h4 className="resume-section-title"></h4>
-                            <p className="copyright-text">
-                                &copy; Matthew Maxwell 2019. All rights reserved.
-                            </p>
-                        </div>
                     </div>
+                </div>
+                <div className="copyright-container resume-section">
+                    <h4 className="resume-section-title"></h4>
+                    <p className="copyright-text">
+                        &copy; Matthew Maxwell 2019. All rights reserved.
+                    </p>
                 </div>
             </div>
         )

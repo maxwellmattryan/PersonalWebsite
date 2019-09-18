@@ -16,7 +16,7 @@
             font-family: "GT Sectra";
             text-align: left;
             font-size: 24px;
-            color: $light-text;
+            color: $white-text;
             margin-bottom: 2rem;
         }
         .footer-text-container {
@@ -24,7 +24,7 @@
             .resume-section {
                 font-family: "Louis George Cafe";
                 font-size: 1.25rem;
-                color: $light-text;
+                color: $white-text;
                 text-align: left;
                 height: auto;
                 margin-bottom: 2rem;
@@ -40,7 +40,7 @@
                 .icon-container {
                     display: inline;
                     svg {
-                        fill: $light-text;
+                        fill: $white-text;
                         height: 2rem;
                         margin-right: 2rem;
                     }
@@ -48,18 +48,19 @@
             }
             #back-to-top {
                 a {
-                    color: $light-text;
+                    color: $white-text;
                     text-decoration: none;
                 }
             }
         }
-        .copyright-container {
-            .copyright-text {
-                font-size: 1.25rem;
-                color: $light-text;
-                margin-top: 2vw;
-                font-family: "Louis George Cafe";
-            }
+    }
+    .copyright-container {
+        .copyright-text {
+            color: $white-text;
+            font-family: "Louis George Cafe";
+            font-size: 1rem;
+            padding: $padding-top;
+            text-align: center;
         }
     }
 }
@@ -90,7 +91,7 @@
                                 transition: 0.2s;
                                 &:hover {
                                     transform: translateY(-0.25rem);
-                                    fill: lighten($light-text, 10);
+                                    fill: lighten($white-text, 10);
                                 }
                             }
                         }

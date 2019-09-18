@@ -16,7 +16,7 @@
 
 #jlpt-scrape {
     .project-img-container {
-        background-color: $black;
+        background-color: $jlpt-scrape-background;
         align-items: center;
     }
 }
@@ -106,9 +106,14 @@
     .project-container {
         height: auto;
         padding: 0 0;
+        .image-first {
+            flex-direction: row-reverse;
+        }
+        .text-first {
+            flex-direction: row;
+        }
         .project-inner-container {
             display: flex;
-            flex-direction: row;
             align-items: center;
             justify-items: center;
             .project-img-container {

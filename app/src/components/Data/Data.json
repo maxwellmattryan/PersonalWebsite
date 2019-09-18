@@ -3,6 +3,7 @@
         {
             "id": "operation-home", 
             "image": "../../images/operation-home.png", 
+            "layout": "project-inner-container image-first",
             "title": "Operation H.O.M.E.", 
             "subtitle": "Unity-built Arcade Shooter", 
             "description": [
@@ -25,6 +26,7 @@
         {
             "id": "distortion-plugin", 
             "image": "../../images/distortion-plugin.png", 
+            "layout": "project-inner-container text-first",
             "title": "Distortion VST Plugin", 
             "subtitle": "C++ Audio Effect", 
             "description": [
@@ -34,7 +36,7 @@
             "links": [
                 {
                     "name": "GitHub",
-                    "url": "https://github.com/maxwellmattryan/operation-home",
+                    "url": "https://github.com/maxwellmattryan/basic-distortion-plugin",
                     "logo": "../../logos/github.svg"
                 },
                 {
@@ -47,21 +49,22 @@
         {
             "id": "jlpt-scrape", 
             "image": "../../images/jlpt-scrape.png", 
+            "layout": "project-inner-container image-first",
             "title": "JLPT Vocabulary Scraper", 
             "subtitle": "Python Dictionary Scraper", 
             "description": [
-                "The Japanese Language Proficiency Test is rigorous. Passing the top level, referred to as N1, requires the vocabulary of roughly 8,226 words (according to jisho.org). In order to study more efficiently, I thought that a script for scraping all of these words and creating spreadsheets filled with their data would be helpful.",
+                "The Japanese Language Proficiency Test (JLPT) is rigorous. Passing the top level, referred to as N1, requires the vocabulary of roughly 8,226 words (according to jisho.org). In order to study more efficiently, I thought that a script for scraping all of these words and creating spreadsheets filled with their data would be helpful.",
                 "Using Python 3.7.4 and some of its libraries (beautiful soup, xlwt, lxml), the script searches the words that belong to a JLPT level, which is defined by the user. From the page's requested html, the script extracts the kanji, furigana, meaning(s), part of speech, and whether or not it is a commonly used word."
             ],
             "links": [
                 {
                     "name": "GitHub",
-                    "url": "https://github.com/maxwellmattryan/operation-home",
+                    "url": "https://github.com/maxwellmattryan/jisho-search",
                     "logo": "../../logos/github.svg"
                 },
                 {
                     "name": "Google Drive",
-                    "url": "https://drive.google.com/drive/folders/17C_JE0Ml55esPL3bPV167YPPwtijaJgN?usp=sharing",
+                    "url": "https://drive.google.com/drive/folders/1BAvCwVEkObtevfx9YwB0gGtDbqpndqsj?usp=sharing",
                     "logo": "../../logos/color_google-drive.svg"
                 }
             ]
@@ -87,6 +90,10 @@
         {
             "name": "React JS",
             "logo": "../../logos/color_reactjs.svg"
+        },
+        {
+            "name": "Redux",
+            "logo": "../../logos/color_redux.svg"
         },
         {
             "name": "Node JS",
