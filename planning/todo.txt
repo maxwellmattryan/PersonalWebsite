@@ -55,22 +55,11 @@ Last updated: 09/01/2019
 
     TODO:
     - refactor / redesign sass 
-        - alphabetized
-        - cleaner / more elegant handling of imports
+        - alphabetized 
         - use the power of sass more !
         - just feels messy and disorganized, even though it still "works"
     - update readme
     - add animations for certain containers
-    - make project layout more interesting (desktop view)
-        - needs to be staggered, feels off balance having all pictures on the right
-    - fix icons in tech stack container
-    - where should copyright stuff go ... ? 
-        - bottom and center feels great
-    - home page's footer has some issues at half screen width
-        - text margins are messed up
-        - fix contact icons (overflow to next line)
-    - fix image container background for JLPT project 
-        - color mismatch looks weird
     - read / revise all text in website
         - project descriptions could be better (more in-depth !)
         - about-me section needs to be stronger
@@ -78,10 +67,9 @@ Last updated: 09/01/2019
         - mobile view is great, perfect size
         - photo gets too big as screen gets big (especially desktop view)
     - some issues on device rotation
-        - iphoneX rotation messes up some margings /:
+        - iphoneX rotation messes up some margins /:
         - it's okay on ipads, but i think raising the media query width will help
     - text is just a bit too big on mobile displays 
-    - center nodejs icon (...?)
     - change favicon
 
 ===================
