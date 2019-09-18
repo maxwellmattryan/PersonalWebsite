@@ -54,8 +54,6 @@ Last updated: 09/01/2019
             - IDK
 
     TODO:
-    - fix folder structure
-        - feels kinda messy ?
     - refactor / redesign sass 
         - alphabetized
         - cleaner / more elegant handling of imports
