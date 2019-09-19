@@ -17,16 +17,16 @@ export default class Project extends React.Component {
                                 <p className="project-description">{ project.description[0] } <br/><br/> { project.description[1] }</p>
                                 <div className="icon-container">
                                     <a href={ project.links[0].url } className="read-more" target="_blank">
-                                        <img src={ project.links[0].logo } alt={ project.links[0].name }/>
+                                        <img src={ project.links[0].logo } alt={ project.links[0].name } title={ project.links[0].name } />
                                     </a>
                                     <a href={ project.links[1].url } className="read-more" target="_blank">
-                                        <img src={ project.links[1].logo } alt={ project.links[1].name }/>
+                                        <img src={ project.links[1].logo } alt={ project.links[1].name } title={ project.links[1].name } />
                                     </a> 
                                 </div>                           
                             </div>
                             <a href={ project.links[0].url } className="read-more" target="_blank">
                                 <div className="project-img-container">
-                                    <img src={ project.image } alt={ project.title }/>
+                                    <img src={ project.image } alt={ project.title } title={ project.title } />
                                 </div>
                             </a>
                         </div>

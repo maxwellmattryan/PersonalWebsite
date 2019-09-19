@@ -59,6 +59,8 @@ Last updated: 09/01/2019
         - use the power of sass / bourbon more !
         - just feels messy and disorganized, even though it still "works"
     - update readme
+    - add more images 
+        - timed slideshow on about page ?
     - change favicon
     - add animations for animated sections
     - read / revise all text in website
