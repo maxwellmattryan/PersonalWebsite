@@ -1,9 +1,6 @@
 ## FOLDERS
-node_modules
-
-## TEXT FILES
-projects.txt
+app/node_modules
+app/build
 
 ## AFFINITY DESIGN FILES
 *.afdesign
-app/build/

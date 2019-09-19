@@ -1,0 +1,70 @@
+// VARIABLES SCSS PARTIAL
+
+// COLORS
+
+// Black / White
+$offWhite: #F8F9F9;
+$black: #202020;
+
+// Primary Color
+$color-light: rgb(87, 95, 181);
+$color-normal: #5F6DFF;
+$color-dark: #303780;
+$white-text: darken($offWhite, 32);
+$grey-text: lighten($black, 40);
+$black-text: darken($color-dark, 24);
+$text-hover-red: darken(#F1948A, 12);
+
+// Project
+$operation-home-background: rgb(0, 3, 21);
+$distortion-plugin-background: rgb(205, 92, 92);
+$jlpt-scrape-background: rgb(14, 14, 14);
+
+//============================================
+
+// LAYOUT
+
+// Page
+$padding-top: 2rem;
+$padding-side: 2rem;
+$padding-bottom: 2rem;
+
+// Navigation
+$nav-height: 10vh;
+
+// Home
+$landing-padding-top: 20vh;
+$landing-height: 90vh;
+
+// Project
+$padding-top: 5vh;
+$project-height: 90vh;
+$text-container-padding-top: 10vh;
+$text-container-padding-side: 7vw;
+
+// ===============================
+
+
+// FONT STACKS
+
+// FONT DEFINITIONS
+@font-face {
+    font-family: "Rubik";
+    src: url("https://fonts.googleapis.com/css?family=Rubik:300,400,500,700&display=swap")
+}
+@font-face {
+    font-family: "Abhaya Libre";
+    src: url("https://fonts.googleapis.com/css?family=Abhaya+Libre:400,500,700&display=swap");
+}
+@font-face {
+    font-family: "Louis George Cafe";
+    src: url("../fonts/louis-george-cafe.ttf");
+}
+@font-face {
+    font-family: "Noe Display Bold";
+    src: url("../fonts/noe-display-bold.ttf");
+}
+@font-face {
+    font-family: "GT Sectra";
+    src: url("../fonts/gt-sectra-fine-bold.ttf");
+}
