@@ -1,0 +1,26 @@
+{
+  "name": "mattmaxwell.tech",
+  "version": "1.0.0",
+  "description": "Codebase for my website.",
+  "main": "main.js",
+  "scripts": {
+    "deploy": "gh-pages -d src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxwellmattryan/mattmaxwell.git"
+  },
+  "keywords": [],
+  "author": "Matthew Maxwell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maxwellmattryan/mattmaxwell/issues"
+  },
+  "homepage": "https://github.com/maxwellmattryan/mattmaxwell",
+  "dependencies": {
+    "gh-pages": "^2.1.1",
+    "node-sass": "^4.12.0",
+    "react": "^16.9.0",
+    "react-router-dom": "^5.0.1"
+  }
+}
