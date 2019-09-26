@@ -13,7 +13,7 @@ export default withRouter(class Landing extends Component {
                     <div className="tagline-container">
                         <h1>Hi! <br/> I'm a full-stack developer based out of Austin, TX.</h1>
                         <br/>
-                        <a className="read-more" href="/about">Contact Me &rarr;</a>
+                        <a className="read-more" href="#resume-contact" aria-current="page">Contact Me &rarr;</a>
                     </div>
                     <div className="scroll-container animated">
                         <a className="read-more" href="#operation-home">Projects <br/> &darr;</a>

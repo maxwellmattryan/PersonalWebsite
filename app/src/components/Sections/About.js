@@ -4,9 +4,6 @@
 import React from "react";
 import { withRouter } from "react-router";
 
-// IMAGE IMPORTS
-// import Portrait from "../../images/portrait.jpg";
-
 export default withRouter(class About extends React.Component {
     render() {
         return(
@@ -39,7 +36,7 @@ export default withRouter(class About extends React.Component {
                     </p>
                 </div>
                 <div className="about-image-container">
-                    <img src="../../images/portrait.jpg" alt="About me"></img>
+                    <img src={ process.env.PUBLIC_URL + "/images/portrait.jpg" } alt="About me"></img>
                 </div>
             </div>
         );

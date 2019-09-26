@@ -2,7 +2,7 @@
     "Projects": [
         {
             "id": "operation-home", 
-            "image": "../../images/operation-home.png", 
+            "image": "/images/operation-home.png", 
             "layout": "project-inner-container image-first",
             "title": "Operation H.O.M.E.", 
             "subtitle": "Arcade shooter made in Unity", 
@@ -14,18 +14,18 @@
                 {
                     "name": "GitHub",
                     "url": "https://github.com/maxwellmattryan/operation-home",
-                    "logo": "../../logos/github.svg"
+                    "logo": "/logos/github.svg"
                 },
                 {
                     "name": "Itch.io",
                     "url": "https://maxwellmatt.itch.io/operation-home",
-                    "logo": "../../logos/color_itch-dot-io.svg"
+                    "logo": "/logos/color_itch-dot-io.svg"
                 }
             ]
         },
         {
             "id": "distortion-plugin", 
-            "image": "../../images/distortion-plugin.png", 
+            "image": "/images/distortion-plugin.png", 
             "layout": "project-inner-container text-first",
             "title": "Distortion VST Plugin", 
             "subtitle": "C++ audio effect made in JUCE", 
@@ -37,18 +37,18 @@
                 {
                     "name": "GitHub",
                     "url": "https://github.com/maxwellmattryan/basic-distortion-plugin",
-                    "logo": "../../logos/github.svg"
+                    "logo": "/logos/github.svg"
                 },
                 {
                     "name": "Google Drive",
                     "url": "https://drive.google.com/drive/folders/17C_JE0Ml55esPL3bPV167YPPwtijaJgN?usp=sharing",
-                    "logo": "../../logos/color_google-drive.svg"
+                    "logo": "/logos/color_google-drive.svg"
                 }
             ]
         },
         {
             "id": "jlpt-scrape", 
-            "image": "../../images/jlpt-scrape.png", 
+            "image": "/images/jlpt-scrape.png", 
             "layout": "project-inner-container image-first",
             "title": "JLPT Vocabulary Scraper", 
             "subtitle": "Python dictionary scraper", 
@@ -60,12 +60,12 @@
                 {
                     "name": "GitHub",
                     "url": "https://github.com/maxwellmattryan/jisho-search",
-                    "logo": "../../logos/github.svg"
+                    "logo": "/logos/github.svg"
                 },
                 {
                     "name": "Google Drive",
                     "url": "https://drive.google.com/drive/folders/1BAvCwVEkObtevfx9YwB0gGtDbqpndqsj?usp=sharing",
-                    "logo": "../../logos/color_google-drive.svg"
+                    "logo": "/logos/color_google-drive.svg"
                 }
             ]
         }
@@ -73,31 +73,31 @@
     "Technologies": [
         {
             "name": "HTML 5",
-            "logo": "../../logos/color_html5.svg"
+            "logo": "/logos/color_html5.svg"
         },
         {
             "name": "CSS 3",
-            "logo": "../../logos/color_css3.svg"
+            "logo": "/logos/color_css3.svg"
         },
         {
             "name": "JavaScript",
-            "logo": "../../logos/color_javascript.svg"
+            "logo": "/logos/color_javascript.svg"
         },
         {
             "name": "Sass",
-            "logo": "../../logos/color_sass.svg"
+            "logo": "/logos/color_sass.svg"
         },
         {
             "name": "React JS",
-            "logo": "../../logos/color_reactjs.svg"
+            "logo": "/logos/color_reactjs.svg"
         },
         {
             "name": "Redux",
-            "logo": "../../logos/color_redux.svg"
+            "logo": "/logos/color_redux.svg"
         },
         {
             "name": "Node JS",
-            "logo": "../../logos/color_nodejs.svg"
+            "logo": "/logos/color_nodejs.svg"
         }
     ]
 }

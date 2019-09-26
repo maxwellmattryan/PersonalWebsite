@@ -9,7 +9,7 @@ export default class TechStack extends React.Component {
         const techList = technologies.map(technology => {
             return(
                 <div className="tech-stack-logos-item">
-                    <img src={ technology.logo } alt={ technology.name } title={ technology.name } />
+                    <img src={ process.env.PUBLIC_URL + technology.logo } alt={ technology.name } title={ technology.name } />
                     <p>{ technology.name }</p>
                 </div>
             );

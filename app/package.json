@@ -2,8 +2,9 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://maxwellmattryan.github.io/mattmaxwell",
+  "homepage": "http://mattmaxwell.tech",
   "dependencies": {
+    "babel": "^6.23.0",
     "bourbon": "^6.0.0",
     "gh-pages": "^2.1.1",
     "node": "^12.10.0",
