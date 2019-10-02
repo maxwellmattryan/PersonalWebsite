@@ -1,0 +1,29 @@
+// LANDING MODULE
+
+.landing-container {
+    max-width: 100%;
+    height: $landing-height;
+    background-color: lighten($offWhite, 1);
+    color: $black-text;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: $landing-padding-top $padding-side $padding-bottom;
+    .tagline-container {
+        h1 {
+            margin-right: 0;
+            font-size: 3rem;
+        }
+    }
+    .scroll-container {
+        text-align: center;
+        justify-content: flex-end;
+    }
+    a {
+        font-family: "Louis George Cafe";
+        font-size: 1.5rem;
+        color: lighten($black, 40);
+        text-decoration: none;
+    }
+}
