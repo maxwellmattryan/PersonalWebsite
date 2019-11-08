@@ -15,6 +15,9 @@ $grey-text: lighten($black, 40);
 $black-text: darken($color-dark, 24);
 $text-hover-red: darken(#F1948A, 12);
 
+// MODULES
+$dark-background: darken($color-dark, 26);
+
 // Project
 $operation-home-background: rgb(0, 3, 21);
 $distortion-plugin-background: rgb(205, 92, 92);
@@ -25,27 +28,29 @@ $jlpt-scrape-background: rgb(14, 14, 14);
 // LAYOUT
 
 // Page
-$padding-top: 2rem;
+$padding-top: 1rem;
 $padding-side: 2rem;
-$padding-bottom: 2rem;
+$padding-bottom: 2.5rem;
 
 // Navigation
 $nav-height: 10vh;
 
 // Home
-$landing-padding-top: 20vh;
+$landing-padding-top: 15vh;
 $landing-height: 90vh;
 
 // Project
 $padding-top: 5vh;
 $project-height: 90vh;
-$text-container-padding-top: 10vh;
+$text-container-padding-top: 4vh;
 $text-container-padding-side: 7vw;
 
 // ===============================
 
 
 // FONT STACKS
+
+// ...
 
 // FONT DEFINITIONS
 @font-face {
@@ -68,3 +73,5 @@ $text-container-padding-side: 7vw;
     font-family: "GT Sectra";
     src: url("../fonts/gt-sectra-fine-bold.ttf");
 }
+
+// ==============================================

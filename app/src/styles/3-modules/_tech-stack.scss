@@ -1,7 +1,7 @@
 // TECHNOLOGIES MODULE
 
 .tech-stack-container {
-    padding: 5vw;
+    padding: 5vh 5vw 0;
     background-color: darken($offWhite, 1);
     height: auto;
     .tech-stack-title {
@@ -53,9 +53,15 @@
     }
 }
 
-@media (min-width: 1025px) {
+@media (max-width: 1049px) and (min-width: 791px) {
     .tech-stack-container {
-        height: 20vw;
+        height: 20vh;
+    }
+}
+
+@media (min-width: 1050px) {
+    .tech-stack-container {
+        height: 45vh;
         .tech-stack-logos {
             display: grid;
             .tech-stack-logos-item {
@@ -64,6 +70,9 @@
                 justify-content: center;
                 padding: 5vw;
                 height: auto;
+                img {
+                    height: 6rem;
+                }
             }
         }
     }

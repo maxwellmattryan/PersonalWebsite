@@ -1,30 +1,18 @@
 // NAV MODULE
 
+// MOBILE (PORTRAIT) - BASE
 .nav-container {
-    background-color: darken($color-dark, 26);
+    background-color: $dark-background;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    height: $nav-height;
+    height: auto;
     justify-content: space-between;
-    padding: $padding-top $padding-side;
-    top: 0;
+    padding: 1rem 2rem;
     width: 100%;
 
     a:visited {
-        text-decoration: none;
-    }
-
-    .logo-container {
-        align-items: center;
-        display: flex;
-    }
-
-    .text-logo {
-        color: $white-text;
-        font-family: "GT Sectra";
-        font-size: 2.5rem;
-        text-decoration: none;
+        text-decoration: underline;
     }
 
     .links-container {
@@ -35,29 +23,69 @@
 
     .link-item {
         font-family: "Louis George Cafe";
-        font-size: 1rem;
-        margin-left: 3rem;
+        font-size: 1.2rem;
+        margin-left: 2rem;
         text-decoration: none;
         color: $white-text;
+        transition: 0.2s;
+    }
+
+    .logo-container {
+        align-items: center;
+        display: flex;
+    }
+
+    .text-logo {
+        color: $white-text;
+        font-family: "GT Sectra";
+        font-size: 2rem;
+        margin-left: -0.5rem;
+        text-decoration: none;
     }
 }
 
-@media (max-width: 565px) {
+// MOBILE (LANDSCAPE)
+@media (max-height: 420px) and (max-width: 850px) {
     .nav-container {
+        .link-item {
+            font-size: 1.5rem;
+        }
         .text-logo {
-            font-size: 7vw;
+            font-size: 2rem;
         }
     }
 }
 
-@media (min-width: 760px) {
+// TABLET (LANDSCAPE)
+@media (min-height: 760px) and (min-width: 1000px) {
     .nav-container {
-        .link-item-container {
-            .link-item {
-                transition: 0.2s;
-                &:hover {
-                    color: lighten($white-text, 15);
-                }
+        .link-item {
+            font-size: 1.5rem;
+        }
+        .text-logo {
+            font-size: 3rem;
+        }
+    }
+}
+
+// TABLET (PORTRAIT) and DESKTOP
+@media (min-height: 1000px) and (min-width: 760px) {
+    .nav-container {
+        .link-item {
+            font-size: 1.5rem;
+        }
+        .text-logo {
+            font-size: 2.5rem;
+        }
+    }
+}
+
+// DESKTOP 
+@media (min-height: 1000px) and (min-width: 1300px) {
+    .nav-container {
+        .link-item, .text-logo {
+            &:hover {
+                color: lighten($grey-text, 30);
             }
         }
     }

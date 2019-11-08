@@ -16,8 +16,8 @@ export default class Footer extends Component {
                         <div id="resume-about" className="resume-section">
                             <h4 className="resume-section-title">About Me</h4>
                             <p className="resume-section-description">
-                                I'm a passionate full-stack developer who enjoys building websites and 
-                                applications. The both creative and highly technical challenges of web development 
+                                I'm a software engineer / frontend developer who enjoys building websites and 
+                                applications. The both creative and highly technical challenges involved 
                                 make the experience enjoyable and worthwhile.
                             </p>
                         </div>
@@ -25,7 +25,7 @@ export default class Footer extends Component {
                         <div id="resume-skills" className="resume-section">
                             <h4 className="resume-section-title">Skills</h4>
                             <p className="resume-section-description">
-                                Web: <i>React JS, Redux, NodeJS, Sass, jQuery</i>
+                                Web: <i>React JS, Redux JS, Node JS, Sass, jQuery</i>
                                 <br/>
                                 <br/>
                                 Languages: <i>Python (fluent), JavaScript (proficient), C++ (prior experience), C# (prior experience)</i>

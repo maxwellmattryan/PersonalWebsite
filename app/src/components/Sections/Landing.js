@@ -11,7 +11,7 @@ export default withRouter(class Landing extends Component {
 
                 <div className="landing-container animated fade-in">
                     <div className="tagline-container">
-                        <h1>Hi! <br/> I'm a full-stack developer based out of Austin, TX.</h1>
+                        <h1>Hi! <br/> I'm a software engineer based out of Austin, TX.</h1>
                         <br/>
                         <a className="read-more" href="/about">Contact Me &rarr;</a>
                     </div>

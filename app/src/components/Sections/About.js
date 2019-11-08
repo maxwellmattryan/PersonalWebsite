@@ -14,14 +14,16 @@ export default withRouter(class About extends React.Component {
                 <div className="about-text-container">
                     <h2>Nice to meet you!</h2>
                     <p>
-                        I am Matt Maxwell, a passionate and energetic full-stack developer who loves to solve creative and technical problems. I am currently studying Computer 
+                        I'm Matt Maxwell - a passionate and energetic software engineer who loves to solve creative and technical problems. I am currently studying Computer 
                         Science and Art and Entertainment Technologies at the University of Texas at Austin, where I am learning about technical fields pertaining to web development, 
-                        software engineering, and audio programming. 
+                        software engineering, and audio programming. I am applying all of that knowledge to build and develop web applications as well as various other
+                        projects including Python scripts or games.
                     </p>
                     <p>
-                        Now, I am applying all of that knowledge with my design skills to build and develop professional-grade web applications as well as other various 
-                        projects. I am aiming to do a web development and / or software engineering internship in the summer of 2020 to gain some truly valuable experience in the 
-                        industry. In my free time, I am usually either at Austin Bouldering Project or DJ-ing / producing techno music.  
+                        As of now, I am searching for an internship for the summer of 2020, so that I can gain some truly valuable experience
+                        in this industry. I am eagar to start working and contributing to a team and company effort as I find that process to be quite enjoyable
+                        and formative to my growth as a developer. If you have any questions or would like to reach out, please visit my GitHub linked below or send me an email.
+                        Thank you for visiting my website!
                     </p>
                     <p className="about-icon-container">    
                         <a href="mailto:maxwellmattryan@gmail.com" target="_blank">
