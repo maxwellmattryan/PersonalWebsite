@@ -4,7 +4,7 @@
   "description": "Codebase for my website.",
   "main": "main.js",
   "scripts": {
-    "deploy": "gh-pages -d src"
+    "deploy": "gh-pages -d app/build"
   },
   "repository": {
     "type": "git",

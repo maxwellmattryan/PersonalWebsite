@@ -2,7 +2,7 @@
 
 // REACT IMPORTS
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class MainNavBar extends React.Component {
     render() {
