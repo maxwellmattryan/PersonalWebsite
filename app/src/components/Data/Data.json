@@ -1,6 +1,29 @@
 {
     "Projects": [
         {
+            "id": "green-foot", 
+            "image": "../../images/green-foot.png", 
+            "layout": "project-inner-container text-first",
+            "title": "Green Foot", 
+            "subtitle": "React JS application for reducing your carbon footprint", 
+            "description": [
+                "Green Foot is an environmentally conscious app concerned with helping you lower your carbon footprint. Given a starting and target location provided by the user, it returns a ranked list of modes of transportation according to their carbon emission.",
+                "The frontend was built within the React JS framework and utilizes Redux JS to handle data between the store and the backend. The backend utilizes Node JS and Express JS to calculate results according to data from Bing's VirtualEarth API and our own. The application was created out of a hackathon held locally in Austin, Texas."
+            ],
+            "links": [
+                {
+                    "name": "GitHub",
+                    "url": "https://github.com/Diversity-Hackathon/greenfoot-frontend",
+                    "logo": "../../logos/github.svg"
+                },
+                {
+                    "name": "Green Foot",
+                    "url": "https://diversity-hackathon.github.io/greenfoot-frontend/#/",
+                    "logo": "../../logos/green-foot.png"
+                }
+            ]
+        },
+        {
             "id": "operation-home", 
             "image": "../../images/operation-home.png", 
             "layout": "project-inner-container image-first",

@@ -1,5 +1,12 @@
 // PROJECT MODULE
 
+#green-foot {
+    .project-img-container {
+        align-items: center;
+        background-color: #EDE7E0;
+    }
+}
+
 #operation-home {
     .project-img-container {
         background-color: $operation-home-background;
@@ -120,10 +127,14 @@
                 width: 50vw;
                 height: 90vh;
                 margin: $padding-top 0;
+                transition: 0.2s;
                 img {
                     width: 50vw;
                     height: auto;
                     transition: 0.3s;
+                }
+                &:hover {
+                    opacity: 0.75;
                 }
             }
             .project-text-container {
