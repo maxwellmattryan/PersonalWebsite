@@ -1,11 +1,5 @@
-// ABOUT SECTION
-
-// REACT IMPORT
 import React from "react";
 import { withRouter } from "react-router";
-
-// IMAGE IMPORTS
-// import Portrait from "../../images/portrait.jpg";
 
 export default withRouter(class About extends React.Component {
     render() {
@@ -14,16 +8,13 @@ export default withRouter(class About extends React.Component {
                 <div className="about-text-container">
                     <h2>Nice to meet you!</h2>
                     <p>
-                        I'm Matt Maxwell - a passionate and energetic software engineer who loves to solve creative and technical problems. I am currently studying Computer 
-                        Science and Art and Entertainment Technologies at the University of Texas at Austin, where I am learning about technical fields pertaining to web development, 
-                        software engineering, and audio programming. I am applying all of that knowledge to build and develop web applications as well as various other
-                        projects including Python scripts or games.
+                        Hello! I'm Matthew, a passionate and energetic software engineer based out of Austin, TX who loves to solve creative and technical problems. I currently attend the University of Texas at Austin where I study both Art and Entertainment Technologies (AET) and Computer Science. 
                     </p>
                     <p>
-                        As of now, I am searching for an internship for the summer of 2020, so that I can gain some truly valuable experience
-                        in this industry. I am eagar to start working and contributing to a team and company effort as I find that process to be quite enjoyable
-                        and formative to my growth as a developer. If you have any questions or would like to reach out, please visit my GitHub linked below or send me an email.
-                        Thank you for visiting my website!
+                        I strive to develop clean and neatly architected code solutions for games, a problem that is unique to every individual project. Because of that, game development and its creative process often feels quite exciting, fresh, and invigorating for me. If the project and team environment permits, I like to couple these skills with my background in music and sound to creative dynamic and immersive sounds for the game, each of which is precisely implemented using scripts and middleware (if necessary).
+                    </p>
+                    <p>
+                        Please contact me if you have any questions. Thank you for visiting my website!
                     </p>
                     <p className="about-icon-container">    
                         <a href="mailto:maxwellmattryan@gmail.com" target="_blank">

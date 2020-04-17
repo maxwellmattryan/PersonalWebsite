@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import Obfuscate from "react-obfuscate";
-
 export default class Footer extends Component {
     render() {
         return(
@@ -24,13 +22,13 @@ export default class Footer extends Component {
                         <div id="resume-skills" className="resume-section">
                             <h4 className="resume-section-title">Skills</h4>
                             <p className="resume-section-description">
-                                Languages: <i>C#, C++, Python, JavaScript</i>
+                                Languages: <i>C#, C++, Python, JavaScript (ES6+)</i>
                                 <br/>
                                 <br/>
-                                Audio: <i>Ableton Live 10, FMOD Studio (+ API), JUCE</i>
+                                Tools: <i>Unity, Git, Visual Studio, Adobe Creative Suite</i>
                                 <br/>
                                 <br/>
-                                Tools: <i>Unity Engine, Git, Visual Studio, Adobe Creative Suite</i>
+                                Audio: <i>FMOD Studio (+ API), JUCE, Ableton Live 10</i>
                             </p>
                         </div>
 
