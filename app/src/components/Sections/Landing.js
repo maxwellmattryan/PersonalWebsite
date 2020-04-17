@@ -17,7 +17,7 @@ export default withRouter(class Landing extends Component {
                         <Link className="read-more" to="/about" href="/about" aria-current="page">Contact Me &rarr;</Link>
                     </div>
                     <div className="scroll-container animated">
-                        <a className="read-more" href="#operation-home">Projects <br/> &darr;</a>
+                        <a className="read-more" href="#counterplay">Projects <br/> &darr;</a>
                     </div>
                 </div>
             </div>
