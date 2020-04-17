@@ -1,5 +1,5 @@
 // DATA INDEX 
 
-import Data from "./Data.json";
+import Data from "./GameData.json";
 
 export default Data;

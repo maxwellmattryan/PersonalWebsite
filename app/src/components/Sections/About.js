@@ -41,7 +41,7 @@ export default withRouter(class About extends React.Component {
                     </p>
                 </div>
                 <div className="about-image-container">
-                    <img src="../../images/portrait.jpg" alt="About me"></img>
+                    <img src="../../images/portrait.png" alt="About me"></img>
                 </div>
             </div>
         );

@@ -22,6 +22,12 @@ export default class Project extends React.Component {
                                     <a href={ project.links[1].url } className="read-more" target="_blank">
                                         <img src={ project.links[1].logo } alt={ project.links[1].name } title={ project.links[1].name } />
                                     </a> 
+                                    {
+                                        project.links.length > 2 &&
+                                        <a href={ project.links[2].url } className="read-more" target="_blank">
+                                            <img src={ project.links[2].logo } alt={ project.links[2].name } title={ project.links[2].name } />
+                                        </a> 
+                                    }
                                 </div>                           
                             </div>
                             <a href={ project.links[0].url } className="read-more" target="_blank">

@@ -1,7 +1,6 @@
-// FOOTER SECTION
-
-// REACT IMPORT
 import React, { Component } from "react";
+
+import Obfuscate from "react-obfuscate";
 
 export default class Footer extends Component {
     render() {
@@ -16,8 +15,8 @@ export default class Footer extends Component {
                         <div id="resume-about" className="resume-section">
                             <h4 className="resume-section-title">About Me</h4>
                             <p className="resume-section-description">
-                                I'm a software engineer / frontend developer who enjoys building websites and 
-                                applications. The both creative and highly technical challenges involved 
+                                I'm a software engineer who enjoys building games, web apps, and more. 
+                                Both the creative and technical challenges involved 
                                 make the experience enjoyable and worthwhile.
                             </p>
                         </div>
@@ -25,16 +24,13 @@ export default class Footer extends Component {
                         <div id="resume-skills" className="resume-section">
                             <h4 className="resume-section-title">Skills</h4>
                             <p className="resume-section-description">
-                                Web: <i>React JS, Redux JS, Node JS, Sass, jQuery</i>
+                                Languages: <i>C#, C++, Python, JavaScript</i>
                                 <br/>
                                 <br/>
-                                Languages: <i>Python (fluent), JavaScript (proficient), C++ (prior experience), C# (prior experience)</i>
+                                Audio: <i>Ableton Live 10, FMOD Studio (+ API), JUCE</i>
                                 <br/>
                                 <br/>
-                                Design: <i>Adobe Creative Suite, Affinity Design, Affinity Photo</i>
-                                <br/>
-                                <br/>
-                                Tools: <i>GitHub, Visual Studio Code</i>
+                                Tools: <i>Unity Engine, Git, Visual Studio, Adobe Creative Suite</i>
                             </p>
                         </div>
 

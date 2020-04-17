@@ -1,0 +1,131 @@
+{
+    "Projects": [
+        {
+            "id": "counterplay",
+            "image": "../../images/counterplay.png",
+            "layout": "project-inner-container text-first",
+            "title": "Counterplay",
+            "subtitle": "Grid-based strategy game",
+            "description": [
+                "Counterplay is a team project for the class, Video Game Systems Design (AET 334M), that demonstrates a unique intersection of primary, secondary, and progression systems. The purpose of the class is to gain a perspective of how video game systems shape an entire game's basis of gameplay through building an implementation.",
+                "Although it was quite fun designing the systems behind this game, I found my enjoyment in creating their implementations. They turned out to be quite interesting and technical, most notably the grid-based pathfinding system that calculates movement costs based on the tile's type (i.e. water, grass, forest, or mountain) and a unit's state (i.e. water, fire, or grass). "
+            ],
+            "links": [
+                {
+                    "name": "GitHub",
+                    "url": "https://github.com/zero-sum-games/counterplay",
+                    "logo": "../../logos/github.svg"
+                },
+                {
+                    "name": "itch.io",
+                    "url": "https://maxwellmatt.itch.io/counterplay",
+                    "logo": "../../logos/color_itch-dot-io.svg"
+                }
+            ]
+        },
+        {
+            "id": "operation-home", 
+            "image": "../../images/operation-home.png", 
+            "layout": "project-inner-container image-first",
+            "title": "Operation H.O.M.E.", 
+            "subtitle": "Arcade shooter made in Unity", 
+            "description": [
+                "Operation H.O.M.E. (\"Heck Off My Earth\") is a simple arcade shooter created for the 2019 Global Game Jam. The theme of the jam was \"home\" and what it represents to you. Does home mean a location, sound, smell, or feeling? My team decided that for us it meant defending the Earth from invading aliens.",
+                "I used Ableton Live 10 to design the sounds and handled their implementation into the acutal game with C# scripts. Although audio was my core responsibility, I also wrote scripts for core gameplay mechanics including player movement and enemy movement and spawning behavior."
+            ],
+            "links": [
+                {
+                    "name": "GitHub",
+                    "url": "https://github.com/maxwellmattryan/operation-home",
+                    "logo": "../../logos/github.svg"
+                },
+                {
+                    "name": "Itch.io",
+                    "url": "https://maxwellmatt.itch.io/operation-home",
+                    "logo": "../../logos/color_itch-dot-io.svg"
+                }
+            ]
+        },
+        {
+            "id": "cozy-cat-cafe",
+            "image": "../../images/cozy-cat-cafe.png",
+            "layout": "project-inner-container text-first",
+            "title": "Cozy Cat Cafe",
+            "subtitle": "The mellowest idle game for feeding cats",
+            "description": [
+                "Cozy Cat Cafe is an incredibly relaxing and chill game also created for the 2019 Global Game Jam. You indefinitely feed cats that appear on your patio doorstep in exchange for acorns. These acorns can be used to customize your kitchen by installing new walls or floors, hanging posters, and more.",
+                "Because my main project for the jam was Operation H.O.M.E., I was only able to dedicate enough time to design the sounds for Cozy Cat Cafe. I quite enjoyed this process simply because the game already had such a cute vibe even without the sounds. Once the bubbly UI clicks and various kitchen sounds were added, the game felt even more cohesive and complete."
+            ],
+            "links": [
+                {
+                    "name": "GitHub",
+                    "url": "https://github.com/VeryBester/Cozy-Cat-Cafe",
+                    "logo": "../../logos/github.svg"
+                },
+                {
+                    "name": "Itch.io",
+                    "url": "https://maxwellmatt.itch.io/cozy-cat-cafe",
+                    "logo": "../../logos/color_itch-dot-io.svg"
+                }
+            ]
+        },
+        {
+            "id": "rotor", 
+            "image": "../../images/rotor.png", 
+            "layout": "project-inner-container image-first",
+            "title": "Modern Ring Modulation Plugin", 
+            "subtitle": "C++ audio effect made in JUCE", 
+            "description": [
+                "Rotor is a variable waveform ring modulation plugin targeting VST3 and AU for OS X and Windows platforms. It uses wavetable synthesis to generate various simple waveforms that act as the modulation signal for the input. It is compiled using the JUCE framework for C++.",
+                "Before I became interested in software engineering, I spent a considerable amount of time producing and DJing techno music, which can lend itself to quite esoteric textures at times. I find ring modulation to be a perfect technique to explore this type of sound palette, so learning the DSP mathematics and implementation for ring modulation was an extremely entertaining process."
+            ], 
+            "links": [
+                {
+                    "name": "GitHub",
+                    "url": "https://github.com/maxwellmattryan/rotor",
+                    "logo": "../../logos/github.svg"
+                },
+                {
+                    "name": "Drive",
+                    "url": "https://drive.google.com/open?id=1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2",
+                    "logo": "../../logos/color_google-drive.svg"
+                },
+                {
+                    "name": "Soundcloud",
+                    "url": "https://soundcloud.com/apellum/digital-world-original-mix",
+                    "logo": "../../logos/color_soundcloud.svg"
+                }
+            ]
+        }
+    ],
+    "Technologies": [
+        {
+            "name": "HTML 5",
+            "logo": "../../logos/color_html5.svg"
+        },
+        {
+            "name": "CSS 3",
+            "logo": "../../logos/color_css3.svg"
+        },
+        {
+            "name": "JavaScript",
+            "logo": "../../logos/color_javascript.svg"
+        },
+        {
+            "name": "Sass",
+            "logo": "../../logos/color_sass.svg"
+        },
+        {
+            "name": "React JS",
+            "logo": "../../logos/color_reactjs.svg"
+        },
+        {
+            "name": "Redux",
+            "logo": "../../logos/color_redux.svg"
+        },
+        {
+            "name": "Node JS",
+            "logo": "../../logos/color_nodejs.svg"
+        }
+    ]
+}

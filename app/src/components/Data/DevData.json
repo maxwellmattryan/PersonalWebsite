@@ -1,14 +1,37 @@
 {
     "Projects": [
         {
+            "id": "rotor", 
+            "image": "../../images/rotor.png", 
+            "layout": "project-inner-container text-first",
+            "title": "Modern Ring Modulation Plugin", 
+            "subtitle": "C++ audio effect made in JUCE", 
+            "description": [
+                "Because digital audio samples are just float values between -1 and 1, distortion can be created relatively simply by multiplying them with a real number so that it extends past -1 or 1. Such a simple distortion does require some fine tuning in order to \"sound good\", so the user has the ability to modify the gain (amplitude of signal), drive (intensity of distortion algorithm), and mix (blend between wet and dry signals).",
+                "This plugin was created using the JUCE framework created by ROLI and uses C++. The distortion algorithm was designed in C using Bela.io, which allows me to quickly write and iterate on code that affects audio in realtime. I then implemented it into the JUCE project's audio processor to modify audio data based on parameters received from the GUI." 
+            ], 
+            "links": [
+                {
+                    "name": "GitHub",
+                    "url": "https://github.com/maxwellmattryan/basic-distortion-plugin",
+                    "logo": "../../logos/github.svg"
+                },
+                {
+                    "name": "",
+                    "url": "",
+                    "logo": ""
+                }
+            ]
+        },
+        {
             "id": "green-foot", 
             "image": "../../images/green-foot.png", 
             "layout": "project-inner-container text-first",
             "title": "Green Foot", 
             "subtitle": "React JS application for reducing your carbon footprint", 
             "description": [
-                "Green Foot is an environmentally conscious app concerned with helping you lower your carbon footprint. Given a starting and target location provided by the user, it returns a ranked list of modes of transportation according to their carbon emission.",
-                "The frontend was built within the React JS framework and utilizes Redux JS to handle data between the store and the backend. The backend utilizes Node JS and Express JS to calculate results according to data from Bing's VirtualEarth API and our own. The application was created out of a hackathon held locally in Austin, Texas."
+                "Green Foot is an environmentally conscious app concerned with helping you lower your carbon footprint. Provided a starting and target location by the user, it returns a list of modes of transportation ranked in increasing order according to their carbon emission amount.",
+                "The frontend was built within the React JS framework and utilizes Redux JS to handle data between the store and the backend. The backend utilizes Node JS and Express JS to calculate results according to data from requests to Bing's VirtualEarth API and our own. The application was created out of a hackathon held locally in Austin, Texas in late September, 2019."
             ],
             "links": [
                 {
@@ -43,29 +66,6 @@
                     "name": "Itch.io",
                     "url": "https://maxwellmatt.itch.io/operation-home",
                     "logo": "../../logos/color_itch-dot-io.svg"
-                }
-            ]
-        },
-        {
-            "id": "distortion-plugin", 
-            "image": "../../images/distortion-plugin.png", 
-            "layout": "project-inner-container text-first",
-            "title": "Distortion VST Plugin", 
-            "subtitle": "C++ audio effect made in JUCE", 
-            "description": [
-                "Because digital audio samples are just float values between -1 and 1, distortion can be created relatively simply by multiplying them with a real number so that it extends past -1 or 1. Such a simple distortion does require some fine tuning in order to \"sound good\", so the user has the ability to modify the gain (amplitude of signal), drive (intensity of distortion algorithm), and mix (blend between wet and dry signals).",
-                "This plugin was created using the JUCE framework created by ROLI and uses C++. The distortion algorithm was designed in C using Bela.io, which allows me to quickly write and iterate on code that affects audio in realtime. I then implemented it into the JUCE project's audio processor to modify audio data based on parameters received from the GUI." 
-            ], 
-            "links": [
-                {
-                    "name": "GitHub",
-                    "url": "https://github.com/maxwellmattryan/basic-distortion-plugin",
-                    "logo": "../../logos/github.svg"
-                },
-                {
-                    "name": "Google Drive",
-                    "url": "https://drive.google.com/drive/folders/17C_JE0Ml55esPL3bPV167YPPwtijaJgN?usp=sharing",
-                    "logo": "../../logos/color_google-drive.svg"
                 }
             ]
         },
