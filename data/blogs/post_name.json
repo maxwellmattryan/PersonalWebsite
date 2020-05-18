@@ -1,11 +1,11 @@
 {
-    "Title": "The blog post's title",
-    "Subtitle": "The blog post's subtitle",
-    "AuthorDate": "05/18/2020",
-    "Category": "Game Development",
-    "Content": [
+    "title": "The blog post's title",
+    "subtitle": "The blog post's subtitle",
+    "createdAt": "05/18/2020",
+    "category": "Game Development",
+    "content": [
         "This a paragraph for the blog post.",
         "This is another paragraph for the blog post."
     ],
-    "Picture": "https://mattmaxwell.tech/images/portrait.png"
+    "image": "https://mattmaxwell.tech/images/portrait.png"
 }
