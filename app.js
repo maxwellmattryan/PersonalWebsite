@@ -1,20 +1,34 @@
-const cors          = require("cors");
-const bodyParser    = require("body-parser");
-const express       = require("express");
-const mongoose      = require("mongoose");
-const path          = require("path");
-const passport      = require("passport");
+const passport = require("passport");
 
-// Initialization
+// APP INIT
+const express = require("express");
 const app = express();
 
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const path = require("path");
+
+app.use(bodyParser.json());
+app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
-// Middlewares
-app.use(cors());
-app.use(bodyParser.json());
+const blog = require("./routes/blog");
+app.use("/blog", blog);
 
-// Start server
+// DATABASE INIT
+const mongoose = require("mongoose");
+const config = require("./config/database");
+
+mongoose.connect(config.database);
+
+mongoose.connection.on("connected", () => {
+    console.log("Connected to database " + config.database);
+});
+mongoose.connection.on("error", (err) => {
+    console.log("Database error: " + err);
+});
+
+// START SERVER
 const port = 3000;
 
 app.listen(port, () => {
