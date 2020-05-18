@@ -1,0 +1,56 @@
+{
+    "GameDev": {
+        "About": {
+            "Content": [
+                "This is the first (game dev) content paragraph for the about section.",
+                "This is the second (game dev) content paragraph for the about section."
+            ],
+            "Image": "https://mattmaxwell.tech/images/portrait.png",
+            "Technologies": [
+                "C#",
+                "C++",
+                "Git",
+                "Unity",
+                "FMOD (Studio and Low-Level APIs)",
+                "Ableton Live 10 Suite"
+            ]
+        },
+        "Landing": {
+            "Title": "Hi, I'm Matthew Maxwell.",
+            "Subtitle": "I build neatly architected code solutions for games.",
+            "Description": "This is short but concise paragraph (1-2 sentences) about what I do."
+        },
+        "Projects": [
+            "Counterplay",
+            "The Norse Tale",
+            "Operation H.O.M.E."
+        ]
+    },
+    "SoftwareEngineer": {
+        "About": {
+            "Content": [
+                "This is the first (software engineering) content paragraph for the about section.",
+                "This is the second (software engineering) content paragraph for the about section."
+            ],
+            "Image": "https://mattmaxwell.tech/images/portrait.png",
+            "Technologies": [
+                "TypeScript",
+                "JavaScript",
+                "C++",
+                "Python",
+                "C#",
+                "Git"
+            ]
+        },
+        "Landing": {
+            "Title": "Hi, I'm Matthew Maxwell.",
+            "Subtitle": "I build professional grade web applications.",
+            "Description": "This is short but concise paragraph (1-2 sentences) about what I do."
+        },
+        "Projects": [
+            "Green Foot",
+            "Rotor",
+            "Counterplay"
+        ]
+    }
+}
