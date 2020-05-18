@@ -1,0 +1,30 @@
+{
+  "name": "mattmaxwell",
+  "version": "1.0.0",
+  "description": "Website codebase for mattmaxwell.tech",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "*",
+    "mongoose": "*",
+    "bcryptjs": "*",
+    "cors": "*",
+    "jsonwebtoken": "*",
+    "body-parser": "*",
+    "passport": "*",
+    "passport-jwt": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxwellmattryan/mattmaxwell.git"
+  },
+  "author": "Matthew Maxwell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maxwellmattryan/mattmaxwell/issues"
+  },
+  "homepage": "https://github.com/maxwellmattryan/mattmaxwell#readme"
+}
