@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Software Engineering</title>
+    </head>
+    <body>
+        <h1>mattmaxwell.tech</h1>
+        <p>Welcome to my portfolio and blog !</p>
+
+        <h1>Create Post</h1>
+            <form action="create" method="POST">
+                <input name = "title" type="text" placeholder="Title"/>
+                <textarea name="content"></textarea>
+                <input type="submit" value="Add Post"/>
+            </form>
+
+        <% for(let i = 0; i < posts.length; i++) { %>
+            <article>
+                <h2><%= posts[i].title %></h2>
+                <p><%= posts[i].content %></p>
+            </article>
+        <% } %>
+    </body>
+</html>
