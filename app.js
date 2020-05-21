@@ -11,6 +11,10 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 
+const passport = require("passport");
+app.use(passport.initialize());
+app.use(passport.session());
+
 // TODO: Remove later once the front end is implemented (or SSR ... ?)
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
