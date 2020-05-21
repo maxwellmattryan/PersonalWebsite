@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const postSchema = Schema({
     _id: Schema.Types.ObjectId,
-    title: String,
+    title: { type: String, unique: true },
     subtitle: String,
     category: { type: Schema.Types.ObjectId, ref: "Category"},
     author: String,

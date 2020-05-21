@@ -32,12 +32,10 @@ mongoose.connect("mongodb://localhost/mattmaxwell", {
 
 // ROUTES
 const indexRoute = require("./routers/index");
-
-app.use("/", indexRoute);
-
 const adminRoute = require("./routers/admin");
 const blogRoute = require("./routers/blog");
 
+app.use("/", indexRoute);
 app.use("/admin", adminRoute);
 app.use("/blog", blogRoute);
 

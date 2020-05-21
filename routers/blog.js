@@ -3,6 +3,9 @@ const router = express.Router();
 
 const mongoose = require("mongoose");
 
+const passport = require("passport");
+require("../config/passport")(passport);
+
 const Post = require("../models/post");
 
 // POSTS
@@ -16,7 +19,7 @@ router.get("posts/:id", (req, res, next) => {
     res.send("TODO: Display specific blog post based on id");
 });
 
-router.post("/posts", /* AUTHENTICATE HATE */ (req, res, next) => {
+router.post("/posts", passport.authenticate("jwt", {session: false}),  (req, res, next) => {
     const newPost = new Post({
         _id: new mongoose.Types.ObjectId(),
         title: "TODO: AUTHENTICATE STATUS", 
@@ -26,8 +29,8 @@ router.post("/posts", /* AUTHENTICATE HATE */ (req, res, next) => {
         description: req.body.description,
         content: req.body.content,
         imageUrl: req.body.imageUrl,
-        created: req.body.created,
-        updated: req.body.updated
+        created: Date.now(),
+        updated: Date.now()
     });
 
     newPost.save()

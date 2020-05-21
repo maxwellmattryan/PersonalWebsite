@@ -9,7 +9,13 @@ require("../config/passport")(passport);
 
 const Admin = require("../models/admin");
 
-router.get("/", passport.authenticate("jwt", {session: false}), (req, res, next) => {
+const checkAuthentication = (req, res, next) => {
+    if(req.user) return next();
+
+    return res.status(401).send("Unauthorized.");
+};
+
+router.get("/", checkAuthentication, (req, res, next) => {
     res.json({admin: req.user});
 });
 
@@ -47,8 +53,8 @@ router.post("/authenticate", (req, res, next) => {
     });
 });
 
-router.post("/login", (req, res, next) => {
-    res.send("TODO: Logging in");
+router.get("/login", (req, res, next) => {
+    res.render("admin");
 });
 
 router.get("/logout", passport.authenticate("jwt", {session: false}), (req, res, next) => {
@@ -56,19 +62,19 @@ router.get("/logout", passport.authenticate("jwt", {session: false}), (req, res,
 });
 
 // TODO: delete at some point before deploying app or making publicly available
-router.post("/register", (req, res, next) => {
-    let newAdmin = new Admin({
-        username: req.body.username,
-        password: req.body.password
-    });
+// router.post("/register", (req, res, next) => {
+//     let newAdmin = new Admin({
+//         username: req.body.username,
+//         password: req.body.password
+//     });
 
-    Admin.registerAdmin(newAdmin, (err, admin) => {
-        if(err) {
-            res.json({success: false, msg: "Failed to register admin."});
-        } else {
-            res.json({success: true, msg: "Successfully registered admin."});
-        }
-    });
-});
+//     Admin.registerAdmin(newAdmin, (err, admin) => {
+//         if(err) {
+//             res.json({success: false, msg: "Failed to register admin."});
+//         } else {
+//             res.json({success: true, msg: "Successfully registered admin."});
+//         }
+//     });
+// });
 
 module.exports = router;
