@@ -15,8 +15,6 @@ router.post("/create", (req, res) => {
         content: req.body.content
     });
 
-    console.log(newPost);
-
     newPost.save()
     .then(result => res.redirect("/blog"))
     .catch(err => res.status(400).send("Unable to create blog post."));
