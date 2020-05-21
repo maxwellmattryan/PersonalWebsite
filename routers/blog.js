@@ -1,23 +1,59 @@
 const express = require("express");
 const router = express.Router();
 
+const mongoose = require("mongoose");
+
 const Post = require("../models/post");
 
-router.get("/", (req, res) => {
+// POSTS
+router.get("/", (req, res, next) => {
     Post.find({}, (err, posts) => {
         res.render("blog", {posts: posts});
     });
 });
 
-router.post("/create", (req, res) => {
+router.get("posts/:id", (req, res, next) => {
+    res.send("TODO: Display specific blog post based on id");
+});
+
+router.post("/posts", /* AUTHENTICATE HATE */ (req, res, next) => {
     const newPost = new Post({
-        title: req.body.title, 
-        content: req.body.content
+        _id: new mongoose.Types.ObjectId(),
+        title: "TODO: AUTHENTICATE STATUS", 
+        subtitle: req.body.subtitle,
+        category: req.body.category,
+        author: req.body.author,
+        description: req.body.description,
+        content: req.body.content,
+        imageUrl: req.body.imageUrl,
+        created: req.body.created,
+        updated: req.body.updated
     });
 
     newPost.save()
     .then(result => res.redirect("/blog"))
-    .catch(err => res.status(400).send("Unable to create blog post."));
+    .catch(err => {console.log(err); res.status(400).send("Unable to create blog post.");});
+});
+
+router.put("/posts/:id", /* AUTHENTICATE HATE */ (req, res, next) => {
+    res.send("TODO: Add support for updating a post");
+});
+
+router.delete("/posts/:id", /* AUTHENTICATE HERE */ (req, res, next) => {
+    res.send("TODO: Add support for deleting a post");
+});
+
+// CATEGORIES
+router.get("/categories/:category", (req, res, next) => {
+    res.send("TODO: Display category with all related blog posts");
+});
+
+router.post("/categories", /* AUTHENTICATE HERE */ (req, res, next) => {
+    res.send("TODO: Add a new category")
+});
+
+router.put("/categories/:category", /* AUTHENTICATE HERE */ (req, res, next) => {
+    res.send("TODO: Add support for updating category information");
 });
 
 module.exports = router;

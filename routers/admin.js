@@ -47,6 +47,15 @@ router.post("/authenticate", (req, res, next) => {
     });
 });
 
+router.post("/login", (req, res, next) => {
+    res.send("TODO: Logging in");
+});
+
+router.get("/logout", passport.authenticate("jwt", {session: false}), (req, res, next) => {
+    res.send("TODO: Logging out");
+});
+
+// TODO: delete at some point before deploying app or making publicly available
 router.post("/register", (req, res, next) => {
     let newAdmin = new Admin({
         username: req.body.username,
@@ -60,10 +69,6 @@ router.post("/register", (req, res, next) => {
             res.json({success: true, msg: "Successfully registered admin."});
         }
     });
-});
-
-router.post("/login", (req, res, next) => {
-    res.send("TODO: Logging in");
 });
 
 module.exports = router;
