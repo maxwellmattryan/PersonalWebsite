@@ -16,41 +16,43 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PostComponent } from './components/post/post.component';
 import { RegisterComponent } from './components/register/register.component';
 
+import { AuthService } from './services/auth.service';
 import { ValidationService } from './services/validation.service';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'admin', component: AdminComponent },
-  { path: 'admin/login', component: LoginComponent },
-  { path: 'admin/register', component: RegisterComponent },
-  { path: 'blog', component: BlogComponent },
-  //{ path: 'blog/categories/:name', component: CategoryComponent },
-  //{ path: 'blog/posts/:id', component: PostComponent },
+    { path: '', component: HomeComponent },
+    { path: 'admin', component: AdminComponent },
+    { path: 'admin/login', component: LoginComponent },
+    { path: 'admin/register', component: RegisterComponent },
+    { path: 'blog', component: BlogComponent },
+    //{ path: 'blog/categories/:name', component: CategoryComponent },
+    //{ path: 'blog/posts/:id', component: PostComponent },
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AdminComponent,
-    BlogComponent,
-    CategoryComponent,
-    HomeComponent,
-    LoginComponent,
-    NavbarComponent,
-    PostComponent,
-    RegisterComponent
-  ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    FlashMessagesModule.forRoot(),
-    FormsModule,
-    HttpClientModule,
-    RouterModule.forRoot(appRoutes)
-  ],
-  providers: [
-    ValidationService
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        AdminComponent,
+        BlogComponent,
+        CategoryComponent,
+        HomeComponent,
+        LoginComponent,
+        NavbarComponent,
+        PostComponent,
+        RegisterComponent
+    ],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        FlashMessagesModule.forRoot(),
+        FormsModule,
+        HttpClientModule,
+        RouterModule.forRoot(appRoutes)
+    ],
+    providers: [
+        AuthService,
+        ValidationService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

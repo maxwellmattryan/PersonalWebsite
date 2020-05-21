@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ValidationService {
 
-  constructor() { }
+    constructor() { }
 
-  validateRegistration(admin) {
-    if(admin.username == undefined || admin.password == undefined) {
-      return false;
-    } else {
-      return true;
+    validateRegistration(admin) {
+        if (admin.username == undefined || admin.password == undefined) {
+            return false;
+        } else {
+            return true;
+        }
     }
-  }
 }
