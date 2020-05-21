@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { ValidationService } from '../../services/validation.service';
 
 @Component({
     selector: 'app-login',
@@ -6,10 +10,49 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+    username: String;
+    password: String;
 
-    constructor() { }
+    constructor(
+        private router: Router,
+        private authService: AuthService,
+        private flashMessagesService: FlashMessagesService,
+        private validationService: ValidationService
+    ) { }
 
     ngOnInit(): void {
     }
 
+    onLoginSubmit() {
+        const admin = {
+            username: this.username,
+            password: this.password
+        };
+
+        if (!this.validationService.validateCredentials(admin)) {
+            this.flashMessagesService.show('Please provide a username AND password !', {
+                cssClass: 'alert-danger', 
+                timeout: 2000 
+            });
+            return false;
+        }
+
+        this.authService.authenticateAdmin(admin).subscribe(res => {
+            if(res.success) {
+                this.authService.storeAdminData(res.admin, res.token);
+
+                this.flashMessagesService.show(res.msg, {
+                    cssClass: 'alert-success', 
+                    timeout: 5000 
+                });
+                this.router.navigate(['admin']);
+            } else {
+                this.flashMessagesService.show(res.msg, { 
+                    cssClass: 'alert-danger', 
+                    timeout: 5000 
+                });
+                this.router.navigate(['admin/login']);
+            }
+        });
+    }
 }

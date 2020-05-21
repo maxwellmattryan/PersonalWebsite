@@ -27,7 +27,7 @@ router.post("/authenticate", (req, res, next) => {
         if(err) throw err;
 
         if(!admin) {
-            return res.json({success: false, msg: "Authentication error: User not found."});
+            return res.json({success: false, msg: "User not found."});
         }
 
         Admin.comparePassword(password, admin.password, (err, isMatch) => {
@@ -47,7 +47,7 @@ router.post("/authenticate", (req, res, next) => {
                     }
                 });
             } else {
-                return res.json({success: false, msg: "Authentication error: Invalid password."});
+                return res.json({success: false, msg: "Wrong password."});
             }
         });
     });

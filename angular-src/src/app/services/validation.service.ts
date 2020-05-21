@@ -7,7 +7,7 @@ export class ValidationService {
 
     constructor() { }
 
-    validateRegistration(admin) {
+    validateCredentials(admin) {
         if (admin.username == undefined || admin.password == undefined) {
             return false;
         } else {
