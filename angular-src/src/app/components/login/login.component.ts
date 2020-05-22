@@ -38,8 +38,9 @@ export class LoginComponent implements OnInit {
         }
 
         this.authService.authenticateAdmin(admin).subscribe(res => {
+            console.log(res);
             if(res.success) {
-                this.authService.storeAdminData(res.admin, res.token);
+                this.authService.storeAdminData(res.token, res.admin);
 
                 this.flashMessagesService.show(res.msg, {
                     cssClass: 'alert-success', 

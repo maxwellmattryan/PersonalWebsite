@@ -19,7 +19,7 @@ export class AuthService {
 
     isAdmin() {
         const token = localStorage.getItem('id_token');
-        return token != null
+        return token != null;
     }
 
     authenticateAdmin(admin) {
@@ -49,16 +49,16 @@ export class AuthService {
         localStorage.setItem('id_token', token);
         localStorage.setItem('admin', JSON.stringify(admin));
 
-        this.admin = admin;
         this.authToken = token;
+        this.admin = admin;
     }
 
     createPost(post) {
         this.loadToken();
 
         let headers = new HttpHeaders();
-        headers.set('Content-Type', 'application/json');
         headers.set('Authorization', this.authToken);
+        headers.set('Content-Type', 'application/json');
 
         return this.httpClient.post(this.postsUrl, post, { headers: headers })
             .pipe(map((res: any) => { return res; }));

@@ -1,17 +1,33 @@
 // APP CONFIG
 const express = require("express");
-const app = express();
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const logger = require("morgan");
+const mongoose = require("mongoose");
+const passport = require("passport");
 const path = require("path");
 
+// DATABASE
+const config = require("./config/database");
+
+mongoose.connect(config.database, {
+    promiseLibrary: require("bluebird"),
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(() => console.log("Connected to " + config.database))
+.catch((err) => console.log("Database error: " + err));
+
+// APP CONFIG
+const app = express();
+
 app.use(cors());
+app.use(bodyParser.json());
 app.use(logger("dev"));
-app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 
-const passport = require("passport");
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -19,21 +35,10 @@ app.use(passport.session());
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 
-// DATABASE
-const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/mattmaxwell", {
-    promiseLibrary: require("bluebird"),
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => console.log("Database connection successful !"))
-.catch((err) => console.log(err));
-
 // ROUTES
-const indexRoute = require("./routers/index");
-const adminRoute = require("./routers/admin");
-const blogRoute = require("./routers/blog");
+const indexRoute = require("./routes/index");
+const adminRoute = require("./routes/admin");
+const blogRoute = require("./routes/blog");
 
 app.use("/", indexRoute);
 app.use("/admin", adminRoute);

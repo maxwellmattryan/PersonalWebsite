@@ -29,7 +29,7 @@ export class PostEditorComponent implements OnInit {
     }
 
     onPostSubmit() {
-        const post = {
+        const post: Object = {
             title: this.title,
             subtitle: this.subtitle,
             author: this.author,
@@ -37,7 +37,7 @@ export class PostEditorComponent implements OnInit {
         };
 
         if (!this.validationService.isValidPost(post)) {
-            this.flashMessagesService.show('Please fill in all fields !', {
+            this.flashMessagesService.show('Please fill in all fields.', {
                 cssClass: 'alert-danger',
                 timeout: 2000
             });
