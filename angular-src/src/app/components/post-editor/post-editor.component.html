@@ -1,0 +1,20 @@
+<h2 class="page-header">Create Post</h2>
+<form (ngSubmit)="onPostSubmit()">
+    <div class="form-group">
+        <label>Title</label>
+        <input type="text" [(ngModel)]="title" name="title" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Subtitle</label>
+        <input type="text" [(ngModel)]="subtitle" name="subtitle" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Author</label>
+        <input type="text" [(ngModel)]="author" name="author" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Content</label>
+        <input type="text" [(ngModel)]="content" name="content" class="form-control">
+    </div>
+    <input type="submit" class="btn btn-primary" value="Submit">
+</form>

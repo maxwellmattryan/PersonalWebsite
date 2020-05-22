@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PostComponent } from './components/post/post.component';
 import { RegisterComponent } from './components/register/register.component';
+import { PostEditorComponent } from './components/post-editor/post-editor.component';
 
 import { AuthService } from './services/auth.service';
 import { ValidationService } from './services/validation.service';
@@ -25,8 +26,7 @@ const appRoutes: Routes = [
     { path: 'admin/login', component: LoginComponent },
     { path: 'admin/register', component: RegisterComponent },
     { path: 'blog', component: BlogComponent },
-    //{ path: 'blog/categories/:name', component: CategoryComponent },
-    //{ path: 'blog/posts/:id', component: PostComponent },
+    { path: 'blog/posts', component: PostEditorComponent }
 ];
 
 @NgModule({
@@ -39,7 +39,8 @@ const appRoutes: Routes = [
         LoginComponent,
         NavbarComponent,
         PostComponent,
-        RegisterComponent
+        RegisterComponent,
+        PostEditorComponent
     ],
     imports: [
         AppRoutingModule,

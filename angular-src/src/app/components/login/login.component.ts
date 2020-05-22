@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
             password: this.password
         };
 
-        if (!this.validationService.validateCredentials(admin)) {
+        if (!this.validationService.isValidCredentials(admin)) {
             this.flashMessagesService.show('Please provide a username AND password !', {
                 cssClass: 'alert-danger', 
                 timeout: 2000 
@@ -43,13 +43,13 @@ export class LoginComponent implements OnInit {
 
                 this.flashMessagesService.show(res.msg, {
                     cssClass: 'alert-success', 
-                    timeout: 5000 
+                    timeout: 2000 
                 });
                 this.router.navigate(['admin']);
             } else {
                 this.flashMessagesService.show(res.msg, { 
                     cssClass: 'alert-danger', 
-                    timeout: 5000 
+                    timeout: 2000 
                 });
                 this.router.navigate(['admin/login']);
             }

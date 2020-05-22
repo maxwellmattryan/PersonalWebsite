@@ -19,10 +19,10 @@ router.get("posts/:id", (req, res, next) => {
     res.send("TODO: Display specific blog post based on id");
 });
 
-router.post("/posts", passport.authenticate("jwt", {session: false}),  (req, res, next) => {
+router.post("/posts", passport.authenticate("jwt", { session: false }),  (req, res, next) => {
     const newPost = new Post({
         _id: new mongoose.Types.ObjectId(),
-        title: "TODO: AUTHENTICATE STATUS", 
+        title: req.body.title, 
         subtitle: req.body.subtitle,
         category: req.body.category,
         author: req.body.author,

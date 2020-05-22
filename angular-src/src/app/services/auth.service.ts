@@ -9,10 +9,18 @@ import { map } from 'rxjs/operators';
 export class AuthService {
     admin: any;
     authToken: any;
-    authenticationUrl: string = 'http://localhost:3000/admin/authenticate';
-    registrationUrl: string = 'http://localhost:3000/admin/register';
+
+    rootUrl: string = 'http://localhost:3000/';
+    authenticationUrl: string = this.rootUrl + 'admin/authenticate';
+    registrationUrl: string = this.rootUrl + 'admin/register';
+    postsUrl: string = this.rootUrl + 'blog/posts';
 
     constructor(private httpClient: HttpClient) { }
+
+    isAdmin() {
+        const token = localStorage.getItem('id_token');
+        return token != null
+    }
 
     authenticateAdmin(admin) {
         let headers = new HttpHeaders();
@@ -22,7 +30,7 @@ export class AuthService {
             .pipe(map((res: any) => { return res; }));
     }
 
-    logout() {
+    logoutAdmin() {
         this.admin = null;
         this.authToken = null;
 
@@ -42,6 +50,22 @@ export class AuthService {
         localStorage.setItem('admin', JSON.stringify(admin));
 
         this.admin = admin;
+        this.authToken = token;
+    }
+
+    createPost(post) {
+        this.loadToken();
+
+        let headers = new HttpHeaders();
+        headers.set('Content-Type', 'application/json');
+        headers.set('Authorization', this.authToken);
+
+        return this.httpClient.post(this.postsUrl, post, { headers: headers })
+            .pipe(map((res: any) => { return res; }));
+    }
+
+    loadToken() {
+        const token = localStorage.getItem('id_token');
         this.authToken = token;
     }
 }

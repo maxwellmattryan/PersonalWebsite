@@ -29,8 +29,8 @@ export class RegisterComponent implements OnInit {
             password: this.password
         };
         
-        if (!this.validationService.validateCredentials(admin)) {
-            this.flashMessagesService.show('Please provide a username AND password !', {
+        if (!this.validationService.isValidCredentials(admin)) {
+            this.flashMessagesService.show('Please fill in both fields.', {
                 cssClass: 'alert-danger',
                 timeout: 2000
             });
@@ -39,13 +39,13 @@ export class RegisterComponent implements OnInit {
 
         this.authService.registerAdmin(admin).subscribe(res => {
             if (res.success) {
-                this.flashMessagesService.show('Admin was successfully registered !', {
+                this.flashMessagesService.show('Successfully registered admin.', {
                     cssClass: 'alert-success',
                     timeout: 2000
                 });
                 this.router.navigate(['/admin/login']);
             } else {
-                this.flashMessagesService.show('Something went wrong ...', {
+                this.flashMessagesService.show('Something went wrong.', {
                     cssClass: 'alert-danger',
                     timeout: 2000
                 });
