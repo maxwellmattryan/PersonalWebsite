@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 
@@ -18,9 +18,12 @@ import { PostComponent } from './components/post/post.component';
 import { PostEditorComponent } from './components/post-editor/post-editor.component';
 import { RegisterComponent } from './components/register/register.component';
 
+import { JwtInterceptor } from './helpers/jwt.interceptor';
+
 import { AuthService } from './services/auth.service';
 import { ValidationService } from './services/validation.service';
 
+// TODO: move all of this to app-routing.module.ts
 const appRoutes: Routes = [
     { path: '',                     component: HomeComponent        },
     { path: 'admin',                component: AdminComponent       },
@@ -28,7 +31,7 @@ const appRoutes: Routes = [
     { path: 'admin/register',       component: RegisterComponent    },
     { path: 'blog',                 component: BlogComponent        },
     { path: 'blog/posts',           component: PostEditorComponent  },
-    { path: 'blog/posts/:postId',   component: PostComponent        },
+    { path: 'blog/posts/:title',    component: PostComponent        },
     { 
         path: 'blog/categories/:categoryId',           
         component: PostEditorComponent  
@@ -57,6 +60,7 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes)
     ],
     providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         AuthService,
         ValidationService
     ],

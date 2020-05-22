@@ -2,15 +2,8 @@
     <h2>Welcome to the admin panel !</h2>
     <br>
     <div>
-        <a class="btn btn-primary" [routerLink]="['/admin/register']">Register</a>
-        <a class="btn btn-secondary" [routerLink]="['/admin/login']">Login</a>
-        <a class="btn btn-default" (click)="onLogoutClick()">Logout</a>
-    </div>
-    
-    <br>
-    <br>
-    
-    <div>
-        <a class="btn btn-primary" [routerLink]="['/blog/posts']">Create Post</a>
+        <a *ngIf="!authService.isLoggedIn()" class="btn btn-primary" [routerLink]="['/admin/login']">Login</a>
+        <a *ngIf="authService.isLoggedIn()" class="btn btn-primary" [routerLink]="['/blog/posts']">Create Post</a>
+        <a *ngIf="authService.isLoggedIn()" class="btn btn-secondary" (click)="onLogoutClick()">Logout</a>
     </div>
 </div>  

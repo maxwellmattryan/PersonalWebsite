@@ -12,7 +12,7 @@ export class AdminComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private authService: AuthService,
+        public authService: AuthService,
         private flashMessagesService: FlashMessagesService,
     ) { }
 
@@ -20,7 +20,7 @@ export class AdminComponent implements OnInit {
     }
 
     onLogoutClick() {
-        if(!this.authService.isAdmin()) {
+        if(!this.authService.isLoggedIn()) {
             this.flashMessagesService.show('Already logged out.', {
                 cssClass: 'alert-danger',
                 timeout: 2000

@@ -10,16 +10,44 @@ export class AuthService {
     admin: any;
     authToken: any;
 
-    rootUrl: string = 'http://localhost:3000/';
-    authenticationUrl: string = this.rootUrl + 'admin/authenticate';
-    registrationUrl: string = this.rootUrl + 'admin/register';
-    postsUrl: string = this.rootUrl + 'blog/posts';
+    // TODO: put in a better place specifically for API URLs
+    public rootUrl: string = 'http://localhost:3000/';
+    public authenticationUrl: string = this.rootUrl + 'admin/authenticate';
+    public registrationUrl: string = this.rootUrl + 'admin/register';
+    public postsUrl: string = this.rootUrl + 'blog/posts';
 
     constructor(private httpClient: HttpClient) { }
 
-    isAdmin() {
-        const token = localStorage.getItem('id_token');
-        return token != null;
+    getAdmin() {
+        return this.admin;
+    }
+
+    getToken() {
+        return this.authToken;
+    }
+
+    createPost(post) {
+        this.loadAdminData();
+
+        let headers = new HttpHeaders();
+        headers.set('Authorization', this.authToken);
+        headers.set('Content-Type', 'application/json');
+
+        return this.httpClient.post(this.postsUrl, post, { headers: headers })
+            .pipe(map((res: any) => { return res; }));
+    }
+
+    isLoggedIn() {
+        this.loadAdminData();
+        return this.authToken != null;
+    }
+
+    registerAdmin(admin) {
+        let headers = new HttpHeaders();
+        headers.set('Content-Type', 'application/json');
+
+        return this.httpClient.post(this.registrationUrl, admin, { headers: headers })
+            .pipe(map((res: any) => { return res; }));
     }
 
     authenticateAdmin(admin) {
@@ -37,35 +65,19 @@ export class AuthService {
         localStorage.clear();
     }
 
-    registerAdmin(admin) {
-        let headers = new HttpHeaders();
-        headers.set('Content-Type', 'application/json');
-
-        return this.httpClient.post(this.registrationUrl, admin, { headers: headers })
-            .pipe(map((res: any) => { return res; }));
-    }
-
     storeAdminData(token, admin) {
-        localStorage.setItem('id_token', token);
-        localStorage.setItem('admin', JSON.stringify(admin));
-
         this.authToken = token;
         this.admin = admin;
+
+        localStorage.setItem('id_token', token);
+        localStorage.setItem('admin', JSON.stringify(admin));
     }
 
-    createPost(post) {
-        this.loadToken();
-
-        let headers = new HttpHeaders();
-        headers.set('Authorization', this.authToken);
-        headers.set('Content-Type', 'application/json');
-
-        return this.httpClient.post(this.postsUrl, post, { headers: headers })
-            .pipe(map((res: any) => { return res; }));
-    }
-
-    loadToken() {
+    loadAdminData() {
         const token = localStorage.getItem('id_token');
         this.authToken = token;
+
+        const admin = JSON.parse(localStorage.getItem('admin'));
+        this.admin = admin;
     }
 }

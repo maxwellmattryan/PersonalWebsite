@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
         }
 
         this.authService.authenticateAdmin(admin).subscribe(res => {
-            console.log(res);
             if(res.success) {
                 this.authService.storeAdminData(res.token, res.admin);
 

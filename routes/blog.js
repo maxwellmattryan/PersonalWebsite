@@ -15,8 +15,12 @@ router.get("/", (req, res, next) => {
     });
 });
 
-router.get("posts/:id", (req, res, next) => {
-    res.send("TODO: Display specific blog post based on id");
+router.get("posts/:title", (req, res, next) => {
+    Post.findOne({title: req.params.title}, (err, post) => {
+        if(err) throw err;
+
+        res.json(post)
+    });
 });
 
 router.post("/posts", passport.authenticate("jwt", { session: false }),  (req, res, next) => {
@@ -34,8 +38,8 @@ router.post("/posts", passport.authenticate("jwt", { session: false }),  (req, r
     });
 
     newPost.save()
-    .then(result => res.redirect("/blog"))
-    .catch(err => {console.log(err); res.status(400).send("Unable to create blog post.");});
+    .then(result => res.status(200).send(JSON.stringify(result)))
+    .catch(err => res.status(400).send("Unable to create blog post."));
 });
 
 router.put("/posts/:id", /* AUTHENTICATE HATE */ (req, res, next) => {

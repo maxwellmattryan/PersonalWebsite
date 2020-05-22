@@ -23,13 +23,13 @@ export class PostEditorComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        if(!this.authService.isAdmin()) {
+        if(!this.authService.isLoggedIn()) {
             this.router.navigate(['/blog']);
         }
     }
 
     onPostSubmit() {
-        const post: Object = {
+        const post: object = {
             title: this.title,
             subtitle: this.subtitle,
             author: this.author,
@@ -45,10 +45,7 @@ export class PostEditorComponent implements OnInit {
         }
 
         this.authService.createPost(post).subscribe(res => {
-            console.log(res);
-        }, err => {
-            console.log(err);
-            return false;
+            this.router.navigate([`/blog/posts/${res.title}`]);
         });
     }
 }
