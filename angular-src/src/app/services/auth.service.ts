@@ -12,9 +12,8 @@ export class AuthService {
 
     // TODO: put in a better place specifically for API URLs
     public rootUrl: string = 'http://localhost:3000/';
-    public authenticationUrl: string = this.rootUrl + 'admin/authenticate';
+    public authenticationUrl: string = this.rootUrl + 'admin/auth';
     public registrationUrl: string = this.rootUrl + 'admin/register';
-    public postsUrl: string = this.rootUrl + 'blog/posts';
 
     constructor(private httpClient: HttpClient) { }
 
@@ -24,17 +23,6 @@ export class AuthService {
 
     getToken() {
         return this.authToken;
-    }
-
-    createPost(post) {
-        this.loadAdminData();
-
-        let headers = new HttpHeaders();
-        headers.set('Authorization', this.authToken);
-        headers.set('Content-Type', 'application/json');
-
-        return this.httpClient.post(this.postsUrl, post, { headers: headers })
-            .pipe(map((res: any) => { return res; }));
     }
 
     isLoggedIn() {
@@ -75,9 +63,9 @@ export class AuthService {
 
     loadAdminData() {
         const token = localStorage.getItem('id_token');
-        this.authToken = token;
-
         const admin = JSON.parse(localStorage.getItem('admin'));
+        
+        this.authToken = token;
         this.admin = admin;
     }
 }

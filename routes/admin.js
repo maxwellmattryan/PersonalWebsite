@@ -9,7 +9,7 @@ require('../config/passport')(passport);
 
 const Admin = require('../models/admin');
 
-router.post('/authenticate', (req, res, next) => {
+router.post('/auth', (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
 
@@ -44,20 +44,20 @@ router.post('/authenticate', (req, res, next) => {
     });
 });
 
-// TODO: delete at some point before deploying app or making publicly available
-// router.post('/register', (req, res, next) => {
-//     let newAdmin = new Admin({
-//         username: req.body.username,
-//         password: req.body.password
-//     });
+// TODO: remove access to this method later
+router.post('/register', (req, res, next) => {
+    let newAdmin = new Admin({
+        username: req.body.username,
+        password: req.body.password
+    });
 
-//     Admin.registerAdmin(newAdmin, (err, admin) => {
-//         if(err) {
-//             res.json({success: false, msg: 'Failed to register admin.'});
-//         } else {
-//             res.json({success: true, msg: 'Successfully registered admin.'});
-//         }
-//     });
-// });
+    Admin.registerAdmin(newAdmin, (err, admin) => {
+        if(err) {
+            res.json({success: false, msg: 'Failed to register admin.'});
+        } else {
+            res.json({success: true, msg: 'Successfully registered admin.'});
+        }
+    });
+});
 
 module.exports = router;
