@@ -1,20 +1,13 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const config = require("../config/database");
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const config = require('../config/database');
 
 const adminSchema = mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    password: {
-        type: String,
-        required: true
-    }
+    username: { type: String, required: true, unique: true  }, 
+    password: { type: String, required: true                }
 });
 
-const Admin = mongoose.model("Admin", adminSchema);
+const Admin = mongoose.model('Admin', adminSchema);
 module.exports = Admin;
 
 module.exports.comparePassword = (candidate, hash, callback) => {

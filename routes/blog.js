@@ -1,29 +1,29 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const passport = require("passport");
-require("../config/passport")(passport);
+const passport = require('passport');
+require('../config/passport')(passport);
 
-const Post = require("../models/post");
+const Post = require('../models/post');
 
 // POSTS
-router.get("/", (req, res, next) => {
+router.get('/', (req, res, next) => {
     Post.find({}, (err, posts) => {
-        res.render("blog", {posts: posts});
+        res.render('blog', {posts: posts});
     });
 });
 
-router.get("posts/:title", (req, res, next) => {
+router.get('posts/:title', (req, res, next) => {
     Post.findOne({title: req.params.title}, (err, post) => {
         if(err) throw err;
 
-        res.json(post)
+        res.json(post);
     });
 });
 
-router.post("/posts", passport.authenticate("jwt", { session: false }),  (req, res, next) => {
+router.post('/posts', passport.authenticate('jwt', { session: false }),  (req, res, next) => {
     const newPost = new Post({
         _id: new mongoose.Types.ObjectId(),
         title: req.body.title, 
@@ -39,28 +39,28 @@ router.post("/posts", passport.authenticate("jwt", { session: false }),  (req, r
 
     newPost.save()
     .then(result => res.status(200).send(JSON.stringify(result)))
-    .catch(err => res.status(400).send("Unable to create blog post."));
+    .catch(err => res.status(400).send('Unable to create blog post.'));
 });
 
-router.put("/posts/:id", /* AUTHENTICATE HATE */ (req, res, next) => {
-    res.send("TODO: Add support for updating a post");
+router.put('/posts/:id', /* AUTHENTICATE HATE */ (req, res, next) => {
+    res.send('TODO: Add support for updating a post');
 });
 
-router.delete("/posts/:id", /* AUTHENTICATE HERE */ (req, res, next) => {
-    res.send("TODO: Add support for deleting a post");
+router.delete('/posts/:id', /* AUTHENTICATE HERE */ (req, res, next) => {
+    res.send('TODO: Add support for deleting a post');
 });
 
 // CATEGORIES
-router.get("/categories/:category", (req, res, next) => {
-    res.send("TODO: Display category with all related blog posts");
+router.get('/categories/:category', (req, res, next) => {
+    res.send('TODO: Display category with all related blog posts');
 });
 
-router.post("/categories", /* AUTHENTICATE HERE */ (req, res, next) => {
-    res.send("TODO: Add a new category")
+router.post('/categories', /* AUTHENTICATE HERE */ (req, res, next) => {
+    res.send('TODO: Add a new category')
 });
 
-router.put("/categories/:category", /* AUTHENTICATE HERE */ (req, res, next) => {
-    res.send("TODO: Add support for updating category information");
+router.put('/categories/:category', /* AUTHENTICATE HERE */ (req, res, next) => {
+    res.send('TODO: Add support for updating category information');
 });
 
 module.exports = router;

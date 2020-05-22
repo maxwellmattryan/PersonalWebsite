@@ -1,21 +1,15 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-const config = require("../config/database");
-const jwt = require("jsonwebtoken");
+const config = require('../config/database');
+const jwt = require('jsonwebtoken');
 
-const passport = require("passport");
-require("../config/passport")(passport);
+const passport = require('passport');
+require('../config/passport')(passport);
 
-const Admin = require("../models/admin");
+const Admin = require('../models/admin');
 
-const checkAuthentication = (req, res, next) => {
-    if(req.user) return next();
-
-    return res.status(401).send("Unauthorized.");
-};
-
-router.post("/authenticate", (req, res, next) => {
+router.post('/authenticate', (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
 
@@ -23,7 +17,7 @@ router.post("/authenticate", (req, res, next) => {
         if(err) throw err;
 
         if(!admin) {
-            return res.json({success: false, msg: "User not found."});
+            return res.json({success: false, msg: 'User not found.'});
         }
 
         Admin.comparePassword(password, admin.password, (err, isMatch) => {
@@ -36,22 +30,22 @@ router.post("/authenticate", (req, res, next) => {
 
                 res.json({
                     success: true,
-                    token: "JWT " + token,
-                    msg: "Successfully logged in.",
+                    token: 'JWT ' + token,
+                    msg: 'Successfully logged in.',
                     admin: {
                         id: admin._id,
                         username: admin.username
                     }
                 });
             } else {
-                return res.json({success: false, msg: "Wrong password."});
+                return res.json({success: false, msg: 'Wrong password.'});
             }
         });
     });
 });
 
 // TODO: delete at some point before deploying app or making publicly available
-// router.post("/register", (req, res, next) => {
+// router.post('/register', (req, res, next) => {
 //     let newAdmin = new Admin({
 //         username: req.body.username,
 //         password: req.body.password
@@ -59,9 +53,9 @@ router.post("/authenticate", (req, res, next) => {
 
 //     Admin.registerAdmin(newAdmin, (err, admin) => {
 //         if(err) {
-//             res.json({success: false, msg: "Failed to register admin."});
+//             res.json({success: false, msg: 'Failed to register admin.'});
 //         } else {
-//             res.json({success: true, msg: "Successfully registered admin."});
+//             res.json({success: true, msg: 'Successfully registered admin.'});
 //         }
 //     });
 // });

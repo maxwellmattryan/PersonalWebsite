@@ -1,48 +1,48 @@
 // APP CONFIG
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const logger = require("morgan");
-const mongoose = require("mongoose");
-const passport = require("passport");
-const path = require("path");
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const logger = require('morgan');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const path = require('path');
 
 // DATABASE
-const config = require("./config/database");
+const config = require('./config/database');
 
 mongoose.connect(config.database, {
-    promiseLibrary: require("bluebird"),
+    promiseLibrary: require('bluebird'),
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-.then(() => console.log("Connected to " + config.database))
-.catch((err) => console.log("Database error: " + err));
+.then(() => console.log('Connected to ' + config.database))
+.catch((err) => console.log('Database error: ' + err));
 
 // APP CONFIG
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(logger("dev"));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(logger('dev'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 // TODO: Remove later once the front end is implemented (or SSR ... ?)
-app.engine("html", require("ejs").renderFile);
-app.set("view engine", "html");
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 // ROUTES
-const indexRoute = require("./routes/index");
-const adminRoute = require("./routes/admin");
-const blogRoute = require("./routes/blog");
+const indexRoute = require('./routes/index');
+const adminRoute = require('./routes/admin');
+const blogRoute = require('./routes/blog');
 
-app.use("/", indexRoute);
-app.use("/admin", adminRoute);
-app.use("/blog", blogRoute);
+app.use('/', indexRoute);
+app.use('/admin', adminRoute);
+app.use('/blog', blogRoute);
 
 // EXPORT
 module.exports = app;
