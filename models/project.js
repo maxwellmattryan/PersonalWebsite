@@ -7,9 +7,7 @@ const projectSchema = Schema({
     title:          { type: String, required: true, unique: true    },
     subtitle:       { type: String, required: true                  },
     description:    { type: String, required: true                  },
-    imageURLs:      [
-                        { url: { type: String, required: true } }
-                    ],    
+    imageUrl:       { type: String, required: true                  },  
     created:        { type: Date                                    },
     updated:        { type: Date, default: Date.now                 }
 });
