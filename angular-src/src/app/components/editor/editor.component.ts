@@ -42,6 +42,11 @@ export class EditorComponent implements OnInit {
         }
     }
 
+    redirectTo(uri: string){
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+        this.router.navigate([uri]));
+     }
+
     onEditorSubmit(): void {
         this.submitPost();
     }
@@ -56,7 +61,8 @@ export class EditorComponent implements OnInit {
             author: this.author,
             description: this.description,
             content: this.content,
-            imageUrls: this.imageUrls.split(',')
+            // TODO: handle the input parsing better because ','.split(',') will return ["", ""]
+            imageUrls: this.imageUrls ? this.imageUrls.split(',').map(url => url.trim()) : []
         };
 
         if (!this.validationService.isValidPost(post)) {
@@ -68,7 +74,12 @@ export class EditorComponent implements OnInit {
         }
 
         this.authService.submitPost(post).subscribe(res => {
-            this.router.navigate(['/blog']);
+            this.flashMessagesService.show('Post successfully submitted.', {
+                cssClass: 'alert-success',
+                timeout: 2000
+            });
+           
+            this.redirectTo('/editor');
         });
     }
 
