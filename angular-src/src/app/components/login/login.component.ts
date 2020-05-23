@@ -4,6 +4,8 @@ import { AuthService } from '../../services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ValidationService } from '../../services/validation.service';
 
+// TODO: use admin model 
+
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
