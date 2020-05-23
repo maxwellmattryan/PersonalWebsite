@@ -45,19 +45,17 @@ export class EditorComponent implements OnInit {
     redirectTo(uri: string){
         this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
         this.router.navigate([uri]));
-     }
+    }
 
     onEditorSubmit(): void {
         this.submitPost();
     }
 
     submitPost() {
-        const selectedTopics = this.topics.filter((topic: any) => topic.isSelected).map((topic: any) => topic._id);
-
         const post: object = {
             title: this.title,
             subtitle: this.subtitle,
-            topics: selectedTopics,
+            topics: this.selectedTopicIDs(),
             author: this.author,
             description: this.description,
             content: this.content,
@@ -85,4 +83,6 @@ export class EditorComponent implements OnInit {
 
     submitProject() { }
     submitTopic() { }
+
+    selectedTopicIDs = () => this.topics.filter((topic: any) => topic.isSelected).map((topic: any) => topic._id);
 }
