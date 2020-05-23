@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AdminComponent } from '../components/admin/admin.component';
 
 @Injectable({
     providedIn: 'root'
@@ -17,10 +16,12 @@ export class ValidationService {
 
     isValidPost(post) {
         return (
-            post.title != undefined && 
-            post.subtitle != undefined && 
-            post.author != undefined && 
-            post.content != undefined
+            post.title              != undefined && 
+            post.subtitle           != undefined &&  
+            post.topics.length      != 0 &&  
+            post.author             != undefined && 
+            post.content            != undefined &&
+            post.imageUrls.length   != 0
         );
     }
 }

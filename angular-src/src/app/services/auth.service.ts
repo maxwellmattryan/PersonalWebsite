@@ -1,31 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+
+import { environment } from '../../environments/environment';
+import { Topic } from '../models/topic.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
+    // TODO: implement admin model later and type this 
     admin: any;
     authToken: any;
 
-    // TODO: put in a better place specifically for API URLs
-    public rootUrl: string = 'http://localhost:3000/';
-    public authenticationUrl: string = this.rootUrl + 'admin/auth';
-    public registrationUrl: string = this.rootUrl + 'admin/register';
-
     constructor(private httpClient: HttpClient) { }
 
-    getAdmin() {
+    // ADMIN METHODS
+    getAdmin(): String {
         return this.admin;
     }
 
-    getToken() {
+    getToken(): String {
         return this.authToken;
     }
 
-    isLoggedIn() {
+    isLoggedIn(): Boolean {
         this.loadAdminData();
         return this.authToken != null;
     }
@@ -34,26 +33,26 @@ export class AuthService {
         let headers = new HttpHeaders();
         headers.set('Content-Type', 'application/json');
 
-        return this.httpClient.post(this.registrationUrl, admin, { headers: headers })
-            .pipe(map((res: any) => { return res; }));
+        return this.httpClient.post(environment.API_URL + '/admin/register', admin, { headers: headers })
+            .pipe(map((res: any) => { return res }));
     }
 
     authenticateAdmin(admin) {
         let headers = new HttpHeaders();
         headers.set('Content-Type', 'application/json');
 
-        return this.httpClient.post(this.authenticationUrl, admin, { headers: headers })
-            .pipe(map((res: any) => { return res; }));
+        return this.httpClient.post(environment.API_URL + '/admin/auth', admin, { headers: headers })
+            .pipe(map((res: any) => { return res }));
     }
 
-    logoutAdmin() {
+    logoutAdmin(): void {
         this.admin = null;
         this.authToken = null;
 
         localStorage.clear();
     }
 
-    storeAdminData(token, admin) {
+    storeAdminData(token, admin): void {
         this.authToken = token;
         this.admin = admin;
 
@@ -61,11 +60,21 @@ export class AuthService {
         localStorage.setItem('admin', JSON.stringify(admin));
     }
 
-    loadAdminData() {
+    loadAdminData(): void {
         const token = localStorage.getItem('id_token');
         const admin = JSON.parse(localStorage.getItem('admin'));
-        
+
         this.authToken = token;
         this.admin = admin;
+    }
+
+    // EDITOR METHODS
+    getAuthHeaders(): HttpHeaders {
+        this.loadAdminData();
+
+        return new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': this.authToken
+        });
     }
 }
