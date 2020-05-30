@@ -83,30 +83,46 @@ router.get('/topics', (req, res, next) => {
     });
 });
 
-router.get('/topics/:name', (req, res, next) => {
-    Topic.findOne({name: req.params.name}, (err, topic) => {
+router.get('/topics/:uri', (req, res, next) => {
+    Topic.findOne({uri: req.params.uri}, (err, topic) => {
         if(err) throw err;
 
-        res.json(topic);
+        if(topic) {
+            res.status(200).json(topic);
+        } else {
+            res.sendStatus(204);
+        }
     });
 });
 
-router.put('/topics/:name', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    // TODO: change functionality to actually update if it exists / create if not
-    const newTopic = new Topic({
-        _id:            new mongoose.Types.ObjectId(),
-        name:           req.body.name,
-        description:    req.body.description,
-        imageUrl:       req.body.imageUrl
+router.put('/topics/:uri', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    const topicData = {
+        uri: req.body.uri,
+        name: req.body.name,
+        description: req.body.description,
+        imageURL: req.body.imageURL
+    };
+
+    Topic.updateOne({uri: req.params.uri}, topicData, (err, result) => {
+        if(err) throw err;
+
+        if(result.n === 0) {
+            const newTopic = new Topic({
+                ...topicData,
+                _id: new mongoose.Types.ObjectId()
+            });
+
+            newTopic.save((err, topic) => {
+                if(err) {
+                    res.status(400).send('Unable to create blog topic.');
+                } else {
+                    res.status(201).send('Successfully created blog topic.');
+                }
+            });
+        } else {
+            res.status(200).send('Successfully updated blog topic.');
+        }
     });
-
-    newTopic.save()
-    .then(data => res.status(200).send(JSON.stringify(data)))
-    .catch(err => res.status(400).send(JSON.stringify(err)));
-});
-
-router.delete('/topics/:name', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    console.log(req);
 });
 
 module.exports = router;
