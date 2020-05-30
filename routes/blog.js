@@ -11,10 +11,12 @@ const Topic = require('../models/topic');
 
 // BLOG
 router.get('/posts', (req, res, next) => {
-    Post.find({}, (err, posts) => {
+    Post.find({})
+    .populate('topics')
+    .exec((err, posts) => {
         if(err) throw err;
 
-        res.json(posts);
+        res.status(200).json(posts);
     });
 });
 
@@ -79,7 +81,7 @@ router.get('/topics', (req, res, next) => {
     Topic.find({}, (err, topics) => {
         if(err) throw err;
 
-        res.json(topics);
+        res.status(200).json(topics);
     });
 });
 
