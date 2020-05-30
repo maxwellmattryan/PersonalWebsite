@@ -20,10 +20,14 @@ router.get('/posts', (req, res, next) => {
 
 // POSTS
 router.get('/posts/:uri', (req, res, next) => {
-    Post.findOne({title: req.params.title}, (err, post) => {
+    Post.findOne({uri: req.params.uri}, (err, post) => {
         if(err) throw err;
 
-        res.json(post);
+        if(post) {
+            res.status(200).json(post);
+        } else {
+            res.sendStatus(204);
+        }
     });
 });
 
@@ -64,7 +68,10 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
 });
 
 router.delete('/posts/:uri', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    console.log(req);
+    Post.deleteOne({uri: req.params.uri}, err => {
+        if(err) res.status(400).send('Unable to delete blog posts');
+        else res.status(200).send('Successfully deleted blog post.');
+    });
 });
 
 // TOPICS
@@ -95,7 +102,7 @@ router.put('/topics/:name', passport.authenticate('jwt', { session: false }), (r
 
     newTopic.save()
     .then(data => res.status(200).send(JSON.stringify(data)))
-    .catch(err => { console.log(err); res.status(400).send(JSON.stringify(err)); });
+    .catch(err => res.status(400).send(JSON.stringify(err)));
 });
 
 router.delete('/topics/:name', passport.authenticate('jwt', { session: false }), (req, res, next) => {
