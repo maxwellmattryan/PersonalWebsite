@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 
 const postSchema = Schema({
     _id:            { type: Schema.Types.ObjectId                   },
-    title:          { type: String, required: true, unique: true    },
+    uri:            { type: String, required: true, unique: true    },
+    title:          { type: String, required: true                  },
     subtitle:       { type: String, required: true                  },
     topics:         [{ type: Schema.Types.ObjectId, ref: 'Topic'    }],
     author:         { type: String, required: true                  },

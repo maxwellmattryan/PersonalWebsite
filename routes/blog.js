@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const mongoose = require('mongoose');
+
 const passport = require('passport');
 require('../config/passport')(passport);
 
@@ -17,7 +19,7 @@ router.get('/posts', (req, res, next) => {
 });
 
 // POSTS
-router.get('/posts/:title', (req, res, next) => {
+router.get('/posts/:uri', (req, res, next) => {
     Post.findOne({title: req.params.title}, (err, post) => {
         if(err) throw err;
 
@@ -25,9 +27,9 @@ router.get('/posts/:title', (req, res, next) => {
     });
 });
 
-router.put('/posts/:title', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    const newPost = new Post({
-        _id:            req.body._id,
+router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    const postData = {
+        uri:            req.body.uri,
         title:          req.body.title, 
         subtitle:       req.body.subtitle,
         topics:         req.body.topics,
@@ -35,18 +37,33 @@ router.put('/posts/:title', passport.authenticate('jwt', { session: false }), (r
         description:    req.body.description,
         content:        req.body.content,
         imageURL:       req.body.imageURL,
-        created:        Date.now(),
         updated:        Date.now()
+    };
+
+    Post.updateOne({uri: req.params.uri}, postData, (err, result) => {
+        if(err) throw err;
+
+        if(result.n === 0) {
+            const newPost = new Post({
+                ...postData,
+                _id: new mongoose.Types.ObjectId(),
+                created: Date.now()
+            });
+
+            newPost.save((err, post) => {
+                if(err) {
+                    res.status(400).send('Unable to create blog post.');
+                } else {    
+                    res.status(201).send('Successfully created blog post.');
+                }
+            });
+        } else {
+            res.status(200).send('Successfully updated blog post.');
+        }
     });
-
-    // TODO: finish writing put request and handle ID logic in front end
-
-    // the topic IDs are handle by the front end (when requesting any sort of editor page, the topics will be 
-    // requested therefore the IDs will already be there - no need to 'find' them via mongoose in here)
-    res.json(newPost);
 });
 
-router.delete('/posts/:title', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+router.delete('/posts/:uri', passport.authenticate('jwt', { session: false }), (req, res, next) => {
     console.log(req);
 });
 

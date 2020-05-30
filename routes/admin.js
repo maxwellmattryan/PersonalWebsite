@@ -25,7 +25,7 @@ router.post('/auth', (req, res, next) => {
 
             if(isMatch) {
                 const token = jwt.sign(admin.toJSON(), config.secret, {
-                    expiresIn: "1h"
+                    expiresIn: "12h"
                 });
 
                 res.json({
