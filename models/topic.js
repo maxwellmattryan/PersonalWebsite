@@ -6,7 +6,8 @@ const topicSchema = Schema({
     uri:            { type: String, required: true, unique: true    },
     name:           { type: String, required: true                  },
     description:    { type: String, required: true                  },
-    imageURL:       { type: String, required: true                  }
+    imageURL:       { type: String, required: true                  },
+    posts:          [{ type: Schema.Types.ObjectId, ref: 'Post'     }]
 });
 
 const Topic = mongoose.model("Topic", topicSchema);

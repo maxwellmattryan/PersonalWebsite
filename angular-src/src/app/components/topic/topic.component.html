@@ -1,15 +1,16 @@
-<div>
-    <h1>Welcome to my blog !</h1>
-    <br>
-    <a [href]='"blog/posts/" + post.uri' *ngFor='let post of posts'>
+<div *ngIf='isLoaded'>
+    <h1>{{ topic.name }}</h1>
+
+    <img [src]='topic.imageURL' height=150>
+
+    <p>{{ topic.description }}</p>
+
+    <a [href]='"blog/posts/" + post.uri' *ngFor='let post of topic.posts'>
         <article>
             <img [src]="post.imageURL" height=150>
             <h3>{{ post.title }}</h3>
             <h4>{{ post.subtitle }}</h4>
             <p>{{ post.content }}</p>
-            <p *ngFor='let topic of post.topics'>
-                {{ topic.name }}
-            </p>
         </article>
     </a>
 </div>

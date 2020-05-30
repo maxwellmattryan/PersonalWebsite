@@ -88,7 +88,9 @@ router.get('/topics', (req, res, next) => {
 });
 
 router.get('/topics/:uri', (req, res, next) => {
-    Topic.findOne({uri: req.params.uri}, (err, topic) => {
+    Topic.findOne({uri: req.params.uri})
+    .populate('posts')
+    .exec((err, topic) => {
         if(err) throw err;
 
         if(topic) {
@@ -104,7 +106,8 @@ router.put('/topics/:uri', passport.authenticate('jwt', { session: false }), (re
         uri: req.body.uri,
         name: req.body.name,
         description: req.body.description,
-        imageURL: req.body.imageURL
+        imageURL: req.body.imageURL,
+        posts: req.body.posts
     };
 
     Topic.updateOne({uri: req.params.uri}, topicData, (err, result) => {

@@ -14,6 +14,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PostComponent } from './components/post/post.component';
 import { RegisterComponent } from './components/register/register.component';
+import { TopicComponent } from './components/topic/topic.component';
 
 import { AuthService } from './services/auth.service';
 import { ValidationService } from './services/validation.service';
@@ -28,7 +29,8 @@ import { ValidationService } from './services/validation.service';
         LoginComponent,
         NavbarComponent,
         RegisterComponent,
-        PostComponent
+        PostComponent,
+        TopicComponent
     ],
     imports: [
         AppRoutingModule,

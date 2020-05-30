@@ -3,14 +3,16 @@
     <h2>{{ post.subtitle }}</h2>
     
     <p>{{post.created.slice(0, 10) }}</p>
-    
-    <p *ngFor='let topic of post.topics'>
-        {{ topic.name }}
-    </p>
+
+    <a [href]='"blog/topics/" + topic.uri' *ngFor='let topic of post.topics'>
+        <p>
+            {{ topic.name }}
+        </p>
+    </a>
     
     <p>{{ post.author }}</p>
 
     <p>{{ post.content }}</p>
     
-    <img [src]="post.imageURL"/>
+    <img [src]="post.imageURL" height=150>
 </div>

@@ -8,16 +8,18 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { PostComponent } from './components/post/post.component';
 import { RegisterComponent } from './components/register/register.component';
+import { TopicComponent } from './components/topic/topic.component';
 
 const routes: Routes = [
     // CAUTION: Children routes aren't used because the components themselves are not nested
-    { path: '',                 component: HomeComponent },
-    { path: 'admin',            component: AdminComponent },
-    { path: 'admin/login',      component: LoginComponent },
-    { path: 'admin/register',   component: RegisterComponent },
-    { path: 'blog',             component: BlogComponent },
-    { path: 'blog/posts/:uri',  component: PostComponent },
-    { path: 'editor',           component: EditorComponent }
+    { path: '',                     component: HomeComponent        },
+    { path: 'admin',                component: AdminComponent       },
+    { path: 'admin/login',          component: LoginComponent       },
+    { path: 'admin/register',       component: RegisterComponent    },
+    { path: 'blog',                 component: BlogComponent        },
+    { path: 'blog/posts/:uri',      component: PostComponent        },
+    { path: 'blog/topics/:uri',     component: TopicComponent       },
+    { path: 'editor',               component: EditorComponent      }
 ];
 
 @NgModule({
