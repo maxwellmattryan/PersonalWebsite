@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Topic } from 'src/app/models/topic.model';
-import { BlogService } from 'src/app/services/blog.service';
+import { Topic } from '../../models';
+
+import { BlogService } from 'src/app/services';
 
 @Component({
     selector: 'app-topic',

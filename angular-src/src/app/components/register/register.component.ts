@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+
+import { AuthService, ValidationService } from '../../services';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { ValidationService } from '../../services/validation.service';
 
 @Component({
     selector: 'app-register',

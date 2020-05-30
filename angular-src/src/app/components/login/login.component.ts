@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { FlashMessagesService } from 'angular2-flash-messages';
-import { ValidationService } from '../../services/validation.service';
 
-// TODO: use admin model 
+import { AuthService, ValidationService } from '../../services';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
     selector: 'app-login',

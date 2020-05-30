@@ -1,7 +1,9 @@
-import { BlogService } from 'src/app/services/blog.service';
 import { Component, OnInit } from '@angular/core';
-import { Post } from 'src/app/models/post.model';
 import { Router } from '@angular/router';
+
+import { Post } from 'src/app/models';
+
+import { BlogService } from 'src/app/services';
 
 @Component({
     selector: 'app-post',
