@@ -5,7 +5,7 @@
 
     <p>{{ topic.description }}</p>
 
-    <a [href]='"blog/posts/" + post.uri' *ngFor='let post of topic.posts'>
+    <a [routerLink]='["/blog/posts/" + post.uri]' *ngFor='let post of topic.posts'>
         <article>
             <img [src]="post.imageURL" height=150>
             <h3>{{ post.title }}</h3>

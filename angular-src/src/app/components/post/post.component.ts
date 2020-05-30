@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { Post } from 'src/app/models';
 
-import { BlogService } from 'src/app/services';
+import { AuthService, BlogService } from 'src/app/services';
 
 @Component({
     selector: 'app-post',
@@ -11,15 +11,19 @@ import { BlogService } from 'src/app/services';
     styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
+    isAdmin: boolean = false;
     isLoaded: boolean = false;
     post: Post;
 
     constructor(
+        private authService: AuthService,
         private blogService: BlogService,
         private router: Router
     ) { }
 
     ngOnInit(): void {
+        this.isAdmin = this.authService.isLoggedIn();
+        
         this.blogService.getPost(this.router.url).subscribe(post => {
             this.post = post;
             this.isLoaded = true;

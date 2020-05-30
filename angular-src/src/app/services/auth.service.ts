@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { Topic } from '../models/topic.model';
 
 @Injectable({
     providedIn: 'root'
@@ -16,27 +15,21 @@ export class AuthService {
     constructor(private httpClient: HttpClient) { }
 
     // ADMIN METHODS
-    getAdmin(): String {
+    getAdmin(): string {
         return this.admin;
     }
 
-    getToken(): String {
+    getToken(): string {
         return this.authToken;
     }
 
-    isLoggedIn(): Boolean {
+    isLoggedIn(): boolean {
         this.loadAdminData();
+
         return this.authToken != null;
     }
 
-    registerAdmin(admin) {
-        let headers = new HttpHeaders();
-        headers.set('Content-Type', 'application/json');
-
-        return this.httpClient.post(environment.API_URL + '/admin/register', admin, { headers: headers })
-            .pipe(map((res: any) => { return res }));
-    }
-
+    // TODO: Write types and fix method return types for all of these
     authenticateAdmin(admin) {
         let headers = new HttpHeaders();
         headers.set('Content-Type', 'application/json');
@@ -52,12 +45,12 @@ export class AuthService {
         localStorage.clear();
     }
 
-    storeAdminData(token, admin): void {
-        this.authToken = token;
-        this.admin = admin;
+    registerAdmin(admin) {
+        let headers = new HttpHeaders();
+        headers.set('Content-Type', 'application/json');
 
-        localStorage.setItem('id_token', token);
-        localStorage.setItem('admin', JSON.stringify(admin));
+        return this.httpClient.post(environment.API_URL + '/admin/register', admin, { headers: headers })
+            .pipe(map((res: any) => { return res }));
     }
 
     loadAdminData(): void {
@@ -66,6 +59,14 @@ export class AuthService {
 
         this.authToken = token;
         this.admin = admin;
+    }
+
+    storeAdminData(token, admin): void {
+        this.authToken = token;
+        this.admin = admin;
+
+        localStorage.setItem('id_token', token);
+        localStorage.setItem('admin', JSON.stringify(admin));
     }
 
     // EDITOR METHODS
