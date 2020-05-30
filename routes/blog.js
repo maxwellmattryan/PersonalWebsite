@@ -22,7 +22,9 @@ router.get('/posts', (req, res, next) => {
 
 // POSTS
 router.get('/posts/:uri', (req, res, next) => {
-    Post.findOne({uri: req.params.uri}, (err, post) => {
+    Post.findOne({uri: req.params.uri})
+    .populate('topics')
+    .exec((err, post) => {
         if(err) throw err;
 
         if(post) {

@@ -12,6 +12,7 @@ import { EditorComponent } from './components/editor/editor.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { PostComponent } from './components/post/post.component';
 import { RegisterComponent } from './components/register/register.component';
 
 import { AuthService } from './services/auth.service';
@@ -26,7 +27,8 @@ import { ValidationService } from './services/validation.service';
         HomeComponent,
         LoginComponent,
         NavbarComponent,
-        RegisterComponent
+        RegisterComponent,
+        PostComponent
     ],
     imports: [
         AppRoutingModule,

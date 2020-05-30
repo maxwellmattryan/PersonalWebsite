@@ -11,6 +11,7 @@ export class Post implements Deserializable {
     description:    string;
     content:        string;
     imageURL:       string;
+    created:        string;
 
     deserialize(input: any): this {
         Object.assign(this, input);

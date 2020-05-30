@@ -14,6 +14,10 @@ export class BlogService {
         private httpClient: HttpClient
     ) { }
 
+    getPost(requestURL: string): Observable<Post> {
+        return this.httpClient.get<Post>(environment.API_URL + requestURL);
+    }
+
     getPosts(): Observable<Post[]> {
         return this.httpClient.get<Post[]>(environment.API_URL + '/blog/posts');
     }
