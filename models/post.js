@@ -10,11 +10,10 @@ const postSchema = Schema({
     author:         { type: String, required: true                  },
     description:    { type: String, required: true                  },
     content:        { type: String, required: true                  },
-    imageUrls:      [{ type: String, required: true                 }], 
+    imageURL:       { type: String, required: true                  }, 
     created:        { type: Date                                    },
     updated:        { type: Date, default: Date.now                 }
 });
 
 const Post = mongoose.model('Post', postSchema);
-
 module.exports = Post;

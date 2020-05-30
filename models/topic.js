@@ -10,5 +10,4 @@ const topicSchema = Schema({
 });
 
 const Topic = mongoose.model("Topic", topicSchema);
-
 module.exports = Topic;

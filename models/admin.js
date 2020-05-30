@@ -18,8 +18,7 @@ module.exports.comparePassword = (candidate, hash, callback) => {
 };
 
 module.exports.getFromUsername = (username, callback) => {
-    const query = {username: username};
-    Admin.findOne(query, callback);
+    Admin.findOne({username: username}, callback);
 };
 
 module.exports.registerAdmin = (admin, callback) => {

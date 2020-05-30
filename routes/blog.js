@@ -1,21 +1,23 @@
 const express = require('express');
 const router = express.Router();
 
-const mongoose = require('mongoose');
-
 const passport = require('passport');
 require('../config/passport')(passport);
 
 const Post = require('../models/post');
+const Topic = require('../models/topic');
 
-// POSTS
-router.get('/', (req, res, next) => {
+// BLOG
+router.get('/posts', (req, res, next) => {
     Post.find({}, (err, posts) => {
-        res.render('blog', {posts: posts});
+        if(err) throw err;
+
+        res.json(posts);
     });
 });
 
-router.get('posts/:title', (req, res, next) => {
+// POSTS
+router.get('/posts/:title', (req, res, next) => {
     Post.findOne({title: req.params.title}, (err, post) => {
         if(err) throw err;
 
@@ -23,44 +25,64 @@ router.get('posts/:title', (req, res, next) => {
     });
 });
 
-router.post('/posts', passport.authenticate('jwt', { session: false }),  (req, res, next) => {
+router.put('/posts/:title', passport.authenticate('jwt', { session: false }), (req, res, next) => {
     const newPost = new Post({
-        _id: new mongoose.Types.ObjectId(),
-        title: req.body.title, 
-        subtitle: req.body.subtitle,
-        category: req.body.category,
-        author: req.body.author,
-        description: req.body.description,
-        content: req.body.content,
-        imageUrl: req.body.imageUrl,
-        created: Date.now(),
-        updated: Date.now()
+        _id:            req.body._id,
+        title:          req.body.title, 
+        subtitle:       req.body.subtitle,
+        topics:         req.body.topics,
+        author:         req.body.author,
+        description:    req.body.description,
+        content:        req.body.content,
+        imageURL:       req.body.imageURL,
+        created:        Date.now(),
+        updated:        Date.now()
     });
 
-    newPost.save()
-    .then(result => res.status(200).send(JSON.stringify(result)))
-    .catch(err => res.status(400).send('Unable to create blog post.'));
+    // TODO: finish writing put request and handle ID logic in front end
+
+    // the topic IDs are handle by the front end (when requesting any sort of editor page, the topics will be 
+    // requested therefore the IDs will already be there - no need to 'find' them via mongoose in here)
+    res.json(newPost);
 });
 
-router.put('/posts/:id', /* AUTHENTICATE HATE */ (req, res, next) => {
-    res.send('TODO: Add support for updating a post');
+router.delete('/posts/:title', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    console.log(req);
 });
 
-router.delete('/posts/:id', /* AUTHENTICATE HERE */ (req, res, next) => {
-    res.send('TODO: Add support for deleting a post');
+// TOPICS
+router.get('/topics', (req, res, next) => {
+    Topic.find({}, (err, topics) => {
+        if(err) throw err;
+
+        res.json(topics);
+    });
 });
 
-// CATEGORIES
-router.get('/categories/:category', (req, res, next) => {
-    res.send('TODO: Display category with all related blog posts');
+router.get('/topics/:name', (req, res, next) => {
+    Topic.findOne({name: req.params.name}, (err, topic) => {
+        if(err) throw err;
+
+        res.json(topic);
+    });
 });
 
-router.post('/categories', /* AUTHENTICATE HERE */ (req, res, next) => {
-    res.send('TODO: Add a new category')
+router.put('/topics/:name', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    // TODO: change functionality to actually update if it exists / create if not
+    const newTopic = new Topic({
+        _id:            new mongoose.Types.ObjectId(),
+        name:           req.body.name,
+        description:    req.body.description,
+        imageUrl:       req.body.imageUrl
+    });
+
+    newTopic.save()
+    .then(data => res.status(200).send(JSON.stringify(data)))
+    .catch(err => { console.log(err); res.status(400).send(JSON.stringify(err)); });
 });
 
-router.put('/categories/:category', /* AUTHENTICATE HERE */ (req, res, next) => {
-    res.send('TODO: Add support for updating category information');
+router.delete('/topics/:name', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    console.log(req);
 });
 
 module.exports = router;

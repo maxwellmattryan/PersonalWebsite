@@ -17,7 +17,7 @@ router.post('/auth', (req, res, next) => {
         if(err) throw err;
 
         if(!admin) {
-            return res.json({success: false, msg: 'User not found.'});
+            return res.json({success: false, msg: 'Admin not found.'});
         }
 
         Admin.comparePassword(password, admin.password, (err, isMatch) => {
@@ -25,7 +25,7 @@ router.post('/auth', (req, res, next) => {
 
             if(isMatch) {
                 const token = jwt.sign(admin.toJSON(), config.secret, {
-                    expiresIn: 86400 // 1 day in seconds
+                    expiresIn: "1h"
                 });
 
                 res.json({
@@ -44,7 +44,7 @@ router.post('/auth', (req, res, next) => {
     });
 });
 
-// TODO: remove access to this method later
+// CAUTION: This endpoint should always be inactive
 router.post('/register', (req, res, next) => {
     let newAdmin = new Admin({
         username: req.body.username,
