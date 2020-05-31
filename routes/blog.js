@@ -37,7 +37,7 @@ router.get('/posts/:uri', (req, res, next) => {
 
 router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req, res, next) => {
     const postData = {
-        _id:            req.body._id,
+        _id:            req.body._id || new mongoose.Types.ObjectId(),
         uri:            req.body.uri,
         title:          req.body.title, 
         subtitle:       req.body.subtitle,
@@ -56,13 +56,12 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
         if(err) throw err;
     });
 
-    Post.updateOne({uri: req.params.uri}, postData, (err, result) => {
+    Post.updateOne({_id: req.body._id}, postData, (err, result) => {
         if(err) throw err;
 
         if(result.nModified === 0) {
             const newPost = new Post({
                 ...postData,
-                _id: new mongoose.Types.ObjectId(),
                 created: Date.now()
             });
 

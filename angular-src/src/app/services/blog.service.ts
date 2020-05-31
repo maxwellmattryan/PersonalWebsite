@@ -26,7 +26,10 @@ export class BlogService {
         return this.httpClient.put(
             environment.API_URL + '/blog/posts/' + post['uri'], 
             post,
-            { headers: headers }
+            { 
+                headers: headers,
+                responseType: 'text'
+            }
         );
     }
 

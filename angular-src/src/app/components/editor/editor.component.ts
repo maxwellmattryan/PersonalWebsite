@@ -31,7 +31,10 @@ export class EditorComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit(): void {
-        window.onbeforeunload = (e) => {
+        if(!this.authService.isLoggedIn())
+            this.router.navigate(['/']);
+
+        window.onbeforeunload = () => {
             this.editorService.setPostData(null);
         };
 
@@ -85,8 +88,10 @@ export class EditorComponent implements OnDestroy, OnInit {
             if(key === "topics") post[key] = selectedTopics;
             else post[key] = this.postForm.value[key];
         }
-        post['_id'] = this.postData._id;
         post['uri'] = post['title'].toLowerCase().replace(' ', '-');
+        
+        if(this.postData)
+            post['_id'] = this.postData._id;
 
         this.blogService.submitPost(post, this.authService.getAuthHeaders()).subscribe(res => {
             this.router.navigate(['blog/posts/' + post['uri']]);
