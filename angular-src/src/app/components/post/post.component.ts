@@ -32,6 +32,6 @@ export class PostComponent implements OnInit {
     }
 
     sendPostToEditor() {
-        this.editorService.setPost(this.post);
+        this.editorService.setPostData(this.post);
     }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
@@ -11,7 +11,7 @@ import { Post, Topic } from '../models';
 })
 export class BlogService {
     constructor(
-        private httpClient: HttpClient
+        private httpClient: HttpClient,
     ) { }
 
     getPost(requestURL: string): Observable<Post> {
@@ -20,6 +20,14 @@ export class BlogService {
 
     getPosts(): Observable<Post[]> {
         return this.httpClient.get<Post[]>(environment.API_URL + '/blog/posts');
+    }
+
+    submitPost(post: Object, headers: HttpHeaders) {
+        return this.httpClient.put(
+            environment.API_URL + '/blog/posts/' + post['uri'], 
+            post,
+            { headers: headers }
+        );
     }
 
     getTopic(requestURL: string): Observable<Topic> {

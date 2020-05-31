@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Post, Topic } from 'src/app/models';
 
-import { BlogService, EditorService, ValidationService } from '../../services';
+import { AuthService, BlogService, EditorService, ValidationService } from '../../services';
 
 @Component({
     selector: 'app-editor',
@@ -17,22 +18,24 @@ export class EditorComponent implements OnDestroy, OnInit {
     topics: Array<Topic> = [];
 
     constructor(
+        private authService: AuthService,
         private blogService: BlogService,
         private editorService: EditorService,
         private formBuilder: FormBuilder,
+        private router: Router,
         private validationService: ValidationService
     ) { }
 
     ngOnDestroy(): void {
-        this.editorService.setPost(null);
+        this.editorService.setPostData(null);
     }
 
     ngOnInit(): void {
         window.onbeforeunload = (e) => {
-            this.editorService.setPost(null);
+            this.editorService.setPostData(null);
         };
 
-        this.postData = this.editorService.getPost();
+        this.postData = this.editorService.getPostData();
         if(this.postData) {
             this.postForm = this.formBuilder.group({
                 title:          this.formBuilder.control(this.postData.title,           [Validators.required]),
@@ -62,9 +65,9 @@ export class EditorComponent implements OnDestroy, OnInit {
                 let control: FormControl;
 
                 if(this.postData && this.postData.topics.map(t => t.name).includes(topic.name)) {
-                    control = this.formBuilder.control(1);
+                    control = this.formBuilder.control(true);
                 } else {
-                    control = this.formBuilder.control(0);
+                    control = this.formBuilder.control(false);
                 }
 
                 (this.postForm.controls.topics as FormArray).push(control);
@@ -77,6 +80,15 @@ export class EditorComponent implements OnDestroy, OnInit {
             .map((topic, idx) => topic ? this.topics[idx]._id : null)
             .filter(topic => topic !== null);
 
-        console.log(selectedTopics);
+        let post = {};
+        for(let key in this.postForm.value) {
+            if(key === "topics") post[key] = selectedTopics;
+            else post[key] = this.postForm.value[key];
+        }
+        post['uri'] = post['title'].toLowerCase().replace(' ', '-');
+
+        this.blogService.submitPost(post, this.authService.getAuthHeaders()).subscribe(res => {
+            this.router.navigate(['blog/posts/' + post['uri']]);
+        });
     }
 }

@@ -6,19 +6,19 @@ import { Post } from '../models';
     providedIn: 'root'
 })
 export class EditorService {
-    private post: Post;
+    private postData: Post;
 
     constructor() { }
 
-    getPost(): Post {
-        return this.post;
+    getPostData(): Post {
+        return this.postData;
     }
 
-    hasPost(): boolean {
-        return this.post != null;
+    hasPostData(): boolean {
+        return this.postData != null;
     }
 
-    setPost(post: Post): void {
-        this.post = post;
+    setPostData(post: Post): void {
+        this.postData = post;
     }
 }
