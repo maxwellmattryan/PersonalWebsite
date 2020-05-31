@@ -37,6 +37,7 @@ router.get('/posts/:uri', (req, res, next) => {
 
 router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req, res, next) => {
     const postData = {
+        _id:            req.body._id,
         uri:            req.body.uri,
         title:          req.body.title, 
         subtitle:       req.body.subtitle,
@@ -48,10 +49,17 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
         updated:        Date.now()
     };
 
+    Topic.updateMany({$pull: {posts: req.body._id}}, (err, result) => {
+        if(err) throw err;
+    });
+    Topic.updateMany({_id: {$in: req.body.topics}}, {$push: {posts: req.body._id}}, (err, result) => {
+        if(err) throw err;
+    });
+
     Post.updateOne({uri: req.params.uri}, postData, (err, result) => {
         if(err) throw err;
 
-        if(result.n === 0) {
+        if(result.nModified === 0) {
             const newPost = new Post({
                 ...postData,
                 _id: new mongoose.Types.ObjectId(),

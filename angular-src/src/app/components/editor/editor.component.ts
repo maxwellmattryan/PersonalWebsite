@@ -85,6 +85,7 @@ export class EditorComponent implements OnDestroy, OnInit {
             if(key === "topics") post[key] = selectedTopics;
             else post[key] = this.postForm.value[key];
         }
+        post['_id'] = this.postData._id;
         post['uri'] = post['title'].toLowerCase().replace(' ', '-');
 
         this.blogService.submitPost(post, this.authService.getAuthHeaders()).subscribe(res => {
