@@ -1,1 +1,54 @@
-<p>editor works!</p>
+<div>
+    <h1>Editor</h1>
+    <br>
+
+    <div class='form-group'>
+        <form [formGroup]='postForm' (ngSubmit)='onEditorSubmit()'>
+            <label>
+                Title
+                <input type='text' formControlName='title' class='form-control'>
+            </label>
+            <br>
+
+            <label>
+                Subtitle
+                <input type='text' formControlName='subtitle' class='form-control'>
+            </label>
+            <br>
+
+            <p>Topics</p>
+            <label formArrayName='topics' *ngFor='let topic of postForm.controls.topics["controls"]; let idx = index'>
+                <input type='checkbox' [formControlName]='idx'>
+                {{ topics[idx] }}
+            </label>
+            <br>
+
+            <label>
+                Author
+                <input type='text' formControlName='author' class='form-control'>
+            </label>
+            <br>
+
+            <label>
+                Description
+                <input type='text' formControlName='description' class='form-control'>
+            </label>
+            <br>
+
+            <label>
+                Content
+                <textarea type='text' formControlName='content' class='form-control'></textarea>
+            </label>
+            <br>
+
+            <label>
+                Image URL
+                <input type='text' formControlName='imageURL' class='form-control'>
+            </label>
+            <br>
+            
+            <br>
+            <input type='submit' class='btn btn-primary' value='Submit Post'>
+        </form>
+    </div>
+</div>

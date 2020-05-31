@@ -25,4 +25,8 @@ export class BlogService {
     getTopic(requestURL: string): Observable<Topic> {
         return this.httpClient.get<Topic>(environment.API_URL + requestURL);
     }
+
+    getTopics(): Observable<Topic[]> {
+        return this.httpClient.get<Topic[]>(environment.API_URL + '/blog/topics');
+    }
 }
