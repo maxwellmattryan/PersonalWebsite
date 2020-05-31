@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormArray, ValidatorFn } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root'
@@ -14,14 +15,15 @@ export class ValidationService {
         );
     }
 
-    isValidPost(post) {
-        return (
-            post.title              != undefined && 
-            post.subtitle           != undefined &&  
-            post.topics.length      != 0 &&  
-            post.author             != undefined && 
-            post.content            != undefined &&
-            post.imageUrls.length   != 0
-        );
+    hasMinTopics(min = 1) {
+        const validator: ValidatorFn = (formArray: FormArray) => {
+            const amountSelected = formArray.controls
+                .map(control => control.value)
+                .reduce((prev, next) => next ? prev + next : prev, 0);
+            
+            return amountSelected >= min ? null : { required: true };
+        };
+
+        return validator;
     }
 }

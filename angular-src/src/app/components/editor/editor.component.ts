@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators, FormControl } from '@ang
 
 import { Post } from 'src/app/models';
 
-import { BlogService, EditorService } from '../../services';
+import { BlogService, EditorService, ValidationService } from '../../services';
 
 @Component({
     selector: 'app-editor',
@@ -19,30 +19,31 @@ export class EditorComponent implements OnInit {
     constructor(
         private blogService: BlogService,
         private editorService: EditorService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private validationService: ValidationService
     ) { }
 
     ngOnInit(): void {
         this.post = this.editorService.getPost();
         if(this.post) {
             this.postForm = this.formBuilder.group({
-                title: this.formBuilder.control(this.post.title, [Validators.requiredTrue]),
-                subtitle: this.formBuilder.control(this.post.subtitle, [Validators.requiredTrue]),
-                topics: new FormArray([]),
-                author: this.formBuilder.control(this.post.author, [Validators.requiredTrue]),
-                description: this.formBuilder.control(this.post.description, [Validators.requiredTrue]),
-                content: this.formBuilder.control(this.post.content, [Validators.requiredTrue]),
-                imageURL: this.formBuilder.control(this.post.imageURL, [Validators.requiredTrue])
+                title: this.formBuilder.control(this.post.title, [Validators.required]),
+                subtitle: this.formBuilder.control(this.post.subtitle, [Validators.required]),
+                topics: this.formBuilder.array([], this.validationService.hasMinTopics(1)),
+                author: this.formBuilder.control(this.post.author, [Validators.required]),
+                description: this.formBuilder.control(this.post.description, [Validators.required]),
+                content: this.formBuilder.control(this.post.content, [Validators.required]),
+                imageURL: this.formBuilder.control(this.post.imageURL, [Validators.required])
             });
         } else {
             this.postForm = this.formBuilder.group({
-                title: this.formBuilder.control('', [Validators.requiredTrue]),
-                subtitle: this.formBuilder.control('', [Validators.requiredTrue]),
-                topics: new FormArray([]),
-                author: this.formBuilder.control('', [Validators.requiredTrue]),
-                description: this.formBuilder.control('', [Validators.requiredTrue]),
-                content: this.formBuilder.control('', [Validators.requiredTrue]),
-                imageURL: this.formBuilder.control('', [Validators.requiredTrue])
+                title: this.formBuilder.control('', [Validators.required]),
+                subtitle: this.formBuilder.control('', [Validators.required]),
+                topics: this.formBuilder.array([], this.validationService.hasMinTopics(1)),
+                author: this.formBuilder.control('', [Validators.required]),
+                description: this.formBuilder.control('', [Validators.required]),
+                content: this.formBuilder.control('', [Validators.required]),
+                imageURL: this.formBuilder.control('', [Validators.required])
             });
         }
 
@@ -50,13 +51,13 @@ export class EditorComponent implements OnInit {
             this.topics = topics.map(t => t.name);
 
             this.topics.forEach((topic, idx) => {
-                const control = new FormControl();
+                const control = this.formBuilder.control('');
                 (this.postForm.controls.topics as FormArray).push(control);
             });
         });
     }
 
-    onEditorSubmit() {
+    onSubmit() {
         console.log('TODO: Submit the post.');
     }
 }
