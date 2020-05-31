@@ -19,7 +19,7 @@
             <p>Topics</p>
             <label formArrayName='topics' *ngFor='let topic of postForm.controls.topics["controls"]; let idx = index'>
                 <input type='checkbox' [formControlName]='idx'>
-                {{ topics[idx] }}
+                {{ topics[idx].name }} &nbsp;&nbsp;
             </label>
             <br>
 

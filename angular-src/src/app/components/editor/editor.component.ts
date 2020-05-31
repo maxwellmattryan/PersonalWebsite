@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
-import { Post } from 'src/app/models';
+import { Post, Topic } from 'src/app/models';
 
 import { BlogService, EditorService, ValidationService } from '../../services';
 
@@ -14,7 +14,7 @@ export class EditorComponent implements OnInit {
     post: Post;
     postForm: FormGroup;
 
-    topics = [];
+    topics: Array<Topic> = [];
 
     constructor(
         private blogService: BlogService,
@@ -48,16 +48,28 @@ export class EditorComponent implements OnInit {
         }
 
         this.blogService.getTopics().subscribe(topics => {
-            this.topics = topics.map(t => t.name);
+            this.topics = topics;
 
             this.topics.forEach((topic, idx) => {
-                const control = this.formBuilder.control('');
+                let control;
+                
+                if(this.post && this.post.topics.map(t => t.name).includes(topic.name)) {
+                    control = this.formBuilder.control(1);
+                } else {
+                    control = this.formBuilder.control(0);
+                }
+
                 (this.postForm.controls.topics as FormArray).push(control);
             });
         });
     }
 
     onSubmit() {
-        console.log('TODO: Submit the post.');
+        console.log(this.postForm);
+        const selectedTopics = this.postForm.value.topics
+            .map((topic, idx) => topic ? this.topics[idx] : null)
+            .filter(topic => topic !== null);
+
+        console.log(selectedTopics);
     }
 }
