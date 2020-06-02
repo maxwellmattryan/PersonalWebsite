@@ -14,7 +14,7 @@ export class BlogService {
         private httpClient: HttpClient,
     ) { }
 
-    deletePost(requestURL: string, headers: HttpHeaders) {
+    deletePost(requestURL: string, headers: HttpHeaders): Observable<any> {
         return this.httpClient.delete(
             environment.API_URL + requestURL,
             { 
@@ -32,7 +32,7 @@ export class BlogService {
         return this.httpClient.get<Post[]>(environment.API_URL + '/blog/posts');
     }
 
-    putPost(post: Object, headers: HttpHeaders) {
+    putPost(post: Object, headers: HttpHeaders): Observable<any> {
         return this.httpClient.put(
             environment.API_URL + '/blog/posts/' + post['uri'], 
             post,

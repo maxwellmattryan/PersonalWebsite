@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -24,25 +25,23 @@ export class AuthService {
     }
 
     isLoggedIn(): boolean {
-        this.loadAdminData();
-
-        return this.authToken != null;
+        return JSON.parse(localStorage.getItem('loginStatus') || 'false');
     }
 
     // TODO: Write types and fix method return types for all of these
-    authenticateAdmin(admin) {
+    authenticateAdmin(admin): Observable<any> {
         let headers = new HttpHeaders();
         headers.set('Content-Type', 'application/json');
 
-        return this.httpClient.post(environment.API_URL + '/admin/auth', admin, { headers: headers })
+        return this.httpClient.post<any>(environment.API_URL + '/admin/auth', admin, { headers: headers })
             .pipe(map((res: any) => { return res }));
     }
 
     logoutAdmin(): void {
+        localStorage.clear();
+
         this.admin = null;
         this.authToken = null;
-
-        localStorage.clear();
     }
 
     registerAdmin(admin) {
@@ -65,8 +64,9 @@ export class AuthService {
         this.authToken = token;
         this.admin = admin;
 
-        localStorage.setItem('id_token', token);
         localStorage.setItem('admin', JSON.stringify(admin));
+        localStorage.setItem('id_token', token);
+        localStorage.setItem('loginStatus', 'true');
     }
 
     // EDITOR METHODS
