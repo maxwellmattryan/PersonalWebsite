@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 require('../config/passport')(passport);
 
+const Profile = require('../models/profile');
 const Post = require('../models/post');
 const Topic = require('../models/topic');
 
@@ -49,10 +50,14 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
         updated:        Date.now()
     };
 
+    Profile.updateMany({}, {$addToSet: {posts: postData._id}}, (err, result) => {
+        if(err) throw err;
+    });
+
     Topic.updateMany({}, {$pull: {posts: postData._id}}, (err, result) => {
         if(err) throw err;
     });
-    Topic.updateMany({_id: {$in: req.body.topics}}, {$push: {posts: req.body._id}}, (err, result) => {
+    Topic.updateMany({_id: {$in: postData.topics}}, {$push: {posts: postData._id}}, (err, result) => {
         if(err) throw err;
     });
 
@@ -79,15 +84,21 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
 });
 
 router.delete('/posts/:uri', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    Post.findOneAndDelete({uri: req.params.uri}, (err, result) => {
+    Post.findOneAndDelete({uri: req.params.uri}, (err, post) => {
         if(err) {
             res.sendStatus(400);
         } else {
-            Topic.updateMany({}, {$pull: {posts: result._id}}, (err, result) => {
+            Topic.updateMany({}, {$pull: {posts: post._id}}, (err, result) => {
                 if(err) throw err;
 
                 else {
-                    res.sendStatus(200);
+                    Profile.updateMany({}, {$pull: {posts: post._id}}, (err, result) => {
+                        if(err) throw err;
+
+                        else {
+                            res.sendStatus(200);
+                        }
+                    });
                 }
             });
         }

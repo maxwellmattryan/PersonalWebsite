@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Profile = require('../models/profile');
-const PROFILE_URI = 'programming';
+const PROFILE_URI = 'software-engineering';
 
 router.get('', (req, res, next) => {
     Profile.find({uri: PROFILE_URI})
