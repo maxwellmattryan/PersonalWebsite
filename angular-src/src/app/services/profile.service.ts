@@ -3,18 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { Project, Post } from '../models';
-
-interface Profile {
-    _id: string;
-    uri: string;
-    name: string;
-    tagline: string;
-    about: string;
-    technologies: Array<object>;
-    projects: Array<Project>;
-    posts: Array<Post>
-}
+import { Profile } from '../models';
 
 @Injectable({
     providedIn: 'root'

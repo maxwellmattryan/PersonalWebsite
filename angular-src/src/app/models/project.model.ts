@@ -1,5 +1,4 @@
 import { Deserializable } from './deserializable.model';
-import { Post } from './post.model';
 
 export class Project implements Deserializable {
     _id:            any;
@@ -8,6 +7,7 @@ export class Project implements Deserializable {
     subtitle:       string;
     description:    string;
     imageURL:       string;
+    externals:      Array<Object>;
 
     deserialize(input: any): this {
         Object.assign(this, input);

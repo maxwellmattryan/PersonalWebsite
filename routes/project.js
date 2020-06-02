@@ -18,6 +18,7 @@ router.put('/:uri', passport.authenticate('jwt', { session: false }), (req, res,
         subtitle: req.body.subtitle,
         description: req.body.description,
         imageURL: req.body.imageURL,
+        externals: req.body.externals,
         updated: Date.now()
     };
 
@@ -46,6 +47,22 @@ router.put('/:uri', passport.authenticate('jwt', { session: false }), (req, res,
             });
         } else {
             res.sendStatus(200);
+        }
+    });
+});
+
+router.delete('/:uri', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    Project.findOneAndDelete({ uri: req.params.uri }, (err, project) => {
+        if(err) {
+            res.sendStatus(400);
+        } else {
+            Profile.updateMany({}, {$pull: {projects: project._id}}, (err, result) => {
+                if(err) throw err;
+
+                else {
+                    res.sendStatus(200);
+                }
+            });
         }
     });
 });

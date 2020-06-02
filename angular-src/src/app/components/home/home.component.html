@@ -15,6 +15,10 @@
         <p>{{ project.title }}</p>
         <p>{{ project.subtitle }}</p>
         <p>{{ project.description }}</p>
+
+        <div *ngFor='let ext of project.externals'>
+            <a [href]='ext.url' target='_blank'>{{ ext.name }}</a>
+        </div>
     </div>
 
     <h3>Posts</h3>
