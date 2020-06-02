@@ -115,7 +115,7 @@ export class EditorComponent implements OnDestroy, OnInit {
         let headers = this.authService.getAuthHeaders();
         headers.set('Content-Type', 'application/json');
 
-        this.blogService.submitPost(post, headers).subscribe(res => {
+        this.blogService.putPost(post, headers).subscribe(res => {
             this.router.navigate(['blog/posts/' + post['uri']]);
         });
     }

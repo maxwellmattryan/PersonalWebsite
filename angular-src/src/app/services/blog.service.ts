@@ -32,7 +32,7 @@ export class BlogService {
         return this.httpClient.get<Post[]>(environment.API_URL + '/blog/posts');
     }
 
-    submitPost(post: Object, headers: HttpHeaders) {
+    putPost(post: Object, headers: HttpHeaders) {
         return this.httpClient.put(
             environment.API_URL + '/blog/posts/' + post['uri'], 
             post,

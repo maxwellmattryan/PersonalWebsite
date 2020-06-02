@@ -1,7 +1,9 @@
 <div *ngIf='isLoaded'>
-    <a *ngIf='this.isAdmin' (click)='sendPostToEditor()' [routerLink]='["/editor"]' class="btn btn-primary">Edit Post</a>
-    <a *ngIf='this.isAdmin' (click)='deletePost()' [routerLink]='["/blog"]' class="btn btn-secondary">Delete Post</a>
-    <br>
+    <div *ngIf='this.isAdmin'>
+        <a (click)='sendPostToEditor()' [routerLink]='["/editor"]' class="btn btn-primary">Edit Post</a>
+        <a (click)='deletePost()' [routerLink]='["/blog"]' class="btn btn-secondary">Delete Post</a>
+        <br>
+    </div>
 
     <h1>{{ post.title }}</h1>
     <h2>{{ post.subtitle }}</h2>
