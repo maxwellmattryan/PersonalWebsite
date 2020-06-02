@@ -49,14 +49,14 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
         updated:        Date.now()
     };
 
-    Topic.updateMany({}, {$pull: {posts: req.body._id}}, (err, result) => {
+    Topic.updateMany({}, {$pull: {posts: postData._id}}, (err, result) => {
         if(err) throw err;
     });
     Topic.updateMany({_id: {$in: req.body.topics}}, {$push: {posts: req.body._id}}, (err, result) => {
         if(err) throw err;
     });
 
-    Post.updateOne({_id: req.body._id}, postData, (err, result) => {
+    Post.updateOne({_id: postData._id}, postData, (err, result) => {
         if(err) throw err;
 
         if(result.nModified === 0) {

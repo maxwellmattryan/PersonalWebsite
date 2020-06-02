@@ -39,10 +39,14 @@ app.set('view engine', 'html');
 const indexRoute = require('./routes/index');
 const adminRoute = require('./routes/admin');
 const blogRoute = require('./routes/blog');
+const profileRoute = require('./routes/profile');
+const projectRoute = require('./routes/project');
 
 app.use('/', indexRoute);
 app.use('/admin', adminRoute);
 app.use('/blog', blogRoute);
+app.use('/profiles', profileRoute);
+app.use('/projects', projectRoute);
 
 // EXPORT
 module.exports = app;

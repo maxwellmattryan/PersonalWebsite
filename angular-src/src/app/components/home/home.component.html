@@ -1,1 +1,29 @@
-<p>home works!</p>
+<div *ngIf="isLoaded">
+    <h1>Hi! I'm Matthew Maxwell.</h1>
+    <h2>{{ profileData.tagline }}</h2>
+
+    <p>{{ profileData.about }}</p>
+    <img src='https://mattmaxwell.tech/images/portrait.png' height=200>
+
+    <div *ngFor='let tech of profileData.technologies'>
+        <p>{{ tech.name }}</p>
+    </div>
+
+    <h3>Projects</h3>
+    <div *ngFor='let project of profileData.projects'>
+        <img [src]='project.imageURL' height=150>
+        <p>{{ project.title }}</p>
+        <p>{{ project.subtitle }}</p>
+        <p>{{ project.description }}</p>
+    </div>
+
+    <h3>Posts</h3>
+    <div *ngFor='let post of profileData.posts'>
+        <img [src]='post.imageURL' height=150>
+        <a [routerLink]='["blog/posts/" + post.uri]'>
+            <p>{{ post.title }}</p>
+        </a>
+        <p>{{ post.subtitle }}</p>
+        <p>{{ post.content }}</p>
+    </div>
+</div>

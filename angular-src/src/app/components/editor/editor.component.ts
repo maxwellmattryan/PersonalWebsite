@@ -107,7 +107,7 @@ export class EditorComponent implements OnDestroy, OnInit {
             if(key === "topics") post[key] = selectedTopics;
             else post[key] = this.postForm.value[key];
         }
-        post['uri'] = post['title'].toLowerCase().replace(' ', '-');
+        post['uri'] = post['title'].toLowerCase().replace(/[ ]/g, '-').replace(/[\.]/g, '');
         
         if(this.postData)
             post['_id'] = this.postData._id;
