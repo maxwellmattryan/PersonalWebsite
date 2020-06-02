@@ -97,7 +97,7 @@ export class EditorComponent implements OnDestroy, OnInit {
         });
     }
 
-    onSubmit() {
+    onSubmit(): void {
         const selectedTopics = this.postForm.value.topics
             .map((topic, idx) => topic ? this.topics[idx]._id : null)
             .filter(topic => topic !== null);
@@ -112,7 +112,10 @@ export class EditorComponent implements OnDestroy, OnInit {
         if(this.postData)
             post['_id'] = this.postData._id;
 
-        this.blogService.submitPost(post, this.authService.getAuthHeaders()).subscribe(res => {
+        let headers = this.authService.getAuthHeaders();
+        headers.set('Content-Type', 'application/json');
+
+        this.blogService.submitPost(post, headers).subscribe(res => {
             this.router.navigate(['blog/posts/' + post['uri']]);
         });
     }

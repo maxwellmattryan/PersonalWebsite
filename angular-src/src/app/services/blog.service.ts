@@ -14,6 +14,16 @@ export class BlogService {
         private httpClient: HttpClient,
     ) { }
 
+    deletePost(requestURL: string, headers: HttpHeaders) {
+        return this.httpClient.delete(
+            environment.API_URL + requestURL,
+            { 
+                headers: headers,
+                responseType: 'text'
+            }
+        );
+    }
+
     getPost(requestURL: string): Observable<Post> {
         return this.httpClient.get<Post>(environment.API_URL + requestURL);
     }

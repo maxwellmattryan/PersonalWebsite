@@ -31,7 +31,13 @@ export class PostComponent implements OnInit {
         });
     }
 
-    sendPostToEditor() {
+    sendPostToEditor(): void {
         this.editorService.setPostData(this.post);
+    }
+
+    deletePost(): void {
+        this.blogService.deletePost(this.router.url, this.authService.getAuthHeaders()).subscribe(result => {
+            this.router.navigate(['/blog']);
+        });
     }
 }

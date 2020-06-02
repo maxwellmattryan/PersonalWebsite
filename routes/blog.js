@@ -67,13 +67,13 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
 
             newPost.save((err, post) => {
                 if(err) {
-                    res.status(400).send('Unable to create blog post.');
+                    res.sendStatus(400);
                 } else {    
-                    res.status(201).send('Successfully created blog post.');
+                    res.sendStatus(201);
                 }
             });
         } else {
-            res.status(200).send('Successfully updated blog post.');
+            res.sendStatus(200);
         }
     });
 });
@@ -81,13 +81,13 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
 router.delete('/posts/:uri', passport.authenticate('jwt', { session: false }), (req, res, next) => {
     Post.findOneAndDelete({uri: req.params.uri}, (err, result) => {
         if(err) {
-            res.status(400).send('Unable to delete blog posts');
+            res.sendStatus(400);
         } else {
             Topic.updateMany({}, {$pull: {posts: result._id}}, (err, result) => {
                 if(err) throw err;
 
                 else {
-                    res.status(200).send('Successfully deleted blog post.');
+                    res.sendStatus(200);
                 }
             });
         }
@@ -137,13 +137,13 @@ router.put('/topics/:uri', passport.authenticate('jwt', { session: false }), (re
 
             newTopic.save((err, topic) => {
                 if(err) {
-                    res.status(400).send('Unable to create blog topic.');
+                    res.sendStatus(400);
                 } else {
-                    res.status(201).send('Successfully created blog topic.');
+                    res.sendStatus(201);
                 }
             });
         } else {
-            res.status(200).send('Successfully updated blog topic.');
+            res.sendStatus(200);
         }
     });
 });

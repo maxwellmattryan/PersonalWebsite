@@ -73,9 +73,7 @@ export class AuthService {
     getAuthHeaders(): HttpHeaders {
         this.loadAdminData();
 
-        // TODO: remove the content type and remove 'responseType' from blog service
         return new HttpHeaders({
-            'Content-Type': 'application/json',
             'Authorization': this.authToken
         });
     }
