@@ -31,14 +31,31 @@ export class EditorComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit(): void {
+        this.checkForAdmin();
+        
+        this.setUnloadEvent();
+
+        this.loadPostData();
+        this.buildPostForm();
+        this.loadTopicData();
+    }
+
+    checkForAdmin(): void {
         if(!this.authService.isLoggedIn())
             this.router.navigate(['/']);
+    }
 
+    setUnloadEvent(): void {
         window.onbeforeunload = () => {
             this.editorService.setPostData(null);
         };
+    }
 
+    loadPostData(): void {
         this.postData = this.editorService.getPostData();
+    }
+
+    buildPostForm(): void {
         if(this.postData) {
             this.postForm = this.formBuilder.group({
                 title:          this.formBuilder.control(this.postData.title,           [Validators.required]),
@@ -60,7 +77,9 @@ export class EditorComponent implements OnDestroy, OnInit {
                 imageURL:       this.formBuilder.control('',    [Validators.required])
             });
         }
+    }
 
+    loadTopicData(): void {
         this.blogService.getTopics().subscribe(topics => {
             this.topics = topics;
 

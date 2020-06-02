@@ -49,7 +49,7 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
         updated:        Date.now()
     };
 
-    Topic.updateMany({$pull: {posts: req.body._id}}, (err, result) => {
+    Topic.updateMany({}, {$pull: {posts: req.body._id}}, (err, result) => {
         if(err) throw err;
     });
     Topic.updateMany({_id: {$in: req.body.topics}}, {$push: {posts: req.body._id}}, (err, result) => {
@@ -79,9 +79,18 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
 });
 
 router.delete('/posts/:uri', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    Post.deleteOne({uri: req.params.uri}, err => {
-        if(err) res.status(400).send('Unable to delete blog posts');
-        else res.status(200).send('Successfully deleted blog post.');
+    Post.findOneAndDelete({uri: req.params.uri}, (err, result) => {
+        if(err) {
+            res.status(400).send('Unable to delete blog posts');
+        } else {
+            Topic.updateMany({}, {$pull: {posts: result._id}}, (err, result) => {
+                if(err) throw err;
+
+                else {
+                    res.status(200).send('Successfully deleted blog post.');
+                }
+            });
+        }
     });
 });
 
