@@ -1,3 +1,9 @@
+const profiles = [
+    "audio",
+    "games",
+    "software"
+];
+
 module.exports = {
-    "uri": "game-dev"
+    "uri": profiles[2]
 }
