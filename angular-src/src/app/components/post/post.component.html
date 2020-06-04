@@ -8,7 +8,7 @@
     <h1>{{ post.title }}</h1>
     <h2>{{ post.subtitle }}</h2>
     
-    <p>Published: {{ post.created }}</p>
+    <p [innerHtml]='"Published: " + this.getFormattedDate()'></p>
 
     <a [routerLink]='["/blog/topics/" + topic.uri]' *ngFor='let topic of post.topics'>
         <p>

@@ -31,9 +31,7 @@ export class PostComponent implements OnInit {
 
         this.blogService.getPost(this.router.url).subscribe(post => {
             this.isLoaded = true;
-            
             this.post = post;
-            this.post.created = this.getFormattedDate(new Date(this.post.created));
         });
     }
 
@@ -51,12 +49,14 @@ export class PostComponent implements OnInit {
         });
     }
 
-    getFormattedDate(date: Date): string {
+    getFormattedDate(): string {
+        const date = new Date(this.post.created);
+
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
         const nth = (day) => {
             if(day > 3 && day < 21) return 'th'; 
-            
+
             switch(day % 10) {
                 case 1: return 'st';
                 case 2: return 'nd';
@@ -65,6 +65,6 @@ export class PostComponent implements OnInit {
             }
         };
 
-        return months[date.getMonth()] + ' ' + date.getDate() + nth(date.getDate()) + ', ' + date.getFullYear();
+        return months[date.getMonth()] + ' ' + date.getDate() + '<sup>' + nth(date.getDate()) + '</sup>, ' + date.getFullYear();
     }
 }
