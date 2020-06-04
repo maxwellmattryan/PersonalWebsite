@@ -130,6 +130,7 @@ router.get('/topics/:uri', (req, res, next) => {
 
 router.put('/topics/:uri', passport.authenticate('jwt', { session: false }), (req, res, next) => {
     const topicData = {
+        _id: req.body._id || new mongoose.Types.ObjectId(),
         uri: req.body.uri,
         name: req.body.name,
         description: req.body.description,
@@ -137,14 +138,11 @@ router.put('/topics/:uri', passport.authenticate('jwt', { session: false }), (re
         posts: req.body.posts
     };
 
-    Topic.updateOne({uri: req.params.uri}, topicData, (err, result) => {
+    Topic.updateOne({_id: topicData._id}, topicData, (err, result) => {
         if(err) throw err;
 
         if(result.n === 0) {
-            const newTopic = new Topic({
-                ...topicData,
-                _id: new mongoose.Types.ObjectId()
-            });
+            const newTopic = new Topic({...topicData});
 
             newTopic.save((err, topic) => {
                 if(err) {

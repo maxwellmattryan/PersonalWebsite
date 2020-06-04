@@ -12,7 +12,9 @@
     <h3>Projects</h3>
     <div *ngFor='let project of profileData.projects'>
         <img [src]='project.imageURL' height=150>
-        <p>{{ project.title }}</p>
+        <a [href]='project.externals[0].url' target='_blank'>
+            <p>{{ project.title }}</p>
+        </a>
         <p>{{ project.subtitle }}</p>
         <p>{{ project.description }}</p>
 

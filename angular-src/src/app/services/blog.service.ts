@@ -10,11 +10,14 @@ import { Post, Topic } from '../models';
     providedIn: 'root'
 })
 export class BlogService {
+    deletePostURI: string;
+
     constructor(
         private httpClient: HttpClient,
     ) { }
 
     deletePost(requestURL: string, headers: HttpHeaders): Observable<any> {
+        console.log("TODO: CONSTRUCT DELETE POST URI TO ALLOW REMOVING FROM UI");
         return this.httpClient.delete(
             environment.API_URL + requestURL,
             { 

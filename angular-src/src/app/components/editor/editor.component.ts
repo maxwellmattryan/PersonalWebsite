@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { FlashMessagesService } from 'angular2-flash-messages';
+
 import { Post, Topic } from 'src/app/models';
 
 import { AuthService, BlogService, EditorService, ValidationService } from '../../services';
@@ -21,6 +23,7 @@ export class EditorComponent implements OnDestroy, OnInit {
         private authService: AuthService,
         private blogService: BlogService,
         private editorService: EditorService,
+        private flashMessagesService: FlashMessagesService,
         private formBuilder: FormBuilder,
         private router: Router,
         private validationService: ValidationService
@@ -107,7 +110,7 @@ export class EditorComponent implements OnDestroy, OnInit {
             if(key === "topics") post[key] = selectedTopics;
             else post[key] = this.postForm.value[key];
         }
-        post['uri'] = post['title'].toLowerCase().replace(/[ ]/g, '-').replace(/[\.]/g, '');
+        post['uri'] = post['title'].toLowerCase().replace(/[ ]/g, '-').replace(/[\.?]/g, '');
         
         if(this.postData)
             post['_id'] = this.postData._id;
@@ -116,6 +119,17 @@ export class EditorComponent implements OnDestroy, OnInit {
         headers.set('Content-Type', 'application/json');
 
         this.blogService.putPost(post, headers).subscribe(res => {
+            if(!this.postData) {
+                this.flashMessagesService.show('Successfully created blog post.', {
+                    cssClass: 'alert-success',
+                    timeout: 2000
+                });
+            } else {
+                this.flashMessagesService.show('Successfully updated blog post.', {
+                    cssClass: 'alert-success',
+                    timeout: 2000
+                });
+            }
             this.router.navigate(['blog/posts/' + post['uri']]);
         });
     }
