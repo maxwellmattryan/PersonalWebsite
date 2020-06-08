@@ -102,6 +102,7 @@ export class EditorComponent implements OnDestroy, OnInit {
     }
 
     onSubmit(): void {
+        // TODO: Refactor this function and make it way prettier...
         const selectedTopics = this.postForm.value.topics
             .map((topic, idx) => topic ? this.topics[idx]._id : null)
             .filter(topic => topic !== null);

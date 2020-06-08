@@ -1,0 +1,30 @@
+[
+    {
+        "_id": "",
+        "uri": "audio",
+        "name": "Audio",
+        "description": "Any and all things related to audio development and audio programming. I really wanna write some stuff related to DSP...",
+        "imageURL": "https://mattmaxwell.tech/images/rotor.png",
+        "posts": []
+    },
+    {
+        "_id": "5edbde72e9fac6503c2ea617",
+        "uri": "game-development",
+        "name": "Game Development",
+        "description": "This topic is for all things related to game development and programming for games. I love to create games and design their code architectures, so writing blog posts about the topic should be really fun.",
+        "imageURL": "https://mattmaxwell.tech/images/jlpt-scrape.png",
+        "posts": [
+            "5ed54436d8e0ad5e382fa8a8"
+        ]
+    },
+    {
+        "_id": "5ede965ed0412660681ed71b",
+        "uri": "software-engineering",
+        "name": "Software Engineering",
+        "description": "This topic is for all things related to software engineering. I love to create apps and design their code architectures, so writing blog posts about the topic should be really fun.",
+        "imageURL": "https://mattmaxwell.tech/images/jlpt-scrape.png",
+        "posts": [
+            "5ed54436d8e0ad5e382fa8a8"
+        ]
+    }
+]

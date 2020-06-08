@@ -1,0 +1,72 @@
+[
+    {
+        "_id": "5ed6b75d887cd82e00274a13",
+        "profiles": [
+            "5ed6c3a1cedb8f0208ac645c"
+        ],
+        "uri": "cozy-cat-cafe",
+        "title": "Cozy Cat Cafe",
+        "subtitle": "Mellow game for feeding cats",
+        "description": "Cozy Cat Cafe is an incredibly relaxing and chill game also created for the 2019 Global Game Jam where it won best of show. You indefinitely feed cats that appear on your patio doorstep in exchange for acorns. These acorns can be used to customize your kitchen by installing new walls or floors, hanging posters, and more.",
+        "imageURL": "https://mattmaxwell.tech/images/cozy-cat-cafe.png",
+        "externals": [
+            {
+                "name": "GitHub",
+                "url": "https://github.com/VeryBester/Cozy-Cat-Cafe",
+                "icon": ""
+            },
+            {
+                "name": "Itch.io",
+                "url": "https://maxwellmatt.itch.io/cozy-cat-cafe",
+                "icon": ""
+            }
+        ]
+    },
+    {
+        "_id": "5ed723376edc1d41d0c86276",
+        "profiles": [
+            "5ed6ac9f86f08240e86bc2b8"
+        ],
+        "uri": "green-foot",
+        "title": "Green Foot",
+        "subtitle": "ReactJS application that helps reduce carbon footprints",
+        "description": "Green Foot is an environmentally conscious app concerned with helping you lower your carbon footprint. Provided a starting and target location by the user, it returns a list of modes of transportation ranked in increasing order according to their carbon emission amount.",
+        "imageURL": "https://mattmaxwell.tech/images/green-foot.png",
+        "externals": [
+            {
+                "name": "GitHub",
+                "url": "https://github.com/Diversity-Hackathon/greenfoot-frontend",
+                "icon": ""
+            },
+            {
+                "name": "Green Foot",
+                "url": "https://diversity-hackathon.github.io/greenfoot-frontend/#/",
+                "icon": ""
+            }
+        ]
+    },
+    {
+        "_id": "5ed6ca23c08bf2569428c3ee",
+        "profiles": [
+            "5ed6ac9f86f08240e86bc2b8", 
+            "5ed721d0851d2f0094565d91"
+        ],
+        "uri": "rotor",
+        "title": "Rotor",
+        "subtitle": "Modern C++ ring modulation plugin",
+        "description": "Rotor is a variable waveform ring modulation plugin targeting VST3 and AU for OS X and Windows platforms. It uses wavetable synthesis to generate various simple waveforms that act as the modulation signal for the input. It is compiled using the JUCE framework for C++.",
+        "imageURL": "https://mattmaxwell.tech/images/rotor.png",
+        "externals": [
+            {
+                "name": "GitHub",
+                "url": "https://github.com/maxwellmattryan/rotor",
+                "icon": ""
+            },
+            {
+                "name": "Drive",
+                "url": "https://drive.google.com/drive/folders/1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2",
+                "icon": ""
+            }
+        ]
+    }
+]

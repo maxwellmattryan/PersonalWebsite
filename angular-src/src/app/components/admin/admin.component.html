@@ -3,9 +3,11 @@
     <br>
     <div>
         <a *ngIf="!authService.isLoggedIn()" class="btn btn-primary" [routerLink]="['/admin/register']">Register</a>
+        &nbsp;
         <a *ngIf="!authService.isLoggedIn()" class="btn btn-secondary" [routerLink]="['/admin/login']">Login</a>
 
         <a *ngIf="authService.isLoggedIn()" class="btn btn-primary" [routerLink]="['/editor']">Create Post</a>
+        &nbsp;
         <a *ngIf="authService.isLoggedIn()" class="btn btn-secondary" (click)="onLogoutClick()">Logout</a>
     </div>
 </div>  
