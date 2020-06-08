@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { HttpHeaders } from '@angular/common/http';
 import { FormArray, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -34,17 +35,17 @@ export class EditorComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit(): void {
-        this.checkIsAdmin();
+        this.checkForAdmin();
         
         this.setUnloadEvent();
 
         this.loadPostData();
-        this.buildPostForm();
-        
         this.loadTopicData();
+        
+        this.buildPostForm();
     }
 
-    checkIsAdmin(): void {
+    checkForAdmin(): void {
         if(!this.authService.isLoggedIn())
             this.router.navigate(['/']);
     }
@@ -57,6 +58,24 @@ export class EditorComponent implements OnDestroy, OnInit {
 
     loadPostData(): void {
         this.postData = this.editorService.getPostData();
+    }
+
+    loadTopicData(): void {
+        this.blogService.getTopics().subscribe(topics => {
+            this.topics = topics;
+
+            this.topics.forEach((topic, idx) => {
+                let control: FormControl;
+
+                if(this.postData && this.postData.topics.map(t => t.name).includes(topic.name)) {
+                    control = this.formBuilder.control(true);
+                } else {
+                    control = this.formBuilder.control(false);
+                }
+
+                (this.postForm.controls.topics as FormArray).push(control);
+            });
+        });
     }
 
     buildPostForm(): void {
@@ -83,45 +102,9 @@ export class EditorComponent implements OnDestroy, OnInit {
         }
     }
 
-    loadTopicData(): void {
-        this.blogService.getTopics().subscribe(topics => {
-            this.topics = topics;
-
-            this.topics.forEach((topic, idx) => {
-                let control: FormControl;
-
-                if(this.postData && this.postData.topics.map(t => t.name).includes(topic.name)) {
-                    control = this.formBuilder.control(true);
-                } else {
-                    control = this.formBuilder.control(false);
-                }
-
-                (this.postForm.controls.topics as FormArray).push(control);
-            });
-        });
-    }
-
     onSubmit(): void {
-        // TODO: Refactor this function and make it way prettier...
-        const selectedTopics = this.postForm.value.topics
-            .map((topic, idx) => topic ? this.topics[idx]._id : null)
-            .filter(topic => topic !== null);
-
-        let post = {};
-        for(let key in this.postForm.value) {
-            if(key === 'topics') {
-                post[key] = selectedTopics;
-            } else {
-                post[key] = this.postForm.value[key];
-            } 
-        }
-        post['uri'] = post['title'].toLowerCase().replace(/[ ]/g, '-').replace(/[\.?]/g, '');
-        
-        if(this.postData)
-            post['_id'] = this.postData._id;
-
-        let headers = this.authService.getAuthHeaders();
-        headers.set('Content-Type', 'application/json');
+        const post = this.buildPostData();
+        const headers = this.getHeaders();
 
         this.blogService.putPost(post, headers).subscribe(res => {
             if(!this.postData) {
@@ -137,5 +120,41 @@ export class EditorComponent implements OnDestroy, OnInit {
             }
             this.router.navigate(['blog/posts/' + post['uri']]);
         });
+    }
+
+    buildPostData(): any {
+        let post = {};
+        for(let key in this.postForm.value) {
+            if(key === 'topics') {
+                post[key] = this.getSelectedTopics();
+            } else {
+                post[key] = this.postForm.value[key];
+            } 
+        }
+        post['_id'] = this.getPostID();
+        post['uri'] = this.getPostURI(post['title']);
+
+        return post;
+    }
+
+    getSelectedTopics(): any {
+        return this.postForm.value.topics
+            .map((topic, idx) => topic ? this.topics[idx]._id : null)
+            .filter(topic => topic !== null);
+    }
+
+    getPostID(): string {
+        return this.postData ? this.postData._id : '';
+    }
+
+    getPostURI(title: string): string {
+        return title.toLowerCase().replace(/[ ]/g, '-').replace(/[\.?]/g, '');
+    }
+
+    getHeaders(): HttpHeaders {
+        let headers = this.authService.getAuthHeaders();
+        headers.set('Content-Type', 'application/json');
+
+        return headers;
     }
 }
