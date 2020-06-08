@@ -27,7 +27,6 @@ app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
-
 app.use(passport.initialize());
 app.use(passport.session());
 

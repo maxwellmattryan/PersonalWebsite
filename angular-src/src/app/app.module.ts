@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { MarkdownModule } from 'ngx-markdown';
 
 import { AppComponent } from './app.component';
 
@@ -40,8 +41,9 @@ import { AuthService, ValidationService } from './services';
         BrowserModule,
         FlashMessagesModule.forRoot(),
         FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule
+        HttpClientModule,
+        MarkdownModule.forRoot(),
+        ReactiveFormsModule
     ],
     providers: [
         AuthService,

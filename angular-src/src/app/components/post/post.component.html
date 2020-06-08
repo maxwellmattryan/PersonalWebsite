@@ -20,5 +20,5 @@
     
     <img [src]='post.imageURL' height=150>
 
-    <p>{{ post.content }}</p>
+    <markdown [data]='post.content'></markdown>
 </div>

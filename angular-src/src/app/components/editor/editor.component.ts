@@ -34,16 +34,17 @@ export class EditorComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit(): void {
-        this.checkForAdmin();
+        this.checkIsAdmin();
         
         this.setUnloadEvent();
 
         this.loadPostData();
         this.buildPostForm();
+        
         this.loadTopicData();
     }
 
-    checkForAdmin(): void {
+    checkIsAdmin(): void {
         if(!this.authService.isLoggedIn())
             this.router.navigate(['/']);
     }
@@ -107,8 +108,11 @@ export class EditorComponent implements OnDestroy, OnInit {
 
         let post = {};
         for(let key in this.postForm.value) {
-            if(key === "topics") post[key] = selectedTopics;
-            else post[key] = this.postForm.value[key];
+            if(key === 'topics') {
+                post[key] = selectedTopics;
+            } else {
+                post[key] = this.postForm.value[key];
+            } 
         }
         post['uri'] = post['title'].toLowerCase().replace(/[ ]/g, '-').replace(/[\.?]/g, '');
         
