@@ -22,6 +22,7 @@ import {
 } from './components';
 
 import { AuthService, ValidationService } from './services';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import { AuthService, ValidationService } from './services';
         NavbarComponent,
         RegisterComponent,
         PostComponent,
-        TopicComponent
+        TopicComponent,
+        SidebarComponent
     ],
     imports: [
         AppRoutingModule,
