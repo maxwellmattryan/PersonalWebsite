@@ -5,7 +5,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 
 import { Post } from 'src/app/models';
 
-import { AuthService, BlogService, EditorService } from 'src/app/services';
+import { AuthService, BlogService } from 'src/app/services';
 
 @Component({
     selector: 'app-post',
@@ -21,7 +21,6 @@ export class PostComponent implements OnInit {
     constructor(
         private authService: AuthService,
         private blogService: BlogService,
-        private editorService: EditorService,
         private flashMessagesService: FlashMessagesService,
         private router: Router
     ) { }
@@ -36,7 +35,7 @@ export class PostComponent implements OnInit {
     }
 
     sendPostToEditor(): void {
-        this.editorService.setPostData(this.post);
+        this.blogService.setPostData(this.post);
     }
 
     deletePost(): void {

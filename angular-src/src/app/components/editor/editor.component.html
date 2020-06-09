@@ -3,57 +3,53 @@
     <br>
 
     <div class='form-group'>
-        <form [formGroup]='postForm' (ngSubmit)='onSubmit()'>
-            <label>
-                Title
-            </label>
-            <input type='text' formControlName='title' class='form-control' required>
+        <form class='example-form' [formGroup]='postForm' (ngSubmit)='onSubmit()'>
+            <mat-form-field class='example-full-width'>
+                <mat-label>Title</mat-label>
+                <input matInput formControlName='title' required>
+            </mat-form-field>
             <br>
 
-            <label>
-                Subtitle
-            </label>
-            <input type='text' formControlName='subtitle' class='form-control' required>
+            <mat-form-field class='example-full-width'>
+                <mat-label>Subtitle</mat-label>
+                <input matInput formControlName='subtitle' required>
+            </mat-form-field>
             <br>
 
-            <p>Topics</p>
+            <mat-label>Topics</mat-label>
+            <br>
             <ng-container formArrayName='topics' *ngFor='let topic of postForm.controls.topics["controls"]; let idx = index'>
-                <label>
-                <input type='checkbox' [formControlName]='idx'>
-                &nbsp;
-                    {{ topics[idx].name }}
-                </label>
+                <mat-checkbox class='example-margin' [formControlName]='idx'>{{ topics[idx].name }}</mat-checkbox>
                 <br>
             </ng-container>
             <br>
 
-            <label>
-                Author
-            </label>
-            <input type='text' formControlName='author' class='form-control' required>
+            <mat-form-field class='example-full-width'>
+                <mat-label>Author</mat-label>
+                <input matInput formControlName='author' required>
+            </mat-form-field>
             <br>
 
-            <label>
-                Description
-            </label>
-            <input type='text' formControlName='description' class='form-control' required>
+            <mat-form-field class='example-full-width'>
+                <mat-label>Description</mat-label>
+                <input matInput formControlName='description' required>
+            </mat-form-field>
             <br>
 
-            <label>
-                Content
-                <br>
-            </label>
-            <textarea formControlName='content' class='form-control' required></textarea>
+            <mat-form-field class='example-full-width'>
+                <mat-label>Content</mat-label>
+                <textarea matInput formControlName='content' required></textarea>
+            </mat-form-field>
             <br>
             
-            <label>
-                Featured Image URL
-            </label>
-            <input type='text' formControlName='imageURL' class='form-control' required>
+            <mat-form-field class='example-full-width'>
+                <mat-label>Featured Image</mat-label>
+                <input matInput formControlName='imageURL' required>
+            </mat-form-field>
             <br>
             
             <br>
-            <input type='submit' [disabled]='!postForm.valid' class='btn btn-primary' value='Submit Post' required>
+            <button mat-flat-button color='primary' [disabled]='!postForm.valid'>Submit Post</button>
         </form>
     </div>
 </div>

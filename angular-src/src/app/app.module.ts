@@ -4,6 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { MarkdownModule } from 'ngx-markdown';
 
@@ -21,8 +26,9 @@ import {
     TopicComponent
 } from './components';
 
-import { AuthService, ValidationService } from './services';
+import { AuthService, BlogService, ValidationService } from './services';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -45,10 +51,16 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
         FormsModule,
         HttpClientModule,
         MarkdownModule.forRoot(),
-        ReactiveFormsModule
+        MatButtonModule,
+        MatCheckboxModule,
+        MatInputModule,
+        MatToolbarModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule
     ],
     providers: [
         AuthService,
+        BlogService,
         ValidationService
     ],
     bootstrap: [AppComponent]

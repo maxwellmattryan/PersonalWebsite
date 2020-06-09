@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
             password: this.password
         };
 
-        if (!this.validationService.isValidCredentials(admin)) {
+        if (!this.validationService.hasValidAdminCredentials(admin)) {
             this.flashMessagesService.show('Please provide a username AND password !', {
                 cssClass: 'alert-danger', 
                 timeout: 2000 

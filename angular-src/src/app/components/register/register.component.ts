@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
             password: this.password
         };
         
-        if (!this.validationService.isValidCredentials(admin)) {
+        if (!this.validationService.hasValidAdminCredentials(admin)) {
             this.flashMessagesService.show('Please fill in both fields.', {
                 cssClass: 'alert-danger',
                 timeout: 2000

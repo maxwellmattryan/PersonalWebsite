@@ -10,11 +10,15 @@ import { Post, Topic } from '../models';
     providedIn: 'root'
 })
 export class BlogService {
-    deletePostURI: string;
+    private postData: Post = null;
 
     constructor(
         private httpClient: HttpClient,
     ) { }
+
+    ngOnDestroy(): void {
+        this.setPostData(null);
+    }
 
     deletePost(requestURL: string, headers: HttpHeaders): Observable<any> {
         console.log("TODO: CONSTRUCT DELETE POST URI TO ALLOW REMOVING FROM UI");
@@ -31,8 +35,16 @@ export class BlogService {
         return this.httpClient.get<Post>(environment.API_URL + requestURL);
     }
 
+    getPostData(): Post {
+        return this.postData;
+    }
+
     getPosts(): Observable<Post[]> {
         return this.httpClient.get<Post[]>(environment.API_URL + '/blog/posts');
+    }
+
+    hasPostData(): boolean {
+        return this.postData !== null;
     }
 
     putPost(post: Object, headers: HttpHeaders): Observable<any> {
@@ -44,6 +56,10 @@ export class BlogService {
                 responseType: 'text'
             }
         );
+    }
+
+    setPostData(post: Post): void {
+        this.postData = post;
     }
 
     getTopic(requestURL: string): Observable<Topic> {

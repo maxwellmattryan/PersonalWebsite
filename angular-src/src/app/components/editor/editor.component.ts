@@ -7,7 +7,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 
 import { Post, Topic } from 'src/app/models';
 
-import { AuthService, BlogService, EditorService, ValidationService } from '../../services';
+import { AuthService, BlogService, ValidationService } from '../../services';
 
 @Component({
     selector: 'app-editor',
@@ -23,7 +23,6 @@ export class EditorComponent implements OnDestroy, OnInit {
     constructor(
         private authService: AuthService,
         private blogService: BlogService,
-        private editorService: EditorService,
         private flashMessagesService: FlashMessagesService,
         private formBuilder: FormBuilder,
         private router: Router,
@@ -31,7 +30,7 @@ export class EditorComponent implements OnDestroy, OnInit {
     ) { }
 
     ngOnDestroy(): void {
-        this.editorService.setPostData(null);
+        this.blogService.setPostData(null);
     }
 
     ngOnInit(): void {
@@ -52,12 +51,12 @@ export class EditorComponent implements OnDestroy, OnInit {
 
     setUnloadEvent(): void {
         window.onbeforeunload = () => {
-            this.editorService.setPostData(null);
+            this.blogService.setPostData(null);
         };
     }
 
     loadPostData(): void {
-        this.postData = this.editorService.getPostData();
+        this.postData = this.blogService.getPostData();
     }
 
     loadTopicData(): void {

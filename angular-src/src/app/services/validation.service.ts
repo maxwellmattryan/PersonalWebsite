@@ -8,7 +8,7 @@ export class ValidationService {
 
     constructor() { }
 
-    isValidCredentials(admin) {
+    hasValidAdminCredentials(admin) {
         return (
             admin.username != undefined && 
             admin.password != undefined

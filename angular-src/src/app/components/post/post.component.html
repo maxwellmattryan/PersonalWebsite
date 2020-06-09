@@ -1,8 +1,8 @@
 <div *ngIf='isLoaded'>
     <div *ngIf='this.isAdmin'>
-        <a (click)='sendPostToEditor()' [routerLink]='["/editor"]' class="btn btn-primary">Edit Post</a>
+        <a mat-flat-button color='primary' (click)='sendPostToEditor()' routerLink='/editor'>Edit Post</a>
         &nbsp;
-        <a (click)='deletePost()' [routerLink]='["/blog"]' class="btn btn-secondary">Delete Post</a>
+        <a mat-flat-button color='secondary' (click)='deletePost()' routerLink='/blog'>Delete Post</a>
         <br>
     </div>
 
