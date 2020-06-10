@@ -3,11 +3,8 @@ import { HttpHeaders } from '@angular/common/http';
 import { FormArray, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { FlashMessagesService } from 'angular2-flash-messages';
-
-import { Post, Topic } from 'src/app/models';
-
-import { AuthService, BlogService, ValidationService } from '../../services';
+import { Post, Topic } from 'models';
+import { AuthService, BlogService, NotificationService, ValidationService } from 'services';
 
 @Component({
     selector: 'app-editor',
@@ -23,7 +20,7 @@ export class EditorComponent implements OnDestroy, OnInit {
     constructor(
         private authService: AuthService,
         private blogService: BlogService,
-        private flashMessagesService: FlashMessagesService,
+        private notificationService: NotificationService,
         private formBuilder: FormBuilder,
         private router: Router,
         private validationService: ValidationService
@@ -38,9 +35,6 @@ export class EditorComponent implements OnDestroy, OnInit {
         
         this.setUnloadEvent();
 
-        this.loadPostData();
-        this.loadTopicData();
-        
         this.buildPostForm();
     }
 
@@ -53,6 +47,34 @@ export class EditorComponent implements OnDestroy, OnInit {
         window.onbeforeunload = () => {
             this.blogService.setPostData(null);
         };
+    }
+
+    buildPostForm(): void {
+        this.loadPostData();
+
+        if(this.postData) {
+            this.postForm = this.formBuilder.group({
+                title:          this.formBuilder.control(this.postData.title,           [Validators.required]),
+                subtitle:       this.formBuilder.control(this.postData.subtitle,        [Validators.required]),
+                topics:         this.formBuilder.array([],                              this.validationService.hasMinTopics(1)),
+                author:         this.formBuilder.control(this.postData.author,          [Validators.required]),
+                description:    this.formBuilder.control(this.postData.description,     [Validators.required]),
+                content:        this.formBuilder.control(this.postData.content,         [Validators.required]),
+                imageURL:       this.formBuilder.control(this.postData.imageURL,        [Validators.required])
+            });
+        } else {
+            this.postForm = this.formBuilder.group({
+                title:          this.formBuilder.control('',    [Validators.required]),
+                subtitle:       this.formBuilder.control('',    [Validators.required]),
+                topics:         this.formBuilder.array([],      this.validationService.hasMinTopics(1)),
+                author:         this.formBuilder.control('',    [Validators.required]),
+                description:    this.formBuilder.control('',    [Validators.required]),
+                content:        this.formBuilder.control('',    [Validators.required]),
+                imageURL:       this.formBuilder.control('',    [Validators.required])
+            });
+        }
+
+        this.loadTopicData();
     }
 
     loadPostData(): void {
@@ -77,46 +99,20 @@ export class EditorComponent implements OnDestroy, OnInit {
         });
     }
 
-    buildPostForm(): void {
-        if(this.postData) {
-            this.postForm = this.formBuilder.group({
-                title:          this.formBuilder.control(this.postData.title,           [Validators.required]),
-                subtitle:       this.formBuilder.control(this.postData.subtitle,        [Validators.required]),
-                topics:         this.formBuilder.array([],                              this.validationService.hasMinTopics(1)),
-                author:         this.formBuilder.control(this.postData.author,          [Validators.required]),
-                description:    this.formBuilder.control(this.postData.description,     [Validators.required]),
-                content:        this.formBuilder.control(this.postData.content,         [Validators.required]),
-                imageURL:       this.formBuilder.control(this.postData.imageURL,        [Validators.required])
-            });
-        } else {
-            this.postForm = this.formBuilder.group({
-                title:          this.formBuilder.control('',    [Validators.required]),
-                subtitle:       this.formBuilder.control('',    [Validators.required]),
-                topics:         this.formBuilder.array([],      this.validationService.hasMinTopics(1)),
-                author:         this.formBuilder.control('',    [Validators.required]),
-                description:    this.formBuilder.control('',    [Validators.required]),
-                content:        this.formBuilder.control('',    [Validators.required]),
-                imageURL:       this.formBuilder.control('',    [Validators.required])
-            });
-        }
-    }
-
     onSubmit(): void {
         const post = this.buildPostData();
         const headers = this.getHeaders();
 
         this.blogService.putPost(post, headers).subscribe(res => {
+            let message: string;
+
             if(!this.postData) {
-                this.flashMessagesService.show('Successfully created blog post.', {
-                    cssClass: 'alert-success',
-                    timeout: 2000
-                });
+                message = 'Successfully created blog post!';
             } else {
-                this.flashMessagesService.show('Successfully updated blog post.', {
-                    cssClass: 'alert-success',
-                    timeout: 2000
-                });
+                message = 'Successfully updated blog post!'
             }
+
+            this.notificationService.createNotification(message);
             this.router.navigate(['blog/posts/' + post['uri']]);
         });
     }

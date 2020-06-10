@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
-import { FlashMessagesModule } from 'angular2-flash-messages';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { AppComponent } from './app.component';
@@ -46,7 +45,6 @@ import {
         AdminModule,
         AppRoutingModule,
         BrowserModule,
-        FlashMessagesModule.forRoot(),
         FormsModule,
         HttpClientModule,
         MarkdownModule.forRoot(),

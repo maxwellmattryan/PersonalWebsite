@@ -17,14 +17,14 @@ export class AuthService {
 
     // ADMIN METHODS
     getAdmin(): string {
-        if(this.admin) {
-            return this.admin.username;
-        }
+        this.loadAdminData();
 
-        return '';
+        return this.admin.username;
     }
 
     getToken(): string {
+        this.loadAdminData();
+
         return this.authToken;
     }
 

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { FlashMessagesService } from 'angular2-flash-messages';
+import { Post } from 'models';
 
-import { Post } from 'src/app/models';
-
-import { AuthService, BlogService } from 'src/app/services';
+import { AuthService, BlogService, NotificationService } from 'services';
 
 @Component({
     selector: 'app-post',
@@ -14,14 +12,14 @@ import { AuthService, BlogService } from 'src/app/services';
 })
 export class PostComponent implements OnInit {
     isAdmin: boolean = false;
-
     isLoaded: boolean = false;
+
     post: Post;
 
     constructor(
         private authService: AuthService,
         private blogService: BlogService,
-        private flashMessagesService: FlashMessagesService,
+        private notificationService: NotificationService,
         private router: Router
     ) { }
 
@@ -40,10 +38,9 @@ export class PostComponent implements OnInit {
 
     deletePost(): void {
         this.blogService.deletePost(this.router.url, this.authService.getAuthHeaders()).subscribe(result => {
-            this.flashMessagesService.show('Successfully deleted blog post.', {
-                cssClass: 'alert-success',
-                timeout: 2000
-            });
+            let message = 'Successfully deleted blog post!';
+            this.notificationService.createNotification(message);
+            
             this.router.navigate(['/blog']);
         });
     }
