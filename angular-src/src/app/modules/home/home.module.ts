@@ -8,6 +8,8 @@ import {
     HomeDisplayComponent
 } from './components';
 
+import { NavigationModule } from 'modules/navigation/navigation.module';
+
 @NgModule({
     declarations: [
         HomeComponent,
@@ -15,7 +17,8 @@ import {
     ],
     imports: [
         CommonModule,
-        HomeRoutingModule
+        HomeRoutingModule,
+        NavigationModule
     ]
 })
 export class HomeModule { }

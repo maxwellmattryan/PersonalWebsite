@@ -29,7 +29,6 @@ import {
     imports: [
         AppRoutingModule,
         AdminModule,
-        BlogModule,
         BrowserAnimationsModule,
         BrowserModule,
         EditorModule,

@@ -5,7 +5,8 @@ import { NavigationComponent } from './navigation.component';
 import { NavigationRoutingModule } from './navigation-routing.module';
 
 import {
-    NavbarComponent
+    NavbarComponent,
+    SideMenuComponent
 } from './components';
 
 import { MaterialModule } from 'modules/material/material.module';
@@ -13,7 +14,8 @@ import { MaterialModule } from 'modules/material/material.module';
 @NgModule({
     declarations: [
         NavbarComponent,
-        NavigationComponent
+        NavigationComponent,
+        SideMenuComponent
     ],
     imports: [
         CommonModule,
@@ -22,7 +24,7 @@ import { MaterialModule } from 'modules/material/material.module';
     ],
     exports: [
         CommonModule,
-        NavbarComponent
+        NavigationComponent
     ]
 })
 export class NavigationModule { }
