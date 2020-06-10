@@ -16,6 +16,7 @@
       "dom"
     ],
     "paths": {
+        "environments/*": ["src/environments/*"],
         "models": ["src/app/models"],
         "models/*": ["src/app/models/*"],
         "modules/*": ["src/app/modules/*"],
