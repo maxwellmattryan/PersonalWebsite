@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { BlogComponent } from './blog.component';
 import { BlogRoutingModule } from './blog-routing.module';
 
 import {
-    BlogComponent,
+    BlogDisplayComponent,
     PostComponent,
     TopicComponent
 } from './components';
@@ -15,6 +16,7 @@ import { SharedModule } from 'modules/shared/shared.module';
 @NgModule({
     declarations: [
         BlogComponent,
+        BlogDisplayComponent,
         PostComponent,
         TopicComponent
     ],
@@ -23,11 +25,6 @@ import { SharedModule } from 'modules/shared/shared.module';
         CommonModule,
         MaterialModule,
         SharedModule
-    ],
-    exports: [
-        BlogComponent,
-        PostComponent,
-        TopicComponent
     ]
 })
 export class BlogModule { }

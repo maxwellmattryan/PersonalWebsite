@@ -18,7 +18,8 @@ import {
 import {
     AdminModule,
     BlogModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
 } from './modules';
 
 import {
@@ -37,16 +38,17 @@ import {
         NavbarComponent,
     ],
     imports: [
-        AdminModule,
         AppRoutingModule,
+        AdminModule,
         BlogModule,
+        BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
         HttpClientModule,
         MarkdownModule.forRoot(),
         MaterialModule,
         ReactiveFormsModule,
-        BrowserAnimationsModule
+        SharedModule,
     ],
     providers: [
         AuthService,
