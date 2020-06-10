@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import {
-    NavbarComponent
-} from './components';
+import { NavigationComponent } from './navigation.component';
 
 export const routes: Routes = [
     {
         path: '',
-        component: NavbarComponent
+        component: NavigationComponent
     }
 ];
 

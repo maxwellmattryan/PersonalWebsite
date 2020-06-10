@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { NavigationComponent } from './navigation.component';
 import { NavigationRoutingModule } from './navigation-routing.module';
 
 import {
@@ -11,7 +12,8 @@ import { MaterialModule } from 'modules/material/material.module';
 
 @NgModule({
     declarations: [
-        NavbarComponent
+        NavbarComponent,
+        NavigationComponent
     ],
     imports: [
         CommonModule,
