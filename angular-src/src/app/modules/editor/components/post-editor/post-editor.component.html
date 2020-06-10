@@ -1,5 +1,5 @@
 <div>
-    <h1>Editor</h1>
+    <h1>Post Editor</h1>
     <br>
 
     <div class='form-group'>
@@ -14,15 +14,14 @@
                 <mat-label>Subtitle</mat-label>
                 <input matInput formControlName='subtitle' required>
             </mat-form-field>
-            <br>
+            <br><br>
 
             <mat-label>Topics</mat-label>
-            <br>
+            <br><br>
             <ng-container formArrayName='topics' *ngFor='let topic of postForm.controls.topics["controls"]; let idx = index'>
                 <mat-checkbox class='example-margin' [formControlName]='idx'>{{ topics[idx].name }}</mat-checkbox>
-                <br>
+                <br><br>
             </ng-container>
-            <br>
 
             <mat-form-field class='example-full-width'>
                 <mat-label>Author</mat-label>

@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
 import { FormArray, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { Post, Topic } from 'models';
 import { AuthService, BlogService, NotificationService, ValidationService } from 'services';
 
 @Component({
-    selector: 'app-editor',
-    templateUrl: './editor.component.html',
-    styleUrls: ['./editor.component.scss']
+    selector: 'app-post-editor',
+    templateUrl: './post-editor.component.html',
+    styleUrls: ['./post-editor.component.scss']
 })
-export class EditorComponent implements OnDestroy, OnInit {
+export class PostEditorComponent implements OnInit, OnDestroy {
     postData: Post;
     postForm: FormGroup;
 
@@ -26,16 +26,16 @@ export class EditorComponent implements OnDestroy, OnInit {
         private validationService: ValidationService
     ) { }
 
-    ngOnDestroy(): void {
-        this.blogService.setPostData(null);
-    }
-
     ngOnInit(): void {
         this.checkForAdmin();
         
         this.setUnloadEvent();
 
         this.buildPostForm();
+    }
+
+    ngOnDestroy(): void {
+        this.blogService.setPostData(null);
     }
 
     checkForAdmin(): void {
@@ -73,7 +73,7 @@ export class EditorComponent implements OnDestroy, OnInit {
                 imageURL:       this.formBuilder.control('',    [Validators.required])
             });
         }
-
+        
         this.loadTopicData();
     }
 

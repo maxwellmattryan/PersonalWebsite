@@ -1,3 +1,1 @@
-export { EditorComponent } from './editor/editor.component';
-export { HomeComponent } from './home/home.component';
 export { NavbarComponent } from './navbar/navbar.component';

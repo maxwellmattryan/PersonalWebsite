@@ -1,16 +1,16 @@
 <div *ngIf="isLoaded">
     <h1>Hi! I'm Matthew Maxwell.</h1>
-    <h2>{{ profileData.tagline }}</h2>
+    <h2>{{ profile.tagline }}</h2>
 
-    <p>{{ profileData.about }}</p>
+    <p>{{ profile.about }}</p>
     <img src='https://mattmaxwell.tech/images/portrait.png' height=200>
 
-    <div *ngFor='let tech of profileData.technologies'>
+    <div *ngFor='let tech of profile.technologies'>
         <p>{{ tech }}</p>
     </div>
 
     <h3>Projects</h3>
-    <div *ngFor='let project of profileData.projects'>
+    <div *ngFor='let project of profile.projects'>
         <img [src]='project.imageURL' height=150>
         <a [href]='project.externals[0].url' target='_blank'>
             <p>{{ project.title }}</p>
@@ -24,7 +24,7 @@
     </div>
 
     <h3>Posts</h3>
-    <div *ngFor='let post of profileData.posts'>
+    <div *ngFor='let post of profile.posts'>
         <img [src]='post.imageURL' height=150>
         <a [routerLink]='["blog/posts/" + post.uri]'>
             <p>{{ post.title }}</p>

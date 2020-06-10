@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { EditorComponent } from './components/editor/editor.component';
-import { HomeComponent } from './components/home/home.component';
-
 const routes: Routes = [
     { 
         path: '',
         pathMatch: 'full',
-        component: HomeComponent      
+        loadChildren: 'modules/home/home.module#HomeModule'   
     },
     {
         path: 'admin',
@@ -20,7 +17,7 @@ const routes: Routes = [
     },
     {
         path: 'editor',
-        component: EditorComponent
+        loadChildren: 'modules/editor/editor.module#EditorModule'
     },
     {
         path: '**',
