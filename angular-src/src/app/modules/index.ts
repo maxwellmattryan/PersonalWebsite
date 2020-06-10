@@ -3,4 +3,5 @@ export { BlogModule } from './blog/blog.module';
 export { EditorModule } from './editor/editor.module';
 export { HomeModule } from './home/home.module';
 export { MaterialModule } from './material/material.module';
+export { NavigationModule } from './navigation/navigation.module';
 export { SharedModule } from './shared/shared.module';

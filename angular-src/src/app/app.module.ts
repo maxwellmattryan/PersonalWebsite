@@ -8,14 +8,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import {
-    NavbarComponent
-} from './components';
-
-import {
     AdminModule,
     BlogModule,
     EditorModule,
     MaterialModule,
+    NavigationModule,
     SharedModule
 } from './modules';
 
@@ -28,10 +25,7 @@ import {
 } from './services';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        NavbarComponent,
-    ],
+    declarations: [AppComponent],
     imports: [
         AppRoutingModule,
         AdminModule,
@@ -42,6 +36,7 @@ import {
         FormsModule,
         HttpClientModule,
         MaterialModule,
+        NavigationModule,
         ReactiveFormsModule,
         SharedModule,
     ],
