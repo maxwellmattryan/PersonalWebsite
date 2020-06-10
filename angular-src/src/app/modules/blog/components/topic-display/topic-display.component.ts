@@ -5,11 +5,11 @@ import { Topic } from 'models';
 import { BlogService } from 'services';
 
 @Component({
-    selector: 'app-topic',
-    templateUrl: './topic.component.html',
-    styleUrls: ['./topic.component.scss']
+    selector: 'app-topic-display',
+    templateUrl: './topic-display.component.html',
+    styleUrls: ['./topic-display.component.scss']
 })
-export class TopicComponent implements OnInit {
+export class TopicDisplayComponent implements OnInit {
     isLoaded: boolean = false;
 
     topic: Topic;

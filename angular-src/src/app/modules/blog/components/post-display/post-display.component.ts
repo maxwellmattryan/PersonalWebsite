@@ -5,11 +5,11 @@ import { Post } from 'models';
 import { AuthService, BlogService, NotificationService } from 'services';
 
 @Component({
-    selector: 'app-post',
-    templateUrl: './post.component.html',
-    styleUrls: ['./post.component.scss']
+    selector: 'app-post-display',
+    templateUrl: './post-display.component.html',
+    styleUrls: ['./post-display.component.scss']
 })
-export class PostComponent implements OnInit {
+export class PostDisplayComponent implements OnInit {
     isAdmin: boolean = false;
     isLoaded: boolean = false;
 

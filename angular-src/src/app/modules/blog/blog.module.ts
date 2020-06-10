@@ -8,8 +8,8 @@ import { BlogRoutingModule } from './blog-routing.module';
 
 import {
     BlogDisplayComponent,
-    PostComponent,
-    TopicComponent
+    PostDisplayComponent,
+    TopicDisplayComponent
 } from './components';
 
 import { MaterialModule } from 'modules/material/material.module';
@@ -19,8 +19,8 @@ import { SharedModule } from 'modules/shared/shared.module';
     declarations: [
         BlogComponent,
         BlogDisplayComponent,
-        PostComponent,
-        TopicComponent
+        PostDisplayComponent,
+        TopicDisplayComponent
     ],
     imports: [
         BlogRoutingModule,

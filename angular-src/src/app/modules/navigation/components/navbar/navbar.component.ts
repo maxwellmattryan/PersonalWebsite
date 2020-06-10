@@ -10,4 +10,8 @@ export class NavbarComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void { }
+
+    toggleSideMenu(): void {
+        console.log('TODO: Add functional side menu (only mobile).');
+    }
 }
