@@ -1,59 +1,44 @@
 [
     {
-        "_id": "5ed721d0851d2f0094565d91",
+        "_id": "5ee03725836f8e05a48b0682",
         "uri": "audio",
         "name": "Audio",
         "tagline": "Looking for an audio programmer? I'm your guy.",
         "about": "I'm an audio programmer always looking to expand my skillset and also write better website descriptions for myself lololol.",
         "technologies": [
-            {
-                "name": "C++",
-                "logo": "https://mattmaxwell.tech/images/portrait.png"
-            },
-            {
-                "name": "JUCE",
-                "logo": "https://mattmaxwell.tech/images/portrait.png"
-            }
+            "JavaScript (ES6+)",
+            "C++"
         ],
-        "projects": [],
-        "posts": []
+        "projects": [
+            "5ed6ca23c08bf2569428c3ee"
+        ]
     },
     {
-        "_id": "5ed6c3a1cedb8f0208ac645c",
+        "_id": "5ee036fba6cde01b48afbbf8",
         "uri": "games",
         "name": "Games",
         "tagline": "Looking for a game programmer? I'm your guy.",
         "about": "I strive to develop clean and neatly architected code solutions for games, a problem that is unique to every individual project. Because of that, game development and its creative process often feels quite exciting, fresh, and invigorating for me. If the project and team environment permits, I like to couple these skills with my background in music and sound to creative dynamic and immersive sounds for the game, each of which is precisely implemented using scripts and middleware (if necessary).",
         "technologies": [
-            {
-                "name": "Unity",
-                "logo": "https://mattmaxwell.tech/images/portrait.png"
-            },
-            {
-                "name": "C#",
-                "logo": "https://mattmaxwell.tech/images/portrait.png"
-            }
+            "JavaScript (ES6+)",
+            "C++"
         ],
-        "projects": [],
-        "posts": []
+        "projects": [
+            "5ed6b75d887cd82e00274a13"
+        ]
     },
     {
-        "_id": "5ed6ac9f86f08240e86bc2b8",
+        "_id": "5ee036e489b71e26801c0bf0",
         "uri": "software",
         "name": "Software",
         "tagline": "Looking for a software engineer? I'm your guy.",
         "about": "I'm a software engineer who creates professional-grade web-based solutions, but cannot write a good and simple about me paragraph lolol.",
         "technologies": [
-            {
-                "name": "JS (ES6+)",
-                "logo": "https://mattmaxwell.tech/images/portrait.png"
-            },
-            {
-                "name": "C++",
-                "logo": "https://mattmaxwell.tech/images/portrait.png"
-            }
+            "JavaScript (ES6+)",
+            "C++"
         ],
-        "projects": [],
-        "posts": []
+        "projects": [
+        	"5ed723376edc1d41d0c86276"
+        ]
     }
 ]

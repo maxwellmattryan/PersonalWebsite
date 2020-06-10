@@ -21,7 +21,6 @@ export class BlogService {
     }
 
     deletePost(requestURL: string, headers: HttpHeaders): Observable<any> {
-        console.log("TODO: CONSTRUCT DELETE POST URI TO ALLOW REMOVING FROM UI");
         return this.httpClient.delete(
             environment.API_URL + requestURL,
             { 

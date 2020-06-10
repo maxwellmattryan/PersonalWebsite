@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +17,7 @@ export class AuthService {
 
     // ADMIN METHODS
     getAdmin(): string {
-        return this.admin;
+        return this.admin.username;
     }
 
     getToken(): string {
@@ -29,7 +29,7 @@ export class AuthService {
     }
 
     // TODO: Write types and fix method return types for all of these
-    authenticateAdmin(admin): Observable<any> {
+    authenticateAdmin(admin: any): Observable<any> {
         let headers = new HttpHeaders();
         headers.set('Content-Type', 'application/json');
 

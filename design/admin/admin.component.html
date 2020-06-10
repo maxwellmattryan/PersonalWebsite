@@ -1,0 +1,13 @@
+<div class="jumbotron text-center">
+    <h2>Welcome to the admin panel !</h2>
+    <br>
+    <div>
+        <a *ngIf="!authService.isLoggedIn()" mat-flat-button color='primary' [routerLink]="['/admin/register']">Register</a>
+        &nbsp;
+        <a *ngIf="!authService.isLoggedIn()" mat-flat-button color='secondary' [routerLink]="['/admin/login']">Login</a>
+
+        <a *ngIf="authService.isLoggedIn()" mat-flat-button color='primary' [routerLink]="['/editor']">Create Post</a>
+        &nbsp;
+        <a *ngIf="authService.isLoggedIn()" mat-flat-button color='secondary' (click)="onLogoutClick()">Logout</a>
+    </div>
+</div>  

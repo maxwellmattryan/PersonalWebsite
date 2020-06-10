@@ -8,7 +8,7 @@ export class Profile implements Deserializable {
     name:           string;
     tagline:        string;
     about:          string;
-    technologies:   Array<Object>
+    technologies:   Array<string>
     projects:       Array<Project>;
     posts:          Array<Post>;
 

@@ -5,14 +5,10 @@ import { FormArray, ValidatorFn } from '@angular/forms';
     providedIn: 'root'
 })
 export class ValidationService {
-
     constructor() { }
 
-    hasValidAdminCredentials(admin) {
-        return (
-            admin.username != undefined && 
-            admin.password != undefined
-        );
+    hasValidAdminCredentials(username: string, password: string): boolean {
+        return username !== undefined && password !== undefined;
     }
 
     hasMinTopics(min = 1) {

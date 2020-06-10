@@ -7,7 +7,7 @@ const profileSchema = Schema({
     name:           { type: String, required: true                  },
     tagline:        { type: String, required: true                  },
     about:          { type: String, required: true                  },
-    technologies:   [{ type: Object, required: true                 }],
+    technologies:   [{ type: String, required: true                 }],
     projects:       [{ type: Schema.Types.ObjectId, ref: 'Project'  }],
     posts:          [{ type: Schema.Types.ObjectId, ref: 'Post'     }]
 });
