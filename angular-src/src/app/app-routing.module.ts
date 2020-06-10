@@ -3,10 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { EditorComponent } from './components/editor/editor.component';
 import { HomeComponent } from './components/home/home.component';
-import { FullscreenOverlayContainer } from '@angular/cdk/overlay';
 
 const routes: Routes = [
-    // CAUTION: Children routes aren't used because the components themselves are not nested
     { 
         path: '',
         pathMatch: 'full',

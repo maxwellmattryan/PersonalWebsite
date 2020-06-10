@@ -2,13 +2,25 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import {
-    BlogComponent
+    BlogComponent,
+    PostComponent,
+    TopicComponent
 } from './components';
 
 const routes: Routes = [
     {
         path: '',
-        component: BlogComponent
+        component: BlogComponent,
+        children: [
+            {
+                path: 'posts/:uri',
+                component: PostComponent
+            },
+            {
+                path: 'topics/:uri',
+                component: TopicComponent
+            }
+        ]
     }
 ];
 

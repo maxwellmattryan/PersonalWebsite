@@ -1,22 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import {
-    ProjectComponent,
-    ProjectContainerComponent
-} from './components';
+import { ProjectComponent } from './components';
 
 @NgModule({
     declarations: [
-        ProjectComponent,
-        ProjectContainerComponent
+        ProjectComponent
     ],
     imports: [
         CommonModule
     ],
     exports: [
-        ProjectComponent,
-        ProjectContainerComponent
+        ProjectComponent
     ]
 })
 export class ProjectModule { }

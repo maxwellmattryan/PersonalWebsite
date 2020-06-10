@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Post } from 'models';
-
-import { BlogService, NotificationService } from 'services';
+import { BlogService } from 'services';
 
 @Component({
     selector: 'app-blog',
@@ -13,8 +12,7 @@ export class BlogComponent implements OnInit {
     posts: Array<Post>;
 
     constructor(
-        private blogService: BlogService,
-        private notificationService: NotificationService,
+        private blogService: BlogService
     ) { }
 
     ngOnInit(): void {

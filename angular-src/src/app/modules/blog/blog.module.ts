@@ -5,24 +5,29 @@ import { BlogRoutingModule } from './blog-routing.module';
 
 import {
     BlogComponent,
-    BlogContainerComponent
+    PostComponent,
+    TopicComponent
 } from './components';
 
 import { MaterialModule } from 'modules/material/material.module';
+import { SharedModule } from 'modules/shared/shared.module';
 
 @NgModule({
     declarations: [
         BlogComponent,
-        BlogContainerComponent
+        PostComponent,
+        TopicComponent
     ],
     imports: [
         BlogRoutingModule,
         CommonModule,
-        MaterialModule
+        MaterialModule,
+        SharedModule
     ],
     exports: [
         BlogComponent,
-        BlogContainerComponent
+        PostComponent,
+        TopicComponent
     ]
 })
 export class BlogModule { }

@@ -1,2 +1,3 @@
 export { BlogComponent } from './blog/blog.component';
-export { BlogContainerComponent } from './blog-container/blog-container.component';
+export { PostComponent } from './post/post.component';
+export { TopicComponent } from './topic/topic.component';

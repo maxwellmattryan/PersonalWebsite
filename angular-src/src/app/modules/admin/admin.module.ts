@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
+import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
 
 import {
@@ -14,14 +15,10 @@ import { MaterialModule } from 'modules/material/material.module';
 
 @NgModule({
     declarations: [
+        AdminComponent,
         DashboardComponent,
         LoginComponent,
-        RegisterComponent
-    ],
-    exports: [
-        DashboardComponent,
-        LoginComponent,
-        RegisterComponent
+        RegisterComponent,
     ],
     imports: [
         AdminRoutingModule,

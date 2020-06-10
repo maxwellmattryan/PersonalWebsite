@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AdminComponent } from './admin.component';
+
 import {
     DashboardComponent,
     LoginComponent,
@@ -10,8 +12,12 @@ import {
 export const routes: Routes = [
     {
         path: '',
-        component: DashboardComponent,
+        component: AdminComponent,
         children: [
+            {
+                path: '',
+                component: DashboardComponent
+            },
             {
                 path: 'login',
                 component: LoginComponent
