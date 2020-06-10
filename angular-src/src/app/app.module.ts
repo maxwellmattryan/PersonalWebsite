@@ -10,16 +10,14 @@ import { MarkdownModule } from 'ngx-markdown';
 import { AppComponent } from './app.component';
 
 import {
-    BlogComponent,
     EditorComponent,
     HomeComponent,
-    NavbarComponent,
-    PostComponent,
-    TopicComponent
+    NavbarComponent
 } from './components';
 
 import {
     AdminModule,
+    BlogModule,
     MaterialModule
 } from './modules';
 
@@ -34,16 +32,14 @@ import {
 @NgModule({
     declarations: [
         AppComponent,
-        BlogComponent,
         EditorComponent,
         HomeComponent,
         NavbarComponent,
-        PostComponent,
-        TopicComponent
     ],
     imports: [
         AdminModule,
         AppRoutingModule,
+        BlogModule,
         BrowserModule,
         FormsModule,
         HttpClientModule,

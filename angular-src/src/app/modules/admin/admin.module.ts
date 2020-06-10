@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-import { AdminModuleRouting } from './admin.routing';
+import { AdminRoutingModule } from './admin-routing.module';
 
 import {
     DashboardComponent,
@@ -24,7 +24,7 @@ import { MaterialModule } from 'modules/material/material.module';
         RegisterComponent
     ],
     imports: [
-        AdminModuleRouting,
+        AdminRoutingModule,
         CommonModule,
         FormsModule,
         MaterialModule
