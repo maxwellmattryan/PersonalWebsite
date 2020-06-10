@@ -27,8 +27,9 @@ import {
 import {
     AuthService, 
     BlogService,
-    ValidationService,
-    ProfileService
+    NotificationService,
+    ProfileService,
+    ValidationService
 } from './services';
 
 @NgModule({
@@ -56,6 +57,7 @@ import {
     providers: [
         AuthService,
         BlogService,
+        NotificationService,
         ProfileService,
         ValidationService
     ],

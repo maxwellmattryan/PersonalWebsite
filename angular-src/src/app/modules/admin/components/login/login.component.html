@@ -12,11 +12,11 @@
             <input matInput [(ngModel)]='password' name='password' type='password' required>
         </mat-form-field>
         <br>
-
+          
         <button 
-            mat-flat-button 
-            color='primary' 
-            [disabled]='!validationService.hasValidAdminCredentials(username, password)'    
+            color='primary'
+            mat-flat-button
+            [disabled]='!validationService.hasValidAdminCredentials(username, password)'
         >
             Login
         </button>

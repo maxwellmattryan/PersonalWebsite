@@ -17,7 +17,7 @@ router.post('/auth', (req, res, next) => {
         if(err) throw err;
 
         if(!admin) {
-            return res.json({success: false, msg: 'Admin not found.'});
+            return res.json({success: false, msg: 'Unable to find admin.'});
         }
 
         Admin.comparePassword(password, admin.password, (err, isMatch) => {
@@ -31,7 +31,7 @@ router.post('/auth', (req, res, next) => {
                 res.json({
                     success: true,
                     token: 'JWT ' + token,
-                    msg: 'Successfully logged in.',
+                    msg: 'Successfully logged in!',
                     admin: {
                         id: admin._id,
                         username: admin.username
@@ -53,9 +53,9 @@ router.post('/register', (req, res, next) => {
 
     Admin.registerAdmin(newAdmin, (err, admin) => {
         if(err) {
-            res.json({success: false, msg: 'Failed to register admin.'});
+            res.json({success: false, msg: 'Unable to register admin.'});
         } else {
-            res.json({success: true, msg: 'Successfully registered admin.'});
+            res.json({success: true, msg: 'Successfully registered admin!'});
         }
     });
 });

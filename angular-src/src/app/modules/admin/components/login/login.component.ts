@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService, ValidationService } from 'services';
+import { AuthService, NotificationService, ValidationService } from 'services';
 
 @Component({
     selector: 'app-login',
@@ -9,17 +9,17 @@ import { AuthService, ValidationService } from 'services';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    username: string;
-    password: string;
+    username: string = '';
+    password: string = '';
 
     constructor(
         private router: Router,
         private authService: AuthService,
+        private notificationService: NotificationService,
         public validationService: ValidationService
     ) { }
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void { }
 
     onLoginSubmit(): void {
         const admin = {
@@ -28,14 +28,21 @@ export class LoginComponent implements OnInit {
         };
 
         this.authService.authenticateAdmin(admin).subscribe(res => {
+            let message: string;
+            let navURL: string;
+            
             if(res.success) {
-                console.log('TODO: material snackbar');
+                message = `Welcome back, ${this.username}!`;
+                navURL = 'admin';
+                
                 this.authService.storeAdminData(res.token, res.admin);
-                this.router.navigate(['admin']);
             } else {
-                console.log('TODO: material snackbar');
-                this.router.navigate(['admin/login'])
+                message = res.msg;
+                navURL = 'admin/login';
             }
+            
+            this.notificationService.createNotification(message);
+            this.router.navigate([navURL]);
         });
     }
 }

@@ -8,7 +8,7 @@ export class ValidationService {
     constructor() { }
 
     hasValidAdminCredentials(username: string, password: string): boolean {
-        return username !== undefined && password !== undefined;
+        return username !== '' && password !== '';
     }
 
     hasMinTopics(min = 1) {

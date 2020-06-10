@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService, ValidationService } from 'services';
+import { AuthService, NotificationService, ValidationService } from 'services';
 
 @Component({
     selector: 'app-register',
@@ -15,11 +15,11 @@ export class RegisterComponent implements OnInit {
     constructor(
         private router: Router,
         private authService: AuthService,
+        private notificationService: NotificationService,
         public validationService: ValidationService
     ) { }
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void { }
 
     onRegisterSubmit(): void {
         const admin = {
@@ -28,13 +28,19 @@ export class RegisterComponent implements OnInit {
         };
 
         this.authService.registerAdmin(admin).subscribe(res => {
+            let message: string;
+            let navURL: string;
+
             if(res.success) {
-                console.log('TODO: Angular snackbar');
-                this.router.navigate(['admin/login']);
+                message = `Hello, ${this.username}!`;
+                navURL = 'admin/login';
             } else {
-                console.log('TODO: Angular material snackbar');
-                this.router.navigate(['admin/register']);
+                message = res.msg;
+                navURL = 'admin/register';                
             }
+
+            this.notificationService.createNotification(message);
+            this.router.navigate([navURL]);
         });
     }
 }

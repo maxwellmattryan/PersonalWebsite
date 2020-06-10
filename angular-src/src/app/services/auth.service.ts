@@ -17,7 +17,11 @@ export class AuthService {
 
     // ADMIN METHODS
     getAdmin(): string {
-        return this.admin.username;
+        if(this.admin) {
+            return this.admin.username;
+        }
+
+        return '';
     }
 
     getToken(): string {
