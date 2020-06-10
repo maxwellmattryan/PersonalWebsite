@@ -5,8 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
-import { MarkdownModule } from 'ngx-markdown';
-
 import { AppComponent } from './app.component';
 
 import {
@@ -45,7 +43,6 @@ import {
         BrowserModule,
         FormsModule,
         HttpClientModule,
-        MarkdownModule.forRoot(),
         MaterialModule,
         ReactiveFormsModule,
         SharedModule,
