@@ -11,14 +11,26 @@ const Post = require('../models/post');
 const Topic = require('../models/topic');
 
 // BLOG
-router.get('/posts', (req, res, next) => {
+router.get('/', (req, res, next) => {
+    var blog = {};
+
     Post.find({})
     .populate('topics')
     .exec((err, posts) => {
         if(err) throw err;
 
-        res.status(200).json(posts);
+        blog.posts = posts;
+
+        Topic.find({})
+        .exec((err, topics) => {
+            if(err) throw err;
+
+            blog.topics = topics;
+            
+            res.status(200).json(blog);
+        });
     });
+
 });
 
 // POSTS
@@ -78,7 +90,7 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
                 }
             });
         } else {
-            res.sendStatus(200);
+            res.sendStatus(204);
         }
     });
 });
@@ -96,7 +108,7 @@ router.delete('/posts/:uri', passport.authenticate('jwt', { session: false }), (
                         if(err) throw err;
 
                         else {
-                            res.sendStatus(200);
+                            res.sendStatus(204);
                         }
                     });
                 }
@@ -106,25 +118,13 @@ router.delete('/posts/:uri', passport.authenticate('jwt', { session: false }), (
 });
 
 // TOPICS
-router.get('/topics', (req, res, next) => {
-    Topic.find({}, (err, topics) => {
-        if(err) throw err;
-
-        res.status(200).json(topics);
-    });
-});
-
 router.get('/topics/:uri', (req, res, next) => {
     Topic.findOne({uri: req.params.uri})
     .populate('posts')
     .exec((err, topic) => {
         if(err) throw err;
 
-        if(topic) {
-            res.status(200).json(topic);
-        } else {
-            res.sendStatus(204);
-        }
+        res.status(200).json(topic);
     });
 });
 
@@ -152,7 +152,7 @@ router.put('/topics/:uri', passport.authenticate('jwt', { session: false }), (re
                 }
             });
         } else {
-            res.sendStatus(200);
+            res.sendStatus(204);
         }
     });
 });

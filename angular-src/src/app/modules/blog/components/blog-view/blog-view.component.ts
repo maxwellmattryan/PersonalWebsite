@@ -16,8 +16,8 @@ export class BlogViewComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.apiService.getPosts().subscribe(posts => {
-            this.posts = posts;
+        this.apiService.getBlog().subscribe((blog: any) => {
+            this.posts = blog.posts;
         });
     }
 }

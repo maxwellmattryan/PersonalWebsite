@@ -25,7 +25,7 @@ router.put('/:uri', passport.authenticate('jwt', { session: false }), (req, res,
         };
     
         Profile.updateOne({_id: profileData._id}, profileData, (err, result) => {
-            if(err) throw err;
+            if(err) res.sendStatus(400);
 
             if(result.nModified === 0) {
                 const newProfile = new Profile(profileData);
@@ -37,7 +37,7 @@ router.put('/:uri', passport.authenticate('jwt', { session: false }), (req, res,
                     }
                 });
             } else {
-                res.sendStatus(200);
+                res.sendStatus(204);
             }
         });
     });

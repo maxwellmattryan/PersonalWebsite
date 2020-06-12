@@ -52,8 +52,8 @@ export class ApiService {
         return this.http.get<Post>(environment.API_URL + requestURL);
     }
 
-    getPosts(): Observable<Post[]> {
-        return this.http.get<Post[]>(environment.API_URL + '/blog/posts');
+    getBlog(): Observable<Post[]> {
+        return this.http.get<Post[]>(environment.API_URL + '/blog');
     }
 
     // TODO: fix return type for this (and method signature)
@@ -75,6 +75,7 @@ export class ApiService {
         return this.http.get<Topic>(environment.API_URL + requestURL);
     }
 
+    // TODO: Remove this request and combine with getPosts() into getBlog() that fetches both
     getTopics(): Observable<Topic[]> {
         return this.http.get<Topic[]>(environment.API_URL + '/blog/topics');
     }

@@ -4,7 +4,7 @@ const router = express.Router();
 const Profile = require('../models/profile');
 const PROFILE_URI = require('../config/profile').uri;
 
-router.get('', (req, res, next) => {
+router.get('/', (req, res, next) => {
     Profile.find({uri: PROFILE_URI})
     .populate('projects')
     .populate('posts')

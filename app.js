@@ -41,11 +41,11 @@ const blogRoute = require('./routes/blog');
 const profileRoute = require('./routes/profile');
 const projectRoute = require('./routes/project');
 
-app.use('/', indexRoute);
-app.use('/admin', adminRoute);
-app.use('/blog', blogRoute);
-app.use('/profiles', profileRoute);
-app.use('/projects', projectRoute);
+app.use('/api', indexRoute);
+app.use('/api/admin', adminRoute);
+app.use('/api/blog', blogRoute);
+app.use('/api/profiles', profileRoute);
+app.use('/api/projects', projectRoute);
 
 // EXPORT
 module.exports = app;

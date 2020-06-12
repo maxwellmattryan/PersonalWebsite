@@ -60,7 +60,7 @@ router.delete('/:uri', passport.authenticate('jwt', { session: false }), (req, r
                 if(err) throw err;
 
                 else {
-                    res.sendStatus(200);
+                    res.sendStatus(204);
                 }
             });
         }
