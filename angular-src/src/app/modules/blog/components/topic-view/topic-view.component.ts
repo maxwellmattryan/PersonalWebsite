@@ -5,11 +5,11 @@ import { Topic } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 
 @Component({
-    selector: 'app-topic-display',
-    templateUrl: './topic-display.component.html',
-    styleUrls: ['./topic-display.component.scss']
+    selector: 'app-topic-view',
+    templateUrl: './topic-view.component.html',
+    styleUrls: ['./topic-view.component.scss']
 })
-export class TopicDisplayComponent implements OnInit {
+export class TopicViewComponent implements OnInit {
     isLoaded: boolean = false;
 
     topic: Topic;

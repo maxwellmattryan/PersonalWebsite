@@ -1,3 +1,3 @@
-export { BlogDisplayComponent } from './blog-display/blog-display.component';
-export { PostDisplayComponent } from './post-display/post-display.component';
-export { TopicDisplayComponent } from './topic-display/topic-display.component';
+export { BlogViewComponent } from './blog-view/blog-view.component';
+export { PostViewComponent } from './post-view/post-view.component';
+export { TopicViewComponent } from './topic-view/topic-view.component';

@@ -3,11 +3,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Post } from '@app/shared/models';
 
 @Component({
-    selector: 'app-post-container',
-    templateUrl: './post-container.component.html',
-    styleUrls: ['./post-container.component.scss']
+    selector: 'app-post-collection',
+    templateUrl: './post-collection.component.html',
+    styleUrls: ['./post-collection.component.scss']
 })
-export class PostContainerComponent implements OnInit {
+export class PostCollectionComponent implements OnInit {
     @Input() posts: Array<Post>;
 
     constructor() { }

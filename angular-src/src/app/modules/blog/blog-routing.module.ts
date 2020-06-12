@@ -4,9 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { BlogComponent } from './blog.component';
 
 import {
-    BlogDisplayComponent,
-    PostDisplayComponent,
-    TopicDisplayComponent
+    BlogViewComponent,
+    PostViewComponent,
+    TopicViewComponent
 } from './components';
 
 const routes: Routes = [
@@ -16,15 +16,15 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                component: BlogDisplayComponent
+                component: BlogViewComponent
             },
             {
                 path: 'posts/:uri',
-                component: PostDisplayComponent
+                component: PostViewComponent
             },
             {
                 path: 'topics/:uri',
-                component: TopicDisplayComponent
+                component: TopicViewComponent
             }
         ]
     }

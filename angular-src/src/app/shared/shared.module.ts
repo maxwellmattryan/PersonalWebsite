@@ -8,18 +8,18 @@ import { SharedRoutingModule } from './shared-routing.module';
 import {
     FooterComponent,
     HeaderComponent,
-    PostContainerComponent,
-    ProjectContainerComponent,
-    TopicContainerComponent
+    PostCollectionComponent,
+    ProjectCollectionComponent,
+    TopicCollectionComponent
 } from './components';
 
 @NgModule({
     declarations: [
         FooterComponent,
         HeaderComponent,
-        PostContainerComponent,
-        ProjectContainerComponent,
-        TopicContainerComponent
+        PostCollectionComponent,
+        ProjectCollectionComponent,
+        TopicCollectionComponent
     ],
     imports: [
         CommonModule,
@@ -30,9 +30,9 @@ import {
         CommonModule,
         FooterComponent,
         HeaderComponent,
-        PostContainerComponent,
-        ProjectContainerComponent,
-        TopicContainerComponent
+        PostCollectionComponent,
+        ProjectCollectionComponent,
+        TopicCollectionComponent
     ]
 })
 export class SharedModule { }

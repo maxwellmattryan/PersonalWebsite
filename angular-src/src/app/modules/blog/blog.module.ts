@@ -10,17 +10,17 @@ import { BlogComponent } from './blog.component';
 import { BlogRoutingModule } from './blog-routing.module';
 
 import {
-    BlogDisplayComponent,
-    PostDisplayComponent,
-    TopicDisplayComponent
+    BlogViewComponent,
+    PostViewComponent,
+    TopicViewComponent
 } from './components';
 
 @NgModule({
     declarations: [
         BlogComponent,
-        BlogDisplayComponent,
-        PostDisplayComponent,
-        TopicDisplayComponent
+        BlogViewComponent,
+        PostViewComponent,
+        TopicViewComponent
     ],
     imports: [
         BlogRoutingModule,

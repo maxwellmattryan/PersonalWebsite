@@ -7,11 +7,11 @@ import { AuthService } from '@app/core/authentication';
 import { EditorService, NotificationService } from '@app/core/services';
 
 @Component({
-    selector: 'app-post-display',
-    templateUrl: './post-display.component.html',
-    styleUrls: ['./post-display.component.scss']
+    selector: 'app-post-view',
+    templateUrl: './post-view.component.html',
+    styleUrls: ['./post-view.component.scss']
 })
-export class PostDisplayComponent implements OnInit {
+export class PostViewComponent implements OnInit {
     isAdmin: boolean = false;
     isLoaded: boolean = false;
 

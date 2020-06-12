@@ -4,11 +4,11 @@ import { Post } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 
 @Component({
-    selector: 'app-blog-display',
-    templateUrl: './blog-display.component.html',
-    styleUrls: ['./blog-display.component.scss']
+    selector: 'app-blog-view',
+    templateUrl: './blog-view.component.html',
+    styleUrls: ['./blog-view.component.scss']
 })
-export class BlogDisplayComponent implements OnInit {
+export class BlogViewComponent implements OnInit {
     posts: Array<Post>;
 
     constructor(
