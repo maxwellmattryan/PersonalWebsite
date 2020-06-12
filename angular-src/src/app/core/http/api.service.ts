@@ -76,7 +76,6 @@ export class ApiService {
         return this.http.get<Topic>(environment.API_URL + requestURL);
     }
 
-    // TODO: Remove this request and combine with getPosts() into getBlog() that fetches both
     getTopics(): Observable<Topic[]> {
         return this.http.get<Topic[]>(environment.API_URL + '/blog/topics');
     }

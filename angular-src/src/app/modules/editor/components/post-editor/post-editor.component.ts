@@ -34,7 +34,9 @@ export class PostEditorComponent implements OnInit, OnDestroy {
         
         this.setUnloadEvent();
 
+        this.loadPostData();
         this.buildPostForm();
+        this.loadTopicData();
     }
 
     ngOnDestroy(): void {
@@ -53,8 +55,6 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     }
 
     buildPostForm(): void {
-        this.loadPostData();
-
         if(this.postData) {
             this.postForm = this.formBuilder.group({
                 title:          this.formBuilder.control(this.postData.title,           [Validators.required]),
@@ -76,8 +76,6 @@ export class PostEditorComponent implements OnInit, OnDestroy {
                 imageURL:       this.formBuilder.control('',    [Validators.required])
             });
         }
-        
-        this.loadTopicData();
     }
 
     loadPostData(): void {

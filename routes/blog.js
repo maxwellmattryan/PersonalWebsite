@@ -118,6 +118,14 @@ router.delete('/posts/:uri', passport.authenticate('jwt', { session: false }), (
 });
 
 // TOPICS
+router.get('/topics', (req, res, next) => {
+    Topic.find({}, (err, topics) => {
+        if(err) throw err;
+
+        res.status(200).json(topics);
+    });
+});
+
 router.get('/topics/:uri', (req, res, next) => {
     Topic.findOne({uri: req.params.uri})
     .populate('posts')
