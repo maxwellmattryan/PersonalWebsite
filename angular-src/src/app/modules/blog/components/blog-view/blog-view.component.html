@@ -1,2 +1,9 @@
-<app-topic-collection></app-topic-collection>
-<app-post-collection [posts]='posts'></app-post-collection>
+<div *ngIf='isLoaded'>
+    <h1>Welcome to the blog!</h1>
+
+    <h2>Topics</h2>
+    <app-topic-collection [topics]='blog.topics'></app-topic-collection>
+    
+    <h2>Posts</h2> 
+    <app-post-collection [posts]='blog.posts'></app-post-collection>
+</div>

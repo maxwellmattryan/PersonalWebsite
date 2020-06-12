@@ -12,9 +12,7 @@
     <p [innerHtml]='"Published: " + this.getFormattedDate()'></p>
 
     <a [routerLink]='["/blog/topics/" + topic.uri]' *ngFor='let topic of post.topics'>
-        <p>
-            {{ topic.name }}
-        </p>
+        <p>{{ topic.name }}</p>
     </a>
     
     <p>{{ post.author }}</p>

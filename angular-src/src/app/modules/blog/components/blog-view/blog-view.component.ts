@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Post } from '@app/shared/models';
-import { ApiService } from '@app/core/http';
+import { ApiService } from '@app/core/http/api.service';
+import { Blog } from '@app/shared/interfaces';
 
 @Component({
     selector: 'app-blog-view',
@@ -9,15 +9,18 @@ import { ApiService } from '@app/core/http';
     styleUrls: ['./blog-view.component.scss']
 })
 export class BlogViewComponent implements OnInit {
-    posts: Array<Post>;
+    isLoaded: boolean = false;
 
+    blog: Blog;
+    
     constructor(
         private apiService: ApiService
     ) { }
 
     ngOnInit(): void {
-        this.apiService.getBlog().subscribe((blog: any) => {
-            this.posts = blog.posts;
+        this.apiService.getBlog().subscribe((blog: Blog) => {
+            this.isLoaded = true;
+            this.blog = blog;
         });
     }
 }

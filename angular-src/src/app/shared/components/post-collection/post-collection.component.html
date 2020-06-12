@@ -1,6 +1,4 @@
 <div>
-    <h1>Welcome to my blog !</h1>
-    <br>
     <a [routerLink]='["/blog/posts/" + post.uri]' *ngFor='let post of posts'>
         <article>
             <img [src]='post.imageURL' height=150>

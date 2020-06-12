@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { Topic } from '@app/shared/models';
 
 @Component({
     selector: 'app-topic-collection',
@@ -6,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./topic-collection.component.scss']
 })
 export class TopicCollectionComponent implements OnInit {
+    @Input() topics: Array<Topic>;
 
     constructor() { }
 

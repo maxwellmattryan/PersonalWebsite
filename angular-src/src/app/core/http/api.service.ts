@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+import { Blog } from '@app/shared/interfaces';
 import { environment } from '@app/environments/environment';
 import { Post, Profile, Topic } from '@app/shared/models';
 
@@ -52,8 +53,8 @@ export class ApiService {
         return this.http.get<Post>(environment.API_URL + requestURL);
     }
 
-    getBlog(): Observable<Post[]> {
-        return this.http.get<Post[]>(environment.API_URL + '/blog');
+    getBlog(): Observable<Blog> {
+        return this.http.get<Blog>(environment.API_URL + '/blog');
     }
 
     // TODO: fix return type for this (and method signature)
