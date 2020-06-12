@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Post } from '@app/shared/models';
-import { BlogService } from '@app/core/services';
+import { ApiService } from '@app/core/http';
 
 @Component({
     selector: 'app-blog-display',
@@ -12,11 +12,11 @@ export class BlogDisplayComponent implements OnInit {
     posts: Array<Post>;
 
     constructor(
-        private blogService: BlogService
+        private apiService: ApiService
     ) { }
 
     ngOnInit(): void {
-        this.blogService.getPosts().subscribe(posts => {
+        this.apiService.getPosts().subscribe(posts => {
             this.posts = posts;
         });
     }

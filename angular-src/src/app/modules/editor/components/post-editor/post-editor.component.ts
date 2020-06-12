@@ -4,7 +4,9 @@ import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { Post, Topic } from '@app/shared/models';
-import { AuthService, BlogService, NotificationService, ValidationService } from '@app/core/services';
+import { AuthService } from '@app/core/authentication';
+import { ApiService } from '@app/core/http';
+import { EditorService, NotificationService, ValidationService } from '@app/core/services';
 
 @Component({
     selector: 'app-post-editor',
@@ -18,8 +20,9 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     topics: Array<Topic> = [];
 
     constructor(
+        private apiService: ApiService,
         private authService: AuthService,
-        private blogService: BlogService,
+        private editorService: EditorService,
         private notificationService: NotificationService,
         private formBuilder: FormBuilder,
         private router: Router,
@@ -35,7 +38,7 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.blogService.setPostData(null);
+        this.editorService.setPost(null);
     }
 
     checkForAdmin(): void {
@@ -45,7 +48,7 @@ export class PostEditorComponent implements OnInit, OnDestroy {
 
     setUnloadEvent(): void {
         window.onbeforeunload = () => {
-            this.blogService.setPostData(null);
+            this.editorService.setPost(null);
         };
     }
 
@@ -78,11 +81,11 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     }
 
     loadPostData(): void {
-        this.postData = this.blogService.getPostData();
+        this.postData = this.editorService.getPost();
     }
 
     loadTopicData(): void {
-        this.blogService.getTopics().subscribe(topics => {
+        this.apiService.getTopics().subscribe(topics => {
             this.topics = topics;
 
             this.topics.forEach((topic, idx) => {
@@ -103,7 +106,7 @@ export class PostEditorComponent implements OnInit, OnDestroy {
         const post = this.buildPostData();
         const headers = this.getHeaders();
 
-        this.blogService.putPost(post, headers).subscribe(res => {
+        this.apiService.putPost(post, headers).subscribe(res => {
             let message: string;
 
             if(!this.postData) {

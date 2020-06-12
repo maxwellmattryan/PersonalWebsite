@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService, NotificationService, ValidationService } from '@app/core/services';
+import { ApiService } from '@app/core/http';
+import { NotificationService, ValidationService } from '@app/core/services';
 
 @Component({
     selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private authService: AuthService,
+        private apiService: ApiService,
         private notificationService: NotificationService,
         public validationService: ValidationService
     ) { }
@@ -27,7 +28,7 @@ export class RegisterComponent implements OnInit {
             password: this.password
         };
 
-        this.authService.registerAdmin(admin).subscribe(res => {
+        this.apiService.registerAdmin(admin).subscribe(res => {
             let message: string;
             let navURL: string;
 

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService, NotificationService } from '@app/core/services';
+import { AuthService } from '@app/core/authentication';
+import { NotificationService } from '@app/core/services';
 
 @Component({
     selector: 'app-dashboard',

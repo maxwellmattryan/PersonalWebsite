@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Post } from '@app/shared/models';
-import { AuthService, BlogService, NotificationService } from '@app/core/services';
+import { ApiService } from '@app/core/http';
+import { AuthService } from '@app/core/authentication';
+import { EditorService, NotificationService } from '@app/core/services';
 
 @Component({
     selector: 'app-post-display',
@@ -16,8 +18,9 @@ export class PostDisplayComponent implements OnInit {
     post: Post;
 
     constructor(
+        private apiService: ApiService,
         private authService: AuthService,
-        private blogService: BlogService,
+        private editorService: EditorService,
         private notificationService: NotificationService,
         private router: Router
     ) { }
@@ -25,18 +28,18 @@ export class PostDisplayComponent implements OnInit {
     ngOnInit(): void {
         this.isAdmin = this.authService.isLoggedIn();
 
-        this.blogService.getPost(this.router.url).subscribe(post => {
+        this.apiService.getPost(this.router.url).subscribe(post => {
             this.isLoaded = true;
             this.post = post;
         });
     }
 
     sendPostToEditor(): void {
-        this.blogService.setPostData(this.post);
+        this.editorService.setPost(this.post);
     }
 
     deletePost(): void {
-        this.blogService.deletePost(this.router.url, this.authService.getAuthHeaders()).subscribe(result => {
+        this.apiService.deletePost(this.router.url, this.authService.getAuthHeaders()).subscribe(result => {
             let message = 'Successfully deleted blog post!';
             this.notificationService.createNotification(message);
             

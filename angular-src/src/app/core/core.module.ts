@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { ApiService } from './http/api.service';
+import { AuthService } from './authentication/auth.service';
 import {
-    AuthService,
-    BlogService,
+    EditorService,
     NotificationService,
-    ProfileService,
     ValidationService
 } from './services';
 
@@ -14,10 +14,10 @@ import {
         CommonModule
     ],
     providers: [
+        ApiService,
         AuthService,
-        BlogService,
+        EditorService,
         NotificationService,
-        ProfileService,
         ValidationService
     ]
 })

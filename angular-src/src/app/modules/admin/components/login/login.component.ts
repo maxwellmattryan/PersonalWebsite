@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService, NotificationService, ValidationService } from '@app/core/services';
+import { ApiService } from '@app/core/http';
+import { AuthService } from '@app/core/authentication';
+import { NotificationService, ValidationService } from '@app/core/services';
 
 @Component({
     selector: 'app-login',
@@ -14,6 +16,7 @@ export class LoginComponent implements OnInit {
 
     constructor(
         private router: Router,
+        private apiService: ApiService,
         private authService: AuthService,
         private notificationService: NotificationService,
         public validationService: ValidationService
@@ -27,7 +30,7 @@ export class LoginComponent implements OnInit {
             password: this.password
         };
 
-        this.authService.authenticateAdmin(admin).subscribe(res => {
+        this.apiService.authenticateAdmin(admin).subscribe(res => {
             let message: string;
             let navURL: string;
             

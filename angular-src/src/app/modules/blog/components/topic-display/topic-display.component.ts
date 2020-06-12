@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Topic } from '@app/shared/models';
-import { BlogService } from '@app/core/services';
+import { ApiService } from '@app/core/http';
 
 @Component({
     selector: 'app-topic-display',
@@ -16,11 +16,11 @@ export class TopicDisplayComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private blogService: BlogService
+        private apiService: ApiService
     ) { }
 
     ngOnInit(): void {
-        this.blogService.getTopic(this.router.url).subscribe(topic => {
+        this.apiService.getTopic(this.router.url).subscribe(topic => {
             this.isLoaded = true;
             this.topic = topic;
         });

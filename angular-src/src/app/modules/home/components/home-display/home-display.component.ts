@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Profile } from '@app/shared/models';
-import { ProfileService } from '@app/core/services';
+import { ApiService } from '@app/core/http';
 
 @Component({
     selector: 'app-home-display',
@@ -14,11 +14,11 @@ export class HomeDisplayComponent implements OnInit {
     profile: Profile;
 
     constructor(
-        private profileService: ProfileService
+        private apiService: ApiService
     ) { }
 
     ngOnInit(): void {
-        this.profileService.getProfileData().subscribe(profile => {
+        this.apiService.getProfile().subscribe(profile => {
             this.isLoaded = true;
             this.profile = profile[0];
         });
