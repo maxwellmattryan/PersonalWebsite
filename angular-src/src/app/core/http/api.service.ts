@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { Blog } from '@app/shared/interfaces';
+import { Admin, Blog } from '@app/shared/interfaces';
 import { environment } from '@app/environments/environment';
 import { Post, Profile, Topic } from '@app/shared/models';
 
@@ -17,9 +17,8 @@ export class ApiService {
         private http: HttpClient
     ) { }
 
-    // TODO: Write types and fix method return types for all of these
     // ADMIN
-    authenticateAdmin(admin: any): Observable<any> {
+    authenticateAdmin(admin: Admin): Observable<any> {
         let headers = new HttpHeaders();
         headers.set('Content-Type', 'application/json');
 
@@ -30,7 +29,7 @@ export class ApiService {
         ).pipe(map(res => res));
     }
 
-    registerAdmin(admin): Observable<any> {
+    registerAdmin(admin: Admin): Observable<any> {
         let headers = new HttpHeaders();
         headers.set('Content-Type', 'application/json');
 
@@ -57,9 +56,8 @@ export class ApiService {
         return this.http.get<Blog>(environment.API_URL + '/blog');
     }
 
-    // TODO: fix return type for this (and method signature)
-    putPost(post: Object, headers: HttpHeaders): Observable<any> {
-        return this.http.put<any>(
+    putPost(post: Post, headers: HttpHeaders): Observable<Post> {
+        return this.http.put<Post>(
             environment.API_URL + '/blog/posts/' + post['uri'],
             post,
             { headers: headers }

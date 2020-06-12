@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { Admin } from '@app/shared/interfaces';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/authentication';
 import { NotificationService, ValidationService } from '@app/core/services';
@@ -11,8 +12,8 @@ import { NotificationService, ValidationService } from '@app/core/services';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    username: string = '';
-    password: string = '';
+    username: string;
+    password: string;
 
     constructor(
         private router: Router,
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void { }
 
     onLoginSubmit(): void {
-        const admin = {
+        let admin: Admin = {
             username: this.username,
             password: this.password
         };
@@ -35,7 +36,7 @@ export class LoginComponent implements OnInit {
             let navURL: string;
             
             if(res.success) {
-                message = `Welcome back, ${this.username}!`;
+                message = `Welcome back, ${admin.username}!`;
                 navURL = 'admin';
                 
                 this.authService.storeAdminData(res.token, res.admin);

@@ -53,7 +53,11 @@ router.post('/register', (req, res, next) => {
 
     Admin.registerAdmin(newAdmin, (err, admin) => {
         if(err) {
-            res.json({success: false, msg: 'Unable to register admin.'});
+            if(!admin) {
+                res.json({success: false, msg: `'${newAdmin.username}' is already registered.`});
+            } else {
+                res.json({success: false, msg: 'Unable to register admin.'});
+            }
         } else {
             res.json({success: true, msg: 'Successfully registered admin!'});
         }

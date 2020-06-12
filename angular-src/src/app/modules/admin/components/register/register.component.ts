@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { Admin } from '@app/shared/interfaces';
 import { ApiService } from '@app/core/http';
 import { NotificationService, ValidationService } from '@app/core/services';
 
@@ -23,7 +24,7 @@ export class RegisterComponent implements OnInit {
     ngOnInit(): void { }
 
     onRegisterSubmit(): void {
-        const admin = {
+        const admin: Admin = {
             username: this.username,
             password: this.password
         };
@@ -33,7 +34,7 @@ export class RegisterComponent implements OnInit {
             let navURL: string;
 
             if(res.success) {
-                message = `Hello, ${this.username}!`;
+                message = `Hello, ${admin.username}!`;
                 navURL = 'admin/login';
             } else {
                 message = res.msg;

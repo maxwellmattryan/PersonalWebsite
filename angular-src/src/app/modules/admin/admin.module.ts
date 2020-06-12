@@ -18,7 +18,7 @@ import {
         AdminComponent,
         DashboardComponent,
         LoginComponent,
-        RegisterComponent,
+        RegisterComponent
     ],
     imports: [
         AdminRoutingModule,
