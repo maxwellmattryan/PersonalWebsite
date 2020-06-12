@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Post } from 'models';
-import { BlogService } from 'services';
+import { Post } from '@app/shared/models';
+import { BlogService } from '@app/core/services';
 
 @Component({
     selector: 'app-blog-display',

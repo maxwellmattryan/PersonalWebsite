@@ -1,9 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { MaterialModule } from '@app/modules/material/material.module';
+
 import { SharedRoutingModule } from './shared-routing.module';
 
 import {
+    FooterComponent,
+    HeaderComponent,
     PostContainerComponent,
     ProjectContainerComponent,
     TopicContainerComponent
@@ -11,20 +15,21 @@ import {
 
 @NgModule({
     declarations: [
+        FooterComponent,
+        HeaderComponent,
         PostContainerComponent,
         ProjectContainerComponent,
         TopicContainerComponent
     ],
     imports: [
-        // MODULES
         CommonModule,
+        MaterialModule,
         SharedRoutingModule
     ],
     exports: [
-        // MODULES
         CommonModule,
-
-        // COMPONENTS
+        FooterComponent,
+        HeaderComponent,
         PostContainerComponent,
         ProjectContainerComponent,
         TopicContainerComponent

@@ -16,12 +16,10 @@
       "dom"
     ],
     "paths": {
-        "environments/*": ["src/environments/*"],
-        "models": ["src/app/models"],
-        "models/*": ["src/app/models/*"],
-        "modules/*": ["src/app/modules/*"],
-        "services": ["src/app/services"],
-        "services/*": ["src/app/services/*"]
+        "@app/core/*": ["src/app/core/*"],
+        "@app/environments/*": ["src/environments/*"],
+        "@app/modules/*": ["src/app/modules/*"],
+        "@app/shared/*": ["src/app/shared/*"]
     }
   },
   "angularCompilerOptions": {

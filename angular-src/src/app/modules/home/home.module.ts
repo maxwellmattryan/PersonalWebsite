@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { MaterialModule } from '@app/modules/material/material.module';
+
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
 
 import {
     HomeDisplayComponent
 } from './components';
-
-import { NavigationModule } from 'modules/navigation/navigation.module';
 
 @NgModule({
     declarations: [
@@ -18,7 +18,7 @@ import { NavigationModule } from 'modules/navigation/navigation.module';
     imports: [
         CommonModule,
         HomeRoutingModule,
-        NavigationModule
+        MaterialModule
     ]
 })
 export class HomeModule { }

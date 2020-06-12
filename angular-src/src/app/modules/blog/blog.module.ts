@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { MarkdownModule } from 'ngx-markdown';
 
+import { MaterialModule } from '@app/modules/material/material.module';
+import { SharedModule } from '@app/shared/shared.module';
+
 import { BlogComponent } from './blog.component';
 import { BlogRoutingModule } from './blog-routing.module';
 
@@ -11,9 +14,6 @@ import {
     PostDisplayComponent,
     TopicDisplayComponent
 } from './components';
-
-import { MaterialModule } from 'modules/material/material.module';
-import { SharedModule } from 'modules/shared/shared.module';
 
 @NgModule({
     declarations: [

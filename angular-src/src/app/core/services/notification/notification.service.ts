@@ -10,7 +10,7 @@ export class NotificationService {
         private snackBar: MatSnackBar
     ) { }
 
-    createNotification(message: string, action: string = '', duration: number = 1000): void {
+    createNotification(message: string, action: string = '', duration: number = 1250): void {
         this.snackBar.open(message, action, {
             duration: duration
         });

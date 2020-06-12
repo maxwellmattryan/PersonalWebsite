@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Post } from 'models';
-import { AuthService, BlogService, NotificationService } from 'services';
+import { Post } from '@app/shared/models';
+import { AuthService, BlogService, NotificationService } from '@app/core/services';
 
 @Component({
     selector: 'app-post-display',

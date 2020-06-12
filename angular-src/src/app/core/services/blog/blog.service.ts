@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { environment } from 'environments/environment';
-import { Post, Topic } from 'models';
+import { environment } from '@app/environments/environment';
+import { Post, Topic } from '@app/shared/models';
 
 @Injectable({
     providedIn: 'root'

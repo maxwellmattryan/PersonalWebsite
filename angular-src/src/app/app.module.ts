@@ -7,44 +7,20 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import {
-    AdminModule,
-    BlogModule,
-    EditorModule,
-    MaterialModule,
-    NavigationModule,
-    SharedModule
-} from './modules';
-
-import {
-    AuthService, 
-    BlogService,
-    NotificationService,
-    ProfileService,
-    ValidationService
-} from './services';
+import { CoreModule } from '@app/core/core.module';
+import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         AppRoutingModule,
-        AdminModule,
         BrowserAnimationsModule,
         BrowserModule,
-        EditorModule,
+        CoreModule,
         FormsModule,
         HttpClientModule,
-        MaterialModule,
-        NavigationModule,
         ReactiveFormsModule,
-        SharedModule,
-    ],
-    providers: [
-        AuthService,
-        BlogService,
-        NotificationService,
-        ProfileService,
-        ValidationService
+        SharedModule
     ],
     bootstrap: [AppComponent]
 })

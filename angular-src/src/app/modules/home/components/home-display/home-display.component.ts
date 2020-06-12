@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Profile } from 'models';
-import { ProfileService } from 'services';
+import { Profile } from '@app/shared/models';
+import { ProfileService } from '@app/core/services';
 
 @Component({
     selector: 'app-home-display',

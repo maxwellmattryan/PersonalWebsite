@@ -3,8 +3,8 @@ import { FormArray, FormBuilder, FormGroup, Validators, FormControl } from '@ang
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { Post, Topic } from 'models';
-import { AuthService, BlogService, NotificationService, ValidationService } from 'services';
+import { Post, Topic } from '@app/shared/models';
+import { AuthService, BlogService, NotificationService, ValidationService } from '@app/core/services';
 
 @Component({
     selector: 'app-post-editor',
