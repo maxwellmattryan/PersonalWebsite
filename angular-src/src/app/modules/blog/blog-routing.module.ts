@@ -5,8 +5,7 @@ import { BlogComponent } from './blog.component';
 
 import {
     BlogViewComponent,
-    PostViewComponent,
-    TopicViewComponent
+    PostViewComponent
 } from './components';
 
 const routes: Routes = [
@@ -21,10 +20,6 @@ const routes: Routes = [
             {
                 path: 'posts/:uri',
                 component: PostViewComponent
-            },
-            {
-                path: 'topics/:uri',
-                component: TopicViewComponent
             }
         ]
     }

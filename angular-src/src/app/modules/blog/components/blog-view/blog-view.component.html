@@ -1,9 +1,20 @@
-<div *ngIf='isLoaded'>
+<div class='blog' *ngIf='isLoaded'>
     <h1>Welcome to the blog!</h1>
 
     <h2>Topics</h2>
-    <app-topic-collection [topics]='blog.topics'></app-topic-collection>
+    <div class='blog__filter-btn-container'>
+        <ng-container *ngFor='let topic of getTopicArray(); trackBy: trackByIndex'>
+            <button 
+            class='blog__filter-btn' 
+            (click)='posts = getPosts(topic[0])'
+            [color]="topic[1] ? 'accent' : 'primary'"
+            mat-flat-button
+            type='button'
+            >{{ topic[0] }}</button>
+            &nbsp;
+        </ng-container>
+    </div>
     
     <h2>Posts</h2> 
-    <app-post-collection [posts]='blog.posts'></app-post-collection>
+    <app-post-collection [posts]='posts'></app-post-collection>
 </div>

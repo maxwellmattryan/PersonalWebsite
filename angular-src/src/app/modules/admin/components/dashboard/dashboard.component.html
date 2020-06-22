@@ -5,12 +5,12 @@
     <div *ngIf='!authService.isLoggedIn()'>
         <a mat-flat-button color='primary' [routerLink]="['/admin/register']">Register</a>
         &nbsp;
-        <a mat-flat-button color='secondary' [routerLink]="['/admin/login']">Login</a>
+        <a mat-flat-button color='accent' [routerLink]="['/admin/login']">Login</a>
     </div>
 
     <div *ngIf='authService.isLoggedIn()'>
         <a mat-flat-button color='primary' [routerLink]="['/editor']">Create Post</a>
         &nbsp;
-        <a mat-flat-button color='secondary' (click)="onLogoutClick()">Logout</a>
+        <a mat-flat-button color='accent' (click)="onLogoutClick()">Logout</a>
     </div>
 </div>

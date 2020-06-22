@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ApiService } from './http/api.service';
 import { AuthService } from './authentication/auth.service';
 import {
+    BlogService,
     EditorService,
     NotificationService,
     ValidationService
@@ -16,6 +17,7 @@ import {
     providers: [
         ApiService,
         AuthService,
+        BlogService,
         EditorService,
         NotificationService,
         ValidationService

@@ -70,10 +70,6 @@ export class ApiService {
     }
 
     // TOPIC
-    getTopic(requestURL: string): Observable<Topic> {
-        return this.http.get<Topic>(environment.API_URL + requestURL);
-    }
-
     getTopics(): Observable<Topic[]> {
         return this.http.get<Topic[]>(environment.API_URL + '/blog/topics');
     }

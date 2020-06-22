@@ -9,8 +9,7 @@ import {
     FooterComponent,
     HeaderComponent,
     PostCollectionComponent,
-    ProjectCollectionComponent,
-    TopicCollectionComponent
+    ProjectCollectionComponent
 } from './components';
 
 @NgModule({
@@ -18,8 +17,7 @@ import {
         FooterComponent,
         HeaderComponent,
         PostCollectionComponent,
-        ProjectCollectionComponent,
-        TopicCollectionComponent
+        ProjectCollectionComponent
     ],
     imports: [
         CommonModule,
@@ -31,8 +29,7 @@ import {
         FooterComponent,
         HeaderComponent,
         PostCollectionComponent,
-        ProjectCollectionComponent,
-        TopicCollectionComponent
+        ProjectCollectionComponent
     ]
 })
 export class SharedModule { }

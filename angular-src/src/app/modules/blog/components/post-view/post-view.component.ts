@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Post } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/authentication';
-import { EditorService, NotificationService } from '@app/core/services';
+import { BlogService, EditorService, NotificationService } from '@app/core/services';
 
 @Component({
     selector: 'app-post-view',
@@ -20,6 +20,7 @@ export class PostViewComponent implements OnInit {
     constructor(
         private apiService: ApiService,
         private authService: AuthService,
+        private blogService: BlogService,
         private editorService: EditorService,
         private notificationService: NotificationService,
         private router: Router
@@ -64,5 +65,9 @@ export class PostViewComponent implements OnInit {
         };
 
         return months[date.getMonth()] + ' ' + date.getDate() + '<sup>' + nth(date.getDate()) + '</sup>, ' + date.getFullYear();
+    }
+
+    activateTopic(topic: string): void {
+        this.blogService.setActiveTopic(topic);
     }
 }

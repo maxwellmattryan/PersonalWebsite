@@ -126,16 +126,6 @@ router.get('/topics', (req, res, next) => {
     });
 });
 
-router.get('/topics/:uri', (req, res, next) => {
-    Topic.findOne({uri: req.params.uri})
-    .populate('posts')
-    .exec((err, topic) => {
-        if(err) throw err;
-
-        res.status(200).json(topic);
-    });
-});
-
 router.put('/topics/:uri', passport.authenticate('jwt', { session: false }), (req, res, next) => {
     const topicData = {
         _id: req.body._id || new mongoose.Types.ObjectId(),

@@ -2,4 +2,3 @@ export { FooterComponent } from './footer/footer.component';
 export { HeaderComponent } from './header/header.component';
 export { PostCollectionComponent } from './post-collection/post-collection.component';
 export { ProjectCollectionComponent } from './project-collection/project-collection.component';
-export { TopicCollectionComponent } from './topic-collection/topic-collection.component';

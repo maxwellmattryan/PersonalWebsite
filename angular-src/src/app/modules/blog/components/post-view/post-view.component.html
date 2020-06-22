@@ -2,7 +2,7 @@
     <div *ngIf='this.isAdmin'>
         <a mat-flat-button color='primary' (click)='sendPostToEditor()' routerLink='/editor'>Edit Post</a>
         &nbsp;
-        <a mat-flat-button color='secondary' (click)='deletePost()' routerLink='/blog'>Delete Post</a>
+        <a mat-flat-button color='accent' (click)='deletePost()' routerLink='/blog'>Delete Post</a>
         <br>
     </div>
 
@@ -11,7 +11,7 @@
     
     <p [innerHtml]='"Published: " + this.getFormattedDate()'></p>
 
-    <a [routerLink]='["/blog/topics/" + topic.uri]' *ngFor='let topic of post.topics'>
+    <a (click)='activateTopic(topic.name)' [routerLink]="['/blog']" *ngFor='let topic of post.topics'>
         <p>{{ topic.name }}</p>
     </a>
     
