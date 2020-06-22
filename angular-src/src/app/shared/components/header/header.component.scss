@@ -1,3 +1,70 @@
+@import '../../../../styles/variables.scss';
+
 .fill-space {
     flex: 1;
+}
+
+.link-container {
+
+    .link-item {
+    }
+}
+
+.toggle-btn {
+}
+
+.ghost-navbar {
+    height: 6vh;
+}
+
+.navbar {
+    background-color: $color-secondary;
+    position: fixed;
+    height: 5vh;
+    transition: 1s;
+    width: 100vw;
+    z-index: 1;
+
+    &--no-show {
+        opacity: 0;
+    }
+
+    &--show {
+        opacity: 1;
+    }
+}
+
+.navbar__logo-icon {
+}
+
+.navbar__toggle-btn {
+}
+
+.sidebar {
+    background: white;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transition: 1s;
+    z-index: 2;
+
+    &--closed {
+        opacity: 0;
+        width: 0vw;
+    }
+    
+    &--open { 
+        opacity: 1;
+        width: 100vw;
+    }
+}
+
+.sidebar__link-conatiner {
+
+    .sidebar__link-item {
+    }
+}
+
+.sidebar__toggle-btn {
 }
