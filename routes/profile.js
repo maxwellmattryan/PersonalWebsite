@@ -17,9 +17,8 @@ router.put('/:uri', passport.authenticate('jwt', { session: false }), (req, res,
             _id:            req.body._id || new mongoose.Types.ObjectId(),
             uri:            req.body.uri,
             name:           req.body.name,
-            tagline:        req.body.tagline,
+            landing:        req.body.landing,
             about:          req.body.about,
-            technologies:   req.body.technologies,
             projects:       req.body.projects,
             posts:          posts.map(p => p._id) || []
         };

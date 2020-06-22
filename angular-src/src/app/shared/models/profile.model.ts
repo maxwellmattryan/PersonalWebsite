@@ -6,9 +6,8 @@ export class Profile implements Deserializable {
     _id:            any;
     uri:            string;
     name:           string;
-    tagline:        string;
-    about:          string;
-    technologies:   Array<string>
+    landing:        any;
+    about:          any;
     projects:       Array<Project>;
     posts:          Array<Post>;
 

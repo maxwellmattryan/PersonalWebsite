@@ -3,12 +3,20 @@
         "_id": "5ee03725836f8e05a48b0682",
         "uri": "audio",
         "name": "Audio",
-        "tagline": "Looking for an audio programmer? I'm your guy.",
-        "about": "I'm an audio programmer always looking to expand my skillset and also write better website descriptions for myself lololol.",
-        "technologies": [
-            "JavaScript (ES6+)",
-            "C++"
-        ],
+        "landing": {
+            "description": "I'm a game programmer based in Austin, TX. I specialize in audio programming but also enjoy building applications for the web.",
+            "tagline": "Looking for a game programmer? I'm your guy."
+        },
+        "about": {
+            "description": [
+                "Hello! I'm Matthew, a passionate and energetic software engineer based out of Austin, TX who loves to solve creative and technical problems.",
+                "I strive to develop clean and neatly architected code solutions for games, a problem that is unique to every individual project. If the project and team environment permits, I like to couple these skills with mybackground in music and sound to creative dynamic and immersive sounds for the game, each of which is precisely implemented using scripts and middleware (if necessary)."
+            ],
+            "technologies": [
+                "JavaScript (ES6+)",
+                "C++"
+            ]
+        },
         "projects": [
             "5ed6ca23c08bf2569428c3ee"
         ]
@@ -17,12 +25,20 @@
         "_id": "5ee036fba6cde01b48afbbf8",
         "uri": "games",
         "name": "Games",
-        "tagline": "Looking for a game programmer? I'm your guy.",
-        "about": "I strive to develop clean and neatly architected code solutions for games, a problem that is unique to every individual project. Because of that, game development and its creative process often feels quite exciting, fresh, and invigorating for me. If the project and team environment permits, I like to couple these skills with my background in music and sound to creative dynamic and immersive sounds for the game, each of which is precisely implemented using scripts and middleware (if necessary).",
-        "technologies": [
-            "JavaScript (ES6+)",
-            "C++"
-        ],
+        "landing": {
+            "description": "I'm a software engineer based in Austin, TX. I specialize in audio programming but also enjoy building applications for the web.",
+            "tagline": "Looking for an audio programmer? I'm your guy."
+        },
+        "about": {
+            "description": [
+                "Hello! I'm Matthew, a passionate and energetic software engineer based out of Austin, TX who loves to solve creative and technical problems.",
+                "I strive to develop clean and neatly architected code solutions for games, a problem that is unique to every individual project. If the project and team environment permits, I like to couple these skills with mybackground in music and sound to creative dynamic and immersive sounds for the game, each of which is precisely implemented using scripts and middleware (if necessary)."
+            ],
+            "technologies": [
+                "Unity",
+                "C#"
+            ]
+        },
         "projects": [
             "5ed6b75d887cd82e00274a13"
         ]
@@ -31,14 +47,22 @@
         "_id": "5ee036e489b71e26801c0bf0",
         "uri": "software",
         "name": "Software",
-        "tagline": "Looking for a software engineer? I'm your guy.",
-        "about": "I'm a software engineer who creates professional-grade web-based solutions, but cannot write a good and simple about me paragraph lolol.",
-        "technologies": [
-            "JavaScript (ES6+)",
-            "C++"
-        ],
+        "landing": {
+            "description": "I'm a software engineer based in Austin, TX. I specialize in audio programming but also enjoy building applications for the web.",
+            "tagline": "Looking for an audio programmer? I'm your guy."
+        },
+        "about": {
+            "description": [
+                "Hello! I'm Matthew, a passionate and energetic software engineer based out of Austin, TX who loves to solve creative and technical problems.",
+                "I'm a software engineer who creates professional-grade web-based solutions, but cannot write a good and simple about me paragraph lolol."
+            ],
+            "technologies": [
+                "JavaScript (ES6+)",
+                "C++"
+            ]
+        },
         "projects": [
-        	"5ed723376edc1d41d0c86276"
+            "5ed6b75d887cd82e00274a13"
         ]
     }
 ]

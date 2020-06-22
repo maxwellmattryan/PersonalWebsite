@@ -1,13 +1,6 @@
-<div *ngIf="isLoaded">
-    <h1>Hi! I'm Matthew Maxwell.</h1>
-    <h2>{{ profile.tagline }}</h2>
-
-    <p>{{ profile.about }}</p>
-    <img src='https://mattmaxwell.tech/images/portrait.png' height=200>
-
-    <div *ngFor='let tech of profile.technologies'>
-        <p>{{ tech }}</p>
-    </div>
+<div class='home-view' *ngIf="isLoaded">
+    <app-landing [content]='profile.landing'></app-landing>
+    <app-about [content]='profile.about'></app-about>
 
     <h3>Projects</h3>
     <div *ngFor='let project of profile.projects'>

@@ -1,0 +1,11 @@
+<div class='about'>
+    <h2 class='about__header'>About</h2>
+    <p class='about__description' *ngFor='let paragraph of content.description'>
+        {{ paragraph }}
+    </p>
+    <p class='about__description'>These are some of the technologies that I usually work with:</p>
+    <div class='about__technology-container' *ngFor='let technology of content.technologies'>
+        <p class='about__technology'>{{ technology }}</p>
+    </div>
+    <img src='https://mattmaxwell.tech/images/portrait.png' height=250>
+</div>

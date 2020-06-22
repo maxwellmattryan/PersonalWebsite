@@ -1,1 +1,1 @@
-export { HomeDisplayComponent } from './home-display/home-display.component';
+export { HomeViewComponent } from './home-view/home-view.component';

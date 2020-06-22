@@ -6,16 +6,20 @@ import { MaterialModule } from '@app/modules/material/material.module';
 import { SharedRoutingModule } from './shared-routing.module';
 
 import {
+    AboutComponent,
     FooterComponent,
     HeaderComponent,
+    LandingComponent,
     PostCollectionComponent,
     ProjectCollectionComponent
 } from './components';
 
 @NgModule({
     declarations: [
+        AboutComponent,
         FooterComponent,
         HeaderComponent,
+        LandingComponent,
         PostCollectionComponent,
         ProjectCollectionComponent
     ],
@@ -26,8 +30,10 @@ import {
     ],
     exports: [
         CommonModule,
+        AboutComponent,
         FooterComponent,
         HeaderComponent,
+        LandingComponent,
         PostCollectionComponent,
         ProjectCollectionComponent
     ]

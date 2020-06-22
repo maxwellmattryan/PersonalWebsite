@@ -4,11 +4,11 @@ import { Profile } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 
 @Component({
-    selector: 'app-home-display',
-    templateUrl: './home-display.component.html',
-    styleUrls: ['./home-display.component.scss']
+    selector: 'app-home-view',
+    templateUrl: './home-view.component.html',
+    styleUrls: ['./home-view.component.scss']
 })
-export class HomeDisplayComponent implements OnInit {
+export class HomeViewComponent implements OnInit {
     isLoaded: boolean = false;
 
     profile: Profile;
