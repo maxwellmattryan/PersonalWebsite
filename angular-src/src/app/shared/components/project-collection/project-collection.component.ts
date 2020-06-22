@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
     selector: 'app-project-collection',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./project-collection.component.scss']
 })
 export class ProjectCollectionComponent implements OnInit {
+    @Input() content: any;
 
     constructor() { }
 

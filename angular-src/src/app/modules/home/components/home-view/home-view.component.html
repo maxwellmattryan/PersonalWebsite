@@ -1,28 +1,6 @@
 <div class='home-view' *ngIf="isLoaded">
     <app-landing [content]='profile.landing'></app-landing>
     <app-about [content]='profile.about'></app-about>
-
-    <h3>Projects</h3>
-    <div *ngFor='let project of profile.projects'>
-        <img [src]='project.imageURL' height=150>
-        <a [href]='project.externals[0].url' target='_blank'>
-            <p>{{ project.title }}</p>
-        </a>
-        <p>{{ project.subtitle }}</p>
-        <p>{{ project.description }}</p>
-
-        <div *ngFor='let ext of project.externals'>
-            <a [href]='ext.url' target='_blank'>{{ ext.name }}</a>
-        </div>
-    </div>
-
-    <h3>Posts</h3>
-    <div *ngFor='let post of profile.posts'>
-        <img [src]='post.imageURL' height=150>
-        <a [routerLink]='["blog/posts/" + post.uri]'>
-            <p>{{ post.title }}</p>
-        </a>
-        <p>{{ post.subtitle }}</p>
-        <p>{{ post.description }}</p>
-    </div>
+    <app-project-collection [content]='profile.projects'></app-project-collection>
+    <app-post-collection [content]='profile.posts'></app-post-collection>
 </div>

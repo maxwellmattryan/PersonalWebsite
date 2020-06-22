@@ -9,7 +9,7 @@
     <h1>{{ post.title }}</h1>
     <h2>{{ post.subtitle }}</h2>
     
-    <p [innerHtml]='"Published: " + this.getFormattedDate()'></p>
+    <p [innerHtml]='"Published: " + blogService.getFormattedDate(post.created)'></p>
 
     <a (click)='activateTopic(topic.name)' [routerLink]="['/blog']" *ngFor='let topic of post.topics'>
         <p>{{ topic.name }}</p>

@@ -7,7 +7,12 @@ const PROFILE_URI = require('../config/profile').uri;
 router.get('/', (req, res, next) => {
     Profile.find({uri: PROFILE_URI})
     .populate('projects')
-    .populate('posts')
+    .populate({
+        path: 'posts',
+        populate: {
+            path: 'topics'
+        }
+    })
     .exec((err, profile) => {
         if(err) throw err;
 

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Post } from '@app/shared/models';
+import { BlogService } from '@app/core/services';
 
 @Component({
     selector: 'app-post-collection',
@@ -8,9 +9,15 @@ import { Post } from '@app/shared/models';
     styleUrls: ['./post-collection.component.scss']
 })
 export class PostCollectionComponent implements OnInit {
-    @Input() posts: Array<Post>;
+    @Input() content: Array<Post>;
 
-    constructor() { }
+    constructor(
+        public blogService: BlogService
+    ) { }
 
     ngOnInit(): void { }
+
+    activateTopic(topic: string): void {
+        this.blogService.setActiveTopic(topic);
+    }
 }

@@ -1,1 +1,14 @@
-<p>project-collection works!</p>
+<div class='projects'>
+    <h2 class='projects__header'>Projects</h2>
+
+    <div class='projects__project' *ngFor='let project of content'>
+        <h3 class='projects__title'>{{ project.title }}</h3>
+        <h4 class='projects__subtitle'>{{ project.subtitle }}</h4>
+        <p class='projects__description'>{{ project.description }}</p>
+
+        <a class='projects__external' *ngFor='let ext of project.externals' [href]='ext.url' target='_blank'>
+            {{ ext.name }}
+            <br>
+        </a>
+    </div>
+</div>

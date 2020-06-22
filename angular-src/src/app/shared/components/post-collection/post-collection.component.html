@@ -1,13 +1,16 @@
-<div>
-    <a [routerLink]='["/blog/posts/" + post.uri]' *ngFor='let post of posts'>
-        <article>
-            <img [src]='post.imageURL' height=150>
-            <h3>{{ post.title }}</h3>
-            <h4>{{ post.subtitle }}</h4>
-            <p>{{ post.description }}</p>
-            <p *ngFor='let topic of post.topics'>
+<div class='posts'>
+    <h2 class='posts__header'>Posts</h2>
+
+    <div class='posts__post' *ngFor='let post of content'>
+        <a [routerLink]="['/blog/posts/' + post.uri]">
+            <h3 class='posts__header'>{{ post.title }}</h3>
+        </a>
+        <p class='posts__date' [innerHTML]='blogService.getFormattedDate(post.created)'></p>
+        <p class='posts__topics'>
+            In
+            <a *ngFor='let topic of post.topics; let idx = index;' (click)='activateTopic(topic.name)' [routerLink]="['/blog']">
                 {{ topic.name }}
-            </p>
-        </article>
-    </a>
+            </a>
+        </p>
+    </div>
 </div>

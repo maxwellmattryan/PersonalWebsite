@@ -1,6 +1,6 @@
 [
     {
-        "_id": "5ee03725836f8e05a48b0682",
+        "_id": "5ef11941d1eb077864a14bd7",
         "uri": "audio",
         "name": "Audio",
         "landing": {
@@ -13,7 +13,7 @@
                 "I strive to develop clean and neatly architected code solutions for games, a problem that is unique to every individual project. If the project and team environment permits, I like to couple these skills with mybackground in music and sound to creative dynamic and immersive sounds for the game, each of which is precisely implemented using scripts and middleware (if necessary)."
             ],
             "technologies": [
-                "JavaScript (ES6+)",
+                "JUCE",
                 "C++"
             ]
         },
@@ -22,7 +22,7 @@
         ]
     },
     {
-        "_id": "5ee036fba6cde01b48afbbf8",
+        "_id": "5ef118d1bda2aa2c38e18204",
         "uri": "games",
         "name": "Games",
         "landing": {
@@ -44,7 +44,7 @@
         ]
     },
     {
-        "_id": "5ee036e489b71e26801c0bf0",
+        "_id": "5ef11921bda2aa2c38e18205",
         "uri": "software",
         "name": "Software",
         "landing": {
