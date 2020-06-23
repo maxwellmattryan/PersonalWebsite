@@ -2,40 +2,41 @@
     'navbar--show': shouldDisplayNavbar,
     'navbar--no-show': !shouldDisplayNavbar
 }" class='navbar'>
-    <mat-toolbar color='primary'>
-        <mat-toolbar-row>
-            <a class='logo-icon navbar__logo-icon' mat-button routerLink=''>
-                <h1>matt maxwell</h1>
-            </a>
-    
-            <span class='fill-space'></span>
-    
-            <div class='link-container navbar__link-container'>
-                <a class='link-item navbar__link-item' mat-button routerLink=''>Home</a>
-                <a class='link-item navbar__link-item' mat-button routerLink='blog'>Blog</a>
+    <a class='logo-icon navbar__logo-icon' mat-button routerLink=''>
+        <h1>M</h1>
+    </a>
 
-                <a *ngIf='isAdmin' class='link-item navbar__link-item' mat-button routerLink='admin'>Admin</a>
-            </div>
-    
-            <button class='toggle-btn navbar__toggle-btn' mat-icon-button (click)='toggleSidebar()'>
-                <mat-icon>menu</mat-icon>
-            </button>
-        </mat-toolbar-row>
-    </mat-toolbar>
+    <span class='fill-space'></span>
+
+    <div class='link-container navbar__link-container'>
+        <a class='link-item navbar__link-item' mat-button routerLink=''>Home</a>
+        <a class='link-item navbar__link-item' mat-button routerLink='blog'>Blog</a>
+
+        <a *ngIf='isAdmin' class='link-item navbar__link-item' mat-button routerLink='admin'>Admin</a>
+    </div>
+
+    <button class='toggle-btn navbar__toggle-btn' mat-icon-button (click)='toggleSidebar()'>
+        <div class="navbar__menu-icon">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </button>
 </div>
 
 <div class='ghost-navbar'></div>
 
 <div [ngClass]="{
+    'sidebar-fog--show': shouldDisplaySidebar,
+    'sidebar-fog--no-show': !shouldDisplaySidebar
+}" class='sidebar-fog' (click)='toggleSidebar()'></div>
+
+<div [ngClass]="{
     'sidebar--open': shouldDisplaySidebar,
     'sidebar--closed': !shouldDisplaySidebar
 }" class='sidebar'>
-    <a class='logo-icon navbar__logo-icon' mat-button routerLink='' (click)='toggleSidebar()'>
-        <h1>m</h1>
-    </a>
-
-    <button class='toggle-btn sidebar__toggle-btn' mat-icon-button (click)='toggleSidebar()'>
-        <mat-icon>close</mat-icon>
+    <button class='toggle-btn sidebar__toggle-btn' (click)='toggleSidebar()'>
+        &#10005;
     </button>
 
     <div class='link-container sidebar__link-container'>
@@ -45,4 +46,3 @@
         <a *ngIf='isAdmin' class='link-item sidebar__link-item' mat-button routerLink='admin' (click)='toggleSidebar()'>Admin</a>
     </div>
 </div>
-<br>

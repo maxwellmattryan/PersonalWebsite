@@ -1,3 +1,42 @@
+@import 'variables';
+
 .landing {
-    height: 95vh;
+    background-color: $color-dark;
+    display: flex;
+    flex-direction: column;
+    height: $page-height;
+    justify-content: center;
+    padding: 0 $padding-side;
+}
+
+.landing__header {
+    color: $color-primary;
+    font-weight: 300;
+    margin-bottom: $margin-bottom;
+
+    &--highlight {
+        color: $color-white;
+        font-weight: 700;
+    }
+}
+
+.landing__tagline {
+    color: $color-light;
+    font-weight: 500;
+    margin-bottom: $margin-bottom;
+}
+
+.landing__description {
+    color: $color-light;
+    font-weight: 300;
+    margin-bottom: $margin-bottom;
+}
+
+.landing__contact-btn {
+    border: 2px solid $color-primary;
+    border-radius: 4px;
+    color: $color-primary;
+    height: $header-height;
+    line-height: $header-height;
+    text-align: center;
 }
