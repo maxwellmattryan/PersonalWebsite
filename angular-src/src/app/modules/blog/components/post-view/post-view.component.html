@@ -1,12 +1,12 @@
 <div class='post' *ngIf='isLoaded'>
 
+    <h1 class='post__title'>{{ post.title }}</h1>
+
     <div class='post__btn-container' *ngIf='this.isAdmin'>
         <a class='post__btn' (click)='sendPostToEditor()' routerLink='/editor'>Edit</a>
         <a class='post__btn' (click)='deletePost()' routerLink='/blog'>Delete</a>
     </div>
-
-    <h1 class='post__title'>{{ post.title }}</h1>
-
+    
     <p class='post__date' [innerHtml]='"Published: " + blogService.getFormattedDate(post.created)'></p>
     
     <div class='post__topic-container'>

@@ -9,7 +9,7 @@
 .post__btn-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
 }
 
 .post__btn {
@@ -17,12 +17,12 @@
     border: 2px solid $color-primary;
     border-radius: 1000px;
     color: $color-primary;
-    height: $btn-height;
-    line-height: $btn-height;
-    margin: $margin 0;
+    height: $small-btn-height;
+    line-height: $small-btn-height;
+    margin: 0 $quarter-margin $margin 0;
     padding: $quarter-padding;
     text-align: center;
-    width: 50vw;
+    width: 20vw;
 
     &:active {
         background-color: $color-primary;
