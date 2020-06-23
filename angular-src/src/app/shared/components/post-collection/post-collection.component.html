@@ -9,7 +9,7 @@
                 <h3 class='posts__post-header'>{{ post.title }}</h3>
             </a>
             <p class='posts__post-date' [innerHTML]='blogService.getFormattedDate(post.created)'></p>
-            <div class='posts__post-topic-list'>
+            <div class='posts__post-topic-list' *ngIf='showTopics'>
                 <a 
                     class='posts__post-topic-item'
                     *ngFor='let topic of post.topics; let idx = index;'
@@ -20,6 +20,9 @@
                     <br>
                 </a>
             </div>
+            <p class='posts__post-preview' *ngIf='showPreview'>
+                {{ post.description }}
+            </p>
         </div>
     </div>
 </div>

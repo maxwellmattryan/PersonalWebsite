@@ -10,6 +10,8 @@ import { BlogService } from '@app/core/services';
 })
 export class PostCollectionComponent implements OnInit {
     @Input() content: Array<Post>;
+    @Input() showTopics: boolean;
+    @Input() showPreview: boolean;
 
     constructor(
         public blogService: BlogService
