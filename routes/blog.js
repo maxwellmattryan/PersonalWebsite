@@ -84,13 +84,22 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
 
             newPost.save((err, post) => {
                 if(err) {
-                    res.sendStatus(400);
+                    res.status(200).json({
+                        success: false,
+                        msg: 'A post with this title already exists.'
+                    });
                 } else {    
-                    res.status(201).json(post);
+                    res.status(201).json({
+                        success: true,
+                        msg: 'Successfully created new post!'
+                    });
                 }
             });
         } else {
-            res.sendStatus(204);
+            res.status(200).json({
+                success: true,
+                msg: 'Successfully updated blog post!'
+            });
         }
     });
 });

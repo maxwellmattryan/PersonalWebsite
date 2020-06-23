@@ -104,17 +104,12 @@ export class PostEditorComponent implements OnInit, OnDestroy {
         const post = this.buildPostData();
         const headers = this.getHeaders();
 
-        this.apiService.putPost(post, headers).subscribe(res => {
-            let message: string;
+        this.apiService.putPost(post, headers).subscribe((res: any) => {
+            this.notificationService.createNotification(res.msg);
 
-            if(!this.postData) {
-                message = 'Successfully created blog post!';
-            } else {
-                message = 'Successfully updated blog post!'
+            if(res.success) {
+                this.router.navigate(['blog/posts/' + post['uri']]);
             }
-
-            this.notificationService.createNotification(message);
-            this.router.navigate(['blog/posts/' + post['uri']]);
         });
     }
 
