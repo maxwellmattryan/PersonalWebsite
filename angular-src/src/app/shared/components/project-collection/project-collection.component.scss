@@ -4,8 +4,7 @@
     background-color: $color-dark;
     color: $color-white;
     height: auto;
-    margin-bottom: -$margin-bottom;
-    padding: 0 $padding-side;
+    padding: $half-padding $padding;
 }
 
 .projects__header {
@@ -13,14 +12,14 @@
 }
 
 .projects__project-container {
-    
+    display: grid;
+    grid-gap: $margin;
+    grid-template-columns: auto;
 }
 
 .projects__project {
-    background-color: $color-dark;
+    background-color: darken($color-dark, 7);
     height: auto;
-    margin-bottom: $margin-bottom;
-    outline: 1px solid rgba($color-primary, 0.3);
     position: relative;
 
     &-background {
@@ -41,12 +40,12 @@
     &-subtitle,
     &-description,
     &-ext-container {
-        padding: $half-padding-side $padding-side;
+        padding: $half-padding $padding;
     }
     
     &-title {
         color: $color-primary;
-        padding-top: $padding-side;
+        padding-top: $padding;
     }
 
     &-subtitle {
@@ -60,7 +59,7 @@
     &-ext-container {
         display: flex;
         flex-direction: column;
-        padding-bottom: $padding-side;
+        padding-bottom: $padding;
     }
 
     &-ext-item {

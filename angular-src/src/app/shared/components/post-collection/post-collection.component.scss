@@ -1,0 +1,44 @@
+@import 'variables';
+
+.posts {
+    background-color: $color-dark;
+    color: $color-white;
+    height: auto;
+    padding: $half-padding $padding;
+}
+
+.posts__header {
+    margin-bottom: $half-margin;
+}
+
+.posts__post-container {
+    display: grid;
+    grid-gap: $margin;
+    grid-template-columns: auto;
+}
+
+.posts__post {
+    background-color: $color-light;
+    padding: $padding;
+}
+
+.posts__post-header {
+    margin-bottom: $half-margin;
+}
+
+.posts__post-date {
+    color: $color-dark;
+    margin-bottom: $margin;
+}
+
+.posts__post-topic-list {
+    color: $color-secondary;
+    display: grid;
+    grid-gap: $quarter-margin;
+}
+
+.posts__post-topic-item {
+    color: $color-secondary;
+    font-style: italic;
+    text-decoration: underline;
+}

@@ -95,7 +95,7 @@
     
     &--open { 
         opacity: 1;
-        width: 33vw;
+        width: 50vw;
     }
 }
 
@@ -124,7 +124,7 @@
     color: $color-dark;
     background-color: $color-white;
     height: $header-height;
-    padding: 0 $padding-side;
+    padding: 0 $padding;
     transition: $active-link-transition;
     width: 100vw;
 
