@@ -86,7 +86,7 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
                 if(err) {
                     res.sendStatus(400);
                 } else {    
-                    res.sendStatus(201);
+                    res.status(201).json(post);
                 }
             });
         } else {

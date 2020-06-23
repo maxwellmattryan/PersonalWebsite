@@ -4,25 +4,27 @@
     <div class='line-divider'></div>
 
     <div class='posts__post-container'>
-        <div class='posts__post' *ngFor='let post of content'>
-            <a [routerLink]="['/blog/posts/' + post.uri]">
+        <a class=posts__post-wrapper *ngFor='let post of content' [routerLink]="['/blog/posts/' + post.uri]">
+            <div class='posts__post'>
                 <h3 class='posts__post-header'>{{ post.title }}</h3>
-            </a>
-            <p class='posts__post-date' [innerHTML]='blogService.getFormattedDate(post.created)'></p>
-            <div class='posts__post-topic-list' *ngIf='showTopics'>
-                <a 
-                    class='posts__post-topic-item'
-                    *ngFor='let topic of post.topics; let idx = index;'
-                    (click)='activateTopic(topic.name)'
-                    [routerLink]="['/blog']"
-                >
-                    {{ topic.name }}
-                    <br>
-                </a>
+                <p class='posts__post-date' [innerHTML]='blogService.getFormattedDate(post.created)'></p>
+
+                <div class='posts__post-topic-list' *ngIf='showTopics'>
+                    <a 
+                        class='posts__post-topic-item'
+                        *ngFor='let topic of post.topics; let idx = index;'
+                        (click)='activateTopic(topic.name)'
+                        [routerLink]="['/blog']"
+                    >
+                        {{ topic.name }}
+                        <br>
+                    </a>
+                </div>
+                
+                <p class='posts__post-preview' *ngIf='showPreview'>
+                    {{ post.description }}
+                </p>
             </div>
-            <p class='posts__post-preview' *ngIf='showPreview'>
-                {{ post.description }}
-            </p>
-        </div>
+        </a>
     </div>
 </div>
