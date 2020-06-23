@@ -1,22 +1,27 @@
-<h2 class="page-header">Register</h2>
-<div class='form-group'>
-    <form class='example-form' (ngSubmit)='onRegisterSubmit()'>
-        <mat-form-field>
-            <mat-label>Username</mat-label>
-            <input matInput [(ngModel)]='username' name='username' required>
-        </mat-form-field>
+<div class="section-divider"></div>
+
+<div class='register'>
+    <h1 class='register__header'>Register</h1>
+
+    <form class='register__form' (ngSubmit)='onRegisterSubmit()'>
+        <div class='register__form-field'>
+            <label>Username</label>
+            <br><br>
+            <input [(ngModel)]='username' name='username' required>
+        </div>
         <br>
 
-        <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input matInput [(ngModel)]='password' name='password' type='password' required>
-        </mat-form-field>
+        <div class='register__form-field'>
+            <label>Password</label>
+            <br><br>
+            <input [(ngModel)]='password' name='password' type='password' required>
+        </div>
         <br>
-
+            
         <button 
-            mat-flat-button 
-            color='primary' 
-            [disabled]='!validationService.hasValidAdminCredentials(username, password)'    
+            [ngClass]="{'register__form-btn--inactive': !validationService.hasValidAdminCredentials(username, password)}"
+            class='register__form-btn'
+            [disabled]='!validationService.hasValidAdminCredentials(username, password)'
         >
             Submit
         </button>

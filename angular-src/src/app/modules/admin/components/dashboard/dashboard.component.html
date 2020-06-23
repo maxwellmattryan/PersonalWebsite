@@ -1,16 +1,15 @@
-<div class="jumbotron text-center">
-    <h2>Welcome to the admin panel!</h2>
-    <br>
+<div class="section-divider"></div>
+
+<div class='dashboard'>
+    <h1 class='dashboard__header'>Dashboard</h1>
     
-    <div *ngIf='!authService.isLoggedIn()'>
-        <a [routerLink]="['/admin/register']">Register</a>
-        &nbsp;
-        <a [routerLink]="['/admin/login']">Login</a>
+    <div class='dashboard__btn-container' *ngIf='!authService.isLoggedIn()'>
+        <a class='dashboard__btn' [routerLink]="['/admin/register']">Register</a>
+        <a class='dashboard__btn' [routerLink]="['/admin/login']">Login</a>
     </div>
 
-    <div *ngIf='authService.isLoggedIn()'>
-        <a [routerLink]="['/editor']">Create Post</a>
-        &nbsp;
-        <a (click)="onLogoutClick()">Logout</a>
+    <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
+        <a class='dashboard__btn' [routerLink]="['/editor']">Create Post</a>
+        <a class='dashboard__btn' (click)="onLogoutClick()">Logout</a>
     </div>
 </div>

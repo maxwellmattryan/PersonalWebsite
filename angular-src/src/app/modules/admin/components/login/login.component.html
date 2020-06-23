@@ -1,24 +1,29 @@
-<h2 class="page-header">Login</h2>
-<div class='form-group'>
-    <form class='example-form' (ngSubmit)='onLoginSubmit()'>
-        <mat-form-field>
-            <mat-label>Username</mat-label>
-            <input matInput [(ngModel)]='username' name='username' required>
-        </mat-form-field>
+<div class="section-divider"></div>
+
+<div class='login'>
+    <h1 class='login__header'>Login</h1>
+
+    <form class='login__form' (ngSubmit)='onLoginSubmit()'>
+        <div class='login__form-field'>
+            <label>Username</label>
+            <br><br>
+            <input [(ngModel)]='username' name='username' required>
+        </div>
         <br>
 
-        <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input matInput [(ngModel)]='password' name='password' type='password' required>
-        </mat-form-field>
+        <div class='login__form-field'>
+            <label>Password</label>
+            <br><br>
+            <input [(ngModel)]='password' name='password' type='password' required>
+        </div>
         <br>
             
         <button 
-            color='primary'
-            mat-flat-button
+            [ngClass]="{'login__form-btn--inactive': !validationService.hasValidAdminCredentials(username, password)}"
+            class='login__form-btn'
             [disabled]='!validationService.hasValidAdminCredentials(username, password)'
         >
-            Login
+            Submit
         </button>
     </form>
 </div>

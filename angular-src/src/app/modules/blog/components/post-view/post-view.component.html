@@ -6,6 +6,8 @@
     </div>
 
     <h1 class='post__title'>{{ post.title }}</h1>
+
+    <div class="line-divider"></div>
     
     <p class='post__date' [innerHtml]='"Published: " + blogService.getFormattedDate(post.created)'></p>
 
@@ -20,3 +22,5 @@
 
     <markdown [data]='post.content'></markdown>
 </div>
+
+<div class='section-divider'></div>

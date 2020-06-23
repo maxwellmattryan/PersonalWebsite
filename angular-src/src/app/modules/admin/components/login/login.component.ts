@@ -12,8 +12,8 @@ import { NotificationService, ValidationService } from '@app/core/services';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    username: string;
-    password: string;
+    username: string = '';
+    password: string = '';
 
     constructor(
         private router: Router,

@@ -1,0 +1,38 @@
+@import 'variables';
+
+.dashboard {
+    background-color: $color-dark;
+    color: $color-white;
+    min-height: calc(78vh + 1px);
+    padding: $padding;
+}
+
+.dashboard__header {
+    text-align: center;
+    margin-bottom: $margin;
+}
+
+.dashboard__btn-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.dashboard__btn {
+    background-color: $color-dark;
+    border: 2px solid $color-primary;
+    border-radius: 1000px;
+    color: $color-primary;
+    height: $btn-height;
+    line-height: $btn-height;
+    margin: $margin 0;
+    padding: $quarter-padding;
+    text-align: center;
+    width: 50vw;
+
+    &:active {
+        background-color: $color-primary;
+        color: $color-dark;
+    }
+}
