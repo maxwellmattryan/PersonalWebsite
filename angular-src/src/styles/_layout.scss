@@ -1,7 +1,12 @@
 @import 'variables';
 
 .line-divider {
-    background: $color-white;
-    height: 2px;
-    margin-bottom: $margin-bottom;
+    background: $color-light;
+    height: $line-divider-height;
+    margin: $margin-bottom 0;
+}
+
+.section-divider {
+    background: $color-dark;
+    height: $section-divider-height;
 }
