@@ -1,0 +1,35 @@
+@import 'variables';
+
+.blog {
+    background-color: $color-dark;
+    color: $color-white;
+    height: auto;
+    padding: $padding;
+}
+
+.blog__header {
+    margin-bottom: $margin;
+}
+
+.blog__filter-header {
+    margin-bottom: $half-margin;
+}
+
+.blog__filter-btn-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.blog__filter-btn {
+    background-color: $color-dark;
+    border: 2px solid $color-primary;
+    border-radius: 1000px;
+    color: $color-primary;
+    height: $btn-height;
+    margin-bottom: $quarter-margin;
+
+    &--active {
+        background-color: $color-primary;
+        color: $color-dark;
+    }
+}

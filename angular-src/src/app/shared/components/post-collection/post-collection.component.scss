@@ -4,7 +4,8 @@
     background-color: $color-dark;
     color: $color-white;
     height: auto;
-    padding: $half-padding $padding;
+    min-height: calc(41vh + 1px);
+    padding: 0 $padding;
 }
 
 .posts__header {
