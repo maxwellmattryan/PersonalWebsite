@@ -1,0 +1,59 @@
+@import 'variables';
+
+.post {
+    background-color: $color-dark;
+    color: $color-white;
+    padding: 0 $padding;
+}
+
+.post__btn-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.post__btn {
+    background-color: $color-dark;
+    border: 2px solid $color-primary;
+    border-radius: 1000px;
+    color: $color-primary;
+    height: $btn-height;
+    line-height: $btn-height;
+    margin: $margin 0;
+    padding: $quarter-padding;
+    text-align: center;
+    width: 50vw;
+
+    &:active {
+        background-color: $color-primary;
+        color: $color-dark;
+    }
+}
+
+.post__title {
+    margin-bottom: $half-margin;
+}
+
+.post__subtitle {
+    margin-bottom: $margin;
+}
+
+.post__date {
+    margin-bottom: $half-margin;
+}
+
+.post__topic-container {
+    margin-bottom: $margin;
+}
+
+.post__topic-item {
+    color: $color-primary;
+    font-style: italic;
+    margin-bottom: $quarter-margin;
+}
+
+.post__image {
+    height: auto;
+    margin-bottom: $margin;
+    width: 100%;
+}

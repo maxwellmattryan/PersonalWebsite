@@ -1,23 +1,22 @@
-<div *ngIf='isLoaded'>
-    <div *ngIf='this.isAdmin'>
-        <a mat-flat-button color='primary' (click)='sendPostToEditor()' routerLink='/editor'>Edit Post</a>
-        &nbsp;
-        <a mat-flat-button color='accent' (click)='deletePost()' routerLink='/blog'>Delete Post</a>
-        <br>
+<div class='post' *ngIf='isLoaded'>
+
+    <div class='post__btn-container' *ngIf='this.isAdmin'>
+        <a class='post__btn' (click)='sendPostToEditor()' routerLink='/editor'>Edit</a>
+        <a class='post__btn' (click)='deletePost()' routerLink='/blog'>Delete</a>
     </div>
 
-    <h1>{{ post.title }}</h1>
-    <h2>{{ post.subtitle }}</h2>
+    <h1 class='post__title'>{{ post.title }}</h1>
     
-    <p [innerHtml]='"Published: " + blogService.getFormattedDate(post.created)'></p>
+    <p class='post__date' [innerHtml]='"Published: " + blogService.getFormattedDate(post.created)'></p>
 
-    <a (click)='activateTopic(topic.name)' [routerLink]="['/blog']" *ngFor='let topic of post.topics'>
-        <p>{{ topic.name }}</p>
-    </a>
+    <div class='post__topic-container'>
+        <a class='post__topic-item' (click)='activateTopic(topic.name)' [routerLink]="['/blog']" *ngFor='let topic of post.topics'>
+            {{ topic.name }}
+            <br>
+        </a>
+    </div>
     
-    <p>{{ post.author }}</p>
-    
-    <img [src]='post.imageURL' height=150>
+    <img class='post__image' [src]='post.imageURL' height=150>
 
     <markdown [data]='post.content'></markdown>
 </div>
