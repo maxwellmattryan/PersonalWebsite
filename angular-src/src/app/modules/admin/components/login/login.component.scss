@@ -3,7 +3,7 @@
 .login {
     background-color: $color-dark;
     color: $color-white;
-    min-height: 86vh;
+    min-height: 71vh;
 }
 
 .login__header {
@@ -19,7 +19,9 @@
 .login__form-field {
     input {
         border-radius: 1px;
+        box-sizing: border-box;
         height: $input-height;
+        padding: 0 $quarter-padding;
     }
 }
 
