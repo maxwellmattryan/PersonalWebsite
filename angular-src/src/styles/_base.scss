@@ -9,6 +9,7 @@
 
 a {
     color: $color-white;
+    
     &:link {
         text-decoration: none;
     }
@@ -24,6 +25,8 @@ a {
 }
 
 html, body {
+    background-color: $color-dark;
+    color: $color-white;
     font-family: Montserrat, Roboto, "Helvetica Neue", sans-serif;
     height: 100%;
 }
