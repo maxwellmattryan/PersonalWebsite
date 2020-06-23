@@ -31,7 +31,7 @@
 }
 
 .post__title {
-    margin-bottom: $half-margin;
+    margin-bottom: $margin;
 }
 
 .post__subtitle {
@@ -43,13 +43,14 @@
 }
 
 .post__topic-container {
-    margin-bottom: $margin;
+    display: flex;
+    flex-direction: column;
 }
 
 .post__topic-item {
     color: $color-primary;
     font-style: italic;
-    margin-bottom: $quarter-margin;
+    margin-top: $quarter-margin;
 }
 
 .post__image {

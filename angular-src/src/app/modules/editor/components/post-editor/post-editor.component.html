@@ -1,54 +1,60 @@
-<div>
-    <h1>Post Editor</h1>
-    <br>
+<div class='editor'>
+    <h1 class='editor__header'>Editor</h1>
 
-    <div class='form-group'>
-        <form class='example-form' [formGroup]='postForm' (ngSubmit)='onSubmit()'>
-            <mat-form-field class='example-full-width'>
-                <mat-label>Title</mat-label>
-                <input matInput formControlName='title' required>
-            </mat-form-field>
-            <br>
-
-            <mat-form-field class='example-full-width'>
-                <mat-label>Subtitle</mat-label>
-                <input matInput formControlName='subtitle' required>
-            </mat-form-field>
+    <form class='editor__form' [formGroup]='postForm' (ngSubmit)='onSubmit()'>
+        <div class="editor__form-field">
+            <label>Title</label>
             <br><br>
+            <input formControlName='title' required>
+        </div>
 
-            <mat-label>Topics</mat-label>
+        <div class="editor__form-field">
+            <label>Subtitle</label>
+            <br><br>
+            <input formControlName='subtitle' required>
+        </div>
+
+        <div class="editor__form-field">
+            <label>Topics</label>
             <br><br>
             <ng-container formArrayName='topics' *ngFor='let topic of postForm.controls.topics["controls"]; let idx = index'>
                 <mat-checkbox class='example-margin' [formControlName]='idx'>{{ topics[idx].name }}</mat-checkbox>
-                <br><br>
+                <br>
             </ng-container>
+        </div>
 
-            <mat-form-field class='example-full-width'>
-                <mat-label>Author</mat-label>
-                <input matInput formControlName='author' required>
-            </mat-form-field>
-            <br>
+        <div class="editor__form-field">
+            <label>Author</label>
+            <br><br>
+            <input formControlName='author' required>
+        </div>
 
-            <mat-form-field class='example-full-width'>
-                <mat-label>Description</mat-label>
-                <input matInput formControlName='description' required>
-            </mat-form-field>
-            <br>
+        <div class="editor__form-field">
+            <label>Description</label>
+            <br><br>
+            <input formControlName='description' required>
+        </div>
 
-            <mat-form-field class='example-full-width'>
-                <mat-label>Content</mat-label>
-                <textarea matInput formControlName='content' required></textarea>
-            </mat-form-field>
-            <br>
-            
-            <mat-form-field class='example-full-width'>
-                <mat-label>Featured Image</mat-label>
-                <input matInput formControlName='imageURL' required>
-            </mat-form-field>
-            <br>
-            
-            <br>
-            <button mat-flat-button color='primary' [disabled]='!postForm.valid'>Submit Post</button>
-        </form>
-    </div>
+        <div class="editor__form-field">
+            <label>Content</label>
+            <br><br>
+            <textarea formControlName='content' required></textarea>
+        </div>
+
+        <div class="editor__form-field">
+            <label>Image</label>
+            <br><br>
+            <input formControlName='imageURL' required>
+        </div>
+
+        <button
+            [ngClass]="{'editor__form-btn--inactive': !postForm.valid}"
+            class='editor__form-btn'
+            [disabled]='!postForm.valid'
+        >
+            Submit
+        </button>
+    </form>
 </div>
+
+<div class="section-divider"></div>

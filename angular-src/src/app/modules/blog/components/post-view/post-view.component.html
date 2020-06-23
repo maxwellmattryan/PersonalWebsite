@@ -7,16 +7,15 @@
 
     <h1 class='post__title'>{{ post.title }}</h1>
 
-    <div class="line-divider"></div>
-    
     <p class='post__date' [innerHtml]='"Published: " + blogService.getFormattedDate(post.created)'></p>
-
+    
     <div class='post__topic-container'>
         <a class='post__topic-item' (click)='activateTopic(topic.name)' [routerLink]="['/blog']" *ngFor='let topic of post.topics'>
             {{ topic.name }}
-            <br>
         </a>
     </div>
+
+    <div class="line-divider"></div>
     
     <img class='post__image' [src]='post.imageURL' height=150>
 
