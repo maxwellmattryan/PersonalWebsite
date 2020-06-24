@@ -3,7 +3,7 @@
 
     <div class='projects__line-divider line-divider'></div>
 
-    <div class='projects__project-container'>
+    <div class='container projects__project-container'>
         <div class='projects__project' *ngFor='let project of content'>
             <div class='projects__project-background' [ngStyle]="{ 'background-image': 'url(' + project.imageURL + ')' }"></div>
             <a [href]='project.externals[0].url' target='_blank'>
