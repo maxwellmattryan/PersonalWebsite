@@ -1,11 +1,7 @@
 @import 'variables';
 
 .posts {
-    background-color: $color-dark;
-    color: $color-white;
-    height: auto;
     min-height: calc(41vh + 1px);
-    padding: 0 $padding;
 }
 
 .posts__header {
