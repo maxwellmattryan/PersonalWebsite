@@ -8,13 +8,15 @@ import { EditorComponent } from './editor.component';
 import { EditorRoutingModule } from './editor-routing.module';
 
 import {
-    PostEditorComponent
+    PostEditorComponent,
+    TopicEditorComponent
 } from './components';
 
 @NgModule({
     declarations: [
         EditorComponent, 
-        PostEditorComponent
+        PostEditorComponent,
+        TopicEditorComponent
     ],
     imports: [
         CommonModule,

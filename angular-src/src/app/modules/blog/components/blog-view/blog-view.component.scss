@@ -18,5 +18,20 @@
 }
 
 .blog__filter-btn{
+    line-height: $btn-height;
+    width: 100%;
 
+    &--edit {
+        width: 13vw;
+    }
+
+    &--half {
+        width: 50vw;
+    }
+}
+
+.blog__filter-btn-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

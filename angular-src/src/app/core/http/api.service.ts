@@ -70,7 +70,22 @@ export class ApiService {
     }
 
     // TOPIC
+    deleteTopic(requestURL: string, headers: HttpHeaders): Observable<any> {
+        return this.http.delete<any>(
+            environment.API_URL + requestURL,
+            { headers: headers }
+        );
+    }
+
     getTopics(): Observable<Topic[]> {
         return this.http.get<Topic[]>(environment.API_URL + '/blog/topics');
+    }
+
+    putTopic(topic: Topic, headers: HttpHeaders): Observable<Topic> {
+        return this.http.put<Topic>(
+            environment.API_URL + '/blog/topics/' + topic['uri'],
+            topic,
+            { headers: headers }
+        );
     }
 }

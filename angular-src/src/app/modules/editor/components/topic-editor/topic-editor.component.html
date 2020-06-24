@@ -1,0 +1,33 @@
+<div class="section editor">
+    <h1 class='editor__header'>Topic Editor</h1>
+
+    <div class="line-divider"></div>
+
+    <form class='editor__form' [formGroup]='topicForm' (ngSubmit)='onSubmit()'>
+        <div class='form-field editor__form-field'>
+            <label>Name</label>
+            <br><br>
+            <input formControlName='name' required autofocus>
+        </div>
+
+        <div class="form-field editor__form-field">
+            <label>Description</label>
+            <br><br>
+            <input formControlName='description' required>
+        </div>
+
+        <div class="form-field editor__form-field">
+            <label>Image</label>
+            <br><br>
+            <input formControlName='imageURL' required>
+        </div>
+
+        <button
+            [ngClass]="{'btn--inactive': !topicForm.valid}"
+            class='btn editor__form-btn'
+            [disabled]='!topicForm.valid'
+        >
+            Submit
+        </button>
+    </form>
+</div>

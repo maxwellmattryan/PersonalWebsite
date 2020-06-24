@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ApiService } from '@app/core/http/api.service';
+import { AuthService } from '@app/core/authentication';
+import { BlogService, EditorService, NotificationService } from '@app/core/services';
 import { Blog } from '@app/shared/interfaces';
-import { BlogService } from '@app/core/services';
 import { Topic, Post } from '@app/shared/models';
 
 @Component({
@@ -11,6 +13,7 @@ import { Topic, Post } from '@app/shared/models';
     styleUrls: ['./blog-view.component.scss']
 })
 export class BlogViewComponent implements OnInit {
+    isAdmin: boolean = false;
     isLoaded: boolean = false;
 
     blog: Blog;
@@ -19,10 +22,16 @@ export class BlogViewComponent implements OnInit {
     
     constructor(
         private apiService: ApiService,
-        private blogService: BlogService
+        private authService: AuthService,
+        private blogService: BlogService,
+        private editorService: EditorService,
+        private notificationService: NotificationService,
+        private router: Router,
     ) { }
 
     ngOnInit(): void {
+        this.isAdmin = this.authService.isLoggedIn();
+        
         this.apiService.getBlog().subscribe((blog: Blog) => {
             this.isLoaded = true;
             this.blog = blog;
@@ -49,7 +58,7 @@ export class BlogViewComponent implements OnInit {
 
     getEmptyTopicMap(): Map<string, boolean> {
         let topics = new Map<string, boolean>();
-        topics.set('All', false);
+        topics.set("All", false);
 
         this.blog.posts.forEach((post, pIdx) => {
             post.topics.forEach((topic, tIdx) => {
@@ -66,5 +75,18 @@ export class BlogViewComponent implements OnInit {
 
     trackByIndex(index, item): void {
         return index;
+    }
+
+    sendTopicToEditor(topic: string): void {
+        this.editorService.setTopic(this.blog.topics.find(t => t.name === topic));
+    }
+
+    deleteTopic(topic: string): void {
+        this.topics.delete(topic);
+
+        const requestURL = '/blog/topics/' + this.blog.topics.find(t => t.name === topic).uri;
+        this.apiService.deletePost(requestURL, this.authService.getAuthHeaders()).subscribe((res: any) => {
+            this.notificationService.createNotification(res.msg); 
+        });
     }
 }

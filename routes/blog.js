@@ -98,7 +98,7 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
         } else {
             res.status(200).json({
                 success: true,
-                msg: 'Successfully updated blog post!'
+                msg: 'Successfully updated post!'
             });
         }
     });
@@ -153,13 +153,47 @@ router.put('/topics/:uri', passport.authenticate('jwt', { session: false }), (re
 
             newTopic.save((err, topic) => {
                 if(err) {
-                    res.sendStatus(400);
-                } else {
-                    res.sendStatus(201);
+                    res.status(200).json({
+                        success: false,
+                        msg: 'Unable to create new topic.'
+                    });
+                } else {    
+                    res.status(201).json({
+                        success: true,
+                        msg: 'Successfully created new topic!'
+                    });
                 }
             });
         } else {
-            res.sendStatus(204);
+            res.status(201).json({
+                success: true,
+                msg: 'Successfully updated topic!'
+            });
+        }
+    });
+});
+
+router.delete('/topics/:uri', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    Topic.findOneAndDelete({uri: req.params.uri}, (err, topic) => {
+        if(err) {
+            res.status(400).json({
+                success: false,
+                msg: 'Unable to delete topic.'
+            });
+        } else {
+            Post.updateMany({_id: {$in: topic.posts}}, {$pull: {topics: topic._id}}, (err, result) => {
+                if(err) {
+                    res.status(200).json({
+                        success: false,
+                        msg: 'Unable to delete topic.'
+                    });
+                } else {
+                    res.status(200).json({
+                        success: true,
+                        msg: 'Successfully deleted topic!'
+                    });
+                }
+            });
         }
     });
 });

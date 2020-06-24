@@ -1,1 +1,3 @@
-<router-outlet></router-outlet>
+<app-post-editor *ngIf='type === "post"'></app-post-editor>
+<app-topic-editor *ngIf='type === "topic"'></app-topic-editor>
+<div class="section-divider"></div>

@@ -9,7 +9,8 @@
     </div>
 
     <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
-        <a class='btn dashboard__btn' [routerLink]="['/editor']">Create Post</a>
+        <a class='btn dashboard__btn' [routerLink]="['/editor']" [queryParams]='{type: "post"}'>Create Post</a>
+        <a class='btn dashboard__btn' [routerLink]="['/editor']" [queryParams]='{type: "topic"}'>Create Topic</a>
         <a class='btn dashboard__btn' (click)="onLogoutClick()">Logout</a>
     </div>
 </div>

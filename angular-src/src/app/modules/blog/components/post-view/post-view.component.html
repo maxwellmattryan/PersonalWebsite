@@ -3,7 +3,7 @@
     <h1 class='post__title'>{{ post.title }}</h1>
 
     <div class='post__btn-container' *ngIf='this.isAdmin'>
-        <a class='btn post__btn' (click)='sendPostToEditor()' routerLink='/editor'>Edit</a>
+        <a class='btn post__btn' (click)='sendPostToEditor()' routerLink='/editor' [queryParams]='{type: "post"}'>Edit</a>
         <a class='btn post__btn' (click)='deletePost()' routerLink='/blog'>Delete</a>
     </div>
     

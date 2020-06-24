@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { EditorService, NotificationService, ValidationService } from '@app/core
 @Component({
     selector: 'app-post-editor',
     templateUrl: './post-editor.component.html',
-    styleUrls: ['./post-editor.component.scss']
+    styleUrls: ['../../editor.component.scss']
 })
 export class PostEditorComponent implements OnInit, OnDestroy {
     postData: Post;
@@ -54,12 +54,16 @@ export class PostEditorComponent implements OnInit, OnDestroy {
         };
     }
 
+    loadPostData(): void {
+        this.postData = this.editorService.getPost();
+    }
+
     buildPostForm(): void {
         if(this.postData) {
             this.postForm = this.formBuilder.group({
                 title:          this.formBuilder.control(this.postData.title,           [Validators.required]),
                 subtitle:       this.formBuilder.control(this.postData.subtitle,        [Validators.required]),
-                topics:         this.formBuilder.array([],                              this.validationService.hasMinTopics(1)),
+                topics:         this.formBuilder.array  ([],                            this.validationService.hasMinTopics(1)),
                 author:         this.formBuilder.control(this.postData.author,          [Validators.required]),
                 description:    this.formBuilder.control(this.postData.description,     [Validators.required]),
                 content:        this.formBuilder.control(this.postData.content,         [Validators.required]),
@@ -67,19 +71,15 @@ export class PostEditorComponent implements OnInit, OnDestroy {
             });
         } else {
             this.postForm = this.formBuilder.group({
-                title:          this.formBuilder.control('',    [Validators.required]),
-                subtitle:       this.formBuilder.control('',    [Validators.required]),
-                topics:         this.formBuilder.array([],      this.validationService.hasMinTopics(1)),
-                author:         this.formBuilder.control('',    [Validators.required]),
-                description:    this.formBuilder.control('',    [Validators.required]),
-                content:        this.formBuilder.control('',    [Validators.required]),
-                imageURL:       this.formBuilder.control('',    [Validators.required])
+                title:          this.formBuilder.control('', [Validators.required]),
+                subtitle:       this.formBuilder.control('', [Validators.required]),
+                topics:         this.formBuilder.array  ([], this.validationService.hasMinTopics(1)),
+                author:         this.formBuilder.control('', [Validators.required]),
+                description:    this.formBuilder.control('', [Validators.required]),
+                content:        this.formBuilder.control('', [Validators.required]),
+                imageURL:       this.formBuilder.control('', [Validators.required])
             });
         }
-    }
-
-    loadPostData(): void {
-        this.postData = this.editorService.getPost();
     }
 
     loadTopicData(): void {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Post } from '@app/shared/models';
+import { Post, Topic } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/authentication';
 import { BlogService, EditorService, NotificationService } from '@app/core/services';
@@ -32,7 +32,15 @@ export class PostViewComponent implements OnInit {
         this.apiService.getPost(this.router.url).subscribe(post => {
             this.isLoaded = true;
             this.post = post;
+            this.post.topics.sort(this.compareTopics);
         });
+    }
+
+    compareTopics(t1: Topic, t2: Topic): number {
+        if(t1.name > t2.name) return 1;
+        if(t1.name < t2.name) return -1;
+        
+        return 0;
     }
 
     sendPostToEditor(): void {

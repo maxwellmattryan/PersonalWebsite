@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { Post } from '@app/shared/models';
+import { Post, Topic } from '@app/shared/models';
 
 @Injectable({
     providedIn: 'root'
 })
 export class EditorService {
     private post: Post;
+    private topic: Topic;
 
     constructor() { }
 
@@ -15,10 +16,22 @@ export class EditorService {
     }
 
     hasPost(): boolean {
-        return this.post !== null;
+        return this.post != null;
     }
 
     setPost(post: Post): void {
         this.post = post;
+    }
+
+    getTopic(): Topic {
+        return this.topic;
+    }
+
+    hasTopic(): boolean {
+        return this.topic != null;
+    }
+
+    setTopic(topic: Topic): void {
+        this.topic = topic;
     }
 }

@@ -1,0 +1,28 @@
+@import 'variables';
+
+.editor {
+    
+}
+
+.editor__header {
+    text-align: center;
+    margin-bottom: $margin;
+}
+
+.editor__form {
+    text-align: left;
+}
+
+.editor__form-field {
+    margin-bottom: $margin;
+
+    input {
+        width: 100%;
+    }
+}
+
+.editor__form-btn {
+    line-height: $btn-height;
+    margin-top: $half-margin;
+    width: 100%;
+}
