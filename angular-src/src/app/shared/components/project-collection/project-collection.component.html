@@ -4,19 +4,21 @@
     <div class='projects__line-divider line-divider'></div>
 
     <div class='container projects__project-container'>
-        <div class='projects__project' *ngFor='let project of content'>
-            <div class='projects__project-background' [ngStyle]="{ 'background-image': 'url(' + project.imageURL + ')' }"></div>
-            <a [href]='project.externals[0].url' target='_blank'>
-                <h3 class='projects__project-title'>{{ project.title }}</h3>
-            </a>
-            <h4 class='projects__project-subtitle'>{{ project.subtitle }}</h4>
-            <p class='projects__project-description'>{{ project.description }}</p>
-    
-            <div class="projects__project-ext-container">
-                <a class='projects__project-ext-item' *ngFor='let ext of project.externals' [href]='ext.url' target='_blank'>
-                    {{ ext.name }}
+        <a class='projects__project-anchor-wrapper' *ngFor='let project of content' [href]="project.externals[0].url" target='_blank'>
+            <div class='projects__project'>
+                <div class='projects__project-background' [ngStyle]="{ 'background-image': 'url(' + project.imageURL + ')' }"></div>
+                <a [href]='project.externals[0].url' target='_blank'>
+                    <h3 class='projects__project-title'>{{ project.title }}</h3>
                 </a>
+                <h4 class='projects__project-subtitle'>{{ project.subtitle }}</h4>
+                <p class='projects__project-description'>{{ project.description }}</p>
+        
+                <div class="projects__project-ext-container">
+                    <a class='projects__project-ext-item' *ngFor='let ext of project.externals' [href]='ext.url' target='_blank'>
+                        {{ ext.name }}
+                    </a>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
 </div>

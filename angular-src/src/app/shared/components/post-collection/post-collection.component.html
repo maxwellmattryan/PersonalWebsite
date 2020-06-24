@@ -4,7 +4,7 @@
     <div class='line-divider'></div>
 
     <div class='container posts__post-container'>
-        <a class=posts__post-wrapper *ngFor='let post of content' [routerLink]="['/blog/posts/' + post.uri]">
+        <a class=posts__post-anchor-wrapper *ngFor='let post of content' [routerLink]="['/blog/posts/' + post.uri]">
             <div class='posts__post'>
                 <h3 class='posts__post-header'>{{ post.title }}</h3>
                 <p class='posts__post-date' [innerHTML]='blogService.getFormattedDate(post.created)'></p>
