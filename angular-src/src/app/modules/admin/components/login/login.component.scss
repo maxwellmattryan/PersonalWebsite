@@ -26,23 +26,7 @@
 }
 
 .login__form-btn {
-    background-color: $color-dark;
-    border: 2px solid $color-primary;
-    border-radius: 1000px;
-    color: $color-primary;
-    height: $btn-height;
     line-height: $btn-height;
-    margin: $margin 0;
-    text-align: center;
+    margin-top: $half-margin;
     width: 50vw;
-
-    &:active {
-        background-color: $color-primary;
-        color: $color-dark;
-    }
-
-    &--inactive {
-        border: 2px solid $color-light;
-        color: $color-light;
-    }
 }

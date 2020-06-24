@@ -16,23 +16,11 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
 }
 
 .dashboard__btn {
-    background-color: $color-dark;
-    border: 2px solid $color-primary;
-    border-radius: 1000px;
-    color: $color-primary;
-    height: $btn-height;
     line-height: $btn-height;
-    margin: $margin 0;
     padding: $quarter-padding;
-    text-align: center;
+    margin-bottom: $margin;
     width: 50vw;
-
-    &:active {
-        background-color: $color-primary;
-        color: $color-dark;
-    }
 }

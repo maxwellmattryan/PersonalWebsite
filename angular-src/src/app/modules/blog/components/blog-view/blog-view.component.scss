@@ -20,16 +20,6 @@
     flex-direction: column;
 }
 
-.blog__filter-btn {
-    background-color: $color-dark;
-    border: 2px solid $color-primary;
-    border-radius: 1000px;
-    color: $color-primary;
-    height: $btn-height;
-    margin-bottom: $quarter-margin;
+.blog__filter-btn{
 
-    &--active {
-        background-color: $color-primary;
-        color: $color-dark;
-    }
 }

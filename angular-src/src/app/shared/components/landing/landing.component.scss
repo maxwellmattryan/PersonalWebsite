@@ -33,10 +33,7 @@
 }
 
 .landing__contact-btn {
-    border: 2px solid $color-primary;
-    border-radius: 4px;
-    color: $color-primary;
     height: $header-height;
     line-height: $header-height;
-    text-align: center;
+    width: 50vw;
 }

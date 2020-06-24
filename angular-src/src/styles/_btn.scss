@@ -1,0 +1,21 @@
+@import 'variables';
+
+.btn {
+    background-color: $color-dark;
+    border: 2px solid $color-primary;
+    border-radius: 1000px;
+    color: $color-primary;
+    height: $btn-height;
+    margin-bottom: $quarter-margin;
+    text-align: center;
+
+    &--active, &:active {
+        background-color: $color-primary;
+        color: $color-dark;
+    }
+
+    &--inactive {
+        border: 2px solid $color-light;
+        color: $color-light;
+    }
+}

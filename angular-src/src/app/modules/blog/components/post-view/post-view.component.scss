@@ -13,21 +13,11 @@
 }
 
 .post__btn {
-    background-color: $color-dark;
-    border: 2px solid $color-primary;
-    border-radius: 1000px;
-    color: $color-primary;
     height: $small-btn-height;
     line-height: $small-btn-height;
     margin: 0 $quarter-margin $margin 0;
     padding: $quarter-padding;
-    text-align: center;
     width: 20vw;
-
-    &:active {
-        background-color: $color-primary;
-        color: $color-dark;
-    }
 }
 
 .post__title {

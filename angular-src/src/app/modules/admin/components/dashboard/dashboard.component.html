@@ -4,12 +4,12 @@
     <h1 class='dashboard__header'>Dashboard</h1>
     
     <div class='dashboard__btn-container' *ngIf='!authService.isLoggedIn()'>
-        <a class='dashboard__btn' [routerLink]="['/admin/register']">Register</a>
-        <a class='dashboard__btn' [routerLink]="['/admin/login']">Login</a>
+        <a class='btn dashboard__btn' [routerLink]="['/admin/register']">Register</a>
+        <a class='btn dashboard__btn' [routerLink]="['/admin/login']">Login</a>
     </div>
 
     <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
-        <a class='dashboard__btn' [routerLink]="['/editor']">Create Post</a>
-        <a class='dashboard__btn' (click)="onLogoutClick()">Logout</a>
+        <a class='btn dashboard__btn' [routerLink]="['/editor']">Create Post</a>
+        <a class='btn dashboard__btn' (click)="onLogoutClick()">Logout</a>
     </div>
 </div>

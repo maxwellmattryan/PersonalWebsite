@@ -5,8 +5,8 @@
     <div class='blog__filter-btn-container'>
         <button 
             *ngFor='let topic of getTopicArray()'
-            [ngClass]="{'blog__filter-btn--active': topic[1]}"
-            class='blog__filter-btn' 
+            [ngClass]="{'btn--active': topic[1]}"
+            class='btn blog__filter-btn' 
             (click)='posts = getPosts(topic[0])'
             type='button'
         >

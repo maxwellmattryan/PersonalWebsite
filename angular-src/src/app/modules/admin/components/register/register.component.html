@@ -19,8 +19,8 @@
         <br>
             
         <button 
-            [ngClass]="{'register__form-btn--inactive': !validationService.hasValidAdminCredentials(username, password)}"
-            class='register__form-btn'
+            [ngClass]="{'btn--inactive': !validationService.hasValidAdminCredentials(username, password)}"
+            class='btn register__form-btn'
             [disabled]='!validationService.hasValidAdminCredentials(username, password)'
         >
             Submit
