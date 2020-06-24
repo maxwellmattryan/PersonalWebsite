@@ -66,7 +66,19 @@ export class ApiService {
 
     // PROFILE
     getProfile(): Observable<Profile> {
-        return this.http.get<Profile>(environment.API_URL);
+        return this.http.get<Profile>(environment.API_URL + '/profiles?active=true');
+    }
+
+    getProfiles(): Observable<Profile[]> {
+        return this.http.get<Profile[]>(environment.API_URL + '/profiles');
+    }
+
+    putProfile(profile: Profile, headers: HttpHeaders): Observable<any> {
+        return this.http.put<any>(
+            environment.API_URL + '/profiles/' + profile['uri'],
+            profile,
+            { headers: headers }
+        );
     }
 
     // TOPIC

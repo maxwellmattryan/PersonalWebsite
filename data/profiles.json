@@ -1,11 +1,11 @@
 [
     {
-        "_id": "5ef11941d1eb077864a14bd7",
+        "_id": "5ef38eb0eda80d6c74f1a4b2",
         "uri": "audio",
         "name": "Audio",
         "landing": {
-            "description": "I'm a game programmer based in Austin, TX. I specialize in audio programming but also enjoy building applications for the web.",
-            "tagline": "Looking for a game programmer? I'm your guy."
+            "description": "I'm an software engineer based in Austin, TX. I love to build and develop audio-related software, whether its plugins or game audio engines.",
+            "tagline": "I am an audio developer."
         },
         "about": {
             "description": [
@@ -21,11 +21,11 @@
     },
     {
         "_id": "5ef118d1bda2aa2c38e18204",
-        "uri": "games",
-        "name": "Games",
+        "uri": "game-development",
+        "name": "Game Development",
         "landing": {
-            "description": "I'm a software engineer based in Austin, TX. I specialize in audio programming but also enjoy building applications for the web.",
-            "tagline": "Looking for an audio programmer? I'm your guy."
+            "description": "I'm a software engineer based in Austin, TX. I enjoy developing games, whether it's audio programming or technical sound design.",
+            "tagline": "I'm a game programmer."
         },
         "about": {
             "description": [
@@ -41,11 +41,11 @@
     },
     {
         "_id": "5ef11921bda2aa2c38e18205",
-        "uri": "software",
-        "name": "Software",
+        "uri": "software-engineering",
+        "name": "Software Engineering",
         "landing": {
-            "description": "I'm a software engineer based in Austin, TX. I specialize in audio programming but also enjoy building applications for the web.",
-            "tagline": "Looking for an audio programmer? I'm your guy."
+            "description": "I'm a software engineer based in Austin, TX. I like working with full stack technologies.",
+            "tagline": "I develop professional web applications."
         },
         "about": {
             "description": [

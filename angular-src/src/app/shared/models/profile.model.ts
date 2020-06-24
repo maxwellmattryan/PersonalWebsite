@@ -5,6 +5,7 @@ import { Post } from './post.model';
 export class Profile implements Deserializable {
     _id:            any;
     uri:            string;
+    active:         boolean;
     name:           string;
     landing:        any;
     about:          any;

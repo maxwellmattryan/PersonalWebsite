@@ -18,6 +18,13 @@
 .dashboard__btn {
     line-height: $btn-height;
     padding: $quarter-padding;
-    margin-bottom: $margin;
+    margin-bottom: $half-margin;
     width: 50vw;
+}
+
+.dashboard__profile-btn {
+    font-size: 100%;
+    height: auto;
+    padding: $quarter-padding;
+    width: 40vw;
 }

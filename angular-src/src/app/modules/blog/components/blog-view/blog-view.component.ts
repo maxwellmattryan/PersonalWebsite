@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { ApiService } from '@app/core/http/api.service';
 import { AuthService } from '@app/core/authentication';
@@ -25,8 +24,7 @@ export class BlogViewComponent implements OnInit {
         private authService: AuthService,
         private blogService: BlogService,
         private editorService: EditorService,
-        private notificationService: NotificationService,
-        private router: Router,
+        private notificationService: NotificationService
     ) { }
 
     ngOnInit(): void {

@@ -91,14 +91,14 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
                 } else {    
                     res.status(201).json({
                         success: true,
-                        msg: 'Successfully created new post!'
+                        msg: 'Created new blog post!'
                     });
                 }
             });
         } else {
             res.status(200).json({
                 success: true,
-                msg: 'Successfully updated post!'
+                msg: 'Updated blog post!'
             });
         }
     });
@@ -117,7 +117,10 @@ router.delete('/posts/:uri', passport.authenticate('jwt', { session: false }), (
                         if(err) throw err;
 
                         else {
-                            res.sendStatus(204);
+                            res.status(200).json({
+                                success: true,
+                                msg: 'Deleted blog post!'
+                            });
                         }
                     });
                 }
@@ -155,19 +158,19 @@ router.put('/topics/:uri', passport.authenticate('jwt', { session: false }), (re
                 if(err) {
                     res.status(200).json({
                         success: false,
-                        msg: 'Unable to create new topic.'
+                        msg: 'Unable to create new blog topic.'
                     });
                 } else {    
                     res.status(201).json({
                         success: true,
-                        msg: 'Successfully created new topic!'
+                        msg: 'Created new blog topic!'
                     });
                 }
             });
         } else {
             res.status(201).json({
                 success: true,
-                msg: 'Successfully updated topic!'
+                msg: 'Updated blog topic!'
             });
         }
     });
@@ -178,19 +181,19 @@ router.delete('/topics/:uri', passport.authenticate('jwt', { session: false }), 
         if(err) {
             res.status(400).json({
                 success: false,
-                msg: 'Unable to delete topic.'
+                msg: 'Unable to delete blog topic.'
             });
         } else {
             Post.updateMany({_id: {$in: topic.posts}}, {$pull: {topics: topic._id}}, (err, result) => {
                 if(err) {
                     res.status(200).json({
                         success: false,
-                        msg: 'Unable to delete topic.'
+                        msg: 'Unable to delete blog topic.'
                     });
                 } else {
                     res.status(200).json({
                         success: true,
-                        msg: 'Successfully deleted topic!'
+                        msg: 'Deleted blog topic!'
                     });
                 }
             });

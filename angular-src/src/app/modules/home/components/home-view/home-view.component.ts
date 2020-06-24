@@ -20,7 +20,7 @@ export class HomeViewComponent implements OnInit {
     ngOnInit(): void {
         this.apiService.getProfile().subscribe(profile => {
             this.isLoaded = true;
-            this.profile = profile[0];
+            this.profile = profile;
         });
     }
 }

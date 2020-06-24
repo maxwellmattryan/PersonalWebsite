@@ -18,4 +18,24 @@
         border: 2px solid $color-light;
         color: $color-light;
     }
+
+    &--go {
+        border: 2px solid $color-go;
+        color: $color-go;
+    }
+
+    &--go:active {
+        background-color: $color-go;
+        color: $color-dark;
+    }
+
+    &--warn {
+        border: 2px solid $color-warn;
+        color: $color-warn;
+    }
+
+    &--warn:active {
+        background-color: $color-warn;
+        color: $color-dark;
+    }
 }

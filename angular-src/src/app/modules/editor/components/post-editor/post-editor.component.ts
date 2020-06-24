@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { Post, Topic } from '@app/shared/models';
 import { AuthService } from '@app/core/authentication';
 import { ApiService } from '@app/core/http';
-import { EditorService, NotificationService, ValidationService } from '@app/core/services';
+import { EditorService, NotificationService, ValidationService, ComparisonService } from '@app/core/services';
 
 @Component({
     selector: 'app-post-editor',
@@ -22,6 +22,7 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     constructor(
         private apiService: ApiService,
         private authService: AuthService,
+        private comparisonService: ComparisonService,
         private editorService: EditorService,
         private notificationService: NotificationService,
         private formBuilder: FormBuilder,
@@ -84,7 +85,7 @@ export class PostEditorComponent implements OnInit, OnDestroy {
 
     loadTopicData(): void {
         this.apiService.getTopics().subscribe(topics => {
-            this.topics = topics;
+            this.topics = topics.sort(this.comparisonService.topics);
 
             this.topics.forEach((topic, idx) => {
                 let control: FormControl;

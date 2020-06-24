@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Post, Topic } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/authentication';
-import { BlogService, EditorService, NotificationService } from '@app/core/services';
+import { BlogService, EditorService, NotificationService, ComparisonService } from '@app/core/services';
 
 @Component({
     selector: 'app-post-view',
@@ -21,6 +21,7 @@ export class PostViewComponent implements OnInit {
         private apiService: ApiService,
         private authService: AuthService,
         public blogService: BlogService,
+        private comparisonService: ComparisonService,
         private editorService: EditorService,
         private notificationService: NotificationService,
         private router: Router
@@ -32,7 +33,8 @@ export class PostViewComponent implements OnInit {
         this.apiService.getPost(this.router.url).subscribe(post => {
             this.isLoaded = true;
             this.post = post;
-            this.post.topics.sort(this.compareTopics);
+            
+            this.post.topics.sort(this.comparisonService.topics);
         });
     }
 
@@ -48,9 +50,8 @@ export class PostViewComponent implements OnInit {
     }
 
     deletePost(): void {
-        this.apiService.deletePost(this.router.url, this.authService.getAuthHeaders()).subscribe(result => {
-            let message = 'Successfully deleted blog post!';
-            this.notificationService.createNotification(message);
+        this.apiService.deletePost(this.router.url, this.authService.getAuthHeaders()).subscribe(res => {
+            this.notificationService.createNotification(res.msg);
             
             this.router.navigate(['/blog']);
         });

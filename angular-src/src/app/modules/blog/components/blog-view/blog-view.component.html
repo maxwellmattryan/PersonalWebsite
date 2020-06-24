@@ -15,7 +15,7 @@
 
             <ng-container *ngIf='isAdmin'>
                 <ng-container *ngIf='topic[0] === "All"'>
-                    <button class='btn blog__filter-btn--add' [routerLink]="['/editor']" [queryParams]='{type: "topic"}'>
+                    <button class='btn blog__filter-btn--add btn--go' [routerLink]="['/editor']" [queryParams]='{type: "topic"}'>
                         &#x2b;
                     </button>
                 </ng-container>
@@ -30,7 +30,7 @@
                         &#x270F;
                     </button>
                     <button
-                        class='btn blog__filter-btn--edit'
+                        class='btn blog__filter-btn--edit btn--warn'
                         (click)='deleteTopic(topic[0])'
                         type='button'
                     >

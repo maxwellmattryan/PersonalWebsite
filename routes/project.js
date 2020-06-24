@@ -47,7 +47,7 @@ router.put('/:uri', passport.authenticate('jwt', { session: false }), (req, res,
                 } else {
                     res.status(201).json({
                         success: true,
-                        msg: 'Successfully created new project!'
+                        msg: 'Created new project!'
                     });
                 }
             });
@@ -56,7 +56,7 @@ router.put('/:uri', passport.authenticate('jwt', { session: false }), (req, res,
         } else {
             res.status(200).json({
                 success: false,
-                msg: 'Successfully updated project!'
+                msg: 'Updated project!'
             });
         }
     });

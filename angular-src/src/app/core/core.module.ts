@@ -5,8 +5,10 @@ import { ApiService } from './http/api.service';
 import { AuthService } from './authentication/auth.service';
 import {
     BlogService,
+    ComparisonService,
     EditorService,
     NotificationService,
+    ProfileService,
     ValidationService
 } from './services';
 
@@ -18,8 +20,10 @@ import {
         ApiService,
         AuthService,
         BlogService,
+        ComparisonService,
         EditorService,
         NotificationService,
+        ProfileService,
         ValidationService
     ]
 })

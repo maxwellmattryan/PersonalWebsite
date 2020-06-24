@@ -9,46 +9,91 @@ require('../config/passport')(passport);
 const Post = require('../models/post');
 const Profile = require('../models/profile');
 
+router.get('', (req, res, next) => {
+    if(req.query.active) {
+        Profile.findOne({ active: true })
+        .populate('projects')
+        .populate({
+            path: 'posts',
+            populate: {
+                path: 'topics'
+            }
+        })
+        .exec((err, profile) => {
+            if(err) throw err;
+
+            res.status(200).json(profile);
+        });
+    } else {
+        Profile.find({}, (err, profiles) => {
+            if(err) throw err;
+    
+            res.status(200).json(profiles);
+        });
+    }
+});
+
+router.get('/:uri', (req, res, next) => {
+    Profile.find({ uri: req.params.uri })
+    .populate('projects')
+    .populate({
+        path: 'posts',
+        populate: {
+            path: 'topics'
+        }
+    })
+    .exec((err, profile) => {
+        if(err) throw err;
+
+        res.status(200).json(profile);
+    });
+});
+
 router.put('/:uri', passport.authenticate('jwt', { session: false }), (req, res, next) => {
     Post.find({}, (err, posts) => {
         if(err) throw err;
 
-        const profileData = {
-            _id:            req.body._id || new mongoose.Types.ObjectId(),
-            uri:            req.body.uri,
-            name:           req.body.name,
-            landing:        req.body.landing,
-            about:          req.body.about,
-            projects:       req.body.projects,
-            posts:          posts.map(p => p._id) || []
-        };
-    
-        Profile.updateOne({_id: profileData._id}, profileData, (err, result) => {
+        Profile.updateMany({}, { active: false }, (err, profiles) => {
             if(err) throw err;
 
-            if(result.n === 0) {
-                const newProfile = new Profile(profileData);
-                newProfile.save((err, profile) => {
-                    if(err) {
-                        res.status(400).json({
-                            success: false,
-                            msg: 'This profile already exists.'
-                        });
-                    } else {
-                        res.status(201).json({
-                            success: true,
-                            msg: 'Successfully created new profile!'
-                        });
-                    }
-                });
-            } else if(result.nModified === 0) {
-                res.sendStatus(304);
-            } else {
-                res.status(200).json({
-                    success: true,
-                    msg: 'Successfully updated profile!'
-                });
-            }
+            const profileData = {
+                _id:            req.body._id || new mongoose.Types.ObjectId(),
+                uri:            req.body.uri,
+                name:           req.body.name,
+                active:         true,
+                landing:        req.body.landing,
+                about:          req.body.about,
+                projects:       req.body.projects,
+                posts:          posts.map(p => p._id) || []
+            };
+        
+            Profile.updateOne({_id: profileData._id}, profileData, (err, result) => {
+                if(err) throw err;
+
+                if(result.n === 0) {
+                    const newProfile = new Profile(profileData);
+                    newProfile.save((err, profile) => {
+                        if(err) {
+                            res.status(400).json({
+                                success: false,
+                                msg: 'This profile already exists.'
+                            });
+                        } else {
+                            res.status(201).json({
+                                success: true,
+                                msg: 'Created new profile!'
+                            });
+                        }
+                    });
+                } else if(result.nModified === 0) {
+                    res.sendStatus(304);
+                } else {
+                    res.status(200).json({
+                        success: true,
+                        msg: `Switched profile to ${profileData.uri.replace('-', ' ')}!`
+                    });
+                }
+            });
         });
     });
 });

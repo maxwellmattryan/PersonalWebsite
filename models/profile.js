@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const profileSchema = Schema({
     _id:            { type: Schema.Types.ObjectId                   },
     uri:            { type: String, required: true, unique: true    },
+    active:         { type: Boolean, required: true                 },
     name:           { type: String, required: true                  },
     landing:        {
         description:{ type: String, required: true                 },

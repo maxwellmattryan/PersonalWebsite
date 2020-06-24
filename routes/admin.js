@@ -31,7 +31,7 @@ router.post('/auth', (req, res, next) => {
                 res.json({
                     success: true,
                     token: 'JWT ' + token,
-                    msg: 'Successfully logged in!',
+                    msg: 'Logged in!',
                     admin: {
                         id: admin._id,
                         username: admin.username
@@ -59,7 +59,7 @@ router.post('/register', (req, res, next) => {
                 res.json({success: false, msg: 'Unable to register admin.'});
             }
         } else {
-            res.json({success: true, msg: 'Successfully registered admin!'});
+            res.json({success: true, msg: 'Registered new admin!'});
         }
     });
 });

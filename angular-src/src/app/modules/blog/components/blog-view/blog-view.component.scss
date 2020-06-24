@@ -21,14 +21,16 @@
     line-height: $btn-height;
     width: 100%;
 
+    &--add, &--edit {
+        width: 13vw;
+    }
+
     &--add {
         font-size: 150%;
-        width: 29.5vw;
     }
 
     &--edit {
-        font-size: 130%;
-        width: 13vw;
+        font-size: 120%;
     }
 
     &--half {

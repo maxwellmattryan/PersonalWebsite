@@ -35,7 +35,6 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 // ROUTES
-app.use('/api',             require('./routes/index'));
 app.use('/api/admin',       require('./routes/admin'));
 app.use('/api/blog',        require('./routes/blog'));
 app.use('/api/profiles',    require('./routes/profile'));

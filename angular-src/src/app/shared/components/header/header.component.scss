@@ -27,7 +27,7 @@
     padding: 0 $padding;
     position: fixed;
     transition: 1s;
-    width: calc(100vw - 2rem);
+    width: 100vw;
     z-index: 1;
 
     &--no-show {
@@ -76,6 +76,7 @@
 .navbar__toggle-btn {
     background-color: $color-dark;
     height: $header-height;
+    margin-right: $margin;
     width: $header-height;
 }
 
