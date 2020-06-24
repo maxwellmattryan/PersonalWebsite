@@ -2,6 +2,8 @@
 
 <div class='dashboard'>
     <h1 class='dashboard__header'>Dashboard</h1>
+
+    <div class="line-divider"></div>
     
     <div class='dashboard__btn-container' *ngIf='!authService.isLoggedIn()'>
         <a class='btn dashboard__btn' [routerLink]="['/admin/register']">Register</a>

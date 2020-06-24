@@ -3,15 +3,17 @@
 <div class='login'>
     <h1 class='login__header'>Login</h1>
 
+    <div class="line-divider"></div>
+
     <form class='login__form' (ngSubmit)='onLoginSubmit()'>
-        <div class='login__form-field'>
+        <div class='form-field login__form-field'>
             <label>Username</label>
             <br><br>
-            <input [(ngModel)]='username' name='username' required>
+            <input [(ngModel)]='username' name='username' required autofocus>
         </div>
         <br>
 
-        <div class='login__form-field'>
+        <div class='form-field login__form-field'>
             <label>Password</label>
             <br><br>
             <input [(ngModel)]='password' name='password' type='password' required>

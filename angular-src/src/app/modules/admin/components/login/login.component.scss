@@ -4,6 +4,7 @@
     background-color: $color-dark;
     color: $color-white;
     min-height: 71vh;
+    padding: 0 $padding;
 }
 
 .login__header {
@@ -13,16 +14,10 @@
 
 .login__form {
     text-align: center;
-    margin-bottom: $margin;
 }
 
 .login__form-field {
-    input {
-        border-radius: 1px;
-        box-sizing: border-box;
-        height: $input-height;
-        padding: 0 $quarter-padding;
-    }
+    
 }
 
 .login__form-btn {

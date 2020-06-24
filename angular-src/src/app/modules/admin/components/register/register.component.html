@@ -3,15 +3,17 @@
 <div class='register'>
     <h1 class='register__header'>Register</h1>
 
+    <div class="line-divider"></div>
+
     <form class='register__form' (ngSubmit)='onRegisterSubmit()'>
-        <div class='register__form-field'>
+        <div class='form-field register__form-field'>
             <label>Username</label>
             <br><br>
-            <input [(ngModel)]='username' name='username' required>
+            <input [(ngModel)]='username' name='username' required autofocus>
         </div>
         <br>
 
-        <div class='register__form-field'>
+        <div class='form-field register__form-field'>
             <label>Password</label>
             <br><br>
             <input [(ngModel)]='password' name='password' type='password' required>

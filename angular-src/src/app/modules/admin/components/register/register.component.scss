@@ -4,6 +4,7 @@
     background: $color-dark;
     color: $color-white;
     min-height: 71vh;
+    padding: 0 $padding;
 }
 
 .register__header {
@@ -13,16 +14,10 @@
 
 .register__form {
     text-align: center;
-    margin-bottom: $margin;
 }
 
 .register__form-field {
-    input {
-        border-radius: 1px;
-        box-sizing: border-box;
-        height: $input-height;
-        padding: 0 $quarter-padding;
-    }
+    
 }
 
 .register__form-btn {

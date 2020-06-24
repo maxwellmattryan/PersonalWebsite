@@ -19,22 +19,8 @@
 .editor__form-field {
     margin-bottom: $margin;
 
-    input, textarea {
-        border-radius: 1px;
-        box-sizing: border-box;
-        width: 100%;
-    }
-    
     input {
-        height: $input-height;
-        padding: 0 $quarter-padding;
-    }
-
-    textarea {
-        height: $textarea-height;
-        max-width: 100%;
-        min-width: 100%;
-        padding: $quarter-padding;
+        width: 100%;
     }
 }
 
