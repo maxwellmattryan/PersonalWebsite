@@ -17,9 +17,7 @@
                 "C++"
             ]
         },
-        "projects": [
-            "5ed6ca23c08bf2569428c3ee"
-        ]
+        "projects": []
     },
     {
         "_id": "5ef118d1bda2aa2c38e18204",
@@ -39,9 +37,7 @@
                 "C#"
             ]
         },
-        "projects": [
-            "5ed6b75d887cd82e00274a13"
-        ]
+        "projects": []
     },
     {
         "_id": "5ef11921bda2aa2c38e18205",
@@ -61,8 +57,6 @@
                 "C++"
             ]
         },
-        "projects": [
-            "5ed6b75d887cd82e00274a13"
-        ]
+        "projects": []
     }
 ]

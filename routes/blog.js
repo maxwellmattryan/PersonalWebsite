@@ -86,7 +86,7 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
                 if(err) {
                     res.status(200).json({
                         success: false,
-                        msg: 'A post with this title already exists.'
+                        msg: 'This post already exists.'
                     });
                 } else {    
                     res.status(201).json({

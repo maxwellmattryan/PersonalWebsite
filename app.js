@@ -23,10 +23,10 @@ mongoose.connect(config.database, {
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
 app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -35,17 +35,11 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 // ROUTES
-const indexRoute = require('./routes/index');
-const adminRoute = require('./routes/admin');
-const blogRoute = require('./routes/blog');
-const profileRoute = require('./routes/profile');
-const projectRoute = require('./routes/project');
-
-app.use('/api', indexRoute);
-app.use('/api/admin', adminRoute);
-app.use('/api/blog', blogRoute);
-app.use('/api/profiles', profileRoute);
-app.use('/api/projects', projectRoute);
+app.use('/api',             require('./routes/index'));
+app.use('/api/admin',       require('./routes/admin'));
+app.use('/api/blog',        require('./routes/blog'));
+app.use('/api/profiles',    require('./routes/profile'));
+app.use('/api/projects',    require('./routes/project'));
 
 // EXPORT
 module.exports = app;

@@ -24,19 +24,30 @@ router.put('/:uri', passport.authenticate('jwt', { session: false }), (req, res,
         };
     
         Profile.updateOne({_id: profileData._id}, profileData, (err, result) => {
-            if(err) res.sendStatus(400);
+            if(err) throw err;
 
-            if(result.nModified === 0) {
+            if(result.n === 0) {
                 const newProfile = new Profile(profileData);
                 newProfile.save((err, profile) => {
                     if(err) {
-                        res.sendStatus(400);
+                        res.status(400).json({
+                            success: false,
+                            msg: 'This profile already exists.'
+                        });
                     } else {
-                        res.sendStatus(201);
+                        res.status(201).json({
+                            success: true,
+                            msg: 'Successfully created new profile!'
+                        });
                     }
                 });
+            } else if(result.nModified === 0) {
+                res.sendStatus(304);
             } else {
-                res.sendStatus(204);
+                res.status(200).json({
+                    success: true,
+                    msg: 'Successfully updated profile!'
+                });
             }
         });
     });

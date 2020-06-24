@@ -28,11 +28,11 @@ router.put('/:uri', passport.authenticate('jwt', { session: false }), (req, res,
     Profile.updateMany({_id: {$in: projectData.profiles}}, {$push: {projects: projectData._id}}, (err, result) => {
         if(err) throw err;
     });
-
+    
     Project.updateOne({_id: projectData._id}, projectData, (err, result) => {
         if(err) throw err;
 
-        if(result.nModified === 0) {
+        if(result.n === 0) {
             const newProject = new Project({
                 ...projectData,
                 created: Date.now()
@@ -40,13 +40,24 @@ router.put('/:uri', passport.authenticate('jwt', { session: false }), (req, res,
 
             newProject.save((err, project) => {
                 if(err) {
-                    res.sendStatus(400);
+                    res.status(400).json({
+                        success: false,
+                        msg: 'This project already exists.'
+                    });
                 } else {
-                    res.sendStatus(201);
+                    res.status(201).json({
+                        success: true,
+                        msg: 'Successfully created new project!'
+                    });
                 }
             });
+        } else if(result.nModified === 0){
+            res.sendStatus(304);
         } else {
-            res.sendStatus(200);
+            res.status(200).json({
+                success: false,
+                msg: 'Successfully updated project!'
+            });
         }
     });
 });
