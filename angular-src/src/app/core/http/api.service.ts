@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { Admin, Blog } from '@app/shared/interfaces';
+import { Admin, Blog, Homepage } from '@app/shared/interfaces';
 import { environment } from '@app/environments/environment';
 import { Post, Profile, Topic } from '@app/shared/models';
 
@@ -40,6 +40,11 @@ export class ApiService {
         ).pipe(map(res => res));
     }
 
+    // HOMEPAGE
+    getHomepage(): Observable<Homepage> {
+        return this.http.get<Homepage>(environment.API_URL);
+    }
+
     // POST
     deletePost(requestURL: string, headers: HttpHeaders): Observable<any> {
         return this.http.delete<any>(
@@ -52,8 +57,8 @@ export class ApiService {
         return this.http.get<Post>(environment.API_URL + requestURL);
     }
 
-    getBlog(): Observable<Blog> {
-        return this.http.get<Blog>(environment.API_URL + '/blog');
+    getPosts(): Observable<Blog> {
+        return this.http.get<Blog>(environment.API_URL + '/blog/posts');
     }
 
     putPost(post: Post, headers: HttpHeaders): Observable<Post> {
@@ -65,10 +70,6 @@ export class ApiService {
     }
 
     // PROFILE
-    getProfile(): Observable<Profile> {
-        return this.http.get<Profile>(environment.API_URL + '/profiles?active=true');
-    }
-
     getProfiles(): Observable<Profile[]> {
         return this.http.get<Profile[]>(environment.API_URL + '/profiles');
     }

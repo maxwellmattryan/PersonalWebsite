@@ -30,7 +30,7 @@ export class BlogViewComponent implements OnInit {
     ngOnInit(): void {
         this.isAdmin = this.authService.isLoggedIn();
         
-        this.apiService.getBlog().subscribe((blog: Blog) => {
+        this.apiService.getPosts().subscribe((blog: Blog) => {
             this.isLoaded = true;
             this.blog = blog;
             

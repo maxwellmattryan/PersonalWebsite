@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Profile } from '@app/shared/models';
+import { Homepage } from '@app/shared/interfaces';
 import { ApiService } from '@app/core/http';
 
 @Component({
@@ -11,16 +11,16 @@ import { ApiService } from '@app/core/http';
 export class HomeViewComponent implements OnInit {
     isLoaded: boolean = false;
 
-    profile: Profile;
+    homepage: Homepage;
 
     constructor(
         private apiService: ApiService
     ) { }
 
     ngOnInit(): void {
-        this.apiService.getProfile().subscribe(profile => {
+        this.apiService.getHomepage().subscribe(homepage => {
+            this.homepage = homepage;
             this.isLoaded = true;
-            this.profile = profile;
         });
     }
 }

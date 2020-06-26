@@ -14,8 +14,7 @@ const profileSchema = Schema({
         description: [{ type: String, required: true                }],
         technologies: [{ type: String, required: true               }]
     },
-    projects:       [{ type: Schema.Types.ObjectId, ref: 'Project'  }],
-    posts:          [{ type: Schema.Types.ObjectId, ref: 'Post'     }]
+    projects:       [{ type: Schema.Types.ObjectId, ref: 'Project'  }]
 });
 
 const Profile = mongoose.model('Profile', profileSchema);

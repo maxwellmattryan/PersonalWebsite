@@ -11,22 +11,17 @@ const Post = require('../models/post');
 const Topic = require('../models/topic');
 
 // BLOG
-router.get('/', (req, res, next) => {
-    var blog = {};
-
+router.get('/posts', (req, res, next) => {
     Post.find({})
     .populate('topics')
     .exec((err, posts) => {
         if(err) throw err;
 
-        blog.posts = posts;
-
         Topic.find({})
         .exec((err, topics) => {
             if(err) throw err;
-
-            blog.topics = topics;
             
+            let blog = { posts: posts, topics: topics };
             res.status(200).json(blog);
         });
     });
