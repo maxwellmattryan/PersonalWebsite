@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Post } from '@app/shared/models';
-import { BlogService } from '@app/core/services';
+import { BlogService, ComparisonService } from '@app/core/services';
 
 @Component({
     selector: 'app-post-collection',
@@ -10,16 +10,32 @@ import { BlogService } from '@app/core/services';
 })
 export class PostCollectionComponent implements OnInit {
     @Input() content: Array<Post>;
-    @Input() showTopics: boolean;
+    
     @Input() showPreview: boolean;
+    @Input() showTopics: boolean;
+
+    nPostsToDisplay: number = 5;
 
     constructor(
-        public blogService: BlogService
+        public blogService: BlogService,
+        private comparisonService: ComparisonService
     ) { }
 
     ngOnInit(): void { }
 
+    getPosts(): Array<Post> {
+        return this.content.sort(this.comparisonService.posts).slice(0, this.nPostsToDisplay);
+    }
+
     activateTopic(topic: string): void {
         this.blogService.setActiveTopic(topic);
+    }
+
+    displayMorePosts(): void {
+       this.nPostsToDisplay += 5;
+
+        if(this.nPostsToDisplay >= this.content.length) {
+            this.nPostsToDisplay = this.content.length;
+        }
     }
 }

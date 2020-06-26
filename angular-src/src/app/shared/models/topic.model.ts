@@ -1,5 +1,4 @@
 import { Deserializable } from './deserializable.model';
-import { Post } from './post.model';
 
 export class Topic implements Deserializable {
     _id:            any;

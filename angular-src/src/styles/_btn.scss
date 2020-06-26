@@ -29,6 +29,10 @@
         color: $color-dark;
     }
 
+    &--hide {
+        display: none;
+    }
+
     &--warn {
         border: 2px solid $color-warn;
         color: $color-warn;

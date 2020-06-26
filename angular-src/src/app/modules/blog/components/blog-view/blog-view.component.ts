@@ -31,10 +31,11 @@ export class BlogViewComponent implements OnInit {
         this.isAdmin = this.authService.isLoggedIn();
         
         this.apiService.getPosts().subscribe((blog: Blog) => {
-            this.isLoaded = true;
             this.blog = blog;
             
             this.filterPosts(this.blogService.getActiveTopic());
+            
+            this.isLoaded = true;
         });
     }
 
@@ -81,7 +82,7 @@ export class BlogViewComponent implements OnInit {
 
     deleteTopic(topic: string): void {
         if(!this.canDeleteTopic(topic)) {
-            this.notificationService.createNotification('Unable to delete topic (fix the single-topic posts).');
+            this.notificationService.createNotification('Unable to delete topic (fix single-topic posts).');
         } else {
             const requestURL = '/blog/topics/' + this.blog.topics.find(t => t.name === topic).uri;
 

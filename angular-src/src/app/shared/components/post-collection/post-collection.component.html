@@ -1,10 +1,10 @@
-<div class='section posts'>
+<div class='section posts' *ngIf='content'>
     <h2 class='posts__header'>Posts</h2>
 
     <div class='line-divider'></div>
 
     <div class='container posts__post-container'>
-        <a class=posts__post-anchor-wrapper *ngFor='let post of content' [routerLink]="['/blog/posts/' + post.uri]">
+        <a class=posts__post-anchor-wrapper *ngFor='let post of getPosts()' [routerLink]="['/blog/posts/' + post.uri]">
             <div class='posts__post'>
                 <h3 class='posts__post-header'>{{ post.title }}</h3>
                 <p class='posts__post-date' [innerHTML]='blogService.getFormattedDate(post.created)'></p>
@@ -27,4 +27,12 @@
             </div>
         </a>
     </div>
+
+    <button
+        [ngClass]="{'btn--hide': nPostsToDisplay >= content.length}"
+        class='btn posts__load-btn'
+        (click)='displayMorePosts()'
+    >
+        Load More
+    </button>
 </div>
