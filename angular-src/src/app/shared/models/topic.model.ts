@@ -7,13 +7,9 @@ export class Topic implements Deserializable {
     name:           string;
     description:    string;
     imageURL:       string;
-    posts:          Array<Post>;
 
     deserialize(input: any): this {
         Object.assign(this, input);
-
-        this.posts = input.posts.map(p => new Post().deserialize(p));
-
         return this;
     }
 }

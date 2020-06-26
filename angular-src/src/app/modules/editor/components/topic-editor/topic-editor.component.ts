@@ -90,7 +90,6 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
         }
         topic['_id'] = this.getTopicID();
         topic['uri'] = this.getTopicURI(topic['name']);
-        topic['posts'] = this.getTopicPosts();
 
         return topic;
     }
@@ -101,10 +100,6 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
 
     getTopicURI(name: string): string {
         return name.toLowerCase().replace(/[ ]/g, '-').replace(/[\.?]/g, '');
-    }
-
-    getTopicPosts(): Array<Post> {
-        return this.topicData ? this.topicData.posts : new Array<Post>();
     }
 
     getHeaders(): HttpHeaders {

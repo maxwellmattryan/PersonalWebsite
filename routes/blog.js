@@ -57,17 +57,6 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
         updated:        Date.now()
     };
 
-    Profile.updateMany({}, {$addToSet: {posts: postData._id}}, (err, result) => {
-        if(err) throw err;
-    });
-
-    Topic.updateMany({}, {$pull: {posts: postData._id}}, (err, result) => {
-        if(err) throw err;
-    });
-    Topic.updateMany({_id: {$in: postData.topics}}, {$push: {posts: postData._id}}, (err, result) => {
-        if(err) throw err;
-    });
-
     Post.updateOne({_id: postData._id}, postData, (err, result) => {
         if(err) throw err;
 
@@ -101,35 +90,23 @@ router.put('/posts/:uri', passport.authenticate('jwt', { session: false }), (req
 
 router.delete('/posts/:uri', passport.authenticate('jwt', { session: false }), (req, res, next) => {
     Post.findOneAndDelete({uri: req.params.uri}, (err, post) => {
-        if(err) {
-            res.sendStatus(400);
-        } else {
-            Topic.updateMany({}, {$pull: {posts: post._id}}, (err, result) => {
-                if(err) throw err;
-
-                else {
-                    Profile.updateMany({}, {$pull: {posts: post._id}}, (err, result) => {
-                        if(err) throw err;
-
-                        else {
-                            res.status(200).json({
-                                success: true,
-                                msg: 'Deleted blog post!'
-                            });
-                        }
-                    });
-                }
-            });
-        }
+        if(err) throw err
+        
+        res.status(200).json({
+            success: true,
+            msg: 'Deleted blog post!'
+        });
     });
 });
 
 // TOPICS
 router.get('/topics', (req, res, next) => {
     Topic.find({}, (err, topics) => {
-        if(err) throw err;
-
-        res.status(200).json(topics);
+        if(err) {
+            res.sendStatus(400);
+        } else {
+            res.status(200).json(topics);
+        }
     });
 });
 
@@ -139,15 +116,14 @@ router.put('/topics/:uri', passport.authenticate('jwt', { session: false }), (re
         uri: req.body.uri,
         name: req.body.name,
         description: req.body.description,
-        imageURL: req.body.imageURL,
-        posts: req.body.posts
+        imageURL: req.body.imageURL
     };
 
     Topic.updateOne({_id: topicData._id}, topicData, (err, result) => {
         if(err) throw err;
 
         if(result.n === 0) {
-            const newTopic = new Topic({...topicData});
+            const newTopic = new Topic(topicData);
 
             newTopic.save((err, topic) => {
                 if(err) {
@@ -173,26 +149,21 @@ router.put('/topics/:uri', passport.authenticate('jwt', { session: false }), (re
 
 router.delete('/topics/:uri', passport.authenticate('jwt', { session: false }), (req, res, next) => {
     Topic.findOneAndDelete({uri: req.params.uri}, (err, topic) => {
-        if(err) {
-            res.status(400).json({
-                success: false,
-                msg: 'Unable to delete blog topic.'
-            });
-        } else {
-            Post.updateMany({_id: {$in: topic.posts}}, {$pull: {topics: topic._id}}, (err, result) => {
-                if(err) {
-                    res.status(200).json({
-                        success: false,
-                        msg: 'Unable to delete blog topic.'
-                    });
-                } else {
-                    res.status(200).json({
-                        success: true,
-                        msg: 'Deleted blog topic!'
-                    });
-                }
-            });
-        }
+        if(err) throw err;
+
+        Post.updateMany({_id: {$in: topic.posts}}, {$pull: {topics: topic._id}}, (err, result) => {
+            if(err) {
+                res.status(200).json({
+                    success: false,
+                    msg: 'Unable to delete blog topic.'
+                });
+            } else {
+                res.status(200).json({
+                    success: true,
+                    msg: 'Deleted blog topic!'
+                });
+            }
+        });
     });
 });
 
