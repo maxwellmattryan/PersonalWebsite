@@ -7,7 +7,7 @@
             <button 
                 [ngClass]="{'btn--active': topic[1], 'blog__filter-btn--half': isAdmin}"
                 class='btn blog__filter-btn' 
-                (click)='posts = getPosts(topic[0])'
+                (click)='filterPosts(topic[0])'
                 type='button'
             >
                 {{ topic[0] }}

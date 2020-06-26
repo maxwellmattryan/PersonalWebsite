@@ -34,15 +34,15 @@ export class BlogViewComponent implements OnInit {
             this.isLoaded = true;
             this.blog = blog;
             
-            this.posts = this.getPosts(this.blogService.getActiveTopic());
+            this.filterPosts(this.blogService.getActiveTopic());
         });
     }
 
-    getPosts(topic: string): Array<Post> {
+    filterPosts(topic: string): void {
         this.blogService.setActiveTopic(topic);
         this.updateTopicMap();
 
-        return this.blog.posts.filter((value, index, array) => {
+        this.posts = this.blog.posts.filter((value, index, array) => {
             if(value.topics.map(t => t.name).includes(topic) || topic === 'All') return value;
         });
     }
@@ -80,11 +80,27 @@ export class BlogViewComponent implements OnInit {
     }
 
     deleteTopic(topic: string): void {
-        this.topics.delete(topic);
+        if(!this.canDeleteTopic(topic)) {
+            this.notificationService.createNotification('Unable to delete topic (fix the single-topic posts).');
+        } else {
+            const requestURL = '/blog/topics/' + this.blog.topics.find(t => t.name === topic).uri;
 
-        const requestURL = '/blog/topics/' + this.blog.topics.find(t => t.name === topic).uri;
-        this.apiService.deletePost(requestURL, this.authService.getAuthHeaders()).subscribe((res: any) => {
-            this.notificationService.createNotification(res.msg); 
-        });
+            this.apiService.deletePost(requestURL, this.authService.getAuthHeaders()).subscribe((res: any) => {
+                this.notificationService.createNotification(res.msg); 
+                
+                if(this.topics.get(topic)) {
+                    this.filterPosts('All');
+                }
+                
+                this.topics.delete(topic);
+            });
+        }
+    }
+
+    canDeleteTopic(topic: string): boolean {
+        let posts = this.blog.posts.filter(p => p.topics.map(t => t.name).includes(topic));
+        posts = posts.filter(p => p.topics.length === 1);
+        
+        return posts.length === 0;
     }
 }

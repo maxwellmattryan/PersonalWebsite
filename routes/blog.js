@@ -151,8 +151,9 @@ router.delete('/topics/:uri', passport.authenticate('jwt', { session: false }), 
     Topic.findOneAndDelete({uri: req.params.uri}, (err, topic) => {
         if(err) throw err;
 
-        Post.updateMany({_id: {$in: topic.posts}}, {$pull: {topics: topic._id}}, (err, result) => {
+        Post.updateMany({}, {$pull: {topics: topic._id}}, (err, result) => {
             if(err) {
+                console.log(err);
                 res.status(200).json({
                     success: false,
                     msg: 'Unable to delete blog topic.'
