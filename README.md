@@ -27,23 +27,33 @@ These services are used across the entire applications, so it is most organizati
     - Check if admin is logged in
     - Load / store token and admin username to local storage
     - Returns HttpHeaders with authorization key-value for JWT
+    - Contains interceptor for handling 401 / 403 errors
 - HTTP
     - Admin
         - Authenticates from login
         - Registers new admin
+    - Homepage
+        - Get data for homepage request (aka profile and posts)
     - Posts
         - Create, read, update, and delete posts
         - Get data for all posts
     - Profile
         - Get the currently selected profile for homepage data
+        - Get all profiles (used to select profile in dashboard)
     - Topics
-        - Get data for specific topic
+        - Get and delete topic
         - Get data for all topics
 - Services
+    - Blog
+        - Get and set active topic to display
+    - Comparison
+        - Contains functions to sort arrays of the various models, etc.
     - Editor
-        - Get, has, and set operations for the PostEditorComponent
+        - Get, has, and set operations for the various editor components
     - Notification
         - Creates Angular Material SnackBar popup
+    - Profile
+        - Get and set the active profile to display
     - Validation
         - Using ValidatorFn, verifies that at least one topic is selected from the editor's topic FormArray
         - Verifies admin credentials when logging in (and registering*)
@@ -64,24 +74,28 @@ Each module roughly corresponds to a page view of the web app and contains the n
     - TopicViewComponent
 - Editor
     - PostEditorComponent
+    - TopicEditorComponent
 - Home
     - HomeViewComponent
 - Material
-    - Used components from Angular Material
+    - Modules from Angular Material
 
 ### Shared
 
 The 'shared' folder contains all of the things that are going to be commonly used throughout the entire application and will appear on a majority of the pages. Having access to all of these needed Angular structures through a single 'shared' access point has made the whole development (and debug) process a lot easier.
 
 - Components
+    - AboutComponent
     - FooterComponent
     - HeaderComponent
+    - LandingComponent
     - PostCollectionComponent
     - ProjectCollectionComponent
     - TopicCollectionComponent
 - Interfaces
     - Admin
     - Blog
+    - Homepage
 - Models
     - Deserializable
     - Post
@@ -101,20 +115,22 @@ Express is quite a lightweight framework that makes it so easy to get applicatio
     - /login (GET)
     - /register (GET*)
 - /api
+    - / (GET)
     - /admin
         - /auth (POST)
-        - /register (POST)
+        - /register (POST*)
     - /blog
-        - / (GET)
+        - /posts (GET)
         - /posts/:uri (GET, PUT, DELETE)
         - /topics (GET)
-        - /topics/:uri (GET, PUT, DELETE)
+        - /topics/:uri (PUT, DELETE)
     - /profiles
         - /:uri (GET, PUT, DELETE)
+    - /projects
+        - /:uri (PUT, DELETE)
 - /blog
     - / (GET)
     - /posts/:uri (GET)
-    - /topics/:uri (GET)
 - /editor
     - / (GET)
 - /projects
@@ -164,7 +180,6 @@ MongoDB was an excellent database choice for this project. There weren't too man
     - Name (String)
     - Description (String)
     - ImageURL (String)
-    - Posts (Array\<Post>)
 
 ## Acknowledgements
 
