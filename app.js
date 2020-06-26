@@ -8,6 +8,8 @@ const passport = require('passport');
 const path = require('path');
 
 // DATABASE
+
+// CAUTION: Use your own database.js config file (b/c it needs your own credentials)
 const config = require('./config/database');
 
 mongoose.connect(config.database, {
