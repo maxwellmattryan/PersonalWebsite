@@ -11,7 +11,19 @@ export class ValidationService {
         return username !== '' && password !== '';
     }
 
-    hasMinTopics(min = 1) {
+    hasMinProfiles(min: number = 1): ValidatorFn {
+        const validator: ValidatorFn = (formArray: FormArray) => {
+            const amountSelected = formArray.controls
+                .map(control => control.value)
+                .reduce((prev, next) => next ? prev + next : prev, 0);
+
+            return amountSelected >= min ? null : { required: true };
+        };
+
+        return validator;
+    }
+
+    hasMinTopics(min: number = 1): ValidatorFn {
         const validator: ValidatorFn = (formArray: FormArray) => {
             const amountSelected = formArray.controls
                 .map(control => control.value)

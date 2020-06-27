@@ -7,6 +7,7 @@ const projectSchema = Schema({
     uri:            { type: String, required: true, unique: true    },
     title:          { type: String, required: true                  },
     subtitle:       { type: String, required: true                  },
+    preview:        { type: String, required: true                  },
     description:    { type: String, required: true                  },
     imageURL:       { type: String, required: true                  },
     externals:      [{ type: Object, required: true                 }],

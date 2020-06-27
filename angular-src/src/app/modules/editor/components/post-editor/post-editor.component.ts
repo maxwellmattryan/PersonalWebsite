@@ -13,7 +13,7 @@ import { EditorService, NotificationService, ValidationService, ComparisonServic
     templateUrl: './post-editor.component.html',
     styleUrls: ['../../editor.component.scss']
 })
-export class PostEditorComponent implements OnInit, OnDestroy {
+export class PostEditorComponent implements OnDestroy, OnInit {
     postData: Post;
     postForm: FormGroup;
 
@@ -30,6 +30,10 @@ export class PostEditorComponent implements OnInit, OnDestroy {
         private validationService: ValidationService
     ) { }
 
+    ngOnDestroy(): void {
+        this.editorService.setPost(null);
+    }
+
     ngOnInit(): void {
         this.checkForAdmin();
         
@@ -38,10 +42,6 @@ export class PostEditorComponent implements OnInit, OnDestroy {
         this.loadPostData();
         this.buildPostForm();
         this.loadTopicData();
-    }
-
-    ngOnDestroy(): void {
-        this.editorService.setPost(null);
     }
 
     checkForAdmin(): void {
@@ -62,23 +62,23 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     buildPostForm(): void {
         if(this.postData) {
             this.postForm = this.formBuilder.group({
-                title:          this.formBuilder.control(this.postData.title,           [Validators.required]),
-                subtitle:       this.formBuilder.control(this.postData.subtitle,        [Validators.required]),
-                topics:         this.formBuilder.array  ([],                            this.validationService.hasMinTopics(1)),
-                author:         this.formBuilder.control(this.postData.author,          [Validators.required]),
-                description:    this.formBuilder.control(this.postData.description,     [Validators.required]),
-                content:        this.formBuilder.control(this.postData.content,         [Validators.required]),
-                imageURL:       this.formBuilder.control(this.postData.imageURL,        [Validators.required])
+                title:          this.formBuilder.control(this.postData.title,           [Validators.required]                   ),
+                subtitle:       this.formBuilder.control(this.postData.subtitle,        [Validators.required]                   ),
+                topics:         this.formBuilder.array  ([],                            this.validationService.hasMinTopics(1)  ),
+                author:         this.formBuilder.control(this.postData.author,          [Validators.required]                   ),
+                description:    this.formBuilder.control(this.postData.description,     [Validators.required]                   ),
+                content:        this.formBuilder.control(this.postData.content,         [Validators.required]                   ),
+                imageURL:       this.formBuilder.control(this.postData.imageURL,        [Validators.required]                   )
             });
         } else {
             this.postForm = this.formBuilder.group({
-                title:          this.formBuilder.control('', [Validators.required]),
-                subtitle:       this.formBuilder.control('', [Validators.required]),
-                topics:         this.formBuilder.array  ([], this.validationService.hasMinTopics(1)),
-                author:         this.formBuilder.control('', [Validators.required]),
-                description:    this.formBuilder.control('', [Validators.required]),
-                content:        this.formBuilder.control('', [Validators.required]),
-                imageURL:       this.formBuilder.control('', [Validators.required])
+                title:          this.formBuilder.control('', [Validators.required]                  ),
+                subtitle:       this.formBuilder.control('', [Validators.required]                  ),
+                topics:         this.formBuilder.array  ([], this.validationService.hasMinTopics(1) ),
+                author:         this.formBuilder.control('', [Validators.required]                  ),
+                description:    this.formBuilder.control('', [Validators.required]                  ),
+                content:        this.formBuilder.control('', [Validators.required]                  ),
+                imageURL:       this.formBuilder.control('', [Validators.required]                  )
             });
         }
     }

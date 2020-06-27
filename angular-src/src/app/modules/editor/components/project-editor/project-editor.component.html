@@ -1,0 +1,60 @@
+<div class="section editor">
+    <h1 class='editor__header'>Project Editor</h1>
+
+    <div class="line-divider"></div>
+
+    <form class='editor__form' [formGroup]='projectForm' (ngSubmit)='onSubmit()'>
+        <div class='form-field editor__form-field'>
+            <label>Title</label>
+            <br><br>
+            <input formControlName='title' required autofocus>
+        </div>
+
+        <div class='form-field editor__form-field'>
+            <label>Subtitle</label>
+            <br><br>
+            <input formControlName='subtitle' required>
+        </div>
+
+        <div class='form-field editor__form-field'>
+            <label>Profiles</label>
+            <br><br>
+            <ng-container formArrayName='profiles' *ngFor='let profile of projectForm.controls.profiles["controls"]; let idx = index'>
+                <mat-checkbox [formControlName]='idx'>{{ profiles[idx].name }}</mat-checkbox>
+                <br>
+            </ng-container>
+        </div>
+
+        <div class="form-field editor__form-field">
+            <label>Preview</label>
+            <br><br>
+            <input formControlName='preview' required>
+        </div>
+
+        <div class="form-field editor__form-field">
+            <label>Description</label>
+            <br><br>
+            <textarea formControlName='description' required></textarea>
+        </div>
+
+        <div class="form-field editor__form-field">
+            <label>Image</label>
+            <br><br>
+            <input formControlName='imageURL' required>
+        </div>
+
+        <div class="form-field editor__form-field">
+            <label>Externals</label>
+            <br><br>
+            <input formControlName='externals' required>
+        </div>
+
+        <button
+            [ngClass]="{'btn--inactive': !projectForm.valid}"
+            class='btn editor__form-btn'
+            [disabled]='!projectForm.valid'
+        >
+            Submit
+        </button>
+    </form>
+</div>

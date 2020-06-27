@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { Admin, Blog, Homepage } from '@app/shared/interfaces';
 import { environment } from '@app/environments/environment';
-import { Post, Profile, Topic } from '@app/shared/models';
+import { Post, Project, Profile, Topic } from '@app/shared/models';
 
 @Injectable({
     providedIn: 'root'
@@ -65,6 +65,15 @@ export class ApiService {
         return this.http.put<Post>(
             environment.API_URL + '/blog/posts/' + post['uri'],
             post,
+            { headers: headers }
+        );
+    }
+
+    // PROJECT
+    putProject(project: Project, headers: HttpHeaders): Observable<Project> {
+        return this.http.put<Project>(
+            environment.API_URL + '/projects/' + project['uri'],
+            project,
             { headers: headers }
         );
     }
