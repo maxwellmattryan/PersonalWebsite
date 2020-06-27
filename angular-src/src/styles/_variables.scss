@@ -40,5 +40,9 @@ $half-padding: 1rem;
 $quarter-padding: 0.5rem;
 
 // ANIMATION
-$sidebar-transition: 0.3s;
-$active-link-transition: 0.15s;
+$anchor-active-transition-duration: 0.075s;
+
+$btn-active-transition-duration: 0.06s;
+$btn-active-transition-scale: 0.95;
+
+$sidebar-transition-duration: 0.15s;

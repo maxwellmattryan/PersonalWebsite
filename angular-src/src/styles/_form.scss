@@ -11,6 +11,10 @@
     input {
         height: $input-height;
         padding: 0 $quarter-padding;
+
+        &--password {
+            font-size: 16px;
+        }
     }
 
     textarea {

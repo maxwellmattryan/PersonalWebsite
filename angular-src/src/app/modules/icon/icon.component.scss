@@ -9,5 +9,9 @@
     .svg-icon {
         all: inherit;
         display: inline-block;
+
+        &--inactive {
+            fill: $color-light;
+        }
     }
 }

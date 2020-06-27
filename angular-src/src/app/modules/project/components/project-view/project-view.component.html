@@ -1,5 +1,6 @@
 <div class='section project' *ngIf='isLoaded'>
     <h1 class='project__title'>{{ project.title }}</h1>
+    <h2 class='project__subtitle'>{{ project.subtitle }}</h2>
     
     <div class="project__btn-container" *ngIf='isAdmin'>
         <a class='btn project__btn' (click)='sendProjectToEditor()' routerLink='/editor' [queryParams]='{type: "project"}'>
