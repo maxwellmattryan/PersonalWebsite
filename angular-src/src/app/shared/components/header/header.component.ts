@@ -37,7 +37,9 @@ export class HeaderComponent implements OnInit {
     }
 
     checkPageOffset(): void {
-        this.shouldDisplayNavbar = window.pageYOffset < this.previousPageYOffset;
+        const minPageYOffset: number = 50;
+
+        this.shouldDisplayNavbar = window.pageYOffset < this.previousPageYOffset || window.pageYOffset < minPageYOffset;
         this.previousPageYOffset = window.pageYOffset;
     }
 
