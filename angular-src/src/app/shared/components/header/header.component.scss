@@ -142,6 +142,7 @@
     &:active {
         background-color: $color-dark;
         color: $color-primary;
+        text-decoration: line-through;
     }
 }
 

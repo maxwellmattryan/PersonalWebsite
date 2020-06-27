@@ -23,4 +23,17 @@
         min-width: 100%;
         padding: $quarter-padding;
     }
+
+    &--external {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: $margin;
+    }
+}
+
+.form-field-label {
+    font-weight: 700;
+    font-size: 125%;
 }

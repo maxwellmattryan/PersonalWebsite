@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@app/modules/material/material.module';
 
@@ -23,7 +23,6 @@ import {
     imports: [
         CommonModule,
         EditorRoutingModule, 
-        FormsModule,
         MaterialModule,
         ReactiveFormsModule
     ]

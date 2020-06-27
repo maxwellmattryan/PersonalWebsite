@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -24,6 +24,7 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     constructor(
         private apiService: ApiService,
         private authService: AuthService,
+        private cdRef: ChangeDetectorRef,
         private comparisonService: ComparisonService,
         private editorService: EditorService,
         private notificationService: NotificationService,
@@ -41,9 +42,7 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
 
         this.setUnloadEvent();
 
-        this.loadProjectData();
-        this.buildProjectForm();
-        this.loadProfileData();
+        this.initProjectForm();
     }
 
     checkForAdmin(): void {
@@ -55,6 +54,15 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
         window.onbeforeunload = () => {
             this.editorService.setProject(null);
         };
+    }
+
+    initProjectForm(): void {
+        this.loadProjectData();
+
+        this.buildProjectForm();
+
+        this.loadProfileFormData();
+        this.loadExternalFormData();
     }
 
     loadProjectData(): void {
@@ -70,7 +78,7 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
                 preview:        this.formBuilder.control(this.projectData.preview,      [Validators.required]                   ),
                 description:    this.formBuilder.control(this.projectData.description,  [Validators.required]                   ),
                 imageURL:       this.formBuilder.control(this.projectData.imageURL,     [Validators.required]                   ),
-                externals:      this.formBuilder.control(this.projectData.externals,    [Validators.required]                   )
+                externals:      this.formBuilder.array  ([]                                                                     )
             });
         } else {
             this.projectForm = this.formBuilder.group({
@@ -80,12 +88,12 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
                 preview:        this.formBuilder.control('', [Validators.required]                      ),
                 description:    this.formBuilder.control('', [Validators.required]                      ),
                 imageURL:       this.formBuilder.control('', [Validators.required]                      ),
-                externals:      this.formBuilder.control('', [Validators.required]                      )
+                externals:      this.formBuilder.array  ([]                                             )
             });
         }
     }
 
-    loadProfileData(): void {
+    loadProfileFormData(): void {
         this.apiService.getProfiles().subscribe(profiles => {
             this.profiles = profiles.sort(this.comparisonService.profiles);
 
@@ -101,6 +109,35 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
                 (this.projectForm.controls.profiles as FormArray).push(control);
             });
         });
+    }
+
+    loadExternalFormData(): void {
+        if(this.projectData) {
+            this.projectData.externals.forEach((external, idx) => {
+                this.addExternal(external.name, external.URL);
+            });
+        } else {
+            this.addExternal();
+        }
+    }
+
+    addExternal(name: string = '', URL: string = ''): void {
+        (this.projectForm.controls.externals as FormArray).push(this.formBuilder.group({
+            name:   this.formBuilder.control(name,  [Validators.required]),
+            URL:    this.formBuilder.control(URL,   [Validators.required])
+        }));
+    }
+
+    deleteExternal(idx: number): void {
+        if(this.getExternalArrayLength() === 1) {
+            this.notificationService.createNotification('Unable to delete external (must have at least 1).');
+        } else {
+            (this.projectForm.controls.externals as FormArray).removeAt(idx);
+        }
+    }
+
+    getExternalArrayLength(): number {
+        return (this.projectForm.controls.externals as FormArray).length;
     }
 
     onSubmit(): void {

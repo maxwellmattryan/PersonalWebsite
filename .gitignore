@@ -1,3 +1,6 @@
+# Blog data
+/data
+
 # Database credentials
 /config/database.js
 

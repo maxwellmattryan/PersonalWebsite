@@ -5,19 +5,19 @@
 
     <form class='editor__form' [formGroup]='projectForm' (ngSubmit)='onSubmit()'>
         <div class='form-field editor__form-field'>
-            <label>Title</label>
+            <label class='form-field-label editor__form-field-label'>Title</label>
             <br><br>
             <input formControlName='title' required autofocus>
         </div>
 
         <div class='form-field editor__form-field'>
-            <label>Subtitle</label>
+            <label class='form-field-label editor__form-field-label'>Subtitle</label>
             <br><br>
             <input formControlName='subtitle' required>
         </div>
 
         <div class='form-field editor__form-field'>
-            <label>Profiles</label>
+            <label class='form-field-label editor__form-field-label'>Profiles</label>
             <br><br>
             <ng-container formArrayName='profiles' *ngFor='let profile of projectForm.controls.profiles["controls"]; let idx = index'>
                 <mat-checkbox [formControlName]='idx'>{{ profiles[idx].name }}</mat-checkbox>
@@ -26,27 +26,55 @@
         </div>
 
         <div class="form-field editor__form-field">
-            <label>Preview</label>
+            <label class='form-field-label editor__form-field-label'>Preview</label>
             <br><br>
             <input formControlName='preview' required>
         </div>
 
         <div class="form-field editor__form-field">
-            <label>Description</label>
+            <label class='form-field-label editor__form-field-label'>Description</label>
             <br><br>
             <textarea formControlName='description' required></textarea>
         </div>
 
         <div class="form-field editor__form-field">
-            <label>Image</label>
+            <label class='form-field-label editor__form-field-label'>Image</label>
             <br><br>
             <input formControlName='imageURL' required>
         </div>
 
-        <div class="form-field editor__form-field">
-            <label>Externals</label>
-            <br><br>
-            <input formControlName='externals' required>
+        <label class='form-field-label editor__form-field-label'>Externals</label>
+        <br><br>
+        <div class="form-field editor__form-field" formArrayName='externals'>
+            <div class='form-field--external' *ngFor='let external of projectForm.controls.externals["controls"]; let idx = index'>
+                <div [formGroupName]='idx'>
+                    <label>Name</label>
+                    <br>
+                    <input formControlName='name' required>
+                    
+                    <br><br>
+
+                    <label>URL</label>
+                    <input formControlName='URL' required>
+                </div>
+
+                <br>
+                <div class='editor__form-btn-container'>
+                    <button class='btn editor__form-btn btn--warn' (click)='deleteExternal(idx)' type='button'>
+                        &#x2715;
+                    </button>
+                </div>
+                <br>
+            </div>
+
+            <button
+                [ngClass]="{'btn--hide': getExternalArrayLength() >= 3}"
+                class='btn editor__form-btn'
+                (click)='addExternal()'
+                type='button'
+            >
+                Add External
+            </button>
         </div>
 
         <button

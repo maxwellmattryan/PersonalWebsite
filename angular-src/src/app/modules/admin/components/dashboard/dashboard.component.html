@@ -2,6 +2,32 @@
     <h1 class='dashboard__header'>Dashboard</h1>
 
     <div class="line-divider"></div>
+    
+    <div class='dashboard__btn-container' *ngIf='!authService.isLoggedIn()'>
+        <a class='btn dashboard__btn' [routerLink]="['/admin/login']">Login</a>
+        <a class='btn dashboard__btn' [routerLink]="['/admin/register']">Register</a>
+    </div>
+
+    <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
+        <h2>Blog</h2>
+        <br>
+        <a class='btn dashboard__btn' [routerLink]="['/editor']" [queryParams]='{type: "post"}'>
+            Create Post
+        </a>
+        <a class='btn dashboard__btn' [routerLink]="['/editor']" [queryParams]='{type: "topic"}'>
+            Create Topic
+        </a>
+        <br>
+    </div>
+
+    <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
+        <h2>Portfolio</h2>
+        <br>
+        <a class='btn dashboard__btn' [routerLink]="['/editor']" [queryParams]='{type: "project"}'>
+            Create Project
+        </a>
+        <br>
+    </div>
 
     <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
         <h2>Profiles:</h2>
@@ -15,26 +41,6 @@
         >
             {{ profile.name }}
         </button>
-        <br><br>
-    </div>
-    
-    <div class='dashboard__btn-container' *ngIf='!authService.isLoggedIn()'>
-        <a class='btn dashboard__btn' [routerLink]="['/admin/login']">Login</a>
-        <a class='btn dashboard__btn' [routerLink]="['/admin/register']">Register</a>
-    </div>
-
-    <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
-        <h2>Blog</h2>
-        <br>
-        <a class='btn dashboard__btn' [routerLink]="['/editor']" [queryParams]='{type: "post"}'>
-            Create Post
-        </a>
-        <a class='btn dashboard__btn' [routerLink]="['/editor']" [queryParams]='{type: "project"}'>
-            Create Project
-        </a>
-        <a class='btn dashboard__btn' [routerLink]="['/editor']" [queryParams]='{type: "topic"}'>
-            Create Topic
-        </a>
         <br><br>
     </div>
 
