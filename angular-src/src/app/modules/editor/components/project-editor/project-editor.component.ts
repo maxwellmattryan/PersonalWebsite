@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import { External } from '@app/shared/interfaces';
 import { Profile, Project } from '@app/shared/models';
 import { AuthService } from '@app/core/authentication';
 import { ApiService } from '@app/core/http';
@@ -18,6 +19,7 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     projectForm: FormGroup;
 
     profiles: Array<Profile> = [];
+    externals: Array<External> = [];
 
     constructor(
         private apiService: ApiService,

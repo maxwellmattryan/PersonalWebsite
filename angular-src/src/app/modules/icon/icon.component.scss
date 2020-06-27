@@ -1,0 +1,13 @@
+@import 'variables';
+
+:host {
+    fill: $color-primary;
+    display: inline-block;
+    height: $icon-height;
+    width: $icon-height;
+
+    .svg-icon {
+        all: inherit;
+        display: inline-block;
+    }
+}

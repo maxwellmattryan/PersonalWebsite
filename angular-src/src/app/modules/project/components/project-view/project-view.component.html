@@ -10,6 +10,14 @@
         </a>
     </div>
 
+    <div class='project__external-container'>
+        <ng-container *ngFor='let external of project.externals'>
+            <a class='icon project__external-icon' [href]='external.URL' target='_blank'>
+                <app-icon [external]='external'></app-icon>
+            </a>
+        </ng-container>
+    </div>
+
     <div class="line-divider"></div>
 
     <img class='project__image' [src]='project.imageURL' height=150>

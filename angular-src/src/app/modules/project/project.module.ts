@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { MarkdownModule } from 'ngx-markdown';
 
+import { IconModule } from '../icon/icon.module';
+
 import { ProjectComponent } from './project.component';
 import { ProjectRoutingModule } from './project-routing.module';
 
@@ -17,6 +19,7 @@ import {
     ],
     imports: [
         CommonModule,
+        IconModule,
         MarkdownModule.forRoot(),
         ProjectRoutingModule
     ]

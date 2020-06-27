@@ -12,8 +12,8 @@
                 <p class='projects__project-description'>{{ project.preview }}</p>
         
                 <div class="projects__project-ext-container">
-                    <a class='projects__project-ext-item' *ngFor='let ext of project.externals' [href]='ext.url' target='_blank'>
-                        {{ ext.name }}
+                    <a class='projects__project-ext-item' *ngFor='let external of project.externals' [href]='external.URL' target='_blank'>
+                        <app-icon [external]='external'></app-icon>
                     </a>
                 </div>
             </div>

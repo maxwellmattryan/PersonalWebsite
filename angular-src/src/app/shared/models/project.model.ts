@@ -1,4 +1,5 @@
 import { Deserializable } from './deserializable.model';
+import { External } from '../interfaces/external.interface';
 import { Profile } from './profile.model';
 
 export class Project implements Deserializable {
@@ -10,7 +11,7 @@ export class Project implements Deserializable {
     preview:        string;
     description:    string;
     imageURL:       string;
-    externals:      Array<Object>;
+    externals:      Array<External>;
 
     deserialize(input: any): this {
         Object.assign(this, input);

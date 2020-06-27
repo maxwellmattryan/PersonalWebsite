@@ -57,11 +57,11 @@
 
     &-ext-container {
         display: flex;
-        flex-direction: column;
-        padding-bottom: $padding;
+        flex-direction: row;
+        padding-bottom: $one-and-half-padding;
     }
 
     &-ext-item {
-        color: $color-primary;
+        margin-right: $half-margin;
     }
 }
