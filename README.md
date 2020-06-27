@@ -74,11 +74,14 @@ Each module roughly corresponds to a page view of the web app and contains the n
     - TopicViewComponent
 - Editor
     - PostEditorComponent
+    - ProjectEditorComponent
     - TopicEditorComponent
 - Home
     - HomeViewComponent
 - Material
     - Modules from Angular Material
+- Project
+    - ProjectViewComponent
 
 ### Shared
 
@@ -127,7 +130,7 @@ Express is quite a lightweight framework that makes it so easy to get applicatio
     - /profiles
         - /:uri (GET, PUT, DELETE)
     - /projects
-        - /:uri (PUT, DELETE)
+        - /:uri (GET, PUT, DELETE)
 - /blog
     - / (GET)
     - /posts/:uri (GET)

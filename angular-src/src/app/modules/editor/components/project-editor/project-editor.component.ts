@@ -109,8 +109,7 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
             this.notificationService.createNotification(res.msg);
 
             if(res.success) {
-                // TODO: change this link to the project page later
-                this.router.navigate(['']);
+                this.router.navigate(['projects/' + project['uri']]);
             }
         });
     }

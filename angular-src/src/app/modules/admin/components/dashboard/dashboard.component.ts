@@ -23,11 +23,9 @@ export class DashboardComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        if(!this.profileService.profiles) {
-            this.apiService.getProfiles().subscribe(profiles => {
-                this.profileService.setProfiles(profiles.sort(this.comparisonService.profiles));
-            });
-        }
+        this.apiService.getProfiles().subscribe(profiles => {
+            this.profileService.setProfiles(profiles.sort(this.comparisonService.profiles));
+        });
     }
 
     changeProfile(profile: Profile): void {

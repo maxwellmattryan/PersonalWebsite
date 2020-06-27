@@ -7,7 +7,7 @@ const profileSchema = Schema({
     active:         { type: Boolean, required: true                 },
     name:           { type: String, required: true                  },
     landing:        {
-        description:{ type: String, required: true                 },
+        description:{ type: String, required: true                  },
         tagline:    { type: String, required: true                  }
     },
     about: {

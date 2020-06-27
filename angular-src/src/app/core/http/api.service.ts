@@ -70,6 +70,17 @@ export class ApiService {
     }
 
     // PROJECT
+    deleteProject(requestURL: string, headers: HttpHeaders): Observable<any> {
+        return this.http.delete<any>(
+            environment.API_URL + requestURL,
+            { headers: headers }
+        );
+    }
+
+    getProject(requestURL: string): Observable<Project> {
+        return this.http.get<Project>(environment.API_URL + requestURL);
+    }
+    
     putProject(project: Project, headers: HttpHeaders): Observable<Project> {
         return this.http.put<Project>(
             environment.API_URL + '/projects/' + project['uri'],

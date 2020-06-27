@@ -21,8 +21,6 @@ export class HomeViewComponent implements OnInit {
         this.apiService.getHomepage().subscribe(homepage => {
             this.homepage = homepage;
             this.isLoaded = true;
-
-            console.log(this.homepage);
         });
     }
 }

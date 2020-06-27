@@ -1,0 +1,30 @@
+@import 'variables';
+
+.project {
+
+}
+
+.project__btn-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.project__btn {
+    font-size: 130%;
+    height: $small-btn-height;
+    line-height: $small-btn-height;
+    margin: 0 $quarter-margin $half-margin 0;
+    padding: $quarter-padding;
+    width: 15vw;
+}
+
+.project__title {
+    margin-bottom: $margin;
+}
+
+.project__image {
+    height: auto;
+    margin-bottom: $margin;
+    width: 100%;
+}

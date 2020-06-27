@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('@app/modules/editor/editor.module').then(m => m.EditorModule)
     },
     {
+        path: 'projects',
+        loadChildren: () => import('@app/modules/project/project.module').then(m => m.ProjectModule)
+    },
+    {
         path: '**',
         redirectTo: '/'
     }

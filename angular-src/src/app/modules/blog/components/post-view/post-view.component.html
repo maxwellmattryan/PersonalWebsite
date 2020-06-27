@@ -1,8 +1,7 @@
 <div class='section post' *ngIf='isLoaded'>
-
     <h1 class='post__title'>{{ post.title }}</h1>
 
-    <div class='post__btn-container' *ngIf='this.isAdmin'>
+    <div class='post__btn-container' *ngIf='isAdmin'>
         <a class='btn post__btn' (click)='sendPostToEditor()' routerLink='/editor' [queryParams]='{type: "post"}'>
             &#x270F;
         </a>
