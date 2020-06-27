@@ -5,6 +5,16 @@
     display: inline-block;
     height: $icon-height;
     width: $icon-height;
+    transform: perspective(1px) translateZ(0);
+    transition-duration: $icon-active-transition-duration;
+    transition-property: transform;
+    -webkit-transform: perspective(1px) translateZ(0);
+    -webkit-transform-duration: $icon-active-transition-duration;
+    -webkit-transition-property: transform;
+
+    &:active {
+        transform: scale($icon-active-transition-scale);
+    }
 
     .svg-icon {
         all: inherit;

@@ -64,4 +64,28 @@
     &-ext-item {
         margin-right: $half-margin;
     }
+
+    &--rjust {
+        &-title,
+        &-subtitle,
+        &-description {
+            text-align: right;
+        }
+
+        &-ext-container {
+            justify-content: flex-end;
+        }
+    }
+}
+
+.projects__project--rjust {
+    .projects__project-title,
+    .projects__project-subtitle,
+    .projects__project-description {
+        text-align: right;
+    }
+
+    .projects__project-ext-container {
+        justify-content: flex-end;
+    }
 }

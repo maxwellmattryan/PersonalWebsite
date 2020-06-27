@@ -4,19 +4,19 @@
     <div class='projects__line-divider line-divider'></div>
 
     <div class='container projects__project-container'>
-        <a class='projects__project-anchor-wrapper' *ngFor='let project of content' [routerLink]="['/projects/' + project.uri]">
-            <div class='projects__project'>
-                <div class='projects__project-background' [ngStyle]="{ 'background-image': 'url(' + project.imageURL + ')' }"></div>
+        <div class='projects__project' *ngFor='let project of content; let idx = index' [ngClass]="{'projects__project--rjust': idx % 2 === 0}">
+            <div class='projects__project-background' [ngStyle]="{ 'background-image': 'url(' + project.imageURL + ')' }"></div>
+            <a class='projects__project-anchor-wrapper' [routerLink]="['/projects/' + project.uri]">
                 <h3 class='projects__project-title'>{{ project.title }}</h3>
-                <h4 class='projects__project-subtitle'>{{ project.subtitle }}</h4>
-                <p class='projects__project-description'>{{ project.preview }}</p>
-        
-                <div class="projects__project-ext-container">
-                    <a class='projects__project-ext-item' *ngFor='let external of project.externals' [href]='external.URL' target='_blank'>
-                        <app-icon [external]='external'></app-icon>
-                    </a>
-                </div>
+            </a>
+            <h4 class='projects__project-subtitle'>{{ project.subtitle }}</h4>
+            <p class='projects__project-description'>{{ project.preview }}</p>
+    
+            <div class="projects__project-ext-container">
+                <a class='projects__project-ext-item' *ngFor='let external of project.externals' [href]='external.URL' target='_blank'>
+                    <app-icon [external]='external'></app-icon>
+                </a>
             </div>
-        </a>
+        </div>
     </div>
 </div>
