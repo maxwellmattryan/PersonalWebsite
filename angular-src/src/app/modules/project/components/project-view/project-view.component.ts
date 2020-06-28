@@ -28,6 +28,13 @@ export class ProjectViewComponent implements OnInit {
     ngOnInit(): void {
         this.isAdmin = this.authService.isLoggedIn();
 
+        // REMOVE WHEN PROJECT PAGE HAS BEEN INTEGRATED (ALSO IMPLEMENT AUTH GUARD LOLOL)
+        //======================================================================
+        if(!this.isAdmin) {
+            this.router.navigate(['']);
+        }
+        //======================================================================
+
         this.apiService.getProject(this.router.url).subscribe(project => {
             this.project = project;
             
