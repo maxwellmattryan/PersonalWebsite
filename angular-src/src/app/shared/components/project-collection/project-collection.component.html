@@ -6,9 +6,11 @@
     <div class='container projects__project-container'>
         <div class='projects__project' *ngFor='let project of content; let idx = index' [ngClass]="{'projects__project--rjust': idx % 2 === 0}">
             <div class='projects__project-background' [ngStyle]="{ 'background-image': 'url(' + project.imageURL + ')' }"></div>
-            <a class='projects__project-anchor-wrapper' [routerLink]="['/projects/' + project.uri]">
+            <a class='projects__project-anchor-wrapper' [routerLink]="['/projects/' + project.uri]" *ngIf='authService.isLoggedIn()'>
                 <h3 class='projects__project-title'>{{ project.title }}</h3>
             </a>
+            <h3 *ngIf='!authService.isLoggedIn()' class='projects__project-title'>{{ project.title }}</h3>
+
             <h4 class='projects__project-subtitle'>{{ project.subtitle }}</h4>
             <p class='projects__project-description'>{{ project.preview }}</p>
     

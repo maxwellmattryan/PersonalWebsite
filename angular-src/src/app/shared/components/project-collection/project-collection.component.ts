@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { AuthService } from '@app/core/authentication';
+
 @Component({
     selector: 'app-project-collection',
     templateUrl: './project-collection.component.html',
@@ -8,7 +10,9 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ProjectCollectionComponent implements OnInit {
     @Input() content: any;
 
-    constructor() { }
+    constructor(
+        public authService: AuthService
+    ) { }
 
     ngOnInit(): void { }
 }
