@@ -1,4 +1,4 @@
-# mattmaxwell.tech
+# mattmaxwell.dev
 
 Welcome to the codebase for my personal website. This repo contains both the backend and frontend code behind [mattmaxwell.tech](https://mattmaxwell.tech). 
 
