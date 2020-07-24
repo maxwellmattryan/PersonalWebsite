@@ -10,8 +10,8 @@ Welcome to the codebase for my personal website. This repo contains both the bac
     - [Shared](#Shared)
 - [Express / Node](#Express-/-Node)
     - [Routes (+ HTTP Methods)](#Routes-(+-HTTP-Methods))
-- [MongoDB](#MongoDB)
-    - [Schemas](#Schemas)
+- [MySQL](#MySQL)
+    - [Tables](#Tables)
 - [Acknowledgements](#Acknowledgements)
 
 ## Angular 
@@ -141,48 +141,42 @@ Express is quite a lightweight framework that makes it so easy to get applicatio
 
 _\*This endpoint will not be available on app's deployment._
 
-## MongoDB
+## MySQL
 
-MongoDB was an excellent database choice for this project. There weren't too many relationships that needed to be established between records, but even the ones that have them are easily handle-able by MongoDB and Mongoose for Express.
+Although there are no 1:1 relationships in this database design, there is fortunately enough complexity in the app to warrant a need for 1:n and m:n relation types. For this reason, I chose MySQL to efficiently and optimally handle my data needs opposed to a non-relational database technology like MongoDB (which would still work fine, but is not specifically intended for relational data).
 
-### Schemas
+### Tables
 
 - Admin
-    - Username (String)
-    - Password (String)
-- Profile
-    - _id (ObjectId)
-    - Name (String)
-    - URI (String)
-    - Tagline (String)
-    - About (String)
-    - Technologies (Array\<Object>)
-    - Projects (Array\<Project>)
-- Project
-    - _id (ObjectId)
-    - URI (String)
-    - Profiles (Array\<Profile>)
-    - Title (String)
-    - Subtitle (String)
-    - Description (String)
-    - ImageURL (String)
-    - Externals (Array\<Object>)
+    - Username
+    - Password
+- Author
+    - Firstname
+    - Lastname
 - Post
-    - _id (ObjectId)
-    - URI (String)
-    - Title (String)
-    - Subtitle (String)
-    - Topics (Array\<Topic>)
-    - Author (String)
-    - Description (String)
-    - Content (String)
-    - ImageURL (String)
+    - Title
+    - Content
+    - Preview
+    - Image URL
+    - Status (DRAFT, PUBLISHED)
 - Topic
-    - _id (ObjectId)
-    - URI (String)
-    - Name (String)
-    - Description (String)
-    - ImageURL (String)
+    - Name
+    - Description
+- Profile
+    - Name
+    - Tagline
+    - Landing
+    - About
+    - Status (ACTIVE, INACTIVE)
+- Project
+    - Name
+    - Tagline
+    - Description
+    - Image URL
+    - External URL
+- Technology
+    - Name
+    - Icon URL
 
 ## Acknowledgements
 
