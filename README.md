@@ -11,7 +11,7 @@ Welcome to the codebase for my personal website. This repo contains both the bac
 - [Express / Node](#Express-/-Node)
     - [Routes (+ HTTP Methods)](#Routes-(+-HTTP-Methods))
 - [MySQL](#MySQL)
-    - [Schemas](#Schemas)
+    - [Data](#Data)
 - [Acknowledgements](#Acknowledgements)
 
 ## Angular 
@@ -145,9 +145,9 @@ _\*This endpoint will not be available on app's deployment._
 
 Although there are no 1:1 relationships in this database design, there is fortunately enough complexity in the app to warrant a need for 1:n and m:n relation types. For this reason, I chose MySQL to efficiently and optimally handle my data needs opposed to a non-relational database technology like MongoDB (which would still work fine, but is not specifically intended for relational data).
 
-NOTE: What I have listed below is simply the more relevant fields for each table and does not fully represent the actual implementation or design. The more specific details include lookup tables, object-relation mappers, and some extra columns in a few tables, which are not listed here for the sake of my own app's security.
+NOTE: What I have listed below is simply the more relevant fields for each table and does not fully represent the actual implementation or design. The more specific details include lookup tables, object-relation mappers, and some extra columns in a few tables.
 
-### Schemas
+### Data
 
 - Admin
     - Username
@@ -179,6 +179,7 @@ NOTE: What I have listed below is simply the more relevant fields for each table
 - Technology
     - Name
     - Icon URL
+    - Display Order
 
 ## Acknowledgements
 
