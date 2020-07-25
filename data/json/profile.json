@@ -2,7 +2,7 @@
   "audio_development": {
     "name": "Audio Development",
     "tagline": "I make noises happen through code.",
-    "landing": "I'm an software engineer based in Austin, TX. I love to build and develop audio-related software, whether its plugins, game audio engines, and more.",
+    "landing": "I'm an software engineer based in Austin, TX. I love to build and develop audio-related software, whether it's plugins, game audio engines, and more.",
     "about": "I strive to develop clean and optimized audio software, which in and of itself is an vastly interesting problem domain. In addition to my passion for audio, I have experience ranging from building simple audio plugins to audio middleware solutions in games."
   },
   "game_development": {
@@ -14,7 +14,7 @@
   "software_engineering": {
     "name": "Software Engineering",
     "tagline": "Looking for a software engineer? I'm your guy.",
-    "landing": "I'm a software engineer based in Austin, TX. I love working on all sides of web development, whether it involves the front-end, back-end, or database.",
+    "landing": "I'm a software engineer based in Austin, TX. I love working on all sides of web development, whether it involves the front-end, back-end, database, or cloud computing.",
     "about": "I strive to develop clean and neatly architectured software for the web. I have experience ranging from developing simple single-page applications to working in complex enterprise-level solutions."
   }
 }
