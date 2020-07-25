@@ -1,5 +1,5 @@
-# Blog data
-/data
+# Website data (mostly 'starter data')
+/data/db
 
 # Database credentials
 /config/database.js

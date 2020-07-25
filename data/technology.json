@@ -1,0 +1,78 @@
+{
+  "audio_development": [
+    {
+      "name": "C++",
+      "icon_url": "url-to-icon",
+      "display_order": 1
+    },
+    {
+      "name": "JUCE",
+      "icon_url": "url-to-icon",
+      "display_order": 2
+    }
+  ],
+  "game_development": [
+    {
+      "name": "C#",
+      "icon_url": "url-to-icon",
+      "display_order": 1
+    },
+    {
+      "name": "Unity",
+      "icon_url": "url-to-icon",
+      "display_order": 2
+    }
+  ],
+  "software_engineering": [
+    {
+      "name": "TypeScript",
+      "icon_url": "url-to-icon",
+      "display_order": 1
+    },
+    {
+      "name": "Angular",
+      "icon_url": "url-to-icon",
+      "display_order": 2
+    },
+    {
+      "name": "JavaScript (ES6+)",
+      "icon_url": "url-to-icon",
+      "display_order": 3
+    },
+    {
+      "name": "React & Redux",
+      "icon_url": "url-to-icon",
+      "display_order": 4
+    },
+    {
+      "name": "Scala",
+      "icon_url": "url-to-icon",
+      "display_order": 5
+    },
+    {
+      "name": "Play",
+      "icon_url": "url-to-icon",
+      "display_order": 6
+    },
+    {
+      "name": "Express",
+      "icon_url": "url-to-icon",
+      "display_order": 7
+    },
+    {
+      "name": "Node",
+      "icon_url": "url-to-icon",
+      "display_order": 8
+    },
+    {
+      "name": "MySQL",
+      "icon_url": "url-to-icon",
+      "display_order": 9
+    },
+    {
+      "name": "MongoDB",
+      "icon_url": "url-to-icon",
+      "display_order": 10
+    }
+  ]
+}
