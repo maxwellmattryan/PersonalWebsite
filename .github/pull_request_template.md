@@ -1,3 +1,20 @@
+These keywords are for differentiating between task types and should be used in the PR titles and branch names, like `prefix/branch_name`.
+
+- `chore`
+  - simple grunt tasks (updating library, dependency, language spec, etc.)
+  - no production code change
+- `feature`
+  - implementing a new feature, functionality, or redesigned thing
+- `fix`
+  - fixing a bug or something that just isn't working working as it should
+- `refactor`
+  - changing or cleaning existing code that doesn't change external behavior
+- `sandbox`
+  - playing around or testing new things
+- `test`
+  - adding missing tests or refactoring test
+  - no production code change
+
 ## Summary
 
 This is a basic description for the pull-request providing an overview of its purpose, changes, etc.
