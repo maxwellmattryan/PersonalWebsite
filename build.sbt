@@ -1,5 +1,5 @@
 name := """mattmaxwell"""
-organization := "mattmaxwell-org"
+organization := "mattmaxwell"
 
 version := "1.0-SNAPSHOT"
 
