@@ -27,8 +27,7 @@ SELECT CONCAT(ba.first_name, ' ', ba.last_name) AS author,
        bps.status,
        bp.title,
        bp.preview,
-       bp.image_url,
-       bp.published_at
+       bp.image_url
 FROM blog_post bp
 INNER JOIN blog_post_topic_mapping bptm ON bp.blog_post_id = bptm.blog_post_id
 INNER JOIN blog_topic bt ON bt.blog_topic_id = bptm.blog_topic_id

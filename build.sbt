@@ -1,10 +1,18 @@
-name := """mattmaxwell"""
-organization := "mattmaxwell"
+lazy val root = (project in file("."))
+    .enablePlugins(PlayScala)
+    .settings(
+        name := "mattmaxwell",
+        version := "0.1",
+        scalaVersion := "2.13.3"
+    )
 
-version := "1.0-SNAPSHOT"
-
-lazy val root = (project in file(".")).enablePlugins(PlayJava)
-
-scalaVersion := "2.13.3"
-
+// Google 'guice' injection dependency
 libraryDependencies += guice
+
+// ScalikeJDBC dependencies
+libraryDependencies ++= Seq(
+    "mysql" % "mysql-connector-java" % "5.1.49",
+    "org.scalikejdbc" %% "scalikejdbc" % "3.5.0",
+    "org.scalikejdbc" %% "scalikejdbc-config" % "3.5.0",
+    "org.scalikejdbc" %% "scalikejdbc-play-initializer" % "2.8.0-scalikejdbc-3.5"
+)
