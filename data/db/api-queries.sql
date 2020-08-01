@@ -1,4 +1,4 @@
-# homepage (getting data for the profile and projects)
+-- homepage (getting data for the profile and projects)
 SELECT ps.status,
        prf.tagline,
        prf.landing,
@@ -21,14 +21,13 @@ INNER JOIN (
     WHERE ps.status = 'ACTIVE'
     ) prf ON prf.profile_id = ppm.profile_id;
 
-# general blog request
+-- general blog request
 SELECT CONCAT(ba.first_name, ' ', ba.last_name) AS author,
        bt.name AS topic,
        bps.status,
        bp.title,
        bp.preview,
-       bp.image_url,
-       bp.published_at
+       bp.image_url
 FROM blog_post bp
 INNER JOIN blog_post_topic_mapping bptm ON bp.blog_post_id = bptm.blog_post_id
 INNER JOIN blog_topic bt ON bt.blog_topic_id = bptm.blog_topic_id

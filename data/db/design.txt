@@ -1,0 +1,99 @@
+TABLES
+
+- admin
+    - admin_id (PRIMARY)
+    ========
+    - username
+    - password
+    ========
+
+- blog_post_author
+    - blog_post_author_id (PRIMARY)
+    ========
+    - first_name
+    - last_name
+    ========
+
+- blog_post_status
+    - blog_post_status_id (PRIMARY)
+    ========
+    - status
+    ========
+
+- blog_post
+    - blog_post_id (PRIMARY)
+    ========
+    - blog_post_author_id (FOREIGN)
+    - blog_post_status_id (FOREIGN)
+    ========
+    - title
+    - preview
+    - content
+    - image_url
+    ========
+    - created_at
+    - updated_at
+    ========
+
+- blog_topic
+    - blog_topic_id (PRIMARY)
+    ========
+    - name
+    - description
+    ========
+    - created_at
+    - updated_at
+    ========
+
+- blog_post_topic_mapping
+    - blog_post_id (FOREIGN)
+    - blog_topic_id (FOREIGN)
+    ========
+
+- profile_status
+    - profile_status_id (PRIMARY)
+    ========
+    - status
+    ========
+
+- profile
+    - profile_id (PRIMARY)
+    ========
+    - profile_status_id (FOREIGN)
+    ========
+    - name
+    - tagline
+    - landing
+    - about
+    ========
+    - created_at
+    - updated_at
+    ========
+
+- project
+    - project_id (PRIMARY)
+    ========
+    - name
+    - tagline
+    - description
+    - image_url
+    - external_url
+    ========
+    - created_at
+    - updated_at
+    ========
+
+- profile_project_mapping
+    - profile_id (FOREIGN)
+    - project_id (FOREIGN)
+    ========
+
+- technology
+    - technology_id (PRIMARY)
+    ========
+    - profile_id (FOREIGN)
+    ========
+    - name
+    - icon_url
+    - display_order
+    ========
