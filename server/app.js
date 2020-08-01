@@ -19,29 +19,35 @@ app.use(logger('dev'));
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Initialize passport 
-const passport = require('passport');
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Establish controller routing
-const indexController = require('./src/controllers/index.controller');
-
-app.use('/api', indexController);
+// // Initialize passport 
+// const passport = require('passport');
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // Construct connection string and connect with new PostgreSQL client
-const config = require('./config/database');
-const conn = `postgres://${config.username}:${config.password}@${config.host}:${config.port}/${config.name}`;
-
-const pg = require('pg');
-const client = new pg.Client(conn);
-client.connect()
-.then(() => {
-    console.log(`Connected to ${conn}\n`);
-})
-.catch(() => {
-    console.log('Failed to connect to database.\n');
+const dbc = require('./config/database');
+const knex = require('knex')({
+    client: 'pg',
+    debug: true,
+    connection: {
+        host: dbc.HOST,
+        user: dbc.USER,
+        password: dbc.PASSWORD,
+        database: dbc.DB
+    },
+    pool: dbc.pool
 });
 
-// Export the app
-module.exports = app;
+// Establish controller routing
+app.use('/api', require('./src/controllers/index.controller'));
+
+// Create server and spin it up
+const server = require('http').createServer(app);
+const SERVER_PORT = 3000;
+server.listen(SERVER_PORT)
+.on('listening', () => {
+    console.log(`App listening on http://localhost:${SERVER_PORT}`);
+})
+.on('error', (err) => {
+    console.log(`Error: ${err}`);
+});

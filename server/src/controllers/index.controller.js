@@ -1,10 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-    console.log('Retrieving active profile...\n');
+const ProfileService = require('../services/profile.service');
 
-    res.send('Welcome to the API!');
+router.get('/', async (req, res, next) => {
+    return ProfileService.get()
+        .then((profile) => {
+            res.json(profile);
+        })
+        .catch((err) => {
+            res.send(err);
+        });
 });
 
 module.exports = router;
