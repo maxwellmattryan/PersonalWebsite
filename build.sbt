@@ -12,10 +12,14 @@ libraryDependencies += guice
 // Testing library from play
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test
 
-// ScalikeJDBC dependencies
+// ScalikeJDBC and other database dependencies
 libraryDependencies ++= Seq(
-    "mysql" % "mysql-connector-java" % "5.1.49",
-    "org.scalikejdbc" %% "scalikejdbc" % "3.5.0",
-    "org.scalikejdbc" %% "scalikejdbc-config" % "3.5.0",
-    "org.scalikejdbc" %% "scalikejdbc-play-initializer" % "2.8.0-scalikejdbc-3.5"
+    // Importing standard PostgreSQL driver
+    "org.postgresql"        % "postgresql"      % "9.3-1102-jdbc41",
+
+    // ScalikeJdbc async import (needs postgres-async driver)
+    "org.scalikejdbc"      %% "scalikejdbc"   % "3.5.0",
+
+    // Manages the connection pool's lifecycle
+    "org.scalikejdbc"      %% "scalikejdbc-play-plugin" % "0.5.5"
 )
