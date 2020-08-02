@@ -1,5 +1,6 @@
 lazy val root = (project in file("."))
     .enablePlugins(PlayScala)
+    .enablePlugins(ScalikejdbcPlugin)
     .settings(
         name := """mattmaxwell""",
         version := "0.1",
@@ -15,11 +16,19 @@ libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0
 // ScalikeJDBC and other database dependencies
 libraryDependencies ++= Seq(
     // Importing standard PostgreSQL driver
-    "org.postgresql"        % "postgresql"      % "9.3-1102-jdbc41",
+    "org.postgresql"    %  "postgresql"                    % "42.2.14",
 
-    // ScalikeJdbc async import (needs postgres-async driver)
-    "org.scalikejdbc"      %% "scalikejdbc"   % "3.5.0",
+    // ScalikeJdbc imports
+    jdbc,
+    "org.scalikejdbc"   %% "scalikejdbc"                   % "3.5.0",
+    "org.scalikejdbc"   %% "scalikejdbc-config"            % "3.5.0",
+    "org.scalikejdbc"   %% "scalikejdbc-test"              % "3.5.0"   % "test",
 
-    // Manages the connection pool's lifecycle
-    "org.scalikejdbc"      %% "scalikejdbc-play-plugin" % "0.5.5"
+    "org.scalikejdbc"   %% "scalikejdbc-play-fixture"      % "2.8.0-scalikejdbc-3.5",
+    "org.scalikejdbc"   %% "scalikejdbc-play-initializer"  % "2.8.0-scalikejdbc-3.5",
+
+    // Logger backend library
+    "ch.qos.logback"    %   "logback-classic"               % "1.2.3"
 )
+
+scalikejdbcSettings
