@@ -39,7 +39,7 @@ const knex = require('knex')({
 });
 
 // Establish controller routing
-app.use('/api', require('./src/controllers/index.controller'));
+app.use('/api', require('./src/controllers/api.controller'));
 
 // Create server and spin it up
 const server = require('http').createServer(app);
