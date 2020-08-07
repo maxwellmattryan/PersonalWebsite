@@ -18,4 +18,8 @@ class ApiService @Inject()() {
         .from(Profile as p)
     }.map(Profile(p.resultName)).single().apply()
   }
+
+  def countProfiles(): Long = DB readOnly { implicit session =>
+    Profile.countAll()
+  }
 }
