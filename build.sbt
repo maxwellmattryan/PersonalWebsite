@@ -16,6 +16,7 @@ lazy val commonSettings = Seq(
 lazy val root = (project in file("."))
     .configs(IntegrationTest)
     .enablePlugins(PlayScala)
+    .enablePlugins(ScalikejdbcPlugin)
     .settings(commonSettings, Defaults.itSettings)
 
 // Google 'guice' injection dependency
