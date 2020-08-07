@@ -1,0 +1,28 @@
+{
+  "topics": [
+    {
+      "name": "Audio Development",
+      "description": "Any and all things related to audio development and audio programming."
+    },
+    {
+      "name": "Design",
+      "description": "Any and all things related to software design."
+    },
+    {
+      "name": "Engineering",
+      "description": "Any and all things related to software engineering."
+    },
+    {
+      "name": "Game Development",
+      "description": "Any and all things related to game development."
+    },
+    {
+      "name": "Mathematics",
+      "description": "Any and all things related to mathematics (most likely DSP-related concepts)."
+    },
+    {
+      "name": "Programming",
+      "description": "Any and all things related to programming."
+    }
+  ]
+}

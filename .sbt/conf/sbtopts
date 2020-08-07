@@ -36,7 +36,8 @@
 #-offline
 
 # Sets the SBT version to use.
-#-sbt-version  0.11.3
+#
+-sbt-version 1.3.13
 
 # Scala version (default: latest release)
 #
@@ -45,5 +46,5 @@
 
 # java version (default: java from PATH, currently $(java -version |& grep version))
 #
-#-java-home <path>
+-java-home $(echo $JAVA_HOME)
 

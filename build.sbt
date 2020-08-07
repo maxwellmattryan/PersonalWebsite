@@ -6,9 +6,11 @@ lazy val commonSettings = Seq(
     scalacOptions ++= Seq(
         "-deprecation",
         "-Ywarn-value-discard",
-        "-Xlint:missing-interpolator",
-        "-Ypartial-unification"
-    )
+        "-Xlint:missing-interpolator"
+    ),
+
+    // Disables checksum checking in Maven repo downloads (was throwing error)
+    useCoursier := false
 )
 
 lazy val root = (project in file("."))
@@ -38,14 +40,13 @@ libraryDependencies ++= Seq(
     "org.scalamock" %% "scalamock" % ScalaMockVersion % "test"
 )
 
-// Importing Doobie library for database access
-lazy val DoobieVersion = "0.9.0"
+// Importing ScalikeJdbc library for database access
+lazy val ScalikeJdbcVersion = "3.5.0"
 libraryDependencies ++= Seq(
-    "org.tpolecat" %% "doobie-core"         % DoobieVersion,
-    "org.tpolecat" %% "doobie-hikari"       % DoobieVersion,
-    "org.tpolecat" %% "doobie-postgres"     % DoobieVersion,
-    "org.tpolecat" %% "doobie-specs2"       % DoobieVersion,
-    "org.tpolecat" %% "doobie-scalatest"    % DoobieVersion
+    "org.scalikejdbc" %% "scalikejdbc"                  % ScalikeJdbcVersion,
+    "org.scalikejdbc" %% "scalikejdbc-test"             % ScalikeJdbcVersion,
+    "org.scalikejdbc" %% "scalikejdbc-config"           % ScalikeJdbcVersion,
+    "org.scalikejdbc" %% "scalikejdbc-play-initializer" % "2.8.0-scalikejdbc-3.5"
 )
 
 // Need PostgreSQL driver for doobie
