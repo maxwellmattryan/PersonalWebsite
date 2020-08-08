@@ -4,22 +4,22 @@ import javax.inject.Inject
 
 import play.api.libs.json.Json
 
-import repositories.Profile
+import repositories.ProfileRepository
 import scalikejdbc._
 
 class ProfileService @Inject()() {
-    private val p = Profile.p
+    private val p = ProfileRepository.p
 
-    implicit val profileWrites = Json.writes[Profile]
+    implicit val profileWrites = Json.writes[ProfileRepository]
 
-    def getProfile(): Option[Profile] = DB readOnly { implicit session =>
+    def getProfile(): Option[ProfileRepository] = DB readOnly { implicit session =>
         withSQL {
             select
-                .from(Profile as p)
-        }.map(Profile(p.resultName)).single().apply()
+                .from(ProfileRepository as p)
+        }.map(ProfileRepository(p.resultName)).single().apply()
     }
 
     def countProfiles(): Long = DB readOnly { implicit session =>
-        Profile.countAll()
+        ProfileRepository.countAll()
     }
 }

@@ -3,12 +3,12 @@ package models
 import java.time.LocalDateTime
 
 case class Profile(
-    Id: Int,
-    Status: Int,
-    Name: String,
-    Tagline: String,
-    Landing: String,
-    About: String,
-    CreatedAt: LocalDateTime,
-    UpdatedAt: LocalDateTime
+    id: Int,
+    status: Int,
+    name: String,
+    tagline: String,
+    landing: String,
+    about: String,
+    createdAt: LocalDateTime,
+    updatedAt: LocalDateTime
 )

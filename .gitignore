@@ -1,9 +1,12 @@
 # Scala generated files and directories
-logs
-target
+**/logs
+**/target
+
 /.idea
 /.idea_modules
+
 /.classpath
 /.project
 /.settings
+
 /RUNNING_PID
