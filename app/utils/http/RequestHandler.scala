@@ -1,3 +1,5 @@
+package utils.http
+
 import javax.inject.Inject
 
 import play.api.OptionalDevContext

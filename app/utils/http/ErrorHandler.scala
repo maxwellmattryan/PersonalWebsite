@@ -1,3 +1,5 @@
+package utils.http
+
 import scala.concurrent._
 
 import javax.inject.{Inject, Provider}
