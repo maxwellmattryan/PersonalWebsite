@@ -19,15 +19,18 @@ lazy val root = (project in file("."))
     .enablePlugins(ScalikejdbcPlugin)
     .settings(commonSettings, Defaults.itSettings)
 
+// Add filters to library dependencies
+libraryDependencies += filters
+
 // Google 'guice' injection dependency
 libraryDependencies += guice
 
 // Add jdbc for database access
 libraryDependencies += jdbc
 
-// Solving the SLF4J implementation problem
-lazy val SLF4JVersion = "1.7.5"
-libraryDependencies += "org.slf4j" % "slf4j-api" % SLF4JVersion
+// Use scala-logging for all my logging needs
+lazy val ScalaLoggingVersion = "3.9.2"
+libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % ScalaLoggingVersion
 
 // Logging module for slf4j implementation
 lazy val LogbackVersion = "1.2.3"
@@ -44,9 +47,9 @@ libraryDependencies ++= Seq(
 // Importing ScalikeJdbc library for database access
 lazy val ScalikeJdbcVersion = "3.5.0"
 libraryDependencies ++= Seq(
-    "org.scalikejdbc" %% "scalikejdbc"                  % ScalikeJdbcVersion,
-    "org.scalikejdbc" %% "scalikejdbc-test"             % ScalikeJdbcVersion,
-    "org.scalikejdbc" %% "scalikejdbc-config"           % ScalikeJdbcVersion,
+    "org.scalikejdbc" %% "scalikejdbc" % ScalikeJdbcVersion,
+    "org.scalikejdbc" %% "scalikejdbc-test" % ScalikeJdbcVersion,
+    "org.scalikejdbc" %% "scalikejdbc-config" % ScalikeJdbcVersion,
     "org.scalikejdbc" %% "scalikejdbc-play-initializer" % "2.8.0-scalikejdbc-3.5"
 )
 
@@ -58,18 +61,3 @@ libraryDependencies += "org.postgresql" % "postgresql" % PostgresVersion
 // TODO: Set this mofo up with actual migration files
 lazy val FlywayVersion = "6.3.1"
 libraryDependencies += "org.flywaydb" % "flyway-core" % FlywayVersion
-
-// JSON library providing automatic derivation of JSON Encoders / Decoders
-lazy val CirceVersion = "0.13.0"
-libraryDependencies ++= Seq(
-    "io.circe" %% "circe-generic" % CirceVersion,
-    "io.circe" %% "circe-literal" % CirceVersion % "it,test",
-    "io.circe" %% "circe-optics"  % CirceVersion % "it"
-)
-
-// pureconfig allows for reading .conf configurations into well typed objects
-lazy val PureConfigVersion = "0.12.3"
-libraryDependencies ++= Seq(
-    "com.github.pureconfig" %% "pureconfig"             % PureConfigVersion,
-    "com.github.pureconfig" %% "pureconfig-cats-effect" % PureConfigVersion
-)
