@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 
 case class Profile(
     id: Int,
-    status: Int,
+    statusId: Int,
     name: String,
     tagline: String,
     landing: String,

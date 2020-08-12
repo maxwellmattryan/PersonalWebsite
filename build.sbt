@@ -8,6 +8,7 @@ lazy val commonSettings = Seq(
         "-Ywarn-value-discard",
         "-Xlint:missing-interpolator"
     ),
+    javacOptions ++= Seq("-Xlint:unchecked", "-Xlint:deprecation", "-Werror"),
 
     // Disables checksum checking in Maven repo downloads (was throwing error)
     useCoursier := false
@@ -16,7 +17,6 @@ lazy val commonSettings = Seq(
 lazy val root = (project in file("."))
     .configs(IntegrationTest)
     .enablePlugins(PlayScala)
-    .enablePlugins(ScalikejdbcPlugin)
     .settings(commonSettings, Defaults.itSettings)
 
 // Add filters to library dependencies
@@ -44,18 +44,13 @@ libraryDependencies ++= Seq(
     "org.scalamock" %% "scalamock" % ScalaMockVersion % "test"
 )
 
-// Importing ScalikeJdbc library for database access
-lazy val ScalikeJdbcVersion = "3.5.0"
-libraryDependencies ++= Seq(
-    "org.scalikejdbc" %% "scalikejdbc" % ScalikeJdbcVersion,
-    "org.scalikejdbc" %% "scalikejdbc-test" % ScalikeJdbcVersion,
-    "org.scalikejdbc" %% "scalikejdbc-config" % ScalikeJdbcVersion,
-    "org.scalikejdbc" %% "scalikejdbc-play-initializer" % "2.8.0-scalikejdbc-3.5"
-)
-
 // Need PostgreSQL driver for doobie
 lazy val PostgresVersion = "42.2.14"
 libraryDependencies += "org.postgresql" % "postgresql" % PostgresVersion
+
+// Importing Anorm library from Play for database access
+lazy val AnormVersion = "2.6.7"
+libraryDependencies += "org.playframework.anorm" %% "anorm" % AnormVersion
 
 // Using FlywayDB for migrations
 // TODO: Set this mofo up with actual migration files
