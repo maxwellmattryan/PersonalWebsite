@@ -2,6 +2,8 @@ package controllers
 
 import scala.concurrent.ExecutionContext
 
+import play.api.libs.json.Json
+
 import javax.inject._
 import play.api.mvc._
 
@@ -14,9 +16,8 @@ class HomeController @Inject()(
 )(implicit ec: ExecutionContext) extends AbstractController(cc) {
 
     def getIndex(): Action[AnyContent] = Action { implicit request =>
-        val profiles: Seq[Profile] = profileService.listProfiles()
-        println(profiles)
+        val profiles = profileService.listProfiles()
 
-        Ok(s"${profiles.length} profile(s) found!")
+        Ok(Json.toJson[Seq[Profile]](p))
     }
 }

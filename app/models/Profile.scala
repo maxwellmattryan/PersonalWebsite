@@ -1,5 +1,7 @@
 package models
 
+import play.api.libs.json.Json
+
 import java.time.LocalDateTime
 
 case class Profile(
@@ -12,3 +14,7 @@ case class Profile(
     createdAt: LocalDateTime,
     updatedAt: LocalDateTime
 )
+
+object Profile {
+    implicit val format = Json.format[Profile]
+}

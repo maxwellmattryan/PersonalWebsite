@@ -6,7 +6,7 @@ import models.Profile
 import repositories.ProfileRepository
 
 class ProfileService @Inject()(
-    repo: ProfileRepository
+    profileRepository: ProfileRepository
 ) {
-    def listProfiles(): Seq[Profile] = repo.list()
+    def listProfiles(): Seq[Profile] = profileRepository.list()
 }
