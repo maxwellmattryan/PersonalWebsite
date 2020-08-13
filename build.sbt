@@ -1,3 +1,5 @@
+// SETTINGS
+
 // Project-level settings
 lazy val commonSettings = Seq(
     name := """mattmaxwell""",
@@ -14,10 +16,21 @@ lazy val commonSettings = Seq(
     useCoursier := false
 )
 
+lazy val flywaySettings = Seq(
+    flywayUrl := "jdbc:postgresql://localhost:5432/mattmaxwell",
+    flywayLocations += "db/migration",
+    flywayUser := "postgres",
+    flywayPassword := ""
+)
+
 lazy val root = (project in file("."))
     .configs(IntegrationTest)
     .enablePlugins(PlayScala)
+    .enablePlugins(FlywayPlugin)
     .settings(commonSettings, Defaults.itSettings)
+    .settings(inConfig(Runtime)(FlywayPlugin.flywayBaseSettings(Runtime) ++ flywaySettings): _*)
+
+// DEPENDENCIES
 
 // Add filters to library dependencies
 libraryDependencies += filters
@@ -53,6 +66,5 @@ lazy val AnormVersion = "2.6.7"
 libraryDependencies += "org.playframework.anorm" %% "anorm" % AnormVersion
 
 // Using FlywayDB for migrations
-// TODO: Set this mofo up with actual migration files
-lazy val FlywayVersion = "6.3.1"
-libraryDependencies += "org.flywaydb" % "flyway-core" % FlywayVersion
+lazy val FlywayVersion = "6.0.0"
+libraryDependencies += "org.flywaydb" %% "flyway-play" % FlywayVersion
