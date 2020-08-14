@@ -1,50 +1,16 @@
-# Database-related files
-/config/database.js
-/data/db/design.txt
+# Scala generated files and directories
+**/logs
+**/target
 
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-
-# compiled output
-/dist
-/tmp
-/out-tsc
-# Only exists if Bazel was run
-/bazel-out
-
-# dependencies
-/node_modules
-
-# profiling files
-chrome-profiler-events*.json
-speed-measure-plugin*.json
-
-# IDEs and editors
+# IntelliJ-based files and folders
 /.idea
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
+/.idea_modules
 
-# IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
+# Ignore metals VS Code extension
+/.metals
 
-# misc
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
-npm-debug.log
-yarn-error.log
-testem.log
-/typings
+/.classpath
+/.project
+/.settings
 
-# System Files
-.DS_Store
-Thumbs.db
+/RUNNING_PID

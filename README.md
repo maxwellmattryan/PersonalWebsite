@@ -8,10 +8,10 @@ Welcome to the codebase for my personal website. This repo contains both the bac
     - [Core](#Core)
     - [Modules](#Modules)
     - [Shared](#Shared)
-- [Express / Node](#Express-/-Node)
+- [Play (Scala)](#Play-(Scala))
     - [Routes (+ HTTP Methods)](#Routes-(+-HTTP-Methods))
-- [MySQL](#MySQL)
-    - [Data](#Data)
+- [PostgreSQL](#PostgreSQL)
+    - [Schema](#Schema)
 - [Acknowledgements](#Acknowledgements)
 
 ## Angular 
@@ -106,9 +106,11 @@ The 'shared' folder contains all of the things that are going to be commonly use
     - Project
     - Topic
 
-## Express / Node
+## Play (Scala)
 
-Express is quite a lightweight framework that makes it so easy to get applications up and running. I found it to be a smooth and easy-to-use framework that I look forward to working with on future projects.
+Play is a powerful framework that leverages the Java Virtual Machine (JVM). It offers a reactive and elastic mechanism to scalability issues, so it is able to keep resource usage to a minimum while still serving my frontend with any data it needs. 
+
+NOTE: This setup could easily be considered overkill for a relatively simple app like this (versus enterprise-grade software leveraging the same tech), but I wanted the challenge of learning this new and incredibly powerful environment.
 
 ### Routes (+ HTTP Methods)
 
@@ -141,13 +143,13 @@ Express is quite a lightweight framework that makes it so easy to get applicatio
 
 _\*This endpoint will not be available on app's deployment._
 
-## MySQL
+## PostgreSQL
 
-Although there are no 1:1 relationships in this database design, there is fortunately enough complexity in the app to warrant a need for 1:n and m:n relation types. For this reason, I chose MySQL to efficiently and optimally handle my data needs opposed to a non-relational database technology like MongoDB (which would still work fine, but is not specifically intended for relational data).
+Although there are no 1:1 relationships in this database design, there is fortunately enough complexity in the app to warrant a need for 1:n and m:n relation types. For this reason, I chose PostgreSQL to efficiently and optimally handle my data needs opposed to a non-relational database technology like MongoDB (which would still work fine, but is not specifically intended for relational data).
 
 NOTE: What I have listed below is simply the more relevant fields for each table and does not fully represent the actual implementation or design. The more specific details include lookup tables, object-relation mappers, and some extra columns in a few tables.
 
-### Data
+### Schema
 
 - Admin
     - Username
