@@ -13,8 +13,8 @@ class ProfileController @Inject()(
     profileService: ProfileService
 )(implicit ec: ExecutionContext) extends AbstractController(cc) {
 
-    def getProfiles(): Action[AnyContent] = Action { implicit request =>
-        val profiles = profileService.getProfiles()
+    def listProfiles(): Action[AnyContent] = Action { implicit request =>
+        val profiles = profileService.listProfiles()
 
         Ok(Json.toJson(profiles))
     }

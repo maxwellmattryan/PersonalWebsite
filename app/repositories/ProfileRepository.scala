@@ -33,8 +33,7 @@ class ProfileRepository @Inject()(
 
     def getActiveProfile(): Option[Profile] =
         db.withConnection { implicit conn =>
-            SQL(
-                """
+            SQL("""
                     |SELECT * FROM profile prf
                     |LEFT JOIN profile_status ps ON prf.profile_status_id = ps.profile_status_id
                     |WHERE ps.status = 'ACTIVE'
@@ -42,7 +41,7 @@ class ProfileRepository @Inject()(
             ).as(parser.singleOpt)
     }
 
-    def getProfiles(): Seq[Profile] = {
+    def list(): Seq[Profile] = {
         db.withConnection { implicit conn =>
             SQL("SELECT * FROM profile").as(parser *)
         }

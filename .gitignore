@@ -2,8 +2,12 @@
 **/logs
 **/target
 
+# IntelliJ-based files and folders
 /.idea
 /.idea_modules
+
+# Ignore metals VS Code extension
+/.metals
 
 /.classpath
 /.project

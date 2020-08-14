@@ -12,7 +12,7 @@ class ProfileService @Inject()(
     def getActiveProfile(): Option[Profile] =
         profileRepository.getActiveProfile()
 
-    // Lists all profiles within the database
-    def getProfiles(): Seq[Profile] =
-        profileRepository.getProfiles()
+    // Retrieves all profiles within the database
+    def listProfiles(): Seq[Profile] =
+        profileRepository.list()
 }

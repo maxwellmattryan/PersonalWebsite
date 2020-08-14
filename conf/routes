@@ -12,4 +12,4 @@ GET     /api                        controllers.RootController.getIndex()
 
 
 # PROFILE
-GET     /api/profiles               controllers.ProfileController.getProfiles()
+GET     /api/profiles               controllers.ProfileController.listProfiles()
