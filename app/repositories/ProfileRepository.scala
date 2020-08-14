@@ -18,8 +18,6 @@ class ProfileRepository @Inject()(
 )(implicit ec: DBExecutionContext) {
     private val db = dbApi.database("default")
 
-    // TODO: Consider moving to "Macro.namedParser"
-    // TODO: Fix Date typing (lines 29-30 ... do I only need date anyway?) with anorm lib
     private val parser: RowParser[Profile] = {
         for {
             id <- int("profile.profile_id")
@@ -33,8 +31,18 @@ class ProfileRepository @Inject()(
         } yield (Profile(id, statusId, name, tagline, landing, about, createdAt, updatedAt))
     }
 
-    // TODO: Incorporate Future into the response
-    def list(): Seq[Profile] = {
+    def getActiveProfile(): Option[Profile] =
+        db.withConnection { implicit conn =>
+            SQL(
+                """
+                    |SELECT * FROM profile prf
+                    |LEFT JOIN profile_status ps ON prf.profile_status_id = ps.profile_status_id
+                    |WHERE ps.status = 'ACTIVE'
+                    |""".stripMargin
+            ).as(parser.singleOpt)
+    }
+
+    def getProfiles(): Seq[Profile] = {
         db.withConnection { implicit conn =>
             SQL("SELECT * FROM profile").as(parser *)
         }

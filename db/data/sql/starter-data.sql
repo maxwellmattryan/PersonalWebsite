@@ -1,3 +1,5 @@
+INSERT INTO admin(admin_id, username, password) VALUES (1, 'admin', 'password');
+
 INSERT INTO blog_author(blog_author_id, first_name, last_name) VALUES (1, 'Matthew', 'Maxwell');
 
 INSERT INTO blog_post_status(blog_post_status_id, status) VALUES (1, 'DRAFT');

@@ -3,7 +3,6 @@ package utils.http
 import scala.concurrent._
 
 import javax.inject.{Inject, Provider}
-
 import play.api._
 import play.api.http.DefaultHttpErrorHandler
 import play.api.http.Status._
@@ -32,10 +31,12 @@ class ErrorHandler(
 
     // This maps through Guice so that the above constructor can call methods.
     @Inject
-    def this(environment: Environment,
+    def this(
+        environment: Environment,
         configuration: Configuration,
         sourceMapper: OptionalSourceMapper,
-        router: Provider[Router]) = {
+        router: Provider[Router]
+    ) = {
         this(environment,
             configuration,
             sourceMapper.sourceMapper,
@@ -79,7 +80,8 @@ class ErrorHandler(
 
     override protected def onProdServerError(
         request: RequestHeader,
-        exception: UsefulException): Future[Result] = {
+        exception: UsefulException
+    ): Future[Result] = {
         Future.successful(InternalServerError)
     }
 }

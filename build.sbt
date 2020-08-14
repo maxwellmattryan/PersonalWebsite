@@ -57,6 +57,10 @@ libraryDependencies ++= Seq(
     "org.scalamock" %% "scalamock" % ScalaMockVersion % "test"
 )
 
+// Scalaz library dependency
+lazy val ScalazVersion = "7.3.2"
+libraryDependencies += "org.scalaz" %% "scalaz-core" % "7.3.2"
+
 // Need PostgreSQL driver for doobie
 lazy val PostgresVersion = "42.2.14"
 libraryDependencies += "org.postgresql" % "postgresql" % PostgresVersion
@@ -68,3 +72,10 @@ libraryDependencies += "org.playframework.anorm" %% "anorm" % AnormVersion
 // Using FlywayDB for migrations
 lazy val FlywayVersion = "6.0.0"
 libraryDependencies += "org.flywaydb" %% "flyway-play" % FlywayVersion
+
+// pureconfig allows for reading .conf configurations into well typed objects
+lazy val PureConfigVersion = "0.12.3"
+libraryDependencies ++= Seq(
+    "com.github.pureconfig" %% "pureconfig"             % PureConfigVersion,
+    "com.github.pureconfig" %% "pureconfig-cats-effect" % PureConfigVersion
+)

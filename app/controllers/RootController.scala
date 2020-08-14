@@ -5,19 +5,18 @@ import scala.concurrent.ExecutionContext
 import play.api.libs.json.Json
 
 import javax.inject._
-import play.api.mvc._
+import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Result}
 
-import models.Profile
 import services.ProfileService
 
-class HomeController @Inject()(
+class RootController @Inject()(
     cc: ControllerComponents,
     profileService: ProfileService
 )(implicit ec: ExecutionContext) extends AbstractController(cc) {
 
-    def getIndex(): Action[AnyContent] = Action { implicit request =>
-        val profiles = profileService.listProfiles()
+    def getIndex: Action[AnyContent] = Action { implicit request =>
+        val profile = profileService.getActiveProfile()
 
-        Ok(Json.toJson[Seq[Profile]](p))
+        Ok(Json.toJson(profile))
     }
 }
