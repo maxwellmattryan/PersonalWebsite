@@ -6,9 +6,14 @@ lazy val commonSettings = Seq(
     version := "0.1",
     scalaVersion := "2.13.3",
     scalacOptions ++= Seq(
-        "-deprecation",
-        "-Ywarn-value-discard",
-        "-Xlint:missing-interpolator"
+        "-deprecation", // Gives warning and location for usages of deprecated APIs
+        "-feature",     // Gives warning and location for usages of features that need to be imported explicitly
+        "-unchecked",   // Warns where generated code depends on assumptions
+
+        "-Ywarn-value-discard", // Warns when non-unit expression results are unused
+
+        "-Xfatal-warnings",             // Fail the compilaton if there are any errors
+        "-Xlint:missing-interpolator",  // String literal is missing an interpolator ID
     ),
     javacOptions ++= Seq("-Xlint:unchecked", "-Xlint:deprecation", "-Werror"),
 
@@ -29,6 +34,12 @@ lazy val root = (project in file("."))
     .enablePlugins(FlywayPlugin)
     .settings(commonSettings, Defaults.itSettings)
     .settings(inConfig(Runtime)(FlywayPlugin.flywayBaseSettings(Runtime) ++ flywaySettings): _*)
+
+
+// RESOLVERS
+resolvers += Resolver.jcenterRepo
+resolvers += "Atlassian Releases" at "https://maven.atlassian.com/public/"
+
 
 // DEPENDENCIES
 
@@ -57,9 +68,16 @@ libraryDependencies ++= Seq(
     "org.scalamock" %% "scalamock" % ScalaMockVersion % "test"
 )
 
-// Scalaz library dependency
-lazy val ScalazVersion = "7.3.2"
-libraryDependencies += "org.scalaz" %% "scalaz-core" % "7.3.2"
+// Silhouette security library for handling authentication
+lazy val SilhouetteVersion = "6.1.1"
+libraryDependencies ++= Seq(
+    "com.mohiva" %% "play-silhouette"                   % SilhouetteVersion,
+    "com.mohiva" %% "play-silhouette-password-bcrypt"   % SilhouetteVersion,
+    "com.mohiva" %% "play-silhouette-persistence"       % SilhouetteVersion,
+    "com.mohiva" %% "play-silhouette-crypto-jca"        % SilhouetteVersion,
+    "com.mohiva" %% "play-silhouette-totp"              % SilhouetteVersion,
+    "com.mohiva" %% "play-silhouette-testkit"           % SilhouetteVersion % "test",
+)
 
 // Need PostgreSQL driver for doobie
 lazy val PostgresVersion = "42.2.14"
