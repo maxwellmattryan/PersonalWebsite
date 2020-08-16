@@ -31,19 +31,19 @@ class ProfileRepository @Inject()(
         } yield (Profile(id, statusId, name, tagline, landing, about, createdAt, updatedAt))
     }
 
-    def getActiveProfile(): Option[Profile] =
-        db.withConnection { implicit conn =>
-            SQL("""
-                    |SELECT * FROM profile prf
-                    |LEFT JOIN profile_status ps ON prf.profile_status_id = ps.profile_status_id
-                    |WHERE ps.status = 'ACTIVE'
-                    |""".stripMargin
-            ).as(parser.singleOpt)
+    def getActiveProfile(): Option[Profile] = db.withConnection { implicit conn =>
+        SQL("""
+                |SELECT * FROM profile prf
+                |LEFT JOIN profile_status ps ON prf.profile_status_id = ps.profile_status_id
+                |WHERE ps.status = 'ACTIVE'
+                |""".stripMargin
+        ).as(parser.singleOpt)
     }
 
-    def list(): Seq[Profile] = {
-        db.withConnection { implicit conn =>
-            SQL("SELECT * FROM profile").as(parser *)
-        }
+    def list(): Seq[Profile] = db.withConnection { implicit conn =>
+        SQL("""
+                |SELECT * FROM profile
+                |""".stripMargin
+        ).as(parser *)
     }
 }
