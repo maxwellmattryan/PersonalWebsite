@@ -13,7 +13,6 @@ class RootController @Inject()(
     cc: ControllerComponents,
     profileService: ProfileService
 )(implicit ec: ExecutionContext) extends AbstractController(cc) {
-
     def getIndex: Action[AnyContent] = Action { implicit request =>
         val profile = profileService.getActiveProfile()
 

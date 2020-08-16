@@ -26,7 +26,6 @@ class ErrorHandler(
     sourceMapper,
     optionRouter
 ) {
-
     private val logger = Logger(LoggerFactory.getLogger("server.ErrorHandler"))
 
     // This maps through Guice so that the above constructor can call methods.

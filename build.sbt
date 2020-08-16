@@ -69,13 +69,12 @@ libraryDependencies ++= Seq(
 )
 
 // Silhouette security library for handling authentication
-lazy val SilhouetteVersion = "6.1.1"
+lazy val SilhouetteVersion = "7.0.0"
 libraryDependencies ++= Seq(
     "com.mohiva" %% "play-silhouette"                   % SilhouetteVersion,
     "com.mohiva" %% "play-silhouette-password-bcrypt"   % SilhouetteVersion,
     "com.mohiva" %% "play-silhouette-persistence"       % SilhouetteVersion,
     "com.mohiva" %% "play-silhouette-crypto-jca"        % SilhouetteVersion,
-    "com.mohiva" %% "play-silhouette-totp"              % SilhouetteVersion,
     "com.mohiva" %% "play-silhouette-testkit"           % SilhouetteVersion % "test",
 )
 
