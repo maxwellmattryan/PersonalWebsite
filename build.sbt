@@ -52,6 +52,9 @@ libraryDependencies += guice
 // Add jdbc for database access
 libraryDependencies += jdbc
 
+// Add cache to support authentication
+libraryDependencies += ehcache
+
 // Use scala-logging for all my logging needs
 lazy val ScalaLoggingVersion = "3.9.2"
 libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % ScalaLoggingVersion
@@ -77,6 +80,14 @@ libraryDependencies ++= Seq(
     "com.mohiva" %% "play-silhouette-crypto-jca"        % SilhouetteVersion,
     "com.mohiva" %% "play-silhouette-testkit"           % SilhouetteVersion % "test",
 )
+
+// Add Ficus to support the Silhouette implementation
+lazy val FicusVersion = "1.4.7"
+libraryDependencies += "com.iheart" %% "ficus" % FicusVersion
+
+// Add Scala Guice to support the Silhouette implementation
+lazy val ScalaGuiceVersion = "4.2.11"
+libraryDependencies += "net.codingwell" %% "scala-guice" % ScalaGuiceVersion
 
 // Need PostgreSQL driver for doobie
 lazy val PostgresVersion = "42.2.14"
