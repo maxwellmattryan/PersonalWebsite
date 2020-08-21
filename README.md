@@ -1,6 +1,6 @@
 # mattmaxwell.tech
 
-Welcome to the codebase for my personal website. This repo contains both the backend and frontend code behind [mattmaxwell.tech](https://mattmaxwell.tech). 
+Welcome to the codebase for mattmaxwell.tech! The stack consists of Angular (Typescript), NestJS (Typescript) and PostgreSQL. This is still a WIP so the [older version](https://github.com/maxwellmattryan/mattmaxwell/tree/18b58014534d12baa9d7ebb8a747f8253b89cbf7) (ReactJS only) is currently deployed @ [mattmaxwell.tech](https://mattmaxwell.tech)
 
 ## Overview
 
