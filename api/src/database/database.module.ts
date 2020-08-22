@@ -18,6 +18,11 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
                 database: configService.get('POSTGRES_DB'),
                 namingStrategy: new SnakeNamingStrategy(),
                 entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+                cli: {
+                    "migrationsDir": "migrations"
+                },
+                migrations: ["migrations/*{.ts,.js}"],
+                migrationsTableName: "typeorm_migration",
                 synchronize: true
             })
         })
