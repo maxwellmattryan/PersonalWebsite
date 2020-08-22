@@ -4,7 +4,7 @@ SELECT ps.status,
        prf.landing,
        prf.about
 FROM profile prf
-LEFT JOIN profile_status ps ON prf.profile_status_id = ps.profile_status_id
+LEFT JOIN profile_status ps ON prf.id = ps.id
 WHERE ps.status = 'ACTIVE';
 
 SELECT prj.name,
