@@ -14,23 +14,28 @@ export class AuthService {
         private readonly adminService: AdminService
     ) { }
 
-    public async register(adminData: AdminDto) {
-        const passwordHash = await bcrypt.hash(adminData.password, 10);
-        try {
-            const newAdmin: Admin = await this.adminService.create({
-                ...adminData,
-                password: passwordHash
-            });
+    public async authenticateAdmin(adminData: AdminDto): Promise<Admin> {
+        const admin = await this.adminService.getByUsername(adminData.username);
 
-            newAdmin.password = undefined;
+        if(!(await this.isValidPassword(adminData.password, admin.password))) {
+            throw new HttpException('The wrong credentials were provided.', HttpStatus.BAD_REQUEST);
+        } else {
+            admin.password = undefined;
 
-            return newAdmin;
-        } catch(error) {
-            if(error.code === PostgresErrorCode.UNIQUE_VIOLATION) {
-                throw new HttpException('Admin with that username already exists', HttpStatus.BAD_REQUEST);
-            }
-
-            throw new HttpException('Something went wrong', HttpStatus.INTERNAL_SERVER_ERROR);
+            return admin;
         }
+    }
+
+    private async isValidPassword(rawPassword: string, hashedPassword: string): Promise<boolean> {
+        return await bcrypt.compare(rawPassword, hashedPassword);
+    }
+
+    public async registerAdmin(adminData: AdminDto): Promise<Admin> {
+        const passwordHash = await bcrypt.hash(adminData.password, 10);
+
+        const admin = await this.adminService.createAdmin({ ...adminData, password: passwordHash })
+        admin.password = undefined;
+
+        return admin;
     }
 }

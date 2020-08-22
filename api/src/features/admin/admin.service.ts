@@ -3,8 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
-import { AdminDto } from './admin.dto';
+import { PostgresErrorCode } from '@api/core/database/postgres-error-code.enum';
+
 import { Admin } from './admin.entity';
+import { AdminDto } from './admin.dto';
 
 @Injectable()
 export class AdminService {
@@ -13,21 +15,28 @@ export class AdminService {
         private readonly adminRepository: Repository<Admin>
     ) { }
 
-    public async getByUsername(username: string): Promise<Admin> {
-        const admin = await this.adminRepository.findOne({ username: username })
+    public async createAdmin(adminData: AdminDto): Promise<Admin> {
+        const admin: Admin = await this.adminRepository.create(adminData)
 
-        if(admin) {
-            return admin;
-        } else {
-            throw new HttpException(`Admin with username of ${username} does not exist`, HttpStatus.NOT_FOUND)
-        }
+        await this.adminRepository.save(admin)
+            .catch((error) => {
+                if(error.code === PostgresErrorCode.UNIQUE_VIOLATION) {
+                    throw new HttpException('Admin with that username already exists', HttpStatus.BAD_REQUEST);
+                } else {
+                    throw new HttpException('Oops! Something went wrong', HttpStatus.BAD_REQUEST);
+                }
+            });
+
+        return admin;
     }
 
-    public async create(adminData: AdminDto): Promise<Admin> {
-        const newAdmin = await this.adminRepository.create(adminData);
+    public async getByUsername(username: string): Promise<Admin> {
+        const admin = await this.adminRepository.findOne({ username: username });
 
-        await this.adminRepository.save(newAdmin);
-
-        return newAdmin;
+        if(!admin) {
+            throw new HttpException('Admin with that username does not exist', HttpStatus.NOT_FOUND);
+        } else {
+            return admin;
+        }
     }
 }

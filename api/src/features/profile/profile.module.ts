@@ -3,7 +3,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { Profile } from './profile.entity';
 import { ProfileStatus } from './profile-status.entity';
-
 import { ProfileService } from './profile.service';
 
 @Module({
