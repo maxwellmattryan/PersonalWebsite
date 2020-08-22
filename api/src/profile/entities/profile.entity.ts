@@ -5,7 +5,7 @@ import { ProfileStatus } from './profile-status.entity';
 @Entity('profile')
 export class Profile {
     @PrimaryGeneratedColumn()
-    public id: number;
+    public id?: number;
 
     @ManyToOne(type => ProfileStatus, profileStatus => profileStatus.status)
     public status: ProfileStatus;
@@ -23,8 +23,8 @@ export class Profile {
     public about: string;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'now()' })
-    public created_at: Date;
+    public created_at?: Date;
 
     @UpdateDateColumn({ type: 'timestamp', default: () => 'now()', onUpdate: 'now()' })
-    public updated_at: Date;
+    public updated_at?: Date;
 }

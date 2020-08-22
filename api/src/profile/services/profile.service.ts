@@ -9,7 +9,7 @@ import { Profile } from '../entities/profile.entity';
 export class ProfileService {
     constructor(
         @InjectRepository(Profile)
-        private profileRepository: Repository<Profile>
+        private readonly profileRepository: Repository<Profile>
     ) { }
 
     public async getActiveProfile(): Promise<Profile> {

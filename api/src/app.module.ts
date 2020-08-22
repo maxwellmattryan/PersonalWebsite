@@ -26,6 +26,7 @@ import { ProfileModule } from './profile/profile.module';
         ApiModule,
         ProfileModule,
     ],
+    exports: [],
     controllers: [],
     providers: []
 })
