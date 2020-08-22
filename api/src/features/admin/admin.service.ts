@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
-import { CreateAdminDto } from '../dto/create-admin.dto';
-import { Admin } from '../entities/admin.entity';
+import { AdminDto } from './admin.dto';
+import { Admin } from './admin.entity';
 
 @Injectable()
 export class AdminService {
@@ -23,7 +23,7 @@ export class AdminService {
         }
     }
 
-    public async create(adminData: CreateAdminDto) {
+    public async create(adminData: AdminDto): Promise<Admin> {
         const newAdmin = await this.adminRepository.create(adminData);
 
         await this.adminRepository.save(newAdmin);
