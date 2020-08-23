@@ -5,6 +5,9 @@ import { Repository } from 'typeorm';
 
 import { PostgresErrorCode } from '@api/core/database/postgres-error-code.enum';
 
+import { InternalServerErrorException } from '@api/core/http/http.exception';
+import { AdminAlreadyExistsException, AdminNotFoundException } from './admin.exception';
+
 import { Admin } from './admin.entity';
 import { AdminDto } from './admin.dto';
 
@@ -15,15 +18,15 @@ export class AdminService {
         private readonly adminRepository: Repository<Admin>
     ) { }
 
-    public async createAdmin(adminData: AdminDto): Promise<Admin> {
-        const admin: Admin = await this.adminRepository.create(adminData)
+    public async createAdmin(adminData: Admin): Promise<Admin> {
+        const admin: Admin = await this.adminRepository.create(adminData);
 
         await this.adminRepository.save(admin)
             .catch((error) => {
                 if(error.code === PostgresErrorCode.UNIQUE_VIOLATION) {
-                    throw new HttpException('Admin with that username already exists', HttpStatus.BAD_REQUEST);
+                    throw new AdminAlreadyExistsException();
                 } else {
-                    throw new HttpException('Oops! Something went wrong', HttpStatus.BAD_REQUEST);
+                    throw new InternalServerErrorException();
                 }
             });
 
@@ -34,7 +37,7 @@ export class AdminService {
         const admin = await this.adminRepository.findOne({ username: username });
 
         if(!admin) {
-            throw new HttpException('Admin with that username does not exist', HttpStatus.NOT_FOUND);
+            throw new AdminNotFoundException();
         } else {
             return admin;
         }

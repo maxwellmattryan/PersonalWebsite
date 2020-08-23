@@ -1,41 +1,49 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 
 import * as bcrypt from 'bcrypt';
 
-import { PostgresErrorCode } from '@api/core/database/postgres-error-code.enum';
-
 import { Admin } from '@api/features/admin/admin.entity';
-import { AdminDto } from '@api/features/admin/admin.dto';
 import { AdminService } from '@api/features/admin/admin.service';
+
+import { WrongCredentialsProvidedException } from './auth.exception';
+import { TokenPayload } from './token-payload.interface';
 
 @Injectable()
 export class AuthService {
     constructor(
-        private readonly adminService: AdminService
+        private readonly adminService: AdminService,
+        private readonly jwtService: JwtService,
+        private readonly configService: ConfigService
     ) { }
 
-    public async authenticateAdmin(adminData: AdminDto): Promise<Admin> {
+    public async generateCookieWithJwtToken(username: string): Promise<string> {
+        const payload: TokenPayload = { username };
+
+        const token = this.jwtService.sign(payload);
+        const expirationTime = this.configService.get('JWT_EXPIRATION_TIME')
+
+        return `Authentication=${token}; HttpOnly; Secure; Path=/; Max-Age=${expirationTime}`;
+    }
+
+    public async generateEmptyCookie(): Promise<string> {
+        return 'Authentication=; HttpOnly; Secure; Path=/; Max-Age=0';
+    }
+
+    public async authenticateAdmin(adminData: Admin): Promise<Admin> {
         const admin = await this.adminService.getByUsername(adminData.username);
 
-        if(!(await this.isValidPassword(adminData.password, admin.password))) {
-            throw new HttpException('The wrong credentials were provided.', HttpStatus.BAD_REQUEST);
+        if(!(await bcrypt.compare(adminData.password, admin.password))) {
+            throw new WrongCredentialsProvidedException();
         } else {
-            admin.password = undefined;
-
             return admin;
         }
     }
 
-    private async isValidPassword(rawPassword: string, hashedPassword: string): Promise<boolean> {
-        return await bcrypt.compare(rawPassword, hashedPassword);
-    }
-
-    public async registerAdmin(adminData: AdminDto): Promise<Admin> {
+    public async registerAdmin(adminData: Admin): Promise<Admin> {
         const passwordHash = await bcrypt.hash(adminData.password, 10);
 
-        const admin = await this.adminService.createAdmin({ ...adminData, password: passwordHash })
-        admin.password = undefined;
-
-        return admin;
+        return await this.adminService.createAdmin({ ...adminData, password: passwordHash });
     }
 }

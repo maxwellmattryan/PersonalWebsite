@@ -23,7 +23,7 @@ export class ApiService {
         headers.set('Content-Type', 'application/json');
 
         return this.http.post<any>(
-            environment.API_URL + '/admin/auth',
+            environment.ROOT_URL + '/admin/login',
             admin,
             { headers: headers }
         ).pipe(map(res => res));
@@ -34,7 +34,7 @@ export class ApiService {
         headers.set('Content-Type', 'application/json');
 
         return this.http.post(
-            environment.API_URL + '/admin/register',
+            environment.ROOT_URL + '/admin/register',
             admin,
             { headers: headers }
         ).pipe(map(res => res));
@@ -80,7 +80,7 @@ export class ApiService {
     getProject(requestURL: string): Observable<Project> {
         return this.http.get<Project>(environment.API_URL + requestURL);
     }
-    
+
     putProject(project: Project, headers: HttpHeaders): Observable<Project> {
         return this.http.put<Project>(
             environment.API_URL + '/projects/' + project['uri'],

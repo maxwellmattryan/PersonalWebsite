@@ -34,17 +34,19 @@ export class LoginComponent implements OnInit {
         this.apiService.authenticateAdmin(admin).subscribe(res => {
             let message: string;
             let navURL: string;
-            
-            if(res.success) {
-                message = `Welcome back, ${admin.username}!`;
-                navURL = 'admin';
-                
-                this.authService.storeAdminData(res.token, res.admin);
-            } else {
-                message = res.msg;
+
+            console.log(res);
+
+            if(!res.success) {
+                message = res.message;
                 navURL = 'admin/login';
+            } else {
+                message = `Welcome back, ${res.username}!`;
+                navURL = 'admin';
+
+                this.authService.storeAdminData(res.token, res.admin);
             }
-            
+
             this.notificationService.createNotification(message);
             this.router.navigate([navURL]);
         });
