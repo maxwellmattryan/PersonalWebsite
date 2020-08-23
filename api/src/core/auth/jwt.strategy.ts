@@ -6,10 +6,11 @@ import { Request } from 'express';
 
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
+import { Admin } from '@api/features/admin/admin.entity'
+import { AdminService } from '@api/features/admin/admin.service';
+
 import { TokenPayload } from './token-payload.interface';
 
-import { Admin } from '@api/features/admin/admin.entity';
-import { AdminService } from '@api/features/admin/admin.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {

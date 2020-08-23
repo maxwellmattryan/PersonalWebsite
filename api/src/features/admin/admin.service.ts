@@ -1,4 +1,4 @@
-import { HttpStatus, Injectable, HttpException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
@@ -9,7 +9,6 @@ import { InternalServerErrorException } from '@api/core/http/http.exception';
 import { AdminAlreadyExistsException, AdminNotFoundException } from './admin.exception';
 
 import { Admin } from './admin.entity';
-import { AdminDto } from './admin.dto';
 
 @Injectable()
 export class AdminService {
