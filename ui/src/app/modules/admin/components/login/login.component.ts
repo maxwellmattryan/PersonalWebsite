@@ -33,12 +33,9 @@ export class LoginComponent implements OnInit {
         };
 
         this.apiService.loginAdmin(admin).subscribe(res => {
-            if(!res.error) {
-              this.authService.storeAdminData(res.token.signature, res.admin.username);
-
-              this.notificationService.createNotification(`Welcome back, ${res.admin.username}!`);
-              this.router.navigate(['admin']);
-            }
+          this.authService.loginAdmin(res.id, res.username);
+          this.notificationService.createNotification(`Welcome back, ${res.username}!`);
+          this.router.navigate(['admin']);
         }, (error: HttpErrorResponse) => {
           this.notificationService.createNotification(error.error.message);
         });

@@ -37,7 +37,7 @@ export class ProjectViewComponent implements OnInit {
 
         this.apiService.getProject(this.router.url).subscribe(project => {
             this.project = project;
-            
+
             this.isLoaded = true;
         });
     }
@@ -47,9 +47,9 @@ export class ProjectViewComponent implements OnInit {
     }
 
     deleteProject(): void {
-        this.apiService.deleteProject(this.router.url, this.authService.getAuthHeaders()).subscribe((res: any) => {
+        this.apiService.deleteProject(this.router.url).subscribe((res: any) => {
             this.notificationService.createNotification(res.msg);
-            
+
             this.router.navigate(['']);
         });
     }

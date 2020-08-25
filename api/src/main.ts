@@ -14,7 +14,11 @@ async function bootstrap() {
         logger: ['log', 'error', 'warn'],
     });
 
-    app.enableCors();
+    app.enableCors({
+        origin: true,
+        methods: 'GET,POST,PUT,DELETE,BATCH,OPTIONS',
+        credentials: true
+    });
 
     app.use(rateLimit({
         windowMs: 15 * 60 * 1000,

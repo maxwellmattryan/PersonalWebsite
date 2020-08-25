@@ -2,7 +2,7 @@
     <h1 class='dashboard__header'>Dashboard</h1>
 
     <div class="line-divider"></div>
-    
+
     <div class='dashboard__btn-container' *ngIf='!authService.isLoggedIn()'>
         <a class='btn dashboard__btn' [routerLink]="['/admin/login']">Login</a>
         <a class='btn dashboard__btn' [routerLink]="['/admin/register']">Register</a>
@@ -32,7 +32,7 @@
     <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
         <h2>Profiles:</h2>
         <br>
-        <button 
+        <button
             [ngClass]="{'btn--active': profile.active}"
             *ngFor='let profile of profileService.getProfiles()'
             class='btn dashboard__profile-btn'

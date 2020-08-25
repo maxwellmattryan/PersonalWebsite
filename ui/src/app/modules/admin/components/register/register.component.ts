@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Admin } from '@app/shared/interfaces';
 import { ApiService } from '@app/core/http';
 import { NotificationService, ValidationService } from '@app/core/services';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-register',
@@ -30,19 +31,10 @@ export class RegisterComponent implements OnInit {
         };
 
         this.apiService.registerAdmin(admin).subscribe(res => {
-            let message: string;
-            let navURL: string;
-
-            if(res.success) {
-                message = `Hello, ${admin.username}!`;
-                navURL = 'admin/login';
-            } else {
-                message = res.msg;
-                navURL = 'admin/register';                
-            }
-
-            this.notificationService.createNotification(message);
-            this.router.navigate([navURL]);
+            this.notificationService.createNotification(`Hello, ${admin.username}!`);
+            this.router.navigate(['admin/login']);
+        }, (error: HttpErrorResponse) => {
+          this.notificationService.createNotification(error.error.message);
         });
     }
 }

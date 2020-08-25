@@ -6,57 +6,23 @@ import { Admin } from '@app/shared/interfaces';
     providedIn: 'root'
 })
 export class AuthService {
-    // TODO: implement admin model later and type this
-    admin: any;
-    authToken: any;
 
     constructor() { }
 
     getAdmin(): string {
-        this.loadAdminData();
-
-        return this.admin.username;
-    }
-
-    getAuthHeaders(): HttpHeaders {
-        this.loadAdminData();
-
-        return new HttpHeaders({
-            Authorization: this.authToken
-        });
-    }
-
-    getToken(): string {
-        this.loadAdminData();
-
-        return this.authToken;
+        return localStorage.getItem('username')
     }
 
     isLoggedIn(): boolean {
-        return JSON.parse(localStorage.getItem('loginStatus') || 'false');
+        return localStorage.length !== 0;
+    }
+
+    loginAdmin(id: number, username: string): void {
+        localStorage.setItem('id', id.toString());
+        localStorage.setItem('username', username);
     }
 
     logoutAdmin(): void {
         localStorage.clear();
-
-        this.admin = undefined;
-        this.authToken = undefined;
-    }
-
-    loadAdminData(): void {
-        const token = localStorage.getItem('jwtToken');
-        const admin = JSON.parse(localStorage.getItem('admin'));
-
-        this.authToken = token;
-        this.admin = admin;
-    }
-
-    storeAdminData(token: string, admin: Admin): void {
-        this.authToken = token;
-        this.admin = admin;
-
-        localStorage.setItem('admin', JSON.stringify(admin));
-        localStorage.setItem('jwtToken', token);
-        localStorage.setItem('loginStatus', 'true');
     }
 }

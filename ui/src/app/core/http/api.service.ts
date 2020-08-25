@@ -18,26 +18,34 @@ export class ApiService {
     ) { }
 
     // ADMIN
+    registerAdmin(admin: Admin): Observable<any> {
+      const headers = new HttpHeaders();
+      headers.set('Content-Type', 'application/json');
+
+      return this.http.post(
+        environment.API_URL + '/auth/register',
+        admin,
+        { headers }
+      ).pipe(map(res => res));
+    }
+
+    logoutAdmin(): Observable<any> {
+        return this.http.post<any>(environment.API_URL + '/auth/logout', {});
+    }
+
     loginAdmin(admin: Admin): Observable<any> {
         const headers = new HttpHeaders();
         headers.set('Content-Type', 'application/json');
 
         return this.http.post<any>(
-            environment.ROOT_URL + '/admin/login',
+            environment.API_URL + '/auth/login',
             admin,
             { headers }
         ).pipe(map(res => res));
     }
 
-    registerAdmin(admin: Admin): Observable<any> {
-        const headers = new HttpHeaders();
-        headers.set('Content-Type', 'application/json');
-
-        return this.http.post(
-            environment.ROOT_URL + '/admin/register',
-            admin,
-            { headers }
-        ).pipe(map(res => res));
+    tryAuthTest(): Observable<any> {
+      return this.http.get<any>(environment.API_URL + '/auth/test');
     }
 
     // HOMEPAGE
@@ -46,10 +54,9 @@ export class ApiService {
     }
 
     // POST
-    deletePost(requestURL: string, headers: HttpHeaders): Observable<any> {
+    deletePost(requestURL: string): Observable<any> {
         return this.http.delete<any>(
-            environment.API_URL + requestURL,
-            { headers: headers }
+            environment.API_URL + requestURL
         );
     }
 
@@ -61,31 +68,26 @@ export class ApiService {
         return this.http.get<Blog>(environment.API_URL + '/blog/posts');
     }
 
-    putPost(post: Post, headers: HttpHeaders): Observable<Post> {
+    putPost(post: Post): Observable<Post> {
         return this.http.put<Post>(
             environment.API_URL + '/blog/posts/' + post['uri'],
-            post,
-            { headers: headers }
+            post
         );
     }
 
     // PROJECT
-    deleteProject(requestURL: string, headers: HttpHeaders): Observable<any> {
-        return this.http.delete<any>(
-            environment.API_URL + requestURL,
-            { headers: headers }
-        );
+    deleteProject(requestURL: string): Observable<any> {
+        return this.http.delete<any>(environment.API_URL + requestURL);
     }
 
     getProject(requestURL: string): Observable<Project> {
         return this.http.get<Project>(environment.API_URL + requestURL);
     }
 
-    putProject(project: Project, headers: HttpHeaders): Observable<Project> {
+    putProject(project: Project): Observable<Project> {
         return this.http.put<Project>(
             environment.API_URL + '/projects/' + project['uri'],
-            project,
-            { headers: headers }
+            project
         );
     }
 
@@ -94,19 +96,17 @@ export class ApiService {
         return this.http.get<Profile[]>(environment.API_URL + '/profiles');
     }
 
-    putProfile(profile: Profile, headers: HttpHeaders): Observable<any> {
+    putProfile(profile: Profile): Observable<any> {
         return this.http.put<any>(
             environment.API_URL + '/profiles/' + profile['uri'],
-            profile,
-            { headers: headers }
+            profile
         );
     }
 
     // TOPIC
-    deleteTopic(requestURL: string, headers: HttpHeaders): Observable<any> {
+    deleteTopic(requestURL: string): Observable<any> {
         return this.http.delete<any>(
-            environment.API_URL + requestURL,
-            { headers: headers }
+            environment.API_URL + requestURL
         );
     }
 
@@ -114,11 +114,10 @@ export class ApiService {
         return this.http.get<Topic[]>(environment.API_URL + '/blog/topics');
     }
 
-    putTopic(topic: Topic, headers: HttpHeaders): Observable<Topic> {
+    putTopic(topic: Topic): Observable<Topic> {
         return this.http.put<Topic>(
             environment.API_URL + '/blog/topics/' + topic['uri'],
-            topic,
-            { headers: headers }
+            topic
         );
     }
 }

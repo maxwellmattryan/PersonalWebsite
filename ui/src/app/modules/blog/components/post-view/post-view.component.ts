@@ -33,7 +33,7 @@ export class PostViewComponent implements OnInit {
         this.apiService.getPost(this.router.url).subscribe(post => {
             this.post = post;
             this.post.topics.sort(this.comparisonService.topics);
-            
+
             this.isLoaded = true;
         });
     }
@@ -43,9 +43,9 @@ export class PostViewComponent implements OnInit {
     }
 
     deletePost(): void {
-        this.apiService.deletePost(this.router.url, this.authService.getAuthHeaders()).subscribe((res: any) => {
+        this.apiService.deletePost(this.router.url).subscribe((res: any) => {
             this.notificationService.createNotification(res.msg);
-            
+
             this.router.navigate(['/blog']);
         });
     }

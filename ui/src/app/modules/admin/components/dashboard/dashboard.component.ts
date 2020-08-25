@@ -33,18 +33,16 @@ export class DashboardComponent implements OnInit {
 
         profile = this.profileService.activateProfile(profile);
 
-        const headers = this.authService.getAuthHeaders();
-
-        this.apiService.putProfile(profile, headers).subscribe(res => {
+        this.apiService.putProfile(profile).subscribe(res => {
             this.notificationService.createNotification(res.msg);
         });
     }
 
     onLogoutClick(): void {
-        this.notificationService.createNotification(`Bye, ${this.authService.getAdmin()}!`);
-
-        this.authService.logoutAdmin();
-
-        this.router.navigate(['admin']);
+        this.apiService.logoutAdmin().subscribe(res => {
+            this.notificationService.createNotification(`Bye, ${this.authService.getAdmin()}!`);
+            this.authService.logoutAdmin();
+            this.router.navigate(['admin']);
+        });
     }
 }

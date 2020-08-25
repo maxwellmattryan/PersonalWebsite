@@ -19,8 +19,10 @@ export class HomeViewComponent implements OnInit {
 
     ngOnInit(): void {
         this.apiService.getHomepage().subscribe(homepage => {
-            this.homepage = homepage;
-            this.isLoaded = true;
+            console.log(homepage);
+
+            // this.homepage = homepage;
+            // this.isLoaded = true;
         });
     }
 }
