@@ -145,7 +145,7 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
         - 200
     - `PUT /api/blog/posts/:id`
         - Upserts post data from the client for the post with the corresponding `id`
-        - 200, 204
+        - 200, 201
     - `DELETE /api/blog/posts/:id`
         - Removes the post with the corresponding `id` from the database
         - 204
@@ -154,7 +154,7 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
         - 200
     - `PUT /api/blog/topics/:id`
         - Upserts topic data from the client for the topic with the corresponding `id` 
-        - 200, 204
+        - 200, 201
     - `DELETE /api/blog/topics/:id`
         - Removes the topic with the corresponding `id` from the database
         - 204
@@ -165,7 +165,7 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
         - 200
     - `PUT /api/profiles/:id`
         - Upserts profile data from the client for the profile with the corresponding `id`
-        - 200, 204
+        - 200, 201
     - `DELETE /api/profiles/:id`
         - Removes the profile with the corresponding `id` from the database
         - 204
@@ -176,7 +176,7 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
         - 200
     - `PUT /api/projects/:id`
         - Upserts project data from the client for the project with the corresponding `id`
-        - 200, 204
+        - 200, 201
     - `DELETE /api/projects/:id`
         - Removes the project with the corresponding `id` from the database
         - 204

@@ -14,8 +14,10 @@ export class AuthController {
     ) { }
 
     @Post('register')
-    @HttpCode(204)
-    async register(@Req() request: Request) { }
+    @HttpCode(201)
+    async register(@Req() request: Request): Promise<Admin> {
+        return await this.authService.registerAdmin(request.body);
+    }
 
     @Post('login')
     @HttpCode(200)

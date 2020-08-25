@@ -20,7 +20,7 @@ export class AdminService {
     public async createAdmin(adminData: Admin): Promise<Admin> {
         const admin: Admin = await this.adminRepository.create(adminData);
 
-        await this.adminRepository.save(admin)
+        return await this.adminRepository.save(admin)
             .catch((error) => {
                 if(error.code === PostgresErrorCode.UNIQUE_VIOLATION) {
                     throw new AdminAlreadyExistsException();
@@ -28,8 +28,6 @@ export class AdminService {
                     throw new InternalServerErrorException();
                 }
             });
-
-        return admin;
     }
 
     public async getById(id: number): Promise<Admin> {

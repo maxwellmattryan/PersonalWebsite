@@ -38,7 +38,7 @@ export class AuthService {
         const token = this.jwtService.sign(payload);
         const expiresIn = this.configService.get<string>('JWT_EXPIRES_IN');
 
-        // CAUTION: When trying to include the 'Secure' field, the cookie was not being set on client side
+        // CAUTION: When trying to include the 'Secure;' option, the cookie was not being set on client side
         return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${expiresIn}`;
     }
 }
