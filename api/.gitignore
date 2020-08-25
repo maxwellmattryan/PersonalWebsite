@@ -33,5 +33,6 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# Docker environment variables
+# Environment variable stuff
+/.env
 /docker.env
