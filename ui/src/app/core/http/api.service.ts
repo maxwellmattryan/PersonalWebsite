@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { Admin, Blog, Homepage } from '@app/shared/interfaces';
@@ -18,25 +18,25 @@ export class ApiService {
     ) { }
 
     // ADMIN
-    authenticateAdmin(admin: Admin): Observable<any> {
-        let headers = new HttpHeaders();
+    loginAdmin(admin: Admin): Observable<any> {
+        const headers = new HttpHeaders();
         headers.set('Content-Type', 'application/json');
 
         return this.http.post<any>(
             environment.ROOT_URL + '/admin/login',
             admin,
-            { headers: headers }
+            { headers }
         ).pipe(map(res => res));
     }
 
     registerAdmin(admin: Admin): Observable<any> {
-        let headers = new HttpHeaders();
+        const headers = new HttpHeaders();
         headers.set('Content-Type', 'application/json');
 
         return this.http.post(
             environment.ROOT_URL + '/admin/register',
             admin,
-            { headers: headers }
+            { headers }
         ).pipe(map(res => res));
     }
 

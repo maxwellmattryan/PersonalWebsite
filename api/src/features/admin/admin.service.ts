@@ -6,7 +6,7 @@ import { Repository } from 'typeorm';
 import { PostgresErrorCode } from '@api/core/database/postgres-error-code.enum';
 
 import { InternalServerErrorException } from '@api/core/http/http.exception';
-import { AdminAlreadyExistsException, AdminNotFoundException } from './admin.exception';
+import { AdminAlreadyExistsException } from './admin.exception';
 
 import { Admin } from './admin.entity';
 
@@ -32,13 +32,11 @@ export class AdminService {
         return admin;
     }
 
-    public async getByUsername(username: string): Promise<Admin> {
-        const admin = await this.adminRepository.findOne({ username: username });
+    public async getById(id: number): Promise<Admin> {
+        return await this.adminRepository.findOne({ id: id });
+    }
 
-        if(!admin) {
-            throw new AdminNotFoundException();
-        } else {
-            return admin;
-        }
+    public async getByUsername(username: string): Promise<Admin> {
+        return await this.adminRepository.findOne({ username: username });
     }
 }

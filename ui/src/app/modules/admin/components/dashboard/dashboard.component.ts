@@ -23,9 +23,9 @@ export class DashboardComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.apiService.getProfiles().subscribe(profiles => {
-            this.profileService.setProfiles(profiles.sort(this.comparisonService.profiles));
-        });
+        // this.apiService.getProfiles().subscribe(profiles => {
+        //     this.profileService.setProfiles(profiles.sort(this.comparisonService.profiles));
+        // });
     }
 
     changeProfile(profile: Profile): void {
@@ -41,11 +41,10 @@ export class DashboardComponent implements OnInit {
     }
 
     onLogoutClick(): void {
-        const message = `Bye, ${this.authService.getAdmin()}!`;
-        this.notificationService.createNotification(message);
+        this.notificationService.createNotification(`Bye, ${this.authService.getAdmin()}!`);
 
         this.authService.logoutAdmin();
-        
-        this.router.navigate(['admin'])
+
+        this.router.navigate(['admin']);
     }
 }

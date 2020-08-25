@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -26,29 +27,20 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void { }
 
     onLoginSubmit(): void {
-        let admin: Admin = {
+        const admin: Admin = {
             username: this.username,
             password: this.password
         };
 
-        this.apiService.authenticateAdmin(admin).subscribe(res => {
-            let message: string;
-            let navURL: string;
+        this.apiService.loginAdmin(admin).subscribe(res => {
+            if(!res.error) {
+              this.authService.storeAdminData(res.token.signature, res.admin.username);
 
-            console.log(res);
-
-            if(!res.success) {
-                message = res.message;
-                navURL = 'admin/login';
-            } else {
-                message = `Welcome back, ${res.username}!`;
-                navURL = 'admin';
-
-                this.authService.storeAdminData(res.token, res.admin);
+              this.notificationService.createNotification(`Welcome back, ${res.admin.username}!`);
+              this.router.navigate(['admin']);
             }
-
-            this.notificationService.createNotification(message);
-            this.router.navigate([navURL]);
+        }, (error: HttpErrorResponse) => {
+          this.notificationService.createNotification(error.error.message);
         });
     }
 }

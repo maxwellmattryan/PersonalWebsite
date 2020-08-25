@@ -1,11 +1,12 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Admin } from '@app/shared/interfaces';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    // TODO: implement admin model later and type this 
+    // TODO: implement admin model later and type this
     admin: any;
     authToken: any;
 
@@ -21,7 +22,7 @@ export class AuthService {
         this.loadAdminData();
 
         return new HttpHeaders({
-            'Authorization': this.authToken
+            Authorization: this.authToken
         });
     }
 
@@ -38,24 +39,24 @@ export class AuthService {
     logoutAdmin(): void {
         localStorage.clear();
 
-        this.admin = null;
-        this.authToken = null;
+        this.admin = undefined;
+        this.authToken = undefined;
     }
 
     loadAdminData(): void {
-        const token = localStorage.getItem('id_token');
+        const token = localStorage.getItem('jwtToken');
         const admin = JSON.parse(localStorage.getItem('admin'));
 
         this.authToken = token;
         this.admin = admin;
     }
 
-    storeAdminData(token, admin): void {
+    storeAdminData(token: string, admin: Admin): void {
         this.authToken = token;
         this.admin = admin;
 
         localStorage.setItem('admin', JSON.stringify(admin));
-        localStorage.setItem('id_token', token);
+        localStorage.setItem('jwtToken', token);
         localStorage.setItem('loginStatus', 'true');
     }
 }
