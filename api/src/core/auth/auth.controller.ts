@@ -3,10 +3,9 @@ import { Controller, HttpCode, Post, Req, Get, UseGuards, Body } from '@nestjs/c
 import { Request } from 'express';
 
 import { AuthService } from './auth.service';
-import { LocalAuthGuard } from './local/local-auth.guard';
 import { JwtAuthGuard } from './jwt/jwt-auth.guard';
-import { Admin } from '@api/features/admin/admin.entity';
 import { WrongCredentialsWereProvidedException } from './auth.exception';
+import { Admin } from '@api/features/admin/admin.entity';
 
 @Controller('api/auth')
 export class AuthController {
@@ -32,10 +31,13 @@ export class AuthController {
 
     @Post('logout')
     @HttpCode(200)
-    async logout(@Req() request: Request) { }
+    @UseGuards(JwtAuthGuard)
+    async logout(@Req() request: Request): Promise<void> {
+        request.res.clearCookie('Authentication');
+    }
 
     @Get('test')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    async test(@Req() request: Request) { }
+    async test(@Req() request: Request): Promise<void> { }
 }
