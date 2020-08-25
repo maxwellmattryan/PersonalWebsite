@@ -4,6 +4,8 @@ import { PassportStrategy } from '@nestjs/passport';
 
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
+import { Request } from 'express';
+
 import { Admin } from '@api/features/admin/admin.entity'
 import { AdminService } from '@api/features/admin/admin.service';
 
@@ -17,7 +19,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         private readonly adminService: AdminService
     ) {
         super({
-            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+            jwtFromRequest: ExtractJwt.fromExtractors([(request: Request) => {
+                return request?.cookies?.Authentication;
+            }]),
             ignoreExpiration: false,
             secretOrKey: configService.get('JWT_SECRET')
         });

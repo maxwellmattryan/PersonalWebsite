@@ -7,7 +7,6 @@ import * as bcrypt from 'bcrypt';
 import { Admin } from '@api/features/admin/admin.entity';
 import { AdminService } from '@api/features/admin/admin.service';
 
-import { JwtToken } from './interfaces/jwt-token.interface';
 import { TokenPayload } from './interfaces/token-payload.interface';
 
 @Injectable()
@@ -34,12 +33,12 @@ export class AuthService {
         }
     }
 
-    public generateJwtToken(adminId: number): JwtToken {
-        const payload: TokenPayload = { adminId };
+    public generateCookieWithJwtToken(admin: Admin): string {
+        const payload: TokenPayload = { adminId: admin.id, username: admin.username };
+        const token = this.jwtService.sign(payload);
+        const expiresIn = this.configService.get<string>('JWT_EXPIRES_IN');
 
-        const expirationTime = this.configService.get('JWT_EXPIRES_IN');
-        const token = this.jwtService.sign(payload, { expiresIn: expirationTime });
-
-        return { signature: token, expiresIn: expirationTime };
+        // CAUTION: When trying to include the 'Secure' field, the cookie was not being set on client side
+        return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${expiresIn}`;
     }
 }

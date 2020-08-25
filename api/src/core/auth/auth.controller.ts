@@ -1,9 +1,12 @@
-import { Controller, HttpCode, Post, Req, Get, UseGuards } from '@nestjs/common';
+import { Controller, HttpCode, Post, Req, Get, UseGuards, Body } from '@nestjs/common';
 
 import { Request } from 'express';
 
 import { AuthService } from './auth.service';
+import { LocalAuthGuard } from './local/local-auth.guard';
 import { JwtAuthGuard } from './jwt/jwt-auth.guard';
+import { Admin } from '@api/features/admin/admin.entity';
+import { WrongCredentialsWereProvidedException } from './auth.exception';
 
 @Controller('api/auth')
 export class AuthController {
@@ -11,14 +14,20 @@ export class AuthController {
         private readonly authService: AuthService
     ) { }
 
+    @Post('register')
+    @HttpCode(204)
+    async register(@Req() request: Request) { }
+
     @Post('login')
     @HttpCode(200)
-    async login(@Req() request: Request) {
-        // authenticate the data in the request body (throw wrong credentials exception if not provided)
-        // create jwt token and embed into HttpOnly cookie (in auth service)
-        // return admin data (id and username)
-        console.log(request.body);
-        return '';
+    async login(@Req() request: Request): Promise<Admin> {
+        const admin = await this.authService.authenticateAdmin(request.body);
+        if(!admin) throw new WrongCredentialsWereProvidedException();
+
+        const jwtCookie = this.authService.generateCookieWithJwtToken(admin);
+        request.res.setHeader('Set-Cookie', jwtCookie);
+
+        return admin;
     }
 
     @Post('logout')
@@ -28,7 +37,5 @@ export class AuthController {
     @Get('test')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    async test(@Req() request: Request) {
-        return 'You passed the auth guard!';
-    }
+    async test(@Req() request: Request) { }
 }
