@@ -10,11 +10,11 @@ export class AuthService {
     constructor() { }
 
     getAdmin(): string {
-        return localStorage.getItem('username')
+        return localStorage.getItem('username');
     }
 
     isLoggedIn(): boolean {
-        return localStorage.length !== 0;
+        return localStorage.getItem('id') != undefined && localStorage.getItem('username') != undefined;
     }
 
     loginAdmin(id: number, username: string): void {

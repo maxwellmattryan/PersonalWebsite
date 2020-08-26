@@ -41,7 +41,5 @@ export class AuthController {
     @Get('test')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    async test(@Req() request: Request): Promise<void> {
-        console.log(request.cookies);
-    }
+    async test(@Req() request: Request): Promise<void> { }
 }

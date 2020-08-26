@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
         this.apiService.logoutAdmin().subscribe(res => {
             this.notificationService.createNotification(`Bye, ${this.authService.getAdmin()}!`);
             this.authService.logoutAdmin();
-            this.router.navigate(['admin']);
+            this.router.navigate(['']);
         });
     }
 }
