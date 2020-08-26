@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Profile } from '@app/shared/models';
+import { ProfileStatus } from '@app/shared/models/profile-status.model';
 
 @Injectable({
     providedIn: 'root'
@@ -11,10 +12,12 @@ export class ProfileService {
     constructor() { }
 
     activateProfile(profile: Profile): Profile {
-        profile.active = true;
-        
+        profile.status = new ProfileStatus({ id: 1, status: 'ACTIVE' });
+
         this.profiles.map(p => {
-            p.active = p._id === profile._id;
+            p.status = p.id === profile.id ?
+              new ProfileStatus({ id: 1, status: 'ACTIVE' }) : new ProfileStatus({ id: 2, status: 'INACTIVE' });
+
             return p;
         });
 

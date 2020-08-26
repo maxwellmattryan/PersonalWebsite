@@ -17,7 +17,7 @@ export class ProfileService {
             .createQueryBuilder('p')
             .leftJoinAndSelect('p.status', 'ps')
             .where('ps.status = \'ACTIVE\'')
-            .getOne()
+            .getOne();
     }
 
     public async getProfile(id: number): Promise<Profile> {
@@ -25,7 +25,7 @@ export class ProfileService {
             .createQueryBuilder('p')
             .leftJoinAndSelect('p.status', 'ps')
             .where('p.id = :id', { id: id })
-            .getOne()
+            .getOne();
     }
 
     public async getProfiles(): Promise<Profile[]> {

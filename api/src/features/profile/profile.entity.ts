@@ -4,6 +4,10 @@ import { ProfileStatus } from './profile-status.entity';
 
 @Entity('profile')
 export class Profile {
+    constructor(partial: Partial<Profile>) {
+        Object.assign(this, partial);
+    }
+
     @PrimaryGeneratedColumn()
     public id?: number;
 

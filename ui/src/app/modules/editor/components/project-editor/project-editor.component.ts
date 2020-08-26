@@ -161,7 +161,7 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
                 project[key] = this.projectForm.value[key];
             }
         }
-        project['_id'] = this.getProjectID();
+        project['id'] = this.getProjectID();
         project['uri'] = this.getProjectURI(project['title']);
 
         return project;
@@ -169,7 +169,7 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
 
     getSelectedProfiles(): any {
         return this.projectForm.value.profiles
-            .map((profile, idx) => profile ? this.profiles[idx]._id : null)
+            .map((profile, idx) => profile ? this.profiles[idx].id : null)
             .filter(profile => profile !== null);
     }
 
