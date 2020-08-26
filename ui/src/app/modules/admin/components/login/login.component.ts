@@ -24,7 +24,12 @@ export class LoginComponent implements OnInit {
         public validationService: ValidationService
     ) { }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        if(this.authService.isLoggedIn()) {
+          this.notificationService.createNotification('Already logged in.');
+          this.router.navigate(['admin']);
+        }
+    }
 
     onLoginSubmit(): void {
         const admin: Admin = {

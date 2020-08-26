@@ -5,6 +5,7 @@ import { Admin } from '@app/shared/interfaces';
 import { ApiService } from '@app/core/http';
 import { NotificationService, ValidationService } from '@app/core/services';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from '@app/core/authentication';
 
 @Component({
     selector: 'app-register',
@@ -18,11 +19,17 @@ export class RegisterComponent implements OnInit {
     constructor(
         private router: Router,
         private apiService: ApiService,
+        private authService: AuthService,
         private notificationService: NotificationService,
         public validationService: ValidationService
     ) { }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        if(this.authService.isLoggedIn()) {
+            this.notificationService.createNotification('Already logged in.');
+            this.router.navigate(['admin']);
+        }
+    }
 
     onRegisterSubmit(): void {
         const admin: Admin = {
