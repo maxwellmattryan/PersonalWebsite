@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
     }
 
     changeProfile(profile: Profile): void {
-        if(profile.active) return;
+        if(profile.status ) return;
 
         profile = this.profileService.activateProfile(profile);
 

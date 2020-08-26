@@ -49,8 +49,8 @@ export class ApiService {
     }
 
     // HOMEPAGE
-    getHomepage(): Observable<Homepage> {
-        return this.http.get<Homepage>(environment.API_URL);
+    getHomepage(): Observable<any> {
+        return this.http.get<any>(environment.API_URL);
     }
 
     // POST
