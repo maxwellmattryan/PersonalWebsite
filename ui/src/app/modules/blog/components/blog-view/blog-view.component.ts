@@ -18,7 +18,7 @@ export class BlogViewComponent implements OnInit {
     blog: Blog;
     posts: Array<Post>;
     topics: Map<string, boolean>;
-    
+
     constructor(
         private apiService: ApiService,
         private authService: AuthService,
@@ -29,12 +29,12 @@ export class BlogViewComponent implements OnInit {
 
     ngOnInit(): void {
         this.isAdmin = this.authService.isLoggedIn();
-        
+
         this.apiService.getPosts().subscribe((blog: Blog) => {
             this.blog = blog;
-            
+
             this.filterPosts(this.blogService.getActiveTopic());
-            
+
             this.isLoaded = true;
         });
     }
@@ -86,13 +86,13 @@ export class BlogViewComponent implements OnInit {
         } else {
             const requestURL = '/blog/topics/' + this.blog.topics.find(t => t.name === topic).uri;
 
-            this.apiService.deletePost(requestURL, this.authService.getAuthHeaders()).subscribe((res: any) => {
-                this.notificationService.createNotification(res.msg); 
-                
+            this.apiService.deletePost(requestURL).subscribe((res: any) => {
+                this.notificationService.createNotification(res.msg);
+
                 if(this.topics.get(topic)) {
                     this.filterPosts('All');
                 }
-                
+
                 this.topics.delete(topic);
             });
         }
@@ -101,7 +101,7 @@ export class BlogViewComponent implements OnInit {
     canDeleteTopic(topic: string): boolean {
         let posts = this.blog.posts.filter(p => p.topics.map(t => t.name).includes(topic));
         posts = posts.filter(p => p.topics.length === 1);
-        
+
         return posts.length === 0;
     }
 }

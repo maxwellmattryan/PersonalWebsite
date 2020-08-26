@@ -1,61 +1,28 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Admin } from '@app/shared/interfaces';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    // TODO: implement admin model later and type this 
-    admin: any;
-    authToken: any;
 
     constructor() { }
 
     getAdmin(): string {
-        this.loadAdminData();
-
-        return this.admin.username;
-    }
-
-    getAuthHeaders(): HttpHeaders {
-        this.loadAdminData();
-
-        return new HttpHeaders({
-            'Authorization': this.authToken
-        });
-    }
-
-    getToken(): string {
-        this.loadAdminData();
-
-        return this.authToken;
+        return localStorage.getItem('username');
     }
 
     isLoggedIn(): boolean {
-        return JSON.parse(localStorage.getItem('loginStatus') || 'false');
+        return localStorage.getItem('id') != undefined && localStorage.getItem('username') != undefined;
+    }
+
+    loginAdmin(id: number, username: string): void {
+        localStorage.setItem('id', id.toString());
+        localStorage.setItem('username', username);
     }
 
     logoutAdmin(): void {
         localStorage.clear();
-
-        this.admin = null;
-        this.authToken = null;
-    }
-
-    loadAdminData(): void {
-        const token = localStorage.getItem('id_token');
-        const admin = JSON.parse(localStorage.getItem('admin'));
-
-        this.authToken = token;
-        this.admin = admin;
-    }
-
-    storeAdminData(token, admin): void {
-        this.authToken = token;
-        this.admin = admin;
-
-        localStorage.setItem('admin', JSON.stringify(admin));
-        localStorage.setItem('id_token', token);
-        localStorage.setItem('loginStatus', 'true');
     }
 }

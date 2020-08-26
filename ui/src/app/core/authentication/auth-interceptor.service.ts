@@ -20,6 +20,8 @@ export class AuthInterceptorService implements HttpInterceptor {
     ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        req = req.clone({ withCredentials: true });
+
         return next.handle(req).pipe(catchError(err => this.handleAuthError(err)));
     }
 
@@ -27,7 +29,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         if(err.status === 401 || err.status === 403) {
             this.authService.logoutAdmin();
             this.notificationService.createNotification('Unauthorized request. Please log in.');
-            
+
             this.router.navigate(['/admin/login']);
 
             return of(err.message);

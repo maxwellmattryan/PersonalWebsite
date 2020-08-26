@@ -72,9 +72,8 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
 
     onSubmit(): void {
         const topic = this.buildTopicData();
-        const headers = this.getHeaders();
 
-        this.apiService.putTopic(topic, headers).subscribe((res: any) => {
+        this.apiService.putTopic(topic).subscribe((res: any) => {
             this.notificationService.createNotification(res.msg);
 
             if(res.success) {
@@ -100,12 +99,5 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
 
     getTopicURI(name: string): string {
         return name.toLowerCase().replace(/[ ]/g, '-').replace(/[\.?]/g, '');
-    }
-
-    getHeaders(): HttpHeaders {
-        let headers = this.authService.getAuthHeaders();
-        headers.set('Content-Type', 'application/json');
-
-        return headers;
     }
 }

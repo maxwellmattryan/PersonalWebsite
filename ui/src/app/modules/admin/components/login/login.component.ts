@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -23,30 +24,25 @@ export class LoginComponent implements OnInit {
         public validationService: ValidationService
     ) { }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        if(this.authService.isLoggedIn()) {
+          this.notificationService.createNotification('Already logged in.');
+          this.router.navigate(['admin']);
+        }
+    }
 
     onLoginSubmit(): void {
-        let admin: Admin = {
+        const admin: Admin = {
             username: this.username,
             password: this.password
         };
 
-        this.apiService.authenticateAdmin(admin).subscribe(res => {
-            let message: string;
-            let navURL: string;
-            
-            if(res.success) {
-                message = `Welcome back, ${admin.username}!`;
-                navURL = 'admin';
-                
-                this.authService.storeAdminData(res.token, res.admin);
-            } else {
-                message = res.msg;
-                navURL = 'admin/login';
-            }
-            
-            this.notificationService.createNotification(message);
-            this.router.navigate([navURL]);
+        this.apiService.loginAdmin(admin).subscribe(res => {
+          this.authService.loginAdmin(res.id, res.username);
+          this.notificationService.createNotification(`Welcome back, ${res.username}!`);
+          this.router.navigate(['admin']);
+        }, (error: HttpErrorResponse) => {
+          this.notificationService.createNotification(error.error.message);
         });
     }
 }

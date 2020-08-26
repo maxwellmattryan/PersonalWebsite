@@ -3,13 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
-import { Profile } from '../entities/profile.entity';
+import { Profile } from './profile.entity';
 
 @Injectable()
 export class ProfileService {
     constructor(
         @InjectRepository(Profile)
-        private profileRepository: Repository<Profile>
+        private readonly profileRepository: Repository<Profile>
     ) { }
 
     public async getActiveProfile(): Promise<Profile> {

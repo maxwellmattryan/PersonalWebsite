@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 
-import { ProfileModule } from '@api/profile/profile.module';
+import { ProfileModule } from '@api/features/profile/profile.module';
 
-import { ApiController } from './controllers/api.controller';
+import { ApiController } from './api.controller';
 
 @Module({
     imports: [ProfileModule],

@@ -36,7 +36,7 @@ export class PostEditorComponent implements OnDestroy, OnInit {
 
     ngOnInit(): void {
         this.checkForAdmin();
-        
+
         this.setUnloadEvent();
 
         this.loadPostData();
@@ -103,9 +103,8 @@ export class PostEditorComponent implements OnDestroy, OnInit {
 
     onSubmit(): void {
         const post = this.buildPostData();
-        const headers = this.getHeaders();
 
-        this.apiService.putPost(post, headers).subscribe((res: any) => {
+        this.apiService.putPost(post).subscribe((res: any) => {
             this.notificationService.createNotification(res.msg);
 
             if(res.success) {
@@ -121,7 +120,7 @@ export class PostEditorComponent implements OnDestroy, OnInit {
                 post[key] = this.getSelectedTopics();
             } else {
                 post[key] = this.postForm.value[key];
-            } 
+            }
         }
         post['_id'] = this.getPostID();
         post['uri'] = this.getPostURI(post['title']);
@@ -141,12 +140,5 @@ export class PostEditorComponent implements OnDestroy, OnInit {
 
     getPostURI(title: string): string {
         return title.toLowerCase().replace(/[ ]/g, '-').replace(/[\.?]/g, '');
-    }
-
-    getHeaders(): HttpHeaders {
-        let headers = this.authService.getAuthHeaders();
-        headers.set('Content-Type', 'application/json');
-
-        return headers;
     }
 }

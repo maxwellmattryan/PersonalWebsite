@@ -142,9 +142,8 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
 
     onSubmit(): void {
         const project = this.buildProjectData();
-        const headers = this.getHeaders();
 
-        this.apiService.putProject(project, headers).subscribe((res: any) => {
+        this.apiService.putProject(project).subscribe((res: any) => {
             this.notificationService.createNotification(res.msg);
 
             if(res.success) {
@@ -180,12 +179,5 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
 
     getProjectURI(title: string): string {
         return title.toLowerCase().replace(/[ ]/g, '-').replace(/[\.?]/g, '');
-    }
-
-    getHeaders(): HttpHeaders {
-        let headers = this.authService.getAuthHeaders();
-        headers.set('Content-Type', 'application/json');
-
-        return headers;
     }
 }

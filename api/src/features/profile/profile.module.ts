@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Profile } from './entities/profile.entity';
-import { ProfileStatus } from './entities/profile-status.entity';
-
-import { ProfileService } from './services/profile.service';
+import { Profile } from './profile.entity';
+import { ProfileStatus } from './profile-status.entity';
+import { ProfileService } from './profile.service';
 
 @Module({
     imports: [
