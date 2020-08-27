@@ -24,7 +24,6 @@ export class HomeViewComponent implements OnInit {
         this.apiService.getHomepage().subscribe(res => {
             console.log(res);
 
-
             this.isLoaded = true;
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);

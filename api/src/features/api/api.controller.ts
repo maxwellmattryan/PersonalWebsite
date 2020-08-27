@@ -1,21 +1,29 @@
 import { Controller, Get, HttpCode, UseGuards } from '@nestjs/common';
 
-import { Profile } from '@api/features/profile/profile.entity';
 import { ProfileService } from '@api/features/profile/profile.service';
+import { ProjectService } from '@api/features/project/project.service';
+
+import { Profile } from '@api/features/profile/profile.entity';
+
 import { NoActiveProfileWasFoundException } from '@api/features/profile/profile.exception';
+import { NoProjectsWereFoundException } from '../project/project.exception';
 
 @Controller('api')
 export class ApiController {
     constructor(
-        private readonly profileService: ProfileService
+        private readonly profileService: ProfileService,
+        private readonly projectService: ProjectService
     ) { }
 
-    @Get('')
+    @Get('homepage')
     @HttpCode(200)
-    async getIndex(): Promise<{ profile: Profile, posts: string[] }> {
+    async getIndex(): Promise<any> {
         const profile = await this.profileService.getActiveProfile();
         if(!profile) throw new NoActiveProfileWasFoundException();
 
-        return { profile: profile, posts: ['', ''] };
+        const projects = await this.projectService.getProjects();
+        if(projects.length == 0) throw new NoProjectsWereFoundException();
+
+        return { profile: profile, projects: projects };
     }
 }

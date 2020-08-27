@@ -12,7 +12,6 @@ import { Post, Project, Profile, Topic } from '@app/shared/models';
     providedIn: 'root'
 })
 export class ApiService {
-
     constructor(
         private http: HttpClient
     ) { }
@@ -23,14 +22,14 @@ export class ApiService {
       headers.set('Content-Type', 'application/json');
 
       return this.http.post(
-        environment.API_URL + '/auth/register',
+        `${environment.API_URL}/auth/register`,
         admin,
         { headers }
       ).pipe(map(res => res));
     }
 
     logoutAdmin(): Observable<any> {
-        return this.http.post<any>(environment.API_URL + '/auth/logout', {});
+        return this.http.post<any>(`${environment.API_URL}/auth/logout`, {});
     }
 
     loginAdmin(admin: Admin): Observable<any> {
@@ -38,19 +37,19 @@ export class ApiService {
         headers.set('Content-Type', 'application/json');
 
         return this.http.post<any>(
-            environment.API_URL + '/auth/login',
+            `${environment.API_URL}/auth/login`,
             admin,
             { headers }
         ).pipe(map(res => res));
     }
 
     tryAuthTest(): Observable<any> {
-      return this.http.get<any>(environment.API_URL + '/auth/test');
+      return this.http.get<any>(`${environment.API_URL}/auth/test`);
     }
 
     // HOMEPAGE
     getHomepage(): Observable<any> {
-        return this.http.get<any>(environment.API_URL);
+        return this.http.get<any>(`${environment.API_URL}/homepage`);
     }
 
     // POST
