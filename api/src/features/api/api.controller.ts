@@ -8,7 +8,7 @@ import { Profile } from '@api/features/profile/profile.entity';
 import { NoActiveProfileWasFoundException } from '@api/features/profile/profile.exception';
 import { NoProjectsWereFoundException } from '../project/project.exception';
 
-@Controller('api')
+@Controller()
 export class ApiController {
     constructor(
         private readonly profileService: ProfileService,

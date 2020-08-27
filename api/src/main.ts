@@ -34,6 +34,8 @@ async function bootstrap() {
         app.get(Reflector)
     ));
 
+    app.setGlobalPrefix('api');
+
     const PORT = 3000;
     await app.listen(PORT);
 }
