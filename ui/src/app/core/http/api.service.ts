@@ -96,10 +96,10 @@ export class ApiService {
         return this.http.get<Profile[]>(environment.API_URL + '/profiles');
     }
 
-    activateProfile(profile: Profile): Observable<Profile> {
+    activateProfile(profileId: number): Observable<Profile> {
         return this.http.put<Profile>(
-            `${environment.API_URL}/profiles/${profile.id}/activate`,
-            profile
+            `${environment.API_URL}/profiles/${profileId}/activate`,
+          {}
         );
     }
 

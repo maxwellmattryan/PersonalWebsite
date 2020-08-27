@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
     changeProfile(profile: Profile): void {
         if(profile.status.status === 'ACTIVE') return;
 
-        this.apiService.activateProfile(profile).subscribe((res: Profile) => {
+        this.apiService.activateProfile(profile.id).subscribe((res: Profile) => {
             profile = this.profileService.activateProfile(profile);
             this.notificationService.createNotification(`'${res.name}' profile has been activated!`);
         }, (error: HttpErrorResponse) => {

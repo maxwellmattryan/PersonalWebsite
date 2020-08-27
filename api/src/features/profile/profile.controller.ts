@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, Put, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode, Param, Put, Req, UseGuards } from '@nestjs/common';
 
 import { Request } from 'express';
 
@@ -27,16 +27,14 @@ export class ProfileController {
     @Put(':id/activate')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    async activateProfile(@Req() request: Request): Promise<Profile> {
-        const profileData: Profile = request.body;
-
+    async activateProfile(@Param('id') id: number, @Req() request: Request): Promise<Profile> {
         // CAUTION: This check is required because all rows will be updated
-        if(!(await this.profileService.existsInTable(profileData.id))) {
+        if(!(await this.profileService.existsInTable(id))) {
             throw new NoProfileWasFoundException();
         }
 
-        await this.profileService.resetProfileStatuses(profileData.id);
+        await this.profileService.resetProfileStatuses(id);
 
-        return await this.profileService.getProfile(profileData.id);
+        return await this.profileService.getProfile(id);
     }
 }
