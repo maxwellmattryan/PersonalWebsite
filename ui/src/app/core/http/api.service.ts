@@ -96,9 +96,9 @@ export class ApiService {
         return this.http.get<Profile[]>(environment.API_URL + '/profiles');
     }
 
-    putProfile(profile: Profile): Observable<any> {
-        return this.http.put<any>(
-            environment.API_URL + '/profiles/' + profile['uri'],
+    activateProfile(profile: Profile): Observable<Profile> {
+        return this.http.put<Profile>(
+            `${environment.API_URL}/profiles/${profile.id}/activate`,
             profile
         );
     }
