@@ -5,6 +5,7 @@ import { Profile } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/authentication';
 import { NotificationService, ProfileService, ComparisonService } from '@app/core/services';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-dashboard',
@@ -12,7 +13,6 @@ import { NotificationService, ProfileService, ComparisonService } from '@app/cor
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
     constructor(
         private router: Router,
         private apiService: ApiService,
@@ -23,18 +23,27 @@ export class DashboardComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        // this.apiService.getProfiles().subscribe(profiles => {
-        //     this.profileService.setProfiles(profiles.sort(this.comparisonService.profiles));
-        // });
+        if(this.authService.isLoggedIn()) {
+            this.populateProfiles();
+        }
+    }
+
+    populateProfiles(): void {
+        this.apiService.getProfiles().subscribe(profiles => {
+            this.profileService.setProfiles(profiles.sort(this.comparisonService.profiles));
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+        });
     }
 
     changeProfile(profile: Profile): void {
-        if(profile.status ) return;
+        if(profile.status.status === 'ACTIVE') return;
 
-        profile = this.profileService.activateProfile(profile);
-
-        this.apiService.putProfile(profile).subscribe(res => {
-            this.notificationService.createNotification(res.msg);
+        this.apiService.activateProfile(profile.id).subscribe((res: Profile) => {
+            profile = this.profileService.activateProfile(profile);
+            this.notificationService.createNotification(`'${res.name}' profile has been activated!`);
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
         });
     }
 
@@ -42,7 +51,9 @@ export class DashboardComponent implements OnInit {
         this.apiService.logoutAdmin().subscribe(res => {
             this.notificationService.createNotification(`Bye, ${this.authService.getAdmin()}!`);
             this.authService.logoutAdmin();
-            this.router.navigate(['']);
+            this.router.navigate(['admin']);
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
         });
     }
 }

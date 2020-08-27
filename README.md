@@ -169,6 +169,9 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
     - `DELETE /api/profiles/:id`
         - Removes the profile with the corresponding `id` from the database
         - 204
+    - `PUT /api/profiles/:id/activate`
+        - Sets the profile with the corresponding `id` as the application's active profile while setting all other profiles as inactive
+        - 200
         
 - /api/projects
     - `GET /api/projects/:id`
