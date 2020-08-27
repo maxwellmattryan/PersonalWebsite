@@ -14,7 +14,7 @@ export class Profile {
     @ManyToOne(type => ProfileStatus, profileStatus => profileStatus.status)
     public status: ProfileStatus;
 
-    @Column({ type: 'varchar', length: 50, nullable: false })
+    @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
     public name: string;
 
     @Column({ type: 'text', nullable: false })

@@ -7,7 +7,7 @@ import { JwtAuthGuard } from './jwt/jwt-auth.guard';
 import { WrongCredentialsWereProvidedException } from './auth.exception';
 import { Admin } from '@api/features/admin/admin.entity';
 
-@Controller('api/auth')
+@Controller('auth')
 export class AuthController {
     constructor(
         private readonly authService: AuthService

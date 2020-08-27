@@ -1,4 +1,4 @@
-INSERT INTO admin(admin_id, username, password) VALUES (1, 'admin', 'password');
+INSERT INTO admin(admin_id, username, password) VALUES (1, 'admin', 'password123');
 
 INSERT INTO blog_author(blog_author_id, first_name, last_name) VALUES (1, 'Matthew', 'Maxwell');
 
@@ -42,67 +42,6 @@ INSERT INTO blog_topic(blog_topic_id, name, description) VALUES (6, 'Programming
 INSERT INTO blog_post_topic_mapping(blog_post_id, blog_topic_id) VALUES (1, 1);
 INSERT INTO blog_post_topic_mapping(blog_post_id, blog_topic_id) VALUES (2, 4);
 INSERT INTO blog_post_topic_mapping(blog_post_id, blog_topic_id) VALUES (3, 3);
-
-INSERT INTO profile_status(id, status) VALUES (1, 'ACTIVE');
-INSERT INTO profile_status(id, status) VALUES (2, 'INACTIVE');
-
-INSERT INTO profile(id, status_id, name, tagline, landing, about)
-VALUES (1,
-       2,
-       'Audio Development',
-       'I make noises happen through code.',
-       'I''m an software engineer based in Austin, TX. I love to build and develop audio-related software, whether it''s plugins, game audio engines, and more.',
-       'I strive to develop clean and optimized audio software, which in and of itself is an vastly interesting problem domain. In addition to my passion for audio, I have experience ranging from building simple audio plugins to audio middleware solutions in games.');
-INSERT INTO profile(id, status_id, name, tagline, landing, about)
-VALUES (2,
-       2,
-       'Game Development',
-       'Looking for a game programmer? I''m your guy.',
-       'I\m a software engineer based in Austin, TX. I enjoy developing games, whether it''s audio programming or technical sound design.',
-       'I strive to develop clean and neatly architectured code for games, pertaining to things such as systems, behaviors, mechanics, and more. Each and every game is different, which makes the entire process so enjoyable and informative.');
-INSERT INTO profile(id, status_id, name, tagline, landing, about)
-VALUES (3,
-       1,
-       'Software Engineering',
-       'Looking for a software engineer? I''m your guy.',
-       'I''m a software engineer based in Austin, TX. I love working on all sides of web development, whether it involves the front-end, back-end, database, or cloud computing.',
-       'I strive to develop clean and neatly architectured software for the web. I have experience ranging from developing simple single-page applications to working in complex enterprise-level solutions.');
-
-INSERT INTO project(id, name, tagline, description, image_url, external_url)
-VALUES (1,
-       'Counterplay',
-       'Grid-based strategy game',
-       'Counterplay is a team project for the class, Video Game Systems Design (AET 334M), that demonstrates a unique intersection of primary, secondary, and progression systems. The purpose of the class is to gain a perspective of how video game systems shape an entire game''s basis of gameplay through building an implementation.',
-       'counterplay.png',
-       'https://github.com/zero-sum-games/counterplay');
-INSERT INTO project(id, name, tagline, description, image_url, external_url)
-VALUES (2,
-       'Cozy Cat Cafe',
-       'Mellow game for feeding cats',
-       'Cozy Cat Cafe is an incredibly relaxing and chill game also created for the 2019 Global Game Jam where it won best of show. You indefinitely feed cats that appear on your patio doorstep in exchange for acorns. These acorns can be used to customize your kitchen by installing new walls or floors, hanging posters, and more.',
-       'cozy-cat-cafe.png',
-       'https://github.com/VeryBester/Cozy-Cat-Cafe');
-INSERT INTO project(id, name, tagline, description, image_url, external_url)
-VALUES (3,
-       'Green Foot',
-       'ReactJS application that helps reduce carbon footprints',
-       'Green Foot is an environmentally conscious app concerned with helping you lower your carbon footprint. Provided a starting and target location by the user, it returns a list of modes of transportation ranked in increasing order according to their carbon emission amount.',
-       'green-foot.png',
-       'https://github.com/Diversity-Hackathon/greenfoot-frontend');
-INSERT INTO project(id, name, tagline, description, image_url, external_url)
-VALUES (4,
-       'Operation H.O.M.E.',
-       'Arcade shooter made in Unity',
-       'Operation H.O.M.E. (''Heck Off My Earth'') is a simple arcade shooter created for the 2019 Global Game Jam. The theme of the jam was ''home'' and what it represents to you. Does home mean a location, sound, smell, or feeling? My team decided that for us it meant defending the Earth from invading aliens.',
-       'operation-home.png',
-       'https://github.com/maxwellmattryan/operation-home');
-INSERT INTO project(id, name, tagline, description, image_url, external_url)
-VALUES (5,
-       'Rotor',
-       'Modern C++ ring modulation plugin',
-       'Rotor is a variable waveform ring modulation plugin targeting VST3 and AU for OS X and Windows platforms. It uses wavetable synthesis to generate various simple waveforms that act as the modulation signal for the input. It is compiled using the JUCE framework for C++.',
-       'rotor.png',
-       'https://github.com/maxwellmattryan/rotor');
 
 INSERT INTO profile_project_mapping(profile_id, project_id) VALUES (1, 2), (1, 4), (1, 5);
 INSERT INTO profile_project_mapping(profile_id, project_id) VALUES (2, 1), (2, 2), (2, 4);

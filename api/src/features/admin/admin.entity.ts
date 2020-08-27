@@ -10,10 +10,10 @@ export class Admin {
     @PrimaryGeneratedColumn()
     public id?: number;
 
-    @Column({ unique: true, length: 50, nullable: false })
+    @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
     public username: string;
 
-    @Column({ length: 255, nullable: false })
+    @Column({ type: 'varchar', length: 255, nullable: false })
     @Exclude()
     public password: string;
 }

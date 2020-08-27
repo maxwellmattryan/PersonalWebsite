@@ -9,7 +9,7 @@ export class Project {
     @PrimaryGeneratedColumn()
     public id?: number;
 
-    @Column({ type: 'varchar', length: 50, nullable: false })
+    @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
     public name: string;
 
     @Column({ type: 'text', nullable: false })
