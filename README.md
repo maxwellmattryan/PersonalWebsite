@@ -160,6 +160,9 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
         - 204
 
 - /api/profiles
+    - `GET /api/profiles`
+        - Retrieves list of all profiles in the database
+        - 200
     - `GET /api/profiles/:id`
         - Retrieves a single profile corresponding to the `id` path parameter
         - 200
