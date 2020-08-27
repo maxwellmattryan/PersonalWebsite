@@ -1,4 +1,4 @@
-import { Controller, Put, HttpCode, UseGuards, Req, Param, Post, Get } from '@nestjs/common';
+import { Controller, Put, HttpCode, UseGuards, Req, Param, Post, Get, Delete } from '@nestjs/common';
 
 import { Request } from 'express';
 
@@ -39,5 +39,14 @@ export class ProjectController {
         if(!project) throw new ProjectCouldNotBeUpdatedException();
 
         return project;
+    }
+
+    @Delete(':id')
+    @HttpCode(204)
+    @UseGuards(JwtAuthGuard)
+    async deleteProject(@Param('id') id: number, @Req() request: Request): Promise<void> {
+        if(!(await this.projectService.existsInTable(id))) throw new NoProjectWasFoundException();
+
+        await this.projectService.deleteProject(id);
     }
 }

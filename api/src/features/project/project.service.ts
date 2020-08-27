@@ -16,6 +16,13 @@ export class ProjectService {
         private readonly projectRepository: Repository<Project>
     ) { }
 
+    public async existsInTable(id: number): Promise<boolean> {
+        return await this.projectRepository
+            .createQueryBuilder('p')
+            .where(`p.id = ${id}`)
+            .getCount() > 0;
+    }
+
     public async createProject(projectData: Project): Promise<Project> {
         const project: Project = await this.projectRepository.create(projectData);
 
@@ -29,6 +36,10 @@ export class ProjectService {
                     throw new InternalServerErrorException();
                 }
             });
+    }
+
+    public async deleteProject(id: number): Promise<void> {
+        await this.projectRepository.delete({ id: id });
     }
 
     public async getProject(id: number): Promise<Project> {

@@ -177,12 +177,12 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
         - 200
         
 - /api/projects
-    - `GET /api/projects/:id`
-        - Retrieves a single project corresponding to the `id` path parameter
-        - 200
     - `POST /api/projects`
         - Creates and saves a new project to the database
         - 201
+    - `GET /api/projects/:id`
+        - Retrieves a single project corresponding to the `id` path parameter
+        - 200
     - `PUT /api/projects/:id`
         - Updates project data from the client for the project with the corresponding `id`
         - 200

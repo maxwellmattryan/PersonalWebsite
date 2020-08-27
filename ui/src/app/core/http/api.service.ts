@@ -86,12 +86,12 @@ export class ApiService {
         );
     }
 
-    deleteProject(requestURL: string): Observable<any> {
-        return this.http.delete<any>(environment.API_URL + requestURL);
+    deleteProject(id: number): Observable<any> {
+        return this.http.delete<any>(`${environment.API_URL}/projects/${id}`);
     }
 
-    getProject(requestURL: string): Observable<Project> {
-        return this.http.get<Project>(environment.API_URL + requestURL);
+    getProject(uri: string): Observable<Project> {
+        return this.http.get<Project>(`${environment.API_URL}${uri}`);
     }
 
     updateProject(project: Project): Observable<Project> {
