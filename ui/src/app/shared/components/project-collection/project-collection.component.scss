@@ -1,19 +1,19 @@
 @import 'variables';
 
 .projects {
-    
+
 }
 
 .projects__header {
-    
+
 }
 
 .projects__project-container {
-    
+
 }
 
 .projects__project-anchor-wrapper {
-    
+
 }
 
 .projects__project {
@@ -35,19 +35,18 @@
         width: 100%;
     }
 
-    &-title,
-    &-subtitle,
+    &-name,
     &-description,
     &-ext-container {
         padding: $half-padding $padding;
     }
-    
-    &-title {
+
+    &-name {
         color: $color-primary;
         padding-top: $padding;
     }
 
-    &-subtitle {
+    &-tagline {
         color: $color-white;
     }
 
@@ -66,8 +65,8 @@
     }
 
     &--rjust {
-        &-title,
-        &-subtitle,
+        &-name,
+        &-tagline,
         &-description {
             text-align: right;
         }
@@ -79,8 +78,8 @@
 }
 
 .projects__project--rjust {
-    .projects__project-title,
-    .projects__project-subtitle,
+    .projects__project-name,
+    .projects__project-tagline,
     .projects__project-description {
         text-align: right;
     }

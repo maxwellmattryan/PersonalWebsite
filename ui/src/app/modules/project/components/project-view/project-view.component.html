@@ -1,8 +1,8 @@
 <div class='section project' *ngIf='isLoaded'>
-    <h1 class='project__title'>{{ project.title }}</h1>
-    <h2 class='project__subtitle'>{{ project.subtitle }}</h2>
-    
-    <div class="project__btn-container" *ngIf='isAdmin'>
+    <h1 class='project__name'>{{ project.name }}</h1>
+    <h2 class='project__tagline'>{{ project.tagline }}</h2>
+
+  <div class="project__btn-container" *ngIf='isAdmin'>
         <a class='btn project__btn' (click)='sendProjectToEditor()' routerLink='/editor' [queryParams]='{type: "project"}'>
             &#x270F;
         </a>
@@ -12,16 +12,14 @@
     </div>
 
     <div class='project__external-container'>
-        <ng-container *ngFor='let external of project.externals'>
-            <a class='icon project__external-icon' [href]='external.URL' target='_blank'>
-                <app-icon [external]='external'></app-icon>
-            </a>
-        </ng-container>
+        <a class='icon project__external-icon' [href]='project.external_url' target='_blank'>
+            <app-icon [name]='project.external_url'></app-icon>
+        </a>
     </div>
 
     <div class="line-divider"></div>
 
-    <img class='project__image' [src]='project.imageURL' height=150>
+    <img class='project__image' [src]='project.image_url' height=150>
 
     <markdown [data]='project.description'></markdown>
 </div>

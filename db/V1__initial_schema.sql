@@ -104,6 +104,7 @@ CREATE TABLE project (
     name VARCHAR(50) NOT NULL UNIQUE,
     tagline TEXT NOT NULL,
     description TEXT NOT NULL,
+
     image_url TEXT NOT NULL,
     external_url TEXT NOT NULL,
 
