@@ -16,6 +16,10 @@ export class ApiService {
         private http: HttpClient
     ) { }
 
+    formatUri(raw: string): string {
+        return raw.toLowerCase().replace(/[ ]/g, '-').replace(/[\.?]/g, '');
+    }
+
     // ADMIN
     registerAdmin(admin: Admin): Observable<any> {
       const headers = new HttpHeaders();
@@ -75,6 +79,13 @@ export class ApiService {
     }
 
     // PROJECT
+    createProject(project: Project): Observable<Project> {
+        return this.http.post<Project>(
+            `${environment.API_URL}/projects`,
+            project
+        );
+    }
+
     deleteProject(requestURL: string): Observable<any> {
         return this.http.delete<any>(environment.API_URL + requestURL);
     }
@@ -83,9 +94,9 @@ export class ApiService {
         return this.http.get<Project>(environment.API_URL + requestURL);
     }
 
-    putProject(project: Project): Observable<Project> {
+    updateProject(project: Project): Observable<Project> {
         return this.http.put<Project>(
-            environment.API_URL + '/projects/' + project['uri'],
+            `${environment.API_URL}/projects/${project.id}`,
             project
         );
     }

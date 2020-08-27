@@ -25,6 +25,7 @@ export class ProjectService {
                 if(error.code === PostgresErrorCode.UNIQUE_VIOLATION) {
                     throw new ProjectAlreadyExistsException();
                 } else {
+                    console.log(error);
                     throw new InternalServerErrorException();
                 }
             });

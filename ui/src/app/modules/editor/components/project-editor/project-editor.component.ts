@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -68,19 +69,19 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     buildProjectForm(): void {
         if(this.projectData) {
             this.projectForm = this.formBuilder.group({
-                name:         this.formBuilder.control(this.projectData.name,         [Validators.required]),
-                tagline:      this.formBuilder.control(this.projectData.tagline,      [Validators.required]),
-                description:  this.formBuilder.control(this.projectData.description,  [Validators.required]),
-                imageUrl:     this.formBuilder.control(this.projectData.image_url,    [Validators.required]),
-                externalUrl:  this.formBuilder.control(this.projectData.external_url, [Validators.required]),
+                name:           this.formBuilder.control(this.projectData.name,         [Validators.required]),
+                tagline:        this.formBuilder.control(this.projectData.tagline,      [Validators.required]),
+                description:    this.formBuilder.control(this.projectData.description,  [Validators.required]),
+                image_url:      this.formBuilder.control(this.projectData.image_url,    [Validators.required]),
+                external_url:   this.formBuilder.control(this.projectData.external_url, [Validators.required]),
             });
         } else {
             this.projectForm = this.formBuilder.group({
-                name:         this.formBuilder.control('',[Validators.required]),
-                tagline:      this.formBuilder.control('',[Validators.required]),
-                description:  this.formBuilder.control('',[Validators.required]),
-                imageUrl:     this.formBuilder.control('',[Validators.required]),
-                externalUrl:  this.formBuilder.control('',[Validators.required]),
+                name:           this.formBuilder.control('',[Validators.required]),
+                tagline:        this.formBuilder.control('',[Validators.required]),
+                description:    this.formBuilder.control('',[Validators.required]),
+                image_url:      this.formBuilder.control('',[Validators.required]),
+                external_url:   this.formBuilder.control('',[Validators.required]),
             });
         }
     }
@@ -104,45 +105,32 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     // }
 
     onSubmit(): void {
-        const project = this.buildProjectData();
+        const project = this.buildProjectFormData();
 
-        this.apiService.putProject(project).subscribe((res: any) => {
-            this.notificationService.createNotification(res.msg);
-
-            if(res.success) {
-                this.router.navigate(['projects/' + project['uri']]);
-            }
-        });
+        if(project.id === undefined) {
+            this.apiService.createProject(project).subscribe((res: Project) => {
+                this.notificationService.createNotification(`Successfully created new project!`);
+                this.router.navigate([`projects/${res.id}`]);
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+            });
+        } else {
+            this.apiService.updateProject(project).subscribe((res: Project) => {
+                this.notificationService.createNotification(`Successfully updated existing project!`);
+                this.router.navigate([`projects/${res.id}`]);
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+            });
+        }
     }
 
-    buildProjectData(): any {
-        let project = {};
-        for(let key in this.projectForm.value) {
-            if(key === 'profiles') {
-                project[key] = this.getSelectedProfiles();
-            } else {
-                project[key] = this.projectForm.value[key];
-            }
-        }
-        project['id'] = this.getProjectID();
-        const uri = this.getProjectURI(project['name']);
-
-        console.log(project, uri);
-
-        return project;
+    buildProjectFormData(): Project {
+        return new Project({ ...this.projectForm.value, id: this.projectData ? this.projectData.id : undefined });
     }
 
     getSelectedProfiles(): any {
         return this.projectForm.value.profiles
             .map((profile, idx) => profile ? this.profiles[idx].id : null)
             .filter(profile => profile !== null);
-    }
-
-    getProjectID(): string {
-        return this.projectData ? this.projectData.id.toString() : '';
-    }
-
-    getProjectURI(title: string): string {
-        return title.toLowerCase().replace(/[ ]/g, '-').replace(/[\.?]/g, '');
     }
 }

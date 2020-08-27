@@ -1,5 +1,11 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 
+export class NoProjectWasFoundException extends NotFoundException {
+    constructor() {
+        super('Unable to find project.');
+    }
+}
+
 export class NoProjectsWereFoundException extends NotFoundException {
     constructor() {
         super('Unable to find any projects.');

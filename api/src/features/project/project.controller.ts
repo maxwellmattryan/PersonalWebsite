@@ -1,4 +1,4 @@
-import { Controller, Put, HttpCode, UseGuards, Req, Param, Post } from '@nestjs/common';
+import { Controller, Put, HttpCode, UseGuards, Req, Param, Post, Get } from '@nestjs/common';
 
 import { Request } from 'express';
 
@@ -6,7 +6,7 @@ import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
 import { Project } from './project.entity';
 import { ProjectService } from "./project.service";
-import { ProjectCouldNotBeUpdatedException } from '@api/features/project/project.exception';
+import { NoProjectWasFoundException, ProjectCouldNotBeUpdatedException } from '@api/features/project/project.exception';
 
 @Controller('projects')
 export class ProjectController {
@@ -20,6 +20,16 @@ export class ProjectController {
     async createProject(@Req() request: Request): Promise<Project> {
         return await this.projectService.createProject(request.body);
     }
+
+    @Get(':id')
+    @HttpCode(200)
+    async getProject(@Param('id') id: number, @Req() request: Request): Promise<Project> {
+        const project = await this.projectService.getProject(id);
+        if(!project) throw new NoProjectWasFoundException();
+
+        return project;
+    }
+
 
     @Put(':id')
     @HttpCode(200)
