@@ -47,7 +47,8 @@ export class ProfileService {
         // CAUTION: This query modifies all rows so it is important that the id being used actually exists
         await this.profileRepository.query(`
             UPDATE profile
-            SET status_id = CASE WHEN id = ${activeId} THEN 1 ELSE 2 END;
+            SET status_id = CASE WHEN id = ${activeId} THEN 1 ELSE 2 END,
+                updated_at = now();
         `);
     }
 }
