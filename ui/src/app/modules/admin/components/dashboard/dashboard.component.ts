@@ -13,8 +13,6 @@ import { HttpErrorResponse } from '@angular/common/http';
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-    isLoaded: boolean = false;
-
     constructor(
         private router: Router,
         private apiService: ApiService,
@@ -25,7 +23,9 @@ export class DashboardComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.populateProfiles();
+        if(this.authService.isLoggedIn()) {
+            this.populateProfiles();
+        }
     }
 
     populateProfiles(): void {
@@ -34,7 +34,6 @@ export class DashboardComponent implements OnInit {
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
         });
-        this.isLoaded = true;
     }
 
     changeProfile(profile: Profile): void {
@@ -52,7 +51,7 @@ export class DashboardComponent implements OnInit {
         this.apiService.logoutAdmin().subscribe(res => {
             this.notificationService.createNotification(`Bye, ${this.authService.getAdmin()}!`);
             this.authService.logoutAdmin();
-            this.router.navigate(['']);
+            this.router.navigate(['admin']);
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
         });
