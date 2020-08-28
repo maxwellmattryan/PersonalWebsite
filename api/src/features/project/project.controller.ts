@@ -18,9 +18,7 @@ export class ProjectController {
     @HttpCode(201)
     @UseGuards(JwtAuthGuard)
     async createProject(@Req() request: Request): Promise<Project> {
-        console.log(request.body);
-
-        return await this.projectService.createProject(request.body.project);
+        return await this.projectService.createProject(request.body.project, request.body.profile_ids);
     }
 
     @Get(':id')
@@ -37,9 +35,7 @@ export class ProjectController {
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
     async updateProject(@Param('id') id: number, @Req() request: Request): Promise<Project> {
-        console.log(request.body);
-
-        const project = await this.projectService.updateProject(request.body.project, request.body.profiles);
+        const project = await this.projectService.updateProject(request.body.project, request.body.profile_ids);
         if(!project) throw new ProjectCouldNotBeUpdatedException();
 
         return project;

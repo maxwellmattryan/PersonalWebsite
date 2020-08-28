@@ -82,7 +82,7 @@ export class ApiService {
     createProject(project: Project, associatedProfileIds: number[]): Observable<Project> {
         return this.http.post<Project>(
             `${environment.API_URL}/projects`,
-            { project: project, profiles: associatedProfileIds }
+            { project: project, profile_ids: associatedProfileIds }
         );
     }
 
@@ -97,7 +97,7 @@ export class ApiService {
     updateProject(project: Project, associatedProfileIds: number[]): Observable<Project> {
         return this.http.put<Project>(
             `${environment.API_URL}/projects/${project.id}`,
-            { project: project, profiles: associatedProfileIds }
+            { project: project, profile_ids: associatedProfileIds }
         );
     }
 

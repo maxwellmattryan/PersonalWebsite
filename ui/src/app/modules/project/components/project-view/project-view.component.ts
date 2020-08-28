@@ -40,6 +40,9 @@ export class ProjectViewComponent implements OnInit {
             this.project = project;
 
             this.isLoaded = true;
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+            this.router.navigate(['']);
         });
     }
 
