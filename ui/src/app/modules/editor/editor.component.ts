@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditorComponent implements OnInit {
     type: string;
+    id: number;
 
     constructor(
         private route: ActivatedRoute
@@ -16,6 +17,7 @@ export class EditorComponent implements OnInit {
     ngOnInit(): void {
         this.route.queryParams.subscribe(params => {
             this.type = params.type;
+            this.id = params.id;
         });
     }
 }

@@ -75,7 +75,7 @@ export class ProjectService {
         return await this.getProject(projectData.id);
     }
 
-    private async createProjectProfileMappings(projectId: number, profileIds: number[]) {
+    private async createProjectProfileMappings(projectId: number, profileIds: number[]): Promise<void> {
         await this.projectProfileMappingRepository
             .createQueryBuilder()
             .insert()
@@ -89,7 +89,7 @@ export class ProjectService {
             .execute();
     }
 
-    private async deleteProjectProfileMappings(projectId: number) {
+    private async deleteProjectProfileMappings(projectId: number): Promise<void> {
         await this.projectProfileMappingRepository
             .createQueryBuilder()
             .delete()

@@ -102,15 +102,19 @@ export class ApiService {
     }
 
     // PROFILE
+    activateProfile(profileId: number): Observable<Profile> {
+        return this.http.put<Profile>(
+            `${environment.API_URL}/profiles/${profileId}/activate`,
+            {}
+        );
+    }
+
     getProfiles(): Observable<Profile[]> {
         return this.http.get<Profile[]>(environment.API_URL + '/profiles');
     }
 
-    activateProfile(profileId: number): Observable<Profile> {
-        return this.http.put<Profile>(
-            `${environment.API_URL}/profiles/${profileId}/activate`,
-          {}
-        );
+    getProfilesForProject(projectId: number): Observable<any> {
+        return this.http.get<any>(`${environment.API_URL}/projects/${projectId}/profiles`)
     }
 
     // TOPIC

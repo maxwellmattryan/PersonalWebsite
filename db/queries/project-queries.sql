@@ -4,10 +4,21 @@ SELECT prj.name,
        prj.image_url,
        prj.external_url
 FROM project prj
-INNER JOIN profile_project_mapping ppm ON ppm.project_id = prj.project_id
+INNER JOIN project_profile_mapping ppm ON ppm.project_id = prj.id
 INNER JOIN (
-    SELECT p.profile_id
+    SELECT p.id
     FROM profile p
-    LEFT JOIN profile_status ps ON p.profile_status_id = ps.profile_status_id
+    LEFT JOIN profile_status ps ON p.status_id = ps.id
     WHERE ps.status = 'ACTIVE'
-    ) prf ON prf.profile_id = ppm.profile_id;
+    ) prf ON prf.id = ppm.profile_id;
+
+SELECT p.* FROM profile p
+LEFT JOIN project_profile_mapping ppm ON p.id = ppm.profile_id
+WHERE ppm.project_id = 4;
+
+SELECT prf.* FROM (
+    SELECT p.* FROM profile p
+    LEFT JOIN profile_status ps ON p.status_id = ps.id
+) prf
+LEFT JOIN project_profile_mapping ppm ON prf.id = ppm.profile_id
+WHERE ppm.project_id = 4;

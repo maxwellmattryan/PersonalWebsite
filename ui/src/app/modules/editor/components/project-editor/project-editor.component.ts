@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { HttpErrorResponse, HttpXsrfTokenExtractor } from '@angular/common/http';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -7,6 +7,7 @@ import { Profile, Project } from '@app/shared/models';
 import { AuthService } from '@app/core/authentication';
 import { ApiService } from '@app/core/http';
 import { EditorService, NotificationService, ValidationService, ComparisonService } from '@app/core/services';
+import { Http } from '@angular/http';
 
 @Component({
     selector: 'app-project-editor',
@@ -17,6 +18,8 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     profileData: Profile[] = [];
     projectData: Project;
     projectForm: FormGroup;
+
+    @Input() id: number;
 
     constructor(
         private apiService: ApiService,
@@ -67,15 +70,23 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     private loadProfileData(): void {
         this.apiService.getProfiles().subscribe((res: Profile[]) => {
             this.profileData = res.sort(this.comparisonService.profiles);
-            this.setProfileControls([]);
+            if(!this.id) this.setProfileControls([]);
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
         });
+
+        if(this.id) {
+            this.apiService.getProfilesForProject(this.id).subscribe((res: Profile[]) => {
+                this.setProfileControls(res.map(p => p.id));
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+            })
+        }
     }
 
-    private setProfileControls(activeIds: number[]): void {
+    private setProfileControls(associatedProfileIds: number[]): void {
         this.profileData.forEach((profile, idx) => {
-            let control: FormControl = this.formBuilder.control(activeIds.includes(profile.id));
+            let control: FormControl = this.formBuilder.control(associatedProfileIds.includes(profile.id));
             (this.projectForm.controls.profiles as FormArray).push(control);
         });
     }

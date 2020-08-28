@@ -10,6 +10,7 @@ import { ApiController } from './api.controller';
         ProfileModule,
         ProjectModule
     ],
+    exports: [],
     controllers: [ApiController],
     providers: []
 })

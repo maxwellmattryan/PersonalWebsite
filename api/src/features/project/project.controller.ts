@@ -4,13 +4,18 @@ import { Request } from 'express';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
-import { Project } from './project.entity';
+import { Profile } from '@api/features/profile/profile.entity';
+import { ProfileService } from '@api/features/profile/profile.service';
+import { NoProfilesWereFoundException } from '@api/features/profile/profile.exception';
+
+import { Project } from './project.entity'
 import { ProjectService } from "./project.service";
-import { NoProjectWasFoundException, ProjectCouldNotBeUpdatedException } from '@api/features/project/project.exception';
+import { NoProjectWasFoundException, ProjectCouldNotBeUpdatedException } from './project.exception';
 
 @Controller('projects')
 export class ProjectController {
     constructor(
+        private readonly profileService: ProfileService,
         private readonly projectService: ProjectService
     ) { }
 
@@ -48,5 +53,16 @@ export class ProjectController {
         if(!(await this.projectService.existsInTable(id))) throw new NoProjectWasFoundException();
 
         await this.projectService.deleteProject(id);
+    }
+
+    @Get(':id/profiles')
+    @HttpCode(200)
+    @UseGuards(JwtAuthGuard)
+    async getProjectForEditor(@Param('id') id: number, @Req() request: Request): Promise<Profile[]> {
+        const profiles = await this.profileService.getProfilesForProject(id);
+        if(profiles.length === 0) throw new NoProfilesWereFoundException();
+        //console.log(profiles);
+
+        return profiles;
     }
 }

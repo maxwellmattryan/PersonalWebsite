@@ -164,7 +164,7 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
         - Retrieves list of all profiles in the database
         - 200
     - `GET /api/profiles/:id`
-        - Retrieves a single profile corresponding to the `id` path parameter
+        - Retrieves a single profile with the corresponding `id`
         - 200
     - `PUT /api/profiles/:id`
         - Upserts profile data from the client for the profile with the corresponding `id`
@@ -189,6 +189,9 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
     - `DELETE /api/projects/:id`
         - Removes the project with the corresponding `id` from the database
         - 204
+    - `GET /api/projects/:id/profiles`
+        - Retrieves list of all profiles associated with the project of the corresponding `id`
+        - 200
 
 ### Architecture
 

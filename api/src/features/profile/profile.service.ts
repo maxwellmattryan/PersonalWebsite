@@ -42,6 +42,14 @@ export class ProfileService {
             .getMany();
     }
 
+    public async getProfilesForProject(projectId: number): Promise<Profile[]> {
+        return await this.profileRepository.query(`
+            SELECT p.* FROM profile p
+            LEFT JOIN project_profile_mapping ppm ON p.id = ppm.profile_id
+            WHERE ppm.project_id = ${projectId}
+        `);
+    }
+
     public async resetProfileStatuses(activeId: number): Promise<void> {
         // CAUTION: This query relies on the status to be set to 1 = 'ACTIVE' and 2 = 'INACTIVE'
         // CAUTION: This query modifies all rows so it is important that the id being used actually exists
