@@ -12,7 +12,7 @@ These keywords are for differentiating between task types and should be used in 
 - `sandbox`
   - playing around or testing new things
 - `test`
-  - adding missing tests or refactoring test
+  - adding missing tests or refactoring tests
   - no production code change
 
 ## Summary
