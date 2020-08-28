@@ -31,9 +31,11 @@ export class ProjectService {
     }
 
     public async createProject(projectData: Project, profileData: number[]): Promise<Project> {
-        const rawProfile: Project = await this.projectRepository.create(projectData);
+        const rawProjectLink: ProjectLink = await this.projectLinkRepository.create(projectData.link);
+        const projectLink = await this.projectLinkRepository.save(rawProjectLink);
 
-        const profile = await this.projectRepository.save(rawProfile)
+        const rawProject: Project = await this.projectRepository.create({ ...projectData, link: projectLink });
+        const project = await this.projectRepository.save(rawProject)
             .catch((error) => {
                 if(error.code === PostgresErrorCode.UNIQUE_VIOLATION) {
                     throw new ProjectAlreadyExistsException();
@@ -42,23 +44,27 @@ export class ProjectService {
                 }
             });
 
-        await this.createProjectProfileMappings(profile.id, profileData);
+        await this.createProjectProfileMappings(project.id, profileData);
 
-        return profile;
+        return project;
     }
 
     public async deleteProject(id: number): Promise<void> {
-        await this.projectRepository
+        const linkId: number = (await this.projectRepository
             .createQueryBuilder()
             .delete()
             .from(Project)
-            .where(`id = ${id}`)
-            .execute();
+            .where('project.id = :id', { id: id })
+            .returning('link_id')
+            .execute()
+        ).raw[0].link_id;
+
         await this.projectLinkRepository
             .createQueryBuilder()
             .delete()
             .from(ProjectLink)
-            .where('')
+            .where('project_link.id = :id', { id: linkId })
+            .execute();
     }
 
     public async getProject(id: number): Promise<Project> {

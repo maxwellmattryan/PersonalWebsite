@@ -4,12 +4,9 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
-    ManyToMany,
-    JoinTable,
-    ManyToOne
+    OneToOne, JoinColumn
 } from 'typeorm';
 
-import { Profile } from '@api/features/profile/profile.entity';
 import { ProjectLink } from './project-link.entity';
 
 @Entity('project')
@@ -21,7 +18,8 @@ export class Project {
     @PrimaryGeneratedColumn()
     public id?: number;
 
-    @ManyToOne(type => ProjectLink, pl => pl.id, { onDelete: 'CASCADE' })
+    @OneToOne(type => ProjectLink, { cascade: true })
+    @JoinColumn()
     public link: ProjectLink;
 
     @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
