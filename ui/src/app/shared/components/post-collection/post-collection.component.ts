@@ -9,7 +9,7 @@ import { BlogService, ComparisonService } from '@app/core/services';
     styleUrls: ['./post-collection.component.scss']
 })
 export class PostCollectionComponent implements OnInit {
-    @Input() content: Array<Post>;
+    @Input() posts: Post[];
     
     @Input() showPreview: boolean;
     @Input() showTopics: boolean;
@@ -24,7 +24,7 @@ export class PostCollectionComponent implements OnInit {
     ngOnInit(): void { }
 
     getPosts(): Array<Post> {
-        return this.content.sort(this.comparisonService.posts).slice(0, this.nPostsToDisplay);
+        return this.posts.sort(this.comparisonService.posts).slice(0, this.nPostsToDisplay);
     }
 
     activateTopic(topic: string): void {
@@ -34,8 +34,8 @@ export class PostCollectionComponent implements OnInit {
     displayMorePosts(): void {
        this.nPostsToDisplay += 5;
 
-        if(this.nPostsToDisplay >= this.content.length) {
-            this.nPostsToDisplay = this.content.length;
+        if(this.nPostsToDisplay >= this.posts.length) {
+            this.nPostsToDisplay = this.posts.length;
         }
     }
 }

@@ -21,7 +21,7 @@ export class ApiController {
         const profile = await this.profileService.getActiveProfile();
         if(!profile) throw new NoActiveProfileWasFoundException();
 
-        const projects = await this.projectService.getProjects();
+        const projects = await this.projectService.getProjectsForProfile(profile.id);
         if(projects.length == 0) throw new NoProjectsWereFoundException();
 
         return { profile: profile, projects: projects };

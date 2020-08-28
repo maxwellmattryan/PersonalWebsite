@@ -66,6 +66,14 @@ export class ProjectService {
             .getMany();
     }
 
+    public async getProjectsForProfile(profileId: number): Promise<Project[]> {
+        return await this.projectRepository.query(`
+            SELECT p.* FROM project p
+            LEFT JOIN project_profile_mapping ppm ON p.id = ppm.project_id
+            WHERE ppm.profile_id = ${profileId}
+        `);
+    }
+
     public async updateProject(projectData: Project, profileData: number[]): Promise<Project> {
         await this.deleteProjectProfileMappings(projectData.id);
         await this.createProjectProfileMappings(projectData.id, profileData);

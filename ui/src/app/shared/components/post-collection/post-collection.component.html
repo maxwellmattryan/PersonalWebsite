@@ -1,4 +1,4 @@
-<div class='section posts' *ngIf='content'>
+<div class='section posts' *ngIf='posts'>
     <h2 class='posts__header'>Posts</h2>
 
     <div class='line-divider'></div>
@@ -29,7 +29,7 @@
     </div>
 
     <button
-        [ngClass]="{'btn--hide': nPostsToDisplay >= content.length}"
+        [ngClass]="{'btn--hide': nPostsToDisplay >= posts.length}"
         class='btn posts__load-btn'
         (click)='displayMorePosts()'
     >

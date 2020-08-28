@@ -16,11 +16,16 @@ export class ApiService {
         private http: HttpClient
     ) { }
 
+    // ========
+    // UTILS
+    // ========
     formatUri(raw: string): string {
         return raw.toLowerCase().replace(/[ ]/g, '-').replace(/[\.?]/g, '');
     }
 
+    // ========
     // ADMIN
+    // ========
     registerAdmin(admin: Admin): Observable<any> {
       const headers = new HttpHeaders();
       headers.set('Content-Type', 'application/json');
@@ -51,12 +56,16 @@ export class ApiService {
       return this.http.get<any>(`${environment.API_URL}/auth/test`);
     }
 
-    // HOMEPAGE
+    // ========
+    // HOME
+    // ========
     getHomepage(): Observable<any> {
         return this.http.get<any>(`${environment.API_URL}/homepage`);
     }
 
+    // ========
     // POST
+    // ========
     deletePost(requestURL: string): Observable<any> {
         return this.http.delete<any>(
             environment.API_URL + requestURL
@@ -78,7 +87,9 @@ export class ApiService {
         );
     }
 
+    // ========
     // PROJECT
+    // ========
     createProject(project: Project, associatedProfileIds: number[]): Observable<Project> {
         return this.http.post<Project>(
             `${environment.API_URL}/projects`,
@@ -101,7 +112,9 @@ export class ApiService {
         );
     }
 
+    // ========
     // PROFILE
+    // ========
     activateProfile(profileId: number): Observable<Profile> {
         return this.http.put<Profile>(
             `${environment.API_URL}/profiles/${profileId}/activate`,
@@ -117,7 +130,9 @@ export class ApiService {
         return this.http.get<any>(`${environment.API_URL}/projects/${projectId}/profiles`)
     }
 
+    // ========
     // TOPIC
+    // ========
     deleteTopic(requestURL: string): Observable<any> {
         return this.http.delete<any>(
             environment.API_URL + requestURL
