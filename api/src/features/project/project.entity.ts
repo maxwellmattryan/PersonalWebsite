@@ -5,10 +5,12 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     ManyToMany,
-    JoinTable
+    JoinTable,
+    ManyToOne
 } from 'typeorm';
 
 import { Profile } from '@api/features/profile/profile.entity';
+import { ProjectLink } from './project-link.entity';
 
 @Entity('project')
 export class Project {
@@ -18,6 +20,9 @@ export class Project {
 
     @PrimaryGeneratedColumn()
     public id?: number;
+
+    @ManyToOne(type => ProjectLink, pl => pl.id, { onDelete: 'CASCADE' })
+    public link: ProjectLink;
 
     @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
     public name: string;
@@ -30,9 +35,6 @@ export class Project {
 
     @Column({ type: 'text', nullable: false })
     public image_url: string;
-
-    @Column({ type: 'text', nullable: false })
-    public external_url: string;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'now()' })
     public created_at?: Date;

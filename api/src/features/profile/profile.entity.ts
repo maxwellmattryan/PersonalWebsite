@@ -19,7 +19,7 @@ export class Profile {
     @PrimaryGeneratedColumn()
     public id?: number;
 
-    @ManyToOne(type => ProfileStatus, profileStatus => profileStatus.status)
+    @ManyToOne(type => ProfileStatus, ps => ps.id)
     public status: ProfileStatus;
 
     @Column({ type: 'varchar', length: 50, nullable: false, unique: true })

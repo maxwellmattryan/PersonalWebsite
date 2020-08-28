@@ -15,10 +15,3 @@ INNER JOIN (
 SELECT p.* FROM profile p
 LEFT JOIN project_profile_mapping ppm ON p.id = ppm.profile_id
 WHERE ppm.project_id = 4;
-
-SELECT prf.* FROM (
-    SELECT p.* FROM profile p
-    LEFT JOIN profile_status ps ON p.status_id = ps.id
-) prf
-LEFT JOIN project_profile_mapping ppm ON prf.id = ppm.profile_id
-WHERE ppm.project_id = 4;

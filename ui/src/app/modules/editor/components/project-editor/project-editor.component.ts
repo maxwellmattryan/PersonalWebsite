@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { HttpErrorResponse, HttpXsrfTokenExtractor } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,6 @@ import { Profile, Project } from '@app/shared/models';
 import { AuthService } from '@app/core/authentication';
 import { ApiService } from '@app/core/http';
 import { EditorService, NotificationService, ValidationService, ComparisonService } from '@app/core/services';
-import { Http } from '@angular/http';
 
 @Component({
     selector: 'app-project-editor',
@@ -70,12 +69,12 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     private loadProfileData(): void {
         this.apiService.getProfiles().subscribe((res: Profile[]) => {
             this.profileData = res.sort(this.comparisonService.profiles);
-            if(!this.id) this.setProfileControls([]);
+            if(!(this.id && this.projectData)) this.setProfileControls([]);
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
         });
 
-        if(this.id) {
+        if(this.id && this.projectData) {
             this.apiService.getProfilesForProject(this.id).subscribe((res: Profile[]) => {
                 this.setProfileControls(res.map(p => p.id));
             }, (error: HttpErrorResponse) => {
@@ -94,21 +93,27 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     private buildProjectForm(): void {
         if(this.projectData) {
             this.projectForm = this.formBuilder.group({
-                name:           this.formBuilder.control(this.projectData.name,         [Validators.required]),
-                profiles:       this.formBuilder.array  (this.profileData,              [this.validationService.hasMinElements()]),
-                tagline:        this.formBuilder.control(this.projectData.tagline,      [Validators.required]),
-                description:    this.formBuilder.control(this.projectData.description,  [Validators.required]),
-                image_url:      this.formBuilder.control(this.projectData.image_url,    [Validators.required]),
-                external_url:   this.formBuilder.control(this.projectData.external_url, [Validators.required]),
+                name:           this.formBuilder.control(this.projectData.name,        [Validators.required]),
+                profiles:       this.formBuilder.array  (this.profileData,             [this.validationService.hasMinElements()]),
+                tagline:        this.formBuilder.control(this.projectData.tagline,     [Validators.required]),
+                description:    this.formBuilder.control(this.projectData.description, [Validators.required]),
+                image_url:      this.formBuilder.control(this.projectData.image_url,   [Validators.required]),
+                link:           this.formBuilder.group  ({
+                    name: this.formBuilder.control(this.projectData.link.name, [Validators.required]),
+                    url:  this.formBuilder.control(this.projectData.link.url,  [Validators.required])
+                })
             });
         } else {
             this.projectForm = this.formBuilder.group({
-                name:           this.formBuilder.control('',    [Validators.required]),
-                profiles:       this.formBuilder.array  ([],    [this.validationService.hasMinElements()]),
-                tagline:        this.formBuilder.control('',    [Validators.required]),
-                description:    this.formBuilder.control('',    [Validators.required]),
-                image_url:      this.formBuilder.control('',    [Validators.required]),
-                external_url:   this.formBuilder.control('',    [Validators.required]),
+                name:           this.formBuilder.control('', [Validators.required]),
+                profiles:       this.formBuilder.array  ([], [this.validationService.hasMinElements()]),
+                tagline:        this.formBuilder.control('', [Validators.required]),
+                description:    this.formBuilder.control('', [Validators.required]),
+                image_url:      this.formBuilder.control('', [Validators.required]),
+                link:           this.formBuilder.group  ({
+                    name: this.formBuilder.control('', [Validators.required]),
+                    url:  this.formBuilder.control('', [Validators.required])
+                })
             });
         }
     }
@@ -116,6 +121,7 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     onSubmit(): void {
         const project = this.buildFormProjectData();
         const activeProfileIds = this.buildFormProfileData();
+        console.log(project);
 
         if(project.id === undefined) {
             this.apiService.createProject(project, activeProfileIds).subscribe((res: Project) => {
@@ -135,11 +141,14 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     }
 
     private buildFormProjectData(): Project {
-        return new Project({
+        const project = new Project({
             ...this.projectForm.value,
             id: this.projectData ? this.projectData.id : undefined,
             profiles: undefined
         });
+        project.link.id = this.projectData ? this.projectData.link.id : undefined;
+
+        return project;
     }
 
     private buildFormProfileData(): number[] {

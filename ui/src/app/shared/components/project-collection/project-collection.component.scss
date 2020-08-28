@@ -18,6 +18,7 @@
 
 .projects__project {
     background-color: darken($color-dark, 7);
+    box-sizing: border-box;
     height: auto;
     position: relative;
 
@@ -36,8 +37,8 @@
     }
 
     &-name,
-    &-description,
-    &-ext-container {
+    &-tagline,
+    &-description {
         padding: $half-padding $padding;
     }
 
@@ -54,25 +55,21 @@
         color: $color-light;
     }
 
-    &-ext-container {
-        display: flex;
-        flex-direction: row;
-        padding-bottom: $one-and-half-padding;
-    }
-
-    &-ext-item {
-        margin-right: $half-margin;
+    &-link {
+        display: block;
+        padding: $padding;
     }
 
     &--rjust {
         &-name,
         &-tagline,
-        &-description {
+        &-description,
+        &-link {
             text-align: right;
         }
 
-        &-ext-container {
-            justify-content: flex-end;
+        &-link {
+            align-self: flex-end;
         }
     }
 }
@@ -80,11 +77,8 @@
 .projects__project--rjust {
     .projects__project-name,
     .projects__project-tagline,
-    .projects__project-description {
+    .projects__project-description,
+    .projects__project-link {
         text-align: right;
-    }
-
-    .projects__project-ext-container {
-        justify-content: flex-end;
     }
 }

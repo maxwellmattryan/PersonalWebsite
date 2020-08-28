@@ -56,6 +56,7 @@ export class ProjectService {
     public async getProject(id: number): Promise<Project> {
         return await this.projectRepository
             .createQueryBuilder('p')
+            .leftJoinAndSelect('p.link', 'pl')
             .where('p.id = :id', { id: id })
             .getOne();
     }
@@ -63,15 +64,22 @@ export class ProjectService {
     public async getProjects(): Promise<Project[]> {
         return await this.projectRepository
             .createQueryBuilder('p')
+            .leftJoinAndSelect('p.link', 'pl')
             .getMany();
     }
 
     public async getProjectsForProfile(profileId: number): Promise<Project[]> {
-        return await this.projectRepository.query(`
-            SELECT p.* FROM project p
+        const profileIds: number[] = (await this.projectRepository.query(`
+            SELECT p.id FROM project p
             LEFT JOIN project_profile_mapping ppm ON p.id = ppm.project_id
             WHERE ppm.profile_id = ${profileId}
-        `);
+        `)).map((p: Project) => { return p.id; });
+
+        return await this.projectRepository
+            .createQueryBuilder('p')
+            .leftJoinAndSelect('p.link', 'pl')
+            .where('p.id IN (:...profileIds)', { profileIds: profileIds })
+            .getMany();
     }
 
     public async updateProject(projectData: Project, profileData: number[]): Promise<Project> {

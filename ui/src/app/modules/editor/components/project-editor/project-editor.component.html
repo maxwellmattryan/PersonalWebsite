@@ -37,10 +37,16 @@
             <input formControlName='image_url' required>
         </div>
 
-        <div class="form-field editor__form-field">
-            <label class='form-field-label editor__form-field-label'>External URL</label>
+        <div formGroupName='link' class="form-field editor__form-field">
+            <label class='form-field-label editor__form-field-label'>Link</label>
             <br><br>
-            <input formControlName='external_url' required>
+            <label class='form-field-label--small editor__form-field-label--small'>Name</label>
+            <br><br>
+            <input formControlName='name' required>
+            <br><br>
+            <label class='form-field-label--small editor__form-field-label--small'>URL</label>
+            <br><br>
+            <input formControlName='url' required>
         </div>
 
         <button

@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
         };
 
         this.apiService.registerAdmin(admin).subscribe(res => {
-            this.notificationService.createNotification(`Hello, ${admin.username}!`);
+            this.notificationService.createNotification(`Hello, ${admin.username}! Please log in.`);
             this.router.navigate(['admin/login']);
         }, (error: HttpErrorResponse) => {
           this.notificationService.createNotification(error.error.message);
