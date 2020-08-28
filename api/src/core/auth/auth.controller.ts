@@ -37,9 +37,4 @@ export class AuthController {
     async logout(@Req() request: Request): Promise<void> {
         request.res.clearCookie('Authentication');
     }
-
-    @Get('test')
-    @HttpCode(200)
-    @UseGuards(JwtAuthGuard)
-    async test(@Req() request: Request): Promise<void> { }
 }

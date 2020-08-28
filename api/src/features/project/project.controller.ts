@@ -61,7 +61,6 @@ export class ProjectController {
     async getProjectForEditor(@Param('id') id: number, @Req() request: Request): Promise<Profile[]> {
         const profiles = await this.profileService.getProfilesForProject(id);
         if(profiles.length === 0) throw new NoProfilesWereFoundException();
-        //console.log(profiles);
 
         return profiles;
     }
