@@ -10,12 +10,15 @@ import { ProjectAlreadyExistsException } from './project.exception';
 import { Project } from './project.entity';
 import { ProjectProfileMapping } from './project-profile-mapping.entity';
 import { Profile } from '@api/features/profile/profile.entity';
+import { ProjectLink } from './project-link.entity';
 
 @Injectable()
 export class ProjectService {
     constructor(
         @InjectRepository(Project)
         private readonly projectRepository: Repository<Project>,
+        @InjectRepository(ProjectLink)
+        private readonly projectLinkRepository: Repository<ProjectLink>,
         @InjectRepository(ProjectProfileMapping)
         private readonly projectProfileMappingRepository: Repository<ProjectProfileMapping>
     ) { }
@@ -51,6 +54,11 @@ export class ProjectService {
             .from(Project)
             .where(`id = ${id}`)
             .execute();
+        await this.projectLinkRepository
+            .createQueryBuilder()
+            .delete()
+            .from(ProjectLink)
+            .where('')
     }
 
     public async getProject(id: number): Promise<Project> {
@@ -87,6 +95,7 @@ export class ProjectService {
         await this.createProjectProfileMappings(projectData.id, profileData);
 
         await this.projectRepository.update(projectData.id, projectData);
+        await this.projectLinkRepository.update(projectData.link.id, projectData.link);
 
         return await this.getProject(projectData.id);
     }

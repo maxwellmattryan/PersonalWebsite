@@ -32,8 +32,6 @@ export class ProjectController {
         const project = await this.projectService.getProject(id);
         if(!project) throw new NoProjectWasFoundException();
 
-        console.log(project);
-
         return project;
     }
 
