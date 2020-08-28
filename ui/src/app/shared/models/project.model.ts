@@ -11,15 +11,15 @@ export class Project implements Deserializable {
         return this;
     }
 
-    id?:          number;
+    id?:            number;
 
-    name:         string;
-    tagline:      string;
-    description:  string;
+    name:           string;
+    tagline:        string;
+    description:    string;
 
-    image_url:    string;
-    external_url: string;
+    image_url:      string;
+    external_url:   string;
 
-    created_at:    Date;
-    updated_at:    Date;
+    created_at:     Date;
+    updated_at:     Date;
 }

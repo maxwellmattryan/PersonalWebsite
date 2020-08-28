@@ -1,4 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    CreateDateColumn,
+    UpdateDateColumn,
+    ManyToMany,
+    JoinTable
+} from 'typeorm';
+
+import { Profile } from '@api/features/profile/profile.entity';
 
 @Entity('project')
 export class Project {

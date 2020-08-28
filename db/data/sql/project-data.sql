@@ -33,3 +33,7 @@ VALUES (5,
        'Rotor is a variable waveform ring modulation plugin targeting VST3 and AU for OS X and Windows platforms. It uses wavetable synthesis to generate various simple waveforms that act as the modulation signal for the input. It is compiled using the JUCE framework for C++.',
        'rotor.png',
        'https://github.com/maxwellmattryan/rotor');
+
+INSERT INTO project_profile_mapping(profile_id, project_id) VALUES (1, 2), (1, 4), (1, 5);
+INSERT INTO project_profile_mapping(profile_id, project_id) VALUES (2, 1), (2, 2), (2, 4);
+INSERT INTO project_profile_mapping(profile_id, project_id) VALUES (3, 1), (3, 3), (3, 5);

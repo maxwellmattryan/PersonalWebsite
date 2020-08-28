@@ -1,5 +1,3 @@
-INSERT INTO admin(admin_id, username, password) VALUES (1, 'admin', 'password123');
-
 INSERT INTO blog_author(blog_author_id, first_name, last_name) VALUES (1, 'Matthew', 'Maxwell');
 
 INSERT INTO blog_post_status(blog_post_status_id, status) VALUES (1, 'DRAFT');
@@ -42,22 +40,3 @@ INSERT INTO blog_topic(blog_topic_id, name, description) VALUES (6, 'Programming
 INSERT INTO blog_post_topic_mapping(blog_post_id, blog_topic_id) VALUES (1, 1);
 INSERT INTO blog_post_topic_mapping(blog_post_id, blog_topic_id) VALUES (2, 4);
 INSERT INTO blog_post_topic_mapping(blog_post_id, blog_topic_id) VALUES (3, 3);
-
-INSERT INTO profile_project_mapping(profile_id, project_id) VALUES (1, 2), (1, 4), (1, 5);
-INSERT INTO profile_project_mapping(profile_id, project_id) VALUES (2, 1), (2, 2), (2, 4);
-INSERT INTO profile_project_mapping(profile_id, project_id) VALUES (3, 1), (3, 3), (3, 5);
-
-INSERT INTO technology(technology_id, profile_id, name, icon_url, display_order) VALUES (1, 1, 'C++', 'cpp.svg', 1);
-INSERT INTO technology(technology_id, profile_id, name, icon_url, display_order) VALUES (2, 1, 'JUCE', 'juce.svg', 2);
-INSERT INTO technology(technology_id, profile_id, name, icon_url, display_order) VALUES (3, 2, 'C#', 'c-sharp.svg', 1);
-INSERT INTO technology(technology_id, profile_id, name, icon_url, display_order) VALUES (4, 2, 'Unity', 'unity.svg', 2);
-INSERT INTO technology(technology_id, profile_id, name, icon_url, display_order) VALUES (5, 3, 'TypeScript', 'typescript.svg', 1);
-INSERT INTO technology(technology_id, profile_id, name, icon_url, display_order) VALUES (6, 3, 'Angular', 'angular.svg', 2);
-INSERT INTO technology(technology_id, profile_id, name, icon_url, display_order) VALUES (7, 3, 'JavaScript (ES6+)', 'javascript.svg', 3);
-INSERT INTO technology(technology_id, profile_id, name, icon_url, display_order) VALUES (8, 3, 'React & Redux', 'react.svg', 4);
-INSERT INTO technology(technology_id, profile_id, name, icon_url, display_order) VALUES (9, 3, 'Scala', 'scala.svg', 5);
-INSERT INTO technology(technology_id, profile_id, name, icon_url, display_order) VALUES (10, 3, 'Play', 'play.svg', 6);
-INSERT INTO technology(technology_id, profile_id, name, icon_url, display_order) VALUES (11, 3, 'Express', 'express.svg', 7);
-INSERT INTO technology(technology_id, profile_id, name, icon_url, display_order) VALUES (12, 3, 'Node', 'node.svg', 8);
-INSERT INTO technology(technology_id, profile_id, name, icon_url, display_order) VALUES (13, 3, 'MySQL', 'mysql.svg', 9);
-INSERT INTO technology(technology_id, profile_id, name, icon_url, display_order) VALUES (14, 3, 'MongoDB', 'mongodb.svg', 10);

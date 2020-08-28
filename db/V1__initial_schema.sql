@@ -116,7 +116,7 @@ CREATE TRIGGER project_updated_at_modtime
     BEFORE UPDATE ON project
     FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
 
-CREATE TABLE profile_project_mapping (
+CREATE TABLE project_profile_mapping (
     profile_id INT NOT NULL,
     project_id INT NOT NULL,
 

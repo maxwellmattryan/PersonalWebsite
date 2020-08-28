@@ -17,7 +17,7 @@ export class ApiController {
 
     @Get('homepage')
     @HttpCode(200)
-    async getIndex(): Promise<any> {
+    async getHomepage(): Promise<any> {
         const profile = await this.profileService.getActiveProfile();
         if(!profile) throw new NoActiveProfileWasFoundException();
 
