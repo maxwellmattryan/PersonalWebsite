@@ -258,6 +258,9 @@ NOTE: What I have listed below is simply the more relevant fields for each table
     - Description
     - Image URL
     - External URL
+- Project Link
+    - Name
+    - URL
 - Technology
     - Name
     - Icon URL
