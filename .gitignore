@@ -14,3 +14,8 @@
 /.settings
 
 /RUNNING_PID
+
+
+# Environment variable stuff
+/api/.env
+/docker.env
