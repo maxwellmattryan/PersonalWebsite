@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
+    "outDir": "./dist",
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -16,10 +16,8 @@
       "dom"
     ],
     "paths": {
-        "@app/core/*": ["src/app/core/*"],
-        "@app/environments/*": ["src/environments/*"],
-        "@app/modules/*": ["src/app/modules/*"],
-        "@app/shared/*": ["src/app/shared/*"]
+        "@app/*": ["src/app/*"],
+        "@app/environments/*": ["src/environments/*"]
     }
   },
   "angularCompilerOptions": {
