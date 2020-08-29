@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { config } from 'rxjs';
 
 @Module({
     imports: [
@@ -12,7 +13,8 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
             useFactory: (configService: ConfigService) => {
                 return ({
                     type: 'postgres',
-                    socketPath: configService.get('POSTGRES_SOCKET_PATH'),
+                    //host: `/cloudsql/${configService.get('POSTGRES_INSTANCE')}`,
+                    socketPath: `/cloudsql/${configService.get(`POSTGRES_INSTANCE`)}`,
                     port: configService.get('POSTGRES_PORT'),
                     username: configService.get('POSTGRES_USER'),
                     password: configService.get('POSTGRES_PASSWORD'),

@@ -16,7 +16,7 @@ import { ProjectModule } from '@api/features/project/project.module';
     imports: [
         ConfigModule.forRoot({
             validationSchema: Joi.object({
-                POSTGRES_SOCKET_PATH: Joi.string().required(),
+                POSTGRES_INSTANCE: Joi.string().required(),
                 POSTGRES_PORT: Joi.number().required(),
                 POSTGRES_USER: Joi.string().required(),
                 POSTGRES_PASSWORD: Joi.string().required(),
