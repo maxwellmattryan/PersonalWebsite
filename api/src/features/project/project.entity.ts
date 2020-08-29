@@ -1,26 +1,26 @@
 import {
-    Column,
     Entity,
     PrimaryGeneratedColumn,
+    Column,
     CreateDateColumn,
     UpdateDateColumn,
-    ManyToOne,
-    ManyToMany
+    OneToOne, JoinColumn
 } from 'typeorm';
 
-import { ProfileStatus } from './profile-status.entity';
+import { ProjectLink } from './project-link.entity';
 
-@Entity('profile')
-export class Profile {
-    constructor(partial: Partial<Profile>) {
+@Entity('project')
+export class Project {
+    constructor(partial: Partial<Project>) {
         Object.assign(this, partial);
     }
 
     @PrimaryGeneratedColumn()
     public id?: number;
 
-    @ManyToOne(type => ProfileStatus, ps => ps.id)
-    public status: ProfileStatus;
+    @OneToOne(type => ProjectLink, { cascade: true })
+    @JoinColumn()
+    public link: ProjectLink;
 
     @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
     public name: string;
@@ -29,10 +29,10 @@ export class Profile {
     public tagline: string;
 
     @Column({ type: 'text', nullable: false })
-    public landing: string;
+    public description: string;
 
     @Column({ type: 'text', nullable: false })
-    public about: string;
+    public image_url: string;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'now()' })
     public created_at?: Date;

@@ -8,7 +8,7 @@ import { Profile } from './profile.entity';
 import { ProfileService } from './profile.service';
 import { NoProfilesWereFoundException, NoProfileWasFoundException } from './profile.exception';
 
-@Controller('api/profiles')
+@Controller('profiles')
 export class ProfileController {
     constructor(
         private readonly profileService: ProfileService

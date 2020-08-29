@@ -9,30 +9,30 @@ CREATE FUNCTION update_updated_at_column() RETURNS trigger
 $$;
 
 CREATE TABLE admin (
-    admin_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
 
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE blog_author (
-    blog_author_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
 
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE blog_post_status (
-    blog_post_status_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
 
     status VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE blog_post (
-    blog_post_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
 
-    blog_author_id INT NOT NULL,
-    blog_post_status_id INT NOT NULL,
+    author_id INT NOT NULL,
+    status_id INT NOT NULL,
 
     title VARCHAR(255) NOT NULL UNIQUE,
     preview TEXT NOT NULL,
@@ -42,8 +42,8 @@ CREATE TABLE blog_post (
     created_at TIMESTAMP DEFAULT now(),
     updated_at TIMESTAMP DEFAULT now(),
 
-    FOREIGN KEY (blog_author_id) REFERENCES blog_author(blog_author_id),
-    FOREIGN KEY (blog_post_status_id) REFERENCES blog_post_status(blog_post_status_id)
+    FOREIGN KEY (author_id) REFERENCES blog_author(id),
+    FOREIGN KEY (status_id) REFERENCES blog_post_status(id)
 );
 
 CREATE TRIGGER blog_post_updated_at_modtime
@@ -51,7 +51,7 @@ CREATE TRIGGER blog_post_updated_at_modtime
     FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
 
 CREATE TABLE blog_topic (
-    blog_topic_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
 
     name VARCHAR(50) NOT NULL UNIQUE,
     description TEXT NOT NULL,
@@ -65,23 +65,25 @@ CREATE TRIGGER blog_topic_updated_at_modtime
     FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
 
 CREATE TABLE blog_post_topic_mapping (
-    blog_post_id INT NOT NULL,
-    blog_topic_id INT NOT NULL,
+    id SERIAL PRIMARY KEY,
 
-    FOREIGN KEY (blog_post_id) REFERENCES blog_post(blog_post_id),
-    FOREIGN KEY (blog_topic_id) REFERENCES blog_topic(blog_topic_id)
+    post_id INT NOT NULL,
+    topic_id INT NOT NULL,
+
+    FOREIGN KEY (post_id) REFERENCES blog_post(id),
+    FOREIGN KEY (topic_id) REFERENCES blog_topic(id)
 );
 
 CREATE TABLE profile_status (
-    profile_status_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
 
     status VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE profile (
-    profile_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
 
-    profile_status_id INT NOT NULL,
+    status_id INT NOT NULL,
 
     name VARCHAR(50) NOT NULL UNIQUE,
     tagline TEXT NOT NULL,
@@ -91,40 +93,52 @@ CREATE TABLE profile (
     created_at TIMESTAMP DEFAULT now(),
     updated_at TIMESTAMP DEFAULT now(),
 
-    FOREIGN KEY (profile_status_id) REFERENCES profile_status(profile_status_id)
+    FOREIGN KEY (status_id) REFERENCES profile_status(id)
 );
 
 CREATE TRIGGER profile_updated_at_modtime
     BEFORE UPDATE ON profile
     FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
 
+CREATE TABLE project_link (
+    id SERIAL PRIMARY KEY,
+
+    name VARCHAR(50) NOT NULL,
+
+    url TEXT NOT NULL
+);
+
 CREATE TABLE project (
-    project_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
+
+    link_id INT NOT NULL,
 
     name VARCHAR(50) NOT NULL UNIQUE,
     tagline TEXT NOT NULL,
     description TEXT NOT NULL,
+
     image_url TEXT NOT NULL,
-    external_url TEXT NOT NULL,
 
     created_at TIMESTAMP DEFAULT now(),
-    updated_at TIMESTAMP DEFAULT now()
+    updated_at TIMESTAMP DEFAULT now(),
+
+    FOREIGN KEY(link_id) REFERENCES project_link(id)
 );
 
 CREATE TRIGGER project_updated_at_modtime
     BEFORE UPDATE ON project
     FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
 
-CREATE TABLE profile_project_mapping (
+CREATE TABLE project_profile_mapping (
     profile_id INT NOT NULL,
     project_id INT NOT NULL,
 
-    FOREIGN KEY (profile_id) REFERENCES profile(profile_id),
-    FOREIGN KEY (project_id) REFERENCES project(project_id)
+    FOREIGN KEY (profile_id) REFERENCES profile(id),
+    FOREIGN KEY (project_id) REFERENCES project(id)
 );
 
 CREATE TABLE technology (
-    technology_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
 
     profile_id INT NOT NULL,
 
@@ -132,5 +146,5 @@ CREATE TABLE technology (
     icon_url TEXT NOT NULL,
     display_order INT NOT NULL,
 
-    FOREIGN KEY (profile_id) REFERENCES profile(profile_id)
+    FOREIGN KEY (profile_id) REFERENCES profile(id)
 );

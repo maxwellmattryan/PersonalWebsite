@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { AuthService } from '@app/core/authentication';
+import { Project } from '@app/shared/models';
 
 @Component({
     selector: 'app-project-collection',
@@ -8,7 +9,7 @@ import { AuthService } from '@app/core/authentication';
     styleUrls: ['./project-collection.component.scss']
 })
 export class ProjectCollectionComponent implements OnInit {
-    @Input() content: any;
+    @Input() projects: Project[];
 
     constructor(
         public authService: AuthService

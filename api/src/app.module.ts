@@ -3,13 +3,14 @@ import { ConfigModule } from '@nestjs/config';
 
 import * as Joi from '@hapi/joi';
 
-import { HttpModule } from '@api/core/http/http.module';
 import { AuthModule } from '@api/core/auth/auth.module';
 import { DatabaseModule } from '@api/core/database/database.module';
+import { HttpModule } from '@api/core/http/http.module';
 
 import { AdminModule } from '@api/features/admin/admin.module';
 import { ApiModule } from '@api/features/api/api.module';
 import { ProfileModule } from '@api/features/profile/profile.module';
+import { ProjectModule } from '@api/features/project/project.module';
 
 @Module({
     imports: [
@@ -28,13 +29,14 @@ import { ProfileModule } from '@api/features/profile/profile.module';
             })
         }),
 
-        HttpModule,
         AuthModule,
         DatabaseModule,
+        HttpModule,
 
         AdminModule,
         ApiModule,
-        ProfileModule
+        ProfileModule,
+        ProjectModule
     ],
     exports: [],
     controllers: [],

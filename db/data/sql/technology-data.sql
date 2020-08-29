@@ -1,0 +1,14 @@
+INSERT INTO technology(id, profile_id, name, icon_url, display_order) VALUES (1, 1, 'C++', 'cpp.svg', 1);
+INSERT INTO technology(id, profile_id, name, icon_url, display_order) VALUES (2, 1, 'JUCE', 'juce.svg', 2);
+INSERT INTO technology(id, profile_id, name, icon_url, display_order) VALUES (3, 2, 'C#', 'c-sharp.svg', 1);
+INSERT INTO technology(id, profile_id, name, icon_url, display_order) VALUES (4, 2, 'Unity', 'unity.svg', 2);
+INSERT INTO technology(id, profile_id, name, icon_url, display_order) VALUES (5, 3, 'TypeScript', 'typescript.svg', 1);
+INSERT INTO technology(id, profile_id, name, icon_url, display_order) VALUES (6, 3, 'Angular', 'angular.svg', 2);
+INSERT INTO technology(id, profile_id, name, icon_url, display_order) VALUES (7, 3, 'JavaScript (ES6+)', 'javascript.svg', 3);
+INSERT INTO technology(id, profile_id, name, icon_url, display_order) VALUES (8, 3, 'React & Redux', 'react.svg', 4);
+INSERT INTO technology(id, profile_id, name, icon_url, display_order) VALUES (9, 3, 'Scala', 'scala.svg', 5);
+INSERT INTO technology(id, profile_id, name, icon_url, display_order) VALUES (10, 3, 'Play', 'play.svg', 6);
+INSERT INTO technology(id, profile_id, name, icon_url, display_order) VALUES (11, 3, 'Express', 'express.svg', 7);
+INSERT INTO technology(id, profile_id, name, icon_url, display_order) VALUES (12, 3, 'Node', 'node.svg', 8);
+INSERT INTO technology(id, profile_id, name, icon_url, display_order) VALUES (13, 3, 'MySQL', 'mysql.svg', 9);
+INSERT INTO technology(id, profile_id, name, icon_url, display_order) VALUES (14, 3, 'MongoDB', 'mongodb.svg', 10);

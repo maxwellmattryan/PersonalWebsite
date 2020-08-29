@@ -1,9 +1,8 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { External } from '@app/shared/interfaces';
 import { Profile, Project } from '@app/shared/models';
 import { AuthService } from '@app/core/authentication';
 import { ApiService } from '@app/core/http';
@@ -15,11 +14,11 @@ import { EditorService, NotificationService, ValidationService, ComparisonServic
     styleUrls: ['../../editor.component.scss']
 })
 export class ProjectEditorComponent implements OnDestroy, OnInit {
+    profileData: Profile[] = [];
     projectData: Project;
     projectForm: FormGroup;
 
-    profiles: Array<Profile> = [];
-    externals: Array<External> = [];
+    @Input() id: number;
 
     constructor(
         private apiService: ApiService,
@@ -45,139 +44,116 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
         this.initProjectForm();
     }
 
-    checkForAdmin(): void {
+    private checkForAdmin(): void {
         if(!this.authService.isLoggedIn())
-            this.router.navigate(['/']);
+            this.router.navigate(['']);
     }
 
-    setUnloadEvent(): void {
+    private setUnloadEvent(): void {
         window.onbeforeunload = () => {
             this.editorService.setProject(null);
         };
     }
 
-    initProjectForm(): void {
+    private initProjectForm(): void {
         this.loadProjectData();
+        this.loadProfileData();
 
         this.buildProjectForm();
-
-        this.loadProfileFormData();
-        this.loadExternalFormData();
     }
 
-    loadProjectData(): void {
+    private loadProjectData(): void {
         this.projectData = this.editorService.getProject();
     }
 
-    buildProjectForm(): void {
-        if(this.projectData) {
-            this.projectForm = this.formBuilder.group({
-                title:          this.formBuilder.control(this.projectData.title,        [Validators.required]                   ),
-                subtitle:       this.formBuilder.control(this.projectData.subtitle,     [Validators.required]                   ),
-                profiles:       this.formBuilder.array  ([],                            this.validationService.hasMinProfiles(1)),
-                preview:        this.formBuilder.control(this.projectData.preview,      [Validators.required]                   ),
-                description:    this.formBuilder.control(this.projectData.description,  [Validators.required]                   ),
-                imageURL:       this.formBuilder.control(this.projectData.imageURL,     [Validators.required]                   ),
-                externals:      this.formBuilder.array  ([]                                                                     )
-            });
-        } else {
-            this.projectForm = this.formBuilder.group({
-                title:          this.formBuilder.control('', [Validators.required]                      ),
-                subtitle:       this.formBuilder.control('', [Validators.required]                      ),
-                profiles:       this.formBuilder.array  ([], this.validationService.hasMinProfiles(1)   ),
-                preview:        this.formBuilder.control('', [Validators.required]                      ),
-                description:    this.formBuilder.control('', [Validators.required]                      ),
-                imageURL:       this.formBuilder.control('', [Validators.required]                      ),
-                externals:      this.formBuilder.array  ([]                                             )
-            });
+    private loadProfileData(): void {
+        this.apiService.getProfiles().subscribe((res: Profile[]) => {
+            this.profileData = res.sort(this.comparisonService.profiles);
+            if(!(this.id && this.projectData)) this.setProfileControls([]);
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+        });
+
+        if(this.id && this.projectData) {
+            this.apiService.getProfilesForProject(this.id).subscribe((res: Profile[]) => {
+                this.setProfileControls(res.map(p => p.id));
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+            })
         }
     }
 
-    loadProfileFormData(): void {
-        this.apiService.getProfiles().subscribe(profiles => {
-            this.profiles = profiles.sort(this.comparisonService.profiles);
-
-            this.profiles.forEach((profile, idx) => {
-                let control: FormControl;
-
-                if(this.projectData && this.projectData.profiles.map(p => p.name).includes(profile.name)) {
-                    control = this.formBuilder.control(true);
-                } else {
-                    control = this.formBuilder.control(false);
-                }
-
-                (this.projectForm.controls.profiles as FormArray).push(control);
-            });
+    private setProfileControls(associatedProfileIds: number[]): void {
+        this.profileData.forEach((profile, idx) => {
+            let control: FormControl = this.formBuilder.control(associatedProfileIds.includes(profile.id));
+            (this.projectForm.controls.profiles as FormArray).push(control);
         });
     }
 
-    loadExternalFormData(): void {
+    private buildProjectForm(): void {
         if(this.projectData) {
-            this.projectData.externals.forEach((external, idx) => {
-                this.addExternal(external.name, external.URL);
+            this.projectForm = this.formBuilder.group({
+                name:           this.formBuilder.control(this.projectData.name,        [Validators.required]),
+                profiles:       this.formBuilder.array  (this.profileData,             [this.validationService.hasMinElements()]),
+                tagline:        this.formBuilder.control(this.projectData.tagline,     [Validators.required]),
+                description:    this.formBuilder.control(this.projectData.description, [Validators.required]),
+                image_url:      this.formBuilder.control(this.projectData.image_url,   [Validators.required]),
+                link:           this.formBuilder.group  ({
+                    name: this.formBuilder.control(this.projectData.link.name, [Validators.required]),
+                    url:  this.formBuilder.control(this.projectData.link.url,  [Validators.required])
+                })
             });
         } else {
-            this.addExternal();
+            this.projectForm = this.formBuilder.group({
+                name:           this.formBuilder.control('', [Validators.required]),
+                profiles:       this.formBuilder.array  ([], [this.validationService.hasMinElements()]),
+                tagline:        this.formBuilder.control('', [Validators.required]),
+                description:    this.formBuilder.control('', [Validators.required]),
+                image_url:      this.formBuilder.control('', [Validators.required]),
+                link:           this.formBuilder.group  ({
+                    name: this.formBuilder.control('', [Validators.required]),
+                    url:  this.formBuilder.control('', [Validators.required])
+                })
+            });
         }
-    }
-
-    addExternal(name: string = '', URL: string = ''): void {
-        (this.projectForm.controls.externals as FormArray).push(this.formBuilder.group({
-            name:   this.formBuilder.control(name,  [Validators.required]),
-            URL:    this.formBuilder.control(URL,   [Validators.required])
-        }));
-    }
-
-    deleteExternal(idx: number): void {
-        if(this.getExternalArrayLength() === 1) {
-            this.notificationService.createNotification('Unable to delete external (must have at least 1).');
-        } else {
-            (this.projectForm.controls.externals as FormArray).removeAt(idx);
-        }
-    }
-
-    getExternalArrayLength(): number {
-        return (this.projectForm.controls.externals as FormArray).length;
     }
 
     onSubmit(): void {
-        const project = this.buildProjectData();
+        const project = this.buildFormProjectData();
+        const activeProfileIds = this.buildFormProfileData();
+        console.log(project);
 
-        this.apiService.putProject(project).subscribe((res: any) => {
-            this.notificationService.createNotification(res.msg);
-
-            if(res.success) {
-                this.router.navigate(['projects/' + project['uri']]);
-            }
-        });
+        if(project.id === undefined) {
+            this.apiService.createProject(project, activeProfileIds).subscribe((res: Project) => {
+                this.notificationService.createNotification(`Successfully created new project!`);
+                this.router.navigate([`projects/${res.id}`]);
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+            });
+        } else {
+            this.apiService.updateProject(project, activeProfileIds).subscribe((res: Project) => {
+                this.notificationService.createNotification(`Successfully updated existing project!`);
+                this.router.navigate([`projects/${res.id}`]);
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+            });
+        }
     }
 
-    buildProjectData(): any {
-        let project = {};
-        for(let key in this.projectForm.value) {
-            if(key === 'profiles') {
-                project[key] = this.getSelectedProfiles();
-            } else {
-                project[key] = this.projectForm.value[key];
-            }
-        }
-        project['id'] = this.getProjectID();
-        project['uri'] = this.getProjectURI(project['title']);
+    private buildFormProjectData(): Project {
+        const project = new Project({
+            ...this.projectForm.value,
+            id: this.projectData ? this.projectData.id : undefined,
+            profiles: undefined
+        });
+        project.link.id = this.projectData ? this.projectData.link.id : undefined;
 
         return project;
     }
 
-    getSelectedProfiles(): any {
+    private buildFormProfileData(): number[] {
         return this.projectForm.value.profiles
-            .map((profile, idx) => profile ? this.profiles[idx].id : null)
-            .filter(profile => profile !== null);
-    }
-
-    getProjectID(): string {
-        return this.projectData ? this.projectData._id : '';
-    }
-
-    getProjectURI(title: string): string {
-        return title.toLowerCase().replace(/[ ]/g, '-').replace(/[\.?]/g, '');
+            .map((p, idx) => p ? this.profileData[idx].id : undefined)
+            .filter(p => p !== undefined);
     }
 }

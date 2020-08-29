@@ -4,7 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { PostgresErrorCode } from '@api/core/database/postgres-error-code.enum';
-
 import { InternalServerErrorException } from '@api/core/http/http.exception';
 import { AdminAlreadyExistsException } from './admin.exception';
 

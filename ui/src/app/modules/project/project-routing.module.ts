@@ -13,7 +13,7 @@ export const routes: Routes = [
         component: ProjectComponent,
         children: [
             {
-                path: ':uri',
+                path: ':id',
                 component: ProjectViewComponent
             }
         ]

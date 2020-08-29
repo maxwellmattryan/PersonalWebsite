@@ -64,7 +64,7 @@ export class PostEditorComponent implements OnDestroy, OnInit {
             this.postForm = this.formBuilder.group({
                 title:          this.formBuilder.control(this.postData.title,           [Validators.required]                   ),
                 subtitle:       this.formBuilder.control(this.postData.subtitle,        [Validators.required]                   ),
-                topics:         this.formBuilder.array  ([],                            this.validationService.hasMinTopics(1)  ),
+                topics:         this.formBuilder.array  ([],                            this.validationService.hasMinElements(1)  ),
                 author:         this.formBuilder.control(this.postData.author,          [Validators.required]                   ),
                 description:    this.formBuilder.control(this.postData.description,     [Validators.required]                   ),
                 content:        this.formBuilder.control(this.postData.content,         [Validators.required]                   ),
@@ -74,7 +74,7 @@ export class PostEditorComponent implements OnDestroy, OnInit {
             this.postForm = this.formBuilder.group({
                 title:          this.formBuilder.control('', [Validators.required]                  ),
                 subtitle:       this.formBuilder.control('', [Validators.required]                  ),
-                topics:         this.formBuilder.array  ([], this.validationService.hasMinTopics(1) ),
+                topics:         this.formBuilder.array  ([], this.validationService.hasMinElements(1) ),
                 author:         this.formBuilder.control('', [Validators.required]                  ),
                 description:    this.formBuilder.control('', [Validators.required]                  ),
                 content:        this.formBuilder.control('', [Validators.required]                  ),

@@ -4,21 +4,20 @@
     <div class='projects__line-divider line-divider'></div>
 
     <div class='container projects__project-container'>
-        <div class='projects__project' *ngFor='let project of content; let idx = index' [ngClass]="{'projects__project--rjust': idx % 2 === 0}">
-            <div class='projects__project-background' [ngStyle]="{ 'background-image': 'url(' + project.imageURL + ')' }"></div>
-            <a class='projects__project-anchor-wrapper' [routerLink]="['/projects/' + project.uri]" *ngIf='authService.isLoggedIn()'>
-                <h3 class='projects__project-title'>{{ project.title }}</h3>
-            </a>
-            <h3 *ngIf='!authService.isLoggedIn()' class='projects__project-title'>{{ project.title }}</h3>
+        <div class='projects__project' *ngFor='let project of projects; let idx = index' [ngClass]="{'projects__project--rjust': idx % 2 === 0}">
+            <div class='projects__project-background' [ngStyle]="{ 'background-image': 'url(https://mattmaxwell.tech/' + project.image_url + ')' }"></div>
 
-            <h4 class='projects__project-subtitle'>{{ project.subtitle }}</h4>
-            <p class='projects__project-description'>{{ project.preview }}</p>
-    
-            <div class="projects__project-ext-container">
-                <a class='projects__project-ext-item' *ngFor='let external of project.externals' [href]='external.URL' target='_blank'>
-                    <app-icon [external]='external'></app-icon>
-                </a>
-            </div>
+            <a *ngIf='authService.isLoggedIn()' class='projects__project-anchor-wrapper' [routerLink]="['/projects/' + project.id]">
+                <h3 class='projects__project-name'>{{ project.name }}</h3>
+            </a>
+            <h3 *ngIf='!authService.isLoggedIn()' class='projects__project-name'>{{ project.name }}</h3>
+
+            <h4 class='projects__project-tagline'>{{ project.tagline }}</h4>
+            <p class='projects__project-description'>{{ project.description }}</p>
+
+            <a class='projects__project-link' [href]='project.link.url' target='_blank'>
+                <app-icon class= 'projects__project-link-icon' [name]='project.link.name'></app-icon>
+            </a>
         </div>
     </div>
 </div>

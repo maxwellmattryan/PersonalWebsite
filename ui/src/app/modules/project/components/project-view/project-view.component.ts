@@ -5,6 +5,7 @@ import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/authentication';
 import { EditorService, NotificationService } from '@app/core/services';
 import { Project } from '@app/shared/models';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-project-view',
@@ -39,6 +40,9 @@ export class ProjectViewComponent implements OnInit {
             this.project = project;
 
             this.isLoaded = true;
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+            this.router.navigate(['']);
         });
     }
 
@@ -47,10 +51,11 @@ export class ProjectViewComponent implements OnInit {
     }
 
     deleteProject(): void {
-        this.apiService.deleteProject(this.router.url).subscribe((res: any) => {
-            this.notificationService.createNotification(res.msg);
-
+        this.apiService.deleteProject(this.project.id).subscribe((res: any) => {
+            this.notificationService.createNotification('Successfully deleted the project!');
             this.router.navigate(['']);
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
         });
     }
 }

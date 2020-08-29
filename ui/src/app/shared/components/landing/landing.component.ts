@@ -6,7 +6,8 @@ import { Component, OnInit, Input } from '@angular/core';
     styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit {
-    @Input() content: any;
+    @Input() tagline: string;
+    @Input() landing: string;
 
     constructor() { }
 

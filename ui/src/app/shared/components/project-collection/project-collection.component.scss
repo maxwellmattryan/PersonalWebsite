@@ -1,23 +1,24 @@
 @import 'variables';
 
 .projects {
-    
+
 }
 
 .projects__header {
-    
+
 }
 
 .projects__project-container {
-    
+
 }
 
 .projects__project-anchor-wrapper {
-    
+
 }
 
 .projects__project {
     background-color: darken($color-dark, 7);
+    box-sizing: border-box;
     height: auto;
     position: relative;
 
@@ -35,19 +36,18 @@
         width: 100%;
     }
 
-    &-title,
-    &-subtitle,
-    &-description,
-    &-ext-container {
+    &-name,
+    &-tagline,
+    &-description {
         padding: $half-padding $padding;
     }
-    
-    &-title {
+
+    &-name {
         color: $color-primary;
         padding-top: $padding;
     }
 
-    &-subtitle {
+    &-tagline {
         color: $color-white;
     }
 
@@ -55,37 +55,30 @@
         color: $color-light;
     }
 
-    &-ext-container {
-        display: flex;
-        flex-direction: row;
-        padding-bottom: $one-and-half-padding;
-    }
-
-    &-ext-item {
-        margin-right: $half-margin;
+    &-link {
+        display: block;
+        padding: $padding;
     }
 
     &--rjust {
-        &-title,
-        &-subtitle,
-        &-description {
+        &-name,
+        &-tagline,
+        &-description,
+        &-link {
             text-align: right;
         }
 
-        &-ext-container {
-            justify-content: flex-end;
+        &-link {
+            align-self: flex-end;
         }
     }
 }
 
 .projects__project--rjust {
-    .projects__project-title,
-    .projects__project-subtitle,
-    .projects__project-description {
+    .projects__project-name,
+    .projects__project-tagline,
+    .projects__project-description,
+    .projects__project-link {
         text-align: right;
-    }
-
-    .projects__project-ext-container {
-        justify-content: flex-end;
     }
 }

@@ -121,8 +121,8 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
 ### API
 
 - /api
-    - `GET /api`
-        - Retrieves data needed to populate components on the client side (profile, projects, blog posts, etc.)
+    - `GET /api/homepage`
+        - Retrieves data needed to populate homepage components on the client side (profile, projects, blog posts, etc.)
         - 200
 
 - /api/auth
@@ -137,36 +137,39 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
         - 201
 
 - /api/blog
-    - `GET /api/blog/posts`
+    - **`GET /api/blog/posts`
         - Retrieves list of all posts in the database
         - 200
-    - `GET /api/blog/posts/:id`
+    - **`GET /api/blog/posts/:id`
         - Retrieves a single post corresponding to the `id` path parameter
         - 200
-    - `PUT /api/blog/posts/:id`
+    - **`PUT /api/blog/posts/:id`
         - Upserts post data from the client for the post with the corresponding `id`
         - 200, 201
-    - `DELETE /api/blog/posts/:id`
+    - **`DELETE /api/blog/posts/:id`
         - Removes the post with the corresponding `id` from the database
         - 204
-    - `GET /api/blog/topics`
+    - **`GET /api/blog/topics`
         - Retrieves list of all topics in the database
         - 200
-    - `PUT /api/blog/topics/:id`
+    - **`PUT /api/blog/topics/:id`
         - Upserts topic data from the client for the topic with the corresponding `id` 
         - 200, 201
-    - `DELETE /api/blog/topics/:id`
+    - **`DELETE /api/blog/topics/:id`
         - Removes the topic with the corresponding `id` from the database
         - 204
 
 - /api/profiles
-    - `GET /api/profiles/:id`
-        - Retrieves a single profile corresponding to the `id` path parameter
+    - `GET /api/profiles`
+        - Retrieves list of all profiles in the database
         - 200
-    - `PUT /api/profiles/:id`
+    - **`GET /api/profiles/:id`
+        - Retrieves a single profile with the corresponding `id`
+        - 200
+    - **`PUT /api/profiles/:id`
         - Upserts profile data from the client for the profile with the corresponding `id`
         - 200, 201
-    - `DELETE /api/profiles/:id`
+    - **`DELETE /api/profiles/:id`
         - Removes the profile with the corresponding `id` from the database
         - 204
     - `PUT /api/profiles/:id/activate`
@@ -174,15 +177,23 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
         - 200
         
 - /api/projects
+    - `POST /api/projects`
+        - Creates and saves a new project to the database
+        - 201
     - `GET /api/projects/:id`
         - Retrieves a single project corresponding to the `id` path parameter
         - 200
     - `PUT /api/projects/:id`
-        - Upserts project data from the client for the project with the corresponding `id`
-        - 200, 201
+        - Updates project data from the client for the project with the corresponding `id`
+        - 200
     - `DELETE /api/projects/:id`
         - Removes the project with the corresponding `id` from the database
         - 204
+    - `GET /api/projects/:id/profiles`
+        - Retrieves list of all profiles associated with the project of the corresponding `id`
+        - 200
+        
+_**Not yet implemented_
 
 ### Architecture
 
