@@ -37,7 +37,8 @@ async function bootstrap() {
     app.setGlobalPrefix('api');
 
     const PORT = 3000;
-    await app.listen(PORT);
+    const HOSTNAME = '0.0.0.0'
+    await app.listen(PORT, HOSTNAME);
 }
 
 bootstrap();
