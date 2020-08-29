@@ -58,7 +58,7 @@ export class ProjectController {
     @Get(':id/profiles')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    async getProjectForEditor(@Param('id') id: number, @Req() request: Request): Promise<Profile[]> {
+    async getProfilesForProject(@Param('id') id: number, @Req() request: Request): Promise<Profile[]> {
         const profiles = await this.profileService.getProfilesForProject(id);
         if(profiles.length === 0) throw new NoProfilesWereFoundException();
 
