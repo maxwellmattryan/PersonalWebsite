@@ -1,7 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    ManyToOne,
+    Column,
+    CreateDateColumn,
+    UpdateDateColumn,
+    ManyToMany,
+    JoinTable
+} from 'typeorm';
 
 import { BlogAuthor } from './blog-author.entity';
 import { BlogPostStatus } from './blog-post-status.entity';
+import { BlogTopic } from './blog-topic.entity';
 
 @Entity('blog_post')
 export class BlogPost {
@@ -17,6 +27,10 @@ export class BlogPost {
 
     @ManyToOne(type => BlogPostStatus, bps => bps.id)
     public status: BlogPostStatus;
+
+    @ManyToMany(type => BlogTopic)
+    @JoinTable()
+    public topics: BlogTopic[];
 
     @Column({ type: 'varchar', length: 255, nullable: false, unique: true })
     public title: string;

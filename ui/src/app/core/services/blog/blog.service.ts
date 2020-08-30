@@ -8,7 +8,7 @@ export class BlogService {
 
     constructor() { }
 
-    getFormattedDate(raw: string): string {
+    getFormattedDate(raw: Date): string {
         const date = new Date(raw);
 
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

@@ -1,6 +1,7 @@
 import { Deserializable } from './deserializable.model';
 import { BlogAuthor } from './blog-author.model';
 import { BlogPostStatus } from './blog-post-status.model';
+import { BlogTopic } from './blog-topic.model';
 
 export class BlogPost implements Deserializable {
     constructor(partial: Partial<BlogPost>) {
@@ -13,6 +14,8 @@ export class BlogPost implements Deserializable {
         this.author = input.author.map(ba => new BlogAuthor({ ...ba }).deserialize(ba));
         this.status = input.status.map(bps => new BlogPostStatus({ ...bps }).deserialize(bps));
 
+        this.topics = input.topics.map(bt => new BlogTopic({ ...bt }).deserialize(bt));
+
         return this;
     }
 
@@ -20,6 +23,8 @@ export class BlogPost implements Deserializable {
 
     author: BlogAuthor;
     status: BlogPostStatus;
+
+    topics?: BlogTopic[];
 
     title: string;
     preview: string;

@@ -16,6 +16,7 @@ export class BlogService {
         return await this.blogPostRepository
             .createQueryBuilder('bp')
             .leftJoinAndSelect('bp.status', 'bps')
+            .leftJoinAndSelect('bp.topics', 'bt')
             .where('bps.status = :status', { status: status })
             .getMany()
     }
