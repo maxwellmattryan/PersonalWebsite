@@ -53,12 +53,6 @@ export class BlogViewComponent implements OnInit {
         return [...set];
     }
 
-    setActiveTopic(topic: BlogTopic) {
-        console.log('MAKE REQUEST TO API AND GET THESE TOPICS');
-
-        this.blogService.setActiveTopic(topic);
-    }
-
     filterPosts(topicId: number): void {
         this.activeTopicId = topicId;
 
@@ -73,28 +67,16 @@ export class BlogViewComponent implements OnInit {
         this.editorService.setTopic(topic);
     }
 
-    deleteTopic(topic: string): void {
-        if(!this.canDeleteTopic(topic)) {
-            this.notificationService.createNotification('Unable to delete topic (fix single-topic posts).');
-        } else {
-            const requestURL = '/blog/topics/' + this.blog.topics.find(t => t.name === topic).uri;
-
-            this.apiService.deletePost(requestURL).subscribe((res: any) => {
-                this.notificationService.createNotification(res.msg);
-
-                if(this.topics.get(topic)) {
-                    this.filterPosts('All');
-                }
-
-                this.topics.delete(topic);
-            });
-        }
+    deleteTopic(topic: BlogTopic): void {
+        this.apiService.deleteTopic(topic.id).subscribe((res: any) => {
+            this.removeTopic(topic.id);
+            this.notificationService.createNotification('Deleted blog topic.');
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+        });
     }
 
-    canDeleteTopic(topic: string): boolean {
-        let posts = this.blog.posts.filter(p => p.topics.map(t => t.name).includes(topic));
-        posts = posts.filter(p => p.topics.length === 1);
-
-        return posts.length === 0;
+    private removeTopic(id: number): void {
+        this.topics = this.topics.filter(t => t.id != id);
     }
 }

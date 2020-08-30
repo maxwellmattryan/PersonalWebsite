@@ -147,10 +147,8 @@ export class ApiService {
         );
     }
 
-    deleteTopic(requestURL: string): Observable<any> {
-        return this.http.delete<any>(
-            environment.API_URL + requestURL
-        );
+    deleteTopic(id: number): Observable<any> {
+        return this.http.delete<any>(`${environment.API_URL}/blog/topics/${id}`);
     }
 
     getTopics(): Observable<BlogTopic[]> {

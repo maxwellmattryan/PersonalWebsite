@@ -89,14 +89,14 @@ export class ProjectService {
             .getMany();
     }
 
-    public async updateProject(projectData: Project, profileData: number[]): Promise<Project> {
-        await this.deleteProjectProfileMappings(projectData.id);
-        await this.createProjectProfileMappings(projectData.id, profileData);
+    public async updateProject(id: number, projectData: Project, profileData: number[]): Promise<Project> {
+        await this.deleteProjectProfileMappings(id);
+        await this.createProjectProfileMappings(id, profileData);
 
-        await this.projectRepository.update(projectData.id, projectData);
+        await this.projectRepository.update(id, projectData);
         await this.projectLinkRepository.update(projectData.link.id, projectData.link);
 
-        return await this.getProject(projectData.id);
+        return await this.getProject(id);
     }
 
     private async createProjectProfileMappings(projectId: number, profileIds: number[]): Promise<void> {
