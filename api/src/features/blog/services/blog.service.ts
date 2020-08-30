@@ -28,4 +28,14 @@ export class BlogService {
             .where('bps.status = :status', { status: status })
             .getMany()
     }
+
+    public async getPostsByStatusAndTopic(status: string, topicId: number): Promise<BlogPost[]> {
+        return await this.blogPostRepository
+            .createQueryBuilder('bp')
+            .leftJoinAndSelect('bp.status', 'bps')
+            .leftJoinAndSelect('bp.topics', 'bt')
+            .where('bps.status = :status', { status: status })
+            .where('bt.id = :id', { id: topicId })
+            .getMany()
+    }
 }

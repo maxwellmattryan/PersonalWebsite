@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { map, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { Admin, Blog, Homepage } from '@app/shared/interfaces';
+import { Admin } from '@app/shared/interfaces';
 import { environment } from '@app/environments/environment';
 import { BlogPost, Project, Profile, Topic } from '@app/shared/models';
 
@@ -59,12 +59,8 @@ export class ApiService {
     // ========
     // HOME
     // ========
-    getHomepage(isAdmin: boolean): Observable<any> {
-        const params = isAdmin ? { } : { published: 'true' };
-        return this.http.get<any>(
-            `${environment.API_URL}/homepage`,
-            { params: params }
-        );
+    getHomepage(): Observable<any> {
+        return this.http.get<any>(`${environment.API_URL}/homepage`);
     }
 
     // ========
@@ -80,8 +76,15 @@ export class ApiService {
         return this.http.get<BlogPost>(environment.API_URL + requestURL);
     }
 
-    getPosts(): Observable<Blog> {
-        return this.http.get<Blog>(environment.API_URL + '/blog/posts');
+    getPosts(topicId: number = -1): Observable<BlogPost[]> {
+        let params = new HttpParams();
+
+        if(topicId != -1) params = params.set('topic_id', topicId.toString());
+
+        return this.http.get<BlogPost[]>(
+            `${environment.API_URL}/blog/posts`,
+            { params: params }
+        );
     }
 
     putPost(post: BlogPost): Observable<BlogPost> {

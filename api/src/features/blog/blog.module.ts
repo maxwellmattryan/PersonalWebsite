@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { BlogPostController } from './controllers/blog-post.controller';
+
 import { BlogAuthor } from './entities/blog-author.entity';
 import { BlogPost } from './entities/blog-post.entity';
 import { BlogPostStatus } from './entities/blog-post-status.entity';
@@ -15,7 +17,9 @@ import { BlogService } from './services/blog.service';
     exports: [
         BlogService
     ],
-    controllers: [],
+    controllers: [
+        BlogPostController
+    ],
     providers: [
         BlogService
     ]

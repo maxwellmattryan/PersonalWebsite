@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { BlogPost, BlogTopic } from '@app/shared/models';
 import { ApiService } from '@app/core/http/api.service';
 import { AuthService } from '@app/core/authentication';
 import { BlogService, EditorService, NotificationService } from '@app/core/services';
-import { Blog } from '@app/shared/interfaces';
-import { Topic, BlogPost } from '@app/shared/models';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-blog-view',
@@ -15,9 +15,10 @@ export class BlogViewComponent implements OnInit {
     isAdmin: boolean = false;
     isLoaded: boolean = false;
 
-    blog: Blog;
-    posts: Array<BlogPost>;
-    topics: Map<string, boolean>;
+    posts: BlogPost[];
+    topics: BlogTopic[];
+
+    activeTopicId: number = -1;
 
     constructor(
         private apiService: ApiService,
@@ -30,54 +31,44 @@ export class BlogViewComponent implements OnInit {
     ngOnInit(): void {
         this.isAdmin = this.authService.isLoggedIn();
 
-        this.apiService.getPosts().subscribe((blog: Blog) => {
-            this.blog = blog;
-
-            this.filterPosts(this.blogService.getActiveTopic());
+        this.apiService.getPosts(this.activeTopicId).subscribe((res: BlogPost[]) => {
+            this.posts = res;
+            this.topics = this.getTopicsFromPosts();
 
             this.isLoaded = true;
         });
     }
 
-    filterPosts(topic: string): void {
-        this.blogService.setActiveTopic(topic);
-        this.updateTopicMap();
+    private getTopicsFromPosts(): BlogTopic[] {
+        const set = new Set<BlogTopic>();
 
-        this.posts = this.blog.posts.filter((value, index, array) => {
-            if(value.topics.map(t => t.name).includes(topic) || topic === 'All') return value;
-        });
-    }
-
-    updateTopicMap(): void {
-        let topics = this.getEmptyTopicMap();
-        topics.set(this.blogService.getActiveTopic(), true);
-
-        this.topics = topics;
-    }
-
-    getEmptyTopicMap(): Map<string, boolean> {
-        let topics = new Map<string, boolean>();
-        topics.set("All", false);
-
-        this.blog.posts.forEach((post, pIdx) => {
-            post.topics.forEach((topic, tIdx) => {
-                topics.set(topic.name, false);
+        this.posts.forEach(p => {
+            p.topics.forEach(t => {
+                set.add(t);
             });
         });
 
-        return topics;
+        return [...set];
     }
 
-    getTopicArray(): Array<any> {
-        return Array.from(this.topics.keys()).map(t => [t, this.topics.get(t)]).sort();
+    setActiveTopic(topic: BlogTopic) {
+        console.log('MAKE REQUEST TO API AND GET THESE TOPICS');
+
+        this.blogService.setActiveTopic(topic);
     }
 
-    trackByIndex(index, item): void {
-        return index;
+    filterPosts(topicId: number): void {
+        this.activeTopicId = topicId;
+
+        this.apiService.getPosts(topicId).subscribe((res: BlogPost[]) => {
+            this.posts = res;
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+        });
     }
 
-    sendTopicToEditor(topic: string): void {
-        this.editorService.setTopic(this.blog.topics.find(t => t.name === topic));
+    sendTopicToEditor(topic: BlogTopic): void {
+        this.editorService.setTopic(topic);
     }
 
     deleteTopic(topic: string): void {

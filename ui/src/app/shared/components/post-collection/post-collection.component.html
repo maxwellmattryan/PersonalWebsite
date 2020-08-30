@@ -12,8 +12,8 @@
                 <div class='posts__post-topic-list' *ngIf='showTopics'>
                     <a 
                         class='posts__post-topic-item'
-                        *ngFor='let topic of post.topics; let idx = index;'
-                        (click)='activateTopic(topic.name)'
+                        *ngFor='let topic of post.topics'
+                        (click)='blogService.setActiveTopic(topic)'
                         [routerLink]="['/blog']"
                     >
                         {{ topic.name }}

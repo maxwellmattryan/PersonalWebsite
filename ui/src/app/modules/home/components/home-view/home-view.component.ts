@@ -23,8 +23,7 @@ export class HomeViewComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.apiService.getHomepage(this.authService.isLoggedIn()).subscribe((res: Homepage) => {
-            console.log(res);
+        this.apiService.getHomepage().subscribe((res: Homepage) => {
             this.homepage = res;
             this.isLoaded = true;
         }, (error: HttpErrorResponse) => {

@@ -27,10 +27,6 @@ export class PostCollectionComponent implements OnInit {
         return this.posts.sort(this.comparisonService.posts).slice(0, this.nPostsToDisplay);
     }
 
-    activateTopic(topic: string): void {
-        this.blogService.setActiveTopic(topic);
-    }
-
     displayMorePosts(): void {
        this.nPostsToDisplay += 5;
 
