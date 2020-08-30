@@ -8,6 +8,6 @@ RUN npm install -g @angular/cli
 RUN apk add git # Needed for dependency from GitHub
 RUN npm install --only=production
 COPY . ./
-RUN npm run build
+# RUN npm run build
 
 CMD ["npm", "start"]
