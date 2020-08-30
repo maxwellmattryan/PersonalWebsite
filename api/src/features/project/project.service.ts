@@ -26,7 +26,7 @@ export class ProjectService {
     public async existsInTable(id: number): Promise<boolean> {
         return await this.projectRepository
             .createQueryBuilder('p')
-            .where(`p.id = ${id}`)
+            .where('p.id = :id', { id: id })
             .getCount() > 0;
     }
 
@@ -73,13 +73,6 @@ export class ProjectService {
             .leftJoinAndSelect('p.link', 'pl')
             .where('p.id = :id', { id: id })
             .getOne();
-    }
-
-    public async getProjects(): Promise<Project[]> {
-        return await this.projectRepository
-            .createQueryBuilder('p')
-            .leftJoinAndSelect('p.link', 'pl')
-            .getMany();
     }
 
     public async getProjectsForProfile(profileId: number): Promise<Project[]> {
