@@ -12,6 +12,14 @@ export class BlogService {
         private readonly blogPostRepository: Repository<BlogPost>
     ) { }
 
+    public async getPosts(): Promise<BlogPost[]> {
+        return await this.blogPostRepository
+            .createQueryBuilder('bp')
+            .leftJoinAndSelect('bp.status', 'bps')
+            .leftJoinAndSelect('bp.topics', 'bt')
+            .getMany()
+    }
+
     public async getPostsByStatus(status: string): Promise<BlogPost[]> {
         return await this.blogPostRepository
             .createQueryBuilder('bp')

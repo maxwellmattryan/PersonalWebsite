@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { map, catchError } from 'rxjs/operators';
@@ -59,8 +59,12 @@ export class ApiService {
     // ========
     // HOME
     // ========
-    getHomepage(): Observable<any> {
-        return this.http.get<any>(`${environment.API_URL}/homepage`);
+    getHomepage(isAdmin: boolean): Observable<any> {
+        const params = isAdmin ? { } : { published: 'true' };
+        return this.http.get<any>(
+            `${environment.API_URL}/homepage`,
+            { params: params }
+        );
     }
 
     // ========

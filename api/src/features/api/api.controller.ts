@@ -1,4 +1,6 @@
-import { Controller, Get, HttpCode } from '@nestjs/common';
+import { Controller, Get, HttpCode, Param, Query, Req } from '@nestjs/common';
+
+import { Request } from 'express';
 
 import { BlogService } from '@api/features/blog/services/blog.service';
 import { ProfileService } from '@api/features/profile/profile.service';
@@ -18,14 +20,19 @@ export class ApiController {
 
     @Get('homepage')
     @HttpCode(200)
-    async getHomepage(): Promise<any> {
+    async getHomepage(@Query('published') publishedPostsOnly: string, @Req() request: Request): Promise<any> {
         const profile = await this.profileService.getActiveProfile();
         if(!profile) throw new NoActiveProfileWasFoundException();
 
         const projects = await this.projectService.getProjectsForProfile(profile.id);
         if(projects.length == 0) throw new NoProjectsWereFoundException();
 
-        const posts = await this.blogService.getPostsByStatus('PUBLISHED');
+        let posts;
+        if(publishedPostsOnly !== undefined) {
+            posts = await this.blogService.getPostsByStatus('PUBLISHED')
+        } else {
+            posts = await this.blogService.getPosts();
+        }
         if(posts.length == 0) throw new NoBlogPostsWereFoundException();
 
         return { profile: profile, projects: projects, posts: posts };
