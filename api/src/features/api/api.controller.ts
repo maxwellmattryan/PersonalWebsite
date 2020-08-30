@@ -27,8 +27,7 @@ export class ApiController {
         const projects = await this.projectService.getProjectsForProfile(profile.id);
         if(projects.length == 0) throw new NoProjectsWereFoundException();
 
-        // const posts = await this.blogService.getPostsByStatus('PUBLISHED')
-        const posts = await this.blogService.getPosts();
+        const posts = await this.blogService.getPostsByStatus('PUBLISHED')
         if(posts.length == 0) throw new NoBlogPostsWereFoundException();
 
         return { profile: profile, projects: projects, posts: posts };

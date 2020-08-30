@@ -34,13 +34,12 @@
     color: $color-secondary;
     display: grid;
     grid-gap: $quarter-margin;
-    margin-bottom: $margin;
+    margin-top: $margin;
 }
 
 .posts__post-topic-item {
     color: $color-secondary;
     font-style: italic;
-    text-decoration: underline;
 }
 
 .posts__post-preview {

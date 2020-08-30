@@ -17,6 +17,7 @@ export class BlogService {
             .createQueryBuilder('bp')
             .leftJoinAndSelect('bp.status', 'bps')
             .leftJoinAndSelect('bp.topics', 'bt')
+            .orderBy('bp.created_at', 'DESC')
             .getMany()
     }
 
@@ -26,6 +27,7 @@ export class BlogService {
             .leftJoinAndSelect('bp.status', 'bps')
             .leftJoinAndSelect('bp.topics', 'bt')
             .where('bps.status = :status', { status: status })
+            .orderBy('bp.created_at', 'DESC')
             .getMany()
     }
 
@@ -36,6 +38,7 @@ export class BlogService {
             .leftJoinAndSelect('bp.topics', 'bt')
             .where('bps.status = :status', { status: status })
             .where('bt.id = :id', { id: topicId })
+            .orderBy('bp.created_at', 'DESC')
             .getMany()
     }
 }

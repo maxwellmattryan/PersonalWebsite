@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { BlogPost, Topic } from '@app/shared/models';
+import { Topic } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/authentication';
 import { EditorService, NotificationService } from '@app/core/services';
@@ -87,8 +86,6 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
         for(let key in this.topicForm.value) {
             topic[key] = this.topicForm.value[key];
         }
-        topic['_id'] = this.getTopicID();
-        topic['uri'] = this.getTopicURI(topic['name']);
 
         return topic;
     }

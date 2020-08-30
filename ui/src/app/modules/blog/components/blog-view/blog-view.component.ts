@@ -36,6 +36,8 @@ export class BlogViewComponent implements OnInit {
             this.topics = this.getTopicsFromPosts();
 
             this.isLoaded = true;
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
         });
     }
 

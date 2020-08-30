@@ -9,21 +9,15 @@
                 <h3 class='posts__post-header'>{{ post.title }}</h3>
                 <p class='posts__post-date' [innerHTML]='blogService.getFormattedDate(post.created_at)'></p>
 
-                <div class='posts__post-topic-list' *ngIf='showTopics'>
-                    <a 
-                        class='posts__post-topic-item'
-                        *ngFor='let topic of post.topics'
-                        (click)='blogService.setActiveTopic(topic)'
-                        [routerLink]="['/blog']"
-                    >
-                        {{ topic.name }}
-                        <br>
-                    </a>
-                </div>
-                
                 <p class='posts__post-preview' *ngIf='showPreview'>
                     {{ post.preview }}
                 </p>
+
+                <div class='posts__post-topic-list' *ngIf='showTopics'>
+                    <p class='posts__post-topic-item' *ngFor='let topic of post.topics'>
+                        {{ topic.name }}
+                    </p>
+                </div>
             </div>
         </a>
     </div>
