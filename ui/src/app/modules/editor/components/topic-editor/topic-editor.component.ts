@@ -1,11 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Topic } from '@app/shared/models';
+import { BlogTopic } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/authentication';
 import { EditorService, NotificationService } from '@app/core/services';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-topic-editor',
@@ -13,8 +14,10 @@ import { EditorService, NotificationService } from '@app/core/services';
     styleUrls: ['../../editor.component.scss']
 })
 export class TopicEditorComponent implements OnInit, OnDestroy {
-    topicData: Topic;
+    topicData: BlogTopic;
     topicForm: FormGroup;
+
+    @Input() id: number;
 
     constructor(
         private apiService: ApiService,
@@ -25,76 +28,77 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
         private router: Router,
     ) { }
 
+    ngOnDestroy(): void {
+        this.editorService.setTopic(null);
+    }
+
     ngOnInit(): void {
         this.checkForAdmin();
 
         this.setUnloadEvent();
 
-        this.loadTopicData();
-        this.buildTopicForm();
+        this.initTopicForm();
     }
 
-    ngOnDestroy(): void {
-        this.editorService.setTopic(null);
-    }
-
-    checkForAdmin(): void {
+    private checkForAdmin(): void {
         if(!this.authService.isLoggedIn())
             this.router.navigate(['/']);
     }
 
-    setUnloadEvent(): void {
+    private setUnloadEvent(): void {
         window.onbeforeunload = () => {
             this.editorService.setPost(null);
         };
     }
 
-    loadTopicData(): void {
+    private initTopicForm(): void {
+        this.loadTopicData();
+
+        this.buildTopicForm();
+    }
+
+    private loadTopicData(): void {
         this.topicData = this.editorService.getTopic();
     }
 
-    buildTopicForm(): void {
+    private buildTopicForm(): void {
         if(this.topicData) {
             this.topicForm = this.formBuilder.group({
-                name:           this.formBuilder.control(this.topicData.name,           [Validators.required]),
-                description:    this.formBuilder.control(this.topicData.description,    [Validators.required]),
-                imageURL:       this.formBuilder.control(this.topicData.imageURL,       [Validators.required])
+                name:        this.formBuilder.control(this.topicData.name,        [Validators.required]),
+                description: this.formBuilder.control(this.topicData.description, [Validators.required]),
             });
         } else {
             this.topicForm = this.formBuilder.group({
-                name:           this.formBuilder.control('', [Validators.required]),
-                description:    this.formBuilder.control('', [Validators.required]),
-                imageURL:       this.formBuilder.control('', [Validators.required])
+                name:        this.formBuilder.control('', [Validators.required]),
+                description: this.formBuilder.control('', [Validators.required]),
             });
         }
     }
 
     onSubmit(): void {
-        const topic = this.buildTopicData();
+        const topic = this.buildFormTopicData();
 
-        this.apiService.putTopic(topic).subscribe((res: any) => {
-            this.notificationService.createNotification(res.msg);
-
-            if(res.success) {
-                this.router.navigate(['blog/']);
-            }
-        });
-    }
-
-    buildTopicData(): any {
-        let topic = {};
-        for(let key in this.topicForm.value) {
-            topic[key] = this.topicForm.value[key];
+        if(topic.id === undefined) {
+            this.apiService.createTopic(topic).subscribe((res: BlogTopic) => {
+                this.notificationService.createNotification('Created new topic.');
+                this.router.navigate(['blog'])
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+            });
+        } else {
+            this.apiService.updateTopic(topic).subscribe((res: BlogTopic) => {
+                this.notificationService.createNotification('Updated existing topic.');
+                this.router.navigate(['blog'])
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+            });
         }
-
-        return topic;
     }
 
-    getTopicID(): string {
-        return this.topicData ? this.topicData._id : '';
-    }
-
-    getTopicURI(name: string): string {
-        return name.toLowerCase().replace(/[ ]/g, '-').replace(/[\.?]/g, '');
+    buildFormTopicData(): BlogTopic {
+        return new BlogTopic({
+            ...this.topicForm.value,
+            id: this.topicData ? this.topicData.id : undefined
+        });
     }
 }

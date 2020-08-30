@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { Admin } from '@app/shared/interfaces';
 import { environment } from '@app/environments/environment';
-import { BlogPost, Project, Profile, Topic } from '@app/shared/models';
+import { BlogPost, Project, Profile, BlogTopic } from '@app/shared/models';
 
 @Injectable({
     providedIn: 'root'
@@ -140,19 +140,26 @@ export class ApiService {
     // ========
     // TOPIC
     // ========
+    createTopic(topic: BlogTopic): Observable<BlogTopic> {
+        return this.http.post<BlogTopic>(
+            `${environment.API_URL}/blog/topics`,
+            topic
+        );
+    }
+
     deleteTopic(requestURL: string): Observable<any> {
         return this.http.delete<any>(
             environment.API_URL + requestURL
         );
     }
 
-    getTopics(): Observable<Topic[]> {
-        return this.http.get<Topic[]>(environment.API_URL + '/blog/topics');
+    getTopics(): Observable<BlogTopic[]> {
+        return this.http.get<BlogTopic[]>(environment.API_URL + '/blog/topics');
     }
 
-    putTopic(topic: Topic): Observable<Topic> {
-        return this.http.put<Topic>(
-            environment.API_URL + '/blog/topics/' + topic['uri'],
+    updateTopic(topic: BlogTopic): Observable<BlogTopic> {
+        return this.http.put<BlogTopic>(
+            `${environment.API_URL}/blog/topics/${topic.id}`,
             topic
         );
     }

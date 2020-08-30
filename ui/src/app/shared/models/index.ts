@@ -8,5 +8,3 @@ export { ProfileStatus } from './profile-status.model';
 
 export { Project } from './project.model';
 export { ProjectLink } from './project-link.model';
-
-export { Topic } from './topic.model';

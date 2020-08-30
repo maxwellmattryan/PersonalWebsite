@@ -121,18 +121,17 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     onSubmit(): void {
         const project = this.buildFormProjectData();
         const activeProfileIds = this.buildFormProfileData();
-        console.log(project);
 
         if(project.id === undefined) {
             this.apiService.createProject(project, activeProfileIds).subscribe((res: Project) => {
-                this.notificationService.createNotification(`Successfully created new project!`);
+                this.notificationService.createNotification(`Created new project.`);
                 this.router.navigate([`projects/${res.id}`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
             this.apiService.updateProject(project, activeProfileIds).subscribe((res: Project) => {
-                this.notificationService.createNotification(`Successfully updated existing project!`);
+                this.notificationService.createNotification(`Updated existing project.`);
                 this.router.navigate([`projects/${res.id}`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
