@@ -3,7 +3,7 @@ import { Profile } from '../models/profile.model';
 import { Project } from '../models/project.model';
 
 export interface Homepage {
-    posts?: Post[];
+    posts: Post[];
     profile: Profile;
-    projects?: Project[];
+    projects: Project[];
 }

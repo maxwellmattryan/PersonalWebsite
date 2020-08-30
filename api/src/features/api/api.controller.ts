@@ -1,16 +1,17 @@
-import { Controller, Get, HttpCode, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode } from '@nestjs/common';
 
+import { BlogService } from '@api/features/blog/services/blog.service';
 import { ProfileService } from '@api/features/profile/profile.service';
 import { ProjectService } from '@api/features/project/project.service';
 
-import { Profile } from '@api/features/profile/profile.entity';
-
 import { NoActiveProfileWasFoundException } from '@api/features/profile/profile.exception';
+import { NoBlogPostsWereFoundException } from '@api/features/blog/exceptions/blog-post.exception'
 import { NoProjectsWereFoundException } from '../project/project.exception';
 
 @Controller()
 export class ApiController {
     constructor(
+        private readonly blogService: BlogService,
         private readonly profileService: ProfileService,
         private readonly projectService: ProjectService
     ) { }
@@ -24,6 +25,9 @@ export class ApiController {
         const projects = await this.projectService.getProjectsForProfile(profile.id);
         if(projects.length == 0) throw new NoProjectsWereFoundException();
 
-        return { profile: profile, projects: projects };
+        const posts = await this.blogService.getPostsByStatus('PUBLISHED');
+        if(posts.length == 0) throw new NoBlogPostsWereFoundException();
+
+        return { profile: profile, projects: projects, posts: posts };
     }
 }
