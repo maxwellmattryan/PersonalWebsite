@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { Admin, Blog, Homepage } from '@app/shared/interfaces';
 import { environment } from '@app/environments/environment';
-import { Post, Project, Profile, Topic } from '@app/shared/models';
+import { BlogPost, Project, Profile, Topic } from '@app/shared/models';
 
 @Injectable({
     providedIn: 'root'
@@ -72,16 +72,16 @@ export class ApiService {
         );
     }
 
-    getPost(requestURL: string): Observable<Post> {
-        return this.http.get<Post>(environment.API_URL + requestURL);
+    getPost(requestURL: string): Observable<BlogPost> {
+        return this.http.get<BlogPost>(environment.API_URL + requestURL);
     }
 
     getPosts(): Observable<Blog> {
         return this.http.get<Blog>(environment.API_URL + '/blog/posts');
     }
 
-    putPost(post: Post): Observable<Post> {
-        return this.http.put<Post>(
+    putPost(post: BlogPost): Observable<BlogPost> {
+        return this.http.put<BlogPost>(
             environment.API_URL + '/blog/posts/' + post['uri'],
             post
         );

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Post, Topic } from '@app/shared/models';
+import { BlogPost, Topic } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/authentication';
 import { BlogService, EditorService, NotificationService, ComparisonService } from '@app/core/services';
@@ -15,7 +15,7 @@ export class PostViewComponent implements OnInit {
     isAdmin: boolean = false;
     isLoaded: boolean = false;
 
-    post: Post;
+    post: BlogPost;
 
     constructor(
         private apiService: ApiService,

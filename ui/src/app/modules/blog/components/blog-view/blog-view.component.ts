@@ -4,7 +4,7 @@ import { ApiService } from '@app/core/http/api.service';
 import { AuthService } from '@app/core/authentication';
 import { BlogService, EditorService, NotificationService } from '@app/core/services';
 import { Blog } from '@app/shared/interfaces';
-import { Topic, Post } from '@app/shared/models';
+import { Topic, BlogPost } from '@app/shared/models';
 
 @Component({
     selector: 'app-blog-view',
@@ -16,7 +16,7 @@ export class BlogViewComponent implements OnInit {
     isLoaded: boolean = false;
 
     blog: Blog;
-    posts: Array<Post>;
+    posts: Array<BlogPost>;
     topics: Map<string, boolean>;
 
     constructor(

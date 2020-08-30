@@ -1,0 +1,31 @@
+import { Deserializable } from './deserializable.model';
+import { BlogAuthor } from './blog-author.model';
+import { BlogPostStatus } from './blog-post-status.model';
+
+export class BlogPost implements Deserializable {
+    constructor(partial: Partial<BlogPost>) {
+        Object.assign(this, partial);
+    }
+
+    deserialize(input: any): this {
+        Object.assign(this, input);
+
+        this.author = input.author.map(ba => new BlogAuthor({ ...ba }).deserialize(ba));
+        this.status = input.status.map(bps => new BlogPostStatus({ ...bps }).deserialize(bps));
+
+        return this;
+    }
+
+    id?: number;
+
+    author: BlogAuthor;
+    status: BlogPostStatus;
+
+    title: string;
+    preview: string;
+    content: string;
+    image_url: string;
+
+    created_at:      Date;
+    updated_at:      Date;
+}

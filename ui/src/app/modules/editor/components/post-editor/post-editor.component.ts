@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { Post, Topic } from '@app/shared/models';
+import { BlogPost, Topic } from '@app/shared/models';
 import { AuthService } from '@app/core/authentication';
 import { ApiService } from '@app/core/http';
 import { EditorService, NotificationService, ValidationService, ComparisonService } from '@app/core/services';
@@ -14,7 +14,7 @@ import { EditorService, NotificationService, ValidationService, ComparisonServic
     styleUrls: ['../../editor.component.scss']
 })
 export class PostEditorComponent implements OnDestroy, OnInit {
-    postData: Post;
+    postData: BlogPost;
     postForm: FormGroup;
 
     topics: Array<Topic> = [];

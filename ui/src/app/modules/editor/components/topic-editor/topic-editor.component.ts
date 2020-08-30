@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { Post, Topic } from '@app/shared/models';
+import { BlogPost, Topic } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/authentication';
 import { EditorService, NotificationService } from '@app/core/services';

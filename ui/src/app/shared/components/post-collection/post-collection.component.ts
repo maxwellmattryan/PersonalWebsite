@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Post } from '@app/shared/models';
+import { BlogPost } from '@app/shared/models';
 import { BlogService, ComparisonService } from '@app/core/services';
 
 @Component({
@@ -9,7 +9,7 @@ import { BlogService, ComparisonService } from '@app/core/services';
     styleUrls: ['./post-collection.component.scss']
 })
 export class PostCollectionComponent implements OnInit {
-    @Input() posts: Post[];
+    @Input() posts: BlogPost[];
     
     @Input() showPreview: boolean;
     @Input() showTopics: boolean;
@@ -23,7 +23,7 @@ export class PostCollectionComponent implements OnInit {
 
     ngOnInit(): void { }
 
-    getPosts(): Array<Post> {
+    getPosts(): BlogPost[] {
         return this.posts.sort(this.comparisonService.posts).slice(0, this.nPostsToDisplay);
     }
 
