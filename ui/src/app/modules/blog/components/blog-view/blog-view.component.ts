@@ -78,5 +78,7 @@ export class BlogViewComponent implements OnInit {
 
     private removeTopic(id: number): void {
         this.topics = this.topics.filter(t => t.id != id);
+
+        this.posts = this.posts.filter(p => !p.topics.map(t => t.id).includes(id));
     }
 }
