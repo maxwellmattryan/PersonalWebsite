@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { BlogPost, BlogTopic } from '@app/shared/models';
 import { ApiService } from '@app/core/http/api.service';
 import { AuthService } from '@app/core/authentication';
 import { BlogService, ComparisonService, EditorService, NotificationService } from '@app/core/services';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-blog-view',
@@ -26,7 +27,8 @@ export class BlogViewComponent implements OnInit {
         public blogService: BlogService,
         private comparisonService: ComparisonService,
         private editorService: EditorService,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
+        private router: Router
     ) { }
 
     ngOnInit(): void {

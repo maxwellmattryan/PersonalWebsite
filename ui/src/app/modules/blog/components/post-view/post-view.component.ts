@@ -32,10 +32,17 @@ export class PostViewComponent implements OnInit {
         this.isAdmin = this.authService.isLoggedIn();
 
         this.apiService.getPost(this.router.url).subscribe(post => {
+            if(post.status.status !== 'PUBLISHED' && !this.isAdmin) {
+                this.notificationService.createNotification('Unable to view the blog post.');
+                this.router.navigate(['']);
+            }
+
             this.post = post;
             this.post.topics.sort(this.comparisonService.topics);
 
             this.isLoaded = true;
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
         });
     }
 
