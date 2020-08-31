@@ -10,7 +10,7 @@ import { NoProfilesWereFoundException } from '@api/features/profile/profile.exce
 
 import { Project } from './project.entity'
 import { ProjectService } from "./project.service";
-import { NoProjectWasFoundException, ProjectCouldNotBeUpdatedException } from './project.exception';
+import { ProjectWasNotFoundException, ProjectCouldNotBeUpdatedException } from './project.exception';
 
 @Controller('projects')
 export class ProjectController {
@@ -30,7 +30,7 @@ export class ProjectController {
     @HttpCode(200)
     async getProject(@Param('id') id: number, @Req() request: Request): Promise<Project> {
         const project = await this.projectService.getProject(id);
-        if(!project) throw new NoProjectWasFoundException();
+        if(!project) throw new ProjectWasNotFoundException();
 
         return project;
     }
@@ -50,7 +50,7 @@ export class ProjectController {
     @HttpCode(204)
     @UseGuards(JwtAuthGuard)
     async deleteProject(@Param('id') id: number, @Req() request: Request): Promise<void> {
-        if(!(await this.projectService.existsInTable(id))) throw new NoProjectWasFoundException();
+        if(!(await this.projectService.existsInTable(id))) throw new ProjectWasNotFoundException();
 
         await this.projectService.deleteProject(id);
     }

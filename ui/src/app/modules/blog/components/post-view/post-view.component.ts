@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BlogPost, Topic } from '@app/shared/models';
+import { BlogPost, BlogTopic } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/authentication';
 import { BlogService, EditorService, NotificationService, ComparisonService } from '@app/core/services';

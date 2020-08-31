@@ -6,7 +6,7 @@ export class AdminAlreadyExistsException extends BadRequestException {
     }
 }
 
-export class AdminNotFoundException extends NotFoundException {
+export class AdminWasNotFoundException extends NotFoundException {
     constructor() {
         super('Unable to find admin.');
     }

@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { BlogPost, Topic } from '@app/shared/models';
+import { BlogPost, BlogTopic } from '@app/shared/models';
 import { AuthService } from '@app/core/authentication';
 import { ApiService } from '@app/core/http';
 import { EditorService, NotificationService, ValidationService, ComparisonService } from '@app/core/services';
@@ -17,7 +17,7 @@ export class PostEditorComponent implements OnDestroy, OnInit {
     postData: BlogPost;
     postForm: FormGroup;
 
-    topics: Array<Topic> = [];
+    topics: BlogTopic = [];
 
     constructor(
         private apiService: ApiService,
@@ -122,8 +122,6 @@ export class PostEditorComponent implements OnDestroy, OnInit {
                 post[key] = this.postForm.value[key];
             }
         }
-        post['_id'] = this.getPostID();
-        post['uri'] = this.getPostURI(post['title']);
 
         return post;
     }
@@ -132,13 +130,5 @@ export class PostEditorComponent implements OnDestroy, OnInit {
         return this.postForm.value.topics
             .map((topic, idx) => topic ? this.topics[idx]._id : null)
             .filter(topic => topic !== null);
-    }
-
-    getPostID(): string {
-        return this.postData ? this.postData._id : '';
-    }
-
-    getPostURI(title: string): string {
-        return title.toLowerCase().replace(/[ ]/g, '-').replace(/[\.?]/g, '');
     }
 }

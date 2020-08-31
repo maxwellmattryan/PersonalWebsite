@@ -72,8 +72,8 @@ export class ApiService {
         );
     }
 
-    getPost(requestURL: string): Observable<BlogPost> {
-        return this.http.get<BlogPost>(environment.API_URL + requestURL);
+    getPost(uri: string): Observable<BlogPost> {
+        return this.http.get<BlogPost>(environment.API_URL + uri);
     }
 
     getPosts(topicId: number = -1): Observable<BlogPost[]> {
@@ -109,7 +109,7 @@ export class ApiService {
     }
 
     getProject(uri: string): Observable<Project> {
-        return this.http.get<Project>(`${environment.API_URL}${uri}`);
+        return this.http.get<Project>(environment.API_URL + uri);
     }
 
     updateProject(project: Project, associatedProfileIds: number[]): Observable<Project> {

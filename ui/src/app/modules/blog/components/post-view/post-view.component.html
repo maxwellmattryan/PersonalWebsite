@@ -10,7 +10,7 @@
         </a>
     </div>
     
-    <p class='post__date' [innerHtml]='"Published: " + blogService.getFormattedDate(post.created)'></p>
+    <p class='post__date' [innerHtml]='"Published: " + blogService.getFormattedDate(post.created_at)'></p>
     
     <div class='post__topic-container'>
         <a class='post__topic-item' (click)='activateTopic(topic.name)' [routerLink]="['/blog']" *ngFor='let topic of post.topics'>
@@ -20,7 +20,7 @@
 
     <div class="line-divider"></div>
     
-    <img class='post__image' [src]='post.imageURL' height=150>
+    <img class='post__image' [src]='"https://mattmaxwell.tech/images/" + post.image_url' height=150>
 
     <markdown [data]='post.content'></markdown>
 </div>

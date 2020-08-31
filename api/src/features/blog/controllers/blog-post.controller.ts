@@ -4,14 +4,14 @@ import { Request } from 'express';
 
 import { BlogPost } from '../entities/blog-post.entity';
 
-import { BlogService } from '../services/blog.service';
+import { BlogPostService } from '../services/blog-post.service';
 
-import { NoBlogPostsWereFoundException } from '../exceptions/blog-post.exception';
+import { BlogPostsWereNotFoundException, BlogPostWasNotFoundException } from '../exceptions/blog-post.exception';
 
 @Controller('blog/posts')
 export class BlogPostController {
     constructor(
-        private readonly blogService: BlogService
+        private readonly blogPostService: BlogPostService
     ) { }
 
     @Get('')
@@ -22,14 +22,21 @@ export class BlogPostController {
     ): Promise<BlogPost[]> {
         let posts: BlogPost[];
         if(topicId) {
-            posts = await this.blogService.getPostsByStatusAndTopic('PUBLISHED', parseInt(topicId));
+            posts = await this.blogPostService.getPostsByStatusAndTopic('PUBLISHED', parseInt(topicId));
         } else {
-            posts = await this.blogService.getPostsByStatus('PUBLISHED');
+            posts = await this.blogPostService.getPostsByStatus('PUBLISHED');
         }
-        if(posts.length == 0) throw new NoBlogPostsWereFoundException();
-
-        console.log(posts);
+        if(posts.length == 0) throw new BlogPostsWereNotFoundException();
 
         return posts;
+    }
+
+    @Get(':id')
+    @HttpCode(200)
+    async getPost(@Param('id') id: number, @Req() request: Request): Promise<BlogPost> {
+        const post = await this.blogPostService.getPost(id);
+        if(!post) throw new BlogPostWasNotFoundException();
+
+        return post;
     }
 }

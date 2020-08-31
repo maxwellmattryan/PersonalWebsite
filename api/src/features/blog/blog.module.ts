@@ -9,7 +9,7 @@ import { BlogPost } from './entities/blog-post.entity';
 import { BlogPostStatus } from './entities/blog-post-status.entity';
 import { BlogTopic } from './entities/blog-topic.entity';
 
-import { BlogService } from './services/blog.service';
+import { BlogPostService } from './services/blog-post.service';
 import { BlogTopicService } from './services/blog-topic.service';
 
 @Module({
@@ -17,7 +17,7 @@ import { BlogTopicService } from './services/blog-topic.service';
         TypeOrmModule.forFeature([BlogAuthor, BlogPost, BlogPostStatus, BlogTopic])
     ],
     exports: [
-        BlogService,
+        BlogPostService,
         BlogTopicService
     ],
     controllers: [
@@ -25,7 +25,7 @@ import { BlogTopicService } from './services/blog-topic.service';
         BlogTopicController
     ],
     providers: [
-        BlogService,
+        BlogPostService,
         BlogTopicService
     ]
 })

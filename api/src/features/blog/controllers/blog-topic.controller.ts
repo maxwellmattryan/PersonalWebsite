@@ -1,4 +1,4 @@
-import { Controller, Post, HttpCode, UseGuards, Req, Put, Param, Delete } from '@nestjs/common';
+import { Controller, Post, HttpCode, UseGuards, Req, Put, Param, Delete, Get } from '@nestjs/common';
 
 import { Request } from 'express'
 
@@ -21,6 +21,15 @@ export class BlogTopicController {
         return await this.blogTopicService.createTopic(request.body);
     }
 
+    @Get(':id')
+    @HttpCode(200)
+    async getTopic(@Param('id') id: number, @Req() request: Request): Promise<BlogTopic> {
+        const topic = await this.blogTopicService.getTopic(id);
+        if(!topic) throw new BlogTopicWasNotFoundException();
+
+        return topic;
+    }
+
     @Put(':id')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
@@ -34,7 +43,7 @@ export class BlogTopicController {
     @Delete(':id')
     @HttpCode(204)
     @UseGuards(JwtAuthGuard)
-    async deleteProject(@Param('id') id: number, @Req() request: Request): Promise<void> {
+    async deleteTopic(@Param('id') id: number, @Req() request: Request): Promise<void> {
         if(!(await this.blogTopicService.existsInTable(id))) throw new BlogTopicWasNotFoundException();
 
         await this.blogTopicService.deleteTopic(id);

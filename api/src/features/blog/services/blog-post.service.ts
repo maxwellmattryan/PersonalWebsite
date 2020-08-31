@@ -6,11 +6,20 @@ import { Repository } from 'typeorm';
 import { BlogPost } from '../entities/blog-post.entity';
 
 @Injectable()
-export class BlogService {
+export class BlogPostService {
     constructor(
         @InjectRepository(BlogPost)
         private readonly blogPostRepository: Repository<BlogPost>
     ) { }
+
+    public async getPost(id: number): Promise<BlogPost> {
+        return await this.blogPostRepository
+            .createQueryBuilder('bp')
+            .leftJoinAndSelect('bp.status', 'bps')
+            .leftJoinAndSelect('bp.topics', 'bt')
+            .where('bt.id = :id', { id: id })
+            .getOne();
+    }
 
     public async getPosts(): Promise<BlogPost[]> {
         return await this.blogPostRepository
@@ -18,7 +27,7 @@ export class BlogService {
             .leftJoinAndSelect('bp.status', 'bps')
             .leftJoinAndSelect('bp.topics', 'bt')
             .orderBy('bp.created_at', 'DESC')
-            .getMany()
+            .getMany();
     }
 
     public async getPostsByStatus(status: string): Promise<BlogPost[]> {
@@ -28,7 +37,7 @@ export class BlogService {
             .leftJoinAndSelect('bp.topics', 'bt')
             .where('bps.status = :status', { status: status })
             .orderBy('bp.created_at', 'DESC')
-            .getMany()
+            .getMany();
     }
 
     public async getPostsByStatusAndTopic(status: string, topicId: number): Promise<BlogPost[]> {
@@ -39,6 +48,6 @@ export class BlogService {
             .where('bps.status = :status', { status: status })
             .where('bt.id = :id', { id: topicId })
             .orderBy('bp.created_at', 'DESC')
-            .getMany()
+            .getMany();
     }
 }
