@@ -1,13 +1,14 @@
-import { Controller, Get, HttpCode, Param, Req, Query, Put, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode, Param, Req, Query, Put, UseGuards, Post } from '@nestjs/common';
 
 import { Request } from 'express';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
 import { BlogPost } from '../entities/blog-post.entity';
+import { BlogPostStatus } from '../entities/blog-post-status.entity';
 import { BlogPostService } from '../services/blog-post.service';
 import {
-    BlogPostCouldNotBeUpdated,
+    BlogPostCouldNotBeUpdated, BlogPostStatusesWereNotFoundException,
     BlogPostsWereNotFoundException,
     BlogPostWasNotFoundException
 } from '../exceptions/blog-post.exception';
@@ -35,6 +36,13 @@ export class BlogPostController {
         return posts;
     }
 
+    @Post('')
+    @HttpCode(200)
+    @UseGuards(JwtAuthGuard)
+    async createPost(@Req() request: Request): Promise<BlogPost> {
+        return await this.blogPostService.createPost(request.body);
+    }
+
     @Get(':id')
     @HttpCode(200)
     async getPost(@Param('id') id: number, @Req() request: Request): Promise<BlogPost> {
@@ -52,5 +60,16 @@ export class BlogPostController {
         if(!post) throw new BlogPostCouldNotBeUpdated();
 
         return post;
+    }
+
+    @Get('statuses')
+    @HttpCode(200)
+    @UseGuards(JwtAuthGuard)
+    async getPostStatuses(@Req() request: Request): Promise<BlogPostStatus[]> {
+        const statuses = await this.blogPostService.fuckAll();
+        if(statuses.length === 0) throw new BlogPostStatusesWereNotFoundException();
+
+        console.log(statuses);
+        return statuses;
     }
 }

@@ -24,7 +24,7 @@ export class BlogTopicService {
     }
 
     public async createTopic(topicData: BlogTopic): Promise<BlogTopic> {
-        const topic: BlogTopic = await this.blogTopicRepository.create(topicData);
+        const topic: BlogTopic = this.blogTopicRepository.create(topicData);
 
         return await this.blogTopicRepository.save(topic)
             .catch((error) => {

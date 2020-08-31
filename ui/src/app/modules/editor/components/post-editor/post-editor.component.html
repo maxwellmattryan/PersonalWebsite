@@ -13,7 +13,12 @@
         <div class="form-field editor__form-field">
             <label>Status</label>
             <br><br>
-            <input formControlName='status' required>
+            <mat-radio-group formControlName='status' name='status' required>
+                <mat-radio-button
+                        *ngFor='let status of statusData'
+                        [value]='status.status'
+                >{{ status.status }}</mat-radio-button>
+            </mat-radio-group>
         </div>
 
         <div class="form-field editor__form-field">

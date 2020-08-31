@@ -43,15 +43,15 @@ export class BlogViewComponent implements OnInit {
     }
 
     private getTopicsFromPosts(): BlogTopic[] {
-        const set = new Set<BlogTopic>();
+        let result: BlogTopic[] = [];
 
         this.posts.forEach(p => {
             p.topics.forEach(t => {
-                set.add(t);
+                if(!result.map(bt => bt.id).includes(t.id)) result.push(t);
             });
         });
 
-        return [...set];
+        return result;
     }
 
     filterPosts(topicId: number): void {

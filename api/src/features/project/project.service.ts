@@ -31,10 +31,10 @@ export class ProjectService {
     }
 
     public async createProject(projectData: Project, profileData: number[]): Promise<Project> {
-        const rawProjectLink: ProjectLink = await this.projectLinkRepository.create(projectData.link);
+        const rawProjectLink: ProjectLink = this.projectLinkRepository.create(projectData.link);
         const projectLink = await this.projectLinkRepository.save(rawProjectLink);
 
-        const rawProject: Project = await this.projectRepository.create({ ...projectData, link: projectLink });
+        const rawProject: Project = this.projectRepository.create({ ...projectData, link: projectLink });
         const project = await this.projectRepository.save(rawProject)
             .catch((error) => {
                 if(error.code === PostgresErrorCode.UNIQUE_VIOLATION) {

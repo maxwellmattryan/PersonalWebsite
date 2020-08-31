@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { Admin } from '@app/shared/interfaces';
 import { environment } from '@app/environments/environment';
-import { BlogPost, Project, Profile, BlogTopic } from '@app/shared/models';
+import { BlogPost, Project, Profile, BlogTopic, BlogPostStatus } from '@app/shared/models';
 
 @Injectable({
     providedIn: 'root'
@@ -66,6 +66,13 @@ export class ApiService {
     // ========
     // POST
     // ========
+    createPost(post: BlogPost): Observable<BlogPost> {
+        return this.http.post<BlogPost>(
+            `${environment.API_URL}/blog/topics`,
+            post
+        );
+    }
+
     deletePost(requestURL: string): Observable<any> {
         return this.http.delete<any>(
             environment.API_URL + requestURL
@@ -85,6 +92,10 @@ export class ApiService {
             `${environment.API_URL}/blog/posts`,
             { params: params }
         );
+    }
+
+    getPostStatuses(): Observable<BlogPostStatus[]> {
+        return this.http.get<BlogPostStatus[]>(`${environment.API_URL}/blog/posts/statuses`);
     }
 
     updatePost(post: BlogPost): Observable<BlogPost> {

@@ -14,13 +14,6 @@ export class BlogTopicController {
         private readonly blogTopicService: BlogTopicService
     ) { }
 
-    @Post('')
-    @HttpCode(201)
-    @UseGuards(JwtAuthGuard)
-    async createTopic(@Req() request: Request): Promise<BlogTopic> {
-        return await this.blogTopicService.createTopic(request.body);
-    }
-
     @Get('')
     @HttpCode(200)
     async getTopics(@Req() request: Request): Promise<BlogTopic[]> {
@@ -28,6 +21,13 @@ export class BlogTopicController {
         if(topics.length == 0) throw new BlogTopicsWereNotFoundException();
 
         return topics;
+    }
+
+    @Post('')
+    @HttpCode(201)
+    @UseGuards(JwtAuthGuard)
+    async createTopic(@Req() request: Request): Promise<BlogTopic> {
+        return await this.blogTopicService.createTopic(request.body);
     }
 
     @Get(':id')

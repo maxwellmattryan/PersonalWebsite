@@ -17,7 +17,7 @@ export class AdminService {
     ) { }
 
     public async createAdmin(adminData: Admin): Promise<Admin> {
-        const admin: Admin = await this.adminRepository.create(adminData);
+        const admin: Admin = this.adminRepository.create(adminData);
 
         return await this.adminRepository.save(admin)
             .catch((error) => {
