@@ -87,9 +87,9 @@ export class ApiService {
         );
     }
 
-    putPost(post: BlogPost): Observable<BlogPost> {
+    updatePost(post: BlogPost): Observable<BlogPost> {
         return this.http.put<BlogPost>(
-            environment.API_URL + '/blog/posts/' + post['uri'],
+            `${environment.API_URL}/blog/posts/${post.id}`,
             post
         );
     }

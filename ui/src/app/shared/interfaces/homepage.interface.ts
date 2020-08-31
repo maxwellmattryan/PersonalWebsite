@@ -1,4 +1,4 @@
-import { BlogPost } from '../models/post.model';
+import { BlogPost } from '../models/blog-post.model';
 import { Profile } from '../models/profile.model';
 import { Project } from '../models/project.model';
 

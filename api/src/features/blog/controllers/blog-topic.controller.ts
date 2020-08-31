@@ -6,7 +6,7 @@ import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
 import { BlogTopic } from '../entities/blog-topic.entity';
 import { BlogTopicService } from '../services/blog-topic.service';
-import { BlogTopicCouldNotBeUpdated, BlogTopicWasNotFoundException } from '../exceptions/blog-topic.exception';
+import { BlogTopicCouldNotBeUpdated, BlogTopicWasNotFoundException, BlogTopicsWereNotFoundException } from '../exceptions/blog-topic.exception';
 
 @Controller('blog/topics')
 export class BlogTopicController {
@@ -19,6 +19,15 @@ export class BlogTopicController {
     @UseGuards(JwtAuthGuard)
     async createTopic(@Req() request: Request): Promise<BlogTopic> {
         return await this.blogTopicService.createTopic(request.body);
+    }
+
+    @Get('')
+    @HttpCode(200)
+    async getTopics(@Req() request: Request): Promise<BlogTopic[]> {
+        const topics = await this.blogTopicService.getTopics();
+        if(topics.length == 0) throw new BlogTopicsWereNotFoundException();
+
+        return topics;
     }
 
     @Get(':id')

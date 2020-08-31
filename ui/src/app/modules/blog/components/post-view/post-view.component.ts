@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BlogPost, BlogTopic } from '@app/shared/models';
+import { BlogPost } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/authentication';
 import { BlogService, EditorService, NotificationService, ComparisonService } from '@app/core/services';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-post-view',
@@ -44,13 +45,10 @@ export class PostViewComponent implements OnInit {
 
     deletePost(): void {
         this.apiService.deletePost(this.router.url).subscribe((res: any) => {
-            this.notificationService.createNotification(res.msg);
-
+            this.notificationService.createNotification('Successfully deleted blog post!');
             this.router.navigate(['/blog']);
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
         });
-    }
-
-    activateTopic(topic: string): void {
-        this.blogService.setActiveTopic(topic);
     }
 }

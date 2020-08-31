@@ -28,7 +28,7 @@ export class BlogPost {
     @ManyToOne(type => BlogPostStatus, bps => bps.id)
     public status: BlogPostStatus;
 
-    @ManyToMany(type => BlogTopic, { onDelete: 'CASCADE' })
+    @ManyToMany(type => BlogTopic, bt => bt.posts, { onDelete: 'CASCADE' })
     @JoinTable()
     public topics: BlogTopic[];
 

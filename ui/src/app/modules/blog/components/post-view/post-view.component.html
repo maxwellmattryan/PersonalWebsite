@@ -2,7 +2,7 @@
     <h1 class='post__title'>{{ post.title }}</h1>
 
     <div class='post__btn-container' *ngIf='isAdmin'>
-        <a class='btn post__btn' (click)='sendPostToEditor()' routerLink='/editor' [queryParams]='{type: "post"}'>
+        <a class='btn post__btn' (click)='sendPostToEditor()' routerLink='/editor' [queryParams]='{type: "post", id: post.id}'>
             &#x270F;
         </a>
         <a class='btn post__btn btn--warn' (click)='deletePost()' routerLink='/blog'>
@@ -13,7 +13,7 @@
     <p class='post__date' [innerHtml]='"Published: " + blogService.getFormattedDate(post.created_at)'></p>
     
     <div class='post__topic-container'>
-        <a class='post__topic-item' (click)='activateTopic(topic.name)' [routerLink]="['/blog']" *ngFor='let topic of post.topics'>
+        <a class='post__topic-item' (click)='blogService.setActiveTopic(topic)' [routerLink]="['/blog']" *ngFor='let topic of post.topics'>
             {{ topic.name }}
         </a>
     </div>

@@ -51,7 +51,7 @@
                             class='btn blog__filter-btn--edit'
                             (click)='sendTopicToEditor(topic)'
                             routerLink='/editor'
-                            [queryParams]='{type: "topic"}'
+                            [queryParams]='{type: "topic", id: topic.id}'
                         >
                             &#x270F;
                         </button>

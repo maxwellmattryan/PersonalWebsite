@@ -17,7 +17,7 @@ export class BlogPostService {
             .createQueryBuilder('bp')
             .leftJoinAndSelect('bp.status', 'bps')
             .leftJoinAndSelect('bp.topics', 'bt')
-            .where('bt.id = :id', { id: id })
+            .where('bp.id = :id', { id: id })
             .getOne();
     }
 
@@ -49,5 +49,11 @@ export class BlogPostService {
             .where('bt.id = :id', { id: topicId })
             .orderBy('bp.created_at', 'DESC')
             .getMany();
+    }
+
+    public async updatePost(id: number, postData: BlogPost): Promise<BlogPost> {
+        await this.blogPostRepository.save(postData);
+
+        return this.getPost(id);
     }
 }

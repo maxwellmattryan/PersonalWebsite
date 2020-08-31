@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { BlogPost, BlogTopic } from '@app/shared/models';
@@ -15,9 +15,11 @@ import { EditorService, NotificationService, ValidationService, ComparisonServic
 })
 export class PostEditorComponent implements OnDestroy, OnInit {
     postData: BlogPost;
+    topicData: BlogTopic[] = [];
+
     postForm: FormGroup;
 
-    topics: BlogTopic = [];
+    @Input() id: number;
 
     constructor(
         private apiService: ApiService,
@@ -39,96 +41,95 @@ export class PostEditorComponent implements OnDestroy, OnInit {
 
         this.setUnloadEvent();
 
-        this.loadPostData();
-        this.buildPostForm();
-        this.loadTopicData();
+        this.initPostForm();
     }
 
-    checkForAdmin(): void {
+    private checkForAdmin(): void {
         if(!this.authService.isLoggedIn())
-            this.router.navigate(['/']);
+            this.router.navigate(['']);
     }
 
-    setUnloadEvent(): void {
+    private setUnloadEvent(): void {
         window.onbeforeunload = () => {
             this.editorService.setPost(null);
         };
     }
 
-    loadPostData(): void {
+    private initPostForm(): void {
+        this.loadPostData();
+        this.loadTopicData();
+
+        this.buildPostForm();
+    }
+
+    private loadPostData(): void {
         this.postData = this.editorService.getPost();
     }
 
-    buildPostForm(): void {
+    private loadTopicData(): void {
+        this.apiService.getTopics().subscribe((topics: BlogTopic[]) => {
+            this.topicData = topics.sort(this.comparisonService.topics);
+            if(this.postData) {
+                this.setTopicControls(this.postData.topics.map(t => t.id));
+            } else {
+                this.setTopicControls([]);
+            }
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+        });
+    }
+
+    private setTopicControls(associatedTopicIds: number[]) {
+        this.topicData.forEach(t => {
+            const control: FormControl = this.formBuilder.control(associatedTopicIds.includes(t.id));
+            (this.postForm.controls.topics as FormArray).push(control);
+        });
+    }
+
+    private buildPostForm(): void {
         if(this.postData) {
             this.postForm = this.formBuilder.group({
-                title:          this.formBuilder.control(this.postData.title,           [Validators.required]                   ),
-                subtitle:       this.formBuilder.control(this.postData.subtitle,        [Validators.required]                   ),
-                topics:         this.formBuilder.array  ([],                            this.validationService.hasMinElements(1)  ),
-                author:         this.formBuilder.control(this.postData.author,          [Validators.required]                   ),
-                description:    this.formBuilder.control(this.postData.description,     [Validators.required]                   ),
-                content:        this.formBuilder.control(this.postData.content,         [Validators.required]                   ),
-                imageURL:       this.formBuilder.control(this.postData.imageURL,        [Validators.required]                   )
+                title:      this.formBuilder.control(this.postData.title,           [Validators.required]),
+                status:     this.formBuilder.control(this.postData.status.status,   [Validators.required]),
+                topics:     this.formBuilder.array(this.topicData,                  [this.validationService.hasMinElements(1)]),
+                preview:    this.formBuilder.control(this.postData.preview,         [Validators.required]),
+                content:    this.formBuilder.control(this.postData.content,         [Validators.required]),
+                image_url:  this.formBuilder.control(this.postData.image_url,       [Validators.required])
             });
         } else {
             this.postForm = this.formBuilder.group({
-                title:          this.formBuilder.control('', [Validators.required]                  ),
-                subtitle:       this.formBuilder.control('', [Validators.required]                  ),
-                topics:         this.formBuilder.array  ([], this.validationService.hasMinElements(1) ),
-                author:         this.formBuilder.control('', [Validators.required]                  ),
-                description:    this.formBuilder.control('', [Validators.required]                  ),
-                content:        this.formBuilder.control('', [Validators.required]                  ),
-                imageURL:       this.formBuilder.control('', [Validators.required]                  )
+                title:      this.formBuilder.control('', [Validators.required]),
+                status:     this.formBuilder.control('', [Validators.required]),
+                topics:     this.formBuilder.array  ([], [this.validationService.hasMinElements(1)]),
+                preview:    this.formBuilder.control('', [Validators.required]),
+                content:    this.formBuilder.control('', [Validators.required]),
+                image_url:  this.formBuilder.control('', [Validators.required])
             });
         }
-    }
-
-    loadTopicData(): void {
-        this.apiService.getTopics().subscribe(topics => {
-            this.topics = topics.sort(this.comparisonService.topics);
-
-            this.topics.forEach((topic, idx) => {
-                let control: FormControl;
-
-                if(this.postData && this.postData.topics.map(t => t.name).includes(topic.name)) {
-                    control = this.formBuilder.control(true);
-                } else {
-                    control = this.formBuilder.control(false);
-                }
-
-                (this.postForm.controls.topics as FormArray).push(control);
-            });
-        });
     }
 
     onSubmit(): void {
-        const post = this.buildPostData();
+        const post = this.buildFormPostData();
 
-        this.apiService.putPost(post).subscribe((res: any) => {
-            this.notificationService.createNotification(res.msg);
-
-            if(res.success) {
-                this.router.navigate(['blog/posts/' + post['uri']]);
-            }
+        this.apiService.updatePost(post).subscribe((res: BlogPost) => {
+            this.notificationService.createNotification('Successfully updated existing post!');
+            this.router.navigate([`blog/posts/${post.id}`]);
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
         });
     }
 
-    buildPostData(): any {
-        let post = {};
-        for(let key in this.postForm.value) {
-            if(key === 'topics') {
-                post[key] = this.getSelectedTopics();
-            } else {
-                post[key] = this.postForm.value[key];
-            }
-        }
+    private buildFormPostData(): BlogPost {
+        const topics = this.postForm.value.topics.map((t, idx) => {
+            if(t) return this.topicData[idx];
+        }).filter(t => t !== undefined);
+        return new BlogPost({
+            ...this.postForm.value,
+            id: this.postData ? this.postData.id : undefined,
+            topics: topics,
 
-        return post;
-    }
-
-    getSelectedTopics(): any {
-        return this.postForm.value.topics
-            .map((topic, idx) => topic ? this.topics[idx]._id : null)
-            .filter(topic => topic !== null);
+            // TODO: Fix later when radio button functionality is here
+            status: undefined
+        });
     }
 }

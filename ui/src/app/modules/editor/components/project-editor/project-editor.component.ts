@@ -16,6 +16,7 @@ import { EditorService, NotificationService, ValidationService, ComparisonServic
 export class ProjectEditorComponent implements OnDestroy, OnInit {
     profileData: Profile[] = [];
     projectData: Project;
+
     projectForm: FormGroup;
 
     @Input() id: number;
@@ -84,8 +85,8 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     }
 
     private setProfileControls(associatedProfileIds: number[]): void {
-        this.profileData.forEach((profile, idx) => {
-            let control: FormControl = this.formBuilder.control(associatedProfileIds.includes(profile.id));
+        this.profileData.forEach(p => {
+            const control: FormControl = this.formBuilder.control(associatedProfileIds.includes(p.id));
             (this.projectForm.controls.profiles as FormArray).push(control);
         });
     }
@@ -124,14 +125,14 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
 
         if(project.id === undefined) {
             this.apiService.createProject(project, activeProfileIds).subscribe((res: Project) => {
-                this.notificationService.createNotification(`Created new project.`);
+                this.notificationService.createNotification(`Successfully created new project!`);
                 this.router.navigate([`projects/${res.id}`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
             this.apiService.updateProject(project, activeProfileIds).subscribe((res: Project) => {
-                this.notificationService.createNotification(`Updated existing project.`);
+                this.notificationService.createNotification(`Successfully updated existing project!`);
                 this.router.navigate([`projects/${res.id}`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);

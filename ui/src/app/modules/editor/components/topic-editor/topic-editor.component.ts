@@ -80,14 +80,14 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
 
         if(topic.id === undefined) {
             this.apiService.createTopic(topic).subscribe((res: BlogTopic) => {
-                this.notificationService.createNotification('Created new topic.');
+                this.notificationService.createNotification('Successfully created new topic.');
                 this.router.navigate(['blog'])
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
             this.apiService.updateTopic(topic).subscribe((res: BlogTopic) => {
-                this.notificationService.createNotification('Updated existing topic.');
+                this.notificationService.createNotification('Successfully updated existing topic.');
                 this.router.navigate(['blog'])
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);

@@ -17,3 +17,9 @@ export class BlogTopicWasNotFoundException extends NotFoundException {
         super('Unable to find blog post.');
     }
 }
+
+export class BlogTopicsWereNotFoundException extends NotFoundException {
+    constructor() {
+        super('Unable to find any blog posts.');
+    }
+}

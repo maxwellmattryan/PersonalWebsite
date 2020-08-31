@@ -1,4 +1,4 @@
-import { NotFoundException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 export class BlogPostWasNotFoundException extends NotFoundException {
     constructor() {
@@ -9,5 +9,11 @@ export class BlogPostWasNotFoundException extends NotFoundException {
 export class BlogPostsWereNotFoundException extends NotFoundException {
     constructor() {
         super('Unable to find blog posts.');
+    }
+}
+
+export class BlogPostCouldNotBeUpdated extends BadRequestException {
+    constructor() {
+        super('Blog post could not be updated.');
     }
 }

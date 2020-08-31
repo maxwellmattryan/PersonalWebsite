@@ -17,14 +17,13 @@ export class PostCollectionComponent implements OnInit {
     nPostsToDisplay: number = 5;
 
     constructor(
-        public blogService: BlogService,
-        private comparisonService: ComparisonService
+        public blogService: BlogService
     ) { }
 
     ngOnInit(): void { }
 
     getPosts(): BlogPost[] {
-        return this.posts.sort(this.comparisonService.posts).slice(0, this.nPostsToDisplay);
+        return this.posts.slice(0, this.nPostsToDisplay);
     }
 
     displayMorePosts(): void {

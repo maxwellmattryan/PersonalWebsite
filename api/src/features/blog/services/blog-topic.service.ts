@@ -52,6 +52,12 @@ export class BlogTopicService {
             .getOne();
     }
 
+    public async getTopics(): Promise<BlogTopic[]> {
+        return await this.blogTopicRepository
+            .createQueryBuilder('bt')
+            .getMany();
+    }
+
     public async updateTopic(id: number, data: BlogTopic): Promise<BlogTopic> {
         await this.blogTopicRepository.update(id, data);
 

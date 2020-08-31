@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { BlogPost, BlogTopic } from '@app/shared/models';
 import { ApiService } from '@app/core/http/api.service';
 import { AuthService } from '@app/core/authentication';
-import { BlogService, EditorService, NotificationService } from '@app/core/services';
+import { BlogService, ComparisonService, EditorService, NotificationService } from '@app/core/services';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -23,7 +23,8 @@ export class BlogViewComponent implements OnInit {
     constructor(
         private apiService: ApiService,
         private authService: AuthService,
-        private blogService: BlogService,
+        public blogService: BlogService,
+        private comparisonService: ComparisonService,
         private editorService: EditorService,
         private notificationService: NotificationService
     ) { }
@@ -33,7 +34,7 @@ export class BlogViewComponent implements OnInit {
 
         this.apiService.getPosts(this.activeTopicId).subscribe((res: BlogPost[]) => {
             this.posts = res;
-            this.topics = this.getTopicsFromPosts();
+            this.topics = this.getTopicsFromPosts().sort(this.comparisonService.topics);
 
             this.isLoaded = true;
         }, (error: HttpErrorResponse) => {
@@ -70,7 +71,7 @@ export class BlogViewComponent implements OnInit {
     deleteTopic(topic: BlogTopic): void {
         this.apiService.deleteTopic(topic.id).subscribe((res: any) => {
             this.removeTopic(topic.id);
-            this.notificationService.createNotification('Deleted blog topic.');
+            this.notificationService.createNotification('Successfully deleted blog topic!');
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
         });

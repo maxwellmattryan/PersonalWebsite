@@ -12,34 +12,40 @@
 }
 
 .posts__post-anchor-wrapper {
-    
+
+}
+
+.posts__post-title,
+.posts__post-date,
+.posts__post-preview,
+.posts__post-topic-list {
+    padding: $half-padding $padding;
 }
 
 .posts__post {
     background-color: $color-light;
     border: 1px solid black;
-    padding: $padding;
 }
 
-.posts__post-header {
-    margin-bottom: $half-margin;
+.posts__post-title {
+    padding-top: $padding;
 }
 
 .posts__post-date {
     color: $color-dark;
-    margin-bottom: $margin;
+    padding-bottom: $padding;
 }
 
 .posts__post-topic-list {
     color: $color-secondary;
     display: grid;
     grid-gap: $quarter-margin;
-    margin-top: $margin;
 }
 
 .posts__post-topic-item {
     color: $color-secondary;
     font-style: italic;
+    text-decoration: underline;
 }
 
 .posts__post-preview {

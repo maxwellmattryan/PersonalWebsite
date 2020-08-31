@@ -10,7 +10,7 @@ export class BlogTopic {
     @PrimaryGeneratedColumn()
     public id?: number;
 
-    @ManyToMany(type => BlogPost, { onDelete: 'CASCADE' })
+    @ManyToMany(type => BlogPost, bp => bp.topics, { onDelete: 'CASCADE' })
     public posts: BlogPost[];
 
     @Column({ type: 'varchar', length: 50, nullable: false, unique: true })

@@ -1,12 +1,16 @@
-import { Controller, Get, HttpCode, Param, Req, Query } from '@nestjs/common';
+import { Controller, Get, HttpCode, Param, Req, Query, Put, UseGuards } from '@nestjs/common';
 
 import { Request } from 'express';
 
+import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
+
 import { BlogPost } from '../entities/blog-post.entity';
-
 import { BlogPostService } from '../services/blog-post.service';
-
-import { BlogPostsWereNotFoundException, BlogPostWasNotFoundException } from '../exceptions/blog-post.exception';
+import {
+    BlogPostCouldNotBeUpdated,
+    BlogPostsWereNotFoundException,
+    BlogPostWasNotFoundException
+} from '../exceptions/blog-post.exception';
 
 @Controller('blog/posts')
 export class BlogPostController {
@@ -36,6 +40,16 @@ export class BlogPostController {
     async getPost(@Param('id') id: number, @Req() request: Request): Promise<BlogPost> {
         const post = await this.blogPostService.getPost(id);
         if(!post) throw new BlogPostWasNotFoundException();
+
+        return post;
+    }
+
+    @Put(':id')
+    @HttpCode(200)
+    @UseGuards(JwtAuthGuard)
+    async updatePost(@Param('id') id: number, @Req() request: Request): Promise<BlogPost> {
+        const post = await this.blogPostService.updatePost(id, request.body);
+        if(!post) throw new BlogPostCouldNotBeUpdated();
 
         return post;
     }
