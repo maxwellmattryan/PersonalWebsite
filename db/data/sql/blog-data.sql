@@ -39,7 +39,7 @@ ngOnInit(): void {
 <br>
 
 Sed adipiscing diam donec adipiscing tristique. Interdum velit euismod in pellentesque massa. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat in. Posuere urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Facilisi cras fermentum odio eu feugiat pretium nibh ipsum. Mattis molestie a iaculis at. Amet porttitor eget dolor morbi non. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. Ut morbi tincidunt augue interdum velit. Vel quam elementum pulvinar etiam non quam. Vulputate odio ut enim blandit volutpat maecenas volutpat. Sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Convallis posuere morbi leo urna molestie at elementum eu. Condimentum mattis pellentesque id nibh tortor id aliquet lectus. Amet venenatis urna cursus eget nunc scelerisque viverra mauris.',
-       'rotor.png');
+       'images/rotor.png');
 
 INSERT INTO blog_post(id, author_id, status_id, title, preview, content, image_url)
 VALUES (2,
@@ -76,7 +76,7 @@ ngOnInit(): void {
 <br>
 
 Sed adipiscing diam donec adipiscing tristique. Interdum velit euismod in pellentesque massa. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat in. Posuere urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Facilisi cras fermentum odio eu feugiat pretium nibh ipsum. Mattis molestie a iaculis at. Amet porttitor eget dolor morbi non. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. Ut morbi tincidunt augue interdum velit. Vel quam elementum pulvinar etiam non quam. Vulputate odio ut enim blandit volutpat maecenas volutpat. Sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Convallis posuere morbi leo urna molestie at elementum eu. Condimentum mattis pellentesque id nibh tortor id aliquet lectus. Amet venenatis urna cursus eget nunc scelerisque viverra mauris.',
-       'operation-home.png');
+       'images/operation-home.png');
 
 INSERT INTO blog_post(id, author_id, status_id, title, preview, content, image_url)
 VALUES (3,
@@ -113,7 +113,7 @@ ngOnInit(): void {
 <br>
 
 Sed adipiscing diam donec adipiscing tristique. Interdum velit euismod in pellentesque massa. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat in. Posuere urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Facilisi cras fermentum odio eu feugiat pretium nibh ipsum. Mattis molestie a iaculis at. Amet porttitor eget dolor morbi non. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. Ut morbi tincidunt augue interdum velit. Vel quam elementum pulvinar etiam non quam. Vulputate odio ut enim blandit volutpat maecenas volutpat. Sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Convallis posuere morbi leo urna molestie at elementum eu. Condimentum mattis pellentesque id nibh tortor id aliquet lectus. Amet venenatis urna cursus eget nunc scelerisque viverra mauris.',
-       'green-foot.png');
+       'images/green-foot.png');
 
 INSERT INTO blog_topic(id, name, description) VALUES (1, 'Audio Development', 'Any and all things related to audio development and audio programming.');
 INSERT INTO blog_topic(id, name, description) VALUES (2, 'Design', 'Any and all things related to software design.');
@@ -122,6 +122,6 @@ INSERT INTO blog_topic(id, name, description) VALUES (4, 'Game Development', 'An
 INSERT INTO blog_topic(id, name, description) VALUES (5, 'Mathematics', 'Any and all things related to mathematics (most likely DSP-related concepts).');
 INSERT INTO blog_topic(id, name, description) VALUES (6, 'Programming', 'Any and all things related to programming.');
 
-INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (1, 1);
-INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (2, 4);
+INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (1, 1), (1, 5), (1, 6);
+INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (2, 4), (2, 1);
 INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (3, 3);

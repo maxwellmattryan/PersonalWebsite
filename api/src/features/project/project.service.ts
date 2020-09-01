@@ -8,19 +8,12 @@ import { InternalServerErrorException } from '@api/core/http/http.exception';
 import { ProjectAlreadyExistsException } from './project.exception';
 
 import { Project } from './project.entity';
-import { ProjectProfileMapping } from './project-profile-mapping.entity';
-import { Profile } from '@api/features/profile/profile.entity';
-import { ProjectLink } from './project-link.entity';
 
 @Injectable()
 export class ProjectService {
     constructor(
         @InjectRepository(Project)
-        private readonly projectRepository: Repository<Project>,
-        @InjectRepository(ProjectLink)
-        private readonly projectLinkRepository: Repository<ProjectLink>,
-        @InjectRepository(ProjectProfileMapping)
-        private readonly projectProfileMappingRepository: Repository<ProjectProfileMapping>
+        private readonly projectRepository: Repository<Project>
     ) { }
 
     public async existsInTable(id: number): Promise<boolean> {
@@ -30,12 +23,9 @@ export class ProjectService {
             .getCount() > 0;
     }
 
-    public async createProject(projectData: Project, profileData: number[]): Promise<Project> {
-        const rawProjectLink: ProjectLink = this.projectLinkRepository.create(projectData.link);
-        const projectLink = await this.projectLinkRepository.save(rawProjectLink);
-
-        const rawProject: Project = this.projectRepository.create({ ...projectData, link: projectLink });
-        const project = await this.projectRepository.save(rawProject)
+    public async createProject(projectData: Project): Promise<Project> {
+        const project: Project = this.projectRepository.create(projectData);
+        return await this.projectRepository.save(project)
             .catch((error) => {
                 if(error.code === PostgresErrorCode.UNIQUE_VIOLATION) {
                     throw new ProjectAlreadyExistsException();
@@ -43,82 +33,36 @@ export class ProjectService {
                     throw new InternalServerErrorException();
                 }
             });
-
-        await this.createProjectProfileMappings(project.id, profileData);
-
-        return project;
     }
 
     public async deleteProject(id: number): Promise<void> {
-        const linkId: number = (await this.projectRepository
+        await this.projectRepository
             .createQueryBuilder()
             .delete()
             .from(Project)
             .where('project.id = :id', { id: id })
-            .returning('link_id')
-            .execute()
-        ).raw[0].link_id;
-
-        await this.projectLinkRepository
-            .createQueryBuilder()
-            .delete()
-            .from(ProjectLink)
-            .where('project_link.id = :id', { id: linkId })
             .execute();
     }
 
     public async getProject(id: number): Promise<Project> {
         return await this.projectRepository
             .createQueryBuilder('p')
-            .leftJoinAndSelect('p.link', 'pl')
+            .leftJoinAndSelect('p.profiles', 'prf')
             .where('p.id = :id', { id: id })
             .getOne();
     }
 
     public async getProjectsForProfile(profileId: number): Promise<Project[]> {
-        const profileIds: number[] = (await this.projectRepository.query(`
-            SELECT p.id FROM project p
-            LEFT JOIN project_profile_mapping ppm ON p.id = ppm.project_id
-            WHERE ppm.profile_id = ${profileId}
-        `)).map((p: Project) => { return p.id; });
-
         return await this.projectRepository
             .createQueryBuilder('p')
-            .leftJoinAndSelect('p.link', 'pl')
-            .where('p.id IN (:...profileIds)', { profileIds: profileIds })
+            .innerJoinAndSelect('p.profiles', 'prf')
+            .where('prf.id = :id', { id: profileId })
             .getMany();
     }
 
-    public async updateProject(id: number, projectData: Project, profileData: number[]): Promise<Project> {
-        await this.deleteProjectProfileMappings(id);
-        await this.createProjectProfileMappings(id, profileData);
-
-        await this.projectRepository.update(id, projectData);
-        await this.projectLinkRepository.update(projectData.link.id, projectData.link);
+    public async updateProject(id: number, projectData: Project): Promise<Project> {
+        await this.projectRepository.save(projectData);
 
         return await this.getProject(id);
-    }
-
-    private async createProjectProfileMappings(projectId: number, profileIds: number[]): Promise<void> {
-        await this.projectProfileMappingRepository
-            .createQueryBuilder()
-            .insert()
-            .into(ProjectProfileMapping)
-            .values(profileIds.map(profileId => {
-                return new ProjectProfileMapping({
-                    project: new Project({ id: projectId }),
-                    profile: new Profile({ id: profileId })
-                })}
-            ))
-            .execute();
-    }
-
-    private async deleteProjectProfileMappings(projectId: number): Promise<void> {
-        await this.projectProfileMappingRepository
-            .createQueryBuilder()
-            .delete()
-            .from(ProjectProfileMapping)
-            .where(`project_id = ${projectId}`)
-            .execute();
     }
 }

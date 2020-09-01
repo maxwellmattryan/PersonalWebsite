@@ -70,18 +70,14 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     private loadProfileData(): void {
         this.apiService.getProfiles().subscribe((res: Profile[]) => {
             this.profileData = res.sort(this.comparisonService.profiles);
-            if(!(this.id && this.projectData)) this.setProfileControls([]);
+            if(this.id && this.projectData) {
+                this.setProfileControls(this.projectData.profiles.map(p => p.id));
+            } else {
+                this.setProfileControls([]);
+            }
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
         });
-
-        if(this.id && this.projectData) {
-            this.apiService.getProfilesForProject(this.id).subscribe((res: Profile[]) => {
-                this.setProfileControls(res.map(p => p.id));
-            }, (error: HttpErrorResponse) => {
-                this.notificationService.createNotification(error.error.message);
-            })
-        }
     }
 
     private setProfileControls(associatedProfileIds: number[]): void {
@@ -99,10 +95,8 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
                 tagline:        this.formBuilder.control(this.projectData.tagline,     [Validators.required]),
                 description:    this.formBuilder.control(this.projectData.description, [Validators.required]),
                 image_url:      this.formBuilder.control(this.projectData.image_url,   [Validators.required]),
-                link:           this.formBuilder.group  ({
-                    name: this.formBuilder.control(this.projectData.link.name, [Validators.required]),
-                    url:  this.formBuilder.control(this.projectData.link.url,  [Validators.required])
-                })
+                link_name:      this.formBuilder.control(this.projectData.link_name,   [Validators.required]),
+                link_url:       this.formBuilder.control(this.projectData.link_url,    [Validators.required])
             });
         } else {
             this.projectForm = this.formBuilder.group({
@@ -111,27 +105,24 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
                 tagline:        this.formBuilder.control('', [Validators.required]),
                 description:    this.formBuilder.control('', [Validators.required]),
                 image_url:      this.formBuilder.control('', [Validators.required]),
-                link:           this.formBuilder.group  ({
-                    name: this.formBuilder.control('', [Validators.required]),
-                    url:  this.formBuilder.control('', [Validators.required])
-                })
+                link_name:      this.formBuilder.control('', [Validators.required]),
+                link_url:       this.formBuilder.control('', [Validators.required])
             });
         }
     }
 
     onSubmit(): void {
         const project = this.buildFormProjectData();
-        const activeProfileIds = this.buildFormProfileData();
 
         if(project.id === undefined) {
-            this.apiService.createProject(project, activeProfileIds).subscribe((res: Project) => {
+            this.apiService.createProject(project).subscribe((res: Project) => {
                 this.notificationService.createNotification(`Successfully created new project!`);
                 this.router.navigate([`projects/${res.id}`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
-            this.apiService.updateProject(project, activeProfileIds).subscribe((res: Project) => {
+            this.apiService.updateProject(project).subscribe((res: Project) => {
                 this.notificationService.createNotification(`Successfully updated existing project!`);
                 this.router.navigate([`projects/${res.id}`]);
             }, (error: HttpErrorResponse) => {
@@ -141,19 +132,18 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     }
 
     private buildFormProjectData(): Project {
-        const project = new Project({
+        const profiles = this.buildFormProfileData();
+
+        return new Project({
             ...this.projectForm.value,
             id: this.projectData ? this.projectData.id : undefined,
-            profiles: undefined
+            profiles: profiles
         });
-        project.link.id = this.projectData ? this.projectData.link.id : undefined;
-
-        return project;
     }
 
-    private buildFormProfileData(): number[] {
-        return this.projectForm.value.profiles
-            .map((p, idx) => p ? this.profileData[idx].id : undefined)
-            .filter(p => p !== undefined);
+    private buildFormProfileData(): Profile[] {
+        return this.projectForm.value.profiles.map((p, idx) => {
+            if(p) return this.profileData[idx];
+        }).filter(p => p !== undefined);
     }
 }

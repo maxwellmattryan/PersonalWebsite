@@ -5,5 +5,4 @@ import { Project } from '../models/project.model';
 export interface Homepage {
     posts: BlogPost[];
     profile: Profile;
-    projects: Project[];
 }
