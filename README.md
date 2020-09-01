@@ -137,16 +137,19 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
         - 201
 
 - /api/blog
+    - `GET /api/blog/authors`
+        - Retrieves list of all authors in the database
+        - 200
     - `GET /api/blog/posts`
         - Retrieves list of all published posts in the database
         - 200
-    - **`GET /api/blog/posts/:id`
+    - `GET /api/blog/posts/:id`
         - Retrieves a single post corresponding to the `id` path parameter
         - 200
-    - **`PUT /api/blog/posts/:id`
+    - `PUT /api/blog/posts/:id`
         - Upserts post data from the client for the post with the corresponding `id`
         - 200, 201
-    - **`DELETE /api/blog/posts/:id`
+    - `DELETE /api/blog/posts/:id`
         - Removes the post with the corresponding `id` from the database
         - 204
     - `POST /api/blog/topics`
@@ -245,7 +248,7 @@ NOTE: What I have listed below is simply the more relevant fields for each table
     - Content
     - Preview
     - Image URL
-    - Status (DRAFT, PUBLISHED)
+    - Status (DRAFT, PUBLISHED, ARCHIVED)
 - Topic
     - Name
     - Description

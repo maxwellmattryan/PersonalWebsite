@@ -99,7 +99,8 @@ export class PostEditorComponent implements OnDestroy, OnInit {
         // NOTE: This is not ideal, but the server is throwing weird nonsense when trying to query all topics (?)
         this.statusData = [
             new BlogPostStatus({ id: 1, status: 'DRAFT' }),
-            new BlogPostStatus({ id: 2, status: 'PUBLISHED' })
+            new BlogPostStatus({ id: 2, status: 'PUBLISHED' }),
+            new BlogPostStatus({ id: 3, status: 'ARCHIVED' })
         ];
     }
 

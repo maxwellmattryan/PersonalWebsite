@@ -2,6 +2,7 @@ INSERT INTO blog_author(id, first_name, last_name) VALUES (1, 'Matthew', 'Maxwel
 
 INSERT INTO blog_post_status(id, status) VALUES (1, 'DRAFT');
 INSERT INTO blog_post_status(id, status) VALUES (2, 'PUBLISHED');
+INSERT INTO blog_post_status(id, status) VALUES (3, 'ARCHIVED');
 
 INSERT INTO blog_post(id, author_id, status_id, title, preview, content, image_url)
 VALUES (1,
