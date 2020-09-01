@@ -20,7 +20,7 @@ export class Profile {
     @PrimaryGeneratedColumn()
     public id?: number;
 
-    @ManyToOne(type => ProfileStatus, ps => ps.profile)
+    @ManyToOne(type => ProfileStatus, ps => ps.profiles)
     public status: ProfileStatus;
 
     @OneToMany(type => ProfileTechnology, pt => pt.profile)
