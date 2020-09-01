@@ -136,13 +136,13 @@ export class PostEditorComponent implements OnDestroy, OnInit {
             });
         } else {
             this.postForm = this.formBuilder.group({
-                title:      this.formBuilder.control('', [Validators.required]),
-                author:     this.formBuilder.control('', [Validators.required]),
-                status:     this.formBuilder.control('', [Validators.required]),
-                topics:     this.formBuilder.array  ([], [this.validationService.hasMinElements(1)]),
-                preview:    this.formBuilder.control('', [Validators.required]),
-                content:    this.formBuilder.control('', [Validators.required]),
-                image_url:  this.formBuilder.control('', [Validators.required])
+                title:      this.formBuilder.control('',                [Validators.required]),
+                author:     this.formBuilder.control('Matthew Maxwell', [Validators.required]),
+                status:     this.formBuilder.control('DRAFT',           [Validators.required]),
+                topics:     this.formBuilder.array  ([],                [this.validationService.hasMinElements(1)]),
+                preview:    this.formBuilder.control('',                [Validators.required]),
+                content:    this.formBuilder.control('',                [Validators.required]),
+                image_url:  this.formBuilder.control('',                [Validators.required])
             });
         }
     }
