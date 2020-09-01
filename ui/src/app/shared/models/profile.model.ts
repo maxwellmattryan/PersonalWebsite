@@ -22,6 +22,7 @@ export class Profile implements Deserializable {
     tagline:        string;
     landing:        string;
     about:          string;
+    image_url:      string;
 
     created_at:      Date;
     updated_at:      Date;
