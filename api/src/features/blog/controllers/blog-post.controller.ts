@@ -77,7 +77,7 @@ export class BlogPostController {
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
     async getPostStatuses(@Req() request: Request): Promise<BlogPostStatus[]> {
-        const statuses = await this.blogPostService.fuckAll();
+        const statuses = await this.blogPostService.getStatuses();
         if(statuses.length === 0) throw new BlogPostStatusesWereNotFoundException();
 
         console.log(statuses);

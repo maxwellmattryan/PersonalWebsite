@@ -46,7 +46,7 @@ export class BlogPostService {
         return await this.blogPostRepository
             .createQueryBuilder('bp')
             .leftJoinAndSelect('bp.status', 'bps')
-            .leftJoinAndSelect('bp.topics', 'bt')
+            .innerJoinAndSelect('bp.topics', 'bt')
             .orderBy('bp.created_at', 'DESC')
             .getMany();
     }
@@ -55,7 +55,7 @@ export class BlogPostService {
         return await this.blogPostRepository
             .createQueryBuilder('bp')
             .leftJoinAndSelect('bp.status', 'bps')
-            .leftJoinAndSelect('bp.topics', 'bt')
+            .innerJoinAndSelect('bp.topics', 'bt')
             .where('bps.status = :status', { status: status })
             .orderBy('bp.created_at', 'DESC')
             .getMany();
@@ -65,7 +65,7 @@ export class BlogPostService {
         return await this.blogPostRepository
             .createQueryBuilder('bp')
             .leftJoinAndSelect('bp.status', 'bps')
-            .leftJoinAndSelect('bp.topics', 'bt')
+            .innerJoinAndSelect('bp.topics', 'bt')
             .where('bps.status = :status', { status: status })
             .where('bt.id = :id', { id: topicId })
             .orderBy('bp.created_at', 'DESC')
@@ -76,7 +76,7 @@ export class BlogPostService {
         return await this.blogPostRepository
             .createQueryBuilder('bp')
             .leftJoinAndSelect('bp.status', 'bps')
-            .leftJoinAndSelect('bp.topics', 'bt')
+            .innerJoinAndSelect('bp.topics', 'bt')
             .where('bt.id = :id', { id: topicId })
             .orderBy('bt.created_at', 'DESC')
             .getMany();
@@ -86,12 +86,6 @@ export class BlogPostService {
         return await this.blogPostStatusRepository
             .createQueryBuilder('bps')
             .getMany();
-    }
-
-    public async fuckAll() {
-        return await this.blogPostStatusRepository.query(`
-            SELECT * FROM blog_post_status
-        `);
     }
 
     public async updatePost(id: number, postData: BlogPost): Promise<BlogPost> {
