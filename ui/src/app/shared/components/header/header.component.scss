@@ -25,7 +25,6 @@
     height: $header-height;
     justify-content: space-between;
     left: 0px;
-    padding: 0 $padding;
     position: fixed;
     right: 0px;
     transition: $navbar-transition-duration;
@@ -54,6 +53,7 @@
     animation-fill-mode: both;
     color: $color-primary;
     line-height: $header-height;
+    padding: 0 $padding;
 }
 
 @keyframes expand-in {
@@ -109,7 +109,6 @@
 .navbar__toggle-btn {
     background-color: $color-dark;
     height: $header-height;
-    margin-right: $margin;
     width: $header-height;
 }
 
@@ -152,7 +151,7 @@
     }
 
     &--show {
-        opacity: 0.4;
+        opacity: 0.6;
         pointer-events: all;
     }
 }
