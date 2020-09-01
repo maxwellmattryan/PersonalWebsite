@@ -1,5 +1,6 @@
 import { Deserializable } from './deserializable.model';
 import { ProfileStatus } from './profile-status.model';
+import { ProfileTechnology } from './profile-technology.model';
 
 export class Profile implements Deserializable {
     constructor(partial: Partial<Profile>) {
@@ -17,6 +18,7 @@ export class Profile implements Deserializable {
     id?:             number;
 
     status:         ProfileStatus;
+    technologies:   ProfileTechnology[];
 
     name:           string;
     tagline:        string;

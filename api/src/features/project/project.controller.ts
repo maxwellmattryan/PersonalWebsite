@@ -6,7 +6,7 @@ import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
 import { Profile } from '@api/features/profile/profile.entity';
 import { ProfileService } from '@api/features/profile/profile.service';
-import { NoProfilesWereFoundException } from '@api/features/profile/profile.exception';
+import { ProfilesWereNotFoundException } from '@api/features/profile/profile.exception';
 
 import { Project } from './project.entity'
 import { ProjectService } from "./project.service";
@@ -60,7 +60,7 @@ export class ProjectController {
     @UseGuards(JwtAuthGuard)
     async getProfilesForProject(@Param('id') id: number, @Req() request: Request): Promise<Profile[]> {
         const profiles = await this.profileService.getProfilesForProject(id);
-        if(profiles.length === 0) throw new NoProfilesWereFoundException();
+        if(profiles.length === 0) throw new ProfilesWereNotFoundException();
 
         return profiles;
     }

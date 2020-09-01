@@ -1,18 +1,18 @@
 import { NotFoundException } from '@nestjs/common';
 
-export class NoActiveProfileWasFoundException extends NotFoundException {
+export class ActiveProfileWasNotFoundException extends NotFoundException {
     constructor() {
         super('Unable to find an active profile.');
     }
 }
 
-export class NoProfileWasFoundException extends NotFoundException {
+export class ProfileWasNotFoundException extends NotFoundException {
     constructor() {
-        super('Unable to find requested profile.');
+        super('Unable to find profile.');
     }
 }
 
-export class NoProfilesWereFoundException extends NotFoundException {
+export class ProfilesWereNotFoundException extends NotFoundException {
     constructor() {
         super('Unable to find any profiles.');
     }

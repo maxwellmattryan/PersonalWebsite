@@ -101,6 +101,17 @@ CREATE TRIGGER profile_updated_at_modtime
     BEFORE UPDATE ON profile
     FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
 
+CREATE TABLE profile_technology (
+    id SERIAL PRIMARY KEY,
+
+    profile_id INT NOT NULL,
+
+    name VARCHAR(50) NOT NULL,
+    display_order INT NOT NULL,
+
+    FOREIGN KEY (profile_id) REFERENCES profile(id)
+);
+
 CREATE TABLE project_link (
     id SERIAL PRIMARY KEY,
 
@@ -136,16 +147,4 @@ CREATE TABLE project_profile_mapping (
 
     FOREIGN KEY (profile_id) REFERENCES profile(id),
     FOREIGN KEY (project_id) REFERENCES project(id)
-);
-
-CREATE TABLE technology (
-    id SERIAL PRIMARY KEY,
-
-    profile_id INT NOT NULL,
-
-    name VARCHAR(50),
-    icon_url TEXT NOT NULL,
-    display_order INT NOT NULL,
-
-    FOREIGN KEY (profile_id) REFERENCES profile(id)
 );

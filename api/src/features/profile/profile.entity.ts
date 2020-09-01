@@ -4,10 +4,12 @@ import {
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
-    ManyToOne
+    ManyToOne,
+    OneToMany
 } from 'typeorm';
 
 import { ProfileStatus } from './profile-status.entity';
+import { ProfileTechnology } from './profile-technology.entity';
 
 @Entity('profile')
 export class Profile {
@@ -18,8 +20,11 @@ export class Profile {
     @PrimaryGeneratedColumn()
     public id?: number;
 
-    @ManyToOne(type => ProfileStatus, ps => ps.id)
+    @ManyToOne(type => ProfileStatus, ps => ps.profile)
     public status: ProfileStatus;
+
+    @OneToMany(type => ProfileTechnology, pt => pt.profile)
+    public technologies: ProfileTechnology[];
 
     @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
     public name: string;

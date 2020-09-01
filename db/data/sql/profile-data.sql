@@ -25,3 +25,18 @@ VALUES (3,
        'I''m a software engineer based in Austin, TX. I love working on all sides of web development, whether it involves the front-end, back-end, database, or cloud computing.',
        'I strive to develop clean and neatly architectured software for the web. I have experience ranging from developing simple single-page applications to working in complex enterprise-level solutions.',
        'portrait.png');
+
+INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (1, 1, 'C++', 1);
+INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (2, 1, 'JUCE', 2);
+
+INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (3, 2, 'C#', 1);
+INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (4, 2, 'Unity', 2);
+
+INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (5, 3, 'TypeScript', 1);
+INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (6, 3, 'Angular', 2);
+INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (7, 3, 'Scala', 3);
+INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (8, 3, 'Play', 4);
+INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (9, 3, 'NestJS', 5);
+INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (10, 3, 'Node', 6);
+INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (11, 3, 'PostgreSQL', 7);
+INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (12, 3, 'Google Cloud', 8);
