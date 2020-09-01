@@ -25,6 +25,7 @@ export class HomeViewComponent implements OnInit {
     ngOnInit(): void {
         this.apiService.getHomepage().subscribe((res: Homepage) => {
             this.homepage = res;
+            console.log(this.homepage.profile);
             this.isLoaded = true;
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { createQueryBuilder, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 import { Profile } from './profile.entity';
 
@@ -22,6 +22,7 @@ export class ProfileService {
     public async getActiveProfile(): Promise<Profile> {
         return await this.profileRepository
             .createQueryBuilder('p')
+            .leftJoinAndSelect('p.technologies', 'pt')
             .leftJoinAndSelect('p.status', 'ps')
             .where('ps.status = \'ACTIVE\'')
             .getOne();

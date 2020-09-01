@@ -6,7 +6,7 @@ import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
 import { Profile } from './profile.entity';
 import { ProfileService } from './profile.service';
-import { NoProfilesWereFoundException, NoProfileWasFoundException } from './profile.exception';
+import { ProfilesWereNotFoundException, ProfileWasNotFoundException } from './profile.exception';
 
 @Controller('profiles')
 export class ProfileController {
@@ -19,7 +19,7 @@ export class ProfileController {
     @UseGuards(JwtAuthGuard)
     async listProfiles(@Req() request: Request): Promise<Profile[]> {
         const profiles = await this.profileService.getProfiles();
-        if(profiles.length == 0) throw new NoProfilesWereFoundException();
+        if(profiles.length == 0) throw new ProfilesWereNotFoundException();
 
         return profiles;
     }
@@ -30,7 +30,7 @@ export class ProfileController {
     async activateProfile(@Param('id') id: number, @Req() request: Request): Promise<Profile> {
         // CAUTION: This check is required because all rows will be updated
         if(!(await this.profileService.existsInTable(id))) {
-            throw new NoProfileWasFoundException();
+            throw new ProfileWasNotFoundException();
         }
 
         await this.profileService.resetProfileStatuses(id);
