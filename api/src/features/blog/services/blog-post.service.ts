@@ -19,6 +19,13 @@ export class BlogPostService {
         private readonly blogPostStatusRepository: Repository<BlogPostStatus>
     ) { }
 
+    public async existsInTable(id: number): Promise<boolean> {
+        return await this.blogPostRepository
+            .createQueryBuilder('bp')
+            .where('bp.id = :id', { id: id })
+            .getCount() > 0;
+    }
+
     public async createPost(postData: BlogPost): Promise<BlogPost> {
         const post: BlogPost = this.blogPostRepository.create(postData);
 
@@ -31,6 +38,15 @@ export class BlogPostService {
                     throw new InternalServerErrorException();
                 }
             })
+    }
+
+    public async deletePost(id: number): Promise<void> {
+        await this.blogPostRepository
+            .createQueryBuilder()
+            .delete()
+            .from(BlogPost)
+            .where('blog_post.id = :id', { id: id })
+            .execute();
     }
 
     public async getPost(id: number): Promise<BlogPost> {

@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, Param, Req, Query, Put, UseGuards, Post } from '@nestjs/common';
+import { Controller, Get, HttpCode, Param, Req, Query, Put, UseGuards, Post, Delete } from '@nestjs/common';
 
 import { Request } from 'express';
 
@@ -71,6 +71,15 @@ export class BlogPostController {
         if(!post) throw new BlogPostCouldNotBeUpdated();
 
         return post;
+    }
+
+    @Delete(':id')
+    @HttpCode(204)
+    @UseGuards(JwtAuthGuard)
+    async deletePost(@Param('id') id: number, @Req() request: Request): Promise<void> {
+        if(!(await this.blogPostService.existsInTable(id))) throw new BlogPostWasNotFoundException();
+
+        await this.blogPostService.deletePost(id);
     }
 
     @Get('statuses')
