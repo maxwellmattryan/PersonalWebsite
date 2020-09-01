@@ -4,9 +4,7 @@ import { Request } from 'express';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
-import { Profile } from '@api/features/profile/profile.entity';
 import { ProfileService } from '@api/features/profile/profile.service';
-import { ProfilesWereNotFoundException } from '@api/features/profile/profile.exception';
 
 import { Project } from './project.entity'
 import { ProjectService } from "./project.service";
@@ -23,7 +21,7 @@ export class ProjectController {
     @HttpCode(201)
     @UseGuards(JwtAuthGuard)
     async createProject(@Req() request: Request): Promise<Project> {
-        return await this.projectService.createProject(request.body.project, request.body.profile_ids);
+        return await this.projectService.createProject(request.body);
     }
 
     @Get(':id')
@@ -40,7 +38,7 @@ export class ProjectController {
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
     async updateProject(@Param('id') id: number, @Req() request: Request): Promise<Project> {
-        const project = await this.projectService.updateProject(id, request.body.project);
+        const project = await this.projectService.updateProject(id, request.body);
         if(!project) throw new ProjectCouldNotBeUpdatedException();
 
         return project;
@@ -53,15 +51,5 @@ export class ProjectController {
         if(!(await this.projectService.existsInTable(id))) throw new ProjectWasNotFoundException();
 
         await this.projectService.deleteProject(id);
-    }
-
-    @Get(':id/profiles')
-    @HttpCode(200)
-    @UseGuards(JwtAuthGuard)
-    async getProfilesForProject(@Param('id') id: number, @Req() request: Request): Promise<Profile[]> {
-        const profiles = await this.profileService.getProfilesForProject(id);
-        if(profiles.length === 0) throw new ProfilesWereNotFoundException();
-
-        return profiles;
     }
 }

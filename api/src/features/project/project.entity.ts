@@ -4,7 +4,7 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
-    OneToOne, JoinColumn, ManyToMany
+    OneToOne, JoinColumn, ManyToMany, JoinTable
 } from 'typeorm';
 
 import { ProjectLink } from './project-link.entity';

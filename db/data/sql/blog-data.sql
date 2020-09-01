@@ -122,6 +122,6 @@ INSERT INTO blog_topic(id, name, description) VALUES (4, 'Game Development', 'An
 INSERT INTO blog_topic(id, name, description) VALUES (5, 'Mathematics', 'Any and all things related to mathematics (most likely DSP-related concepts).');
 INSERT INTO blog_topic(id, name, description) VALUES (6, 'Programming', 'Any and all things related to programming.');
 
-INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (1, 1);
-INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (2, 4);
+INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (1, 1), (1, 5), (1, 6);
+INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (2, 4), (2, 1);
 INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (3, 3);

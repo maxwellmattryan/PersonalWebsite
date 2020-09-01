@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Profile, Project } from '@app/shared/models';
+import { Profile, Project, ProjectLink } from '@app/shared/models';
 import { AuthService } from '@app/core/authentication';
 import { ApiService } from '@app/core/http';
 import { EditorService, NotificationService, ValidationService, ComparisonService } from '@app/core/services';
@@ -70,18 +70,14 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     private loadProfileData(): void {
         this.apiService.getProfiles().subscribe((res: Profile[]) => {
             this.profileData = res.sort(this.comparisonService.profiles);
-            if(!(this.id && this.projectData)) this.setProfileControls([]);
+            if(this.id && this.projectData) {
+                this.setProfileControls(this.projectData.profiles.map(p => p.id));
+            } else {
+                this.setProfileControls([]);
+            }
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
         });
-
-        if(this.id && this.projectData) {
-            this.apiService.getProfilesForProject(this.id).subscribe((res: Profile[]) => {
-                this.setProfileControls(res.map(p => p.id));
-            }, (error: HttpErrorResponse) => {
-                this.notificationService.createNotification(error.error.message);
-            })
-        }
     }
 
     private setProfileControls(associatedProfileIds: number[]): void {
@@ -121,17 +117,16 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
 
     onSubmit(): void {
         const project = this.buildFormProjectData();
-        const activeProfileIds = this.buildFormProfileData();
 
         if(project.id === undefined) {
-            this.apiService.createProject(project, activeProfileIds).subscribe((res: Project) => {
+            this.apiService.createProject(project).subscribe((res: Project) => {
                 this.notificationService.createNotification(`Successfully created new project!`);
                 this.router.navigate([`projects/${res.id}`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
-            this.apiService.updateProject(project, activeProfileIds).subscribe((res: Project) => {
+            this.apiService.updateProject(project).subscribe((res: Project) => {
                 this.notificationService.createNotification(`Successfully updated existing project!`);
                 this.router.navigate([`projects/${res.id}`]);
             }, (error: HttpErrorResponse) => {
@@ -141,19 +136,27 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     }
 
     private buildFormProjectData(): Project {
-        const project = new Project({
+        const profiles = this.buildFormProfileData();
+        const link = this.buildFormLinkData();
+
+        return new Project({
             ...this.projectForm.value,
             id: this.projectData ? this.projectData.id : undefined,
-            profiles: undefined
+            profiles: profiles,
+            link: link
         });
-        project.link.id = this.projectData ? this.projectData.link.id : undefined;
-
-        return project;
     }
 
-    private buildFormProfileData(): number[] {
-        return this.projectForm.value.profiles
-            .map((p, idx) => p ? this.profileData[idx].id : undefined)
-            .filter(p => p !== undefined);
+    private buildFormProfileData(): Profile[] {
+        return this.projectForm.value.profiles.map((p, idx) => {
+            if(p) return this.profileData[idx];
+        }).filter(p => p !== undefined);
+    }
+
+    private buildFormLinkData(): ProjectLink {
+        return new ProjectLink({
+            ...this.projectForm.value.link,
+            id: this.projectData ? this.projectData.link.id : undefined,
+        });
     }
 }

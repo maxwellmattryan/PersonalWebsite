@@ -26,7 +26,7 @@ export class ProjectService {
             .getCount() > 0;
     }
 
-    public async createProject(projectData: Project, profileData: number[]): Promise<Project> {
+    public async createProject(projectData: Project): Promise<Project> {
         const rawProjectLink: ProjectLink = this.projectLinkRepository.create(projectData.link);
         const projectLink = await this.projectLinkRepository.save(rawProjectLink);
 
@@ -65,6 +65,7 @@ export class ProjectService {
         return await this.projectRepository
             .createQueryBuilder('p')
             .leftJoinAndSelect('p.link', 'pl')
+            .leftJoinAndSelect('p.profiles', 'prf')
             .where('p.id = :id', { id: id })
             .getOne();
     }
@@ -79,8 +80,8 @@ export class ProjectService {
     }
 
     public async updateProject(id: number, projectData: Project): Promise<Project> {
-        await this.projectRepository.update(id, projectData);
-        await this.projectLinkRepository.update(projectData.link.id, projectData.link);
+        await this.projectRepository.save(projectData);
+        await this.projectLinkRepository.save(projectData.link);
 
         return await this.getProject(id);
     }

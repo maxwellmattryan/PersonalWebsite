@@ -6,8 +6,7 @@ import {
     UpdateDateColumn,
     ManyToOne,
     OneToMany,
-    ManyToMany,
-    JoinTable
+    ManyToMany, JoinTable
 } from 'typeorm';
 
 import { ProfileStatus } from './profile-status.entity';

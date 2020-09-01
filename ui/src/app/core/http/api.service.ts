@@ -135,10 +135,10 @@ export class ApiService {
     // ========
     // PROJECT
     // ========
-    createProject(project: Project, associatedProfileIds: number[]): Observable<Project> {
+    createProject(project: Project): Observable<Project> {
         return this.http.post<Project>(
             `${environment.API_URL}/projects`,
-            { project: project, profile_ids: associatedProfileIds }
+            project
         );
     }
 
@@ -150,10 +150,10 @@ export class ApiService {
         return this.http.get<Project>(environment.API_URL + uri);
     }
 
-    updateProject(project: Project, associatedProfileIds: number[]): Observable<Project> {
+    updateProject(project: Project): Observable<Project> {
         return this.http.put<Project>(
             `${environment.API_URL}/projects/${project.id}`,
-            { project: project, profile_ids: associatedProfileIds }
+            project
         );
     }
 
@@ -169,9 +169,5 @@ export class ApiService {
 
     getProfiles(): Observable<Profile[]> {
         return this.http.get<Profile[]>(environment.API_URL + '/profiles');
-    }
-
-    getProfilesForProject(projectId: number): Observable<any> {
-        return this.http.get<any>(`${environment.API_URL}/projects/${projectId}/profiles`)
     }
 }
