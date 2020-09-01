@@ -68,7 +68,7 @@ export class ApiService {
     // ========
     createPost(post: BlogPost): Observable<BlogPost> {
         return this.http.post<BlogPost>(
-            `${environment.API_URL}/blog/topics`,
+            `${environment.API_URL}/blog/posts`,
             post
         );
     }

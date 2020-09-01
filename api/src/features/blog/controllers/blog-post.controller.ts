@@ -48,7 +48,7 @@ export class BlogPostController {
     }
 
     @Post('')
-    @HttpCode(200)
+    @HttpCode(201)
     @UseGuards(JwtAuthGuard)
     async createPost(@Req() request: Request): Promise<BlogPost> {
         return await this.blogPostService.createPost(request.body);
