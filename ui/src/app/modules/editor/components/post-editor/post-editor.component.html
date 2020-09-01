@@ -11,6 +11,17 @@
         </div>
 
         <div class="form-field editor__form-field">
+            <label>Author</label>
+            <br><br>
+            <mat-radio-group formControlName='author' name='author' required>
+                <mat-radio-button
+                    *ngFor='let author of authorData'
+                    [value]='buildAuthorName(author)'
+                >{{ buildAuthorName(author) }}</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <div class="form-field editor__form-field">
             <label>Status</label>
             <br><br>
             <mat-radio-group formControlName='status' name='status' required>

@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { BlogPost, BlogTopic, BlogPostStatus } from '@app/shared/models';
+import { BlogPost, BlogTopic, BlogPostStatus, BlogAuthor } from '@app/shared/models';
 import { AuthService } from '@app/core/authentication';
 import { ApiService } from '@app/core/http';
 import { EditorService, NotificationService, ValidationService, ComparisonService } from '@app/core/services';
@@ -15,8 +15,9 @@ import { EditorService, NotificationService, ValidationService, ComparisonServic
 })
 export class PostEditorComponent implements OnDestroy, OnInit {
     postData: BlogPost;
-    topicData: BlogTopic[] = [];
+    authorData: BlogAuthor[] = [];
     statusData: BlogPostStatus[] = [];
+    topicData: BlogTopic[] = [];
 
     postForm: FormGroup;
 
@@ -58,14 +59,48 @@ export class PostEditorComponent implements OnDestroy, OnInit {
 
     private initPostForm(): void {
         this.loadPostData();
-        this.loadTopicData();
+        this.loadAuthorData();
         this.loadStatusData();
+        this.loadTopicData();
 
         this.buildPostForm();
     }
 
     private loadPostData(): void {
         this.postData = this.editorService.getPost();
+    }
+
+    private loadAuthorData(): void {
+        this.apiService.getBlogAuthors().subscribe((res: BlogAuthor[]) => {
+            this.authorData = res;
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+        });
+    }
+
+    private loadStatusData(): void {
+        // this.apiService.getPostStatuses().subscribe((res: BlogPostStatus[]) => {
+        //     console.log(res);
+        //     if(this.postData) {
+        //         this.setStatusControls(this.postData.status.id)
+        //     } else {
+        //         this.setStatusControls();
+        //     }
+        // }, (error: HttpErrorResponse) => {
+        //     this.notificationService.createNotification(error.error.message);
+        // })
+
+        // if(this.postData) {
+        //     this.setStatusControls(this.postData.status.id)
+        // } else {
+        //     this.setStatusControls();
+        // }
+
+        // NOTE: This is not ideal, but the server is throwing weird nonsense when trying to query all topics (?)
+        this.statusData = [
+            new BlogPostStatus({ id: 1, status: 'DRAFT' }),
+            new BlogPostStatus({ id: 2, status: 'PUBLISHED' })
+        ];
     }
 
     private loadTopicData(): void {
@@ -88,43 +123,21 @@ export class PostEditorComponent implements OnDestroy, OnInit {
         });
     }
 
-    private loadStatusData(): void {
-        // this.apiService.getPostStatuses().subscribe((res: BlogPostStatus[]) => {
-        //     console.log(res);
-        //     if(this.postData) {
-        //         this.setStatusControls(this.postData.status.id)
-        //     } else {
-        //         this.setStatusControls();
-        //     }
-        // }, (error: HttpErrorResponse) => {
-        //     this.notificationService.createNotification(error.error.message);
-        // })
-
-        // if(this.postData) {
-        //     this.setStatusControls(this.postData.status.id)
-        // } else {
-        //     this.setStatusControls();
-        // }
-
-        this.statusData = [
-            new BlogPostStatus({ id: 1, status: 'DRAFT' }),
-            new BlogPostStatus({ id: 2, status: 'PUBLISHED' })
-        ];
-    }
-
     private buildPostForm(): void {
         if(this.postData) {
             this.postForm = this.formBuilder.group({
-                title:      this.formBuilder.control(this.postData.title,         [Validators.required]),
-                status:     this.formBuilder.control(this.postData.status.status, [Validators.required]),
-                topics:     this.formBuilder.array  (this.topicData,              [this.validationService.hasMinElements(1)]),
-                preview:    this.formBuilder.control(this.postData.preview,       [Validators.required]),
-                content:    this.formBuilder.control(this.postData.content,       [Validators.required]),
-                image_url:  this.formBuilder.control(this.postData.image_url,     [Validators.required])
+                title:      this.formBuilder.control(this.postData.title,                        [Validators.required]),
+                author:     this.formBuilder.control(this.buildAuthorName(this.postData.author), [Validators.required]),
+                status:     this.formBuilder.control(this.postData.status.status,                [Validators.required]),
+                topics:     this.formBuilder.array  (this.topicData,                             [this.validationService.hasMinElements(1)]),
+                preview:    this.formBuilder.control(this.postData.preview,                      [Validators.required]),
+                content:    this.formBuilder.control(this.postData.content,                      [Validators.required]),
+                image_url:  this.formBuilder.control(this.postData.image_url,                    [Validators.required])
             });
         } else {
             this.postForm = this.formBuilder.group({
                 title:      this.formBuilder.control('', [Validators.required]),
+                author:     this.formBuilder.control('', [Validators.required]),
                 status:     this.formBuilder.control('', [Validators.required]),
                 topics:     this.formBuilder.array  ([], [this.validationService.hasMinElements(1)]),
                 preview:    this.formBuilder.control('', [Validators.required]),
@@ -132,6 +145,10 @@ export class PostEditorComponent implements OnDestroy, OnInit {
                 image_url:  this.formBuilder.control('', [Validators.required])
             });
         }
+    }
+
+    buildAuthorName(author: BlogAuthor): string {
+        return `${author.first_name} ${author.last_name}`;
     }
 
     onSubmit(): void {
@@ -155,24 +172,30 @@ export class PostEditorComponent implements OnDestroy, OnInit {
     }
 
     private buildFormPostData(): BlogPost {
-        const topics = this.buildFormTopicData();
+        const author = this.buildFormAuthorData();
         const status = this.buildFormStatusData();
+        const topics = this.buildFormTopicData();
 
         return new BlogPost({
             ...this.postForm.value,
             id: this.postData ? this.postData.id : undefined,
-            topics: topics,
-            status: status
+            author: author,
+            status: status,
+            topics: topics
         });
+    }
+
+    private buildFormAuthorData(): BlogAuthor {
+        return this.authorData.find(a => this.buildAuthorName(a) === this.postForm.value.author);
+    }
+
+    private buildFormStatusData(): BlogPostStatus {
+        return this.statusData.find(s => s.status === this.postForm.value.status);
     }
 
     private buildFormTopicData(): BlogTopic[] {
         return this.postForm.value.topics.map((t, idx) => {
             if(t) return this.topicData[idx];
         }).filter(t => t !== undefined);
-    }
-
-    private buildFormStatusData(): BlogPostStatus {
-        return this.statusData.find(s => s.status === this.postForm.value.status);
     }
 }

@@ -52,6 +52,7 @@ export class BlogPostService {
     public async getPost(id: number): Promise<BlogPost> {
         return await this.blogPostRepository
             .createQueryBuilder('bp')
+            .leftJoinAndSelect('bp.author', 'ba')
             .leftJoinAndSelect('bp.status', 'bps')
             .leftJoinAndSelect('bp.topics', 'bt')
             .where('bp.id = :id', { id: id })
@@ -61,6 +62,7 @@ export class BlogPostService {
     public async getPosts(): Promise<BlogPost[]> {
         return await this.blogPostRepository
             .createQueryBuilder('bp')
+            .leftJoinAndSelect('bp.author', 'ba')
             .leftJoinAndSelect('bp.status', 'bps')
             .innerJoinAndSelect('bp.topics', 'bt')
             .orderBy('bp.created_at', 'DESC')
@@ -70,6 +72,7 @@ export class BlogPostService {
     public async getPostsByStatus(status: string): Promise<BlogPost[]> {
         return await this.blogPostRepository
             .createQueryBuilder('bp')
+            .leftJoinAndSelect('bp.author', 'ba')
             .leftJoinAndSelect('bp.status', 'bps')
             .innerJoinAndSelect('bp.topics', 'bt')
             .where('bps.status = :status', { status: status })
@@ -80,6 +83,7 @@ export class BlogPostService {
     public async getPostsByStatusAndTopic(status: string, topicId: number): Promise<BlogPost[]> {
         return await this.blogPostRepository
             .createQueryBuilder('bp')
+            .leftJoinAndSelect('bp.author', 'ba')
             .leftJoinAndSelect('bp.status', 'bps')
             .innerJoinAndSelect('bp.topics', 'bt')
             .where('bps.status = :status', { status: status })
@@ -91,6 +95,7 @@ export class BlogPostService {
     public async getPostsByTopic(topicId: number): Promise<BlogPost[]> {
         return await this.blogPostRepository
             .createQueryBuilder('bp')
+            .leftJoinAndSelect('bp.author', 'ba')
             .leftJoinAndSelect('bp.status', 'bps')
             .innerJoinAndSelect('bp.topics', 'bt')
             .where('bt.id = :id', { id: topicId })

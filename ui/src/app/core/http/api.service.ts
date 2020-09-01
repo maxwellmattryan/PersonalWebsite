@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { Admin } from '@app/shared/interfaces';
 import { environment } from '@app/environments/environment';
-import { BlogPost, Project, Profile, BlogTopic, BlogPostStatus } from '@app/shared/models';
+import { BlogPost, Project, Profile, BlogTopic, BlogPostStatus, BlogAuthor } from '@app/shared/models';
 
 @Injectable({
     providedIn: 'root'
@@ -64,8 +64,12 @@ export class ApiService {
     }
 
     // ========
-    // POST
+    // BLOG
     // ========
+    getBlogAuthors(): Observable<BlogAuthor[]> {
+        return this.http.get<BlogAuthor[]>(`${environment.API_URL}/blog/authors`);
+    }
+
     createPost(post: BlogPost): Observable<BlogPost> {
         return this.http.post<BlogPost>(
             `${environment.API_URL}/blog/posts`,
@@ -103,6 +107,28 @@ export class ApiService {
         return this.http.put<BlogPost>(
             `${environment.API_URL}/blog/posts/${post.id}`,
             post
+        );
+    }
+
+    createTopic(topic: BlogTopic): Observable<BlogTopic> {
+        return this.http.post<BlogTopic>(
+            `${environment.API_URL}/blog/topics`,
+            topic
+        );
+    }
+
+    deleteTopic(id: number): Observable<any> {
+        return this.http.delete<any>(`${environment.API_URL}/blog/topics/${id}`);
+    }
+
+    getTopics(): Observable<BlogTopic[]> {
+        return this.http.get<BlogTopic[]>(environment.API_URL + '/blog/topics');
+    }
+
+    updateTopic(topic: BlogTopic): Observable<BlogTopic> {
+        return this.http.put<BlogTopic>(
+            `${environment.API_URL}/blog/topics/${topic.id}`,
+            topic
         );
     }
 
@@ -147,30 +173,5 @@ export class ApiService {
 
     getProfilesForProject(projectId: number): Observable<any> {
         return this.http.get<any>(`${environment.API_URL}/projects/${projectId}/profiles`)
-    }
-
-    // ========
-    // TOPIC
-    // ========
-    createTopic(topic: BlogTopic): Observable<BlogTopic> {
-        return this.http.post<BlogTopic>(
-            `${environment.API_URL}/blog/topics`,
-            topic
-        );
-    }
-
-    deleteTopic(id: number): Observable<any> {
-        return this.http.delete<any>(`${environment.API_URL}/blog/topics/${id}`);
-    }
-
-    getTopics(): Observable<BlogTopic[]> {
-        return this.http.get<BlogTopic[]>(environment.API_URL + '/blog/topics');
-    }
-
-    updateTopic(topic: BlogTopic): Observable<BlogTopic> {
-        return this.http.put<BlogTopic>(
-            `${environment.API_URL}/blog/topics/${topic.id}`,
-            topic
-        );
     }
 }
