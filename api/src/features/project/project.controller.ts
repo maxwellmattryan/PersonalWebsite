@@ -40,7 +40,7 @@ export class ProjectController {
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
     async updateProject(@Param('id') id: number, @Req() request: Request): Promise<Project> {
-        const project = await this.projectService.updateProject(id, request.body.project, request.body.profile_ids);
+        const project = await this.projectService.updateProject(id, request.body.project);
         if(!project) throw new ProjectCouldNotBeUpdatedException();
 
         return project;

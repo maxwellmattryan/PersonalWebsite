@@ -1,5 +1,6 @@
 import { Deserializable } from './deserializable.model';
 import { ProjectLink } from './project-link.model';
+import { Profile } from './profile.model';
 
 export class Project implements Deserializable {
     constructor(partial: Partial<Project>) {
@@ -17,6 +18,7 @@ export class Project implements Deserializable {
     id?:            number;
 
     link:           ProjectLink;
+    profiles:       Profile[];
 
     name:           string;
     tagline:        string;

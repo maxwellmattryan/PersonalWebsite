@@ -59,6 +59,6 @@ VALUES (5,
        'images/rotor.png');
 
 -- CAUTION: Make sure profile starter data is loaded before running
-INSERT INTO project_profile_mapping(profile_id, project_id) VALUES (1, 2), (1, 4), (1, 5);
-INSERT INTO project_profile_mapping(profile_id, project_id) VALUES (2, 1), (2, 2), (2, 4);
-INSERT INTO project_profile_mapping(profile_id, project_id) VALUES (3, 1), (3, 3), (3, 5);
+INSERT INTO profile_projects_project(profile_id, project_id) VALUES (1, 2), (1, 4), (1, 5);
+INSERT INTO profile_projects_project(profile_id, project_id) VALUES (2, 1), (2, 2), (2, 4);
+INSERT INTO profile_projects_project(profile_id, project_id) VALUES (3, 1), (3, 3), (3, 5);

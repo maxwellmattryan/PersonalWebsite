@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Profile } from './profile.entity';
+import { Project } from '@api/features/project/project.entity';
 
 @Injectable()
 export class ProfileService {
@@ -24,6 +25,7 @@ export class ProfileService {
             .createQueryBuilder('p')
             .leftJoinAndSelect('p.technologies', 'pt')
             .leftJoinAndSelect('p.status', 'ps')
+            .leftJoinAndSelect('p.projects', 'prj')
             .where('ps.status = \'ACTIVE\'')
             .getOne();
     }

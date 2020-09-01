@@ -4,10 +4,12 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
-    OneToOne, JoinColumn
+    OneToOne, JoinColumn, ManyToMany
 } from 'typeorm';
 
 import { ProjectLink } from './project-link.entity';
+
+import { Profile } from '@api/features/profile/profile.entity';
 
 @Entity('project')
 export class Project {
@@ -21,6 +23,9 @@ export class Project {
     @OneToOne(type => ProjectLink, { cascade: true })
     @JoinColumn()
     public link: ProjectLink;
+
+    @ManyToMany(type => Profile, p => p.projects, { onDelete: 'CASCADE' })
+    public profiles: Profile[];
 
     @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
     public name: string;

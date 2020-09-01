@@ -5,11 +5,15 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     ManyToOne,
-    OneToMany
+    OneToMany,
+    ManyToMany,
+    JoinTable
 } from 'typeorm';
 
 import { ProfileStatus } from './profile-status.entity';
 import { ProfileTechnology } from './profile-technology.entity';
+
+import { Project } from '@api/features/project/project.entity';
 
 @Entity('profile')
 export class Profile {
@@ -25,6 +29,10 @@ export class Profile {
 
     @OneToMany(type => ProfileTechnology, pt => pt.profile)
     public technologies: ProfileTechnology[];
+
+    @ManyToMany(type => Project, p => p.profiles, { onDelete: 'CASCADE' })
+    @JoinTable()
+    public projects: Project[];
 
     @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
     public name: string;
