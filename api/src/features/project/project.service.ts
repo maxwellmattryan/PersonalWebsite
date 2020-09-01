@@ -30,8 +30,8 @@ export class ProjectService {
         const rawProjectLink: ProjectLink = this.projectLinkRepository.create(projectData.link);
         const projectLink = await this.projectLinkRepository.save(rawProjectLink);
 
-        const rawProject: Project = this.projectRepository.create({ ...projectData, link: projectLink });
-        const project = await this.projectRepository.save(rawProject)
+        const rawProject: Project = this.projectRepository.create(projectData);
+        return await this.projectRepository.save(rawProject)
             .catch((error) => {
                 if(error.code === PostgresErrorCode.UNIQUE_VIOLATION) {
                     throw new ProjectAlreadyExistsException();
@@ -39,8 +39,6 @@ export class ProjectService {
                     throw new InternalServerErrorException();
                 }
             });
-
-        return project;
     }
 
     public async deleteProject(id: number): Promise<void> {
