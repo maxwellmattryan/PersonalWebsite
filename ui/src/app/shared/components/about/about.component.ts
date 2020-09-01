@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
     @Input() paragraph: string;
+    @Input() imageUrl: string;
 
     constructor() { }
 

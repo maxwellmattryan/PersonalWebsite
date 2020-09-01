@@ -4,8 +4,7 @@ import {
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
-    ManyToOne,
-    ManyToMany
+    ManyToOne
 } from 'typeorm';
 
 import { ProfileStatus } from './profile-status.entity';
@@ -33,6 +32,9 @@ export class Profile {
 
     @Column({ type: 'text', nullable: false })
     public about: string;
+
+    @Column({ type: 'text', nullable: false })
+    public image_url: string;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'now()' })
     public created_at?: Date;

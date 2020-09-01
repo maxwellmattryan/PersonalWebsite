@@ -89,6 +89,7 @@ CREATE TABLE profile (
     tagline TEXT NOT NULL,
     landing TEXT NOT NULL,
     about TEXT NOT NULL,
+    image_url TEXT NOT NULL,
 
     created_at TIMESTAMP DEFAULT now(),
     updated_at TIMESTAMP DEFAULT now(),

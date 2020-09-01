@@ -1,6 +1,6 @@
 <div class='section-container home-view' *ngIf="isLoaded">
     <app-landing [tagline]='homepage.profile.tagline' [landing]='homepage.profile.landing'></app-landing>
-    <app-about [paragraph]='homepage.profile.about'></app-about>
+    <app-about [paragraph]='homepage.profile.about' [imageUrl]='homepage.profile.image_url'></app-about>
     <div class="section-divider"></div>
     <app-project-collection [projects]='homepage.projects'></app-project-collection>
     <div class="section-divider"></div>
