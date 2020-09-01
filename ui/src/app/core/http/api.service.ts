@@ -1,12 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { map, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { Admin, Blog, Homepage } from '@app/shared/interfaces';
+import { Admin } from '@app/shared/interfaces';
 import { environment } from '@app/environments/environment';
-import { Post, Project, Profile, Topic } from '@app/shared/models';
+import { BlogPost, Project, Profile, BlogTopic, BlogPostStatus, BlogAuthor } from '@app/shared/models';
 
 @Injectable({
     providedIn: 'root'
@@ -64,26 +64,71 @@ export class ApiService {
     }
 
     // ========
-    // POST
+    // BLOG
     // ========
+    getBlogAuthors(): Observable<BlogAuthor[]> {
+        return this.http.get<BlogAuthor[]>(`${environment.API_URL}/blog/authors`);
+    }
+
+    createPost(post: BlogPost): Observable<BlogPost> {
+        return this.http.post<BlogPost>(
+            `${environment.API_URL}/blog/posts`,
+            post
+        );
+    }
+
     deletePost(requestURL: string): Observable<any> {
         return this.http.delete<any>(
             environment.API_URL + requestURL
         );
     }
 
-    getPost(requestURL: string): Observable<Post> {
-        return this.http.get<Post>(environment.API_URL + requestURL);
+    getPost(uri: string): Observable<BlogPost> {
+        return this.http.get<BlogPost>(environment.API_URL + uri);
     }
 
-    getPosts(): Observable<Blog> {
-        return this.http.get<Blog>(environment.API_URL + '/blog/posts');
+    getPosts(topicId: number = -1, publishedOnly: boolean = true): Observable<BlogPost[]> {
+        let params = new HttpParams();
+
+        if(topicId != -1) params = params.set('topic_id', topicId.toString());
+        if(publishedOnly) params = params.set('published', 'true');
+
+        return this.http.get<BlogPost[]>(
+            `${environment.API_URL}/blog/posts`,
+            { params: params }
+        );
     }
 
-    putPost(post: Post): Observable<Post> {
-        return this.http.put<Post>(
-            environment.API_URL + '/blog/posts/' + post['uri'],
+    getPostStatuses(): Observable<BlogPostStatus[]> {
+        return this.http.get<BlogPostStatus[]>(`${environment.API_URL}/blog/posts/statuses`);
+    }
+
+    updatePost(post: BlogPost): Observable<BlogPost> {
+        return this.http.put<BlogPost>(
+            `${environment.API_URL}/blog/posts/${post.id}`,
             post
+        );
+    }
+
+    createTopic(topic: BlogTopic): Observable<BlogTopic> {
+        return this.http.post<BlogTopic>(
+            `${environment.API_URL}/blog/topics`,
+            topic
+        );
+    }
+
+    deleteTopic(id: number): Observable<any> {
+        return this.http.delete<any>(`${environment.API_URL}/blog/topics/${id}`);
+    }
+
+    getTopics(): Observable<BlogTopic[]> {
+        return this.http.get<BlogTopic[]>(environment.API_URL + '/blog/topics');
+    }
+
+    updateTopic(topic: BlogTopic): Observable<BlogTopic> {
+        return this.http.put<BlogTopic>(
+            `${environment.API_URL}/blog/topics/${topic.id}`,
+            topic
         );
     }
 
@@ -102,7 +147,7 @@ export class ApiService {
     }
 
     getProject(uri: string): Observable<Project> {
-        return this.http.get<Project>(`${environment.API_URL}${uri}`);
+        return this.http.get<Project>(environment.API_URL + uri);
     }
 
     updateProject(project: Project, associatedProfileIds: number[]): Observable<Project> {
@@ -128,25 +173,5 @@ export class ApiService {
 
     getProfilesForProject(projectId: number): Observable<any> {
         return this.http.get<any>(`${environment.API_URL}/projects/${projectId}/profiles`)
-    }
-
-    // ========
-    // TOPIC
-    // ========
-    deleteTopic(requestURL: string): Observable<any> {
-        return this.http.delete<any>(
-            environment.API_URL + requestURL
-        );
-    }
-
-    getTopics(): Observable<Topic[]> {
-        return this.http.get<Topic[]>(environment.API_URL + '/blog/topics');
-    }
-
-    putTopic(topic: Topic): Observable<Topic> {
-        return this.http.put<Topic>(
-            environment.API_URL + '/blog/topics/' + topic['uri'],
-            topic
-        );
     }
 }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Post } from '@app/shared/models';
+import { BlogPost } from '@app/shared/models';
 import { BlogService, ComparisonService } from '@app/core/services';
 
 @Component({
@@ -9,10 +9,13 @@ import { BlogService, ComparisonService } from '@app/core/services';
     styleUrls: ['./post-collection.component.scss']
 })
 export class PostCollectionComponent implements OnInit {
-    @Input() posts: Post[];
+    @Input() posts: BlogPost[];
     
     @Input() showPreview: boolean;
     @Input() showTopics: boolean;
+
+    // CAUTION: This is necessary because the routing changes when this component is used outside of the blog module
+    @Input() baseRoute: string = 'blog/posts/';
 
     nPostsToDisplay: number = 5;
 
@@ -21,14 +24,14 @@ export class PostCollectionComponent implements OnInit {
         private comparisonService: ComparisonService
     ) { }
 
-    ngOnInit(): void { }
-
-    getPosts(): Array<Post> {
-        return this.posts.sort(this.comparisonService.posts).slice(0, this.nPostsToDisplay);
+    ngOnInit(): void {
+        this.posts.forEach(p => {
+            p.topics.sort(this.comparisonService.topics);
+        });
     }
 
-    activateTopic(topic: string): void {
-        this.blogService.setActiveTopic(topic);
+    getPosts(): BlogPost[] {
+        return this.posts.slice(0, this.nPostsToDisplay);
     }
 
     displayMorePosts(): void {

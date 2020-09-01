@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Homepage } from '@app/shared/interfaces';
 import { ApiService } from '@app/core/http';
+import { AuthService } from '@app/core/authentication';
 import { NotificationService } from '@app/core/services';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -17,6 +18,7 @@ export class HomeViewComponent implements OnInit {
 
     constructor(
         private apiService: ApiService,
+        private authService: AuthService,
         private notificationService: NotificationService
     ) { }
 

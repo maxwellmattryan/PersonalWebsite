@@ -1,1 +1,1 @@
-INSERT INTO admin(id, username, password) VALUES (1, 'admin', 'password123');
+INSERT INTO admin(id, username, password) VALUES (1, 'admin', '$2b$10$qh2bWwgRP5eZ/62GRJ8N6exlgTcSJqiF5RkeyUameums30c9YLDwi');

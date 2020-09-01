@@ -26,15 +26,15 @@ export class ProjectService {
     public async existsInTable(id: number): Promise<boolean> {
         return await this.projectRepository
             .createQueryBuilder('p')
-            .where(`p.id = ${id}`)
+            .where('p.id = :id', { id: id })
             .getCount() > 0;
     }
 
     public async createProject(projectData: Project, profileData: number[]): Promise<Project> {
-        const rawProjectLink: ProjectLink = await this.projectLinkRepository.create(projectData.link);
+        const rawProjectLink: ProjectLink = this.projectLinkRepository.create(projectData.link);
         const projectLink = await this.projectLinkRepository.save(rawProjectLink);
 
-        const rawProject: Project = await this.projectRepository.create({ ...projectData, link: projectLink });
+        const rawProject: Project = this.projectRepository.create({ ...projectData, link: projectLink });
         const project = await this.projectRepository.save(rawProject)
             .catch((error) => {
                 if(error.code === PostgresErrorCode.UNIQUE_VIOLATION) {
@@ -75,13 +75,6 @@ export class ProjectService {
             .getOne();
     }
 
-    public async getProjects(): Promise<Project[]> {
-        return await this.projectRepository
-            .createQueryBuilder('p')
-            .leftJoinAndSelect('p.link', 'pl')
-            .getMany();
-    }
-
     public async getProjectsForProfile(profileId: number): Promise<Project[]> {
         const profileIds: number[] = (await this.projectRepository.query(`
             SELECT p.id FROM project p
@@ -96,14 +89,14 @@ export class ProjectService {
             .getMany();
     }
 
-    public async updateProject(projectData: Project, profileData: number[]): Promise<Project> {
-        await this.deleteProjectProfileMappings(projectData.id);
-        await this.createProjectProfileMappings(projectData.id, profileData);
+    public async updateProject(id: number, projectData: Project, profileData: number[]): Promise<Project> {
+        await this.deleteProjectProfileMappings(id);
+        await this.createProjectProfileMappings(id, profileData);
 
-        await this.projectRepository.update(projectData.id, projectData);
+        await this.projectRepository.update(id, projectData);
         await this.projectLinkRepository.update(projectData.link.id, projectData.link);
 
-        return await this.getProject(projectData.id);
+        return await this.getProject(id);
     }
 
     private async createProjectProfileMappings(projectId: number, profileIds: number[]): Promise<void> {

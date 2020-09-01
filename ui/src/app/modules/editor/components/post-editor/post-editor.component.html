@@ -11,30 +11,40 @@
         </div>
 
         <div class="form-field editor__form-field">
-            <label>Subtitle</label>
+            <label>Author</label>
             <br><br>
-            <input formControlName='subtitle' required>
+            <mat-radio-group formControlName='author' name='author' required>
+                <mat-radio-button
+                    *ngFor='let author of authorData'
+                    [value]='buildAuthorName(author)'
+                >{{ buildAuthorName(author) }}</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <div class="form-field editor__form-field">
+            <label>Status</label>
+            <br><br>
+            <mat-radio-group formControlName='status' name='status' required>
+                <mat-radio-button
+                        *ngFor='let status of statusData'
+                        [value]='status.status'
+                >{{ status.status }}</mat-radio-button>
+            </mat-radio-group>
         </div>
 
         <div class="form-field editor__form-field">
             <label>Topics</label>
             <br><br>
             <ng-container formArrayName='topics' *ngFor='let topic of postForm.controls.topics["controls"]; let idx = index'>
-                <mat-checkbox [formControlName]='idx'>{{ topics[idx].name }}</mat-checkbox>
+                <mat-checkbox [formControlName]='idx'>{{ topicData[idx].name }}</mat-checkbox>
                 <br>
             </ng-container>
         </div>
 
         <div class="form-field editor__form-field">
-            <label>Author</label>
+            <label>Preview</label>
             <br><br>
-            <input formControlName='author' required>
-        </div>
-
-        <div class="form-field editor__form-field">
-            <label>Description</label>
-            <br><br>
-            <input formControlName='description' required>
+            <textarea formControlName='preview' required></textarea>
         </div>
 
         <div class="form-field editor__form-field">
@@ -44,9 +54,9 @@
         </div>
 
         <div class="form-field editor__form-field">
-            <label>Image</label>
+            <label>Image URL</label>
             <br><br>
-            <input formControlName='imageURL' required>
+            <input formControlName='image_url' required>
         </div>
 
         <button

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Post, Topic } from '@app/shared/models';
+import { BlogPost } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/authentication';
 import { BlogService, EditorService, NotificationService, ComparisonService } from '@app/core/services';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-post-view',
@@ -15,7 +16,7 @@ export class PostViewComponent implements OnInit {
     isAdmin: boolean = false;
     isLoaded: boolean = false;
 
-    post: Post;
+    post: BlogPost;
 
     constructor(
         private apiService: ApiService,
@@ -31,10 +32,17 @@ export class PostViewComponent implements OnInit {
         this.isAdmin = this.authService.isLoggedIn();
 
         this.apiService.getPost(this.router.url).subscribe(post => {
+            if(post.status.status !== 'PUBLISHED' && !this.isAdmin) {
+                this.notificationService.createNotification('Unable to view the blog post.');
+                this.router.navigate(['']);
+            }
+
             this.post = post;
             this.post.topics.sort(this.comparisonService.topics);
 
             this.isLoaded = true;
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
         });
     }
 
@@ -44,13 +52,10 @@ export class PostViewComponent implements OnInit {
 
     deletePost(): void {
         this.apiService.deletePost(this.router.url).subscribe((res: any) => {
-            this.notificationService.createNotification(res.msg);
-
+            this.notificationService.createNotification('Successfully deleted blog post!');
             this.router.navigate(['/blog']);
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
         });
-    }
-
-    activateTopic(topic: string): void {
-        this.blogService.setActiveTopic(topic);
     }
 }

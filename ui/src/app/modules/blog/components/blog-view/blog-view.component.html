@@ -1,53 +1,74 @@
 <ng-container *ngIf='isLoaded'>
     <div class='section blog' *ngIf='isLoaded'>
         <h1 class='blog__header'>Welcome to my blog!</h1>
-    
-        <h2 class='blog__filter-header'>Topics:</h2>
+
+        <br><br>
+
+        <h2 class='blog__filter-header'>Topics</h2>
+
+        <div class='line-divider'></div>
+
         <div class='blog__filter-btn-container'>
-            <div class='blog__filter-btn-row' *ngFor='let topic of getTopicArray()'>
+            <div class='blog__filter-btn-row'>
+                <button
+                        [ngClass]="{'btn--active': activeTopicId === -1, 'blog__filter-btn--half': isAdmin}"
+                        class='btn blog__filter-btn'
+                        (click)='filterPosts(-1)'
+                        type='button'
+                >
+                    All
+                </button>
+
+                <ng-container *ngIf='isAdmin'>
+                    <button class='btn blog__filter-btn--add btn--go' [routerLink]="['/editor']" [queryParams]='{type: "topic"}'>
+                        &#x2b;
+                    </button>
+                </ng-container>
+
+                <ng-container *ngIf='!isAdmin'>
+                    <br><br><br>
+                </ng-container>
+            </div>
+            <div class='blog__filter-btn-row' *ngFor='let topic of topics'>
                 <button 
-                    [ngClass]="{'btn--active': topic[1], 'blog__filter-btn--half': isAdmin}"
+                    [ngClass]="{'btn--active': topic.id === activeTopicId, 'blog__filter-btn--half': isAdmin}"
                     class='btn blog__filter-btn' 
-                    (click)='filterPosts(topic[0])'
+                    (click)='filterPosts(topic.id); blogService.setActiveTopic(topic)'
                     type='button'
                 >
-                    {{ topic[0] }}
+                    {{ topic.name }}
                 </button>
     
                 <ng-container *ngIf='isAdmin'>
-                    <ng-container *ngIf='topic[0] === "All"'>
+                    <ng-container *ngIf='topic.name === "All"'>
                         <button class='btn blog__filter-btn--add btn--go' [routerLink]="['/editor']" [queryParams]='{type: "topic"}'>
                             &#x2b;
                         </button>
                     </ng-container>
         
-                    <ng-container *ngIf='topic[0] !== "All"'>
+                    <ng-container *ngIf='topic.name !== "All"'>
                         <button
                             class='btn blog__filter-btn--edit'
-                            (click)='sendTopicToEditor(topic[0])'
+                            (click)='sendTopicToEditor(topic)'
                             routerLink='/editor'
-                            [queryParams]='{type: "topic"}'
+                            [queryParams]='{type: "topic", id: topic.id}'
                         >
                             &#x270F;
                         </button>
                         <button
                             class='btn blog__filter-btn--edit btn--warn'
-                            (click)='deleteTopic(topic[0])'
+                            (click)='deleteTopic(topic)'
                             type='button'
                         >
                             &#x2715;
                         </button>
                     </ng-container>
                 </ng-container>
-    
-                <ng-container *ngIf='!isAdmin && topic[0] === "All"'>
-                    <br><br><br>
-                </ng-container>
             </div>
         </div>
     </div>
     
-    <app-post-collection [posts]="posts" [showPreview]='true'></app-post-collection>
+    <app-post-collection [posts]="posts" [showPreview]='true' baseRoute='posts/'></app-post-collection>
     
     <div class='section-divider'></div>
 </ng-container>

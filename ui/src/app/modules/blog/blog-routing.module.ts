@@ -18,7 +18,7 @@ const routes: Routes = [
                 component: BlogViewComponent
             },
             {
-                path: 'posts/:uri',
+                path: 'posts/:id',
                 component: PostViewComponent
             }
         ]

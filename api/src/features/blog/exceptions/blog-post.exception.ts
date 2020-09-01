@@ -1,0 +1,31 @@
+import { BadRequestException, NotFoundException } from '@nestjs/common';
+
+export class BlogPostWasNotFoundException extends NotFoundException {
+    constructor() {
+        super('Unable to find blog post.');
+    }
+}
+
+export class BlogPostsWereNotFoundException extends NotFoundException {
+    constructor() {
+        super('Unable to find blog posts.');
+    }
+}
+
+export class BlogPostStatusesWereNotFoundException extends NotFoundException {
+    constructor() {
+        super('Unable to find blog post statuses.');
+    }
+}
+
+export class BlogPostCouldNotBeUpdated extends BadRequestException {
+    constructor() {
+        super('Blog post could not be updated.');
+    }
+}
+
+export class BlogPostAlreadyExistsException extends BadRequestException {
+    constructor() {
+        super('Blog post already exists.');
+    }
+}

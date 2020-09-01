@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 
+import { BlogTopic } from '@app/shared/models';
+
 @Injectable({
     providedIn: 'root'
 })
 export class BlogService {
-    private activeTopic: string = 'All';
+    private activeTopic: BlogTopic;
 
     constructor() { }
 
-    getFormattedDate(raw: string): string {
+    getFormattedDate(raw: Date): string {
         const date = new Date(raw);
 
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -27,11 +29,12 @@ export class BlogService {
         return months[date.getMonth()] + ' ' + date.getDate() + '<sup>' + nth(date.getDate()) + '</sup>, ' + date.getFullYear();
     }
 
-    getActiveTopic(): string {
-        return this.activeTopic;
+    getActiveTopicId(): number {
+        if(!this.activeTopic) return -1;
+        return this.activeTopic.id;
     }
 
-    setActiveTopic(topic: string): void {
+    setActiveTopic(topic: BlogTopic): void {
         this.activeTopic = topic;
     }
 }

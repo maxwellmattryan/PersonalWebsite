@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 
-import { Post, Project, Topic } from '@app/shared/models';
+import { BlogPost, BlogTopic, Project } from '@app/shared/models';
 
 @Injectable({
     providedIn: 'root'
 })
 export class EditorService {
-    private post: Post;
+    private post: BlogPost;
     private project: Project;
-    private topic: Topic;
+    private topic: BlogTopic;
 
     constructor() { }
 
     // POST
-    getPost(): Post {
+    getPost(): BlogPost {
         return this.post;
     }
 
@@ -21,7 +21,7 @@ export class EditorService {
         return this.post != undefined;
     }
 
-    setPost(post: Post): void {
+    setPost(post: BlogPost): void {
         this.post = post;
     }
 
@@ -39,7 +39,7 @@ export class EditorService {
     }
 
     // TOPIC
-    getTopic(): Topic {
+    getTopic(): BlogTopic {
         return this.topic;
     }
 
@@ -47,7 +47,7 @@ export class EditorService {
         return this.topic != undefined;
     }
 
-    setTopic(topic: Topic): void {
+    setTopic(topic: BlogTopic): void {
         this.topic = topic;
     }
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
+import { BlogPost, BlogTopic } from '@app/shared/models';
 import { ApiService } from '@app/core/http/api.service';
 import { AuthService } from '@app/core/authentication';
-import { BlogService, EditorService, NotificationService } from '@app/core/services';
-import { Blog } from '@app/shared/interfaces';
-import { Topic, Post } from '@app/shared/models';
+import { BlogService, ComparisonService, EditorService, NotificationService } from '@app/core/services';
 
 @Component({
     selector: 'app-blog-view',
@@ -15,14 +15,16 @@ export class BlogViewComponent implements OnInit {
     isAdmin: boolean = false;
     isLoaded: boolean = false;
 
-    blog: Blog;
-    posts: Array<Post>;
-    topics: Map<string, boolean>;
+    posts: BlogPost[];
+    topics: BlogTopic[];
+
+    activeTopicId: number = -1;
 
     constructor(
         private apiService: ApiService,
         private authService: AuthService,
-        private blogService: BlogService,
+        public blogService: BlogService,
+        private comparisonService: ComparisonService,
         private editorService: EditorService,
         private notificationService: NotificationService
     ) { }
@@ -30,78 +32,73 @@ export class BlogViewComponent implements OnInit {
     ngOnInit(): void {
         this.isAdmin = this.authService.isLoggedIn();
 
-        this.apiService.getPosts().subscribe((blog: Blog) => {
-            this.blog = blog;
+        if(this.isAdmin) {
+            this.apiService.getPosts(this.activeTopicId, false).subscribe((res: BlogPost[]) => {
+                this.posts = res;
+                this.topics = this.getTopicsFromPosts().sort(this.comparisonService.topics);
 
-            this.filterPosts(this.blogService.getActiveTopic());
-
-            this.isLoaded = true;
-        });
-    }
-
-    filterPosts(topic: string): void {
-        this.blogService.setActiveTopic(topic);
-        this.updateTopicMap();
-
-        this.posts = this.blog.posts.filter((value, index, array) => {
-            if(value.topics.map(t => t.name).includes(topic) || topic === 'All') return value;
-        });
-    }
-
-    updateTopicMap(): void {
-        let topics = this.getEmptyTopicMap();
-        topics.set(this.blogService.getActiveTopic(), true);
-
-        this.topics = topics;
-    }
-
-    getEmptyTopicMap(): Map<string, boolean> {
-        let topics = new Map<string, boolean>();
-        topics.set("All", false);
-
-        this.blog.posts.forEach((post, pIdx) => {
-            post.topics.forEach((topic, tIdx) => {
-                topics.set(topic.name, false);
+                this.isLoaded = true;
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
             });
-        });
-
-        return topics;
-    }
-
-    getTopicArray(): Array<any> {
-        return Array.from(this.topics.keys()).map(t => [t, this.topics.get(t)]).sort();
-    }
-
-    trackByIndex(index, item): void {
-        return index;
-    }
-
-    sendTopicToEditor(topic: string): void {
-        this.editorService.setTopic(this.blog.topics.find(t => t.name === topic));
-    }
-
-    deleteTopic(topic: string): void {
-        if(!this.canDeleteTopic(topic)) {
-            this.notificationService.createNotification('Unable to delete topic (fix single-topic posts).');
         } else {
-            const requestURL = '/blog/topics/' + this.blog.topics.find(t => t.name === topic).uri;
+            this.apiService.getPosts(this.activeTopicId).subscribe((res: BlogPost[]) => {
+                this.posts = res;
+                this.topics = this.getTopicsFromPosts().sort(this.comparisonService.topics);
 
-            this.apiService.deletePost(requestURL).subscribe((res: any) => {
-                this.notificationService.createNotification(res.msg);
-
-                if(this.topics.get(topic)) {
-                    this.filterPosts('All');
-                }
-
-                this.topics.delete(topic);
+                this.isLoaded = true;
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
             });
         }
     }
 
-    canDeleteTopic(topic: string): boolean {
-        let posts = this.blog.posts.filter(p => p.topics.map(t => t.name).includes(topic));
-        posts = posts.filter(p => p.topics.length === 1);
+    private getTopicsFromPosts(): BlogTopic[] {
+        let result: BlogTopic[] = [];
 
-        return posts.length === 0;
+        this.posts.forEach(p => {
+            p.topics.forEach(t => {
+                if(!result.map(bt => bt.id).includes(t.id)) result.push(t);
+            });
+        });
+
+        return result;
+    }
+
+    filterPosts(topicId: number): void {
+        this.activeTopicId = topicId;
+
+        if(this.isAdmin) {
+            this.apiService.getPosts(topicId, false).subscribe((res: BlogPost[]) => {
+                this.posts = res;
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+            });
+        } else {
+            this.apiService.getPosts(topicId).subscribe((res: BlogPost[]) => {
+                this.posts = res;
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+            });
+        }
+    }
+
+    sendTopicToEditor(topic: BlogTopic): void {
+        this.editorService.setTopic(topic);
+    }
+
+    deleteTopic(topic: BlogTopic): void {
+        this.apiService.deleteTopic(topic.id).subscribe((res: any) => {
+            this.removeTopic(topic.id);
+            this.notificationService.createNotification('Successfully deleted blog topic!');
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+        });
+    }
+
+    private removeTopic(id: number): void {
+        this.topics = this.topics.filter(t => t.id != id);
+
+        this.posts = this.posts.filter(p => !p.topics.map(t => t.id).includes(id));
     }
 }

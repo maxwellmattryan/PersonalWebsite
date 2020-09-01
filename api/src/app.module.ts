@@ -9,6 +9,7 @@ import { HttpModule } from '@api/core/http/http.module';
 
 import { AdminModule } from '@api/features/admin/admin.module';
 import { ApiModule } from '@api/features/api/api.module';
+import { BlogModule } from '@api/features/blog/blog.module';
 import { ProfileModule } from '@api/features/profile/profile.module';
 import { ProjectModule } from '@api/features/project/project.module';
 
@@ -16,8 +17,6 @@ import { ProjectModule } from '@api/features/project/project.module';
     imports: [
         ConfigModule.forRoot({
             validationSchema: Joi.object({
-                PORT: Joi.number(),
-
                 POSTGRES_HOST: Joi.string().required(),
                 POSTGRES_PORT: Joi.number().required(),
                 POSTGRES_USER: Joi.string().required(),
@@ -35,6 +34,7 @@ import { ProjectModule } from '@api/features/project/project.module';
 
         AdminModule,
         ApiModule,
+        BlogModule,
         ProfileModule,
         ProjectModule
     ],

@@ -137,26 +137,32 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
         - 201
 
 - /api/blog
-    - **`GET /api/blog/posts`
-        - Retrieves list of all posts in the database
+    - `GET /api/blog/authors`
+        - Retrieves list of all authors in the database
         - 200
-    - **`GET /api/blog/posts/:id`
+    - `GET /api/blog/posts`
+        - Retrieves list of all published posts in the database
+        - 200
+    - `GET /api/blog/posts/:id`
         - Retrieves a single post corresponding to the `id` path parameter
         - 200
-    - **`PUT /api/blog/posts/:id`
+    - `PUT /api/blog/posts/:id`
         - Upserts post data from the client for the post with the corresponding `id`
         - 200, 201
-    - **`DELETE /api/blog/posts/:id`
+    - `DELETE /api/blog/posts/:id`
         - Removes the post with the corresponding `id` from the database
         - 204
-    - **`GET /api/blog/topics`
-        - Retrieves list of all topics in the database
+    - `POST /api/blog/topics`
+        - Creates and saves a new topic to the database
+        - 201
+    - `GET /api/blog/topics/:id`
+        - Retrieves a single topic corresponding to the `id` path parameter
         - 200
-    - **`PUT /api/blog/topics/:id`
-        - Upserts topic data from the client for the topic with the corresponding `id` 
-        - 200, 201
-    - **`DELETE /api/blog/topics/:id`
-        - Removes the topic with the corresponding `id` from the database
+    - `PUT /api/blog/topics/:id`
+        - Updates topic data from the client for the topic with the corresponding `id`
+        - 200
+    - `DELETE /api/projects/:id`
+        - Removes the project with the corresponding `id` from the database
         - 204
 
 - /api/profiles
@@ -242,7 +248,7 @@ NOTE: What I have listed below is simply the more relevant fields for each table
     - Content
     - Preview
     - Image URL
-    - Status (DRAFT, PUBLISHED)
+    - Status (DRAFT, PUBLISHED, ARCHIVED)
 - Topic
     - Name
     - Description

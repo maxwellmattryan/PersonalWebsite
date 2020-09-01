@@ -10,6 +10,7 @@
             <a *ngIf='authService.isLoggedIn()' class='projects__project-anchor-wrapper' [routerLink]="['/projects/' + project.id]">
                 <h3 class='projects__project-name'>{{ project.name }}</h3>
             </a>
+
             <h3 *ngIf='!authService.isLoggedIn()' class='projects__project-name'>{{ project.name }}</h3>
 
             <h4 class='projects__project-tagline'>{{ project.tagline }}</h4>
