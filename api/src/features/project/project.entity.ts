@@ -4,10 +4,8 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
-    OneToOne, JoinColumn, ManyToMany, JoinTable
+    ManyToMany
 } from 'typeorm';
-
-import { ProjectLink } from './project-link.entity';
 
 import { Profile } from '@api/features/profile/profile.entity';
 
@@ -19,10 +17,6 @@ export class Project {
 
     @PrimaryGeneratedColumn()
     public id?: number;
-
-    @OneToOne(type => ProjectLink, { cascade: true })
-    @JoinColumn()
-    public link: ProjectLink;
 
     @ManyToMany(type => Profile, p => p.projects, { onDelete: 'CASCADE' })
     public profiles: Profile[];
@@ -38,6 +32,12 @@ export class Project {
 
     @Column({ type: 'text', nullable: false })
     public image_url: string;
+
+    @Column({ type: 'text', nullable: false })
+    public link_name: string;
+
+    @Column({ type: 'text', nullable: false })
+    public link_url: string;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'now()' })
     public created_at?: Date;

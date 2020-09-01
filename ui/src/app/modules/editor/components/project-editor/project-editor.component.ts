@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Profile, Project, ProjectLink } from '@app/shared/models';
+import { Profile, Project } from '@app/shared/models';
 import { AuthService } from '@app/core/authentication';
 import { ApiService } from '@app/core/http';
 import { EditorService, NotificationService, ValidationService, ComparisonService } from '@app/core/services';
@@ -95,10 +95,8 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
                 tagline:        this.formBuilder.control(this.projectData.tagline,     [Validators.required]),
                 description:    this.formBuilder.control(this.projectData.description, [Validators.required]),
                 image_url:      this.formBuilder.control(this.projectData.image_url,   [Validators.required]),
-                link:           this.formBuilder.group  ({
-                    name: this.formBuilder.control(this.projectData.link.name, [Validators.required]),
-                    url:  this.formBuilder.control(this.projectData.link.url,  [Validators.required])
-                })
+                link_name:      this.formBuilder.control(this.projectData.link_name,   [Validators.required]),
+                link_url:       this.formBuilder.control(this.projectData.link_url,    [Validators.required])
             });
         } else {
             this.projectForm = this.formBuilder.group({
@@ -107,10 +105,8 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
                 tagline:        this.formBuilder.control('', [Validators.required]),
                 description:    this.formBuilder.control('', [Validators.required]),
                 image_url:      this.formBuilder.control('', [Validators.required]),
-                link:           this.formBuilder.group  ({
-                    name: this.formBuilder.control('', [Validators.required]),
-                    url:  this.formBuilder.control('', [Validators.required])
-                })
+                link_name:      this.formBuilder.control('', [Validators.required]),
+                link_url:       this.formBuilder.control('', [Validators.required])
             });
         }
     }
@@ -137,13 +133,11 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
 
     private buildFormProjectData(): Project {
         const profiles = this.buildFormProfileData();
-        const link = this.buildFormLinkData();
 
         return new Project({
             ...this.projectForm.value,
             id: this.projectData ? this.projectData.id : undefined,
-            profiles: profiles,
-            link: link
+            profiles: profiles
         });
     }
 
@@ -151,12 +145,5 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
         return this.projectForm.value.profiles.map((p, idx) => {
             if(p) return this.profileData[idx];
         }).filter(p => p !== undefined);
-    }
-
-    private buildFormLinkData(): ProjectLink {
-        return new ProjectLink({
-            ...this.projectForm.value.link,
-            id: this.projectData ? this.projectData.link.id : undefined,
-        });
     }
 }
