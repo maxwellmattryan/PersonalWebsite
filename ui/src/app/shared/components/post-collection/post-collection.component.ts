@@ -20,10 +20,15 @@ export class PostCollectionComponent implements OnInit {
     nPostsToDisplay: number = 5;
 
     constructor(
-        public blogService: BlogService
+        public blogService: BlogService,
+        private comparisonService: ComparisonService
     ) { }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        this.posts.forEach(p => {
+            p.topics.sort(this.comparisonService.topics);
+        });
+    }
 
     getPosts(): BlogPost[] {
         return this.posts.slice(0, this.nPostsToDisplay);
