@@ -72,6 +72,16 @@ export class BlogPostService {
             .getMany();
     }
 
+    public async getPostsByTopic(topicId: number): Promise<BlogPost[]> {
+        return await this.blogPostRepository
+            .createQueryBuilder('bp')
+            .leftJoinAndSelect('bp.status', 'bps')
+            .leftJoinAndSelect('bp.topics', 'bt')
+            .where('bt.id = :id', { id: topicId })
+            .orderBy('bt.created_at', 'DESC')
+            .getMany();
+    }
+
     public async getStatuses(): Promise<BlogPostStatus[]> {
         return await this.blogPostStatusRepository
             .createQueryBuilder('bps')

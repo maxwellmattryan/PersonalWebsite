@@ -83,10 +83,11 @@ export class ApiService {
         return this.http.get<BlogPost>(environment.API_URL + uri);
     }
 
-    getPosts(topicId: number = -1): Observable<BlogPost[]> {
+    getPosts(topicId: number = -1, publishedOnly: boolean = true): Observable<BlogPost[]> {
         let params = new HttpParams();
 
         if(topicId != -1) params = params.set('topic_id', topicId.toString());
+        if(publishedOnly) params = params.set('published', 'true');
 
         return this.http.get<BlogPost[]>(
             `${environment.API_URL}/blog/posts`,

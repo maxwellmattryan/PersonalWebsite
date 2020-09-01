@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { BlogPost, BlogTopic } from '@app/shared/models';
@@ -27,21 +26,31 @@ export class BlogViewComponent implements OnInit {
         public blogService: BlogService,
         private comparisonService: ComparisonService,
         private editorService: EditorService,
-        private notificationService: NotificationService,
-        private router: Router
+        private notificationService: NotificationService
     ) { }
 
     ngOnInit(): void {
         this.isAdmin = this.authService.isLoggedIn();
 
-        this.apiService.getPosts(this.activeTopicId).subscribe((res: BlogPost[]) => {
-            this.posts = res;
-            this.topics = this.getTopicsFromPosts().sort(this.comparisonService.topics);
+        if(this.isAdmin) {
+            this.apiService.getPosts(this.activeTopicId, false).subscribe((res: BlogPost[]) => {
+                this.posts = res;
+                this.topics = this.getTopicsFromPosts().sort(this.comparisonService.topics);
 
-            this.isLoaded = true;
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
-        });
+                this.isLoaded = true;
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+            });
+        } else {
+            this.apiService.getPosts(this.activeTopicId).subscribe((res: BlogPost[]) => {
+                this.posts = res;
+                this.topics = this.getTopicsFromPosts().sort(this.comparisonService.topics);
+
+                this.isLoaded = true;
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+            });
+        }
     }
 
     private getTopicsFromPosts(): BlogTopic[] {
@@ -59,11 +68,19 @@ export class BlogViewComponent implements OnInit {
     filterPosts(topicId: number): void {
         this.activeTopicId = topicId;
 
-        this.apiService.getPosts(topicId).subscribe((res: BlogPost[]) => {
-            this.posts = res;
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
-        });
+        if(this.isAdmin) {
+            this.apiService.getPosts(topicId, false).subscribe((res: BlogPost[]) => {
+                this.posts = res;
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+            });
+        } else {
+            this.apiService.getPosts(topicId).subscribe((res: BlogPost[]) => {
+                this.posts = res;
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+            });
+        }
     }
 
     sendTopicToEditor(topic: BlogTopic): void {

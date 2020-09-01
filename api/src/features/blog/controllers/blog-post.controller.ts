@@ -23,14 +23,25 @@ export class BlogPostController {
     @HttpCode(200)
     async getPublishedPosts(
         @Query('topic_id') topicId: string,
+        @Query('published') published: string,
         @Req() request: Request
     ): Promise<BlogPost[]> {
         let posts: BlogPost[];
-        if(topicId) {
-            posts = await this.blogPostService.getPostsByStatusAndTopic('PUBLISHED', parseInt(topicId));
+
+        if(published !== undefined) {
+            if(topicId) {
+                posts = await this.blogPostService.getPostsByStatusAndTopic('PUBLISHED', parseInt(topicId));
+            } else {
+                posts = await this.blogPostService.getPostsByStatus('PUBLISHED');
+            }
         } else {
-            posts = await this.blogPostService.getPostsByStatus('PUBLISHED');
+            if(topicId) {
+                posts = await this.blogPostService.getPostsByTopic(parseInt(topicId));
+            } else {
+                posts = await this.blogPostService.getPosts();
+            }
         }
+
         if(posts.length == 0) throw new BlogPostsWereNotFoundException();
 
         return posts;

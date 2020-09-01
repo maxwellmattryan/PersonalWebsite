@@ -5,7 +5,7 @@
 
     <div class='container posts__post-container'>
             <div class='posts__post' *ngFor='let post of getPosts(); let idx = index' [ngClass]="{'posts__post--rjust': idx % 2 !== 0}">
-                <a class=posts__post-anchor-wrapper [routerLink]="['blog/posts/' + post.id]">
+                <a class=posts__post-anchor-wrapper [routerLink]="[baseRoute + post.id]">
                     <h3 class='posts__post-title'>{{ post.title }}</h3>
                 </a>
 
