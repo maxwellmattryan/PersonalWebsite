@@ -39,4 +39,4 @@ INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (8, 3
 INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (9, 3, 'NestJS', 5);
 INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (10, 3, 'Node', 6);
 INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (11, 3, 'PostgreSQL', 7);
-INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (12, 3, 'Google Cloud Platform', 8);
+INSERT INTO profile_technology(id, profile_id, name, display_order) VALUES (12, 3, 'Google Cloud', 8);

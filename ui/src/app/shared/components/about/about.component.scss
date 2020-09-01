@@ -14,10 +14,13 @@
 }
 
 .about__technology-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin-bottom: $margin;
 }
 
 .about__technology-list-item {
+    margin-bottom: $quarter-margin;
 }
 
 .about__portrait-container {

@@ -15,5 +15,5 @@ export class ProfileStatus {
     public status: string;
 
     @OneToMany(type => Profile, p => p.status)
-    public profile: Profile;
+    public profiles: Profile[];
 }

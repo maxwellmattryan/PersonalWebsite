@@ -23,7 +23,6 @@ export class ApiController {
     async getHomepage(@Query('published') publishedPostsOnly: string, @Req() request: Request): Promise<any> {
         const profile = await this.profileService.getActiveProfile();
         if(!profile) throw new ActiveProfileWasNotFoundException();
-        console.log(profile);
 
         const projects = await this.projectService.getProjectsForProfile(profile.id);
         if(projects.length == 0) throw new ProjectsWereNotFoundException();
