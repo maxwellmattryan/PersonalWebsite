@@ -81,20 +81,9 @@ export class PostEditorComponent implements OnDestroy, OnInit {
     private loadStatusData(): void {
         // this.apiService.getPostStatuses().subscribe((res: BlogPostStatus[]) => {
         //     console.log(res);
-        //     if(this.postData) {
-        //         this.setStatusControls(this.postData.status.id)
-        //     } else {
-        //         this.setStatusControls();
-        //     }
         // }, (error: HttpErrorResponse) => {
         //     this.notificationService.createNotification(error.error.message);
         // })
-
-        // if(this.postData) {
-        //     this.setStatusControls(this.postData.status.id)
-        // } else {
-        //     this.setStatusControls();
-        // }
 
         // NOTE: This is not ideal, but the server is throwing weird nonsense when trying to query all topics (?)
         this.statusData = [

@@ -31,7 +31,6 @@ export class BlogPostService {
 
         return await this.blogPostRepository.save(post)
             .catch((error) => {
-                console.log(error);
                 if(error.code === PostgresErrorCode.UNIQUE_VIOLATION) {
                     throw new BlogPostAlreadyExistsException();
                 } else {
