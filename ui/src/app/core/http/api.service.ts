@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { Admin } from '@app/shared/interfaces';
 import { environment } from '@app/environments/environment';
-import { BlogPost, Project, Profile, BlogTopic, BlogPostStatus, BlogAuthor } from '@app/shared/models';
+import { BlogPost, Project, Profile, BlogTopic, BlogPostStatus, BlogAuthor, ProfileStatus } from '@app/shared/models';
 
 @Injectable({
     providedIn: 'root'
@@ -170,6 +170,10 @@ export class ApiService {
     }
 
     getProfiles(): Observable<Profile[]> {
-        return this.http.get<Profile[]>(environment.API_URL + '/profiles');
+        return this.http.get<Profile[]>(`${environment.API_URL}/profiles`);
+    }
+
+    getProfileStatuses(): Observable<ProfileStatus[]> {
+        return this.http.get<ProfileStatus[]>(`${environment.API_URL}/profiles/statuses`);
     }
 }

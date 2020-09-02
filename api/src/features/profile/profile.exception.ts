@@ -14,6 +14,12 @@ export class ProfileWasNotFoundException extends NotFoundException {
 
 export class ProfilesWereNotFoundException extends NotFoundException {
     constructor() {
-        super('Unable to find any profiles.');
+        super('Unable to find profiles.');
+    }
+}
+
+export class ProfileStatusesWereNotFoundException extends NotFoundException {
+    constructor() {
+        super('Unable to find profile statuses.');
     }
 }

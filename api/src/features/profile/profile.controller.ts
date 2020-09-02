@@ -5,8 +5,9 @@ import { Request } from 'express';
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
 import { Profile } from './profile.entity';
+import { ProfileStatus } from './profile-status.entity';
 import { ProfileService } from './profile.service';
-import { ProfilesWereNotFoundException, ProfileWasNotFoundException } from './profile.exception';
+import { ProfilesWereNotFoundException, ProfileWasNotFoundException, ProfileStatusesWereNotFoundException } from './profile.exception';
 
 @Controller('profiles')
 export class ProfileController {
@@ -17,11 +18,21 @@ export class ProfileController {
     @Get('')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    async listProfiles(@Req() request: Request): Promise<Profile[]> {
+    async getProfiles(@Req() request: Request): Promise<Profile[]> {
         const profiles = await this.profileService.getProfiles();
         if(profiles.length == 0) throw new ProfilesWereNotFoundException();
 
         return profiles;
+    }
+
+    @Get('statuses')
+    @HttpCode(200)
+    @UseGuards(JwtAuthGuard)
+    async getProfileStatuses(@Req() request: Request): Promise<ProfileStatus[]> {
+        const statuses = await this.profileService.getStatuses();
+        if(statuses.length === 0) throw new ProfileStatusesWereNotFoundException();
+
+        return statuses;
     }
 
     @Put(':id/activate')

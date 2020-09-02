@@ -5,12 +5,15 @@ import { Repository } from 'typeorm';
 
 import { Profile } from './profile.entity';
 import { Project } from '@api/features/project/project.entity';
+import { ProfileStatus } from './profile-status.entity';
 
 @Injectable()
 export class ProfileService {
     constructor(
         @InjectRepository(Profile)
-        private readonly profileRepository: Repository<Profile>
+        private readonly profileRepository: Repository<Profile>,
+        @InjectRepository(ProfileStatus)
+        private readonly profileStatusRepository: Repository<ProfileStatus>
     ) { }
 
     public async existsInTable(id: number): Promise<boolean> {
@@ -45,12 +48,10 @@ export class ProfileService {
             .getMany();
     }
 
-    public async getProfilesForProject(projectId: number): Promise<Profile[]> {
-        return await this.profileRepository.query(`
-            SELECT p.* FROM profile p
-            LEFT JOIN project_profile_mapping ppm ON p.id = ppm.profile_id
-            WHERE ppm.project_id = ${projectId}
-        `);
+    public async getStatuses(): Promise<ProfileStatus[]> {
+        return await this.profileStatusRepository
+            .createQueryBuilder('ps')
+            .getMany();
     }
 
     public async resetProfileStatuses(activeId: number): Promise<void> {
