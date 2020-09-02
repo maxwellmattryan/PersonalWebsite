@@ -8,7 +8,11 @@ import { ProfileService } from '@api/features/profile/profile.service';
 
 import { Project } from './project.entity'
 import { ProjectService } from "./project.service";
-import { ProjectWasNotFoundException, ProjectCouldNotBeUpdatedException } from './project.exception';
+import {
+    ProjectWasNotFoundException,
+    ProjectCouldNotBeUpdatedException,
+    ProjectsWereNotFoundException
+} from './project.exception';
 
 @Controller('projects')
 export class ProjectController {
@@ -16,6 +20,15 @@ export class ProjectController {
         private readonly profileService: ProfileService,
         private readonly projectService: ProjectService
     ) { }
+
+    @Get('')
+    @HttpCode(200)
+    async getProjects(@Req() request: Request): Promise<Project[]> {
+        const projects = await this.projectService.getProjects();
+        if(projects.length === 0) throw new ProjectsWereNotFoundException();
+
+        return projects;
+    }
 
     @Post('')
     @HttpCode(201)

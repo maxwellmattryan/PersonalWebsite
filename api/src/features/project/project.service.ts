@@ -52,6 +52,12 @@ export class ProjectService {
             .getOne();
     }
 
+    public async getProjects(): Promise<Project[]> {
+        return await this.projectRepository
+            .createQueryBuilder('p')
+            .getMany();
+    }
+
     public async getProjectsForProfile(profileId: number): Promise<Project[]> {
         return await this.projectRepository
             .createQueryBuilder('p')
