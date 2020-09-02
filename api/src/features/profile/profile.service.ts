@@ -45,6 +45,21 @@ export class ProfileService {
         return profile;
     }
 
+    public async deleteProfile(id: number): Promise<void> {
+        if(id == (await this.getProfileByStatus('ACTIVE')).id) {
+            await this.resetProfileStatuses((await this.getProfileByStatus('INACTIVE')).id);
+        }
+
+        await this.deleteProfileTechnologies(id);
+
+        await this.profileRepository
+            .createQueryBuilder()
+            .delete()
+            .from(Profile)
+            .where('profile.id = :id', { id: id })
+            .execute();
+    }
+
     public async getProfile(id: number): Promise<Profile> {
         return await this.profileRepository
             .createQueryBuilder('p')

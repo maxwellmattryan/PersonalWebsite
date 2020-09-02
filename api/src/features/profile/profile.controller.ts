@@ -1,4 +1,4 @@
-import { BadRequestException, Controller, Get, HttpCode, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
+import { BadRequestException, Controller, Get, HttpCode, Param, Post, Put, Req, UseGuards, Delete } from '@nestjs/common';
 
 import { Request } from 'express';
 
@@ -61,6 +61,15 @@ export class ProfileController {
         if(!profile) throw new ProfileCouldNotBeUpdatedException();
 
         return profile;
+    }
+
+    @Delete(':id')
+    @HttpCode(204)
+    @UseGuards(JwtAuthGuard)
+    async deleteProfile(@Param('id') id: number, @Req() request: Request): Promise<void> {
+        if(!(await this.profileService.existsInTable(id))) throw new ProfileWasNotFoundException();
+
+        await this.profileService.deleteProfile(id);
     }
 
     @Put(':id/activate')

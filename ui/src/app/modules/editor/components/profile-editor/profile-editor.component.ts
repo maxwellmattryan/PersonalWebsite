@@ -130,7 +130,6 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
 
     onSubmit(): void {
         const profile = this.buildFormProfileData();
-        console.log(profile);
 
         if(profile.id === undefined) {
             this.apiService.createProfile(profile).subscribe((res: Profile) => {

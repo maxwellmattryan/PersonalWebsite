@@ -35,7 +35,7 @@
     <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
         <h2>Profiles:</h2>
         <br>
-        <div class='dashboard__profile-btn-row' *ngFor='let profile of profileService.getProfiles()'>
+        <div class='dashboard__profile-btn-row' *ngFor='let profile of profiles'>
             <button
                     [ngClass]="{'btn--active': profile.status.status == 'ACTIVE' }"
                     class='btn dashboard__profile-btn'

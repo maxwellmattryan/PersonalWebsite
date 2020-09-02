@@ -185,6 +185,10 @@ export class ApiService {
         );
     }
 
+    deleteProfile(id: number): Observable<any> {
+        return this.http.delete<any>(`${environment.API_URL}/profiles/${id}`)
+    }
+
     getProfiles(): Observable<Profile[]> {
         return this.http.get<Profile[]>(`${environment.API_URL}/profiles`);
     }
