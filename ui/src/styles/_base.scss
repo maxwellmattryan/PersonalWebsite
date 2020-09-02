@@ -58,3 +58,7 @@ button, input, textarea {
         font-size: 90%;
     }
 }
+
+.app {
+    min-height: calc(100vh - #{$footer-height});
+}
