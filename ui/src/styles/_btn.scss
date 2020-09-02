@@ -26,11 +26,6 @@
         -webkit-transform: scale($btn-active-transition-scale);
     }
 
-    &--inactive {
-        border: 2px solid $color-light;
-        color: $color-light;
-    }
-
     &--go {
         border: 2px solid $color-go;
         color: $color-go;
@@ -53,5 +48,10 @@
     &--warn:active {
         background-color: $color-warn;
         color: $color-dark;
+    }
+
+    &--inactive {
+      border: 2px solid $color-light;
+      color: $color-light;
     }
 }

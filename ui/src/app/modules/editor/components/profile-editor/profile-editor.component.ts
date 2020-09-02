@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
-import { Profile, ProfileStatus, Project, ProfileTechnology } from '@app/shared/models';
+import { Profile, ProfileStatus, ProfileTechnology, Project } from '@app/shared/models';
 import { AuthService } from '@app/core/authentication';
 import { ApiService } from '@app/core/http';
 import { ComparisonService, EditorService, NotificationService, ValidationService } from '@app/core/services';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-profile-editor',
@@ -25,6 +25,7 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
 
     constructor(
         private router: Router,
+        private changeDetectionRef: ChangeDetectorRef,
         private formBuilder: FormBuilder,
         private apiService: ApiService,
         private authService: AuthService,
@@ -176,5 +177,24 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
         return this.profileForm.value.technologies.map((t, idx) => {
             return new ProfileTechnology({ name: t, display_order: idx + 1 });
         });
+    }
+
+    addTechnologyToForm(): void {
+        const control: FormControl = this.formBuilder.control('', [Validators.required]);
+        (this.profileForm.controls.technologies as FormArray).push(control);
+
+        // CAUTION: Angular will throw an ExpressionChangedAfterItWasCheckedException after adding new control (b/c array becomes invalid)
+        this.changeDetectionRef.detectChanges();
+    }
+
+    changeTechnologyDisplayOrder(oldIdx: number, newIdx: number): void {
+        const technologyFormArray = this.profileForm.get('technologies') as FormArray;
+        const technologies = [...technologyFormArray.value];
+        [technologies[oldIdx], technologies[newIdx]] = [technologies[newIdx], technologies[oldIdx]];
+        technologyFormArray.setValue(technologies);
+    }
+
+    removeTechnology(idx: number): void {
+        (this.profileForm.controls.technologies as FormArray).removeAt(idx);
     }
 }

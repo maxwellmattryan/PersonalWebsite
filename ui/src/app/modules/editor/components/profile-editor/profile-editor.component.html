@@ -51,10 +51,35 @@
         <div class='form-field editor__form-field'>
             <label class='form-field-label editor__form-field-label'>Technologies</label>
             <br><br>
-            <ng-container formArrayName='technologies' *ngFor='let technology of profileForm.controls.technologies["controls"]; let idx = index'>
-                <input [formControlName]='idx' required autofocus>
-                <br><br>
-            </ng-container>
+            <button
+                class='btn editor__profile-btn--add btn--go'
+                type='button'
+                (click)='addTechnologyToForm()'
+            >&#x2b;</button>
+            <br>
+            <div class='editor__profile-btn-row' formArrayName='technologies' *ngFor='let technology of profileForm.controls.technologies["controls"]; let idx = index'>
+                <input class='editor__profile-form-field0' [formControlName]='idx' required autofocus>
+
+                <button
+                    *ngIf='idx !== 0'
+                    class='btn editor__profile-btn--edit'
+                    (click)='changeTechnologyDisplayOrder(idx, idx - 1)'
+                    type='button'
+                >&#9650;</button>
+                <button
+                    *ngIf='idx !== profileForm.controls.technologies["controls"].length - 1'
+                    class='btn editor__profile-btn--edit'
+                    (click)='changeTechnologyDisplayOrder(idx, idx + 1)'
+                    type='button'
+                >&#9660;</button>
+                <button
+                    [ngClass]="{'btn--inactive': profileForm.controls.technologies['controls'].length === 1}"
+                    [disabled]='profileForm.controls.technologies["controls"].length === 1'
+                    class='btn editor__profile-btn--warn btn--warn'
+                    (click)='removeTechnology(idx)'
+                    type='button'
+                >&#x2715;</button>
+            </div>
         </div>
 
         <div class='form-field editor__form-field'>

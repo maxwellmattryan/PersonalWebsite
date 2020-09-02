@@ -34,3 +34,25 @@
 .mat-radio-button {
     margin: 0 $half-margin $half-margin 0;
 }
+
+.editor__profile-btn {
+    &--add {
+        font-size: 150%;
+        width: 13vw;
+    }
+
+    &--edit, &--warn {
+        width: 10vw;
+    }
+}
+
+.editor__profile-btn-row {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    input {
+        width: 50%;
+    }
+}
