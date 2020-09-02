@@ -35,20 +35,7 @@ These services are used across the entire applications, so it is most organizati
     - Returns HttpHeaders with authorization key-value for JWT
     - Contains interceptor for handling 401 / 403 errors
 - HTTP
-    - Admin
-        - Authenticates from login
-        - Registers new admin
-    - Homepage
-        - Get data for homepage request (aka profile and posts)
-    - Posts
-        - Create, read, update, and delete posts
-        - Get data for all posts
-    - Profile
-        - Get the currently selected profile for homepage data
-        - Get all profiles (used to select profile in dashboard)
-    - Topics
-        - Get and delete topic
-        - Get data for all topics
+    - Handles all outgoing requests to the API
 - Services
     - Blog
         - Get and set active topic to display
@@ -58,10 +45,8 @@ These services are used across the entire applications, so it is most organizati
         - Get, has, and set operations for the various editor components
     - Notification
         - Creates Angular Material SnackBar popup
-    - Profile
-        - Get and set the active profile to display
     - Validation
-        - Using ValidatorFn, verifies that at least one topic is selected from the editor's topic FormArray
+        - Using ValidatorFn, verifies that at least one item is selected from an editor's FormArray
         - Verifies admin credentials when logging in (and registering*)
 
 _\*This functionality will not be available on app's deployment._
@@ -80,10 +65,13 @@ Each module roughly corresponds to a page view of the web app and contains the n
     - TopicViewComponent
 - Editor
     - PostEditorComponent
+    - ProfileEditorComponent
     - ProjectEditorComponent
     - TopicEditorComponent
 - Home
     - HomeViewComponent
+- Icon
+    - SVG-embedded components
 - Material
     - Modules from Angular Material
 - Project
@@ -143,15 +131,24 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
     - `GET /api/blog/posts`
         - Retrieves list of all published posts in the database
         - 200
+    - `POST /api/blog/posts`
+        - Creates and saves a new post to the database
+        - 201
     - `GET /api/blog/posts/:id`
         - Retrieves a single post corresponding to the `id` path parameter
         - 200
     - `PUT /api/blog/posts/:id`
         - Upserts post data from the client for the post with the corresponding `id`
-        - 200, 201
+        - 200
     - `DELETE /api/blog/posts/:id`
         - Removes the post with the corresponding `id` from the database
         - 204
+    - `GET /api/blog/posts/statuses`
+        - Retrieves list of all post statuses in the database
+        - 200
+    - `GET /api/blog/topics`
+        - Retrieves list of all topics in the database
+        - 200
     - `POST /api/blog/topics`
         - Creates and saves a new topic to the database
         - 201
@@ -161,28 +158,37 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
     - `PUT /api/blog/topics/:id`
         - Updates topic data from the client for the topic with the corresponding `id`
         - 200
-    - `DELETE /api/projects/:id`
-        - Removes the project with the corresponding `id` from the database
+    - `DELETE /api/blog/topics/:id`
+        - Removes the topic with the corresponding `id` from the database
         - 204
 
 - /api/profiles
     - `GET /api/profiles`
         - Retrieves list of all profiles in the database
         - 200
-    - *`GET /api/profiles/:id`
-        - Retrieves a single profile with the corresponding `id`
+    - `POST /api/profiles`
+        - Creates and saves a new profile to the database
+        - 201
+    - `PUT /api/profiles/:id`
+        - Updates profile data from the client for the profile with the corresponding `id`
         - 200
-    - *`PUT /api/profiles/:id`
-        - Upserts profile data from the client for the profile with the corresponding `id`
-        - 200, 201
-    - *`DELETE /api/profiles/:id`
+    - `DELETE /api/profiles/:id`
         - Removes the profile with the corresponding `id` from the database
         - 204
     - `PUT /api/profiles/:id/activate`
         - Sets the profile with the corresponding `id` as the application's active profile while setting all other profiles as inactive
         - 200
+    - `GET /api/profiles/:id/technologies`
+        - Retrieves list of all technologies belonging to the profile with the corresponding `id`
+        - 200
+    - `GET /api/profiles/statuses`
+        - Retrieves list of all profile statuses in the database
+        - 200
         
 - /api/projects
+    - `GET /api/projects`
+        - Retrieves list of all projects in the database
+        - 200
     - `POST /api/projects`
         - Creates and saves a new project to the database
         - 201
@@ -195,8 +201,6 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
     - `DELETE /api/projects/:id`
         - Removes the project with the corresponding `id` from the database
         - 204
-        
-_*Not yet implemented_
 
 ### Architecture
 
@@ -224,7 +228,7 @@ TypeORM is a powerful library included in the NestJS ecosystem, so initial impre
 
 ### Error Handling
 
-It is difficult to find a good method that handles errors, and it's important to always try provide helpful messages for when an error occurs. This means that incorporating errors in a more domain-consistent way, which is an incredibly satisfying environment to write in.
+It is difficult to find a good method that handles errors, and it's important to always try provide helpful messages for when an error occurs. This means that incorporating errors in a more domain-consistent way, which is an incredibly satisfying environment to write in. It is almost like receiving errors feels good.
 
 ## PostgreSQL
 
@@ -237,16 +241,16 @@ NOTE: What I have listed below is simply the more relevant fields for each table
 - Admin
     - Username
     - Password
-- Author
+- Blog Author
     - Firstname
     - Lastname
-- Post
+- Blog Post
     - Title
     - Content
     - Preview
     - Image URL
     - Status (DRAFT, PUBLISHED, ARCHIVED)
-- Topic
+- Blog Topic
     - Name
     - Description
 - Profile
@@ -255,6 +259,9 @@ NOTE: What I have listed below is simply the more relevant fields for each table
     - Landing
     - About
     - Status (ACTIVE, INACTIVE)
+- Profile Technology
+    - Name
+    - Display Order
 - Project
     - Name
     - Tagline
@@ -262,9 +269,6 @@ NOTE: What I have listed below is simply the more relevant fields for each table
     - Image URL
     - Link Name
     - Link URL
-- Technology
-    - Name
-    - Display Order
 
 ## Google Cloud Platform
 

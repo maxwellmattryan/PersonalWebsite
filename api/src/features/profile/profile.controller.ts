@@ -33,26 +33,6 @@ export class ProfileController {
         return await this.profileService.createProfile(request.body);
     }
 
-    @Get('statuses')
-    @HttpCode(200)
-    @UseGuards(JwtAuthGuard)
-    async getProfileStatuses(@Req() request: Request): Promise<ProfileStatus[]> {
-        const statuses = await this.profileService.getStatuses();
-        if(statuses.length === 0) throw new ProfileStatusesWereNotFoundException();
-
-        return statuses;
-    }
-
-    @Get(':id/technologies')
-    @HttpCode(200)
-    @UseGuards(JwtAuthGuard)
-    async getProfileTechnologies(@Param('id') id: number, @Req() request: Request): Promise<ProfileTechnology[]> {
-        const technologies = await this.profileService.getProfileTechnologies(id);
-        if(technologies.length === 0) throw new ProfileTechnologiesWereNotFoundException();
-
-        return technologies;
-    }
-
     @Put(':id')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
@@ -84,5 +64,25 @@ export class ProfileController {
         await this.profileService.resetProfileStatuses(id);
 
         return await this.profileService.getProfile(id);
+    }
+
+    @Get(':id/technologies')
+    @HttpCode(200)
+    @UseGuards(JwtAuthGuard)
+    async getProfileTechnologies(@Param('id') id: number, @Req() request: Request): Promise<ProfileTechnology[]> {
+        const technologies = await this.profileService.getProfileTechnologies(id);
+        if(technologies.length === 0) throw new ProfileTechnologiesWereNotFoundException();
+
+        return technologies;
+    }
+
+    @Get('statuses')
+    @HttpCode(200)
+    @UseGuards(JwtAuthGuard)
+    async getProfileStatuses(@Req() request: Request): Promise<ProfileStatus[]> {
+        const statuses = await this.profileService.getStatuses();
+        if(statuses.length === 0) throw new ProfileStatusesWereNotFoundException();
+
+        return statuses;
     }
 }
