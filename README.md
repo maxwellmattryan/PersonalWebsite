@@ -169,13 +169,13 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
     - `GET /api/profiles`
         - Retrieves list of all profiles in the database
         - 200
-    - **`GET /api/profiles/:id`
+    - *`GET /api/profiles/:id`
         - Retrieves a single profile with the corresponding `id`
         - 200
-    - **`PUT /api/profiles/:id`
+    - *`PUT /api/profiles/:id`
         - Upserts profile data from the client for the profile with the corresponding `id`
         - 200, 201
-    - **`DELETE /api/profiles/:id`
+    - *`DELETE /api/profiles/:id`
         - Removes the profile with the corresponding `id` from the database
         - 204
     - `PUT /api/profiles/:id/activate`
@@ -196,7 +196,7 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
         - Removes the project with the corresponding `id` from the database
         - 204
         
-_**Not yet implemented_
+_*Not yet implemented_
 
 ### Architecture
 
@@ -260,13 +260,10 @@ NOTE: What I have listed below is simply the more relevant fields for each table
     - Tagline
     - Description
     - Image URL
-    - External URL
-- Project Link
-    - Name
-    - URL
+    - Link Name
+    - Link URL
 - Technology
     - Name
-    - Icon URL
     - Display Order
 
 ## Google Cloud Platform

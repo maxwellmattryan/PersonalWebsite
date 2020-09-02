@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { BlogPost, BlogTopic, Profile } from '@app/shared/models';
+import { BlogPost, BlogTopic, Profile, Project } from '@app/shared/models';
 
 @Injectable({
     providedIn: 'root'
@@ -12,6 +12,13 @@ export class ComparisonService {
     posts = (p1: BlogPost, p2: BlogPost) => {
         if(p1.created_at < p2.created_at) return 1;
         if(p1.created_at > p2.created_at) return -1;
+
+        return 0;
+    };
+
+    projects = (p1: Project, p2: Project) => {
+        if(p1.name > p2.name) return 1;
+        if(p1.name < p2.name) return -1;
 
         return 0;
     };

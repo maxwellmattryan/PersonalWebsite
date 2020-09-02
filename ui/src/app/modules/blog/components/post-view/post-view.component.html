@@ -6,7 +6,7 @@
         <a class='btn post__btn' (click)='sendPostToEditor()' routerLink='/editor' [queryParams]='{type: "post", id: post.id}'>
             &#x270F;
         </a>
-        <a class='btn post__btn btn--warn' (click)='deletePost()' routerLink='/blog'>
+        <a class='btn post__btn btn--warn' (click)='deletePost(post.id)' routerLink='/blog'>
             &#x2715;
         </a>
     </div>

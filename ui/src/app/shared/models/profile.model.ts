@@ -12,6 +12,8 @@ export class Profile implements Deserializable {
         Object.assign(this, input);
 
         this.status = input.status.map(s => new ProfileStatus({ ...s }).deserialize(s));
+        this.technologies = input.technologies.map(t => new ProfileTechnology({ ...t }).deserialize(t));
+        this.projects = input.projects.map(p => new Project({ ...p }).deserialize(p));
 
         return this;
     }

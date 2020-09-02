@@ -77,10 +77,8 @@ export class ApiService {
         );
     }
 
-    deletePost(requestURL: string): Observable<any> {
-        return this.http.delete<any>(
-            environment.API_URL + requestURL
-        );
+    deletePost(id: number): Observable<any> {
+        return this.http.delete<any>(`${environment.API_URL}/blog/posts/${id}`);
     }
 
     getPost(uri: string): Observable<BlogPost> {
@@ -122,7 +120,7 @@ export class ApiService {
     }
 
     getTopics(): Observable<BlogTopic[]> {
-        return this.http.get<BlogTopic[]>(environment.API_URL + '/blog/topics');
+        return this.http.get<BlogTopic[]>(`${environment.API_URL}/blog/topics`);
     }
 
     updateTopic(topic: BlogTopic): Observable<BlogTopic> {
@@ -148,6 +146,10 @@ export class ApiService {
 
     getProject(uri: string): Observable<Project> {
         return this.http.get<Project>(environment.API_URL + uri);
+    }
+
+    getProjects(): Observable<Project[]> {
+        return this.http.get<Project[]>(`${environment.API_URL}/projects`);
     }
 
     updateProject(project: Project): Observable<Project> {
