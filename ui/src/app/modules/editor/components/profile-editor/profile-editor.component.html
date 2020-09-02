@@ -11,7 +11,7 @@
         </div>
 
         <div class="form-field editor__form-field">
-            <label>Status</label>
+            <label class='form-field-label editor__form-field-label'>Status</label>
             <br><br>
             <mat-radio-group formControlName='status' name='status' required>
                 <mat-radio-button
@@ -51,12 +51,6 @@
         <div class='form-field editor__form-field'>
             <label class='form-field-label editor__form-field-label'>Technologies</label>
             <br><br>
-            <button
-                class='btn editor__profile-btn--add btn--go'
-                type='button'
-                (click)='addTechnologyToForm()'
-            >&#x2b;</button>
-            <br>
             <div class='editor__profile-btn-row' formArrayName='technologies' *ngFor='let technology of profileForm.controls.technologies["controls"]; let idx = index'>
                 <input class='editor__profile-form-field0' [formControlName]='idx' required autofocus>
 
@@ -80,6 +74,13 @@
                     type='button'
                 >&#x2715;</button>
             </div>
+            <br>
+            <button
+                    class='btn editor__profile-btn--add btn--go'
+                    type='button'
+                    (click)='addTechnologyToForm()'
+            >&#x2b;</button>
+            <br>
         </div>
 
         <div class='form-field editor__form-field'>
