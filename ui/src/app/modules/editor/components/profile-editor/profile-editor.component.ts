@@ -99,7 +99,7 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadTechnologyData(): void {
-        if(this.profileData) this.technologyData = this.profileData.technologies.reverse();
+        if(this.profileData) this.technologyData = this.profileData.technologies;
     }
 
     private buildProfileForm(): void {
@@ -116,14 +116,14 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
             });
         } else {
             this.profileForm = this.formBuilder.group({
-                name:         this.formBuilder.control('',       [Validators.required]),
-                status:       this.formBuilder.control('ACTIVE', [Validators.required]),
-                projects:     this.formBuilder.array  ([],       [this.validationService.hasMinElements(1)]),
-                tagline:      this.formBuilder.control('',       [Validators.required]),
-                landing:      this.formBuilder.control('',       [Validators.required]),
-                about:        this.formBuilder.control('',       [Validators.required]),
-                technologies: this.formBuilder.array  ([],       [Validators.required]),
-                image_url:    this.formBuilder.control('',       [Validators.required])
+                name:         this.formBuilder.control('',         [Validators.required]),
+                status:       this.formBuilder.control('ACTIVE',   [Validators.required]),
+                projects:     this.formBuilder.array  ([],         [this.validationService.hasMinElements(1)]),
+                tagline:      this.formBuilder.control('',         [Validators.required]),
+                landing:      this.formBuilder.control('',         [Validators.required]),
+                about:        this.formBuilder.control('',         [Validators.required]),
+                technologies: this.formBuilder.array  ([''],       [Validators.required]),
+                image_url:    this.formBuilder.control('',         [Validators.required])
             });
         }
     }
@@ -142,7 +142,7 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
         } else {
             this.apiService.updateProfile(profile).subscribe((res: Profile) => {
                 this.notificationService.createNotification('Successfully updated existing profile!');
-                //this.router.navigate(['admin']);
+                this.router.navigate(['admin']);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
