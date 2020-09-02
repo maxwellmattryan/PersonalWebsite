@@ -22,9 +22,22 @@
     width: 50vw;
 }
 
+.dashboard__profile-btn-row {
+    align-items: center;
+    display: grid;
+    grid-gap: $half-padding;
+    grid-template-columns: 40vw 1fr 1fr;
+    margin-bottom: $quarter-margin;
+}
+
 .dashboard__profile-btn {
     font-size: 100%;
     height: auto;
     padding: $quarter-padding;
     width: 40vw;
+
+    &--edit {
+        font-size: 120%;
+        width: 13vw;
+    }
 }

@@ -4,8 +4,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Profile } from './profile.entity';
-import { Project } from '@api/features/project/project.entity';
 import { ProfileStatus } from './profile-status.entity';
+import { ProfileTechnology } from './profile-technology.entity';
 
 @Injectable()
 export class ProfileService {
@@ -44,8 +44,17 @@ export class ProfileService {
     public async getProfiles(): Promise<Profile[]> {
         return await this.profileRepository
             .createQueryBuilder('p')
+            .leftJoinAndSelect('p.technologies', 'pt')
             .leftJoinAndSelect('p.status', 'ps')
             .getMany();
+    }
+
+    public async getProfileTechnologies(id: number): Promise<ProfileTechnology[]> {
+        return (await this.profileRepository
+            .createQueryBuilder('p')
+            .leftJoinAndSelect('p.technologies', 'pt')
+            .where('p.id = :id', { id: id })
+            .getOne()).technologies;
     }
 
     public async getStatuses(): Promise<ProfileStatus[]> {

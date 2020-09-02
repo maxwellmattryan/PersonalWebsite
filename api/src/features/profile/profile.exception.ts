@@ -23,3 +23,9 @@ export class ProfileStatusesWereNotFoundException extends NotFoundException {
         super('Unable to find profile statuses.');
     }
 }
+
+export class ProfileTechnologiesWereNotFoundException extends NotFoundException {
+    constructor() {
+        super('Unable to find profile technologies.');
+    }
+}
