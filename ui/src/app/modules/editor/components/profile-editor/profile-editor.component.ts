@@ -74,7 +74,6 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
         this.apiService.getProjects().subscribe((res: Project[]) => {
             this.projectData = res.sort(this.comparisonService.projects);
             if(this.id && this.profileData) {
-                console.log(this.profileData)
                 this.setProjectControls(this.profileData.projects.map(p => p.id));
             } else {
                 this.setProjectControls([]);
@@ -133,7 +132,21 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
         const profile = this.buildFormProfileData();
         console.log(profile);
 
-        // API REQUEST FOR UPDATING or CREATING PROFILE
+        if(profile.id === undefined) {
+            this.apiService.createProfile(profile).subscribe((res: Profile) => {
+                this.notificationService.createNotification('Successfully created new profile!');
+                this.router.navigate(['admin']);
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+            });
+        } else {
+            this.apiService.updateProfile(profile).subscribe((res: Profile) => {
+                this.notificationService.createNotification('Successfully updated existing profile!');
+                //this.router.navigate(['admin']);
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+            });
+        }
     }
 
     private buildFormProfileData(): Profile {

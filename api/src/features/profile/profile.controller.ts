@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, Param, Put, Req, UseGuards } from '@nestjs/common';
+import { BadRequestException, Controller, Get, HttpCode, Param, Put, Req, UseGuards } from '@nestjs/common';
 
 import { Request } from 'express';
 
@@ -8,7 +8,7 @@ import { Profile } from './profile.entity';
 import { ProfileStatus } from './profile-status.entity';
 import { ProfileTechnology } from './profile-technology.entity';
 import { ProfileService } from './profile.service';
-import { ProfilesWereNotFoundException, ProfileWasNotFoundException, ProfileStatusesWereNotFoundException, ProfileTechnologiesWereNotFoundException } from './profile.exception';
+import { ProfilesWereNotFoundException, ProfileWasNotFoundException, ProfileStatusesWereNotFoundException, ProfileTechnologiesWereNotFoundException, ProfileCouldNotBeUpdatedException } from './profile.exception';
 
 @Controller('profiles')
 export class ProfileController {
@@ -44,6 +44,16 @@ export class ProfileController {
         if(technologies.length === 0) throw new ProfileTechnologiesWereNotFoundException();
 
         return technologies;
+    }
+
+    @Put(':id')
+    @HttpCode(200)
+    @UseGuards(JwtAuthGuard)
+    async updateProfile(@Param('id') id: number, @Req() request: Request): Promise<Profile> {
+        const profile = await this.profileService.updateProfile(id, request.body);
+        if(!profile) throw new ProfileCouldNotBeUpdatedException();
+
+        return profile;
     }
 
     @Put(':id/activate')

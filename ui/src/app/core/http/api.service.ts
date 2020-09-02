@@ -178,6 +178,13 @@ export class ApiService {
         );
     }
 
+    createProfile(profile: Profile): Observable<Profile> {
+        return this.http.post<Profile>(
+            `${environment.API_URL}/profiles`,
+            profile
+        );
+    }
+
     getProfiles(): Observable<Profile[]> {
         return this.http.get<Profile[]>(`${environment.API_URL}/profiles`);
     }
@@ -188,6 +195,13 @@ export class ApiService {
 
     getProfileTechnologies(id: number): Observable<ProfileTechnology[]> {
         return this.http.get<ProfileTechnology[]>(`${environment.API_URL}/profiles/${id}/technologies`);
+    }
+
+    updateProfile(profile: Profile): Observable<Profile> {
+        return this.http.put<Profile>(
+            `${environment.API_URL}/profiles/${profile.id}`,
+            profile
+        )
     }
 }
 

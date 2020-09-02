@@ -26,7 +26,7 @@ export class Profile {
     @ManyToOne(type => ProfileStatus, ps => ps.profiles)
     public status: ProfileStatus;
 
-    @OneToMany(type => ProfileTechnology, pt => pt.profile)
+    @OneToMany(type => ProfileTechnology, pt => pt.profile, { cascade: true, onDelete: 'CASCADE' })
     public technologies: ProfileTechnology[];
 
     @ManyToMany(type => Project, p => p.profiles, { onDelete: 'CASCADE' })

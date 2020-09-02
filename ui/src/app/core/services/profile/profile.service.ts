@@ -24,11 +24,11 @@ export class ProfileService {
         return profile;
     }
 
-    getProfiles(): Array<Profile> {
+    getProfiles(): Profile[] {
         return this.profiles;
     }
 
-    setProfiles(profiles: Array<Profile>): void {
+    setProfiles(profiles: Profile[]): void {
         this.profiles = profiles;
     }
 }

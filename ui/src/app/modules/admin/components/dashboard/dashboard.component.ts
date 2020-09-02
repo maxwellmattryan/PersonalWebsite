@@ -31,7 +31,6 @@ export class DashboardComponent implements OnInit {
 
     populateProfiles(): void {
         this.apiService.getProfiles().subscribe((res: Profile[]) => {
-            console.log(res);
             this.profileService.setProfiles(res.sort(this.comparisonService.profiles));
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
@@ -43,7 +42,7 @@ export class DashboardComponent implements OnInit {
 
         this.apiService.activateProfile(profile.id).subscribe((res: Profile) => {
             profile = this.profileService.activateProfile(profile);
-            this.notificationService.createNotification(`'${res.name}' profile has been activated!`);
+            this.notificationService.createNotification(`Successfully activated the "${res.name}" profile!`);
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
         });

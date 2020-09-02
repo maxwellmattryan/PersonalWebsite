@@ -1,4 +1,4 @@
-import { NotFoundException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 export class ActiveProfileWasNotFoundException extends NotFoundException {
     constructor() {
@@ -27,5 +27,11 @@ export class ProfileStatusesWereNotFoundException extends NotFoundException {
 export class ProfileTechnologiesWereNotFoundException extends NotFoundException {
     constructor() {
         super('Unable to find profile technologies.');
+    }
+}
+
+export class ProfileCouldNotBeUpdatedException extends BadRequestException {
+    constructor() {
+        super('Profile could not be updated.');
     }
 }
