@@ -1,12 +1,14 @@
-import { Controller, Get, HttpCode, Param, Put, Req, UseGuards } from '@nestjs/common';
+import { BadRequestException, Controller, Get, HttpCode, Param, Post, Put, Req, UseGuards, Delete } from '@nestjs/common';
 
 import { Request } from 'express';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
 import { Profile } from './profile.entity';
+import { ProfileStatus } from './profile-status.entity';
+import { ProfileTechnology } from './profile-technology.entity';
 import { ProfileService } from './profile.service';
-import { ProfilesWereNotFoundException, ProfileWasNotFoundException } from './profile.exception';
+import { ProfilesWereNotFoundException, ProfileWasNotFoundException, ProfileStatusesWereNotFoundException, ProfileTechnologiesWereNotFoundException, ProfileCouldNotBeUpdatedException } from './profile.exception';
 
 @Controller('profiles')
 export class ProfileController {
@@ -17,11 +19,37 @@ export class ProfileController {
     @Get('')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    async listProfiles(@Req() request: Request): Promise<Profile[]> {
+    async getProfiles(@Req() request: Request): Promise<Profile[]> {
         const profiles = await this.profileService.getProfiles();
         if(profiles.length == 0) throw new ProfilesWereNotFoundException();
 
         return profiles;
+    }
+
+    @Post('')
+    @HttpCode(201)
+    @UseGuards(JwtAuthGuard)
+    async createProfile(@Req() request: Request): Promise<Profile> {
+        return await this.profileService.createProfile(request.body);
+    }
+
+    @Put(':id')
+    @HttpCode(200)
+    @UseGuards(JwtAuthGuard)
+    async updateProfile(@Param('id') id: number, @Req() request: Request): Promise<Profile> {
+        const profile = await this.profileService.updateProfile(id, request.body);
+        if(!profile) throw new ProfileCouldNotBeUpdatedException();
+
+        return profile;
+    }
+
+    @Delete(':id')
+    @HttpCode(204)
+    @UseGuards(JwtAuthGuard)
+    async deleteProfile(@Param('id') id: number, @Req() request: Request): Promise<void> {
+        if(!(await this.profileService.existsInTable(id))) throw new ProfileWasNotFoundException();
+
+        await this.profileService.deleteProfile(id);
     }
 
     @Put(':id/activate')
@@ -36,5 +64,25 @@ export class ProfileController {
         await this.profileService.resetProfileStatuses(id);
 
         return await this.profileService.getProfile(id);
+    }
+
+    @Get(':id/technologies')
+    @HttpCode(200)
+    @UseGuards(JwtAuthGuard)
+    async getProfileTechnologies(@Param('id') id: number, @Req() request: Request): Promise<ProfileTechnology[]> {
+        const technologies = await this.profileService.getProfileTechnologies(id);
+        if(technologies.length === 0) throw new ProfileTechnologiesWereNotFoundException();
+
+        return technologies;
+    }
+
+    @Get('statuses')
+    @HttpCode(200)
+    @UseGuards(JwtAuthGuard)
+    async getProfileStatuses(@Req() request: Request): Promise<ProfileStatus[]> {
+        const statuses = await this.profileService.getStatuses();
+        if(statuses.length === 0) throw new ProfileStatusesWereNotFoundException();
+
+        return statuses;
     }
 }

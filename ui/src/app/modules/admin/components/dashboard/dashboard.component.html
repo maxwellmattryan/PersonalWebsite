@@ -23,6 +23,9 @@
     <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
         <h2>Portfolio</h2>
         <br>
+        <a class='btn dashboard__btn' [routerLink]="['/editor']" [queryParams]='{type: "profile"}'>
+            Create Profile
+        </a>
         <a class='btn dashboard__btn' [routerLink]="['/editor']" [queryParams]='{type: "project"}'>
             Create Project
         </a>
@@ -32,15 +35,33 @@
     <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
         <h2>Profiles:</h2>
         <br>
-        <button
-            *ngFor='let profile of profileService.getProfiles()'
-            [ngClass]="{'btn--active': profile.status.status == 'ACTIVE' }"
-            class='btn dashboard__profile-btn'
-            (click)='changeProfile(profile)'
-            type='button'
-        >
-            {{ profile.name }}
-        </button>
+        <div class='dashboard__profile-btn-row' *ngFor='let profile of profiles'>
+            <button
+                    [ngClass]="{'btn--active': profile.status.status == 'ACTIVE' }"
+                    class='btn dashboard__profile-btn'
+                    (click)='changeProfile(profile)'
+                    type='button'
+            >
+                {{ profile.name }}
+            </button>
+
+            <button
+                    class='btn dashboard__profile-btn--edit'
+                    (click)='sendProfileToEditor(profile)'
+                    routerLink='/editor'
+                    [queryParams]='{type: "profile", id: profile.id}'
+            >
+                &#x270F;
+            </button>
+            <button
+                    class='btn dashboard__profile-btn--edit btn--warn'
+                    (click)='deleteProfile(profile)'
+                    type='button'
+            >
+                &#x2715;
+            </button>
+        </div>
+
         <br><br>
     </div>
 

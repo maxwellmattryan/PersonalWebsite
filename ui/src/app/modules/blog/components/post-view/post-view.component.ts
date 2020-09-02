@@ -50,8 +50,8 @@ export class PostViewComponent implements OnInit {
         this.editorService.setPost(this.post);
     }
 
-    deletePost(): void {
-        this.apiService.deletePost(this.router.url).subscribe((res: any) => {
+    deletePost(id: number): void {
+        this.apiService.deletePost(id).subscribe((res: any) => {
             this.notificationService.createNotification('Successfully deleted blog post!');
             this.router.navigate(['/blog']);
         }, (error: HttpErrorResponse) => {

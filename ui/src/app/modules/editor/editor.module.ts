@@ -9,6 +9,7 @@ import { EditorRoutingModule } from './editor-routing.module';
 
 import {
     PostEditorComponent,
+    ProfileEditorComponent,
     ProjectEditorComponent,
     TopicEditorComponent
 } from './components';
@@ -18,7 +19,8 @@ import {
         EditorComponent, 
         PostEditorComponent,
         ProjectEditorComponent,
-        TopicEditorComponent
+        TopicEditorComponent,
+        ProfileEditorComponent
     ],
     imports: [
         CommonModule,

@@ -5,13 +5,13 @@
 
     <form class='editor__form' [formGroup]='postForm' (ngSubmit)='onSubmit()'>
         <div class="form-field editor__form-field">
-            <label>Title</label>
+            <label class='form-field-label editor__form-field-label'>Title</label>
             <br><br>
             <input formControlName='title' required autofocus>
         </div>
 
         <div class="form-field editor__form-field">
-            <label>Author</label>
+            <label class='form-field-label editor__form-field-label'>Author</label>
             <br><br>
             <mat-radio-group formControlName='author' name='author' required>
                 <mat-radio-button
@@ -22,7 +22,7 @@
         </div>
 
         <div class="form-field editor__form-field">
-            <label>Status</label>
+            <label class='form-field-label editor__form-field-label'>Status</label>
             <br><br>
             <mat-radio-group formControlName='status' name='status' required>
                 <mat-radio-button
@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-field editor__form-field">
-            <label>Topics</label>
+            <label class='form-field-label editor__form-field-label'>Topics</label>
             <br><br>
             <ng-container formArrayName='topics' *ngFor='let topic of postForm.controls.topics["controls"]; let idx = index'>
                 <mat-checkbox [formControlName]='idx'>{{ topicData[idx].name }}</mat-checkbox>
@@ -42,19 +42,19 @@
         </div>
 
         <div class="form-field editor__form-field">
-            <label>Preview</label>
+            <label class='form-field-label editor__form-field-label'>Preview</label>
             <br><br>
             <textarea formControlName='preview' required></textarea>
         </div>
 
         <div class="form-field editor__form-field">
-            <label>Content</label>
+            <label class='form-field-label editor__form-field-label'>Content</label>
             <br><br>
             <textarea formControlName='content' required></textarea>
         </div>
 
         <div class="form-field editor__form-field">
-            <label>Image URL</label>
+            <label class='form-field-label editor__form-field-label'>Image URL</label>
             <br><br>
             <input formControlName='image_url' required>
         </div>

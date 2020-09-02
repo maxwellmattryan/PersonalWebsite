@@ -6,7 +6,16 @@ import { Observable } from 'rxjs';
 
 import { Admin } from '@app/shared/interfaces';
 import { environment } from '@app/environments/environment';
-import { BlogPost, Project, Profile, BlogTopic, BlogPostStatus, BlogAuthor } from '@app/shared/models';
+import {
+    BlogPost,
+    Project,
+    Profile,
+    BlogTopic,
+    BlogPostStatus,
+    BlogAuthor,
+    ProfileStatus,
+    ProfileTechnology
+} from '@app/shared/models';
 
 @Injectable({
     providedIn: 'root'
@@ -77,10 +86,8 @@ export class ApiService {
         );
     }
 
-    deletePost(requestURL: string): Observable<any> {
-        return this.http.delete<any>(
-            environment.API_URL + requestURL
-        );
+    deletePost(id: number): Observable<any> {
+        return this.http.delete<any>(`${environment.API_URL}/blog/posts/${id}`);
     }
 
     getPost(uri: string): Observable<BlogPost> {
@@ -122,7 +129,7 @@ export class ApiService {
     }
 
     getTopics(): Observable<BlogTopic[]> {
-        return this.http.get<BlogTopic[]>(environment.API_URL + '/blog/topics');
+        return this.http.get<BlogTopic[]>(`${environment.API_URL}/blog/topics`);
     }
 
     updateTopic(topic: BlogTopic): Observable<BlogTopic> {
@@ -150,6 +157,10 @@ export class ApiService {
         return this.http.get<Project>(environment.API_URL + uri);
     }
 
+    getProjects(): Observable<Project[]> {
+        return this.http.get<Project[]>(`${environment.API_URL}/projects`);
+    }
+
     updateProject(project: Project): Observable<Project> {
         return this.http.put<Project>(
             `${environment.API_URL}/projects/${project.id}`,
@@ -167,7 +178,34 @@ export class ApiService {
         );
     }
 
+    createProfile(profile: Profile): Observable<Profile> {
+        return this.http.post<Profile>(
+            `${environment.API_URL}/profiles`,
+            profile
+        );
+    }
+
+    deleteProfile(id: number): Observable<any> {
+        return this.http.delete<any>(`${environment.API_URL}/profiles/${id}`)
+    }
+
     getProfiles(): Observable<Profile[]> {
-        return this.http.get<Profile[]>(environment.API_URL + '/profiles');
+        return this.http.get<Profile[]>(`${environment.API_URL}/profiles`);
+    }
+
+    getProfileStatuses(): Observable<ProfileStatus[]> {
+        return this.http.get<ProfileStatus[]>(`${environment.API_URL}/profiles/statuses`);
+    }
+
+    getProfileTechnologies(id: number): Observable<ProfileTechnology[]> {
+        return this.http.get<ProfileTechnology[]>(`${environment.API_URL}/profiles/${id}/technologies`);
+    }
+
+    updateProfile(profile: Profile): Observable<Profile> {
+        return this.http.put<Profile>(
+            `${environment.API_URL}/profiles/${profile.id}`,
+            profile
+        )
     }
 }
+
