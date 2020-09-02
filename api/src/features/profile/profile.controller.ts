@@ -1,4 +1,4 @@
-import { BadRequestException, Controller, Get, HttpCode, Param, Put, Req, UseGuards } from '@nestjs/common';
+import { BadRequestException, Controller, Get, HttpCode, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
 
 import { Request } from 'express';
 
@@ -24,6 +24,13 @@ export class ProfileController {
         if(profiles.length == 0) throw new ProfilesWereNotFoundException();
 
         return profiles;
+    }
+
+    @Post('')
+    @HttpCode(201)
+    @UseGuards(JwtAuthGuard)
+    async createProfile(@Req() request: Request): Promise<Profile> {
+        return await this.profileService.createProfile(request.body);
     }
 
     @Get('statuses')

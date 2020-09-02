@@ -35,3 +35,9 @@ export class ProfileCouldNotBeUpdatedException extends BadRequestException {
         super('Profile could not be updated.');
     }
 }
+
+export class ProfileAlreadyExistsException extends BadRequestException {
+    constructor() {
+        super('Project already exists.');
+    }
+}

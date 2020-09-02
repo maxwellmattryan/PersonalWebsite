@@ -3,12 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
+import { PostgresErrorCode } from '@api/core/database/postgres-error-code.enum';
+import { InternalServerErrorException } from '@api/core/http/http.exception';
+import { ProfileAlreadyExistsException } from './profile.exception';
+
 import { Profile } from './profile.entity';
 import { ProfileStatus } from './profile-status.entity';
 import { ProfileTechnology } from './profile-technology.entity';
-import { PostgresErrorCode } from '@api/core/database/postgres-error-code.enum';
-import { ProjectAlreadyExistsException } from '@api/features/project/project.exception';
-import { InternalServerErrorException } from '@api/core/http/http.exception';
 
 @Injectable()
 export class ProfileService {
@@ -26,6 +27,22 @@ export class ProfileService {
             .createQueryBuilder('p')
             .where(`p.id = ${id}`)
             .getCount() > 0;
+    }
+
+    public async createProfile(profileData: Profile): Promise<Profile> {
+        let profile: Profile = this.profileRepository.create(profileData);
+        profile = await this.profileRepository.save(profile)
+            .catch((error) => {
+                if(error.code === PostgresErrorCode.UNIQUE_VIOLATION) {
+                    throw new ProfileAlreadyExistsException();
+                } else {
+                    throw new InternalServerErrorException();
+                }
+            });
+
+        if(profile.status.status === 'ACTIVE') await this.resetProfileStatuses(profile.id);
+
+        return profile;
     }
 
     public async getProfile(id: number): Promise<Profile> {
