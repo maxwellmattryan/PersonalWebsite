@@ -1,0 +1,74 @@
+<div class='section editor'>
+    <h1 class='editor__header'>Profile Editor</h1>
+
+    <div class='line-divider'></div>
+
+    <form class='editor__form' [formGroup]='profileForm' (ngSubmit)='onSubmit()'>
+        <div class='form-field editor__form-field'>
+            <label class='form-field-label editor__form-field-label'>Name</label>
+            <br><br>
+            <input formControlName='name' required autofocus>
+        </div>
+
+        <div class="form-field editor__form-field">
+            <label>Status</label>
+            <br><br>
+            <mat-radio-group formControlName='status' name='status' required>
+                <mat-radio-button
+                        *ngFor='let status of statusData'
+                        [value]='status.status'
+                >{{ status.status }}</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <div class='form-field editor__form-field'>
+            <label class='form-field-label editor__form-field-label'>Projects</label>
+            <br><br>
+            <ng-container formArrayName='projects' *ngFor='let project of profileForm.controls.projects["controls"]; let idx = index'>
+                <mat-checkbox [formControlName]='idx'>{{ projectData[idx].name }}</mat-checkbox>
+                <br>
+            </ng-container>
+        </div>
+
+        <div class='form-field editor__form-field'>
+            <label class='form-field-label editor__form-field-label'>Tagline</label>
+            <br><br>
+            <input formControlName='tagline' required autofocus>
+        </div>
+
+        <div class='form-field editor__form-field'>
+            <label class='form-field-label editor__form-field-label'>Landing</label>
+            <br><br>
+            <input formControlName='landing' required autofocus>
+        </div>
+
+        <div class='form-field editor__form-field'>
+            <label class='form-field-label editor__form-field-label'>About</label>
+            <br><br>
+            <input formControlName='about' required autofocus>
+        </div>
+
+        <div class='form-field editor__form-field'>
+            <label class='form-field-label editor__form-field-label'>Technologies</label>
+            <br><br>
+            <ng-container formArrayName='technologies' *ngFor='let technology of profileForm.controls.technologies["controls"]; let idx = index'>
+                <input [formControlName]='idx' required autofocus>
+                <br><br>
+            </ng-container>
+        </div>
+
+        <div class='form-field editor__form-field'>
+            <label class='form-field-label editor__form-field-label'>Image URL</label>
+            <br><br>
+            <input formControlName='image_url' required autofocus>
+        </div>
+
+        <button
+                [ngClass]="{'btn--inactive': !profileForm.valid}"
+                class='btn editor__form-btn'
+                [disabled]='!profileForm.valid'
+        >
+            Submit
+        </button>
+    </form>
+</div>
