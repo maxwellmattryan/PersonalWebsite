@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+    flyway:
+        image: flyway/flyway
+        command: migrate
+        volumes:
+            - ./flyway/conf:/flyway/conf
+            - ./flyway/sql:/flyway/sql
+        depends_on:
+            - postgres
+        links:
+            - postgres
+
+    postgres:
+        image: postgres:latest
+        environment:
+            POSTGRES_DB: mattmaxwell
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: password
+        ports:
+            - 5432:5432
