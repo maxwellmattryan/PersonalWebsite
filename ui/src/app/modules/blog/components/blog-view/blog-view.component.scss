@@ -45,16 +45,16 @@
     &--add, &--edit {
         height: $small-btn-height;
         line-height: $small-btn-height;
-        width: 48px;
+        width: $extra-small-btn-width;
         margin-left: $half-margin;
     }
 
     &--add {
-        font-size: 150%;
+        font-size: 140%;
     }
 
     &--edit {
-        font-size: 120%;
+        font-size: 110%;
     }
 
     &--half {

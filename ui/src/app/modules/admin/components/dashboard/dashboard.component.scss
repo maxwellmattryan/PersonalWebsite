@@ -17,9 +17,8 @@
 
 .dashboard__btn {
     line-height: $btn-height;
-    padding: $quarter-padding;
     margin-bottom: $half-margin;
-    width: 240px;
+    width: $large-btn-width;
 }
 
 .dashboard__profile-btn-row {
@@ -35,13 +34,13 @@
     height: auto;
     padding: $quarter-padding;
     margin: 0 $half-margin;
-    width: 174px;
+    width: $btn-width;
 
     &--edit {
         font-size: 120%;
         height: 36px;
         line-height: 36px;
         margin: 0 $eighth-margin;
-        width: 44px;
+        width: $extra-small-btn-width;
     }
 }

@@ -62,6 +62,7 @@
 }
 
 .navbar__menu-icon {
+    cursor: pointer;
 
     div {
         background-color: $color-primary;
@@ -182,6 +183,7 @@
 }
 
 .sidebar__toggle-btn {
+    cursor: pointer;
     font-size: 150%;
     text-align: right;
 }
