@@ -51,9 +51,15 @@
     color: $color-dark;
 }
 
-.posts__load-btn {
-    width: 100%;
+.posts__load-btn, .posts__readmore-btn {
+    font-size: 100%;
+    height: $btn-height;
     max-width: 316px;
+    width: 100%;
+}
+
+.posts__readmore-btn {
+    line-height: $btn-height;
 }
 
 @media only screen and (min-width: 768px) {

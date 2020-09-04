@@ -13,6 +13,7 @@ export class PostCollectionComponent implements OnInit {
     
     @Input() showPreview: boolean;
     @Input() showTopics: boolean;
+    @Input() showReadmore: boolean;
 
     // CAUTION: This is necessary because the routing changes when this component is used outside of the blog module
     @Input() baseRoute: string = 'blog/posts/';
