@@ -45,7 +45,6 @@
 .posts__post-topic-item {
     color: $color-secondary;
     font-style: italic;
-    text-decoration: underline;
 }
 
 .posts__post-preview {
@@ -55,4 +54,12 @@
 .posts__load-btn {
     width: 100%;
     max-width: 316px;
+}
+
+@media only screen and (min-width: 768px) {
+    .posts__post {
+        &-title:hover, &-topic-item:hover {
+            text-decoration: underline;
+        }
+    }
 }

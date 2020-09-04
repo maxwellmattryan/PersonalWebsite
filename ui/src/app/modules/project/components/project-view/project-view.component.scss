@@ -36,10 +36,19 @@
 
 .project__external-icon {
     margin-right: $half-margin;
+    transition: transform $hover-transition-duration ease;
 }
 
 .project__image {
     height: auto;
     margin-bottom: $margin;
     width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .project__external-icon {
+        &:hover {
+            transform: translateY($hover-transition-transform);
+        }
+    }
 }

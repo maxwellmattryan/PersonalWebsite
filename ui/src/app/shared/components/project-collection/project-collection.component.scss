@@ -59,6 +59,7 @@
     &-link {
         display: block;
         padding: $padding;
+        transition: transform $hover-transition-duration ease;
     }
 
     &--rjust {
@@ -81,5 +82,17 @@
     .projects__project-description,
     .projects__project-link {
         text-align: right;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .projects__project {
+        &-link:hover {
+            transform: translateY($hover-transition-transform);
+        }
+
+        &-name--link:hover {
+            text-decoration: underline;
+        }
     }
 }

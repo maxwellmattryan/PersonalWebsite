@@ -46,3 +46,11 @@
     margin-bottom: $margin;
     width: 100%;
 }
+
+@media only screen and (min-width: 768px) {
+    .post__topic-item {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

@@ -8,7 +8,7 @@
             <div class='projects__project-background' [ngStyle]="{ 'background-image': 'url(https://mattmaxwell.tech/' + project.image_url + ')' }"></div>
 
             <a *ngIf='authService.isLoggedIn()' class='projects__project-anchor-wrapper' [routerLink]="['/projects/' + project.id]">
-                <h3 class='projects__project-name'>{{ project.name }}</h3>
+                <h3 class='projects__project-name projects__project-name--link'>{{ project.name }}</h3>
             </a>
 
             <h3 *ngIf='!authService.isLoggedIn()' class='projects__project-name'>{{ project.name }}</h3>
