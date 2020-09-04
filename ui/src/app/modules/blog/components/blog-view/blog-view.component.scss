@@ -1,11 +1,29 @@
 @import 'variables';
 
 .blog {
-    
+    display: grid;
+    grid-template-areas:
+        "blog-header"
+        "topics"
+        "posts";
+    min-height: 86vh;
+
+    .blog__header {
+        grid-area: blog-header;
+    }
+    .topics {
+        grid-area: topics;
+        margin: 0 auto;
+        padding: $padding;
+    }
+    .posts {
+        grid-area: posts;
+    }
 }
 
 .blog__header {
-    margin-bottom: $margin;
+    margin: 0 auto $margin;
+    padding: $padding;
     text-align: center;
 }
 
@@ -14,16 +32,21 @@
 }
 
 .blog__filter-btn-container {
+    align-items: center;
     display: flex;
     flex-direction: column;
 }
 
 .blog__filter-btn{
+    height: $btn-height;
     line-height: $btn-height;
-    width: 100%;
+    width: 192px;
 
     &--add, &--edit {
-        width: 13vw;
+        height: $small-btn-height;
+        line-height: $small-btn-height;
+        width: 48px;
+        margin-left: $half-margin;
     }
 
     &--add {
@@ -35,12 +58,35 @@
     }
 
     &--half {
-        width: 50vw;
+        width: 196px;
     }
 }
 
 .blog__filter-btn-row {
+    align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    &--all {
+        margin-bottom: $margin;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .blog__filter-btn {
+        height: $large-btn-height;
+        line-height: $large-btn-height;
+        width: 236px;
+
+        &--add, &--edit {
+            width: 52px;
+        }
+    }
+
+    .blog {
+        grid-template-areas:
+          "blog-header blog-header blog-header blog-header"
+          "posts posts posts topics";
+    }
 }

@@ -9,4 +9,8 @@
 .section-divider {
     background: $color-dark;
     height: $section-divider-height;
+
+    &--half {
+        height: calc(#{$section-divider-height} / 2);
+    }
 }

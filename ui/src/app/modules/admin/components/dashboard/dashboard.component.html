@@ -33,7 +33,7 @@
     </div>
 
     <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
-        <h2>Profiles:</h2>
+        <h2>Profiles</h2>
         <br>
         <div class='dashboard__profile-btn-row' *ngFor='let profile of profiles'>
             <button
@@ -45,25 +45,26 @@
                 {{ profile.name }}
             </button>
 
-            <button
+            <a
                     class='btn dashboard__profile-btn--edit'
                     (click)='sendProfileToEditor(profile)'
                     routerLink='/editor'
                     [queryParams]='{type: "profile", id: profile.id}'
             >
                 &#x270F;
-            </button>
-            <button
+            </a>
+            <a
                     class='btn dashboard__profile-btn--edit btn--warn'
                     (click)='deleteProfile(profile)'
-                    type='button'
             >
                 &#x2715;
-            </button>
+            </a>
         </div>
 
         <br><br>
     </div>
+
+    <div class='section-divider--half'></div>
 
     <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
         <a class='btn dashboard__btn btn--warn' (click)="onLogoutClick()">Logout</a>

@@ -1,7 +1,7 @@
 @import 'variables';
 
 .login {
-    min-height: 86vh;
+    min-height: 77vh;
 }
 
 .login__header {
@@ -14,11 +14,11 @@
 }
 
 .login__form-field {
-    
+  
 }
 
 .login__form-btn {
     line-height: $btn-height;
     margin-top: $half-margin;
-    width: 50vw;
+    width: 180px;
 }

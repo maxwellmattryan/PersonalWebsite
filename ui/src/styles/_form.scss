@@ -5,6 +5,7 @@
     input, textarea {
         border-radius: 1px;
         box-sizing: border-box;
+        font-size: 100%;
         width: 50%;
     }
 
@@ -36,4 +37,10 @@
 .form-field-label {
     font-weight: 700;
     font-size: 125%;
+}
+
+@media only screen and (min-width: 768px) {
+    input, textarea {
+        font-size: 110%;
+    }
 }
