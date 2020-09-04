@@ -7,5 +7,5 @@
     <h2 class='landing__tagline'>{{ tagline }}</h2>
     <p class='landing__landing'>{{ landing }}</p>
     <br>
-    <a class='btn landing__contact-btn' href='mailto:maxwellmattryan@gmail.com'>Contact Me</a>
+    <a class='btn landing__contact-btn' [href]='"mailto:" + constructEmail("maxwellmattryan", "gmail")'>Contact Me</a>
 </div>

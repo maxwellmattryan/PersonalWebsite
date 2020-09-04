@@ -12,4 +12,8 @@ export class LandingComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void { }
+
+    constructEmail(name: string, domain: string): string {
+        return `${name}@${domain}.com`;
+    }
 }
