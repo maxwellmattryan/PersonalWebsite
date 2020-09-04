@@ -12,7 +12,6 @@
     text-align: center;
     transform: perspective(1px) translateZ(0);
     transition-duration: $btn-active-transition-duration;
-    transition-property: transform;
     -webkit-transform: perspective(1px) translateZ(0);
     -webkit-transform-duration: $btn-active-transition-duration;
     -webkit-transition-property: transform;
@@ -55,5 +54,30 @@
         border: 2px solid $color-light;
         color: $color-light;
         cursor: auto;
+        pointer-events: none;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .btn {
+        &:hover {
+            background-color: $color-primary;
+            color: $color-dark;
+        }
+
+        &--warn:hover {
+            background-color: $color-warn;
+            color: $color-dark;
+        }
+
+        &--go:hover {
+            background-color: $color-go;
+            color: $color-dark;
+        }
+
+        &--inactive:hover {
+            background-color: $color-dark;
+            color: $color-primary;
+        }
     }
 }
