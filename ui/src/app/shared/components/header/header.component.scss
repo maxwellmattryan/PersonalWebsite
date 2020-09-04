@@ -189,7 +189,36 @@
 }
 
 @media only screen and (min-width: 768px) {
+    .navbar__logo-icon:hover {
+        background-color: $color-primary;
+        color: $color-dark;
+    }
+
     .navbar__link-container {
-        display: default;
+        display: block;
+
+        .navbar__link-item {
+            color: $color-primary;
+            display: inline-block;
+            height: $header-height;
+            line-height: $header-height;
+            padding: 0 $padding;
+
+            &:hover {
+                background-color: $color-primary;
+                color: $color-dark;
+            }
+        }
+    }
+
+    .sidebar, .navbar__toggle-btn {
+        display: none;
+    }
+
+    .sidebar__link-item, .sidebar__toggle-btn {
+        &:hover {
+            background-color: $color-dark;
+            color: $color-white;
+        }
     }
 }
