@@ -12,12 +12,6 @@ export class BlogPostsWereNotFoundException extends NotFoundException {
     }
 }
 
-export class BlogPostStatusesWereNotFoundException extends NotFoundException {
-    constructor() {
-        super('Unable to find blog post statuses.');
-    }
-}
-
 export class BlogPostCouldNotBeUpdated extends BadRequestException {
     constructor() {
         super('Blog post could not be updated.');

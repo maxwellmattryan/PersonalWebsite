@@ -6,7 +6,7 @@ import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
 import { BlogPostStatus } from '../entities/blog-post-status.entity';
 import { BlogPostStatusService } from '../services/blog-post-status.service';
-import { BlogPostStatusesWereNotFoundException } from '../exceptions/blog-post.exception';
+import { BlogPostStatusesWereNotFoundException } from '../exceptions/blog-post-status.exception';
 
 @Controller('blog/posts/statuses')
 export class BlogPostStatusController {
