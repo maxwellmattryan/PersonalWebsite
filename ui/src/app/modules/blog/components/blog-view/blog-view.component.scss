@@ -1,6 +1,7 @@
 @import 'variables';
 
 .blog {
+    background-color: $color-dark;
     display: grid;
     grid-template-areas:
         "blog-header"
@@ -13,8 +14,6 @@
     }
     .topics {
         grid-area: topics;
-        margin: 0 auto;
-        padding: $padding;
     }
     .posts {
         grid-area: posts;
@@ -41,7 +40,7 @@
     font-size: 90%;
     height: $btn-height;
     line-height: $btn-height;
-    width: 192px;
+    width: 184px;
 
     &--add, &--edit {
         height: $small-btn-height;
@@ -51,16 +50,16 @@
 
     &--add {
         font-size: 140%;
-        width: calc(#{$extra-small-btn-width} * 2 + #{$half-margin});
+        width: calc(42px * 2 + #{$half-margin});
     }
 
     &--edit {
         font-size: 110%;
-        width: $extra-small-btn-width;
+        width: 42px;
     }
 
     &--half {
-        width: 196px;
+        width: 184px;
     }
 }
 
