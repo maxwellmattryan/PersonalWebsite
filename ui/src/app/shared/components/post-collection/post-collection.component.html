@@ -14,6 +14,7 @@
                     <a
                             class='posts__post-topic-item'
                             *ngFor='let topic of post.topics'
+                            (click)='blogService.setActiveTopic(topic)'
                             [routerLink]="['/blog']"
                     >
                         {{ topic.name }}
