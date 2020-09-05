@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { BlogPost, BlogTopic, Profile, Project } from '@app/shared/models';
+import { BlogPost, BlogTopic, Profile, ProfileTechnology, Project } from '@app/shared/models';
 
 @Injectable({
     providedIn: 'root'
@@ -27,6 +27,13 @@ export class ComparisonService {
         if(p1.name > p2.name) return 1;
         if(p1.name < p2.name) return -1;
         
+        return 0;
+    };
+
+    profileTechnologies = (pt1: ProfileTechnology, pt2: ProfileTechnology) => {
+        if(pt1.display_order > pt2.display_order) return 1;
+        if(pt1.display_order < pt2.display_order) return -1;
+
         return 0;
     };
 
