@@ -27,6 +27,7 @@
 }
 
 .post__date {
+    font-style: italic;
     margin-bottom: $half-margin;
 }
 
@@ -37,7 +38,6 @@
 
 .post__topic-item {
     color: $color-primary;
-    font-style: italic;
     margin-top: $quarter-margin;
 }
 
