@@ -61,7 +61,7 @@ export class BlogPostService {
             .leftJoinAndSelect('bp.author', 'ba')
             .leftJoinAndSelect('bp.status', 'bps')
             .innerJoinAndSelect('bp.topics', 'bt')
-            .orderBy('bp.created_at', 'DESC')
+            .orderBy('bp.updated_at', 'DESC')
             .getMany();
     }
 
@@ -72,7 +72,7 @@ export class BlogPostService {
             .leftJoinAndSelect('bp.status', 'bps')
             .innerJoinAndSelect('bp.topics', 'bt')
             .where('bps.status = :status', { status: status })
-            .orderBy('bp.created_at', 'DESC')
+            .orderBy('bp.updated_at', 'DESC')
             .getMany();
     }
 
@@ -84,7 +84,7 @@ export class BlogPostService {
             .innerJoinAndSelect('bp.topics', 'bt')
             .where('bps.status = :status', { status: status })
             .where('bt.id = :id', { id: topicId })
-            .orderBy('bp.created_at', 'DESC')
+            .orderBy('bp.updated_at', 'DESC')
             .getMany();
     }
 
@@ -95,7 +95,7 @@ export class BlogPostService {
             .leftJoinAndSelect('bp.status', 'bps')
             .innerJoinAndSelect('bp.topics', 'bt')
             .where('bt.id = :id', { id: topicId })
-            .orderBy('bt.created_at', 'DESC')
+            .orderBy('bt.updated_at', 'DESC')
             .getMany();
     }
 
