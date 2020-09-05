@@ -42,6 +42,7 @@ export class BlogViewComponent implements OnInit {
                 if(this.blogService.hasActiveTopic()) {
                     this.filterPosts(this.blogService.getActiveTopicId());
                     this.blogService.setActiveTopic(null);
+                    this.blogService.getActiveTopicId();
                 }
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
