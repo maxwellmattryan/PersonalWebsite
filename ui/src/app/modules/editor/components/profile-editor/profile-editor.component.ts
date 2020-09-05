@@ -100,7 +100,7 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadTechnologyData(): void {
-        if(this.profileData) this.technologyData = this.profileData.technologies.reverse();
+        if(this.profileData) this.technologyData = this.profileData.technologies.sort(this.comparisonService.profileTechnologies);
     }
 
     private buildProfileForm(): void {
