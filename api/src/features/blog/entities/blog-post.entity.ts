@@ -25,7 +25,7 @@ export class BlogPost {
     @ManyToOne(type => BlogAuthor, ba => ba.id)
     public author: BlogAuthor;
 
-    @ManyToOne(type => BlogPostStatus, bps => bps.id)
+    @ManyToOne(type => BlogPostStatus, bps => bps.post)
     public status: BlogPostStatus;
 
     @ManyToMany(type => BlogTopic, bt => bt.posts, { onDelete: 'CASCADE' })

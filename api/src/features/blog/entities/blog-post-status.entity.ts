@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+
+import { BlogPost } from '../entities/blog-post.entity';
 
 @Entity('blog_post_status')
 export class BlogPostStatus {
@@ -11,4 +13,7 @@ export class BlogPostStatus {
 
     @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
     public status: string;
+
+    @OneToMany(type => BlogPost, bp => bp.status)
+    public post: BlogPost;
 }

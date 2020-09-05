@@ -8,15 +8,12 @@ import { InternalServerErrorException } from '@api/core/http/http.exception';
 import { BlogPostAlreadyExistsException } from '../exceptions/blog-post.exception';
 
 import { BlogPost } from '../entities/blog-post.entity';
-import { BlogPostStatus } from '../entities/blog-post-status.entity';
 
 @Injectable()
 export class BlogPostService {
     constructor(
         @InjectRepository(BlogPost)
-        private readonly blogPostRepository: Repository<BlogPost>,
-        @InjectRepository(BlogPostStatus)
-        private readonly blogPostStatusRepository: Repository<BlogPostStatus>
+        private readonly blogPostRepository: Repository<BlogPost>
     ) { }
 
     public async existsInTable(id: number): Promise<boolean> {
@@ -99,12 +96,6 @@ export class BlogPostService {
             .innerJoinAndSelect('bp.topics', 'bt')
             .where('bt.id = :id', { id: topicId })
             .orderBy('bt.created_at', 'DESC')
-            .getMany();
-    }
-
-    public async getStatuses(): Promise<BlogPostStatus[]> {
-        return await this.blogPostStatusRepository
-            .createQueryBuilder('bps')
             .getMany();
     }
 
