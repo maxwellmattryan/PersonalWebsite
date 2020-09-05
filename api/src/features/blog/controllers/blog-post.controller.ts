@@ -5,10 +5,9 @@ import { Request } from 'express';
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
 import { BlogPost } from '../entities/blog-post.entity';
-import { BlogPostStatus } from '../entities/blog-post-status.entity';
 import { BlogPostService } from '../services/blog-post.service';
 import {
-    BlogPostCouldNotBeUpdated, BlogPostStatusesWereNotFoundException,
+    BlogPostCouldNotBeUpdated,
     BlogPostsWereNotFoundException,
     BlogPostWasNotFoundException
 } from '../exceptions/blog-post.exception';
@@ -21,7 +20,7 @@ export class BlogPostController {
 
     @Get('')
     @HttpCode(200)
-    async getPublishedPosts(
+    async getPosts(
         @Query('topic_id') topicId: string,
         @Query('published') published: string,
         @Req() request: Request
@@ -80,16 +79,5 @@ export class BlogPostController {
         if(!(await this.blogPostService.existsInTable(id))) throw new BlogPostWasNotFoundException();
 
         await this.blogPostService.deletePost(id);
-    }
-
-    @Get('statuses')
-    @HttpCode(200)
-    @UseGuards(JwtAuthGuard)
-    async getPostStatuses(@Req() request: Request): Promise<BlogPostStatus[]> {
-        const statuses = await this.blogPostService.getStatuses();
-        if(statuses.length === 0) throw new BlogPostStatusesWereNotFoundException();
-
-        console.log(statuses);
-        return statuses;
     }
 }

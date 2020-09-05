@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { BlogAuthorController } from '@api/features/blog/controllers/blog-author.controller';
 import { BlogPostController } from './controllers/blog-post.controller';
+import { BlogPostStatusController } from './controllers/blog-post-status.controller';
 import { BlogTopicController } from './controllers/blog-topic.controller';
 
 import { BlogAuthor } from './entities/blog-author.entity';
@@ -12,6 +13,7 @@ import { BlogTopic } from './entities/blog-topic.entity';
 
 import { BlogAuthorService } from './services/blog-author.service';
 import { BlogPostService } from './services/blog-post.service';
+import { BlogPostStatusService } from './services/blog-post-status.service';
 import { BlogTopicService } from './services/blog-topic.service';
 
 @Module({
@@ -21,16 +23,19 @@ import { BlogTopicService } from './services/blog-topic.service';
     exports: [
         BlogAuthorService,
         BlogPostService,
+        BlogPostStatusService,
         BlogTopicService
     ],
     controllers: [
         BlogAuthorController,
         BlogPostController,
+        BlogPostStatusController,
         BlogTopicController
     ],
     providers: [
         BlogAuthorService,
         BlogPostService,
+        BlogPostStatusService,
         BlogTopicService
     ]
 })
