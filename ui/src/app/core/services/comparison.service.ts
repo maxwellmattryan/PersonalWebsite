@@ -10,8 +10,8 @@ export class ComparisonService {
     constructor() { }
 
     posts = (p1: BlogPost, p2: BlogPost) => {
-        if(p1.created_at < p2.created_at) return 1;
-        if(p1.created_at > p2.created_at) return -1;
+        if(p1.updated_at < p2.updated_at) return 1;
+        if(p1.updated_at > p2.updated_at) return -1;
 
         return 0;
     };
