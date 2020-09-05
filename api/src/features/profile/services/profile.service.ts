@@ -8,18 +8,16 @@ import { InternalServerErrorException } from '@api/core/http/exceptions/http.exc
 import { ProfileAlreadyExistsException } from '../exceptions/profile.exception';
 
 import { Profile } from '../entities/profile.entity';
-import { ProfileStatus } from '../entities/profile-status.entity';
-import { ProfileTechnology } from '../entities/profile-technology.entity';
+import { ProfileTechnologyService } from '@api/features/profile/services/profile-technology.service';
+import { ProfileStatusService } from '@api/features/profile/services/profile-status.service';
 
 @Injectable()
 export class ProfileService {
     constructor(
         @InjectRepository(Profile)
         private readonly profileRepository: Repository<Profile>,
-        @InjectRepository(ProfileStatus)
-        private readonly profileStatusRepository: Repository<ProfileStatus>,
-        @InjectRepository(ProfileTechnology)
-        private readonly profileTechnologyRepository: Repository<ProfileTechnology>
+        private readonly profileStatusService: ProfileStatusService,
+        private readonly profileTechnologyService: ProfileTechnologyService
     ) { }
 
     public async existsInTable(id: number): Promise<boolean> {
@@ -50,7 +48,7 @@ export class ProfileService {
             await this.resetProfileStatuses((await this.getProfileByStatus('INACTIVE')).id);
         }
 
-        await this.deleteProfileTechnologies(id);
+        await this.profileTechnologyService.deleteTechnologies(id);
 
         await this.profileRepository
             .createQueryBuilder()
@@ -89,20 +87,6 @@ export class ProfileService {
             .getMany();
     }
 
-    public async getProfileTechnologies(id: number): Promise<ProfileTechnology[]> {
-        return (await this.profileRepository
-            .createQueryBuilder('p')
-            .leftJoinAndSelect('p.technologies', 'pt')
-            .where('p.id = :id', { id: id })
-            .getOne()).technologies;
-    }
-
-    public async getStatuses(): Promise<ProfileStatus[]> {
-        return await this.profileStatusRepository
-            .createQueryBuilder('ps')
-            .getMany();
-    }
-
     public async resetProfileStatuses(activeId: number): Promise<void> {
         // CAUTION: This query relies on the status to be set to 1 = 'ACTIVE' and 2 = 'INACTIVE'
         // CAUTION: This query modifies all rows so it is important that the id being used actually exists
@@ -125,19 +109,10 @@ export class ProfileService {
             }
         }
 
-        await this.deleteProfileTechnologies(id);
+        await this.profileTechnologyService.deleteTechnologies(id);
 
         await this.profileRepository.save(profileData);
 
         return await this.getProfile(id);
-    }
-
-    private async deleteProfileTechnologies(profileId: number): Promise<void> {
-        await this.profileTechnologyRepository
-            .createQueryBuilder()
-            .delete()
-            .from(ProfileTechnology)
-            .where('profile_technology.profile_id = :id', { id: profileId })
-            .execute();
     }
 }
