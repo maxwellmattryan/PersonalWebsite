@@ -3,9 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ProfileModule } from '@api/features/profile/profile.module';
 
-import { Project } from './project.entity';
-import { ProjectController } from './project.controller';
-import { ProjectService } from './project.service';
+import { ProjectController } from './controllers/project.controller';
+
+import { Project } from './entities/project.entity';
+
+import { ProjectService } from './services/project.service';
 
 @Module({
     imports: [

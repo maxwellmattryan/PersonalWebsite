@@ -3,13 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
-import { PostgresErrorCode } from '@api/core/database/postgres-error-code.enum';
-import { InternalServerErrorException } from '@api/core/http/http.exception';
-import { ProfileAlreadyExistsException } from './profile.exception';
+import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
+import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
+import { ProfileAlreadyExistsException } from '../exceptions/profile.exception';
 
-import { Profile } from './profile.entity';
-import { ProfileStatus } from './profile-status.entity';
-import { ProfileTechnology } from './profile-technology.entity';
+import { Profile } from '../entities/profile.entity';
+import { ProfileStatus } from '../entities/profile-status.entity';
+import { ProfileTechnology } from '../entities/profile-technology.entity';
 
 @Injectable()
 export class ProfileService {
@@ -33,7 +33,7 @@ export class ProfileService {
         let profile: Profile = this.profileRepository.create(profileData);
         profile = await this.profileRepository.save(profile)
             .catch((error) => {
-                if(error.code === PostgresErrorCode.UNIQUE_VIOLATION) {
+                if(error.code === PostgresErrorCodes.UNIQUE_VIOLATION) {
                     throw new ProfileAlreadyExistsException();
                 } else {
                     throw new InternalServerErrorException();

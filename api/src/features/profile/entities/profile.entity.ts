@@ -12,7 +12,7 @@ import {
 import { ProfileStatus } from './profile-status.entity';
 import { ProfileTechnology } from './profile-technology.entity';
 
-import { Project } from '@api/features/project/project.entity';
+import { Project } from '@api/features/project/entities/project.entity';
 
 @Entity('profile')
 export class Profile {

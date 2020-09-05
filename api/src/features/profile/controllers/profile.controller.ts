@@ -1,14 +1,20 @@
-import { BadRequestException, Controller, Get, HttpCode, Param, Post, Put, Req, UseGuards, Delete } from '@nestjs/common';
+import { Controller, Get, HttpCode, Param, Post, Put, Req, UseGuards, Delete } from '@nestjs/common';
 
 import { Request } from 'express';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
-import { Profile } from './profile.entity';
-import { ProfileStatus } from './profile-status.entity';
-import { ProfileTechnology } from './profile-technology.entity';
-import { ProfileService } from './profile.service';
-import { ProfilesWereNotFoundException, ProfileWasNotFoundException, ProfileStatusesWereNotFoundException, ProfileTechnologiesWereNotFoundException, ProfileCouldNotBeUpdatedException } from './profile.exception';
+import { Profile } from '../entities/profile.entity';
+import { ProfileStatus } from '../entities/profile-status.entity';
+import { ProfileTechnology } from '../entities/profile-technology.entity';
+import { ProfileService } from '../services/profile.service';
+import {
+    ProfilesWereNotFoundException,
+    ProfileWasNotFoundException,
+    ProfileStatusesWereNotFoundException,
+    ProfileTechnologiesWereNotFoundException,
+    ProfileCouldNotBeUpdatedException
+} from '../exceptions/profile.exception';
 
 @Controller('profiles')
 export class ProfileController {

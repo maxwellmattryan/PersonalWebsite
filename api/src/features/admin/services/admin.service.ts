@@ -3,11 +3,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
-import { PostgresErrorCode } from '@api/core/database/postgres-error-code.enum';
-import { InternalServerErrorException } from '@api/core/http/http.exception';
-import { AdminAlreadyExistsException } from './admin.exception';
+import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
+import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
+import { AdminAlreadyExistsException } from '../exceptions/admin.exception';
 
-import { Admin } from './admin.entity';
+import { Admin } from '../entities/admin.entity';
 
 @Injectable()
 export class AdminService {
@@ -21,7 +21,7 @@ export class AdminService {
 
         return await this.adminRepository.save(admin)
             .catch((error) => {
-                if(error.code === PostgresErrorCode.UNIQUE_VIOLATION) {
+                if(error.code === PostgresErrorCodes.UNIQUE_VIOLATION) {
                     throw new AdminAlreadyExistsException();
                 } else {
                     throw new InternalServerErrorException();
