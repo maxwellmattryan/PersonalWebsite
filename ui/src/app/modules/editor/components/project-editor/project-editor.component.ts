@@ -4,7 +4,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Router } from '@angular/router';
 
 import { Profile, Project } from '@app/shared/models';
-import { AuthService } from '@app/core/authentication';
+import { AuthService } from '@app/core/auth';
 import { ApiService } from '@app/core/http';
 import {
     EditorService,

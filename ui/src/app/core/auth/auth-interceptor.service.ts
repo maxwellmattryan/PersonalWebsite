@@ -6,7 +6,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
-import { NotificationService } from '../services/notification/notification.service';
+import { NotificationService } from '../services/notification.service';
 
 @Injectable({
     providedIn: 'root'

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ApiService } from './http';
-import { AuthService, AuthInterceptorService } from './authentication';
+import { AuthService, AuthInterceptorService } from './auth';
 import {
     BlogService,
     ComparisonService,

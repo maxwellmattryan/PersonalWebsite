@@ -5,7 +5,7 @@ import { Admin } from '@app/shared/interfaces';
 import { ApiService } from '@app/core/http';
 import { NotificationService, ValidationService } from '@app/core/services';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AuthService } from '@app/core/authentication';
+import { AuthService } from '@app/core/auth';
 
 @Component({
     selector: 'app-register',

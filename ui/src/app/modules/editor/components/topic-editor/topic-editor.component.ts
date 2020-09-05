@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { BlogTopic } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
-import { AuthService } from '@app/core/authentication';
+import { AuthService } from '@app/core/auth';
 import { EditorService, NotificationService } from '@app/core/services';
 import { HttpErrorResponse } from '@angular/common/http';
 
