@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 import { Profile } from './profile.entity';
 
@@ -12,6 +13,7 @@ export class ProfileTechnology {
     public id?: number;
 
     @ManyToOne(type => Profile, p => p.technologies)
+    @Exclude()
     public profile: Profile;
 
     @Column({ type: 'varchar', length: 50, nullable: false })
