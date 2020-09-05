@@ -21,7 +21,6 @@ export class BlogPostStatusController {
         const statuses = await this.blogPostStatusService.getStatuses();
         if(statuses.length === 0) throw new BlogPostStatusesWereNotFoundException();
 
-        console.log(statuses);
         return statuses;
     }
 }

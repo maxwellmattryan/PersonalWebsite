@@ -28,8 +28,8 @@ import { BlogTopicService } from './services/blog-topic.service';
     ],
     controllers: [
         BlogAuthorController,
-        BlogPostController,
         BlogPostStatusController,
+        BlogPostController,
         BlogTopicController
     ],
     providers: [
