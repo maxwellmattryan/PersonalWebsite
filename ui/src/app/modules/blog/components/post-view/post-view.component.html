@@ -11,7 +11,7 @@
         </a>
     </div>
     
-    <p class='post__date' [innerHtml]='"Published: " + blogService.getFormattedDate(post.created_at)'></p>
+    <p class='post__date' [innerHtml]='"Updated: " + blogService.getFormattedDate(post.updated_at)'></p>
     
     <div class='post__topic-container'>
         <a class='post__topic-item' (click)='blogService.setActiveTopic(topic)' [routerLink]="['/blog']" *ngFor='let topic of post.topics'>
