@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
         public authService: AuthService,
         private comparisonService: ComparisonService,
         private editorService: EditorService,
-        private notificationService: NotificationService
+        public notificationService: NotificationService
     ) { }
 
     ngOnInit(): void {
