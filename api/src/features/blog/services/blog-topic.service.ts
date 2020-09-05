@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
-import { PostgresErrorCode } from '@api/core/database/postgres-error-code.enum';
-import { InternalServerErrorException } from '@api/core/http/http.exception';
+import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
+import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
 import { BlogTopicAlreadyExistsException } from '../exceptions/blog-topic.exception';
 
 import { BlogTopic } from '../entities/blog-topic.entity';
@@ -28,7 +28,7 @@ export class BlogTopicService {
 
         return await this.blogTopicRepository.save(topic)
             .catch((error) => {
-                if(error.code === PostgresErrorCode.UNIQUE_VIOLATION) {
+                if(error.code === PostgresErrorCodes.UNIQUE_VIOLATION) {
                     throw new BlogTopicAlreadyExistsException();
                 } else {
                     throw new InternalServerErrorException();

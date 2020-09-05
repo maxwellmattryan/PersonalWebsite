@@ -3,11 +3,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
-import { PostgresErrorCode } from '@api/core/database/postgres-error-code.enum';
-import { InternalServerErrorException } from '@api/core/http/http.exception';
-import { ProjectAlreadyExistsException } from './project.exception';
+import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
+import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
+import { ProjectAlreadyExistsException } from '../exceptions/project.exception';
 
-import { Project } from './project.entity';
+import { Project } from '../entities/project.entity';
 
 @Injectable()
 export class ProjectService {
@@ -27,7 +27,7 @@ export class ProjectService {
         const project: Project = this.projectRepository.create(projectData);
         return await this.projectRepository.save(project)
             .catch((error) => {
-                if(error.code === PostgresErrorCode.UNIQUE_VIOLATION) {
+                if(error.code === PostgresErrorCodes.UNIQUE_VIOLATION) {
                     throw new ProjectAlreadyExistsException();
                 } else {
                     throw new InternalServerErrorException();

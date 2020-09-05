@@ -1,26 +1,36 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Profile } from './profile.entity';
-import { ProfileStatus } from './profile-status.entity';
-import { ProfileTechnology } from './profile-technology.entity';
+import { ProfileController } from './controllers/profile.controller';
+import { ProfileStatusController } from './controllers/profile-status.controller';
+import { ProfileTechnologyController } from './controllers/profile-technology.controller';
 
-import { ProfileController } from './profile.controller';
+import { Profile } from './entities/profile.entity';
+import { ProfileStatus } from './entities/profile-status.entity';
+import { ProfileTechnology } from './entities/profile-technology.entity';
 
-import { ProfileService } from './profile.service';
+import { ProfileService } from './services/profile.service';
+import { ProfileStatusService } from './services/profile-status.service';
+import { ProfileTechnologyService } from './services/profile-technology.service';
 
 @Module({
     imports: [
         TypeOrmModule.forFeature([Profile, ProfileStatus, ProfileTechnology])
     ],
     exports: [
-        ProfileService
+        ProfileService,
+        ProfileStatusService,
+        ProfileTechnologyService
     ],
     controllers: [
-        ProfileController
+        ProfileController,
+        ProfileStatusController,
+        ProfileTechnologyController
     ],
     providers: [
-        ProfileService
+        ProfileService,
+        ProfileStatusService,
+        ProfileTechnologyService
     ]
 })
 export class ProfileModule { }

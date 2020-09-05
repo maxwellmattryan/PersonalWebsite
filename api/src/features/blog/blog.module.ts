@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { BlogAuthorController } from '@api/features/blog/controllers/blog-author.controller';
+import { BlogAuthorController } from './controllers/blog-author.controller';
 import { BlogPostController } from './controllers/blog-post.controller';
 import { BlogPostStatusController } from './controllers/blog-post-status.controller';
 import { BlogTopicController } from './controllers/blog-topic.controller';

@@ -18,18 +18,6 @@ export class ProfilesWereNotFoundException extends NotFoundException {
     }
 }
 
-export class ProfileStatusesWereNotFoundException extends NotFoundException {
-    constructor() {
-        super('Unable to find profile statuses.');
-    }
-}
-
-export class ProfileTechnologiesWereNotFoundException extends NotFoundException {
-    constructor() {
-        super('Unable to find profile technologies.');
-    }
-}
-
 export class ProfileCouldNotBeUpdatedException extends BadRequestException {
     constructor() {
         super('Profile could not be updated.');

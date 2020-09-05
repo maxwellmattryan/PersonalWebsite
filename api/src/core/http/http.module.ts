@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
 
-import { ExceptionsLoggerFilter } from './exceptions-logger.filter';
+import { ExceptionsLoggerFilter } from './filters/exceptions-logger.filter';
 
 @Module({
     providers: [

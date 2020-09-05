@@ -4,15 +4,15 @@ import { Request } from 'express';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
-import { ProfileService } from '@api/features/profile/profile.service';
+import { ProfileService } from '@api/features/profile/services/profile.service';
 
-import { Project } from './project.entity'
-import { ProjectService } from "./project.service";
+import { Project } from '../entities/project.entity'
+import { ProjectService } from '../services/project.service';
 import {
     ProjectWasNotFoundException,
     ProjectCouldNotBeUpdatedException,
     ProjectsWereNotFoundException
-} from './project.exception';
+} from '../exceptions/project.exception';
 
 @Controller('projects')
 export class ProjectController {

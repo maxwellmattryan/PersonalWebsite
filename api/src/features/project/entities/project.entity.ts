@@ -7,7 +7,7 @@ import {
     ManyToMany
 } from 'typeorm';
 
-import { Profile } from '@api/features/profile/profile.entity';
+import { Profile } from '@api/features/profile/entities/profile.entity';
 
 @Entity('project')
 export class Project {

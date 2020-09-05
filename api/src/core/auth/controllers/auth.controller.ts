@@ -2,10 +2,10 @@ import { Controller, HttpCode, Post, Req, Get, UseGuards, Body } from '@nestjs/c
 
 import { Request } from 'express';
 
-import { AuthService } from './auth.service';
-import { JwtAuthGuard } from './jwt/jwt-auth.guard';
-import { NotAllowedToRegisterException, WrongCredentialsWereProvidedException } from './auth.exception';
-import { Admin } from '@api/features/admin/admin.entity';
+import { AuthService } from '../services/auth.service';
+import { JwtAuthGuard } from '../jwt/jwt-auth.guard';
+import { NotAllowedToRegisterException, WrongCredentialsWereProvidedException } from '../exceptions/auth.exception';
+import { Admin } from '@api/features/admin/entities/admin.entity';
 
 @Controller('auth')
 export class AuthController {

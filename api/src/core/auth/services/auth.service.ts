@@ -4,10 +4,10 @@ import { JwtService } from '@nestjs/jwt';
 
 import * as bcrypt from 'bcrypt';
 
-import { Admin } from '@api/features/admin/admin.entity';
-import { AdminService } from '@api/features/admin/admin.service';
+import { Admin } from '@api/features/admin/entities/admin.entity';
+import { AdminService } from '@api/features/admin/services/admin.service';
 
-import { TokenPayload } from './interfaces/token-payload.interface';
+import { TokenPayload } from '../interfaces/token-payload.interface';
 
 @Injectable()
 export class AuthService {

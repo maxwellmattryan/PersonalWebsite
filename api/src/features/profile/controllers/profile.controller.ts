@@ -1,14 +1,16 @@
-import { BadRequestException, Controller, Get, HttpCode, Param, Post, Put, Req, UseGuards, Delete } from '@nestjs/common';
+import { Controller, Get, HttpCode, Param, Post, Put, Req, UseGuards, Delete } from '@nestjs/common';
 
 import { Request } from 'express';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
-import { Profile } from './profile.entity';
-import { ProfileStatus } from './profile-status.entity';
-import { ProfileTechnology } from './profile-technology.entity';
-import { ProfileService } from './profile.service';
-import { ProfilesWereNotFoundException, ProfileWasNotFoundException, ProfileStatusesWereNotFoundException, ProfileTechnologiesWereNotFoundException, ProfileCouldNotBeUpdatedException } from './profile.exception';
+import { Profile } from '../entities/profile.entity';
+import { ProfileService } from '../services/profile.service';
+import {
+    ProfilesWereNotFoundException,
+    ProfileWasNotFoundException,
+    ProfileCouldNotBeUpdatedException
+} from '../exceptions/profile.exception';
 
 @Controller('profiles')
 export class ProfileController {
@@ -64,25 +66,5 @@ export class ProfileController {
         await this.profileService.resetProfileStatuses(id);
 
         return await this.profileService.getProfile(id);
-    }
-
-    @Get(':id/technologies')
-    @HttpCode(200)
-    @UseGuards(JwtAuthGuard)
-    async getProfileTechnologies(@Param('id') id: number, @Req() request: Request): Promise<ProfileTechnology[]> {
-        const technologies = await this.profileService.getProfileTechnologies(id);
-        if(technologies.length === 0) throw new ProfileTechnologiesWereNotFoundException();
-
-        return technologies;
-    }
-
-    @Get('statuses')
-    @HttpCode(200)
-    @UseGuards(JwtAuthGuard)
-    async getProfileStatuses(@Req() request: Request): Promise<ProfileStatus[]> {
-        const statuses = await this.profileService.getStatuses();
-        if(statuses.length === 0) throw new ProfileStatusesWereNotFoundException();
-
-        return statuses;
     }
 }
