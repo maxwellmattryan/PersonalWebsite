@@ -5,3 +5,9 @@ export class WrongCredentialsWereProvidedException extends BadRequestException {
         super('The wrong credentials were provided.');
     }
 }
+
+export class NotAllowedToRegisterException extends BadRequestException {
+    constructor() {
+        super('Not allowed to register.');
+    }
+}

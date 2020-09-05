@@ -5,7 +5,7 @@
 
     <div class='dashboard__btn-container' *ngIf='!authService.isLoggedIn()'>
         <a class='btn dashboard__btn' [routerLink]="['/admin/login']">Login</a>
-        <a class='btn dashboard__btn' [routerLink]="['/admin/register']">Register</a>
+        <a class='btn dashboard__btn' (click)='notificationService.createNotification("This functionality is not available.")'>Register</a>
     </div>
 
     <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
