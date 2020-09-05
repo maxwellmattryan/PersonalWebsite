@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { Profile, ProfileStatus } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
-import { AuthService } from '@app/core/authentication';
+import { AuthService } from '@app/core/auth';
 import { NotificationService, ComparisonService, EditorService } from '@app/core/services';
 import { HttpErrorResponse } from '@angular/common/http';
 

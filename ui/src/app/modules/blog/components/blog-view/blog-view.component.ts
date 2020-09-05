@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { BlogPost, BlogTopic } from '@app/shared/models';
 import { ApiService } from '@app/core/http/api.service';
-import { AuthService } from '@app/core/authentication';
+import { AuthService } from '@app/core/auth';
 import { BlogService, ComparisonService, EditorService, NotificationService } from '@app/core/services';
 
 @Component({

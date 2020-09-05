@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Homepage } from '@app/shared/interfaces';
 import { ApiService } from '@app/core/http';
-import { AuthService } from '@app/core/authentication';
+import { AuthService } from '@app/core/auth';
 import { NotificationService } from '@app/core/services';
 import { HttpErrorResponse } from '@angular/common/http';
 

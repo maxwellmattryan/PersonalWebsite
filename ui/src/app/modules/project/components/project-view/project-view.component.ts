@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ApiService } from '@app/core/http';
-import { AuthService } from '@app/core/authentication';
+import { AuthService } from '@app/core/auth';
 import { EditorService, NotificationService, SeoService } from '@app/core/services';
 import { Project } from '@app/shared/models';
 import { HttpErrorResponse } from '@angular/common/http';

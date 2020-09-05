@@ -1,6 +1,6 @@
-export { BlogService } from './blog/blog.service';
-export { ComparisonService } from './comparison/comparison.service';
-export { EditorService } from './editor/editor.service';
-export { NotificationService } from './notification/notification.service';
-export { SeoService } from './seo/seo.service';
-export { ValidationService } from './validation/validation.service';
+export { BlogService } from './blog.service';
+export { ComparisonService } from './comparison.service';
+export { EditorService } from './editor.service';
+export { NotificationService } from './notification.service';
+export { SeoService } from './seo.service';
+export { ValidationService } from './validation.service';

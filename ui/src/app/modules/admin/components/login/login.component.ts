@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { Admin } from '@app/shared/interfaces';
 import { ApiService } from '@app/core/http';
-import { AuthService } from '@app/core/authentication';
+import { AuthService } from '@app/core/auth';
 import { NotificationService, ValidationService } from '@app/core/services';
 
 @Component({

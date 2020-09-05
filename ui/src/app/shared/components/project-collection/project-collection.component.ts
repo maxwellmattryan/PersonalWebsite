@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { AuthService } from '@app/core/authentication';
+import { AuthService } from '@app/core/auth';
 import { Project } from '@app/shared/models';
 import { SeoService } from '@app/core/services';
 

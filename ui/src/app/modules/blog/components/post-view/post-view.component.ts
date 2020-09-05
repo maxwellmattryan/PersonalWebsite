@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { BlogPost } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
-import { AuthService } from '@app/core/authentication';
+import { AuthService } from '@app/core/auth';
 import { BlogService, EditorService, NotificationService, ComparisonService, SeoService } from '@app/core/services';
 import { HttpErrorResponse } from '@angular/common/http';
 

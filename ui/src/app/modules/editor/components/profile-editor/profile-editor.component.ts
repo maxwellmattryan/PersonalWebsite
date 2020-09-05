@@ -4,7 +4,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Profile, ProfileStatus, ProfileTechnology, Project } from '@app/shared/models';
-import { AuthService } from '@app/core/authentication';
+import { AuthService } from '@app/core/auth';
 import { ApiService } from '@app/core/http';
 import { ComparisonService, EditorService, NotificationService, ValidationService } from '@app/core/services';
 
