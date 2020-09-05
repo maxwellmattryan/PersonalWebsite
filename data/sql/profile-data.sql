@@ -5,7 +5,7 @@ INSERT INTO profile(status_id, name, tagline, landing, about, image_url)
 VALUES (2,
        'Audio Development',
        'I make noises happen through code.',
-       'I''m an software engineer based in Austin, TX. I love to build and develop audio-related software, whether it''s plugins, game audio engines, and more.',
+       'I''m a software engineer based in Austin, TX. I love to build and develop audio-related software, whether it''s plugins, game audio engines, and more.',
        'I strive to develop clean and optimized audio software, which in and of itself is an vastly interesting problem domain. In addition to my passion for audio, I have experience ranging from building simple audio plugins to audio middleware solutions in games.',
        'images/portrait.png');
 INSERT INTO profile(status_id, name, tagline, landing, about, image_url)
