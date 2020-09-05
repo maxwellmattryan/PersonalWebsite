@@ -21,7 +21,7 @@
 
     <div class="line-divider"></div>
     
-    <img class='post__image' [src]='"https://mattmaxwell.tech/" + post.image_url' height=150>
+    <img class='post__image' [src]='post.image_url' height=150>
 
     <markdown [data]='post.content' lineNumbers></markdown>
 </div>

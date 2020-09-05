@@ -24,6 +24,10 @@ a {
     }
 }
 
+p {
+    line-height: 170%;
+}
+
 html, body {
     background-color: $color-dark;
     color: $color-white;
@@ -51,14 +55,10 @@ button, input, textarea {
 
 @media only screen and (min-width: 768px) {
     html, body {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     button {
         font-size: 90%;
     }
-}
-
-.app {
-    min-height: calc(100vh - #{$footer-height});
 }

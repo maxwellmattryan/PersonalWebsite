@@ -17,28 +17,28 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ```typescript
 ngOnInit(): void {
-        this.isAdmin = this.authService.isLoggedIn();
+    this.isAdmin = this.authService.isLoggedIn();
 
-        this.apiService.getPost(this.router.url).subscribe(post => {
-            if(post.status.status !== ''PUBLISHED'' && !this.isAdmin) {
-                this.notificationService.createNotification(''Unable to view the blog post.'');
-                this.router.navigate(['''']);
-            }
+    this.apiService.getPost(this.router.url).subscribe(post => {
+        if(post.status.status !== ''PUBLISHED'' && !this.isAdmin) {
+            this.notificationService.createNotification(''Unable to view the blog post.'');
+            this.router.navigate(['''']);
+        }
 
-            this.post = post;
-            this.post.topics.sort(this.comparisonService.topics);
+        this.post = post;
+        this.post.topics.sort(this.comparisonService.topics);
 
-            this.isLoaded = true;
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
-        });
-    }
+        this.isLoaded = true;
+    }, (error: HttpErrorResponse) => {
+        this.notificationService.createNotification(error.error.message);
+    });
+}
 ```
 
 <br>
 
 Sed adipiscing diam donec adipiscing tristique. Interdum velit euismod in pellentesque massa. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat in. Posuere urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Facilisi cras fermentum odio eu feugiat pretium nibh ipsum. Mattis molestie a iaculis at. Amet porttitor eget dolor morbi non. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. Ut morbi tincidunt augue interdum velit. Vel quam elementum pulvinar etiam non quam. Vulputate odio ut enim blandit volutpat maecenas volutpat. Sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Convallis posuere morbi leo urna molestie at elementum eu. Condimentum mattis pellentesque id nibh tortor id aliquet lectus. Amet venenatis urna cursus eget nunc scelerisque viverra mauris.',
-       'images/rotor.png');
+       'https://mattmaxwell.tech/images/rotor.png');
 
 INSERT INTO blog_post(author_id, status_id, title, preview, content, image_url)
 VALUES (1,
@@ -53,28 +53,28 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ```typescript
 ngOnInit(): void {
-        this.isAdmin = this.authService.isLoggedIn();
+    this.isAdmin = this.authService.isLoggedIn();
 
-        this.apiService.getPost(this.router.url).subscribe(post => {
-            if(post.status.status !== ''PUBLISHED'' && !this.isAdmin) {
-                this.notificationService.createNotification(''Unable to view the blog post.'');
-                this.router.navigate(['''']);
-            }
+    this.apiService.getPost(this.router.url).subscribe(post => {
+        if(post.status.status !== ''PUBLISHED'' && !this.isAdmin) {
+            this.notificationService.createNotification(''Unable to view the blog post.'');
+            this.router.navigate(['''']);
+        }
 
-            this.post = post;
-            this.post.topics.sort(this.comparisonService.topics);
+        this.post = post;
+        this.post.topics.sort(this.comparisonService.topics);
 
-            this.isLoaded = true;
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
-        });
-    }
+        this.isLoaded = true;
+    }, (error: HttpErrorResponse) => {
+        this.notificationService.createNotification(error.error.message);
+    });
+}
 ```
 
 <br>
 
 Sed adipiscing diam donec adipiscing tristique. Interdum velit euismod in pellentesque massa. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat in. Posuere urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Facilisi cras fermentum odio eu feugiat pretium nibh ipsum. Mattis molestie a iaculis at. Amet porttitor eget dolor morbi non. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. Ut morbi tincidunt augue interdum velit. Vel quam elementum pulvinar etiam non quam. Vulputate odio ut enim blandit volutpat maecenas volutpat. Sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Convallis posuere morbi leo urna molestie at elementum eu. Condimentum mattis pellentesque id nibh tortor id aliquet lectus. Amet venenatis urna cursus eget nunc scelerisque viverra mauris.',
-       'images/operation-home.png');
+       'https://mattmaxwell.tech/images/operation-home.png');
 
 INSERT INTO blog_post(author_id, status_id, title, preview, content, image_url)
 VALUES (1,
@@ -89,28 +89,28 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ```typescript
 ngOnInit(): void {
-        this.isAdmin = this.authService.isLoggedIn();
+    this.isAdmin = this.authService.isLoggedIn();
 
-        this.apiService.getPost(this.router.url).subscribe(post => {
-            if(post.status.status !== ''PUBLISHED'' && !this.isAdmin) {
-                this.notificationService.createNotification(''Unable to view the blog post.'');
-                this.router.navigate(['''']);
-            }
+    this.apiService.getPost(this.router.url).subscribe(post => {
+        if(post.status.status !== ''PUBLISHED'' && !this.isAdmin) {
+            this.notificationService.createNotification(''Unable to view the blog post.'');
+            this.router.navigate(['''']);
+        }
 
-            this.post = post;
-            this.post.topics.sort(this.comparisonService.topics);
+        this.post = post;
+        this.post.topics.sort(this.comparisonService.topics);
 
-            this.isLoaded = true;
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
-        });
-    }
+        this.isLoaded = true;
+    }, (error: HttpErrorResponse) => {
+        this.notificationService.createNotification(error.error.message);
+    });
+}
 ```
 
 <br>
 
 Sed adipiscing diam donec adipiscing tristique. Interdum velit euismod in pellentesque massa. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat in. Posuere urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Facilisi cras fermentum odio eu feugiat pretium nibh ipsum. Mattis molestie a iaculis at. Amet porttitor eget dolor morbi non. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. Ut morbi tincidunt augue interdum velit. Vel quam elementum pulvinar etiam non quam. Vulputate odio ut enim blandit volutpat maecenas volutpat. Sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Convallis posuere morbi leo urna molestie at elementum eu. Condimentum mattis pellentesque id nibh tortor id aliquet lectus. Amet venenatis urna cursus eget nunc scelerisque viverra mauris.',
-       'images/green-foot.png');
+       'https://mattmaxwell.tech/images/green-foot.png');
 
 INSERT INTO blog_topic(name, description) VALUES ('Audio Development', 'Any and all things related to audio development and audio programming.');
 INSERT INTO blog_topic(name, description) VALUES ('Design', 'Any and all things related to software design.');

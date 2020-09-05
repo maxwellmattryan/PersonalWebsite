@@ -17,16 +17,15 @@
 
 .dashboard__btn {
     line-height: $btn-height;
-    padding: $quarter-padding;
     margin-bottom: $half-margin;
-    width: 50vw;
+    width: $large-btn-width;
 }
 
 .dashboard__profile-btn-row {
     align-items: center;
-    display: grid;
-    grid-gap: $half-padding;
-    grid-template-columns: 40vw 1fr 1fr;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin-bottom: $quarter-margin;
 }
 
@@ -34,10 +33,14 @@
     font-size: 100%;
     height: auto;
     padding: $quarter-padding;
-    width: 40vw;
+    margin: 0 $half-margin;
+    width: $btn-width;
 
     &--edit {
         font-size: 120%;
-        width: 13vw;
+        height: 36px;
+        line-height: 36px;
+        margin: 0 $eighth-margin;
+        width: $extra-small-btn-width;
     }
 }

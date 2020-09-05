@@ -21,8 +21,16 @@ $line-divider-height: 1.5px;
 $section-divider-height: 15vh;
 
 // BUTTONS
-$btn-height: 4vh;
-$small-btn-height: 1.5vh;
+$btn-height: 48px;
+$large-btn-height: 56px;
+$small-btn-height: 36px;
+$extra-small-btn-height: 24px;
+
+$large-btn-width: 232px;
+$btn-width: 176px;
+$small-btn-width: 64px;
+$extra-small-btn-width: 48px;
+$tiny-btn-width: 32px;
 
 // INPUT
 $input-height: 3vh;
@@ -32,12 +40,17 @@ $textarea-height: 15vh;
 $margin: 2rem;
 $half-margin: 1rem;
 $quarter-margin: 0.5rem;
+$eighth-margin: 0.25rem;
 
 // PADDING
 $one-and-half-padding: 3rem;
 $padding: 2rem;
 $half-padding: 1rem;
 $quarter-padding: 0.5rem;
+
+// HOVER EFFECTS
+$hover-transition-duration: 0.2s;
+$hover-transition-transform: -3px;
 
 // ANIMATION
 $anchor-active-transition-duration: 0.075s;

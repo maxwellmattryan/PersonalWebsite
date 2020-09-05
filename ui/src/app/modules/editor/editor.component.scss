@@ -28,6 +28,7 @@
 .editor__form-btn {
     height: $btn-height;
     margin-top: $half-margin;
+    max-width: 312px;
     width: 100%;
 }
 
@@ -37,12 +38,20 @@
 
 .editor__profile-btn {
     &--add {
-        font-size: 150%;
-        width: 13vw;
+        height: $small-btn-height;
+        font-size: 160%;
+        width: $small-btn-width;
     }
 
-    &--edit, &--warn {
-        width: 10vw;
+    &--edit {
+        height: $extra-small-btn-height;
+        width: $tiny-btn-width;
+    }
+
+    &--warn {
+        font-size: 110%;
+        height: $small-btn-height;
+        width: $extra-small-btn-width;
     }
 }
 
@@ -54,5 +63,15 @@
 
     input {
         width: 50%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .editor__profile-btn {
+        &--edit, &--warn {
+            font-size: 120%;
+            height: $small-btn-height;
+            width: $small-btn-width;
+        }
     }
 }

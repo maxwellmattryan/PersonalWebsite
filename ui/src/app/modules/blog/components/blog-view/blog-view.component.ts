@@ -38,6 +38,12 @@ export class BlogViewComponent implements OnInit {
                 this.topics = this.getTopicsFromPosts().sort(this.comparisonService.topics);
 
                 this.isLoaded = true;
+
+                if(this.blogService.hasActiveTopic()) {
+                    this.filterPosts(this.blogService.getActiveTopicId());
+                    this.blogService.setActiveTopic(null);
+                    this.blogService.getActiveTopicId();
+                }
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
@@ -47,6 +53,11 @@ export class BlogViewComponent implements OnInit {
                 this.topics = this.getTopicsFromPosts().sort(this.comparisonService.topics);
 
                 this.isLoaded = true;
+
+                if(this.blogService.hasActiveTopic()) {
+                    this.filterPosts(this.blogService.getActiveTopicId());
+                    this.blogService.setActiveTopic(null);
+                }
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
@@ -91,6 +102,7 @@ export class BlogViewComponent implements OnInit {
         this.apiService.deleteTopic(topic.id).subscribe((res: any) => {
             this.removeTopic(topic.id);
             this.notificationService.createNotification('Successfully deleted blog topic!');
+            this.filterPosts(-1);
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
         });

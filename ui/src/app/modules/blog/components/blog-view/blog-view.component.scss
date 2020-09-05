@@ -1,11 +1,29 @@
 @import 'variables';
 
 .blog {
-    
+    display: grid;
+    grid-template-areas:
+        "blog-header"
+        "topics"
+        "posts";
+    min-height: 86vh;
+
+    .blog__header {
+        grid-area: blog-header;
+    }
+    .topics {
+        grid-area: topics;
+        margin: 0 auto;
+        padding: $padding;
+    }
+    .posts {
+        grid-area: posts;
+    }
 }
 
 .blog__header {
-    margin-bottom: $margin;
+    margin: 0 auto $margin;
+    padding: $padding;
     text-align: center;
 }
 
@@ -14,33 +32,68 @@
 }
 
 .blog__filter-btn-container {
+    align-items: center;
     display: flex;
     flex-direction: column;
 }
 
-.blog__filter-btn{
+.blog__filter-btn {
+    font-size: 90%;
+    height: $btn-height;
     line-height: $btn-height;
-    width: 100%;
+    width: 192px;
 
     &--add, &--edit {
-        width: 13vw;
+        height: $small-btn-height;
+        line-height: $small-btn-height;
+        margin-left: $half-margin;
     }
 
     &--add {
-        font-size: 150%;
+        font-size: 140%;
+        width: calc(#{$extra-small-btn-width} * 2 + #{$half-margin});
     }
 
     &--edit {
-        font-size: 120%;
+        font-size: 110%;
+        width: $extra-small-btn-width;
     }
 
     &--half {
-        width: 50vw;
+        width: 196px;
     }
 }
 
 .blog__filter-btn-row {
+    align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
+
+    &--all {
+        margin-bottom: $margin;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .blog__filter-btn {
+        height: $large-btn-height;
+        line-height: $large-btn-height;
+        width: 236px;
+
+        &--add, &--edit {
+            width: 52px;
+        }
+
+        &--add {
+            width: calc(52px + 52px + #{$half-margin});
+        }
+    }
+
+    .blog {
+        grid-template-areas:
+          "blog-header blog-header blog-header blog-header"
+          "posts posts posts topics";
+    }
 }

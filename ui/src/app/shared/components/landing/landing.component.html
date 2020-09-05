@@ -1,4 +1,4 @@
-<div class='section section--ljust landing'>
+<div class='section landing'>
     <h1 class='landing__header'>
         Hi, my name is 
         <br>
@@ -6,5 +6,6 @@
     </h1>
     <h2 class='landing__tagline'>{{ tagline }}</h2>
     <p class='landing__landing'>{{ landing }}</p>
-    <a class='btn landing__contact-btn' href='mailto:maxwellmattryan@gmail.com'>Contact Me</a>
+    <br>
+    <a class='btn landing__contact-btn' [href]='"mailto:" + constructEmail("maxwellmattryan", "gmail")'>Contact Me</a>
 </div>

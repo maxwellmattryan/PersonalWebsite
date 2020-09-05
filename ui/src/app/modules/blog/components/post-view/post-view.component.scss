@@ -15,8 +15,7 @@
     height: $small-btn-height;
     line-height: $small-btn-height;
     margin: 0 $quarter-margin $margin 0;
-    padding: $quarter-padding;
-    width: 15vw;
+    width: $small-btn-width;
 }
 
 .post__title {
@@ -46,4 +45,12 @@
     height: auto;
     margin-bottom: $margin;
     width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .post__topic-item {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }

@@ -26,8 +26,7 @@
     height: $small-btn-height;
     line-height: $small-btn-height;
     margin: 0 $quarter-margin $margin 0;
-    padding: $quarter-padding;
-    width: 15vw;
+    width: $small-btn-width;
 }
 
 .project__external-container {
@@ -37,10 +36,19 @@
 
 .project__external-icon {
     margin-right: $half-margin;
+    transition: transform $hover-transition-duration ease;
 }
 
 .project__image {
     height: auto;
     margin-bottom: $margin;
     width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .project__external-icon {
+        &:hover {
+            transform: translateY($hover-transition-transform);
+        }
+    }
 }

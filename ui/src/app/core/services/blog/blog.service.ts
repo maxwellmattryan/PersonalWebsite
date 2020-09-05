@@ -34,6 +34,10 @@ export class BlogService {
         return this.activeTopic.id;
     }
 
+    hasActiveTopic(): boolean {
+        return (this.activeTopic !== undefined);
+    }
+
     setActiveTopic(topic: BlogTopic): void {
         this.activeTopic = topic;
     }

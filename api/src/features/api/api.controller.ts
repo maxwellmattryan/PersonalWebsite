@@ -28,8 +28,9 @@ export class ApiController {
         if(projects.length == 0) throw new ProjectsWereNotFoundException();
         profile.projects = projects;
 
-        const posts = await this.blogService.getPostsByStatus('PUBLISHED')
+        let posts = await this.blogService.getPostsByStatus('PUBLISHED')
         if(posts.length == 0) throw new BlogPostsWereNotFoundException();
+        posts = posts.slice(0, 3);
 
         return { profile: profile, posts: posts };
     }

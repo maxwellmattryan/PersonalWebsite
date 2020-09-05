@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { BlogPost } from '@app/shared/models';
-import { BlogService, ComparisonService } from '@app/core/services';
+import { BlogService, ComparisonService, SeoService } from '@app/core/services';
 
 @Component({
     selector: 'app-post-collection',
@@ -13,15 +13,17 @@ export class PostCollectionComponent implements OnInit {
     
     @Input() showPreview: boolean;
     @Input() showTopics: boolean;
+    @Input() showReadmore: boolean;
 
     // CAUTION: This is necessary because the routing changes when this component is used outside of the blog module
-    @Input() baseRoute: string = 'blog/posts/';
+    @Input() baseRoute: string = 'blog/posts';
 
     nPostsToDisplay: number = 5;
 
     constructor(
         public blogService: BlogService,
-        private comparisonService: ComparisonService
+        private comparisonService: ComparisonService,
+        private seoService: SeoService
     ) { }
 
     ngOnInit(): void {
@@ -40,5 +42,9 @@ export class PostCollectionComponent implements OnInit {
         if(this.nPostsToDisplay >= this.posts.length) {
             this.nPostsToDisplay = this.posts.length;
         }
+    }
+
+    getPostUrl(id: number, name: string): string {
+        return `${this.baseRoute}/${this.seoService.getCanonicalUrl(id, name)}`;
     }
 }

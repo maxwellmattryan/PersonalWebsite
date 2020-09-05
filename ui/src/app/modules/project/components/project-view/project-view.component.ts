@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/authentication';
-import { EditorService, NotificationService } from '@app/core/services';
+import { EditorService, NotificationService, SeoService } from '@app/core/services';
 import { Project } from '@app/shared/models';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -23,20 +23,26 @@ export class ProjectViewComponent implements OnInit {
         private authService: AuthService,
         private editorService: EditorService,
         private notificationService: NotificationService,
+        private seoService: SeoService,
         private router: Router
     ) { }
 
     ngOnInit(): void {
         this.isAdmin = this.authService.isLoggedIn();
 
-        // REMOVE WHEN PROJECT PAGE HAS BEEN INTEGRATED (ALSO IMPLEMENT AUTH GUARD LOLOL)
-        //======================================================================
+        // NOTE: Remove when the project page has been integrated (eh?)
         if(!this.isAdmin) {
             this.router.navigate(['']);
         }
-        //======================================================================
 
-        this.apiService.getProject(this.router.url).subscribe(project => {
+        const projectId = this.seoService.getIdFromUrl(this.router.url);
+        if(!projectId) {
+            this.notificationService.createNotification('Unable to find project ID.');
+            this.router.navigate(['']);
+            return;
+        }
+
+        this.apiService.getProject(projectId).subscribe(project => {
             this.project = project;
 
             this.isLoaded = true;

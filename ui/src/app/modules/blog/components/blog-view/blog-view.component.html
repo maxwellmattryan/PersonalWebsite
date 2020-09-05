@@ -1,18 +1,16 @@
-<ng-container *ngIf='isLoaded'>
-    <div class='section blog' *ngIf='isLoaded'>
-        <h1 class='blog__header'>Welcome to my blog!</h1>
+<div class='blog' *ngIf='isLoaded'>
+    <h1 class='blog__header'>Welcome to my blog!</h1>
 
-        <br><br>
-
+    <div class='topics'>
         <h2 class='blog__filter-header'>Topics</h2>
 
         <div class='line-divider'></div>
 
         <div class='blog__filter-btn-container'>
-            <div class='blog__filter-btn-row'>
+            <div class='blog__filter-btn-row blog__filter-btn-row--all'>
                 <button
                         [ngClass]="{'btn--active': activeTopicId === -1, 'blog__filter-btn--half': isAdmin}"
-                        class='btn blog__filter-btn'
+                        class='btn blog__filter-btn blog__filter-btn--all'
                         (click)='filterPosts(-1)'
                         type='button'
                 >
@@ -24,16 +22,13 @@
                         &#x2b;
                     </button>
                 </ng-container>
-
-                <ng-container *ngIf='!isAdmin'>
-                    <br><br><br>
-                </ng-container>
             </div>
+
             <div class='blog__filter-btn-row' *ngFor='let topic of topics'>
                 <button 
                     [ngClass]="{'btn--active': topic.id === activeTopicId, 'blog__filter-btn--half': isAdmin}"
                     class='btn blog__filter-btn' 
-                    (click)='filterPosts(topic.id); blogService.setActiveTopic(topic)'
+                    (click)='filterPosts(topic.id)'
                     type='button'
                 >
                     {{ topic.name }}
@@ -68,7 +63,7 @@
         </div>
     </div>
     
-    <app-post-collection [posts]="posts" [showPreview]='true' baseRoute='posts/'></app-post-collection>
+    <app-post-collection [posts]='posts' [showPreview]='true' baseRoute='posts/'></app-post-collection>
     
     <div class='section-divider'></div>
-</ng-container>
+</div>

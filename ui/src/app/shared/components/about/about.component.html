@@ -3,18 +3,28 @@
 
     <div class='about__line-divider line-divider'></div>
 
-    <p class='about__description'>
-        {{ paragraph }}
-    </p>
+    <div class='about__container'>
+        <div class='about__description-text'>
+            <p class='about__description'>
+                {{ paragraph }}
+            </p>
 
-    <p class='about__description'>These are some of the technologies that I usually work with:</p>
-    <ul class='about__technology-list'>
-        <li class='about__technology-list-item' *ngFor='let technology of technologies'>
-            {{ technology.name }}
-        </li>
-    </ul>
+            <p class='about__description'>
+                To get a better idea of the work that I do, please feel free to checkout my
+                <a class='about__description--link' href='https://github.com/maxwellmattryan' target='_blank'>
+                    GitHub
+                </a>.
+                Otherwise, here are some of the technologies that I work with:
+            </p>
+            <ul class='about__technology-list'>
+                <li class='about__technology-list-item' *ngFor='let technology of technologies'>
+                    {{ technology.name }}
+                </li>
+            </ul>
+        </div>
 
-    <div class='about__portrait-container'>
-        <img class='about__portrait' [src]='"https://mattmaxwell.tech/" + imageUrl'>
+        <div class='about__portrait-container'>
+            <img class='about__portrait' [src]='imageUrl'>
+        </div>
     </div>
 </div>

@@ -40,6 +40,6 @@ export class AuthService {
 
         // CAUTION: When trying to include the 'Secure;' option, HTTPS has to be used
         // NOTE: Cookie just disappears from client-side storage on the first request's sent after it expires
-        return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${expiresIn}`;
+        return `Authentication=${token}; HttpOnly; SameSite=Strict; Path=/; Max-Age=${expiresIn}`;
     }
 }

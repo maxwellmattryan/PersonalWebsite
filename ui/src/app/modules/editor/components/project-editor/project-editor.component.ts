@@ -6,7 +6,13 @@ import { Router } from '@angular/router';
 import { Profile, Project } from '@app/shared/models';
 import { AuthService } from '@app/core/authentication';
 import { ApiService } from '@app/core/http';
-import { EditorService, NotificationService, ValidationService, ComparisonService } from '@app/core/services';
+import {
+    EditorService,
+    NotificationService,
+    ValidationService,
+    ComparisonService,
+    SeoService
+} from '@app/core/services';
 
 @Component({
     selector: 'app-project-editor',
@@ -28,9 +34,10 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
         private comparisonService: ComparisonService,
         private editorService: EditorService,
         private notificationService: NotificationService,
+        private seoService: SeoService,
+        private validationService: ValidationService,
         private formBuilder: FormBuilder,
-        private router: Router,
-        private validationService: ValidationService
+        private router: Router
     ) { }
 
     ngOnDestroy(): void {
@@ -117,14 +124,14 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
         if(project.id === undefined) {
             this.apiService.createProject(project).subscribe((res: Project) => {
                 this.notificationService.createNotification(`Successfully created new project!`);
-                this.router.navigate([`projects/${res.id}`]);
+                this.router.navigate([`projects/${this.seoService.getCanonicalUrl(res.id, res.name)}`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
             this.apiService.updateProject(project).subscribe((res: Project) => {
                 this.notificationService.createNotification(`Successfully updated existing project!`);
-                this.router.navigate([`projects/${res.id}`]);
+                this.router.navigate([`projects/${this.seoService.getCanonicalUrl(res.id, res.name)}`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });

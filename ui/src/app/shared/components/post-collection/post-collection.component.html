@@ -5,7 +5,7 @@
 
     <div class='container posts__post-container'>
             <div class='posts__post' *ngFor='let post of getPosts(); let idx = index' [ngClass]="{'posts__post--rjust': idx % 2 !== 0}">
-                <a class=posts__post-anchor-wrapper [routerLink]="[baseRoute + post.id]">
+                <a class=posts__post-anchor-wrapper [routerLink]="[this.getPostUrl(post.id, post.title)]">
                     <h3 class='posts__post-title' *ngIf='post.status.status === "PUBLISHED"'>{{ post.title }}</h3>
                     <h3 class='posts__post-title' *ngIf='post.status.status !== "PUBLISHED"'>{{ post.status.status + ": " + post.title }}</h3>
                 </a>
@@ -14,6 +14,7 @@
                     <a
                             class='posts__post-topic-item'
                             *ngFor='let topic of post.topics'
+                            (click)='blogService.setActiveTopic(topic)'
                             [routerLink]="['/blog']"
                     >
                         {{ topic.name }}
@@ -35,4 +36,12 @@
     >
         Load More
     </button>
+
+    <a
+        *ngIf='showReadmore'
+        class='btn posts__readmore-btn'
+        routerLink='/blog'
+    >
+        See More
+    </a>
 </div>

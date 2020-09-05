@@ -26,24 +26,17 @@ export class ApiService {
     ) { }
 
     // ========
-    // UTILS
-    // ========
-    formatUri(raw: string): string {
-        return raw.toLowerCase().replace(/[ ]/g, '-').replace(/[\.?]/g, '');
-    }
-
-    // ========
     // ADMIN
     // ========
     registerAdmin(admin: Admin): Observable<any> {
-      const headers = new HttpHeaders();
-      headers.set('Content-Type', 'application/json');
+        const headers = new HttpHeaders();
+        headers.set('Content-Type', 'application/json');
 
-      return this.http.post(
-        `${environment.API_URL}/auth/register`,
-        admin,
-        { headers }
-      ).pipe(map(res => res));
+        return this.http.post(
+            `${environment.API_URL}/auth/register`,
+            admin,
+            { headers }
+        ).pipe(map(res => res));
     }
 
     logoutAdmin(): Observable<any> {
@@ -62,7 +55,7 @@ export class ApiService {
     }
 
     tryAuthTest(): Observable<any> {
-      return this.http.get<any>(`${environment.API_URL}/auth/test`);
+        return this.http.get<any>(`${environment.API_URL}/auth/test`);
     }
 
     // ========
@@ -90,8 +83,8 @@ export class ApiService {
         return this.http.delete<any>(`${environment.API_URL}/blog/posts/${id}`);
     }
 
-    getPost(uri: string): Observable<BlogPost> {
-        return this.http.get<BlogPost>(environment.API_URL + uri);
+    getPost(id: number): Observable<BlogPost> {
+        return this.http.get<BlogPost>(`${environment.API_URL}/blog/posts/${id}`);
     }
 
     getPosts(topicId: number = -1, publishedOnly: boolean = true): Observable<BlogPost[]> {
@@ -153,8 +146,8 @@ export class ApiService {
         return this.http.delete<any>(`${environment.API_URL}/projects/${id}`);
     }
 
-    getProject(uri: string): Observable<Project> {
-        return this.http.get<Project>(environment.API_URL + uri);
+    getProject(id: number): Observable<Project> {
+        return this.http.get<Project>(`${environment.API_URL}/projects/${id}`);
     }
 
     getProjects(): Observable<Project[]> {
