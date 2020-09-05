@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BlogPost } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/authentication';
-import { BlogService, EditorService, NotificationService, ComparisonService } from '@app/core/services';
+import { BlogService, EditorService, NotificationService, ComparisonService, SeoService } from '@app/core/services';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -25,13 +25,21 @@ export class PostViewComponent implements OnInit {
         private comparisonService: ComparisonService,
         private editorService: EditorService,
         private notificationService: NotificationService,
+        private seoService: SeoService,
         private router: Router
     ) { }
 
     ngOnInit(): void {
         this.isAdmin = this.authService.isLoggedIn();
 
-        this.apiService.getPost(this.router.url).subscribe(post => {
+        const postId = this.seoService.getIdFromUrl(this.router.url);
+        if(!postId) {
+            this.notificationService.createNotification('Unable to find post ID.');
+            this.router.navigate(['']);
+            return;
+        }
+
+        this.apiService.getPost(postId).subscribe(post => {
             if(post.status.status !== 'PUBLISHED' && !this.isAdmin) {
                 this.notificationService.createNotification('Unable to view the blog post.');
                 this.router.navigate(['']);

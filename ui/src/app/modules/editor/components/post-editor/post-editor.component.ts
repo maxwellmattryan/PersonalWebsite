@@ -6,7 +6,13 @@ import { Router } from '@angular/router';
 import { BlogPost, BlogTopic, BlogPostStatus, BlogAuthor } from '@app/shared/models';
 import { AuthService } from '@app/core/authentication';
 import { ApiService } from '@app/core/http';
-import { EditorService, NotificationService, ValidationService, ComparisonService } from '@app/core/services';
+import {
+    EditorService,
+    NotificationService,
+    ValidationService,
+    ComparisonService,
+    SeoService
+} from '@app/core/services';
 
 @Component({
     selector: 'app-post-editor',
@@ -29,9 +35,10 @@ export class PostEditorComponent implements OnDestroy, OnInit {
         private comparisonService: ComparisonService,
         private editorService: EditorService,
         private notificationService: NotificationService,
+        private seoService: SeoService,
+        private validationService: ValidationService,
         private formBuilder: FormBuilder,
-        private router: Router,
-        private validationService: ValidationService
+        private router: Router
     ) { }
 
     ngOnDestroy(): void {
@@ -147,14 +154,14 @@ export class PostEditorComponent implements OnDestroy, OnInit {
         if(post.id === undefined) {
             this.apiService.createPost(post).subscribe((res: BlogPost) => {
                 this.notificationService.createNotification('Successfully created new post!');
-                this.router.navigate([`blog/posts/${res.id}`]);
+                this.router.navigate([`blog/posts/${this.seoService.getCanonicalUrl(res.id, res.title)}`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
             this.apiService.updatePost(post).subscribe((res: BlogPost) => {
                 this.notificationService.createNotification('Successfully updated existing post!');
-                this.router.navigate([`blog/posts/${res.id}`]);
+                this.router.navigate([`blog/posts/${this.seoService.getCanonicalUrl(res.id, res.title)}`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
