@@ -4,6 +4,7 @@
   "description": "API for mattmaxwell.tech",
   "author": "Matthew Maxwell",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "prebuild": "node_modules/.bin/rimraf dist",
     "build": "nest build",

@@ -8,7 +8,7 @@ RUN npm install --only=dev
 
 COPY . .
 
-RUN npm run  build
+RUN npm run build
 
 FROM node:12.18-alpine AS prod
 
