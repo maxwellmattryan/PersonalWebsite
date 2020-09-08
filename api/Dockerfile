@@ -9,6 +9,7 @@ RUN npm install --only=dev
 COPY . .
 
 RUN npm install -g rimraf
+RUN npm install glob
 RUN npm run build
 
 FROM node:12.18-alpine AS prod
@@ -24,6 +25,6 @@ RUN npm install --only=prod
 
 COPY . .
 
-COPY --from=development /usr/src/app/dist ./dist
+COPY --from=dev /usr/src/app/dist ./dist
 
 CMD ["npm", "run", "start:prod"]
