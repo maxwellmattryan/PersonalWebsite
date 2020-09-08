@@ -37,13 +37,13 @@ export class BlogViewComponent implements OnInit {
                 this.posts = res;
                 this.topics = this.getTopicsFromPosts().sort(this.comparisonService.topics);
 
-                this.isLoaded = true;
-
                 if(this.blogService.hasActiveTopic()) {
                     this.filterPosts(this.blogService.getActiveTopicId());
                     this.blogService.setActiveTopic(null);
                     this.blogService.getActiveTopicId();
                 }
+
+                this.isLoaded = true;
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
@@ -52,12 +52,12 @@ export class BlogViewComponent implements OnInit {
                 this.posts = res;
                 this.topics = this.getTopicsFromPosts().sort(this.comparisonService.topics);
 
-                this.isLoaded = true;
-
                 if(this.blogService.hasActiveTopic()) {
                     this.filterPosts(this.blogService.getActiveTopicId());
                     this.blogService.setActiveTopic(null);
                 }
+
+                this.isLoaded = true;
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });

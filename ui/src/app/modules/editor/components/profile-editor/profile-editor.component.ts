@@ -23,6 +23,8 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
 
     @Input() id: number;
 
+    isLoaded: boolean = false;
+
     constructor(
         private router: Router,
         private changeDetectionRef: ChangeDetectorRef,
@@ -45,6 +47,8 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
         this.setUnloadEvent();
 
         this.initProfileForm();
+
+        this.isLoaded = true;
     }
 
     private checkForAdmin(): void {
@@ -74,11 +78,14 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
     private loadProjectData(): void {
         this.apiService.getProjects().subscribe((res: Project[]) => {
             this.projectData = res.sort(this.comparisonService.projects);
+
             if(this.id && this.profileData) {
                 this.setProjectControls(this.profileData.projects.map(p => p.id));
             } else {
                 this.setProjectControls([]);
             }
+
+            this.isLoaded = true;
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
         });

@@ -1,4 +1,4 @@
-<div class='blog' *ngIf='isLoaded'>
+<div class='blog' *ngIf='isLoaded; else loading'>
     <h1 class='blog__header'>Welcome to my blog!</h1>
 
     <div class='section topics'>
@@ -64,6 +64,8 @@
     </div>
     
     <app-post-collection [posts]='posts' [showPreview]='true' baseRoute='posts/'></app-post-collection>
-    
-    <div class='section-divider'></div>
 </div>
+
+<ng-template #loading>
+    <app-loading-spinner></app-loading-spinner>
+</ng-template>

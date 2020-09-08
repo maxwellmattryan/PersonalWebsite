@@ -1,4 +1,4 @@
-<div class='section project' *ngIf='isLoaded'>
+<div class='section project' *ngIf='isLoaded; else loading'>
     <h1 class='project__name'>{{ project.name }}</h1>
     <h2 class='project__tagline'>{{ project.tagline }}</h2>
 
@@ -24,4 +24,6 @@
     <markdown [data]='project.description'></markdown>
 </div>
 
-<div class='section-divider'></div>
+<ng-template #loading>
+    <app-loading-spinner></app-loading-spinner>
+</ng-template>

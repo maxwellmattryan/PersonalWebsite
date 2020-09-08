@@ -12,9 +12,9 @@ import { HttpErrorResponse } from '@angular/common/http';
     styleUrls: ['./home-view.component.scss']
 })
 export class HomeViewComponent implements OnInit {
-    isLoaded: boolean = false;
-
     homepage: Homepage;
+
+    isLoaded: boolean = false;
 
     constructor(
         private apiService: ApiService,
@@ -27,6 +27,7 @@ export class HomeViewComponent implements OnInit {
         this.apiService.getHomepage().subscribe((res: Homepage) => {
             this.homepage = res;
             this.homepage.profile.technologies = res.profile.technologies.sort(this.comparisonService.profileTechnologies);
+
             this.isLoaded = true;
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
