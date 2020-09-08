@@ -6,7 +6,6 @@ sup {
 
 .app {
     animation: fade-in $app-fade-in;
-    min-height: calc(100vh - #{$header-height} - #{$footer-height});
 }
 
 @keyframes fade-in {
