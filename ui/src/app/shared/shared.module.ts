@@ -11,6 +11,7 @@ import {
     FooterComponent,
     HeaderComponent,
     LandingComponent,
+    LoadingSpinnerComponent,
     PostCollectionComponent,
     ProjectCollectionComponent
 } from './components';
@@ -21,6 +22,7 @@ import {
         FooterComponent,
         HeaderComponent,
         LandingComponent,
+        LoadingSpinnerComponent,
         PostCollectionComponent,
         ProjectCollectionComponent
     ],
@@ -36,6 +38,7 @@ import {
         FooterComponent,
         HeaderComponent,
         LandingComponent,
+        LoadingSpinnerComponent,
         PostCollectionComponent,
         ProjectCollectionComponent
     ]

@@ -1,9 +1,12 @@
+@import 'variables';
+
 sup {
     font-size: x-small;
 }
 
 .app {
     animation: fade-in 2s;
+    min-height: calc(100vh - #{$header-height} - #{$footer-height});
 }
 
 @keyframes fade-in {
