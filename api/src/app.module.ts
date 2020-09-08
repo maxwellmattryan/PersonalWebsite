@@ -25,9 +25,7 @@ import { ProjectModule } from '@api/features/project/project.module';
                 POSTGRES_DB: Joi.string().required(),
 
                 JWT_SECRET: Joi.string().required(),
-                JWT_EXPIRES_IN: Joi.string().required(),
-
-                CLOUD_SQL_CONNECTION_NAME: Joi.string()
+                JWT_EXPIRES_IN: Joi.string().required()
             })
         }),
 

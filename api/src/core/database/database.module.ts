@@ -12,9 +12,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
             useFactory: (configService: ConfigService) => {
                 return ({
                     type: 'postgres',
-                    extra: {
-                        socketPath: configService.get('POSTGRES_SOCKET_PATH') || `/cloudsql/${configService.get('CLOUD_SQL_CONNECTION_NAME')}`
-                    },
+                    extra: { socketPath: configService.get('POSTGRES_SOCKET_PATH') },
                     host: configService.get('POSTGRES_HOST'),
                     port: configService.get('POSTGRES_PORT'),
                     username: configService.get('POSTGRES_USER'),
