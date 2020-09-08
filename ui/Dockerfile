@@ -4,11 +4,12 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
+RUN npm install rxjs
 RUN npm install --only=dev
 
 COPY . .
 
-RUN npm run build
+RUN npm run build:prod
 
 FROM node:12.18-alpine AS prod
 
@@ -25,4 +26,4 @@ COPY . .
 
 COPY --from=dev /usr/src/app/dist ./dist
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]
