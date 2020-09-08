@@ -7,13 +7,13 @@
         "blog-header"
         "topics"
         "posts";
-    min-height: 86vh;
 
     .blog__header {
         grid-area: blog-header;
     }
     .topics {
         grid-area: topics;
+        margin: 0;
     }
     .posts {
         grid-area: posts;
@@ -37,10 +37,10 @@
 }
 
 .blog__filter-btn {
-    font-size: 90%;
+    font-size: 95%;
     height: $btn-height;
     line-height: $btn-height;
-    width: 184px;
+    width: 100%;
 
     &--add, &--edit {
         height: $small-btn-height;
@@ -77,9 +77,10 @@
 
 @media only screen and (min-width: 768px) {
     .blog__filter-btn {
+        font-size: 90%;
         height: $large-btn-height;
         line-height: $large-btn-height;
-        width: 236px;
+        width: $large-btn-width;
 
         &--add, &--edit {
             width: 52px;
@@ -94,5 +95,9 @@
         grid-template-areas:
           "blog-header blog-header blog-header blog-header"
           "posts posts posts topics";
+
+        .topics {
+            margin: 0 auto;
+        }
     }
 }

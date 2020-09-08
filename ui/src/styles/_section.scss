@@ -1,3 +1,5 @@
+@import 'variables';
+
 .section-container {
     display: flex;
     flex-direction: column;
@@ -10,4 +12,5 @@
     padding: $padding;
     margin: 0 auto;
     max-width: 1060px;
+    min-height: calc(98vh - #{$header-height} - #{$section-divider-height} - #{$footer-height} * 2);
 }

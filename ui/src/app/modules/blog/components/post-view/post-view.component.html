@@ -1,4 +1,4 @@
-<div class='section post' *ngIf='isLoaded'>
+<div class='section post' *ngIf='isLoaded; else loading'>
     <h1 class='post__title' *ngIf='post.status.status === "PUBLISHED"'>{{ post.title }}</h1>
     <h1 class='post__title' *ngIf='post.status.status !== "PUBLISHED"'>{{ post.status.status + ": " + post.title }}</h1>
 
@@ -26,4 +26,6 @@
     <markdown [data]='post.content' lineNumbers></markdown>
 </div>
 
-<div class='section-divider'></div>
+<ng-template #loading>
+    <app-loading-spinner></app-loading-spinner>
+</ng-template>

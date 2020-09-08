@@ -15,6 +15,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class DashboardComponent implements OnInit {
     profiles: Profile[];
 
+    isLoaded: boolean = false;
+
     constructor(
         private router: Router,
         private apiService: ApiService,
@@ -27,12 +29,16 @@ export class DashboardComponent implements OnInit {
     ngOnInit(): void {
         if(this.authService.isLoggedIn()) {
             this.populateProfiles();
+        } else {
+            this.isLoaded = true;
         }
     }
 
     populateProfiles(): void {
         this.apiService.getProfiles().subscribe((res: Profile[]) => {
             this.profiles = res.sort(this.comparisonService.profiles);
+
+            this.isLoaded = true;
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
         });

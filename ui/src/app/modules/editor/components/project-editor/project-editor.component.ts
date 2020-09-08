@@ -27,6 +27,8 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
 
     @Input() id: number;
 
+    isLoaded: boolean = false;
+
     constructor(
         private apiService: ApiService,
         private authService: AuthService,
@@ -77,11 +79,14 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     private loadProfileData(): void {
         this.apiService.getProfiles().subscribe((res: Profile[]) => {
             this.profileData = res.sort(this.comparisonService.profiles);
+
             if(this.id && this.projectData) {
                 this.setProfileControls(this.projectData.profiles.map(p => p.id));
             } else {
                 this.setProfileControls([]);
             }
+
+            this.isLoaded = true;
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
         });

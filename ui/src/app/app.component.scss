@@ -1,9 +1,11 @@
+@import 'variables';
+
 sup {
     font-size: x-small;
 }
 
 .app {
-    animation: fade-in 2s;
+    animation: fade-in $app-fade-in;
 }
 
 @keyframes fade-in {

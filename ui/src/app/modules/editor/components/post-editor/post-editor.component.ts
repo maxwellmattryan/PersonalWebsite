@@ -29,6 +29,8 @@ export class PostEditorComponent implements OnDestroy, OnInit {
 
     @Input() id: number;
 
+    isLoaded: boolean = false;
+
     constructor(
         private apiService: ApiService,
         private authService: AuthService,
@@ -96,11 +98,14 @@ export class PostEditorComponent implements OnDestroy, OnInit {
     private loadTopicData(): void {
         this.apiService.getTopics().subscribe((res: BlogTopic[]) => {
             this.topicData = res.sort(this.comparisonService.topics);
+
             if(this.postData) {
                 this.setTopicControls(this.postData.topics.map(t => t.id));
             } else {
                 this.setTopicControls([]);
             }
+
+            this.isLoaded = true;
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
         });

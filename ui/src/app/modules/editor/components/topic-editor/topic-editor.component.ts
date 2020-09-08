@@ -19,6 +19,8 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
 
     @Input() id: number;
 
+    isLoaded: boolean = false;
+
     constructor(
         private apiService: ApiService,
         private authService: AuthService,
@@ -59,6 +61,7 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
 
     private loadTopicData(): void {
         this.topicData = this.editorService.getTopic();
+        this.isLoaded = true;
     }
 
     private buildTopicForm(): void {
