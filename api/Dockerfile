@@ -1,17 +1,16 @@
-FROM node:12.18-alpine AS development
+FROM node:12.18-alpine AS dev
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install --only=development
+RUN npm install --only=dev
 
 COPY . .
 
-RUN npm install -g rimraf
 RUN npm run build
 
-FROM node:12.18-alpine AS production
+FROM node:12.18-alpine AS prod
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
@@ -20,10 +19,10 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install --only=production
+RUN npm install --only=prod
 
 COPY . .
 
 COPY --from=development /usr/src/app/dist ./dist
 
-CMD ["node", "dist/main"]
+CMD ["npm", "run", "start:prod"]
