@@ -4,7 +4,6 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install rxjs
 RUN npm install --only=dev
 
 COPY . .
