@@ -25,6 +25,6 @@ RUN npm install
 COPY . .
 
 COPY --from=builder /usr/src/app/dist ./dist
-COPY ./public/* ./dist
+COPY ./public/. ./dist
 
 CMD ["npm", "run", "start"]
