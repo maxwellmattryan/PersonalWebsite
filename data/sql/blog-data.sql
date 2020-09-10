@@ -113,12 +113,10 @@ Sed adipiscing diam donec adipiscing tristique. Interdum velit euismod in pellen
        'https://mattmaxwell.tech/images/green-foot.png');
 
 INSERT INTO blog_topic(name, description) VALUES ('Audio Development', 'Any and all things related to audio development and audio programming.');
-INSERT INTO blog_topic(name, description) VALUES ('Design', 'Any and all things related to software design.');
-INSERT INTO blog_topic(name, description) VALUES ('Engineering', 'Any and all things related to software engineering.');
 INSERT INTO blog_topic(name, description) VALUES ('Game Development', 'Any and all things related to game development.');
-INSERT INTO blog_topic(name, description) VALUES ('Mathematics', 'Any and all things related to mathematics (most likely DSP-related concepts).');
-INSERT INTO blog_topic(name, description) VALUES ('Programming', 'Any and all things related to programming.');
+INSERT INTO blog_topic(name, description) VALUES ('Software Design', 'Any and all things related to software design.');
+INSERT INTO blog_topic(name, description) VALUES ('Software Engineering', 'Any and all things related to software engineering.');
 
-INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (1, 1), (1, 5), (1, 6);
-INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (2, 4), (2, 1);
-INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (3, 3);
+INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (1, 1), (1, 4);
+INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (2, 1), (2, 2);
+INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (3, 3), (3, 4);

@@ -20,7 +20,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN apk add git
-RUN npm install
+RUN npm install --only=prod
 
 COPY . .
 
