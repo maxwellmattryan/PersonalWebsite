@@ -20,7 +20,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
                     database: configService.get('POSTGRES_DB'),
                     namingStrategy: new SnakeNamingStrategy(),
                     entities: [__dirname + '/../../features/**/*.entity{.ts,.js}'],
-                    synchronize: false
+                    synchronize: true
                 })
             }
         })
