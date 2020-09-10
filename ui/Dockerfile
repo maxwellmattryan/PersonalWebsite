@@ -13,18 +13,11 @@ COPY . .
 RUN npm run build:prod
 
 ## PRODUCTION STAGE ##
-FROM node:12.18-alpine AS prod
+FROM nginx:alpine
 
-WORKDIR /usr/src/app
+RUN rm -rf /usr/share/nginx/html/*
 
-COPY package*.json ./
+COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
+COPY ./public/. /usr/share/nginx/html
 
-RUN apk add git
-RUN npm install --only=prod
-
-COPY . .
-
-COPY --from=builder /usr/src/app/dist ./dist
-COPY ./public/. ./dist/
-
-CMD ["node_modules/.bin/ng", "build --prod"]
+CMD ["nginx", "-g", "daemon off;"]
