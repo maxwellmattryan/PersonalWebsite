@@ -26,5 +26,6 @@ RUN npm install --only=prod
 COPY . .
 
 COPY --from=dev /usr/src/app/dist ./dist
+COPY ./public/. ./dist/
 
 CMD ["npm", "run", "start"]
