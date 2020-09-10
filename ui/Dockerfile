@@ -13,11 +13,18 @@ COPY . .
 RUN npm run build:prod
 
 ## PRODUCTION STAGE ##
-FROM nginx:alpine
+FROM node:12.18-alpine AS prod
 
-RUN rm -rf /usr/share/nginx/html/*
+WORKDIR /usr/src/app
 
-COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
-COPY ./public/. /usr/share/nginx/html
+COPY package*.json ./
 
-CMD ["nginx", "-g", "daemon off;"]
+RUN apk add git
+RUN npm install
+
+COPY . .
+
+COPY --from=builder /usr/src/app/dist ./dist
+COPY ./public/* ./dist
+
+CMD ["npm", "run", "start"]
