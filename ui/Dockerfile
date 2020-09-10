@@ -20,6 +20,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN apk add git
+RUN npm install -g @angular/cli
 RUN npm install --only=prod
 
 COPY . .
