@@ -27,4 +27,4 @@ COPY . .
 COPY --from=builder /usr/src/app/dist ./dist
 COPY ./public/. ./dist/
 
-CMD ["npm", "run", "start"]
+CMD ["node_modules/.bin/ng", "build --prod"]
