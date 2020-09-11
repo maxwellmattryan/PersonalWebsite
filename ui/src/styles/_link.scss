@@ -1,0 +1,14 @@
+@import 'variables';
+
+.text-link {
+    color: $color-primary;
+    display: inline-block;
+}
+
+@media only screen and (min-width: 768px) {
+    .text-link {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

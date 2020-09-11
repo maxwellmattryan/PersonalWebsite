@@ -51,8 +51,19 @@
     width: 100%;
 }
 
+markdown ::ng-deep a {
+    color: $color-primary;
+    display: inline-block;
+}
+
 @media only screen and (min-width: 768px) {
     .post__topic-item {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    markdown ::ng-deep a {
         &:hover {
             text-decoration: underline;
         }
