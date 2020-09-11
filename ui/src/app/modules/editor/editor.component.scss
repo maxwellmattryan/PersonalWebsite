@@ -69,6 +69,10 @@
     }
 }
 
+.form__checkbox-item {
+    margin-bottom: $half-margin;
+}
+
 @media only screen and (min-width: 768px) {
     .editor__profile-btn {
         &--edit, &--warn {

@@ -24,10 +24,10 @@
         <div class='form-field editor__form-field'>
             <label class='form-field-label editor__form-field-label'>Projects</label>
             <br><br>
-            <ng-container formArrayName='projects' *ngFor='let project of profileForm.controls.projects["controls"]; let idx = index'>
+            <div class='form__checkbox-item' formArrayName='projects' *ngFor='let project of profileForm.controls.projects["controls"]; let idx = index'>
                 <mat-checkbox [formControlName]='idx'>{{ projectData[idx].name }}</mat-checkbox>
                 <br>
-            </ng-container>
+            </div>
         </div>
 
         <div class='form-field editor__form-field'>
