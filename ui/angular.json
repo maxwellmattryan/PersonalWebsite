@@ -1,5 +1,5 @@
 {
-    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "$schema": "node_modules/@angular/cli/lib/config/schema.json",
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
@@ -29,9 +29,9 @@
                         ],
                         "styles": [
                             "src/styles.scss",
-                            "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-                            "./node_modules/prismjs/themes/prism-okaidia.css",
-                            "./node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css"
+                            "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+                            "node_modules/prismjs/themes/prism-okaidia.css",
+                            "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css"
                         ],
                         "stylePreprocessorOptions": {
                             "includePaths": [
@@ -39,23 +39,23 @@
                             ]
                         },
                         "scripts": [
-                            "./node_modules/marked/lib/marked.js",
-                            "./node_modules/prismjs/prism.js",
-                            "./node_modules/prismjs/components/prism-markdown.min.js",
-                            "./node_modules/prismjs/components/prism-css.min.js",
-                            "./node_modules/prismjs/components/prism-scss.min.js",
-                            "./node_modules/prismjs/components/prism-markup.min.js",
-                            "./node_modules/prismjs/components/prism-csharp.min.js",
-                            "./node_modules/prismjs/components/prism-c.min.js",
-                            "./node_modules/prismjs/components/prism-cpp.min.js",
-                            "./node_modules/prismjs/components/prism-json.min.js",
-                            "./node_modules/prismjs/components/prism-javascript.min.js",
-                            "./node_modules/prismjs/components/prism-typescript.min.js",
-                            "./node_modules/prismjs/components/prism-java.min.js",
-                            "./node_modules/prismjs/components/prism-scala.min.js",
-                            "./node_modules/prismjs/components/prism-python.min.js",
-                            "./node_modules/prismjs/components/prism-docker.min.js",
-                            "./node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js"
+                            "node_modules/marked/lib/marked.js",
+                            "node_modules/prismjs/prism.js",
+                            "node_modules/prismjs/components/prism-markdown.min.js",
+                            "node_modules/prismjs/components/prism-css.min.js",
+                            "node_modules/prismjs/components/prism-scss.min.js",
+                            "node_modules/prismjs/components/prism-markup.min.js",
+                            "node_modules/prismjs/components/prism-csharp.min.js",
+                            "node_modules/prismjs/components/prism-c.min.js",
+                            "node_modules/prismjs/components/prism-cpp.min.js",
+                            "node_modules/prismjs/components/prism-json.min.js",
+                            "node_modules/prismjs/components/prism-javascript.min.js",
+                            "node_modules/prismjs/components/prism-typescript.min.js",
+                            "node_modules/prismjs/components/prism-java.min.js",
+                            "node_modules/prismjs/components/prism-scala.min.js",
+                            "node_modules/prismjs/components/prism-python.min.js",
+                            "node_modules/prismjs/components/prism-docker.min.js",
+                            "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js"
                         ]
                     },
                     "configurations": {
@@ -128,6 +128,9 @@
                     "configurations": {
                         "production": {
                             "browserTarget": "ui:build:production"
+                        },
+                        "staging": {
+                            "browserTarget": "ui:build:staging"
                         }
                     }
                 },
@@ -149,7 +152,7 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+                            "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
                             "src/styles.scss"
                         ],
                         "scripts": []
@@ -177,6 +180,9 @@
                     "configurations": {
                         "production": {
                             "devServerTarget": "ui:serve:production"
+                        },
+                        "staging": {
+                            "devServerTarget": "ui:serve:staging"
                         }
                     }
                 }
