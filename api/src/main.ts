@@ -2,10 +2,11 @@ import { ClassSerializerInterceptor } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 
-import * as rateLimit from 'express-rate-limit';
+import * as compression from 'compression';
+import * as cookieParser from 'cookie-parser';
 import * as helmet from 'helmet';
 import * as morgan from 'morgan';
-import * as cookieParser from 'cookie-parser';
+import * as rateLimit from 'express-rate-limit';
 
 import { AppModule } from '@api/app.module';
 
@@ -33,6 +34,8 @@ async function bootstrap() {
     app.useGlobalInterceptors(new ClassSerializerInterceptor(
         app.get(Reflector)
     ));
+
+    app.use(compression());
 
     app.setGlobalPrefix('api');
 
