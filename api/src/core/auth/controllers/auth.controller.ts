@@ -16,8 +16,8 @@ export class AuthController {
     @Post('register')
     @HttpCode(201)
     async register(@Req() request: Request): Promise<Admin> {
-        return await this.authService.registerAdmin(request.body);
-        //throw new NotAllowedToRegisterException();
+        // return await this.authService.registerAdmin(request.body);
+        throw new NotAllowedToRegisterException();
     }
 
     @Post('login')

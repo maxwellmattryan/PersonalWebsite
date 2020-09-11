@@ -25,8 +25,8 @@ export class RegisterComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        // this.notificationService.createNotification('This functionality is not available.');
-        // this.router.navigate(['admin']);
+        this.notificationService.createNotification('This functionality is not available.');
+        this.router.navigate(['admin']);
 
         if(this.authService.isLoggedIn()) {
             this.notificationService.createNotification('Already logged in.');

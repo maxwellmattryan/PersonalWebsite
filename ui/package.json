@@ -7,7 +7,7 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
-        "start:prod": "ng run ui:serve -c ${NODE_ENV:=production}",
+        "start:prod": "ng run ui:serve -c=${NODE_ENV}",
         "build": "ng build",
         "build:prod": "ng build --prod --configuration=${NODE_ENV:=production}",
         "test": "ng test",
@@ -41,7 +41,7 @@
         "@types/hammerjs": "^2.0.36",
         "@types/jasmine": "~3.5.0",
         "@types/jasminewd2": "~2.0.3",
-        "@types/node": "^12.11.1",
+        "@types/node": "^12.12.57",
         "codelyzer": "^5.1.2",
         "jasmine-core": "~3.5.0",
         "jasmine-spec-reporter": "~4.2.1",
