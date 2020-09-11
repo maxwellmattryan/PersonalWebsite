@@ -29,6 +29,10 @@
     margin-top: $half-margin;
     max-width: 312px;
     width: 100%;
+
+    &--submit {
+        font-size: 120%;
+    }
 }
 
 .mat-radio-button {

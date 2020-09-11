@@ -11,11 +11,15 @@
 }
 
 .post__btn {
-    font-size: 130%;
+    font-size: 160%;
     height: $small-btn-height;
     line-height: $small-btn-height;
     margin: 0 $quarter-margin $margin 0;
     width: $small-btn-width;
+
+    &--warn {
+        font-size: 140%;
+    }
 }
 
 .post__title {
