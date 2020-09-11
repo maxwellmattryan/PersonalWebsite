@@ -34,13 +34,13 @@ timeout: 600s
 options:
     substitutionOption: ALLOW_LOOSE
 substitutions:
-    _PLATFORM: managed
-    _LABELS: gcb-trigger-id=9e2a757d-7e56-47fb-97ad-8916f38b3756
-    _TRIGGER_ID: 9e2a757d-7e56-47fb-97ad-8916f38b3756
-    _SERVICE_NAME: mattmaxwell-api
-    _DEPLOY_REGION: us-central1
     _GCR_HOSTNAME: us.gcr.io
+    _LABELS: gcb-trigger-id=2974a040-b2a6-4a8d-ad54-649cc620869d
+    _TRIGGER_ID: 2974a040-b2a6-4a8d-ad54-649cc620869d
+    _PLATFORM: managed
+    _SERVICE_NAME: mattmaxwell-prod-api
+    _DEPLOY_REGION: us-central1
 tags:
     - gcp-cloud-build-deploy-cloud-run
     - gcp-cloud-build-deploy-cloud-run-managed
-    - mattmaxwell-api
+    - mattmaxwell-prod-api
