@@ -7,6 +7,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:prod": "ng serve --disableHostCheck true",
     "build": "ng build",
     "build:prod": "ng build --prod",
     "test": "ng test",
