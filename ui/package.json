@@ -26,6 +26,7 @@
         "@angular/platform-browser": "~9.1.7",
         "@angular/platform-browser-dynamic": "~9.1.7",
         "@angular/router": "~9.1.7",
+        "@angular/service-worker": "^10.1.1",
         "@ngstack/code-editor": "^1.0.0",
         "angular-markdown-editor": "^2.0.2",
         "hammerjs": "^2.0.8",

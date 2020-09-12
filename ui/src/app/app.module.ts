@@ -1,10 +1,13 @@
+import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
+
+import { environment } from '@app/environments/environment';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -34,6 +37,7 @@ export function markedOptionsFactory(): MarkedOptions {
 @NgModule({
     declarations: [AppComponent],
     imports: [
+        environment.production || environment.staging ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
         AppRoutingModule,
         BrowserAnimationsModule,
         BrowserModule,
