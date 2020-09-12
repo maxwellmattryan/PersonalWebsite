@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { BlogPost } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/auth';
-import { BlogService, ComparisonService, EditorService, NotificationService, SeoService } from '@app/core/services';
-import { HttpErrorResponse } from '@angular/common/http';
+import { BlogService, ComparisonService, EditorService, NotificationService, SeoService, ProfileService } from '@app/core/services';
 
 @Component({
     selector: 'app-post-view',
@@ -25,7 +26,9 @@ export class PostViewComponent implements OnInit {
         private comparisonService: ComparisonService,
         private editorService: EditorService,
         private notificationService: NotificationService,
+        private profileService: ProfileService,
         private seoService: SeoService,
+        private titleService: Title,
         private router: Router
     ) { }
 
@@ -39,13 +42,15 @@ export class PostViewComponent implements OnInit {
             return;
         }
 
-        this.apiService.getPost(postId).subscribe(post => {
-            if(post.status.status !== 'PUBLISHED' && !this.isAdmin) {
+        this.apiService.getPost(postId).subscribe((res: BlogPost) => {
+            if(res.status.status !== 'PUBLISHED' && !this.isAdmin) {
                 this.notificationService.createNotification('Unable to view the blog post.');
                 this.router.navigate(['']);
             }
 
-            this.post = post;
+            this.titleService.setTitle(`${res.title} | Blog | Matthew Maxwell`);
+
+            this.post = res;
             this.post.topics.sort(this.comparisonService.topics);
 
             this.isLoaded = true;

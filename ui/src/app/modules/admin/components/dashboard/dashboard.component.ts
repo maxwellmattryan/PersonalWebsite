@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { Profile, ProfileStatus } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/auth';
-import { NotificationService, ComparisonService, EditorService } from '@app/core/services';
-import { HttpErrorResponse } from '@angular/common/http';
+import { NotificationService, ComparisonService, EditorService, ProfileService } from '@app/core/services';
 
 @Component({
     selector: 'app-dashboard',
@@ -23,10 +24,14 @@ export class DashboardComponent implements OnInit {
         public authService: AuthService,
         private comparisonService: ComparisonService,
         private editorService: EditorService,
-        public notificationService: NotificationService
+        public notificationService: NotificationService,
+        private profileService: ProfileService,
+        private titleService: Title
     ) { }
 
     ngOnInit(): void {
+        this.titleService.setTitle(`Admin Dashboard | Matthew Maxwell`);
+
         if(this.authService.isLoggedIn()) {
             this.populateProfiles();
         } else {
@@ -37,6 +42,7 @@ export class DashboardComponent implements OnInit {
     populateProfiles(): void {
         this.apiService.getProfiles().subscribe((res: Profile[]) => {
             this.profiles = res.sort(this.comparisonService.profiles);
+            this.setActiveProfile();
 
             this.isLoaded = true;
         }, (error: HttpErrorResponse) => {
@@ -44,10 +50,17 @@ export class DashboardComponent implements OnInit {
         });
     }
 
+    private setActiveProfile(): void {
+        const activeProfile = this.profiles.find(p => p.status.status === 'ACTIVE');
+        this.profileService.setActiveProfile(activeProfile);
+    }
+
     changeProfile(profile: Profile): void {
         if(profile.status.status === 'ACTIVE') return;
 
         this.apiService.activateProfile(profile.id).subscribe((res: Profile) => {
+            this.profileService.setActiveProfile(res);
+
             this.modifyProfileStatuses(res.id);
             this.notificationService.createNotification(`Successfully activated the "${res.name}" profile!`);
         }, (error: HttpErrorResponse) => {

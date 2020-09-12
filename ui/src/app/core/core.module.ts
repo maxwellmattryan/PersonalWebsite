@@ -10,6 +10,7 @@ import {
     ComparisonService,
     EditorService,
     NotificationService,
+    ProfileService,
     SeoService,
     ValidationService
 } from './services';
@@ -33,6 +34,7 @@ import {
         ComparisonService,
         EditorService,
         NotificationService,
+        ProfileService,
         SeoService,
         ValidationService
     ]

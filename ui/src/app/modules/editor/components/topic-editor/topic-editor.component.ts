@@ -7,6 +7,7 @@ import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/auth';
 import { EditorService, NotificationService } from '@app/core/services';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-topic-editor',
@@ -27,6 +28,7 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
         private editorService: EditorService,
         private formBuilder: FormBuilder,
         private notificationService: NotificationService,
+        private titleService: Title,
         private router: Router,
     ) { }
 
@@ -35,6 +37,8 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        this.titleService.setTitle('Blog Topic Editor | Matthew Maxwell');
+
         this.checkForAdmin();
 
         this.setUnloadEvent();

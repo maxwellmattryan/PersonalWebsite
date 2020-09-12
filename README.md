@@ -246,6 +246,7 @@ NOTE: What I have listed below is simply the more relevant fields for each table
     - Lastname
 - Blog Post
     - Title
+    - Subtitle
     - Content
     - Preview
     - Image URL

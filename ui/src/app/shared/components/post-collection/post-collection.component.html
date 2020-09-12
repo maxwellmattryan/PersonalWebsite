@@ -6,9 +6,12 @@
     <div class='container posts__post-container'>
             <div class='posts__post' *ngFor='let post of getPosts(); let idx = index' [ngClass]="{'posts__post--rjust': idx % 2 !== 0}">
                 <a class=posts__post-anchor-wrapper [routerLink]="[this.getPostUrl(post.id, post.title)]">
-                    <h3 class='posts__post-title' *ngIf='post.status.status === "PUBLISHED"'>{{ post.title }} &rarr;</h3>
-                    <h3 class='posts__post-title' *ngIf='post.status.status !== "PUBLISHED"'>{{ post.status.status + ": " + post.title }} &rarr;</h3>
+                    <h3 class='posts__post-title' *ngIf='post.status.status === "PUBLISHED"'>{{ post.title }}</h3>
+                    <h3 class='posts__post-title' *ngIf='post.status.status !== "PUBLISHED"'>{{ post.status.status + ": " + post.title }}</h3>
+
+                    <h4 class='posts__post-subtitle'>{{ post.subtitle }}</h4>
                 </a>
+
 
                 <div class='posts__post-topic-list' *ngIf='showTopics'>
                     <a
@@ -22,7 +25,7 @@
                 </div>
 
                 <p class='posts__post-preview' *ngIf='showPreview'>
-                    {{ post.preview }}
+                    {{ post.preview.split(' ').slice(0, 44).join(' ') }} ...
                 </p>
 
                 <p class='posts__post-date' [innerHTML]='blogService.getFormattedDate(post.updated_at)'></p>

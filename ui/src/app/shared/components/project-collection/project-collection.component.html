@@ -7,14 +7,12 @@
         <div class='projects__project' *ngFor='let project of projects; let idx = index' [ngClass]="{'projects__project--rjust': idx % 2 === 0}">
             <div class='projects__project-background' [ngStyle]="{ 'background-image': 'url(' + project.image_url + ')' }"></div>
 
-            <a *ngIf='authService.isLoggedIn()' class='projects__project-anchor-wrapper' [routerLink]="[this.getProjectUrl(project.id, project.name)]">
+            <a class='projects__project-anchor-wrapper' [routerLink]="[this.getProjectUrl(project.id, project.name)]">
                 <h3 class='projects__project-name projects__project-name--link'>{{ project.name }}</h3>
             </a>
 
-            <h3 *ngIf='!authService.isLoggedIn()' class='projects__project-name'>{{ project.name }}</h3>
-
             <h4 class='projects__project-tagline'>{{ project.tagline }}</h4>
-            <p class='projects__project-description'>{{ project.description }}</p>
+            <p class='projects__project-description'>{{ project.description.split(' ').slice(0, 44).join(' ') }} ...</p>
 
             <a class='projects__project-link' [href]='project.link_url' target='_blank'>
                 <app-icon class= 'projects__project-link-icon' [name]='project.link_name'></app-icon>

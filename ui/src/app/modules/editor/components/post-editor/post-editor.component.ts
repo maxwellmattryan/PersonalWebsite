@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { BlogPost, BlogTopic, BlogPostStatus, BlogAuthor } from '@app/shared/models';
@@ -38,6 +39,7 @@ export class PostEditorComponent implements OnDestroy, OnInit {
         private editorService: EditorService,
         private notificationService: NotificationService,
         private seoService: SeoService,
+        private titleService: Title,
         private validationService: ValidationService,
         private formBuilder: FormBuilder,
         private router: Router
@@ -48,6 +50,8 @@ export class PostEditorComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit(): void {
+        this.titleService.setTitle('Blog Post Editor | Matthew Maxwell');
+
         this.checkForAdmin();
 
         this.setUnloadEvent();
@@ -122,6 +126,7 @@ export class PostEditorComponent implements OnDestroy, OnInit {
         if(this.postData) {
             this.postForm = this.formBuilder.group({
                 title:      this.formBuilder.control(this.postData.title,                        [Validators.required]),
+                subtitle:   this.formBuilder.control(this.postData.subtitle,                     [Validators.required]),
                 author:     this.formBuilder.control(this.buildAuthorName(this.postData.author), [Validators.required]),
                 status:     this.formBuilder.control(this.postData.status.status,                [Validators.required]),
                 topics:     this.formBuilder.array  (this.topicData,                             [this.validationService.hasMinElements(1)]),
@@ -132,6 +137,7 @@ export class PostEditorComponent implements OnDestroy, OnInit {
         } else {
             this.postForm = this.formBuilder.group({
                 title:      this.formBuilder.control('',                [Validators.required]),
+                subtitle:   this.formBuilder.control('',                [Validators.required]),
                 author:     this.formBuilder.control('Matthew Maxwell', [Validators.required]),
                 status:     this.formBuilder.control('DRAFT',           [Validators.required]),
                 topics:     this.formBuilder.array  ([],                [this.validationService.hasMinElements(1)]),

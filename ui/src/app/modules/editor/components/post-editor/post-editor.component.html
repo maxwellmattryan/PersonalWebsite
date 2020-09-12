@@ -11,6 +11,12 @@
         </div>
 
         <div class="form-field editor__form-field">
+            <label class='form-field-label editor__form-field-label'>Subtitle</label>
+            <br><br>
+            <input formControlName='subtitle' required autofocus>
+        </div>
+
+        <div class="form-field editor__form-field">
             <label class='form-field-label editor__form-field-label'>Author</label>
             <br><br>
             <mat-radio-group formControlName='author' name='author' required>
@@ -35,10 +41,10 @@
         <div class="form-field editor__form-field">
             <label class='form-field-label editor__form-field-label'>Topics</label>
             <br><br>
-            <ng-container formArrayName='topics' *ngFor='let topic of postForm.controls.topics["controls"]; let idx = index'>
+            <div class='form__checkbox-item' formArrayName='topics' *ngFor='let topic of postForm.controls.topics["controls"]; let idx = index'>
                 <mat-checkbox [formControlName]='idx'>{{ topicData[idx].name }}</mat-checkbox>
                 <br>
-            </ng-container>
+            </div>
         </div>
 
         <div class="form-field editor__form-field">

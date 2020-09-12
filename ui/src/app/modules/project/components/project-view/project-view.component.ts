@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/auth';
 import { EditorService, NotificationService, SeoService } from '@app/core/services';
 import { Project } from '@app/shared/models';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-project-view',
@@ -24,16 +25,12 @@ export class ProjectViewComponent implements OnInit {
         private editorService: EditorService,
         private notificationService: NotificationService,
         private seoService: SeoService,
+        private titleService: Title,
         private router: Router
     ) { }
 
     ngOnInit(): void {
         this.isAdmin = this.authService.isLoggedIn();
-
-        // NOTE: Remove when the project page has been integrated (eh?)
-        if(!this.isAdmin) {
-            this.router.navigate(['']);
-        }
 
         const projectId = this.seoService.getIdFromUrl(this.router.url);
         if(!projectId) {
@@ -42,8 +39,10 @@ export class ProjectViewComponent implements OnInit {
             return;
         }
 
-        this.apiService.getProject(projectId).subscribe(project => {
-            this.project = project;
+        this.apiService.getProject(projectId).subscribe((res: Project) => {
+            this.project = res;
+
+            this.titleService.setTitle(`${res.name} - ${res.tagline} | Portfolio | Matthew Maxwell`);
 
             this.isLoaded = true;
         }, (error: HttpErrorResponse) => {
