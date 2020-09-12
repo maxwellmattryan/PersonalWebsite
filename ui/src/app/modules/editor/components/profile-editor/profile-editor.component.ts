@@ -1,12 +1,13 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Profile, ProfileStatus, ProfileTechnology, Project } from '@app/shared/models';
 import { AuthService } from '@app/core/auth';
 import { ApiService } from '@app/core/http';
-import { ComparisonService, EditorService, NotificationService, ValidationService } from '@app/core/services';
+import { ComparisonService, EditorService, NotificationService, ValidationService, ProfileService } from '@app/core/services';
 
 @Component({
     selector: 'app-profile-editor',
@@ -34,6 +35,8 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
         private comparisonService: ComparisonService,
         private editorService: EditorService,
         private notificationService: NotificationService,
+        private profileService: ProfileService,
+        private titleService: Title,
         private validationService: ValidationService
     ) { }
 
@@ -42,6 +45,8 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit(): void {
+        this.titleService.setTitle('Portfolio Profile Editor | Matthew Maxwell');
+
         this.checkForAdmin();
 
         this.setUnloadEvent();
@@ -138,6 +143,9 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
 
     onSubmit(): void {
         const profile = this.buildFormProfileData();
+
+        if(profile.status.status === 'ACTIVE')
+            this.profileService.setActiveProfile(profile);
 
         if(profile.id === undefined) {
             this.apiService.createProfile(profile).subscribe((res: Profile) => {

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Title } from '@angular/platform-browser';
 
 import { BlogPost, BlogTopic } from '@app/shared/models';
 import { ApiService } from '@app/core/http/api.service';
 import { AuthService } from '@app/core/auth';
-import { BlogService, ComparisonService, EditorService, NotificationService } from '@app/core/services';
+import { BlogService, ComparisonService, EditorService, NotificationService, ProfileService } from '@app/core/services';
 
 @Component({
     selector: 'app-blog-view',
@@ -26,10 +27,14 @@ export class BlogViewComponent implements OnInit {
         public blogService: BlogService,
         private comparisonService: ComparisonService,
         private editorService: EditorService,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
+        private profileService: ProfileService,
+        private titleService: Title
     ) { }
 
     ngOnInit(): void {
+        this.titleService.setTitle(`${this.profileService.getActiveProfileName()} Blog | Matthew Maxwell`);
+
         this.isAdmin = this.authService.isLoggedIn();
 
         if(this.isAdmin) {

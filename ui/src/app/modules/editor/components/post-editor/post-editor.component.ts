@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { BlogPost, BlogTopic, BlogPostStatus, BlogAuthor } from '@app/shared/models';
@@ -38,6 +39,7 @@ export class PostEditorComponent implements OnDestroy, OnInit {
         private editorService: EditorService,
         private notificationService: NotificationService,
         private seoService: SeoService,
+        private titleService: Title,
         private validationService: ValidationService,
         private formBuilder: FormBuilder,
         private router: Router
@@ -48,6 +50,8 @@ export class PostEditorComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit(): void {
+        this.titleService.setTitle('Blog Post Editor | Matthew Maxwell');
+
         this.checkForAdmin();
 
         this.setUnloadEvent();
