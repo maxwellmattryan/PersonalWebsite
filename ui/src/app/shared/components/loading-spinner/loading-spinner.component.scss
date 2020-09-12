@@ -1,12 +1,14 @@
 @import 'variables';
 
 .app-loading {
-    position: relative;
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     height: calc(100vh - #{$header-height} - #{$footer-height});
+    justify-content: center;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0px;
 }
 
 .app-loading .spinner {

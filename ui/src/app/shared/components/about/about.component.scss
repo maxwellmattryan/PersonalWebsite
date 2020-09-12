@@ -26,11 +26,6 @@
 .about__description {
     color: $color-light;
     margin-bottom: $margin;
-
-    &--link {
-        color: $color-primary;
-        display: inline-block;
-    }
 }
 
 .about__technology-list {
@@ -66,9 +61,5 @@
 
     .about__technology-list {
         margin-bottom: 0;
-    }
-
-    .about__description--link:hover {
-        text-decoration: underline;
     }
 }

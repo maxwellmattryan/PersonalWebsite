@@ -11,11 +11,15 @@
 }
 
 .post__btn {
-    font-size: 130%;
+    font-size: 160%;
     height: $small-btn-height;
     line-height: $small-btn-height;
     margin: 0 $quarter-margin $margin 0;
     width: $small-btn-width;
+
+    &--warn {
+        font-size: 140%;
+    }
 }
 
 .post__title {
@@ -47,8 +51,19 @@
     width: 100%;
 }
 
+markdown ::ng-deep a {
+    color: $color-primary;
+    display: inline-block;
+}
+
 @media only screen and (min-width: 768px) {
     .post__topic-item {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    markdown ::ng-deep a {
         &:hover {
             text-decoration: underline;
         }

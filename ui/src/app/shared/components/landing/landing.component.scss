@@ -31,7 +31,14 @@
 }
 
 .landing__contact-btn {
-    height: 70px;
-    line-height: 70px;
+    font-size: 120%;
+    height: $large-btn-height;
+    line-height: $large-btn-height;
     width: $btn-width;
+}
+
+@media only screen and (min-width: 768px) {
+    .landing__header--highlight {
+        font-size: 180%;
+    }
 }

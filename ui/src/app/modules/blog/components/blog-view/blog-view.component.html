@@ -27,7 +27,7 @@
             <div class='blog__filter-btn-row' *ngFor='let topic of topics'>
                 <button 
                     [ngClass]="{'btn--active': topic.id === activeTopicId, 'blog__filter-btn--half': isAdmin}"
-                    class='btn blog__filter-btn' 
+                    class='btn blog__filter-btn'
                     (click)='filterPosts(topic.id)'
                     type='button'
                 >

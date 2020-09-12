@@ -29,6 +29,10 @@
     margin-top: $half-margin;
     max-width: 312px;
     width: 100%;
+
+    &--submit {
+        font-size: 120%;
+    }
 }
 
 .mat-radio-button {
@@ -63,6 +67,10 @@
     input {
         width: 50%;
     }
+}
+
+.form__checkbox-item {
+    margin-bottom: $half-margin;
 }
 
 @media only screen and (min-width: 768px) {

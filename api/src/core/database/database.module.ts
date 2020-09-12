@@ -12,18 +12,14 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
             useFactory: (configService: ConfigService) => {
                 return ({
                     type: 'postgres',
-                    host: configService.get('POSTGRES_HOST'),
+                    extra: { socketPath: configService.get('POSTGRES_SOCKET_PATH') },
+                    host: configService.get('POSTGRES_SOCKET_PATH') || configService.get('POSTGRES_HOST'),
                     port: configService.get('POSTGRES_PORT'),
                     username: configService.get('POSTGRES_USER'),
                     password: configService.get('POSTGRES_PASSWORD'),
                     database: configService.get('POSTGRES_DB'),
                     namingStrategy: new SnakeNamingStrategy(),
                     entities: [__dirname + '/../../features/**/*.entity{.ts,.js}'],
-                    cli: {
-                        'migrationsDir': 'migrations'
-                    },
-                    migrations: ['migrations/*{.ts,.js}'],
-                    migrationsTableName: 'typeorm_migration',
                     synchronize: true
                 })
             }

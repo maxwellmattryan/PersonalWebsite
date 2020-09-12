@@ -53,6 +53,7 @@
     animation-fill-mode: both;
     color: $color-primary;
     line-height: $header-height;
+    font-size: 120%;
     padding: 0 $padding;
 }
 
@@ -178,6 +179,7 @@
 .sidebar__link-item {
     display: flex;
     flex-direction: column;
+    font-size: 120%;
     line-height: $header-height;
     text-align: right;
 }
