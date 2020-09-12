@@ -49,7 +49,7 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
 
         this.checkForAdmin();
 
-        this.setUnloadEvent();
+        this.setPageHideEvent();
 
         this.initProfileForm();
 
@@ -61,8 +61,8 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
             this.router.navigate(['']);
     }
 
-    private setUnloadEvent(): void {
-        window.onbeforeunload = () => {
+    private setPageHideEvent(): void {
+        window.onpagehide = () => {
             this.editorService.setProfile(null);
         }
     }

@@ -53,7 +53,7 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
 
         this.checkForAdmin();
 
-        this.setUnloadEvent();
+        this.setPageHideEvent();
 
         this.initProjectForm();
     }
@@ -63,8 +63,8 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
             this.router.navigate(['']);
     }
 
-    private setUnloadEvent(): void {
-        window.onbeforeunload = () => {
+    private setPageHideEvent(): void {
+        window.onpagehide = () => {
             this.editorService.setProject(null);
         };
     }
