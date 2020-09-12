@@ -82,17 +82,17 @@ export class BlogViewComponent implements OnInit {
     }
 
     filterPosts(topicId: number): void {
-        this.activeTopicId = topicId;
-
         if(this.isAdmin) {
             this.apiService.getPosts(topicId, false).subscribe((res: BlogPost[]) => {
                 this.posts = res;
+                this.activeTopicId = topicId;
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
             this.apiService.getPosts(topicId).subscribe((res: BlogPost[]) => {
                 this.posts = res;
+                this.activeTopicId = topicId;
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });

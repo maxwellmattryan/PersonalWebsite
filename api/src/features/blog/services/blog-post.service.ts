@@ -66,26 +66,24 @@ export class BlogPostService {
     }
 
     public async getPostsByStatus(status: string): Promise<BlogPost[]> {
-        return await this.blogPostRepository
+        return (await this.blogPostRepository
             .createQueryBuilder('bp')
             .leftJoinAndSelect('bp.author', 'ba')
             .leftJoinAndSelect('bp.status', 'bps')
             .innerJoinAndSelect('bp.topics', 'bt')
-            .where('bps.status = :status', { status: status })
             .orderBy('bp.updated_at', 'DESC')
-            .getMany();
+            .getMany()).filter(p => p.status.status === status);
     }
 
     public async getPostsByStatusAndTopic(status: string, topicId: number): Promise<BlogPost[]> {
-        return await this.blogPostRepository
+        return (await this.blogPostRepository
             .createQueryBuilder('bp')
             .leftJoinAndSelect('bp.author', 'ba')
             .leftJoinAndSelect('bp.status', 'bps')
             .innerJoinAndSelect('bp.topics', 'bt')
-            .where('bps.status = :status', { status: status })
             .where('bt.id = :id', { id: topicId })
             .orderBy('bp.updated_at', 'DESC')
-            .getMany();
+            .getMany()).filter(p => p.status.status === status);
     }
 
     public async getPostsByTopic(topicId: number): Promise<BlogPost[]> {
