@@ -35,8 +35,8 @@ VALUES ('Rotor',
        'Modern C++ ring modulation plugin',
        'Rotor is a variable waveform ring modulation plugin targeting VST3 and AU for OS X and Windows platforms. It uses wavetable synthesis to generate various simple waveforms that act as the modulation signal for the input. It is compiled using the JUCE framework for C++.',
        'assets/images/rotor.png',
-       'GitHub',
-       'https://github.com/maxwellmattryan/rotor');
+       'Google Drive',
+       'https://drive.google.com/drive/folders/1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2?usp=sharing');
 
 -- CAUTION: Make sure profile starter data is loaded before running
 INSERT INTO profile_projects_project(profile_id, project_id) VALUES (1, 2), (1, 4), (1, 5);
