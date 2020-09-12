@@ -27,6 +27,7 @@ export class BlogPost implements Deserializable {
     topics?: BlogTopic[];
 
     title: string;
+    subtitle: string;
     preview: string;
     content: string;
     image_url: string;

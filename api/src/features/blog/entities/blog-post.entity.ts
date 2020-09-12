@@ -36,6 +36,9 @@ export class BlogPost {
     public title: string;
 
     @Column({ type: 'text', nullable: false })
+    public subtitle: string;
+
+    @Column({ type: 'text', nullable: false })
     public preview: string;
 
     @Column({ type: 'text', nullable: false })

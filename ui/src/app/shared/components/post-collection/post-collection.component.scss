@@ -15,11 +15,8 @@
 
 }
 
-.posts__post-title {
-    text-shadow: 5px $color-dark solid;
-}
-
 .posts__post-title,
+.posts__post-subtitle,
 .posts__post-date,
 .posts__post-preview,
 .posts__post-topic-list {
@@ -35,8 +32,16 @@
     padding-top: $padding;
 }
 
+.posts__post-subtitle {
+    color: darken($color-white, 1);
+    font-style: italic;
+    font-weight: 500;
+    padding-top: $quarter-padding;
+}
+
 .posts__post-date {
     color: $color-dark;
+    font-style: italic;
     padding-bottom: $padding;
 }
 
@@ -48,7 +53,6 @@
 
 .posts__post-topic-item {
     color: $color-secondary;
-    font-style: italic;
 }
 
 .posts__post-preview {

@@ -2,6 +2,8 @@
     <h1 class='post__title' *ngIf='post.status.status === "PUBLISHED"'>{{ post.title }}</h1>
     <h1 class='post__title' *ngIf='post.status.status !== "PUBLISHED"'>{{ post.status.status + ": " + post.title }}</h1>
 
+    <h2 class='post__subtitle'>{{ post.subtitle }}</h2>
+
     <div class='post__btn-container' *ngIf='isAdmin'>
         <a class='btn post__btn' (click)='sendPostToEditor()' routerLink='/editor' [queryParams]='{type: "post", id: post.id}'>
             &#x270F;

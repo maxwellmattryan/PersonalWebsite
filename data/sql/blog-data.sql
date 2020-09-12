@@ -4,10 +4,11 @@ INSERT INTO blog_post_status(status) VALUES ('DRAFT');
 INSERT INTO blog_post_status(status) VALUES ('PUBLISHED');
 INSERT INTO blog_post_status(status) VALUES ('ARCHIVED');
 
-INSERT INTO blog_post(author_id, status_id, title, preview, content, image_url)
+INSERT INTO blog_post(author_id, status_id, title, subtitle, preview, content, image_url)
 VALUES (1,
        2,
        'The Constraints of Audio Programming',
+       'Restrictions of the digital audio domain',
        'Programming for audio software is such a fascinating problem domain and requires some interesting ways of thinking to write optimal code.',
         '# TITLE
 
@@ -38,12 +39,13 @@ ngOnInit(): void {
 <br>
 
 Sed adipiscing diam donec adipiscing tristique. Interdum velit euismod in pellentesque massa. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat in. Posuere urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Facilisi cras fermentum odio eu feugiat pretium nibh ipsum. Mattis molestie a iaculis at. Amet porttitor eget dolor morbi non. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. Ut morbi tincidunt augue interdum velit. Vel quam elementum pulvinar etiam non quam. Vulputate odio ut enim blandit volutpat maecenas volutpat. Sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Convallis posuere morbi leo urna molestie at elementum eu. Condimentum mattis pellentesque id nibh tortor id aliquet lectus. Amet venenatis urna cursus eget nunc scelerisque viverra mauris.',
-       'https://mattmaxwell.tech/images/rotor.png');
+       'assets/images/rotor.png');
 
-INSERT INTO blog_post(author_id, status_id, title, preview, content, image_url)
+INSERT INTO blog_post(author_id, status_id, title, subtitle, preview, content, image_url)
 VALUES (1,
        2,
        'Making a Game for the 2019 Global Game Jam',
+       'No sleep, only game development',
        'Making a game for a game jam is quite an intense experience, but is beyond rewarding if you''re willing to learn new skills or hone some old ones.',
         '# TITLE
 
@@ -74,12 +76,13 @@ ngOnInit(): void {
 <br>
 
 Sed adipiscing diam donec adipiscing tristique. Interdum velit euismod in pellentesque massa. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat in. Posuere urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Facilisi cras fermentum odio eu feugiat pretium nibh ipsum. Mattis molestie a iaculis at. Amet porttitor eget dolor morbi non. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. Ut morbi tincidunt augue interdum velit. Vel quam elementum pulvinar etiam non quam. Vulputate odio ut enim blandit volutpat maecenas volutpat. Sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Convallis posuere morbi leo urna molestie at elementum eu. Condimentum mattis pellentesque id nibh tortor id aliquet lectus. Amet venenatis urna cursus eget nunc scelerisque viverra mauris.',
-       'https://mattmaxwell.tech/images/operation-home.png');
+       'assets/images/operation-home.png');
 
-INSERT INTO blog_post(author_id, status_id, title, preview, content, image_url)
+INSERT INTO blog_post(author_id, status_id, title, subtitle, preview, content, image_url)
 VALUES (1,
        1,
        'My First Internship Experience',
+       'Navigating a new tech environment in Japanese',
        'This post is going to be about going through my first internship experience and the things I learned throughout the process.',
         '# TITLE
 
@@ -110,7 +113,7 @@ ngOnInit(): void {
 <br>
 
 Sed adipiscing diam donec adipiscing tristique. Interdum velit euismod in pellentesque massa. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat in. Posuere urna nec tincidunt praesent semper feugiat nibh sed pulvinar. Facilisi cras fermentum odio eu feugiat pretium nibh ipsum. Mattis molestie a iaculis at. Amet porttitor eget dolor morbi non. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. Ut morbi tincidunt augue interdum velit. Vel quam elementum pulvinar etiam non quam. Vulputate odio ut enim blandit volutpat maecenas volutpat. Sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Convallis posuere morbi leo urna molestie at elementum eu. Condimentum mattis pellentesque id nibh tortor id aliquet lectus. Amet venenatis urna cursus eget nunc scelerisque viverra mauris.',
-       'https://mattmaxwell.tech/images/green-foot.png');
+       'assets/images/green-foot.png');
 
 INSERT INTO blog_topic(name, description) VALUES ('Audio Development', 'Any and all things related to audio development and audio programming.');
 INSERT INTO blog_topic(name, description) VALUES ('Game Development', 'Any and all things related to game development.');
