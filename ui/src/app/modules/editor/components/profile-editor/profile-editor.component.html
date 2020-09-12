@@ -55,18 +55,21 @@
                 <input class='editor__profile-form-field0' [formControlName]='idx' required autofocus>
 
                 <button
+                    aria-label='Move technology up'
                     *ngIf='idx !== 0'
                     class='btn editor__profile-btn--edit'
                     (click)='changeTechnologyDisplayOrder(idx, idx - 1)'
                     type='button'
                 >&#9650;</button>
                 <button
+                    aria-label='Move technology down'
                     *ngIf='idx !== profileForm.controls.technologies["controls"].length - 1'
                     class='btn editor__profile-btn--edit'
                     (click)='changeTechnologyDisplayOrder(idx, idx + 1)'
                     type='button'
                 >&#9660;</button>
                 <button
+                    aria-label='Delete technology'
                     [ngClass]="{'btn--inactive': profileForm.controls.technologies['controls'].length === 1}"
                     [disabled]='profileForm.controls.technologies["controls"].length === 1'
                     class='btn editor__profile-btn--warn btn--warn'
@@ -76,6 +79,7 @@
             </div>
             <br>
             <button
+                    aria-label='Add technology'
                     class='btn editor__profile-btn--add btn--go'
                     type='button'
                     (click)='addTechnologyToForm()'
@@ -90,6 +94,7 @@
         </div>
 
         <button
+                aria-label='Submit profile'
                 [ngClass]="{'btn--inactive': !profileForm.valid}"
                 class='btn editor__form-btn  editor__form-btn--submit'
                 [disabled]='!profileForm.valid'

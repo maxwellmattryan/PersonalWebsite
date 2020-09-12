@@ -9,6 +9,7 @@
         <div class='blog__filter-btn-container'>
             <div class='blog__filter-btn-row blog__filter-btn-row--all'>
                 <button
+                        aria-label='Select all topics'
                         [ngClass]="{'btn--active': activeTopicId === -1, 'blog__filter-btn--half': isAdmin}"
                         class='btn blog__filter-btn blog__filter-btn--all'
                         (click)='filterPosts(-1)'
@@ -18,14 +19,15 @@
                 </button>
 
                 <ng-container *ngIf='isAdmin'>
-                    <button class='btn blog__filter-btn--add btn--go' [routerLink]="['/editor']" [queryParams]='{type: "topic"}'>
+                    <button aria-label='Edit blog topic' class='btn blog__filter-btn--add btn--go' [routerLink]="['/editor']" [queryParams]='{type: "topic"}'>
                         &#x2b;
                     </button>
                 </ng-container>
             </div>
 
             <div class='blog__filter-btn-row' *ngFor='let topic of topics'>
-                <button 
+                <button
+                    aria-label='Filter blog topic'
                     [ngClass]="{'btn--active': topic.id === activeTopicId, 'blog__filter-btn--half': isAdmin}"
                     class='btn blog__filter-btn'
                     (click)='filterPosts(topic.id)'
@@ -36,13 +38,14 @@
     
                 <ng-container *ngIf='isAdmin'>
                     <ng-container *ngIf='topic.name === "All"'>
-                        <button class='btn blog__filter-btn--add btn--go' [routerLink]="['/editor']" [queryParams]='{type: "topic"}'>
+                        <button aria-label='Add blog topic' class='btn blog__filter-btn--add btn--go' [routerLink]="['/editor']" [queryParams]='{type: "topic"}'>
                             &#x2b;
                         </button>
                     </ng-container>
         
                     <ng-container *ngIf='topic.name !== "All"'>
                         <button
+                            aria-label='Edit blog topic'
                             class='btn blog__filter-btn--edit'
                             (click)='sendTopicToEditor(topic)'
                             routerLink='/editor'
@@ -51,6 +54,7 @@
                             &#x270F;
                         </button>
                         <button
+                            aria-label='Delete blog topic'
                             class='btn blog__filter-btn--edit btn--warn'
                             (click)='deleteTopic(topic)'
                             type='button'
