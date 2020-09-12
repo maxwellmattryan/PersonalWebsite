@@ -32,11 +32,6 @@ export class ProjectViewComponent implements OnInit {
     ngOnInit(): void {
         this.isAdmin = this.authService.isLoggedIn();
 
-        // NOTE: Remove when the project page has been integrated (eh?)
-        if(!this.isAdmin) {
-            this.router.navigate(['']);
-        }
-
         const projectId = this.seoService.getIdFromUrl(this.router.url);
         if(!projectId) {
             this.notificationService.createNotification('Unable to find project ID.');

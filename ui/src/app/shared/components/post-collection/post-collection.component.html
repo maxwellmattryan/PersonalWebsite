@@ -25,7 +25,7 @@
                 </div>
 
                 <p class='posts__post-preview' *ngIf='showPreview'>
-                    {{ post.preview }}
+                    {{ post.preview.split(' ').slice(0, 44).join(' ') }} ...
                 </p>
 
                 <p class='posts__post-date' [innerHTML]='blogService.getFormattedDate(post.updated_at)'></p>
