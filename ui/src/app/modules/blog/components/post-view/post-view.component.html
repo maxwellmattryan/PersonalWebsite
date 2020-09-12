@@ -13,7 +13,7 @@
         </a>
     </div>
     
-    <p class='post__date' [innerHtml]='"Updated: " + blogService.getFormattedDate(post.updated_at)'></p>
+    <p class='post__date' [innerHtml]='"Updated: " + seoService.getFormattedDate(post.updated_at)'></p>
     
     <div class='post__topic-container'>
         <a class='post__topic-item' (click)='blogService.setActiveTopic(topic)' [routerLink]="['/blog']" *ngFor='let topic of post.topics'>
@@ -23,7 +23,9 @@
 
     <div class="line-divider"></div>
     
-    <img class='post__image' alt='Blog post image' [src]='post.image_url' height=150>
+    <div class='post__image-container'>
+        <img class='post__image' alt='Blog post image' [src]='post.image_url'>
+    </div>
 
     <markdown [data]='post.content' lineNumbers></markdown>
 </div>

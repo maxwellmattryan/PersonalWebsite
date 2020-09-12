@@ -37,7 +37,6 @@ export function markedOptionsFactory(): MarkedOptions {
 @NgModule({
     declarations: [AppComponent],
     imports: [
-        environment.production || environment.staging ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
         AppRoutingModule,
         BrowserAnimationsModule,
         BrowserModule,
@@ -52,7 +51,8 @@ export function markedOptionsFactory(): MarkedOptions {
             }
         }),
         ReactiveFormsModule,
-        SharedModule
+        SharedModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production || environment.staging })
     ],
     bootstrap: [AppComponent]
 })

@@ -27,7 +27,7 @@ export class PostViewComponent implements OnInit {
         private editorService: EditorService,
         private notificationService: NotificationService,
         private profileService: ProfileService,
-        private seoService: SeoService,
+        public seoService: SeoService,
         private titleService: Title,
         private router: Router
     ) { }

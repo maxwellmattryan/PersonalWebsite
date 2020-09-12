@@ -2,7 +2,7 @@
     <h1 class='project__name'>{{ project.name }}</h1>
     <h2 class='project__tagline'>{{ project.tagline }}</h2>
 
-  <div class="project__btn-container" *ngIf='isAdmin'>
+    <div class="project__btn-container" *ngIf='isAdmin'>
         <a class='btn project__btn' (click)='sendProjectToEditor()' routerLink='/editor' [queryParams]='{type: "project", id: project.id}'>
             &#x270F;
         </a>
@@ -10,6 +10,8 @@
             &#x2715;
         </a>
     </div>
+
+    <p class='project__date' [innerHtml]='"Updated: " + seoService.getFormattedDate(project.updated_at)'></p>
 
     <div class='project__external-container'>
         <a class='icon project__external-icon' [href]='project.link_url' target='_blank' rel='noopener noreferrer'>
@@ -19,9 +21,14 @@
 
     <div class="line-divider"></div>
 
-    <img class='project__image' [src]='project.image_url' height=150>
+    <div class='project__image-link-container'>
+        <a class='project__image-link' [href]='project.link_url' target='_blank' rel='noopener noreferrer'>
+            <img class='project__image' [src]='project.image_url' [alt]='project.name + "image"' height=150>
+        </a>
+    </div>
 
-    <markdown [data]='project.description'></markdown>
+    <markdown [data]='project.description' lineNumbers></markdown>
+
 </div>
 
 <ng-template #loading>

@@ -1,9 +1,5 @@
 @import 'variables';
 
-.post {
-    
-}
-
 .post__btn-container {
     display: flex;
     flex-direction: row;
@@ -48,6 +44,11 @@
     margin-top: $quarter-margin;
 }
 
+.post__image-container {
+    text-align: center;
+    width: 100%;
+}
+
 .post__image {
     height: auto;
     margin-bottom: $margin;
@@ -76,5 +77,9 @@ markdown ::ng-deep img {
         &:hover {
             text-decoration: underline;
         }
+    }
+
+    .post__image {
+        width: 64%;
     }
 }
