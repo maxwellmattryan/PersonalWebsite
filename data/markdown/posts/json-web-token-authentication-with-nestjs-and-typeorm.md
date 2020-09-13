@@ -1054,7 +1054,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './controllers/auth/auth.controller';
 import { AuthService } from './services/auth/auth.service';
 import { User } from './entities/user.entity';
-import { UserService } from './services/user/user.service';
+import { UserService } from './services/user/user.service'; import { JwtStrategy } from './jwt.strategy';
 
 @Module({
     imports: [
@@ -1079,7 +1079,8 @@ import { UserService } from './services/user/user.service';
     controllers: [AuthController],
     providers: [
         AuthService,
-        UserService
+        UserService,
+        JwtStrategy // Adding so that it can be DI'ed into this authentication module
     ]
 })
 export class AuthModule { }
