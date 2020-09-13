@@ -1,3 +1,34 @@
+- [Introduction](#Introduction)
+    - [Authentication](#Authentication)
+        - JSON Web Token
+        - Cookies
+- [Setup](#Setup)
+    - [Middleware](#Middleware)
+        - Logger
+        - Cookie Parser
+    - [TypeORM](#TypeORM)
+        - Database
+        - Configuration
+    - [Authentication](#Authentication)
+        - Entities
+            - User Entity
+            - Serialization / Deserialization
+        - Module
+- [Register](#Register)
+    - Controllers
+    - Services
+    - Error Handling
+- [Login](#Login)
+    - Controllers
+    - Services
+    - Token
+    - Environment Variables
+    - JWT Strategy
+    - JWT Cookie
+- [Logout](#Logout)
+
+<br>
+
 # The NestJS Framework and Authentication
 
 <br>
@@ -563,6 +594,29 @@ By default this creates a file containing an `@Injectable()` decorator. This mea
 
 <br>
 
+This file needs to be brought into the authentication module file so that controllers and other services can use it via dependency injection. I have added it to exports as well so that when other modules import this one, they are able to use these services.
+
+<br>
+
+```typescript
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { AuthController } from './controllers/auth/auth.controller';
+import { AuthService } from './services/auth/auth.service';
+import { User } from './entities/user.entity';
+
+@Module({
+    imports: [TypeOrmModule.forFeature([User])],
+    exports: [AuthService],
+    controllers: [AuthController],
+    providers: [AuthService]
+})
+export class AuthModule { }
+```
+
+<br>
+
 We need to define a constructor for the service class that injects the repositories needed, which is just the `User` repository in this case. While we're at it, let's define a method, `registerUser(userData: User)`, that takes in data to create and save a new user to the database.
 
 <br>
@@ -728,3 +782,372 @@ As we can so though, when we try to make a request with the same credentials, ou
 <br><br>
 
 ### Login
+
+<br>
+
+We need to add an endpoint for logging users in now that we have a means of inputting data into the database. This can be done by simply adding another function with decorators specifying the end and HTTP status codes, except we need to add some more authentication functionality to make it actually work. Let's think about what we need.
+
+<br>
+
+__We need__:
+- A controller route that has a defined login endpoint and has exception handling
+- An authentication method in our service that takes the login data and returns the database record if the passwords match
+- A method to generate cookies via JWT tokens (token payload, environment variable reading)
+- a JWT strategy file that validates cookies from request headers for us
+
+<br>
+
+Let's add the controller route for logging in that first authenticates the admin if the credentials were right, otherwise it throws a wrong credentials exception I will start with the new exception for `auth.exception.ts`.
+
+<br>
+
+```typescript
+export class WrongUserCredentialsWereProvidedException extends BadRequestException {
+    constructor() {
+        super('The wrong user credentials were provided.');
+    }
+}
+```
+
+<br>
+
+Following this, let's create a login endpoint in the controller that calls a not-yet-made function in our service called `authenticateUser()` that takes in user data.
+
+<br>
+
+```typescript
+...
+import { WrongUserCredentialsWereProvidedException } from '@api/core/auth/exceptions/auth.exception';
+
+@Controller('auth')
+export class AuthController {
+    @Post('login')
+    @HttpCode(200)
+    async login(@Req() request: Request): Promise<User> {
+        const user = await this.authService.authenticateUser(request.body);
+        if(!user) throw new WrongUserCredentialsWereProvidedException();
+
+        return user;
+    }
+}
+```
+
+<br>
+
+We need to define that method that we are controller from the controller that we are declaring exists. In this method we need to find the user from the database because it has the hashed password and we compare it with the passowrd given by request.
+
+<br>
+
+```typescript
+public async authenticateUser(userData: User): Promise<User> {
+    const user: User = await this.userRepository.findOne({ username: userData.username });
+
+    if(user && await bcrypt.compare(userData.password, user.password)) {
+        return user;
+    } else {
+        return;
+    }
+}
+```
+
+<br>
+
+At this point we can test to see if we get a user object back with our login request. It's evident that sending the wrong credentials will result in a 400 status while the correct credentials will see a 200 response. 
+
+<br>
+
+<div class="post__image-container">
+    <img class="post__image" alt="Sending login request with wrong credentials" src="assets/images/blog/01-postman-register-error.png">
+</div>
+
+<br>
+
+Our work isn't over as we still need to add the code for handling the generation of the JWT cookie. We need to create some things, namely the token payload, JWT authentication guard, and the JWT strategy for this to work. Let's start by creating the `token-payload.interface.ts` file.
+
+<br>
+
+The token payload makes up the second part of the JWT cookie and holds compact information typically regarding the user.
+
+<br>
+
+```typescript
+export interface TokenPayload {
+    id: number;
+    username: string;
+    email: string;
+}
+```
+
+<br><br>
+
+#### Environment Variables
+
+<br>
+
+We have to setup support for environment variables so we can set things like the secret and expiratory time for our JWTs. To do this we need install the config module from NestJS and configure it with Joi from hapi.
+
+<br>
+
+```
+$ npm install @nestjs/config @hapi/joi --save
+```
+
+<br>
+
+From there we need to add configuration in our `app.module.ts` that declares the environment variables that we need to have in order to use our app.
+
+<br>
+
+```typescript
+import { ConfigModule } from '@angular/config';
+
+import * as Joi from '@hapi/joi';
+
+@Module({
+    imports: [
+        ConfigModule.forRoot({
+            validationSchema: Joi.object({
+                JWT_SECRET: Joi.string().required(),
+                JWT_EXPIRES_IN: Joi.string().required()
+            })
+        }),
+        TypeOrmModule.forRoot(),
+        AuthModule
+    ],
+    controllers: [AppController],
+    providers: [AppService]
+})
+export class AppModule { }
+```
+
+<br>
+
+When this is run we get an error thrown, which happens because haven't actually defined our values for the key-value pair of our environment variables. We fix this by adding a .env file to our root directory.
+
+<br>
+
+```
+- src/
+- test/
+- .env
+...
+```
+
+<br> 
+
+The file contents will simply just be values for our variables, JWT secret and JWT expiratory time. In the code below I have the secret to something that shouldn't ever be used in a production context, and a value of 21,600 seconds, which equates to 6 hours.
+
+<br>
+
+_CAUTION: It's important that this information stay out of the public's knowledge when using with real applications so don't forgot to add to the repository gitigore!'_
+
+<br>
+
+```
+JWT_SECRET=mysecret
+JWT_EXPIRES_IN=21600s
+```
+
+<br><br>
+
+#### JWT Strategy
+
+<br>
+
+Add a directory in the authentication module for JWT and create two files, namely `jwt.strategy.ts` and `jwt-auth.guard.ts`. The strategy file informs our application the method of validating the JWT guard that we will use on the logout endpoint. First, we need to install the passport module for NestJS to use passport strategies. 
+
+<br>
+
+```
+$ npm install @nestjs/passport @nestjs/jwt @types/passport-jwt passport passport-jwt --save
+```
+
+<br>
+
+Once those are installed, let's setup a `user.service.ts` file for retrieving user records for the JWT strategy validation. 
+
+<br>
+
+``` 
+$ cd ./src/core/auth/services
+$ nest generate service user
+OR
+$ nest g s user
+```
+
+<br>
+
+Let's add the repository injection for users so that we can get access to our database with this service. We will write a simple method to retrieve users via their ids.
+
+<br>
+
+```typescript
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+
+import { Repository } from 'typeorm';
+
+import { User } from '@api/core/auth/entities/user.entity';
+
+@Injectable()
+export class UserService {
+    constructor(
+        @InjectRepository(User)
+        private readonly userRepository: Repository<User>
+    ) { }
+
+    public async getById(userId: number): Promise<User> {
+        return await this.userRepository.findOne({ id: userId });
+    }
+}
+```
+
+<br> 
+
+Let's not forgot to add the necessary import statements to the authentication module.
+
+<br>
+
+```typescript
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+
+import { AuthController } from './controllers/auth/auth.controller';
+import { AuthService } from './services/auth/auth.service';
+import { User } from './entities/user.entity';
+import { UserService } from './services/user/user.service';
+
+@Module({
+    imports: [
+        TypeOrmModule.forFeature([User]),
+        ConfigModule,
+        PassportModule,
+        JwtModule.registerAsync({
+            imports: [ConfigModule],
+            inject: [ConfigService],
+            useFactory: async (configService: ConfigService) => ({
+                secret: configService.get<string>('JWT_SECRET'),
+                signOptions: {
+                    expiresIn: configService.get<string>('JWT_EXPIRES_IN')
+                }
+            })
+        })
+    ],
+    exports: [
+        AuthService,
+        UserService
+    ],
+    controllers: [AuthController],
+    providers: [
+        AuthService,
+        UserService
+    ]
+})
+export class AuthModule { }
+```
+
+<br>
+
+From here, let's create the `jwt.strategy.ts` file for our application. Here we tell our JWT strategy to extract the cookie named "Authentication" and to use the JWT_SECRET environment variable. We use our user service to find a user to validate the credentials with.
+
+<br>
+
+```typescript
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { PassportStrategy } from '@nestjs/passport';
+
+import { ExtractJwt, Strategy } from 'passport-jwt';
+
+import { Request } from 'express';
+
+import { TokenPayload } from '../interfaces/token-payload.interface';
+
+import { User } from '@api/core/auth/entities/user.entity'
+import { UserService } from '@api/core/auth/services/user/user.service';
+
+@Injectable()
+export class JwtStrategy extends PassportStrategy(Strategy) {
+    constructor(
+        private readonly configService: ConfigService,
+        private readonly userService: UserService
+    ) {
+        super({
+            jwtFromRequest: ExtractJwt.fromExtractors([(request: Request) => {
+                return request?.cookies?.Authentication;
+            }]),
+            secretOrKey: configService.get('JWT_SECRET')
+        });
+    }
+
+    async validate(payload: TokenPayload): Promise<User> {
+        return this.userService.getById(payload.id);
+    }
+}
+```
+
+<br><br>
+
+#### JWT Cookie
+
+<br>
+
+Because our controller layer deals with HTTP, we want to put have it be responsible for generating the JWT cookie and setting it with the "Set-Header" HTTP header. For now let's also make a call to a to-be-made method in the `AuthService` class that generates a cookie given user data.
+
+<br>
+
+```typescript
+...
+
+@Post('login')
+@HttpCode(200)
+async login(@Req() request: Request): Promise<User> {
+    const user = await this.authService.authenticateUser(request.body);
+    if(!user) throw new WrongUserCredentialsWereProvidedException();
+
+    const jwtCookie = this.authService.generateCookieWithJwtToken(user);
+    request.res.setHeader('Set-Cookie', jwtCookie);
+    
+    return user;
+}
+```
+
+<br>
+
+We need to define the `generateCookieWithJwtToken(user)` method in the service for this to compile correctly. We also cannot forget to add our configuration and JWT services to our our imports (both from NestJS).
+
+<br>
+
+```typescript
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
+
+...
+
+public generateCookieWithJwtToken(user: User): string {
+        const payload: TokenPayload = { id: user.id, username: user.username, email: user.email };
+        const token = this.jwtService.sign(payload);
+        const expiresIn = this.configService.get<string>('JWT_EXPIRES_IN');
+
+        // CAUTION: When trying to include the 'Secure;' option, HTTPS has to be used
+        // NOTE: Cookie just disappears from client-side storage on the first request's sent after it expires
+        return `Authentication=${token}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${expiresIn}`;
+    }
+```
+
+<br>
+
+The return statement at the end of this method contains all of the cookie information for us to see in a readable format. Here we see that it is set to HttpOnly, the SameSite value is Lax, and the authentcation token is the JWT.
+
+<br>
+
+After setting back in the controller, we can now test it out to see if it works and sets an Authenticatin cookie as we need.
+
+<br>
+
+<div class="post__image-container">
+    <img class="post__image" alt="JWT cookie in Postman" src="assets/images/blog/01-postman-login-cookie.png">
+</div>
