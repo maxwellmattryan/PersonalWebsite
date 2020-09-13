@@ -1,47 +1,8 @@
-- [Introduction](#Introduction)
-    - [Authentication](#Authentication)
-        - JSON Web Token
-        - Cookies
-- [Setup](#Setup)
-    - [Middleware](#Middleware)
-        - Logger
-        - Cookie Parser
-    - [TypeORM](#TypeORM)
-        - Database
-        - Configuration
-    - [Authentication](#Authentication)
-        - Entities
-            - User Entity
-            - Serialization / Deserialization
-        - Module
-- [Register](#Register)
-    - Controllers
-    - Services
-    - Error Handling
-- [Login](#Login)
-    - Controllers
-    - Services
-    - Token
-    - Environment Variables
-    - JWT Strategy
-    - JWT Cookie
-- [Logout](#Logout)
-
-<br>
-
 # The NestJS Framework and Authentication
 
 <br>
 
 This project's source code is visible here at its [GitHub repository](https://github.com/maxwellmattryan/nestjs-jwt-auth) if you wish to download it as a starter project and get going. If you'd like to see how I set up the the project as is in the repo the follow along with the rest of the post. 
-
-<br><br>
-
-## NestJS
-
-<br>
-
-[NestJS](https://nestjs.com/) is a wonderful backend framework that utilizes an environment that is incredibly similar to Angular. In that sense, the module system and dependency injection is similar to use programmatically.
 
 <br><br>
 
@@ -81,7 +42,7 @@ They are set programmatically quite easily via the class API for the `Request` o
 
 <br><br>
 
-## Setup
+# Setup
 
 <br>
 
@@ -96,7 +57,11 @@ $ nest new <app-name-here>
 
 <br><br>
 
-### Logging
+## Middleware
+
+<br>
+
+### Logger
 
 <br>
 
@@ -116,9 +81,9 @@ Start off by installing the npm package with:
 $ npm install morgan --save
 ```
 
-<br>
+<br> 
 
-After importing the `morgan` npm package and using it as a middleware for NestJS and Express, our `main.ts` file will some new changes.
+We can now use it within our `main.ts` file for the underlying Express app.
 
 <br>
 
@@ -135,7 +100,47 @@ async function bootstrap() {
     // Initialize with "tiny" option - prefined formatting for string output
     app.use(morgan('tiny'));
 
-    await app.listen(3001);
+    await app.listen(3000);
+}
+
+bootstrap();
+```
+
+<br><br>
+
+### Cookie Parser
+
+<br>
+
+Let's also install a library for parsing cookies as we will need to have it for our JWT cookie mechanism to work.
+
+<br>
+
+```
+$ npm install cookie-parser --save
+```
+
+<br>
+
+After importing the `morgan` and `cookie-parser` npm packages, let's tell our app to use them as a middleware, meaning our `main.ts` file will some new changes.
+
+<br>
+
+```typescript
+...
+
+// Import the cookie parser npm package that was just installed
+import * as cookieParser from 'cookie-parser';
+
+async function bootstrap() {
+    const app = await NestFactory.create(AppModule);
+
+    app.use(morgan('tiny'));
+
+    // Input the cookie parser into the middleware pipeline
+    app.use(cookieParser());                            
+
+    await app.listen(3000);
 }
 
 bootstrap();
@@ -163,7 +168,7 @@ The output of the console should look similar to this. We can see NestJS initial
 
 <br><br>
 
-### TypeORM
+## TypeORM
 
 <br>
 
@@ -171,7 +176,7 @@ We need to have some sort of persistent storage and way to access it in order to
 
 <br>
 
-In a layered architecture, we use classes called "repository" which serve as an access point for a database. Here we perform operations like retrieving users, creating new ones, or deleting them. With [TypeORM](https://typeorm.io/#/), the solution is quite simple, and although there is just a little boilerplate, it's really not too bad.
+In a layered architecture, we use classes called "repositories" which serve as an access point for a database. Here we perform operations like retrieving users, creating new ones, or deleting them. With [TypeORM](https://typeorm.io/#/), the solution is quite simple, and although there is just a little boilerplate, it's really not too bad.
 
 <br>
 
@@ -185,7 +190,7 @@ $ npm install @nestjs/typeorm typeorm <npm-db-driver-here> --save
 
 <br><br>
 
-#### Database
+### Database
 
 <br>
 
@@ -197,7 +202,7 @@ Remember the database name, because we will use it later in our confiuration for
 
 <br><br>
 
-#### Configuration
+### Configuration
 
 <br>
 
@@ -266,7 +271,7 @@ Check to make sure that TypeORM is being initialized when the server starts up. 
 
 <br><br>
 
-### Authentication Module
+## Authentication
 
 <br>
 
@@ -291,7 +296,11 @@ I like to setup a central directory named `core` for holding this kind of stuff 
 
 <br><br>
 
-#### User Entity
+### Entities
+
+<br>
+
+#### User
 
 <br>
 
@@ -388,7 +397,7 @@ export class User {
 
 <br><br>
 
-#### Module Configuration
+### Module
 
 <br>
 
@@ -448,7 +457,11 @@ Spin up the server with `npm run start:dev` and check that the newly created ent
 
 <br><br>
 
-#### Controller
+# Register
+
+<br>
+
+## Controller
 
 <br>
 
@@ -483,12 +496,12 @@ $ nest g c auth
 
 <br>
 
-This will generate a controller file where we define our controller endpoints with decorators in the class's body. As we don't have any users yet, let's create (or stub out) some functionality for registering new users.
+This will generate a controller file where we define our controller endpoints with decorators in the class's body. As we don't have any users yet, let's create (or stub out) some functionality for registering new users. In the following code I have declared an endpoint with the decorator, `@Post('register')`, further specifying that it will return a 201 Created status, and to lastly utilize the class serialization interceptor that will remove the user entity's password field that we "excluded" earlier.
 
 <br>
 
 ```typescript
-import { Controller, HttpCode, Post, Req } from '@nestjs/common';
+import { ClassSerializerInterceptor, Controller, HttpCode, Post, Req, UseInterceptors } from '@nestjs/common';
 
 import { Request } from 'express';
 
@@ -500,6 +513,7 @@ export class AuthController {
 
     @Post('register')
     @HttpCode(201)
+    @UseInterceptors(ClassSerializerInterceptor)            
     registerUser(@Req() request: Request): Promise<User> {
         return new User(request.body);
     }
@@ -553,16 +567,16 @@ Now when running the server we should see the the new route for `/auth/register`
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Sending register request via Postman" src="assets/images/blog/01-postman-register-without-db.png">
+    <img class="post__image" alt="Sending register request via Postman" src="assets/images/blog/01-postman-register-no-db.png">
 </div>
 
 <br><br>
 
-#### Service
+## Service
 
 <br>
 
-The next important step is creating another layer within our architecture that will handle the business logic needs for our application. For authentication we want to create a user and save it to the database whenever a client sends a request with data falling within the constraints set earlier in the entities.
+The next important step is creating another layer within our architecture that will handle the business logic needs for our application. For authentication we want to create a user and save it to the database whenever a client sends a request with data failing to fit the constraints set earlier in the user entity.
 
 <br>
 
@@ -684,6 +698,10 @@ export class AuthService {
 
 This approach works, but it doesn't have any error handling at all. The call to `create(user)` is a `Promise` that will throw an `HttpException` error if the PostgreSQL query fails. We need to check that a user with an already existing email or username, which we do by comparing the error's code against 23505 which is PostgreSQL's unique constraint.
 
+<br><br>
+
+## Error Handling
+
 <br>
 
 I like to create errors with a more business-domain related implementation. Before changing the method in the authentication service, let's create an exception file that holds HTTP exceptions relevant to authentication.
@@ -753,6 +771,7 @@ export class AuthController {
 
     @Post('register')
     @HttpCode(201)
+    @UseInterceptors(ClassSerializerInterceptor)        
     async registerUser(@Req() request: Request): Promise<User> {
             return await this.authService.registerAdmin(request.body);
         }   
@@ -766,12 +785,12 @@ Now let's test what happens when we make two requests to this endpoint. The reas
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Sending register request with db connection via Postman" src="assets/images/blog/01-postman-register-with-db.png">
+    <img class="post__image" alt="Sending register request with db connection via Postman" src="assets/images/blog/01-postman-register.png">
 </div>
 
 <br>
 
-As we can so though, when we try to make a request with the same credentials, our custom error will be thrown to us for us to consume potentially on a frontend somewhere or something. 
+When we try to make a request with the same credentials, our custom error will be thrown to us for us to consume potentially on a frontend somewhere or something. 
 
 <br>
 
@@ -781,7 +800,7 @@ As we can so though, when we try to make a request with the same credentials, ou
 
 <br><br>
 
-### Login
+# Login
 
 <br>
 
@@ -790,9 +809,13 @@ We need to add an endpoint for logging users in now that we have a means of inpu
 <br>
 
 __We need__:
+<br>
 - A controller route that has a defined login endpoint and has exception handling
+<br>
 - An authentication method in our service that takes the login data and returns the database record if the passwords match
+<br>
 - A method to generate cookies via JWT tokens (token payload, environment variable reading)
+<br>
 - a JWT strategy file that validates cookies from request headers for us
 
 <br>
@@ -809,6 +832,10 @@ export class WrongUserCredentialsWereProvidedException extends BadRequestExcepti
 }
 ```
 
+<br><br>
+
+## Controller
+
 <br>
 
 Following this, let's create a login endpoint in the controller that calls a not-yet-made function in our service called `authenticateUser()` that takes in user data.
@@ -823,6 +850,7 @@ import { WrongUserCredentialsWereProvidedException } from '@api/core/auth/except
 export class AuthController {
     @Post('login')
     @HttpCode(200)
+    @UseInterceptors(ClassSerializerInterceptor)        
     async login(@Req() request: Request): Promise<User> {
         const user = await this.authService.authenticateUser(request.body);
         if(!user) throw new WrongUserCredentialsWereProvidedException();
@@ -831,6 +859,10 @@ export class AuthController {
     }
 }
 ```
+
+<br><br>
+
+## Service
 
 <br>
 
@@ -857,12 +889,16 @@ At this point we can test to see if we get a user object back with our login req
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Sending login request with wrong credentials" src="assets/images/blog/01-postman-register-error.png">
+    <img class="post__image" alt="Sending login request with wrong credentials" src="assets/images/blog/01-postman-login-error.png">
 </div>
 
 <br>
 
 Our work isn't over as we still need to add the code for handling the generation of the JWT cookie. We need to create some things, namely the token payload, JWT authentication guard, and the JWT strategy for this to work. Let's start by creating the `token-payload.interface.ts` file.
+
+<br><br>
+
+## Token
 
 <br>
 
@@ -880,7 +916,7 @@ export interface TokenPayload {
 
 <br><br>
 
-#### Environment Variables
+## Environment Variables
 
 <br>
 
@@ -950,7 +986,7 @@ JWT_EXPIRES_IN=21600s
 
 <br><br>
 
-#### JWT Strategy
+## JWT Strategy
 
 <br>
 
@@ -1091,7 +1127,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
 <br><br>
 
-#### JWT Cookie
+## JWT Cookie
 
 <br>
 
@@ -1133,7 +1169,7 @@ public generateCookieWithJwtToken(user: User): string {
         const expiresIn = this.configService.get<string>('JWT_EXPIRES_IN');
 
         // CAUTION: When trying to include the 'Secure;' option, HTTPS has to be used
-        // NOTE: Cookie just disappears from client-side storage on the first request's sent after it expires
+        // NOTE: Cookie just disappears from client-side storage after it expires
         return `Authentication=${token}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${expiresIn}`;
     }
 ```
@@ -1151,3 +1187,92 @@ After setting back in the controller, we can now test it out to see if it works 
 <div class="post__image-container">
     <img class="post__image" alt="JWT cookie in Postman" src="assets/images/blog/01-postman-login-cookie.png">
 </div>
+
+<br><br>
+
+# Logout
+
+<br> 
+
+## Controller
+
+<br>
+
+It's time to add our last endpoint involving authentication, which is to logout. There is something important involving an authentication guard that we need to specify so that we make sure users that are logging out have been authenticated. 
+
+<br>
+
+Let's begin with adding a controller route for logging out that will simply remove the cookie and send a 200 OK. We accomplish this by telling our Request interface to clear the "Authentication" cookie in its response, effectively removing it from the HTTP communication that happens between the frontend and backend.
+
+<br>
+
+```typescript
+@Controller('auth')
+export class AuthController {
+    ...
+
+    @Post('logout')
+    @HttpCode(204)
+    async logout(@Req() request: Request): Promise<void> {
+        request.res.clearCookie('Authentication');
+    }
+}
+```
+
+<br><br>
+
+## JWT Authentication Guard
+
+<br>
+
+We are missing the mechanism that will actually allow users to successfully send requests to this endpoint, which is the JWT authentication guard. Luckily we can just create file named `jwt-auth.guard.ts` and extend a class from the passport module.
+
+<br>
+
+```typescript
+import { Injectable } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+
+@Injectable()
+export class JwtAuthGuard extends AuthGuard('jwt') { }
+```
+
+<br>
+
+The way that we use this is to attach it to the logout endpoint in the auth controller. NestJS has decorators that allow us to indicate this information quite easily.
+
+<br>
+
+```typescript
+import { Controller, HttpCode, Post, Req, Get, UseGuards, Body } from '@nestjs/common';
+
+...
+
+import { JwtAuthGuard } from '../jwt/jwt-auth.guard';
+
+@Controller('auth')
+export class AuthController {
+    ...
+                
+    @Post('logout')
+    @HttpCode(204)
+    @UseGuards(JwtAuthGuard)
+    async logout(@Req() request: Request): Promise<void> {
+        request.res.clearCookie('Authentication');
+    }
+}
+```
+
+<br>
+
+After spinning up the server and testing the endpoint with Postman, we can see that we cannot technically "logout" unless we are logged in prior or else we will receive a 401 Unauthorized response. 
+
+<br>
+
+<div class="post__image-container">
+    <img class="post__image" alt="401 Unauthorized response in Postman" src="assets/images/blog/01-postman-unauthorized.png">
+</div>
+
+<br>
+
+Thank you for taking the time to read this post. I hope it was informative and help to get a basic JWT-based approach for authentication setup in your project. Please feel free to reach out, check out my [Github profile](https://github.com/maxwellmattryan) for other projects, or head back to the [blog](https://mattmaxwell.dev/blog) to read more! 
