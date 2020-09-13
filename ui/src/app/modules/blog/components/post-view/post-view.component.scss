@@ -60,10 +60,14 @@ markdown ::ng-deep a {
     display: inline-block;
 }
 
-markdown ::ng-deep img {
-    box-sizing: border-box;
+markdown ::ng-deep div img {
     text-align: center;
-    max-width: 90%;
+    width: 100%;
+}
+
+markdown ::ng-deep img {
+    height: auto;
+    width: 100%;
 }
 
 @media only screen and (min-width: 768px) {
@@ -77,6 +81,10 @@ markdown ::ng-deep img {
         &:hover {
             text-decoration: underline;
         }
+    }
+
+    markdown ::ng-deep img {
+        width: 64%;
     }
 
     .post__image {

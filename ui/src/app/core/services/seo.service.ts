@@ -11,7 +11,7 @@ export class SeoService {
     }
 
     formatUri(raw: string): string {
-        return raw.toLowerCase().replace(/[ ]/g, '-').replace(/[\.?]/g, '');
+        return raw.toLowerCase().replace(/[ &+=]/g, '-').replace(/[\.\(\)\[\]\@\#\?\:]/g, '');
     }
 
     getFormattedDate(raw: Date): string {
