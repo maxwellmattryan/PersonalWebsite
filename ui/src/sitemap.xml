@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- CAUTION: The information in here needs to be changed every time that any content titles or names used in the uri changes,
+the information in here has to be consistent to have proper SEO optimization -->
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Static URLs -->
+    <url>
+        <loc>https://mattmaxwell.dev</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://mattmaxwell.dev/blog</loc>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- Projects -->
+    <url>
+        <loc>https://mattmaxwell.dev/projects/1/rotor</loc>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://mattmaxwell.dev/projects/2/counterplay</loc>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://mattmaxwell.dev/projects/3/operation-home</loc>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://mattmaxwell.dev/projects/4/cozy-cat-cafe</loc>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://mattmaxwell.dev/projects/5/green-foot</loc>
+        <priority>0.3</priority>
+    </url>
+
+    <!-- Blog posts -->
+    <url>
+        <loc>https://mattmaxwell.dev/blog/posts/1/json-web-token-jwt-authentication-with-nestjs-and-typeorm</loc>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <loc>https://mattmaxwell.dev/blog/posts/2/the-fundamentals-of-audio-programming</loc>
+        <priority>0.4</priority>
+    </url>
+</urlset>
