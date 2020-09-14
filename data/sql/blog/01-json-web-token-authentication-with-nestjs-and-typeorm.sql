@@ -1317,7 +1317,7 @@ This concludes the starter example of getting JSON Web Token authentication to w
 <br>
 
 Thank you for taking the time to read this post. I hope it was informative and help to get a basic JWT-based approach for authentication setup in your project. Please feel free to reach out, check out my [Github profile](https://github.com/maxwellmattryan) for other projects, or head back to the [blog](https://mattmaxwell.dev/blog) to read more!',
-        'assets/images/projects/jlpt-scrape.png',
+        'assets/images/blog/01-jwt.png',
         '2020-09-12 17:16:23.119169');
 
 INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (4, 3), (4, 4);
