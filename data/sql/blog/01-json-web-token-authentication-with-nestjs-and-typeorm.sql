@@ -1,8 +1,15 @@
-# The NestJS Framework and Authentication
+INSERT INTO blog_post(author_id, status_id, title, subtitle, preview, content, image_url, created_at)
+VALUES (
+        1,
+        2,
+        'JSON Web Token (JWT) Authentication with NestJS and TypeORM',
+        'A cookie-based approach to solving authentication',
+        'Authentication is a huge concern among many when developing a web-based application. There exist multiple solutions for implementing mechanisms to authenticate users and post is an overview of the JWT-based approach.',
+        '# The NestJS Framework and Authentication
 
 <br>
 
-This project's source code is visible here at its [GitHub repository](https://github.com/maxwellmattryan/nestjs-jwt-auth) if you wish to download it as a starter project and get going. If you'd like to see how I set up the the project as is in the repo the follow along with the rest of the post. 
+This project''s source code is visible here at its [GitHub repository](https://github.com/maxwellmattryan/nestjs-jwt-auth) if you wish to download it as a starter project and get going. If you''d like to see how I set up the the project as is in the repo the follow along with the rest of the post.
 
 <br><br>
 
@@ -14,7 +21,7 @@ In a literal sense, "authentication" refers to the act of proving some assertion
 
 <br>
 
-With the power of authentication, we can have things like permissions and guards that serve to prevent users who are not authorized or who are forbidden towards committing certain actions or having access to particular pages. For example, it's important that guards are put in place for endpoints that deal with modifying data in any way. If there is a way to delete a resource that belongs to a user that I don't know or have the credentials of then that is a major security concern.
+With the power of authentication, we can have things like permissions and guards that serve to prevent users who are not authorized or who are forbidden towards committing certain actions or having access to particular pages. For example, it''s important that guards are put in place for endpoints that deal with modifying data in any way. If there is a way to delete a resource that belongs to a user that I don''t know or have the credentials of then that is a major security concern.
 
 <br><br>
 
@@ -22,11 +29,11 @@ With the power of authentication, we can have things like permissions and guards
 
 <br>
 
-The [JSON Web Token](https://en.wikipedia.org/wiki/JSON_Web_Token) is a protocol for encrypted signatures that contain JSON data for making certain claims to the server (or wherever else they're being sent) to help with our security concerns. The information specifically refers to things like the signature generation algorithm, types of predefined types of login names, expiration times, the raw token string itself, and more. I will explain more specifcally later when we actually generate the token for cookie storage.
+The [JSON Web Token](https://en.wikipedia.org/wiki/JSON_Web_Token) is a protocol for encrypted signatures that contain JSON data for making certain claims to the server (or wherever else they''re being sent) to help with our security concerns. The information specifically refers to things like the signature generation algorithm, types of predefined types of login names, expiration times, the raw token string itself, and more. I will explain more specifcally later when we actually generate the token for cookie storage.
 
 <br>
 
-A JWT is returned to a user when they successfully login with credentials after they have been verified in by the authentication process. We need them to grant authorization access to users wanting to do things that people typically might in a CRUD (Create, read, update, and delete) application. 
+A JWT is returned to a user when they successfully login with credentials after they have been verified in by the authentication process. We need them to grant authorization access to users wanting to do things that people typically might in a CRUD (Create, read, update, and delete) application.
 
 <br><br>
 
@@ -69,7 +76,7 @@ Before starting the server, I like to add logging middleware before I get starte
 
 <br>
 
-It'll be important to see our incoming HTTP requests as they are received by the server, and NestJS doesn't have logging enabled by default. There are multiple ways to handle logging of http requests, and the package I'll be using to log reqests is called morgan and is pretty commonly used logging middleware with Express, which NestJS uses under the hood by default.
+It''ll be important to see our incoming HTTP requests as they are received by the server, and NestJS doesn''t have logging enabled by default. There are multiple ways to handle logging of http requests, and the package I''ll be using to log reqests is called morgan and is pretty commonly used logging middleware with Express, which NestJS uses under the hood by default.
 
 <br>
 
@@ -81,24 +88,24 @@ Start off by installing the morgan npm package.
 $ npm install morgan --save
 ```
 
-<br> 
+<br>
 
 We can now use it within our `main.ts` file for the underlying Express app.
 
 <br>
 
 ```typescript
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { NestFactory } from ''@nestjs/core'';
+import { AppModule } from ''./app.module'';
 
 // Import the logging middleware for console output of HTTP requests
-import * as morgan from 'morgan';
+import * as morgan from ''morgan'';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
     // Initialize with "tiny" option - prefined formatting for string output
-    app.use(morgan('tiny'));
+    app.use(morgan(''tiny''));
 
     await app.listen(3000);
 }
@@ -112,7 +119,7 @@ bootstrap();
 
 <br>
 
-Let's also install a library for parsing cookies as we will need to have it for our JWT cookie mechanism to work. We will use one called "cookie-parser", which parses the Cookie header on the request and allows developers to access the data programmatically.
+Let''s also install a library for parsing cookies as we will need to have it for our JWT cookie mechanism to work. We will use one called "cookie-parser", which parses the Cookie header on the request and allows developers to access the data programmatically.
 
 <br>
 
@@ -122,7 +129,7 @@ $ npm install cookie-parser --save
 
 <br>
 
-After importing the `morgan` and `cookie-parser` npm packages, let's tell our app to use them as a middleware, meaning our `main.ts` file will some new changes.
+After importing the `morgan` and `cookie-parser` npm packages, let''s tell our app to use them as a middleware, meaning our `main.ts` file will some new changes.
 
 <br>
 
@@ -130,15 +137,15 @@ After importing the `morgan` and `cookie-parser` npm packages, let's tell our ap
 ...
 
 // Import the cookie parser npm package that was just installed
-import * as cookieParser from 'cookie-parser';
+import * as cookieParser from ''cookie-parser'';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
-    app.use(morgan('tiny'));
+    app.use(morgan(''tiny''));
 
     // Input the cookie parser into the middleware pipeline
-    app.use(cookieParser());                            
+    app.use(cookieParser());
 
     await app.listen(3000);
 }
@@ -176,15 +183,15 @@ We need to have some sort of persistent storage and way to access it in order to
 
 <br>
 
-In a layered architecture, we use classes called "repositories" which serve as an access point for a data models. Here we perform operations like retrieving users, creating new ones, or deleting them. With [TypeORM](https://typeorm.io/#/), the solution is quite simple, and although there is just a little boilerplate, it's really not too bad.
+In a layered architecture, we use classes called "repositories" which serve as an access point for a data models. Here we perform operations like retrieving users, creating new ones, or deleting them. With [TypeORM](https://typeorm.io/#/), the solution is quite simple, and although there is just a little boilerplate, it''s really not too bad.
 
 <br>
 
-Run the following command to install TypeORM, but don't forget to add the specific database driver of choice beforehand.
+Run the following command to install TypeORM, but don''t forget to add the specific database driver of choice beforehand.
 
 <br>
 
-``` 
+```
 $ npm install @nestjs/typeorm typeorm <npm-db-driver-here> --save
 ```
 
@@ -194,7 +201,7 @@ $ npm install @nestjs/typeorm typeorm <npm-db-driver-here> --save
 
 <br>
 
-We need to get a database up and running for this to really work, so just make sure that you something installed, liked [PostgreSQL](https://www.postgresql.org/download/), or [MySQL](https://www.mysql.com/downloads/). Make sure that the npm database drivers you just installed match whatever you're using here.
+We need to get a database up and running for this to really work, so just make sure that you something installed, liked [PostgreSQL](https://www.postgresql.org/download/), or [MySQL](https://www.mysql.com/downloads/). Make sure that the npm database drivers you just installed match whatever you''re using here.
 
 <br>
 
@@ -206,7 +213,7 @@ _CAUTION: Remember the database name, because we will use it later in our confiu
 
 <br>
 
-There are two ways we can do database configuration with TypeORM. We can write all of our configuration in the code of our `app.module.ts`, or we opt for an `ormconfig.json` file in the root directory that holds the same information. Let's try the latter of the two!
+There are two ways we can do database configuration with TypeORM. We can write all of our configuration in the code of our `app.module.ts`, or we opt for an `ormconfig.json` file in the root directory that holds the same information. Let''s try the latter of the two!
 
 <br>
 
@@ -215,7 +222,7 @@ There are two ways we can do database configuration with TypeORM. We can write a
     - node_modules/
     - src/
     - test/
-    - ormconfig.json <-- CAUTION: Place in server's root directory
+    - ormconfig.json <-- CAUTION: Place in server''s root directory
     - package.json
     - package-lock.json
     ...
@@ -242,7 +249,7 @@ For MySQL, just modify the type to `mysql` and the port to `3306` or the like fo
 
 <br>
 
-In the previous snippet, the `entities` field refers to the models that reference the tables in the database. In those files we define our data types and models, including the relationships between them. If `true`, `synchronize` will ensure that these entities and the database and up-to-date with each other everytime the application is run. 
+In the previous snippet, the `entities` field refers to the models that reference the tables in the database. In those files we define our data types and models, including the relationships between them. If `true`, `synchronize` will ensure that these entities and the database and up-to-date with each other everytime the application is run.
 
 <br>
 
@@ -251,11 +258,11 @@ From here we need to import the module in our `app.module.ts`.
 <br>
 
 ```typescript
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from ''@nestjs/common'';
+import { TypeOrmModule } from ''@nestjs/typeorm'';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppController } from ''./app.controller'';
+import { AppService } from ''./app.service'';
 
 @Module({
     imports: [TypeOrmModule.forRoot()],
@@ -267,7 +274,7 @@ export class AppModule { }
 
 <br>
 
-Check to make sure that TypeORM is being initialized when the server starts up. When all is well, let's get started at creating our authentication module, namely `auth.module.ts`.
+Check to make sure that TypeORM is being initialized when the server starts up. When all is well, let''s get started at creating our authentication module, namely `auth.module.ts`.
 
 <br><br>
 
@@ -275,7 +282,7 @@ Check to make sure that TypeORM is being initialized when the server starts up. 
 
 <br>
 
-I like to setup a central directory named `core` for holding this kind of stuff that's essential and used throughout applications.
+I like to setup a central directory named `core` for holding this kind of stuff that''s essential and used throughout applications.
 
 <br>
 
@@ -304,21 +311,21 @@ I like to setup a central directory named `core` for holding this kind of stuff 
 
 <br>
 
-It is most likely that our user will have some form of credentials - either a user name or email, perhaps both, alongside a password. We want to tell TypeORM to create a table in our database that contains that information and holds them to some constraints as well. Let's get a basic version of the `user.entity.ts` file going first.
+It is most likely that our user will have some form of credentials - either a user name or email, perhaps both, alongside a password. We want to tell TypeORM to create a table in our database that contains that information and holds them to some constraints as well. Let''s get a basic version of the `user.entity.ts` file going first.
 
 <br>
 
 ```typescript
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from ''typeorm'';
 
-@Entity('user')
+@Entity(''user'')
 export class User {
     @PrimaryGeneratedColumn()
     public id?: number;
 
     @Column()
     public username: string;
-    
+
     @Column()
     public email: string;
 
@@ -329,32 +336,32 @@ export class User {
 
 <br>
 
-Much in an Angular-like style, we use decorators to declare the columns that will belong to the entity's table in the database.
+Much in an Angular-like style, we use decorators to declare the columns that will belong to the entity''s table in the database.
 
 <br>
 
-Now let's add in some more configurations for typing, constraints, and also creating a user. In the decorators we can specify options for our data as well.
+Now let''s add in some more configurations for typing, constraints, and also creating a user. In the decorators we can specify options for our data as well.
 
 <br>
 
 ```typescript
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from ''typeorm'';
 
-@Entity('user')
+@Entity(''user'')
 export class User {
     @PrimaryGeneratedColumn()
     public id?: number;
-    
+
     // Add varchar(50) NOT NULL UNIQUE for usernames
-    @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
+    @Column({ type: ''varchar'', length: 50, nullable: false, unique: true })
     public username: string;
-    
+
     // Add text NOT NULL UNIQUE for emails
-    @Column({ type: 'text', nullable: false, unique: true })
+    @Column({ type: ''text'', nullable: false, unique: true })
     public email: string;
-    
+
     // Add varchar(255) NOT NULL for passwords
-    @Column({ type: 'varchar', length: 255, nullable: false })
+    @Column({ type: ''varchar'', length: 255, nullable: false })
     public password: string;
 
     // Partial class construction via an object is useful for manipulating data
@@ -385,13 +392,13 @@ $ npm install class-transformer --save
 <br>
 
 ```typescript
-import { Exclude } from 'class-transformer';
+import { Exclude } from ''class-transformer'';
 
 ...
 export class User {
     ...
-    
-    @Column({ type: 'varchar', length: 255, nullable: false })
+
+    @Column({ type: ''varchar'', length: 255, nullable: false })
     @Exclude() // Exclude the password from being serialized in responses
     public password: string;
 
@@ -405,15 +412,15 @@ export class User {
 
 <br>
 
-We need to tie the entity together with TypeORM in our `auth.module.ts` so that it generates the table in the database for us to start utilizing. This happens in the module's decorator much like those of Angular - we declare TypeORM in the imports array using the `User` type we just created.
+We need to tie the entity together with TypeORM in our `auth.module.ts` so that it generates the table in the database for us to start utilizing. This happens in the module''s decorator much like those of Angular - we declare TypeORM in the imports array using the `User` type we just created.
 
 <br>
 
 ```typescript
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from ''@nestjs/common'';
+import { TypeOrmModule } from ''@nestjs/typeorm'';
 
-import { User } from './entities/user.entity';
+import { User } from ''./entities/user.entity'';
 
 @Module({
     imports: [TypeOrmModule.forFeature([User])], // Initialize user entity with TypeORM
@@ -426,22 +433,22 @@ export class AuthModule { }
 
 <br>
 
-It's important that we also import the `AuthModule` in the root `AppModule` so that it is added in compilation.
+It''s important that we also import the `AuthModule` in the root `AppModule` so that it is added in compilation.
 
 <br>
 
 ```typescript
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from ''@nestjs/common'';
+import { TypeOrmModule } from ''@nestjs/typeorm'';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { AuthModule } from './core/auth/auth.module';
+import { AppController } from ''./app.controller'';
+import { AppService } from ''./app.service'';
+import { AuthModule } from ''./core/auth/auth.module'';
 
 @Module({
     imports: [
         TypeOrmModule.forRoot(),
-        AuthModule // Don't forget to import this
+        AuthModule // Don''t forget to import this
     ],
     controllers: [AppController],
     providers: [AppService]
@@ -469,7 +476,7 @@ Spin up the server with `npm run start:dev` and check that the newly created ent
 
 <br>
 
-While we are here, let's create our authentication controller inside of a controllers folder and add it to `app.module.ts`.
+While we are here, let''s create our authentication controller inside of a controllers folder and add it to `app.module.ts`.
 
 <br>
 
@@ -500,7 +507,7 @@ $ nest g c auth
 
 <br>
 
-This will generate a controller file where we define our controller endpoints with decorators in the class's body. As we don't have any users yet, let's create (or stub out) some functionality for registering new users. In the following code I have declared an endpoint with the decorator, `@Post('register')`, further specifying that it will return a 201 Created status, and to lastly utilize the class serialization interceptor that will remove the user entity's password field that we "excluded" earlier.
+This will generate a controller file where we define our controller endpoints with decorators in the class''s body. As we don''t have any users yet, let''s create (or stub out) some functionality for registering new users. In the following code I have declared an endpoint with the decorator, `@Post(''register'')`, further specifying that it will return a 201 Created status, and to lastly utilize the class serialization interceptor that will remove the user entity''s password field that we "excluded" earlier.
 
 <br>
 
@@ -512,19 +519,19 @@ import {
     Post,
     Req,
     UseInterceptors
-} from '@nestjs/common';
+} from ''@nestjs/common'';
 
-import { Request } from 'express';
+import { Request } from ''express'';
 
-import { User } from '@api/core/auth/entities/user.entity';
+import { User } from ''@api/core/auth/entities/user.entity'';
 
-@Controller('auth')
+@Controller(''auth'')
 export class AuthController {
     constructor() { }
 
-    @Post('register') // Declare an endpoint for "POST /auth/register"
+    @Post(''register'') // Declare an endpoint for "POST /auth/register"
     @HttpCode(201) // Indicates that it will return a 201 CREATED status
-    @UseInterceptors(ClassSerializerInterceptor) // Excludes password field     
+    @UseInterceptors(ClassSerializerInterceptor) // Excludes password field
     registerUser(@Req() request: Request): Promise<User> {
         return new User(request.body);
     }
@@ -533,20 +540,20 @@ export class AuthController {
 
 <br>
 
-Just to clear some things up that may be confusing for those that don't know. In the imports of the above snippet, I've added a custom path to my `tsconfig.json` `compilerOptions` object to give more readable import paths. Check out the [source code file](https://github.com/maxwellmattryan/nestjs-jwt-auth-starter/blob/master/tsconfig.json#L10) here to see what I am talking about.
+Just to clear some things up that may be confusing for those that don''t know. In the imports of the above snippet, I''ve added a custom path to my `tsconfig.json` `compilerOptions` object to give more readable import paths. Check out the [source code file](https://github.com/maxwellmattryan/nestjs-jwt-auth-starter/blob/master/tsconfig.json#L10) here to see what I am talking about.
 
 <br>
 
-We also have to add it to our `auth.module.ts` controllers init so that NestJS knows to create and map routes to those endpoints. 
+We also have to add it to our `auth.module.ts` controllers init so that NestJS knows to create and map routes to those endpoints.
 
 <br>
 
 ```typescript
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from ''@nestjs/common'';
+import { TypeOrmModule } from ''@nestjs/typeorm'';
 
-import { AuthController } from './controllers/auth/auth.controller';
-import { User } from './entities/user.entity';
+import { AuthController } from ''./controllers/auth/auth.controller'';
+import { User } from ''./entities/user.entity'';
 
 @Module({
     imports: [TypeOrmModule.forFeature([User])],
@@ -559,7 +566,7 @@ export class AuthModule { }
 
 <br>
 
-Now when running the server we should see the the new route for `/auth/register` is mapped by NestJS and ready to go. Let's open up Postman and see what happens when a request is made to the endpoint (as per the code above, a blank User object will be returned with a 201 status).
+Now when running the server we should see the the new route for `/auth/register` is mapped by NestJS and ready to go. Let''s open up Postman and see what happens when a request is made to the endpoint (as per the code above, a blank User object will be returned with a 201 status).
 
 <br>
 
@@ -577,7 +584,7 @@ The next important step is creating another layer within our architecture that w
 
 <br>
 
-Let's generate another file with the NestJS cli - this time it will be a service.
+Let''s generate another file with the NestJS cli - this time it will be a service.
 
 <br>
 
@@ -586,12 +593,12 @@ $ cd ./src/core/auth/services
 $ nest generate service auth
 OR
 $ nest g s auth
-``` 
+```
 
 <br>
 
 ```typescript
-import { Injectable } from '@nestjs/common';
+import { Injectable } from ''@nestjs/common'';
 
 @Injectable()
 export class AuthService {
@@ -601,7 +608,7 @@ export class AuthService {
 
 <br>
 
-By default this creates a file containing an `@Injectable()` decorator. This means that this class is able to be instantiate via NestJS's dependency injection into controllers and other places where it is declared. To demonstrate, I will add it the constructor of my `auth.controller.ts` file and integrate into the controller's register method, but first let's define service functionality for registering a user:
+By default this creates a file containing an `@Injectable()` decorator. This means that this class is able to be instantiate via NestJS''s dependency injection into controllers and other places where it is declared. To demonstrate, I will add it the constructor of my `auth.controller.ts` file and integrate into the controller''s register method, but first let''s define service functionality for registering a user:
 
 <br>
 
@@ -610,35 +617,35 @@ This file needs to be brought into the authentication module file so that contro
 <br>
 
 ```typescript
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from ''@nestjs/common'';
+import { TypeOrmModule } from ''@nestjs/typeorm'';
 
-import { AuthController } from './controllers/auth/auth.controller';
-import { AuthService } from './services/auth/auth.service';
-import { User } from './entities/user.entity';
+import { AuthController } from ''./controllers/auth/auth.controller'';
+import { AuthService } from ''./services/auth/auth.service'';
+import { User } from ''./entities/user.entity'';
 
 @Module({
     imports: [TypeOrmModule.forFeature([User])],
     exports: [AuthService], // Export the service so it can be used elsewhere in the app
     controllers: [AuthController],
-    providers: [AuthService] // Tell NestJS that it is an injectable 
+    providers: [AuthService] // Tell NestJS that it is an injectable
 })
 export class AuthModule { }
 ```
 
 <br>
 
-We need to define a constructor for the service class that injects the repositories needed, which is just the `User` repository in this case. While we're at it, let's define a method, `registerUser`, that takes in data to create and save a new user to the database.
+We need to define a constructor for the service class that injects the repositories needed, which is just the `User` repository in this case. While we''re at it, let''s define a method, `registerUser`, that takes in data to create and save a new user to the database.
 
 <br>
 
 ```typescript
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable } from ''@nestjs/common'';
+import { InjectRepository } from ''@nestjs/typeorm'';
 
-import { Repository } from 'typeorm';
+import { Repository } from ''typeorm'';
 
-import { User } from '@api/core/auth/entities/user.entity';
+import { User } from ''@api/core/auth/entities/user.entity'';
 
 @Injectable()
 export class AuthService {
@@ -655,7 +662,7 @@ export class AuthService {
 
 <br>
 
-We're missing one important step, and that is password hash generator for encrypting passwords as they are stored in the database. This is massively important for having a secure way for users to log into your application. 
+We''re missing one important step, and that is password hash generator for encrypting passwords as they are stored in the database. This is massively important for having a secure way for users to log into your application.
 
 <br>
 
@@ -663,7 +670,7 @@ We are going to use the npm package called `bcrypt`, which is a native C++ modul
 
 <br>
 
-``` 
+```
 $ npm install @types/bcrypt bcrypt --save
 ```
 
@@ -676,7 +683,7 @@ Once the install is finished, it can be imported into `auth.service.ts` and used
 ```typescript
 ...
 // Import the C++ bcrypt library
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from ''bcrypt'';
 
 @Injectable()
 export class AuthService {
@@ -685,10 +692,10 @@ export class AuthService {
     public async registerUser(userData: User): Promise<User> {
         // Create a hash of the password given in the request with 10 salt rounds
         const passwordHash = await bcrypt.hash(userData.password, 10);
-        
+
         // With our partial construction, replace the password with the hashed one
         const user: User = this.userRepository.create({ ...userData, password: hashedPassword });
-    
+
         // Save the record officially into the database
         return await this.userRepository.save(user);
     }
@@ -697,7 +704,7 @@ export class AuthService {
 
 <br>
 
-This approach works, but it doesn't have any error handling at all. The call to `create(user)` is a `Promise` that will throw an `HttpException` error if the PostgreSQL query fails. We need to check that a user with an already existing email or username, which we do by comparing the error's code against 23505 which is PostgreSQL's unique constraint.
+This approach works, but it doesn''t have any error handling at all. The call to `create(user)` is a `Promise` that will throw an `HttpException` error if the PostgreSQL query fails. We need to check that a user with an already existing email or username, which we do by comparing the error''s code against 23505 which is PostgreSQL''s unique constraint.
 
 <br><br>
 
@@ -705,11 +712,11 @@ This approach works, but it doesn't have any error handling at all. The call to 
 
 <br>
 
-I like to create errors with a more business-domain related implementation. Before changing the method in the authentication service, let's create an exception file that holds HTTP exceptions relevant to authentication.
+I like to create errors with a more business-domain related implementation. Before changing the method in the authentication service, let''s create an exception file that holds HTTP exceptions relevant to authentication.
 
 <br>
 
-``` 
+```
 - ../
     - auth
         - exceptions
@@ -718,16 +725,16 @@ I like to create errors with a more business-domain related implementation. Befo
 
 <br>
 
-That file will have multiple classes that extend different `HttpException` types with extra messages pertaining specifically to the request made. They don't need to be officially added anywhere in the `auth.module.ts` file, and can be used anywhere where they are imported. I think this is useful for when providing more descriptive errors to the frontend when something goes wrong!
+That file will have multiple classes that extend different `HttpException` types with extra messages pertaining specifically to the request made. They don''t need to be officially added anywhere in the `auth.module.ts` file, and can be used anywhere where they are imported. I think this is useful for when providing more descriptive errors to the frontend when something goes wrong!
 
 <br>
 
 ```typescript
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException } from ''@nestjs/common'';
 
 export class UserAlreadyExistsException extends BadRequestException {
     constructor() {
-        super('User already exists.');
+        super(''User already exists.'');
     }
 }
 ```
@@ -736,17 +743,17 @@ export class UserAlreadyExistsException extends BadRequestException {
 
 ```typescript
 ...
-import { UserAlreadyExistsException } from '@api/core/auth/exceptions/auth.exception';
+import { UserAlreadyExistsException } from ''@api/core/auth/exceptions/auth.exception'';
 
 public async registerUser(userData: User): Promise<User> {
     const passwordHash = await bcrypt.hash(userData.password, 10);
 
     const user: User = this.userRepository.create({ ...userData, password: hashedPassword });
-    
+
     return await this.userRepository.save(user)
         .catch((error) => {
-            if(error.code === '23505') {
-                // We're throwing our HTTP exception if a user with these credentials already exists
+            if(error.code === ''23505'') {
+                // We''re throwing our HTTP exception if a user with these credentials already exists
                 throw new UserAlreadyExistsException();
             } else {
                 throw new InternalServerErrorException();
@@ -757,33 +764,33 @@ public async registerUser(userData: User): Promise<User> {
 
 <br>
 
-We need to adjust the method in our controller to return the result of the newly defined `registerUser()` method in the `AuthService`. 
+We need to adjust the method in our controller to return the result of the newly defined `registerUser()` method in the `AuthService`.
 
 <br>
 
 ```typescript
 ...
-import { AuthService } from '@api/core/auth/services/auth/auth.service';
+import { AuthService } from ''@api/core/auth/services/auth/auth.service'';
 
-@Controller('auth')
+@Controller(''auth'')
 export class AuthController {
     constructor(
         private readonly authService: AuthService
     ) { }
 
-    @Post('register')
+    @Post(''register'')
     @HttpCode(201)
-    @UseInterceptors(ClassSerializerInterceptor)        
+    @UseInterceptors(ClassSerializerInterceptor)
     async registerUser(@Req() request: Request): Promise<User> {
             // Return the result of the promise from our auth service
             return await this.authService.registerAdmin(request.body);
-        }   
+        }
     }
 ```
 
 <br>
 
-Now let's test what happens when we make two requests to this endpoint. The reason I say two is because `POST` requests are not [idempotent](https://en.wikipedia.org/wiki/Idempotence), which is to say that they always result in a change of of some sorts on the server side, like our user record being created. Luckily our data constraints protect us against resources being created in the database, and we just throw a custom `HttpException` saying that the user is not found.
+Now let''s test what happens when we make two requests to this endpoint. The reason I say two is because `POST` requests are not [idempotent](https://en.wikipedia.org/wiki/Idempotence), which is to say that they always result in a change of of some sorts on the server side, like our user record being created. Luckily our data constraints protect us against resources being created in the database, and we just throw a custom `HttpException` saying that the user is not found.
 
 <br>
 
@@ -793,7 +800,7 @@ Now let's test what happens when we make two requests to this endpoint. The reas
 
 <br>
 
-When we try to make a request with the same credentials, our custom error will be thrown to us. We know that those entity constraints put in earlier are working! If they weren't, we would have multiple duplicate records in the database with just different ids. 
+When we try to make a request with the same credentials, our custom error will be thrown to us. We know that those entity constraints put in earlier are working! If they weren''t, we would have multiple duplicate records in the database with just different ids.
 
 <br>
 
@@ -807,7 +814,7 @@ When we try to make a request with the same credentials, our custom error will b
 
 <br>
 
-We need to add an endpoint for logging users in now that we have a means of inputting data into the database. This can be done by simply adding another function with decorators specifying the end and HTTP status codes, except we need to add some more authentication functionality to make it actually work. Let's think about what we need.
+We need to add an endpoint for logging users in now that we have a means of inputting data into the database. This can be done by simply adding another function with decorators specifying the end and HTTP status codes, except we need to add some more authentication functionality to make it actually work. Let''s think about what we need.
 
 <br><br>
 
@@ -831,20 +838,20 @@ We need to add an endpoint for logging users in now that we have a means of inpu
 
 <br>
 
-Following this, let's create a login endpoint in the controller that calls a not-yet-made function in our service called `authenticateUser()` that takes in user data.
+Following this, let''s create a login endpoint in the controller that calls a not-yet-made function in our service called `authenticateUser()` that takes in user data.
 
 <br>
 
 ```typescript
 ...
 // We will write the code for this shortly
-import { WrongUserCredentialsWereProvidedException } from '@api/core/auth/exceptions/auth.exception';
+import { WrongUserCredentialsWereProvidedException } from ''@api/core/auth/exceptions/auth.exception'';
 
-@Controller('auth')
+@Controller(''auth'')
 export class AuthController {
-    @Post('login')
+    @Post(''login'')
     @HttpCode(200)
-    @UseInterceptors(ClassSerializerInterceptor)        
+    @UseInterceptors(ClassSerializerInterceptor)
     async login(@Req() request: Request): Promise<User> {
         // Give the request data to our service to authenticate it against the record in the database
         const user = await this.authService.authenticateUser(request.body);
@@ -862,14 +869,14 @@ export class AuthController {
 
 <br>
 
-Let's add the new exception for the controller login route that we just wrote.
+Let''s add the new exception for the controller login route that we just wrote.
 
 <br>
 
 ```typescript
 export class WrongUserCredentialsWereProvidedException extends BadRequestException {
     constructor() {
-        super('The wrong user credentials were provided.');
+        super(''The wrong user credentials were provided.'');
     }
 }
 ```
@@ -888,7 +895,7 @@ We need to define that method that we are controller from the controller that we
 public async authenticateUser(userData: User): Promise<User> {
     // Find a user in the database matching credentials from the request data
     const user: User = await this.userRepository.findOne({ username: userData.username });
-    
+
     // Because the record will have the hashed password, use bcrypt to compare the passwords
     if(user && await bcrypt.compare(userData.password, user.password)) {
         return user;
@@ -900,7 +907,7 @@ public async authenticateUser(userData: User): Promise<User> {
 
 <br>
 
-At this point we can test to see if we get a user object back with our login request. It's evident that sending the wrong credentials will result in a 400 status while the correct credentials will see a 200 response. 
+At this point we can test to see if we get a user object back with our login request. It''s evident that sending the wrong credentials will result in a 400 status while the correct credentials will see a 200 response.
 
 <br>
 
@@ -910,7 +917,7 @@ At this point we can test to see if we get a user object back with our login req
 
 <br>
 
-Our work isn't over as we still need to add the code for handling the generation of the JWT cookie. We need to create some things, namely the token payload, JWT authentication guard, and the JWT strategy for this to work. Let's start by creating the `token-payload.interface.ts` file.
+Our work isn''t over as we still need to add the code for handling the generation of the JWT cookie. We need to create some things, namely the token payload, JWT authentication guard, and the JWT strategy for this to work. Let''s start by creating the `token-payload.interface.ts` file.
 
 <br><br>
 
@@ -951,9 +958,9 @@ From there we need to add configuration in our `app.module.ts` that declares the
 <br>
 
 ```typescript
-import { ConfigModule } from '@angular/config';
+import { ConfigModule } from ''@angular/config'';
 
-import * as Joi from '@hapi/joi';
+import * as Joi from ''@hapi/joi'';
 
 @Module({
     imports: [
@@ -974,7 +981,7 @@ export class AppModule { }
 
 <br>
 
-When this is run we get an error thrown, which happens because haven't actually defined our values for the key-value pair of our environment variables. We fix this by adding a .env file to our root directory.
+When this is run we get an error thrown, which happens because haven''t actually defined our values for the key-value pair of our environment variables. We fix this by adding a .env file to our root directory.
 
 <br>
 
@@ -985,13 +992,13 @@ When this is run we get an error thrown, which happens because haven't actually 
 ...
 ```
 
-<br> 
+<br>
 
-The file contents will simply just be values for our authentication variables, namely the JWT secret and JWT expiratory time. In the code below I have the secret to something that shouldn't ever be used in a production context, and a value of 21,600 seconds, which equates to 6 hours.
+The file contents will simply just be values for our authentication variables, namely the JWT secret and JWT expiratory time. In the code below I have the secret to something that shouldn''t ever be used in a production context, and a value of 21,600 seconds, which equates to 6 hours.
 
 <br>
 
-_CAUTION: It's important that this information stay out of the public's knowledge when using with real applications so don't forgot to add to the repository `.gitignore`!'_
+_CAUTION: It''s important that this information stay out of the public''s knowledge when using with real applications so don''t forgot to add to the repository `.gitignore`!''_
 
 <br>
 
@@ -1006,7 +1013,7 @@ JWT_EXPIRES_IN=21600s
 
 <br>
 
-Add a directory in the authentication module for JWT and create two files, namely `jwt.strategy.ts` and `jwt-auth.guard.ts`. The strategy file informs our application the method of validating the JWT guard that we will use on the logout endpoint. First, we need to install the passport module for NestJS to use passport strategies. 
+Add a directory in the authentication module for JWT and create two files, namely `jwt.strategy.ts` and `jwt-auth.guard.ts`. The strategy file informs our application the method of validating the JWT guard that we will use on the logout endpoint. First, we need to install the passport module for NestJS to use passport strategies.
 
 <br>
 
@@ -1016,11 +1023,11 @@ $ npm install @nestjs/passport @nestjs/jwt @types/passport-jwt passport passport
 
 <br>
 
-Once those are installed, let's setup a `user.service.ts` file for retrieving user records for the JWT strategy validation. 
+Once those are installed, let''s setup a `user.service.ts` file for retrieving user records for the JWT strategy validation.
 
 <br>
 
-``` 
+```
 $ cd ./src/core/auth/services
 $ nest generate service user
 OR
@@ -1029,17 +1036,17 @@ $ nest g s user
 
 <br>
 
-Let's add the repository injection for users so that we can get access to our database with this service. We will write a simple method to retrieve users via their ids.
+Let''s add the repository injection for users so that we can get access to our database with this service. We will write a simple method to retrieve users via their ids.
 
 <br>
 
 ```typescript
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable } from ''@nestjs/common'';
+import { InjectRepository } from ''@nestjs/typeorm'';
 
-import { Repository } from 'typeorm';
+import { Repository } from ''typeorm'';
 
-import { User } from '@api/core/auth/entities/user.entity';
+import { User } from ''@api/core/auth/entities/user.entity'';
 
 @Injectable()
 export class UserService {
@@ -1055,24 +1062,24 @@ export class UserService {
 }
 ```
 
-<br> 
+<br>
 
-Let's not forgot to add the necessary import statements to the authentication module.
+Let''s not forgot to add the necessary import statements to the authentication module.
 
 <br>
 
 ```typescript
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
+import { Module } from ''@nestjs/common'';
+import { TypeOrmModule } from ''@nestjs/typeorm'';
+import { ConfigModule, ConfigService } from ''@nestjs/config'';
+import { PassportModule } from ''@nestjs/passport'';
+import { JwtModule } from ''@nestjs/jwt'';
 
-import { AuthController } from './controllers/auth/auth.controller';
-import { AuthService } from './services/auth/auth.service';
-import { JwtStrategy } from './jwt.strategy';
-import { User } from './entities/user.entity';
-import { UserService } from './services/user/user.service';
+import { AuthController } from ''./controllers/auth/auth.controller'';
+import { AuthService } from ''./services/auth/auth.service'';
+import { JwtStrategy } from ''./jwt.strategy'';
+import { User } from ''./entities/user.entity'';
+import { UserService } from ''./services/user/user.service'';
 
 @Module({
     imports: [
@@ -1083,9 +1090,9 @@ import { UserService } from './services/user/user.service';
             imports: [ConfigModule],
             inject: [ConfigService],
             useFactory: async (configService: ConfigService) => ({
-                secret: configService.get<string>('JWT_SECRET'),
+                secret: configService.get<string>(''JWT_SECRET''),
                 signOptions: {
-                    expiresIn: configService.get<string>('JWT_EXPIRES_IN')
+                    expiresIn: configService.get<string>(''JWT_EXPIRES_IN'')
                 }
             })
         })
@@ -1097,8 +1104,8 @@ import { UserService } from './services/user/user.service';
     controllers: [AuthController],
     providers: [
         AuthService,
-        UserService, // Add the newly created user service so it's picked up by NestJS's DI
-        JwtStrategy // Adding so that it can be DI'ed into this authentication module
+        UserService, // Add the newly created user service so it''s picked up by NestJS''s DI
+        JwtStrategy // Adding so that it can be DI''ed into this authentication module
     ]
 })
 export class AuthModule { }
@@ -1106,23 +1113,23 @@ export class AuthModule { }
 
 <br>
 
-From here, let's create the `jwt.strategy.ts` file for our application. Here we tell our JWT strategy to extract the cookie named "Authentication" and to use the JWT_SECRET environment variable. We use our user service to find a user to validate the credentials with.
+From here, let''s create the `jwt.strategy.ts` file for our application. Here we tell our JWT strategy to extract the cookie named "Authentication" and to use the JWT_SECRET environment variable. We use our user service to find a user to validate the credentials with.
 
 <br>
 
 ```typescript
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { PassportStrategy } from '@nestjs/passport';
+import { Injectable } from ''@nestjs/common'';
+import { ConfigService } from ''@nestjs/config'';
+import { PassportStrategy } from ''@nestjs/passport'';
 
-import { ExtractJwt, Strategy } from 'passport-jwt';
+import { ExtractJwt, Strategy } from ''passport-jwt'';
 
-import { Request } from 'express';
+import { Request } from ''express'';
 
-import { TokenPayload } from '../interfaces/token-payload.interface';
+import { TokenPayload } from ''../interfaces/token-payload.interface'';
 
-import { User } from '@api/core/auth/entities/user.entity'
-import { UserService } from '@api/core/auth/services/user/user.service';
+import { User } from ''@api/core/auth/entities/user.entity''
+import { UserService } from ''@api/core/auth/services/user/user.service'';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -1135,7 +1142,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             jwtFromRequest: ExtractJwt.fromExtractors([(request: Request) => {
                 return request?.cookies?.Authentication;
             }]),
-            secretOrKey: configService.get('JWT_SECRET')
+            secretOrKey: configService.get(''JWT_SECRET'')
         });
     }
 
@@ -1153,24 +1160,24 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
 <br>
 
-Because our controller layer deals with HTTP, we want to put have it be responsible for generating the JWT cookie and setting it with the "Set-Cookie" HTTP header. For now let's also make a call to a to-be-made method in the `AuthService` class that generates a cookie given user data.
+Because our controller layer deals with HTTP, we want to put have it be responsible for generating the JWT cookie and setting it with the "Set-Cookie" HTTP header. For now let''s also make a call to a to-be-made method in the `AuthService` class that generates a cookie given user data.
 
 <br>
 
 ```typescript
 ...
 
-@Post('login')
+@Post(''login'')
 @HttpCode(200)
 async login(@Req() request: Request): Promise<User> {
     const user = await this.authService.authenticateUser(request.body);
     if(!user) throw new WrongUserCredentialsWereProvidedException();
-    
+
     // Generate the cookie with validated user data
     const jwtCookie = this.authService.generateCookieWithJwtToken(user);
     // With the "Set-Cookie" header, send our generated JWT cookie along to the client
-    request.res.setHeader('Set-Cookie', jwtCookie);
-    
+    request.res.setHeader(''Set-Cookie'', jwtCookie);
+
     return user;
 }
 ```
@@ -1182,22 +1189,22 @@ We need to define the `generateCookieWithJwtToken(user)` method in the service f
 <br>
 
 ```typescript
-import { ConfigService } from '@nestjs/config';
-import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from ''@nestjs/config'';
+import { JwtService } from ''@nestjs/jwt'';
 
 ...
 
 public generateCookieWithJwtToken(user: User): string {
-        // Generate a payload object from the user data 
+        // Generate a payload object from the user data
         const payload: TokenPayload = { id: user.id, username: user.username, email: user.email };
-        
+
         // Create the token by signing the payload with our JWT service
         const token = this.jwtService.sign(payload);
 
-        // Read the environment variable for the expiration time 
-        const expiresIn = this.configService.get<string>('JWT_EXPIRES_IN');
+        // Read the environment variable for the expiration time
+        const expiresIn = this.configService.get<string>(''JWT_EXPIRES_IN'');
 
-        // CAUTION: When trying to include the 'Secure;' option, HTTPS has to be used
+        // CAUTION: When trying to include the ''Secure;'' option, HTTPS has to be used
         // NOTE: Cookie just disappears from client-side storage after it expires
         return `Authentication=${token}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${expiresIn}`;
     }
@@ -1221,30 +1228,30 @@ After setting back in the controller, we can now test it out to see if it works 
 
 # Logout
 
-<br> 
+<br>
 
 ## Controller
 
 <br>
 
-It's time to add our last endpoint involving authentication, which is to logout. There is something important involving an authentication guard that we need to specify so that we make sure that users logging out are only users who have been authenticated (logged in) previously.  
+It''s time to add our last endpoint involving authentication, which is to logout. There is something important involving an authentication guard that we need to specify so that we make sure that users logging out are only users who have been authenticated (logged in) previously.
 
 <br>
 
-Let's begin with adding a controller route for logging out that will simply remove the cookie and send a 204 No Content. We accomplish this by telling our Request interface to clear the "Authentication" cookie in its response, effectively removing it from the HTTP communication that happens between the frontend and backend.
+Let''s begin with adding a controller route for logging out that will simply remove the cookie and send a 204 No Content. We accomplish this by telling our Request interface to clear the "Authentication" cookie in its response, effectively removing it from the HTTP communication that happens between the frontend and backend.
 
 <br>
 
 ```typescript
-@Controller('auth')
+@Controller(''auth'')
 export class AuthController {
     ...
 
-    @Post('logout')
+    @Post(''logout'')
     @HttpCode(204)
     async logout(@Req() request: Request): Promise<void> {
-        // Using Express's API, just clear the cookie with the name "Authentication"
-        request.res.clearCookie('Authentication');
+        // Using Express''s API, just clear the cookie with the name "Authentication"
+        request.res.clearCookie(''Authentication'');
     }
 }
 ```
@@ -1260,11 +1267,11 @@ We are missing the mechanism that will actually allow users to successfully send
 <br>
 
 ```typescript
-import { Injectable } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Injectable } from ''@nestjs/common'';
+import { AuthGuard } from ''@nestjs/passport'';
 
 @Injectable()
-export class JwtAuthGuard extends AuthGuard('jwt') { }
+export class JwtAuthGuard extends AuthGuard(''jwt'') { }
 ```
 
 <br>
@@ -1274,28 +1281,28 @@ The way that we use this is to attach it to the logout endpoint in the auth cont
 <br>
 
 ```typescript
-import { Controller, HttpCode, Post, Req, Get, UseGuards, Body } from '@nestjs/common';
+import { Controller, HttpCode, Post, Req, Get, UseGuards, Body } from ''@nestjs/common'';
 
 ...
 
-import { JwtAuthGuard } from '../jwt/jwt-auth.guard';
+import { JwtAuthGuard } from ''../jwt/jwt-auth.guard'';
 
-@Controller('auth')
+@Controller(''auth'')
 export class AuthController {
     ...
-                
-    @Post('logout')
+
+    @Post(''logout'')
     @HttpCode(204)
     @UseGuards(JwtAuthGuard) // Only client requests with a valid Authentication cookie are executed
     async logout(@Req() request: Request): Promise<void> {
-        request.res.clearCookie('Authentication');
+        request.res.clearCookie(''Authentication'');
     }
 }
 ```
 
 <br>
 
-After spinning up the server and testing the endpoint with Postman, we can see that we cannot technically "logout" unless we are logged in prior or else we will receive a 401 Unauthorized response. 
+After spinning up the server and testing the endpoint with Postman, we can see that we cannot technically "logout" unless we are logged in prior or else we will receive a 401 Unauthorized response.
 
 <br>
 
@@ -1305,8 +1312,12 @@ After spinning up the server and testing the endpoint with Postman, we can see t
 
 <br>
 
-This concludes the starter example of getting JSON Web Token authentication to work with NestJS and TypeORM. In short, we have three routes: register, login, and logout, where a client making requests to the server can access any of these endpoints. Each one uses the services we created to either look up a user or create and save a user, but the main concept here is using the JWT for authentication with the help of other libraries in the Node ecosystem like passport and bcrypt. 
+This concludes the starter example of getting JSON Web Token authentication to work with NestJS and TypeORM. In short, we have three routes: register, login, and logout, where a client making requests to the server can access any of these endpoints. Each one uses the services we created to either look up a user or create and save a user, but the main concept here is using the JWT for authentication with the help of other libraries in the Node ecosystem like passport and bcrypt.
 
 <br>
 
-Thank you for taking the time to read this post. I hope it was informative and help to get a basic JWT-based approach for authentication setup in your project. Please feel free to reach out, check out my [Github profile](https://github.com/maxwellmattryan) for other projects, or head back to the [blog](https://mattmaxwell.dev/blog) to read more!
+Thank you for taking the time to read this post. I hope it was informative and help to get a basic JWT-based approach for authentication setup in your project. Please feel free to reach out, check out my [Github profile](https://github.com/maxwellmattryan) for other projects, or head back to the [blog](https://mattmaxwell.dev/blog) to read more!',
+        'assets/images/projects/jlpt-scrape.png',
+        '2020-09-12 17:16:23.119169');
+
+INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (4, 3), (4, 4);
