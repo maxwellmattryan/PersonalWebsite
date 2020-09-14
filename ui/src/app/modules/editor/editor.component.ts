@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-editor',
@@ -11,11 +11,14 @@ export class EditorComponent implements OnInit {
     id: number;
 
     constructor(
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
         this.route.queryParams.subscribe(params => {
+            if(!params.type) this.router.navigate(['']);
+
             this.type = params.type;
             this.id = params.id;
         });
