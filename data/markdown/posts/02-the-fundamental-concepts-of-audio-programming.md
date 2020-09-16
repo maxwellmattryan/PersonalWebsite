@@ -138,6 +138,10 @@ At some point, our bitstream of audio data is decoded and converted into the cor
 
 The _audio callback_ is an important concept to learn about, especially when learning to design and develop audio software, in which optimized and performant programming is a must. This callback refers to the computer reading the audio buffer out to the digital to analog converters (DAC) at a consistent time dependent upon the size of the buffer. Buffer sizes are typically like 256 or 512 samples, which at a sample rate of 44,100 is just 5.8ms and 11.6ms respectively. This means that every 5.8ms, the code you write has to be efficient enough to have calculated the mathematics needed to for your effect, synthesizer, plugin, etc.
 
+<br>
+
+_<span class='text--warn'>WARNING: </span><span class='text--warn-paragraph'>This callback occurs whether or not the buffer is filled. It is imperative that you guarantee that the code is written in time. Audio is unique in that we don't just care about the average throughput of our processing - we care about the minimal performance because we can NEVER afford to have dropouts (see "Real-time Constraints" below).</span>_
+
 <br><br>
 
 ## What is a Data Buffer?
@@ -200,4 +204,4 @@ It's important to mention that DSP is not limited to audio. Engineers, mathemati
 
 <br>
 
-Thank you for checking out this blog post! Please read more at my [blog page](https://mattmaxwell.dev/blog). Cheers!
+Thank you for checking out this blog post! Please read more at my [blog page](https://mattmaxwell.dev/blog) or checkout the plugin that I build, [Rotor](https://drive.google.com/drive/folders/1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2?usp=sharing), to see these concepts in action. Cheers!
