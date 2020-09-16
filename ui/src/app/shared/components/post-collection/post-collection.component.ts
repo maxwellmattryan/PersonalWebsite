@@ -23,7 +23,7 @@ export class PostCollectionComponent implements OnInit {
     constructor(
         public blogService: BlogService,
         private comparisonService: ComparisonService,
-        private seoService: SeoService
+        public seoService: SeoService
     ) { }
 
     ngOnInit(): void {

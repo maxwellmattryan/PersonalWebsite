@@ -25,6 +25,8 @@
                         "aot": true,
                         "assets": [
                             "src/favicon.ico",
+                            "src/robots.txt",
+                            "src/sitemap.xml",
                             "src/assets"
                         ],
                         "styles": [
@@ -68,12 +70,17 @@
                             ],
                             "optimization": true,
                             "outputHashing": "all",
-                            "sourceMap": false,
+                            "sourceMap": {
+                                "hidden": true,
+                                "scripts": true,
+                                "styles": true
+                            },
                             "extractCss": true,
                             "namedChunks": false,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true,
+                            "serviceWorker": true,
                             "budgets": [
                                 {
                                     "type": "initial",
@@ -96,12 +103,17 @@
                             ],
                             "optimization": true,
                             "outputHashing": "all",
-                            "sourceMap": false,
+                            "sourceMap": {
+                                "hidden": true,
+                                "scripts": true,
+                                "styles": true
+                            },
                             "extractCss": true,
                             "namedChunks": false,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true,
+                            "serviceWorker": true,
                             "budgets": [
                                 {
                                     "type": "initial",

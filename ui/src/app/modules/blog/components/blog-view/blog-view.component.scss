@@ -14,6 +14,7 @@
     }
     .topics {
         grid-area: topics;
+        min-height: auto;
         margin: 0;
     }
     .posts {
@@ -51,16 +52,16 @@
 
     &--add {
         font-size: 170%;
-        width: calc(42px * 2 + #{$half-margin});
+        width: calc(56px * 2 + #{$half-margin});
     }
 
     &--edit {
         font-size: 118%;
-        width: 42px;
+        width: 56px;
     }
 
     &--half {
-        width: 184px;
+        min-width: 184px;
     }
 }
 

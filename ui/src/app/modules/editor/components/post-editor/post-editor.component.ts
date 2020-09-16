@@ -54,7 +54,7 @@ export class PostEditorComponent implements OnDestroy, OnInit {
 
         this.checkForAdmin();
 
-        this.setUnloadEvent();
+        this.setPageHideEvent();
 
         this.initPostForm();
     }
@@ -64,8 +64,8 @@ export class PostEditorComponent implements OnDestroy, OnInit {
             this.router.navigate(['']);
     }
 
-    private setUnloadEvent(): void {
-        window.onbeforeunload = () => {
+    private setPageHideEvent(): void {
+        window.onpagehide = () => {
             this.editorService.setPost(null);
         };
     }

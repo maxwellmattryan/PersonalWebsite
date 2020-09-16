@@ -41,7 +41,7 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
 
         this.checkForAdmin();
 
-        this.setUnloadEvent();
+        this.setPageHideEvent();
 
         this.initTopicForm();
     }
@@ -51,8 +51,8 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
             this.router.navigate(['/']);
     }
 
-    private setUnloadEvent(): void {
-        window.onbeforeunload = () => {
+    private setPageHideEvent(): void {
+        window.onpagehide = () => {
             this.editorService.setPost(null);
         };
     }

@@ -14,7 +14,7 @@
             <h4 class='projects__project-tagline'>{{ project.tagline }}</h4>
             <p class='projects__project-description'>{{ project.description.split(' ').slice(0, 44).join(' ') }} ...</p>
 
-            <a class='projects__project-link' [href]='project.link_url' target='_blank'>
+            <a class='projects__project-link' [href]='project.link_url' target='_blank' rel='noopener noreferrer'>
                 <app-icon class= 'projects__project-link-icon' [name]='project.link_name'></app-icon>
             </a>
         </div>

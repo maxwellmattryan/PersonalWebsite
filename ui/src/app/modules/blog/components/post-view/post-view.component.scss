@@ -1,9 +1,5 @@
 @import 'variables';
 
-.post {
-    
-}
-
 .post__btn-container {
     display: flex;
     flex-direction: row;
@@ -48,6 +44,11 @@
     margin-top: $quarter-margin;
 }
 
+.post__image-container {
+    text-align: center;
+    width: 100%;
+}
+
 .post__image {
     height: auto;
     margin-bottom: $margin;
@@ -57,6 +58,51 @@
 markdown ::ng-deep a {
     color: $color-primary;
     display: inline-block;
+}
+
+markdown ::ng-deep div img {
+    text-align: center;
+    width: 100%;
+}
+
+markdown ::ng-deep img {
+    height: auto;
+    width: 100%;
+}
+
+markdown ::ng-deep p code {
+    // NOTE: Use commented lines for interesting border effect
+    //border: 1px solid $color-go-light;
+    //padding: calc(#{$quarter-padding} / 4) calc(#{$quarter-padding} / 2);
+
+    padding: 0 calc(#{$quarter-padding} / 2);
+    color: $color-go-light;
+}
+
+markdown ::ng-deep .text {
+    &--note {
+        color: $color-primary;
+
+        &-paragraph {
+            color: $color-primary-light;
+        }
+    }
+
+    &--caution {
+        color: $color-caution;
+
+        &-paragraph {
+            color: $color-caution-light;
+        }
+    }
+
+    &--warn {
+        color: $color-warn;
+
+        &-paragraph {
+            color: $color-warn-light;
+        }
+    }
 }
 
 @media only screen and (min-width: 768px) {
@@ -70,5 +116,13 @@ markdown ::ng-deep a {
         &:hover {
             text-decoration: underline;
         }
+    }
+
+    markdown ::ng-deep img {
+        width: 64%;
+    }
+
+    .post__image {
+        width: 64%;
     }
 }

@@ -18,7 +18,8 @@
         </div>
         <br>
             
-        <button 
+        <button
+            aria-label='Login submit'
             [ngClass]="{'btn--inactive': !validationService.hasValidAdminCredentials(username, password)}"
             class='btn login__form-btn'
             [disabled]='!validationService.hasValidAdminCredentials(username, password)'

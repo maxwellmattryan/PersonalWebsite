@@ -41,4 +41,9 @@
     .landing__header--highlight {
         font-size: 180%;
     }
+
+    .landing__contact-btn {
+        height: $extra-large-btn-height;
+        line-height: $extra-large-btn-height;
+    }
 }

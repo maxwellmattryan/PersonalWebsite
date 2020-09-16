@@ -37,6 +37,7 @@
         <br>
         <div class='dashboard__profile-btn-row' *ngFor='let profile of profiles'>
             <button
+                    aria-label='Activate profile'
                     [ngClass]="{'btn--active': profile.status.status == 'ACTIVE' }"
                     class='btn dashboard__profile-btn'
                     (click)='changeProfile(profile)'

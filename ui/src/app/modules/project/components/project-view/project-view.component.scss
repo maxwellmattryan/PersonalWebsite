@@ -29,14 +29,29 @@
     width: $small-btn-width;
 }
 
+.project__date {
+    font-style: italic;
+    margin-bottom: $half-margin;
+}
+
 .project__external-container {
     display: flex;
     flex-direction: row;
 }
 
 .project__external-icon {
-    margin-right: $half-margin;
+    margin: $quarter-margin 0 0;
     transition: transform $hover-transition-duration ease;
+}
+
+.project__image-link-container {
+    text-align: center;
+    width: 100%;
+}
+
+.project__image-link {
+    text-align: center;
+    width: 100%;
 }
 
 .project__image {
@@ -45,10 +60,29 @@
     width: 100%;
 }
 
+markdown ::ng-deep a {
+    color: $color-primary;
+    display: inline-block;
+}
+
+markdown ::ng-deep img {
+    box-sizing: border-box;
+    text-align: center;
+    max-width: 90%;
+}
+
 @media only screen and (min-width: 768px) {
     .project__external-icon {
         &:hover {
             transform: translateY($hover-transition-transform);
         }
+    }
+
+    markdown ::ng-deep a:hover {
+        text-decoration: underline;
+    }
+
+    .project__image {
+        width: 64%;
     }
 }

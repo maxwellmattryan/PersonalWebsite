@@ -11,10 +11,10 @@
 
     input {
         height: $input-height;
-        padding: 0 $quarter-padding;
+        padding: $half-padding $quarter-padding;
 
         &--password {
-            font-size: 16px;
+            font-size: 20px;
         }
     }
 
@@ -42,5 +42,9 @@
 @media only screen and (min-width: 768px) {
     input, textarea {
         font-size: 110%;
+    }
+
+    .form-field--password input {
+        font-size: 24px;
     }
 }

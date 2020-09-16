@@ -66,6 +66,7 @@
         </div>
 
         <button
+            aria-label='Submit post'
             [ngClass]="{'btn--inactive': !postForm.valid}"
             class='btn editor__form-btn editor__form-btn--submit'
             [disabled]='!postForm.valid'

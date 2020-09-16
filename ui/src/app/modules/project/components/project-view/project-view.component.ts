@@ -24,7 +24,7 @@ export class ProjectViewComponent implements OnInit {
         private authService: AuthService,
         private editorService: EditorService,
         private notificationService: NotificationService,
-        private seoService: SeoService,
+        public seoService: SeoService,
         private titleService: Title,
         private router: Router
     ) { }
