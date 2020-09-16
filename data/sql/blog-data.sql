@@ -117,6 +117,8 @@ Sed adipiscing diam donec adipiscing tristique. Interdum velit euismod in pellen
 
 INSERT INTO blog_topic(name, description) VALUES ('Audio Development', 'Any and all things related to audio development and audio programming.');
 INSERT INTO blog_topic(name, description) VALUES ('Game Development', 'Any and all things related to game development.');
+INSERT INTO blog_topic(name, description) VALUES ('Digital Signal Processing', 'Any and all things related to digital signal processing.');
+INSERT INTO blog_topic(name, description) VALUES ('Software Architecture', 'Any and all things related to software architecture.');
 INSERT INTO blog_topic(name, description) VALUES ('Software Design', 'Any and all things related to software design.');
 INSERT INTO blog_topic(name, description) VALUES ('Software Engineering', 'Any and all things related to software engineering.');
 
