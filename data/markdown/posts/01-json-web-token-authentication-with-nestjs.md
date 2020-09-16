@@ -329,11 +329,7 @@ export class User {
 
 <br>
 
-Much in an Angular-like style, we use decorators to declare the columns that will belong to the entity's table in the database.
-
-<br>
-
-Now let's add in some more configurations for typing, constraints, and also creating a user. In the decorators we can specify options for our data as well.
+Much in an Angular-like style, we use decorators to declare the columns that will belong to the entity's table in the database. Now let's add in some more configurations for data types and constraints when creating a user. Just like you'd expect, we specify these options in the decorators.
 
 <br>
 
@@ -441,7 +437,7 @@ import { AuthModule } from './core/auth/auth.module';
 @Module({
     imports: [
         TypeOrmModule.forRoot(),
-        AuthModule // Don't forget to import this
+        AuthModule // Don't forget to import this here in the app's module file
     ],
     controllers: [AppController],
     providers: [AppService]
@@ -461,11 +457,15 @@ Spin up the server with `npm run start:dev` and check that the newly created ent
 
 <br><br>
 
-# Register
+# Endpoints
 
 <br>
 
-## Controller
+## Register
+
+<br>
+
+### Controller
 
 <br>
 
@@ -569,7 +569,7 @@ Now when running the server we should see the the new route for `/auth/register`
 
 <br><br>
 
-## Service
+### Service
 
 <br>
 
@@ -701,7 +701,7 @@ This approach works, but it doesn't have any error handling at all. The call to 
 
 <br><br>
 
-## Error Handling
+### Error Handling
 
 <br>
 
@@ -803,7 +803,7 @@ When we try to make a request with the same credentials, our custom error will b
 
 <br><br>
 
-# Login
+## Login
 
 <br>
 
@@ -827,7 +827,7 @@ We need to add an endpoint for logging users in now that we have a means of inpu
 
 <br><br>
 
-## Controller
+### Controller
 
 <br>
 
@@ -858,7 +858,7 @@ export class AuthController {
 
 <br><br>
 
-## Error Handling
+### Error Handling
 
 <br>
 
@@ -876,7 +876,7 @@ export class WrongUserCredentialsWereProvidedException extends BadRequestExcepti
 
 <br><br>
 
-## Service
+### Service
 
 <br>
 
@@ -914,7 +914,7 @@ Our work isn't over as we still need to add the code for handling the generation
 
 <br><br>
 
-## Token
+### Token
 
 <br>
 
@@ -932,7 +932,7 @@ export interface TokenPayload {
 
 <br><br>
 
-## Environment Variables
+### Environment Variables
 
 <br>
 
@@ -1002,7 +1002,7 @@ JWT_EXPIRES_IN=21600s
 
 <br><br>
 
-## JWT Strategy
+### JWT Strategy
 
 <br>
 
@@ -1149,7 +1149,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
 <br><br>
 
-## JWT Cookie
+### JWT Cookie
 
 <br>
 
@@ -1219,11 +1219,11 @@ After setting back in the controller, we can now test it out to see if it works 
 
 <br><br>
 
-# Logout
+## Logout
 
 <br> 
 
-## Controller
+### Controller
 
 <br>
 
@@ -1251,7 +1251,7 @@ export class AuthController {
 
 <br><br>
 
-## JWT Authentication Guard
+### Authentication Guard
 
 <br>
 

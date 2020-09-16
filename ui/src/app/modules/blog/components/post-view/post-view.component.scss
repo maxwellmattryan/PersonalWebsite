@@ -70,6 +70,15 @@ markdown ::ng-deep img {
     width: 100%;
 }
 
+markdown ::ng-deep p code {
+    // NOTE: Use commented lines for interesting border effect
+    // border: 1px solid $color-warn;
+    // padding: calc(#{$quarter-padding} / 4) calc(#{$quarter-padding} / 2);
+
+    padding: 0 calc(#{$quarter-padding} / 2);
+    color: $color-warn;
+}
+
 @media only screen and (min-width: 768px) {
     .post__topic-item {
         &:hover {
