@@ -40,6 +40,10 @@ As far as HTTP is concerned [cookies](https://en.wikipedia.org/wiki/HTTP_cookie)
 
 They are set programmatically quite easily via the class API for the `Request` object in Express. I will explain more later when it comes time to generate the cookie and attach it as an HTTP header.
 
+<br>
+
+_<span class='text--warn'>WARNING: </span><span class='text--warn-paragraph'>While a cookie-based approach to authentication is solves problems of Cross-Site Scripting (XSS) because using HttpOnly removes accessibility with JavaScript, there are still other susceptibilities, namely Cross-Site Forgery Requests (CSRF).</span>_
+
 <br><br>
 
 # Setup
@@ -198,7 +202,7 @@ We need to get a database up and running for this to really work, so just make s
 
 <br>
 
-_CAUTION: Remember the database name, because we will use it later in our confiuration for TypeORM._
+_<span class='text--caution'>CAUTION: </span><span class='text--caution-paragraph'>Remember the database name, because we will use it later in our confiuration for TypeORM.</span>_
 
 <br><br>
 
@@ -215,7 +219,7 @@ There are two ways we can do database configuration with TypeORM. We can write a
     - node_modules/
     - src/
     - test/
-    - ormconfig.json <-- CAUTION: Place in server's root directory
+    - ormconfig.json <-- NOTE: Place in server's root directory
     - package.json
     - package-lock.json
     ...
@@ -239,6 +243,10 @@ For MySQL, just modify the type to `mysql` and the port to `3306` or the like fo
   "synchronize": true
 }
 ```
+
+<br>
+
+_<span class='text--warn'>WARNING: </span><span class='text--warn-paragraph'>Setting synchronize to true ensures that the database is synced with the entity files everytime the application is run. It will drop your tables and records when there is a change.</span>_
 
 <br>
 
@@ -395,6 +403,14 @@ export class User {
 }
 ```
 
+<br>
+
+_<span class='text--note'>NOTE: </span><span class='text--note-paragraph'>We may want to perform other operations on our data by default every time it is used in a response. This is where we add things such as name or birthday string formatting or determining something about a field.</span>_
+
+<br>
+
+_<span class='text--warn'>WARNING: </span><span class='text--warn-paragraph'>It is important to exclude sensitive data like this before it is returned in a response to the client.</span>_
+
 <br><br>
 
 ### Module
@@ -465,11 +481,15 @@ Spin up the server with `npm run start:dev` and check that the newly created ent
 
 <br>
 
+We first need to create the functionality for being able to register a new user to the database as long as it abides by the requirements we set in our `User` entity, which is largely that the username and email must be unique and that all fields minus the id (because it will be generated and returned in the new object to us) must NOT be null.
+
+<br>
+
 ### Controller
 
 <br>
 
-While we are here, let's create our authentication controller inside of a controllers folder and add it to `app.module.ts`.
+Inside of the authentication module, let's create our authentication controller inside of a controllers folder and add it to `app.module.ts`.
 
 <br>
 
@@ -487,7 +507,7 @@ While we are here, let's create our authentication controller inside of a contro
 
 <br>
 
-The controller can be written manually or generated with the well-developed NestJS cli.
+The controller can be written manually or generated with the well-developed and convenient NestJS cli.
 
 <br>
 
@@ -500,7 +520,7 @@ $ nest g c auth
 
 <br>
 
-This will generate a controller file where we define our controller endpoints with decorators in the class's body. As we don't have any users yet, let's create (or stub out) some functionality for registering new users. In the following code I have declared an endpoint with the decorator, `@Post('register')`, further specifying that it will return a 201 Created status, and to lastly utilize the class serialization interceptor that will remove the user entity's password field that we "excluded" earlier.
+This will generate a controller file where we define our API's endpoints with decorators in the class's body. As we don't have any users yet, let's create (or stub out) some functionality for registering new users. In the following code I have declared an endpoint with the decorator, `@Post('register')`, further specifying that it will return a 201 Created status, and to lastly utilize the class serialization interceptor that will remove the user entity's password field that we "excluded" earlier.
 
 <br>
 
@@ -533,7 +553,7 @@ export class AuthController {
 
 <br>
 
-Just to clear some things up that may be confusing for those that don't know. In the imports of the above snippet, I've added a custom path to my `tsconfig.json` `compilerOptions` object to give more readable import paths. Check out the [source code file](https://github.com/maxwellmattryan/nestjs-jwt-auth-starter/blob/master/tsconfig.json#L10) here to see what I am talking about.
+_<span class='text--note'>NOTE: </span><span class='text--note-paragraph'>In the example above, I am using a custom import path for the User, which I have defined in the compiler options of the tsconfig.json file. Check out the [source code file](https://github.com/maxwellmattryan/nestjs-jwt-auth-starter/blob/master/tsconfig.json#L10) to see what I am talking about.</span>_
 
 <br>
 
@@ -601,11 +621,7 @@ export class AuthService {
 
 <br>
 
-By default this creates a file containing an `@Injectable()` decorator. This means that this class is able to be instantiate via NestJS's dependency injection into controllers and other places where it is declared. To demonstrate, I will add it the constructor of my `auth.controller.ts` file and integrate into the controller's register method, but first let's define service functionality for registering a user:
-
-<br>
-
-This file needs to be brought into the authentication module file so that controllers and other services can use it via dependency injection. I have added it to exports as well so that when other modules import this one, they are able to use these services.
+By default this creates a file containing an `@Injectable()` decorator. This means that this class is able to be instantiate via NestJS's dependency injection into controllers and other places where it is declared. To demonstrate, I will add it the constructor of my `auth.controller.ts` file and integrate into the controller's register method, but we first cannot forget to add it as a provider to our authentication module.
 
 <br>
 
@@ -669,7 +685,7 @@ $ npm install @types/bcrypt bcrypt --save
 
 <br>
 
-Once the install is finished, it can be imported into `auth.service.ts` and used to created a hashed password for us to use in creating a new user. When calling the actual hash method, we need to supply it with the password and a number pertaining to the number of [salt rounds](https://en.wikipedia.org/wiki/Salt_(cryptography)) used to hash the password. This number is a cost factor that is indicative of the amount of time needed to generate or calculate a hash (higher salt rounds equals harder difficulty). Using 10 results in a decently hard encryption to calculate and crack.
+Once the install is finished, it can be imported into `auth.service.ts` and used to created a hashed password for us to use in creating a new user. When calling the actual hash method, we need to supply it with the password and a number pertaining to the number of [salt rounds](https://en.wikipedia.org/wiki/Salt_(cryptography)) used to hash the password. This number is a cost factor that is indicative of the amount of time needed to generate or calculate a hash (higher salt rounds equals harder difficulty). Using 10 results in a hard encryption to both calculate and crack.
 
 <br>
 
@@ -697,7 +713,7 @@ export class AuthService {
 
 <br>
 
-This approach works, but it doesn't have any error handling at all. The call to `create(user)` is a `Promise` that will throw an `HttpException` error if the PostgreSQL query fails. We need to check that a user with an already existing email or username, which we do by comparing the error's code against 23505 which is PostgreSQL's unique constraint.
+This approach works, but it doesn't have any error handling at all. The call to `create(...)` is a `Promise` that will throw an `HttpException` error if the PostgreSQL query fails. We need to check that a user with an already existing email or username, which we do by comparing the error's code against 23505 which is PostgreSQL's unique constraint.
 
 <br><br>
 
@@ -757,6 +773,10 @@ public async registerUser(userData: User): Promise<User> {
 
 <br>
 
+_<span class='text--caution'>CAUTION: </span><span class='text--caution-paragraph'>Error handling is important and helpful here because we are able to easily digest what is going wrong when things actually go wrong as well as send something informative to the client-side as well.</span>_
+
+<br>
+
 We need to adjust the method in our controller to return the result of the newly defined `registerUser()` method in the `AuthService`. 
 
 <br>
@@ -775,10 +795,10 @@ export class AuthController {
     @HttpCode(201)
     @UseInterceptors(ClassSerializerInterceptor)        
     async registerUser(@Req() request: Request): Promise<User> {
-            // Return the result of the promise from our auth service
-            return await this.authService.registerAdmin(request.body);
-        }   
-    }
+        // Return the result of the promise from our auth service
+        return await this.authService.registerAdmin(request.body);
+    }   
+}
 ```
 
 <br>
@@ -819,7 +839,11 @@ We need to add an endpoint for logging users in now that we have a means of inpu
 
 <br>
 
-- A method to generate cookies via JWT tokens (token payload, environment variable reading)
+- A method to generate cookies with JWT tokens (token payload, environment variable reading)
+
+<br>
+
+- A defined token payload for the cookie
 
 <br>
 
@@ -991,7 +1015,7 @@ The file contents will simply just be values for our authentication variables, n
 
 <br>
 
-_CAUTION: It's important that this information stay out of the public's knowledge when using with real applications so don't forgot to add to the repository `.gitignore`!'_
+_<span class='text--caution'>CAUTION: </span><span class='text--caution-paragraph'>It's important that this information stay out of the public's knowledge when using with real applications so don't forgot to add to the repository .gitignore.</span>_
 
 <br>
 
@@ -1197,11 +1221,18 @@ public generateCookieWithJwtToken(user: User): string {
         // Read the environment variable for the expiration time 
         const expiresIn = this.configService.get<string>('JWT_EXPIRES_IN');
 
-        // CAUTION: When trying to include the 'Secure;' option, HTTPS has to be used
-        // NOTE: Cookie just disappears from client-side storage after it expires
+        // Return the constructed cookie string
         return `Authentication=${token}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${expiresIn}`;
     }
 ```
+
+<br>
+
+_<span class='text--note'>NOTE: </span><span class='text--note-paragraph'>Cookies are deleted at a specific date according to the Max-Age attribute (there is also Expires).</span>_
+
+<br>
+
+_<span class='text--caution'>CAUTION: </span><span class='text--caution-paragraph'>There is another option named Secure that if true only sends cookies with an encrypted request using the HTTPS protocol.</span>_
 
 <br>
 
