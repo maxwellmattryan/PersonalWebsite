@@ -215,4 +215,4 @@ Thank you for checking out this blog post! Please read more at my [blog page](ht
         '2020-09-14 01:05:29.653050');
 
 -- CAUTION: This assumes that no starter data has been entered into the data base (going off of the number in the file)
-INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (2, 1), (2, 2);
+INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (2, 1), (2, 3);
