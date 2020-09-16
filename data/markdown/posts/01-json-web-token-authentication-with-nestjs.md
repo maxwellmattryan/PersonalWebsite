@@ -163,7 +163,7 @@ The output of the console should look similar to this. We can see NestJS initial
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Output of npm morgan logging library" src="assets/images/blog/01-morgan-logging-output.png">
+    <img class="post__image" alt="Output of npm morgan logging library" src="assets/images/blog/01/morgan-logging-output.png">
 </div>
 
 <br><br>
@@ -456,7 +456,7 @@ Spin up the server with `npm run start:dev` and check that the newly created ent
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="User table in database via Datagrip" src="assets/images/blog/01-datagrip-user-table.png">
+    <img class="post__image" alt="User table in database via Datagrip" src="assets/images/blog/01/datagrip-user-table.png">
 </div>
 
 <br><br>
@@ -564,7 +564,7 @@ Now when running the server we should see the the new route for `/auth/register`
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Sending register request via Postman" src="assets/images/blog/01-postman-register-no-db.png">
+    <img class="post__image" alt="Sending register request via Postman" src="assets/images/blog/01/postman-register-no-db.png">
 </div>
 
 <br><br>
@@ -788,7 +788,7 @@ Now let's test what happens when we make two requests to this endpoint. The reas
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Sending register request with db connection via Postman" src="assets/images/blog/01-postman-register.png">
+    <img class="post__image" alt="Sending register request with db connection via Postman" src="assets/images/blog/01/postman-register.png">
 </div>
 
 <br>
@@ -798,7 +798,7 @@ When we try to make a request with the same credentials, our custom error will b
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Sending register request with error thrown" src="assets/images/blog/01-postman-register-error.png">
+    <img class="post__image" alt="Sending register request with error thrown" src="assets/images/blog/01/postman-register-error.png">
 </div>
 
 <br><br>
@@ -905,7 +905,7 @@ At this point we can test to see if we get a user object back with our login req
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Sending login request with wrong credentials" src="assets/images/blog/01-postman-login-error.png">
+    <img class="post__image" alt="Sending login request with wrong credentials" src="assets/images/blog/01/postman-login-error.png">
 </div>
 
 <br>
@@ -1214,7 +1214,7 @@ After setting back in the controller, we can now test it out to see if it works 
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="JWT cookie in Postman" src="assets/images/blog/01-postman-login-cookie.png">
+    <img class="post__image" alt="JWT cookie in Postman" src="assets/images/blog/01/postman-login-cookie.png">
 </div>
 
 <br><br>
@@ -1300,7 +1300,7 @@ After spinning up the server and testing the endpoint with Postman, we can see t
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="401 Unauthorized response in Postman" src="assets/images/blog/01-postman-unauthorized.png">
+    <img class="post__image" alt="401 Unauthorized response in Postman" src="assets/images/blog/01/postman-unauthorized.png">
 </div>
 
 <br>
