@@ -1,7 +1,7 @@
 INSERT INTO project(name, tagline, description, image_url, link_name, link_url)
 VALUES ('Rotor',
        'Modern C++ ring modulation plugin',
-       'Rotor is a variable waveform ring modulation plugin targeting VST3 and AU for OS X and Windows platforms. It uses wavetable synthesis to generate various simple waveforms that act as the modulation signal for the input. It is compiled using the JUCE framework for C++.
+       '[Rotor](https://github.com/maxwellmattryan/rotor) is a variable waveform ring modulation plugin targeting VST3 and AU for OS X and Windows platforms. It uses wavetable synthesis to generate various simple waveforms that act as the modulation signal for the input. It is compiled using the JUCE framework for C++.
 
 <br>
 

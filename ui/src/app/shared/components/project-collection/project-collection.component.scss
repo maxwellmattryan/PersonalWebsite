@@ -39,7 +39,8 @@
 
     &-name,
     &-tagline,
-    &-description {
+    &-description,
+    markdown ::ng-deep p {
         padding: $half-padding $padding;
     }
 
@@ -80,7 +81,8 @@
     .projects__project-name,
     .projects__project-tagline,
     .projects__project-description,
-    .projects__project-link {
+    .projects__project-link,
+    markdown ::ng-deep p {
         text-align: right;
     }
 }
