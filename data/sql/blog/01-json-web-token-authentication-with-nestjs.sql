@@ -1,7 +1,7 @@
 INSERT INTO blog_post(author_id, status_id, title, subtitle, preview, content, image_url, created_at)
 VALUES (1,
         2,
-        'JSON Web Token (JWT) Authentication with NestJS and TypeORM',
+        'JSON Web Token (JWT) Authentication with NestJS',
         'A cookie-based approach to solving authentication',
         'Authentication is a huge concern among many when developing a web-based application. There exist multiple solutions for implementing mechanisms to authenticate users and post is an overview of the JWT-based approach.',
         '# The NestJS Framework and Authentication
