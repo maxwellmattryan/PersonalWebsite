@@ -214,31 +214,68 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
 
 ### Architecture
 
-I structured this application in a "layered architecture" style, which corresponds to different layers performing essentially different types of tasks in HTTP's request-response paradigm.
+I structured this application in a "layered architecture" style, which corresponds to different layers performing essentially different types of tasks in HTTP's request-response paradigm. The project's directory is setup according to the following modules.
+
+- core/
+    - auth/
+        - ...
+        - `auth.module.ts`
+    - database/
+        - ...
+        - `database.module.ts`
+    - http/
+        - ...
+        - `http.module.ts`
+- features/
+    - admin/
+        - ...
+        - `admin.module.ts`
+    - api/
+        - ...
+        - `api.module.ts`
+    - blog/
+        - ...
+        - `blog.module.ts`
+    - profile/
+        - ...
+        - `profile.module.ts`
+    - project/
+        - ...
+        - `project.module.ts`
 
 #### Controllers
 
-Controllers are responsible for handling incoming requests from the client and returning / performing whatever is needed such as some data from database query or a request to delete a user. 
+Controllers are responsible for handling incoming requests from the client and returning / performing whatever is needed such as some data from database query or a request to delete a user.
+
+Inside every module (minus the HTTP and database modules) exists at least one controller that at least one endpoint for controlling or observing some part of the application. Oftentimes these controllers have been dependency-injected with a service for accessing data and performing some type of operation on it.
 
 #### Services
 
-Services are used by the controllers to perform the real business logic behind that endpoint handled in the controller.
+Services are used by the controllers to perform the real business logic behind that endpoint handled in the controller. We commonly use dependency injection to put them in the constructors of classes to let the compiler know that this (injectable) service needs to be used in this controller (or some other thing).
+
+Services are not the closest layer to the database / data models, but they receive data and maybe after performing some type of operation, calculation, manpiulation, etc. to it and send it back upwards to respective controller. Although they sometimes go by different names, the objects used for accessing the database are often called "repositories".
 
 #### Repositories
 
-Repositories are the objects that actual more or less represents and corresponds to a table in the database. A repository is where data is queried, updated, created, deleted, and so forth.
+Repositories are the objects that actual more or less represents and corresponds to a table in the database. A repository is where data is queried, updated, created, deleted, and so forth. There are multiple methodologies when implementing repositories, which are mainly that we can write very naive and simple repositories that only contain the data attributes and properties that we care about, or that we can write functions alongside those attributes that present the data in different way or even query some particular data from the table to create "more informed" repositories.
 
 ### Authentication
 
-Passport is a library that is included within the NestJS packages that offers a proven way to secure the application. Using a JSON web token (JWT) sent back and forth within a HTTP-only cookie is a simple enough way to provide security to an application like this.  
+Passport is a library that is included within the NestJS packages that offers a proven way to secure the application. Using a JSON web token (JWT) sent back and forth within a HTTP-only cookie is a simple enough way to provide security to an application like this. 
+
+It is worth noting that functionality to register to users has been taken out (aka commented out) in both the frontend and backend so that there is no potential for security fault at least in that endpoint.
 
 ### Database 
 
-TypeORM is a powerful library included in the NestJS ecosystem, so initial impressions were strong with how easily it fit together within the backend. It is relatively easy to model relational data with 1:1, 1:n, and m:n relationship types making use of decorators in a NestJS-style.
+TypeORM is a powerful library included in the NestJS ecosystem, so initial impressions were strong with how easily it fit together within the backend. It is relatively easy to model relational data with 1:1, 1:n, and m:n relationship types making use of decorators in a NestJS-style. 
+
+Although it was technically a mistake on my part resulting in having to redo some entity code, I was able to implement many to many relationships in a different way using an intermediary table manually setup by me, including the TypeORM entity for it. It worked simply enough, however I would NOT recommend doing it this way. The ORM was not designed to work that way, so it is more worthwhile and important to work idiomatically with the technology used. 
 
 ### Error Handling
 
 It is difficult to find a good method that handles errors, and it's important to always try provide helpful messages for when an error occurs. This means that incorporating errors in a more domain-consistent way, which is an incredibly satisfying environment to write in. It is almost like receiving errors feels good.
+
+A lot of these errors are consumed and outputted to the client-side via Material's "snack bar" component. I found this a very easily consistent and lightweight way of handling errors.
 
 ## PostgreSQL
 
