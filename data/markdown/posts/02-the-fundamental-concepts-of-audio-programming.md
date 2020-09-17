@@ -75,7 +75,11 @@ In the real world, sound is what we hear as a result of continuous acoustic pres
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Sampling rate visually explained" src="assets/images/blog/02/sample-rate.png">
+    <picture>
+        <source srcset="assets/images/blog/02/sample-rate.webp" type="image/webp">
+        <source srcset="assets/images/blog/02/png/sample-rate.png" type="image/png"> 
+        <img class="post__image" alt="Sampling rate visually explained" src="assets/images/blog/02/png/sample-rate.png">
+    </picture>
 </div>
 
 <br>
@@ -97,7 +101,11 @@ The concept called [bit depth](https://en.wikipedia.org/wiki/Audio_bit_depth) re
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Bit depth visually explained" src="assets/images/blog/02/bit-depth.png">
+    <picture>
+        <source srcset="assets/images/blog/02/bit-depth.web" type="image/webp">
+        <source srcset="assets/images/blog/02/png/bit-depth.png" type="image/png"> 
+        <img class="post__image" alt="Bit depth visually explained" src="assets/images/blog/02/png/bit-depth.png">
+    </picture>
 </div>
 
 <br>
@@ -123,7 +131,11 @@ At some point, our bitstream of audio data is decoded and converted into the cor
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Sample reconstruction function" src="assets/images/blog/02/reconstruction-func.png">
+    <picture>
+        <source srcset="assets/images/blog/02/reconstruction-func.webp" type="image/webp">
+        <source srcset="assets/images/blog/02/png/reconstruction-func.png" type="image/png"> 
+        <img class="post__image" alt="Sample reconstruction function" src="assets/images/blog/02/png/reconstruction-func.png">
+    </picture>
 </div>
 
 <br><br>
