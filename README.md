@@ -19,7 +19,8 @@ Welcome to the codebase for my personal website! The stack consists of Angular (
 - [Google Cloud Platform](#Google-Cloud-Platform)
     - [Cloud Run](#Cloud-Run)
     - [Cloud Build](#Cloud-Build)
-    - [CloudSQL](#Cloud-SQL)
+    - [Cloud SQL](#Cloud-SQL)
+- [Search Engine Optimization](#Search-Engine-Optimization)
 - [Acknowledgements](#Acknowledgements)
 
 ## Angular 
@@ -320,14 +321,30 @@ NOTE: What I have listed below is simply the more relevant fields for each table
 
 ## Google Cloud Platform
 
-Google Cloud Platform (GCP) offers an extensive toolkit to deploy applications.
-
 ### Cloud Run
 
-Cloud-Run is a tool within the GCP environment that deploys apps or something.
+Cloud-Run is a tool within the GCP environment that deploys services, which can conveniently host both sides of fullstack applications. It is easy enough to create one, seeing that you're even able to setup the Continuous Deployment (CD) pipeline that can watch repositories on GitHub for pushes to certain branches.
+
+It is also easy to setup multiple services to use for different environments like production, staging, and development. The Cloud Run feature also contains a custom domain mapper that easily integrates domain routing to the different services, so it beyond easy to get a frontend and backend started.
+
+### Cloud Build
+
+As stated earlier, when new pull requests are merged and pushes are made to a branch, builds trigger that are pointed to the different services. I have two builds for pull requests that only build the source code whenever any branch is pushed to. I have two staging builds that build and deploy the corresponding staging services for my UI and API whenever a push is made to my repository's `develop` branch, as well as a duplicate setup for production for the `production` branch.
+
+### Cloud SQL
+
+Each environment (stg, prod, etc.) has a corresponding PostgreSQL instance in Google's Cloud SQL platform. They are declared as connections both in the services' environment variables and connections configuration.
+
+## Search Engine Optimization
+
+Search Engine Optimization (SEO) is hugely important for relevance on the web. There are certain things that we can do, as engineers and developers, to improve the performance of our website in terms of SEO.
+
+This application features dynamic canonical URLs for things like blog posts and projects (or anything with its own separate page view), which improve URL readability and SEO. Similarly, the (HTML) title of a page changes dynamically according to the pages content.
+
+I have also included files like `robots.txt` and the `sitemap.xml` to try and help indexing of my application's pages by Google. 
 
 ## Acknowledgements
 
-This is the third version of [mattmaxwell.tech](https://mattmaxwell.tech) and it felt just as much of a learning experience this time around as the previous two iterations. However, the whole point of this third re-work was to establish an application architecture that will be as maintainable and extendable as possible so that minimal work is required by me to make changes whenever needed. 
+This is the third version of [mattmaxwell.dev](https://mattmaxwell.dev) and it felt just as much of a learning experience this time around as the previous two iterations. However, the whole point of this third re-work was to establish an application architecture that will be as maintainable and extendable as possible so that minimal work is required by me to make changes whenever needed. 
 
 I really appreciate you taking the time to checkout the repository and website - thank you very much. Cheers!
