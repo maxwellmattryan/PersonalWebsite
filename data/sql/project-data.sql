@@ -85,7 +85,7 @@ void RotorAudioProcessor::setWavetable(int waveformIndex)
 <br>
 
 Please feel free to checkout the [Google Drive folder](https://drive.google.com/drive/folders/1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2?usp=sharing) and download the files you need to get started and use Rotor. Unfortunately at the moment, I do not have any builds available for VST, but the AU and VST3 builds work quite well!',
-       'assets/images/projects/rotor.png',
+       'assets/images/projects/rotor.webp',
        'Google Drive',
        'https://drive.google.com/drive/folders/1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2?usp=sharing');
 
@@ -295,7 +295,7 @@ public class UnitMove : MonoBehaviour
     }
 }
 ```',
-       'assets/images/projects/counterplay.png',
+       'assets/images/projects/counterplay.webp',
        'GitHub',
        'https://github.com/zero-sum-games/counterplay');
 
@@ -311,7 +311,7 @@ In this arcade-like shooter, you control the defenses and offensive attacks of t
 <br>
 
 If you''re interested, you can checkout the [GitHub repository](https://github.com/maxwellmattryan/operation-home) for Operation H.O.M.E. I primarily worked on the sound design and implementation throughout the game.',
-       'assets/images/projects/operation-home.png',
+       'assets/images/projects/operation-home.webp',
        'GitHub',
        'https://github.com/maxwellmattryan/operation-home');
 
@@ -323,7 +323,7 @@ VALUES ('Cozy Cat Cafe',
 <br>
 
 In terms of sound design, the aesthetic is cute and bubbly. With the exception of the user interface sounds, the assets are all from real physical objects being recording including my cat, Luna. Please checkout this [demo video](https://drive.google.com/file/d/1ivh5BB1Jlz9HZb_u1Ja_G0IizKoSRd-Q/view?usp=sharing) to get an idea of what I''m talking about.',
-       'assets/images/projects/cozy-cat-cafe.png',
+       'assets/images/projects/cozy-cat-cafe.webp',
        'GitHub',
        'https://github.com/VeryBester/Cozy-Cat-Cafe');
 
@@ -335,7 +335,7 @@ VALUES ('Green Foot',
 <br>
 
 In terms of tech, Green Foot uses React and Redux for the frontend, Express and Node for the backend, and a Python-based environment for data. Because it was for a hackathon, the app uses GitHub pages and Heroku to deploy easily and simply. If you''re interested in checking out the source code, checkout the [GitHub repositories](https://github.com/Diversity-Hackathon).',
-       'assets/images/projects/green-foot.png',
+       'assets/images/projects/green-foot.webp',
        'GitHub',
        'https://github.com/Diversity-Hackathon/greenfoot-frontend');
 

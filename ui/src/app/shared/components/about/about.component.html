@@ -28,7 +28,11 @@
         </div>
 
         <div class='about__portrait-container'>
-            <img class='about__portrait' alt='Profile image' [src]='imageUrl'>
+            <picture>
+                <source [srcset]="imageUrl" type="image/webp">
+                <source [srcset]="imageUrl" type="image/png">
+                <img class='about__portrait' alt='Profile image' [src]='imageUrl'>
+            </picture>
         </div>
     </div>
 </div>

@@ -23,7 +23,11 @@
 
     <div class='project__image-link-container'>
         <a class='project__image-link' [href]='project.link_url' target='_blank' rel='noopener noreferrer'>
-            <img class='project__image' [src]='project.image_url' [alt]='project.name + "image"' height=150>
+            <picture>
+                <source [srcset]="project.image_url" type="image/webp">
+                <source [srcset]="project.image_url" type="image/png">
+                <img class='project__image' [src]='project.image_url' [alt]='project.name + "image"' height=150>
+            </picture>
         </a>
     </div>
 

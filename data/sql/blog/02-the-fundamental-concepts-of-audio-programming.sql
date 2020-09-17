@@ -211,7 +211,7 @@ It''s important to mention that DSP is not limited to audio. Engineers, mathemat
 <br>
 
 Thank you for checking out this blog post! Please read more at my [blog page](https://mattmaxwell.dev/blog) or checkout the plugin that I build, [Rotor](https://drive.google.com/drive/folders/1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2?usp=sharing), to see these concepts in action. Cheers!',
-        'assets/images/blog/02/signal.png',
+        'assets/images/blog/02/signal.webp',
         '2020-09-14 01:05:29.653050');
 
 -- CAUTION: This assumes that no starter data has been entered into the data base (going off of the number in the file)
