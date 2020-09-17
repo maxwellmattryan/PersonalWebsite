@@ -1,6 +1,6 @@
 # mattmaxwell.tech
 
-Welcome to the codebase for my personal website! The stack consists of Angular (Typescript), NestJS (Typescript) and PostgreSQL. This is still a WIP so the [older version](https://github.com/maxwellmattryan/mattmaxwell/tree/18b58014534d12baa9d7ebb8a747f8253b89cbf7) (ReactJS only) is currently deployed at [mattmaxwell.tech](https://mattmaxwell.tech).
+Welcome to the codebase for my personal website! The stack consists of Angular (Typescript), NestJS (Typescript) and PostgreSQL. Please visit the url, [mattmaxwell.dev](https://mattmaxwell.dev), to see it in action!
 
 ## Overview
 
@@ -18,6 +18,8 @@ Welcome to the codebase for my personal website! The stack consists of Angular (
     - [Schema](#Schema)
 - [Google Cloud Platform](#Google-Cloud-Platform)
     - [Cloud Run](#Cloud-Run)
+    - [Cloud Build](#Cloud-Build)
+    - [CloudSQL](#Cloud-SQL)
 - [Acknowledgements](#Acknowledgements)
 
 ## Angular 
@@ -45,6 +47,12 @@ These services are used across the entire applications, so it is most organizati
         - Get, has, and set operations for the various editor components
     - Notification
         - Creates Angular Material SnackBar popup
+    - Profile
+        - Stores and updates the active profile for the website
+    - SEO
+        - Formats the URI of anything as long as it's given an ID number and some string identifier (name, title, etc.)
+        - Retrieves IDs from URLs containing the same structure returning by the method above
+        - Given a Date object, returns a string with formatted superscripts for the date along with month names
     - Validation
         - Using ValidatorFn, verifies that at least one item is selected from an editor's FormArray
         - Verifies admin credentials when logging in (and registering*)
@@ -62,7 +70,6 @@ Each module roughly corresponds to a page view of the web app and contains the n
 - Blog
     - BlogViewComponent
     - PostViewComponent
-    - TopicViewComponent
 - Editor
     - PostEditorComponent
     - ProfileEditorComponent
@@ -86,19 +93,22 @@ The 'shared' folder contains all of the things that are going to be commonly use
     - FooterComponent
     - HeaderComponent
     - LandingComponent
+    - LoadingSpinnerComponent
     - PostCollectionComponent
     - ProjectCollectionComponent
-    - TopicCollectionComponent
 - Interfaces
     - Admin
-    - Blog
     - Homepage
 - Models
+    - Blog Author
+    - Blog Post
+    - Blog Post Status
+    - Blog Topic
     - Deserializable
-    - Post
     - Profile 
+    - Profile Status
+    - Profile Technology
     - Project
-    - Topic
 
 ## NestJS
 
