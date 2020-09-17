@@ -169,7 +169,7 @@ The output of the console should look similar to this. We can see NestJS initial
 <div class="post__image-container">
     <picture>
         <source srcset="assets/images/blog/01/morgan-logging-output.webp" type="image/webp">
-        <!-- <source srcset="assets/images/blog/01/png/morgan-logging-output.png" type="image/png">  -->
+        <source srcset="assets/images/blog/01/png/morgan-logging-output.png" type="image/png"> 
         <img class="post__image" alt="Output of npm morgan logging library" src="assets/images/blog/01/png/morgan-logging-output.png">
     </picture>
 </div>

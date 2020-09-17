@@ -46,12 +46,12 @@ the information in here has to be consistent to have proper SEO optimization -->
 
     <!-- Blog posts -->
     <url>
-        <loc>https://mattmaxwell.dev/blog/posts/1/json-web-token-jwt-authentication-with-nestjs-and-typeorm</loc>
+        <loc>https://mattmaxwell.dev/blog/posts/1/json-web-token-jwt-authentication-with-nestjs</loc>
         <lastmod>2020-09-14T00:51:32.093600</lastmod>
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>https://mattmaxwell.dev/blog/posts/2/the-fundamentals-of-audio-programming</loc>
+        <loc>https://mattmaxwell.dev/blog/posts/2/the-fundamental-concepts-of-audio-programming</loc>
         <lastmod>2020-09-14T01:05:29.653050</lastmod>
         <priority>0.4</priority>
     </url>
