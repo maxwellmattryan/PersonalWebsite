@@ -29,7 +29,7 @@ async function bootstrap() {
     app.use(helmet());
 
     app.use(morgan('tiny'));
-    app.use(cookieParser());
+    app.use(cookieParser(process.env.JWT_SECRET));
 
     app.useGlobalInterceptors(new ClassSerializerInterceptor(
         app.get(Reflector)

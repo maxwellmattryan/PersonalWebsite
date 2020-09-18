@@ -216,4 +216,4 @@ It's important to mention that DSP is not limited to audio. Engineers, mathemati
 
 <br>
 
-Thank you for checking out this blog post! Please read more at my [blog page](https://mattmaxwell.dev/blog) or checkout the plugin that I build, [Rotor](https://drive.google.com/drive/folders/1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2?usp=sharing), to see these concepts in action. Cheers!
+Thank you for checking out this blog post! Please read more at my [blog page](https://mattmaxwell.dev/blog) or checkout the plugin that I built, [Rotor](https://drive.google.com/drive/folders/1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2?usp=sharing), to see these concepts in action or <a href='assets/plugins/rotor.zip' download='rotor.zip'>download the plugin</a>. Cheers!

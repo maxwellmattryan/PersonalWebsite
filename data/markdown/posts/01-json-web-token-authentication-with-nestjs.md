@@ -808,7 +808,7 @@ export class AuthController {
     @UseInterceptors(ClassSerializerInterceptor)        
     async registerUser(@Req() request: Request): Promise<User> {
         // Return the result of the promise from our auth service
-        return await this.authService.registerAdmin(request.body);
+        return await this.authService.registerUser(request.body);
     }   
 }
 ```
