@@ -102,7 +102,7 @@ The concept called [bit depth](https://en.wikipedia.org/wiki/Audio_bit_depth) re
 
 <div class="post__image-container">
     <picture>
-        <source srcset="assets/images/blog/02/bit-depth.web" type="image/webp">
+        <source srcset="assets/images/blog/02/bit-depth.webp" type="image/webp">
         <source srcset="assets/images/blog/02/png/bit-depth.png" type="image/png"> 
         <img class="post__image" alt="Bit depth visually explained" src="assets/images/blog/02/png/bit-depth.png">
     </picture>
