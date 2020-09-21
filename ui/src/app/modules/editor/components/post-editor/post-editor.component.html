@@ -19,12 +19,23 @@
         <div class="form-field editor__form-field">
             <label class='form-field-label editor__form-field-label'>Author</label>
             <br><br>
-            <mat-radio-group formControlName='author' name='author' required>
-                <mat-radio-button
-                    *ngFor='let author of authorData'
-                    [value]='buildAuthorName(author)'
-                >{{ buildAuthorName(author) }}</mat-radio-button>
-            </mat-radio-group>
+<!--            <mat-radio-group formControlName='author' name='author' required>-->
+<!--                <mat-radio-button-->
+<!--                    *ngFor='let author of authorData'-->
+<!--                    [value]='buildAuthorName(author)'-->
+<!--                >{{ buildAuthorName(author) }}</mat-radio-button>-->
+<!--            </mat-radio-group>-->
+
+            <div class='editor__radio-button' *ngFor='let author of authorData; let idx = index'>
+                <p-radioButton
+                        inputId='author'
+                        name='author'
+                        required
+                        [value]='buildAuthorName(author)'
+                        formControlName='author'
+                ></p-radioButton>
+                <label [for]='idx'>{{ buildAuthorName(author) }}</label>
+            </div>
         </div>
 
         <div class="form-field editor__form-field">

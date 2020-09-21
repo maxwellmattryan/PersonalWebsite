@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { CoreModule } from '@app/core/core.module';
 import { SharedModule } from '@app/shared/shared.module';
+import { MaterialModule } from '@app/modules/material/material.module';
 
 export function markedOptionsFactory(): MarkedOptions {
     const renderer = new MarkedRenderer();
@@ -50,6 +51,7 @@ export function markedOptionsFactory(): MarkedOptions {
                 useFactory: markedOptionsFactory
             }
         }),
+        MaterialModule,
         ReactiveFormsModule,
         SharedModule,
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production || environment.staging })

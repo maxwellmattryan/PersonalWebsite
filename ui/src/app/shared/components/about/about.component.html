@@ -30,8 +30,8 @@
         <div class='about__portrait-container'>
             <picture>
                 <source [srcset]="imageUrl" type="image/webp">
-                <source [srcset]="imageUrl" type="image/png">
-                <img class='about__portrait' alt='Profile image' [src]='imageUrl'>
+                <source [srcset]="imageUrl.substring(0, -3) + 'png'" type="image/png">
+                <img class='about__portrait' alt='Profile image' [src]='imageUrl.substring(0, -3) + "png"'>
             </picture>
         </div>
     </div>

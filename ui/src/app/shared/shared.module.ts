@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { IconModule } from '@app/modules/icon/icon.module';
-import { MaterialModule } from '@app/modules/material/material.module';
 
 import { SharedRoutingModule } from './shared-routing.module';
 
@@ -32,7 +31,6 @@ import {
         CommonModule,
         IconModule,
         MarkdownModule.forRoot(),
-        MaterialModule,
         SharedRoutingModule
     ],
     exports: [
