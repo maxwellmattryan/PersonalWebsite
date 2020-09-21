@@ -44,8 +44,8 @@ ul {
         color: $color-primary; /* Change the color */
         font-weight: 900; /* If you want it to be bold */
         display: inline-block; /* Needed to add space between the bullet and the text */
-        width: 0.75rem; /* Also needed for space (tweak if needed) */
-        margin: 0 0 -1rem -1rem; /* Also needed for space (tweak if needed) */
+        width: 1rem; /* Also needed for space (tweak if needed) */
+        margin: 0 0.5rem -1rem -1rem; /* Also needed for space (tweak if needed) */
     }
 }
 
