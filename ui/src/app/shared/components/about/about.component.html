@@ -29,9 +29,9 @@
 
         <div class='about__portrait-container'>
             <picture>
-                <source [srcset]="imageUrl" type="image/webp">
-                <source [srcset]="imageUrl.substring(0, -3) + 'png'" type="image/png">
-                <img class='about__portrait' alt='Profile image' [src]='imageUrl.substring(0, -3) + "png"'>
+                <source [srcset]='"https://mattmaxwell.dev/assets/images/profiles/portrait.webp"' type="image/webp">
+                <source [srcset]="imageUrl.substring(0, imageUrl.length - 4) + 'png'" type="image/png">
+                <img class='about__portrait' alt='Profile image' [src]='imageUrl.substring(0, imageUrl.length - 4) + "png"'>
             </picture>
         </div>
     </div>

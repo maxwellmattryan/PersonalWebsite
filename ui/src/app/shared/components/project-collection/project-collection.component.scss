@@ -97,4 +97,8 @@
             text-decoration: underline;
         }
     }
+
+    markdown ::ng-deep p a:hover {
+        text-decoration: underline;
+    }
 }

@@ -25,8 +25,8 @@
         <a class='project__image-link' [href]='project.link_url' target='_blank' rel='noopener noreferrer'>
             <picture>
                 <source [srcset]="project.image_url" type="image/webp">
-                <source [srcset]="project.image_url.substring(0, -3) + 'png'" type="image/png">
-                <img class='project__image' [src]='project.image_url.substring(0, -3) + "png"' [alt]='project.name + "image"' height=150>
+                <source [srcset]="project.image_url.substring(0, project.image_url.length - 4) + 'png'" type="image/png">
+                <img class='project__image' [src]='project.image_url.substring(0, project.image_url.length - 4) + "png"' [alt]='project.name + "image"' height=150>
             </picture>
         </a>
     </div>
