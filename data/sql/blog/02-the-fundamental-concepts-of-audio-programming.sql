@@ -1,4 +1,4 @@
-INSERT INTO blog_post(author_id, status_id, title, subtitle, preview, content, image_url, created_at)
+INSERT INTO blog_post(author_id, status_id, title, subtitle, preview, content, image_url, created_at, updated_at)
 VALUES (1,
         2,
         'The Fundamental Concepts of Audio Programming',
@@ -81,7 +81,11 @@ In the real world, sound is what we hear as a result of continuous acoustic pres
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Sampling rate visually explained" src="assets/images/blog/02/sample-rate.png">
+    <picture>
+        <source srcset="assets/images/blog/02/sample-rate.webp" type="image/webp">
+        <source srcset="assets/images/blog/02/png/sample-rate.png" type="image/png">
+        <img class="post__image" alt="Sampling rate visually explained" src="assets/images/blog/02/png/sample-rate.png">
+    </picture>
 </div>
 
 <br>
@@ -103,7 +107,11 @@ The concept called [bit depth](https://en.wikipedia.org/wiki/Audio_bit_depth) re
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Bit depth visually explained" src="assets/images/blog/02/bit-depth.png">
+    <picture>
+        <source srcset="assets/images/blog/02/bit-depth.webp" type="image/webp">
+        <source srcset="assets/images/blog/02/png/bit-depth.png" type="image/png">
+        <img class="post__image" alt="Bit depth visually explained" src="assets/images/blog/02/png/bit-depth.png">
+    </picture>
 </div>
 
 <br>
@@ -129,7 +137,11 @@ At some point, our bitstream of audio data is decoded and converted into the cor
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Sample reconstruction function" src="assets/images/blog/02/reconstruction-func.png">
+    <picture>
+        <source srcset="assets/images/blog/02/reconstruction-func.webp" type="image/webp">
+        <source srcset="assets/images/blog/02/png/reconstruction-func.png" type="image/png">
+        <img class="post__image" alt="Sample reconstruction function" src="assets/images/blog/02/png/reconstruction-func.png">
+    </picture>
 </div>
 
 <br><br>
@@ -146,7 +158,7 @@ The _audio callback_ is an important concept to learn about, especially when lea
 
 <br>
 
-_<span class=''text--warn''>WARNING: </span><span class=''text--warn-paragraph''>This callback occurs whether or not the buffer is filled. It is imperative that you guarantee that the code is written in time. Audio is unique in that we don''t just care about the average throughput of our processing - we care about the minimal performance because we can NEVER afford to have dropouts (see "Real-time Constraints" below).</span>_
+_<span class=''text--warn''>WARNING: </span><span class=''text--warn-paragraph''>This callback occurs whether or not the buffer is filled. It is imperative that you guarantee that the code is executed in time. Audio is unique in that we don''t just care about the average throughput of our processing - we care about the minimal performance because we can NEVER afford to have dropouts (see "Real-time Constraints" below).</span>_
 
 <br><br>
 
@@ -210,9 +222,10 @@ It''s important to mention that DSP is not limited to audio. Engineers, mathemat
 
 <br>
 
-Thank you for checking out this blog post! Please read more at my [blog page](https://mattmaxwell.dev/blog) or checkout the plugin that I build, [Rotor](https://drive.google.com/drive/folders/1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2?usp=sharing), to see these concepts in action. Cheers!',
+Thank you for checking out this blog post! Please read more at my [blog page](https://mattmaxwell.dev/blog) or checkout the plugin that I built, [Rotor](https://drive.google.com/drive/folders/1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2?usp=sharing), to see these concepts in action or <a href=''assets/plugins/rotor.zip'' download=''rotor.zip''>download the plugin</a>. Cheers!',
         'assets/images/blog/02/signal.webp',
-        '2020-09-14 01:05:29.653050');
+        '2020-09-14 01:05:29.653050',
+        '2020-09-20 18:02:18.526809');
 
 -- CAUTION: This assumes that no starter data has been entered into the data base (going off of the number in the file)
 INSERT INTO blog_post_topics_blog_topic(blog_post_id, blog_topic_id) VALUES (2, 1), (2, 3);

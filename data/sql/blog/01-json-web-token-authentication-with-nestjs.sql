@@ -1,4 +1,4 @@
-INSERT INTO blog_post(author_id, status_id, title, subtitle, preview, content, image_url, created_at)
+INSERT INTO blog_post(author_id, status_id, title, subtitle, preview, content, image_url, created_at, updated_at)
 VALUES (1,
         2,
         'JSON Web Token (JWT) Authentication with NestJS',
@@ -173,7 +173,11 @@ The output of the console should look similar to this. We can see NestJS initial
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Output of npm morgan logging library" src="assets/images/blog/01/morgan-logging-output.png">
+    <picture>
+        <source srcset="assets/images/blog/01/morgan-logging-output.webp" type="image/webp">
+        <source srcset="assets/images/blog/01/png/morgan-logging-output.png" type="image/png">
+        <img class="post__image" alt="Output of npm morgan logging library" src="assets/images/blog/01/png/morgan-logging-output.png">
+    </picture>
 </div>
 
 <br><br>
@@ -474,7 +478,11 @@ Spin up the server with `npm run start:dev` and check that the newly created ent
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="User table in database via Datagrip" src="assets/images/blog/01/datagrip-user-table.png">
+    <picture>
+        <source srcset="assets/images/blog/01/datagrip-user-table.webp" type="image/webp">
+        <source srcset="assets/images/blog/01/png/datagrip-user-table.png" type="image/png">
+        <img class="post__image" alt="User table in database via Datagrip" src="assets/images/blog/01/png/datagrip-user-table.png">
+    </picture>
 </div>
 
 <br><br>
@@ -590,7 +598,11 @@ Now when running the server we should see the the new route for `/auth/register`
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Sending register request via Postman" src="assets/images/blog/01/postman-register-no-db.png">
+    <picture>
+        <source srcset="assets/images/blog/01/postman-register-no-db.webp" type="image/webp">
+        <source srcset="assets/images/blog/01/png/postman-register-no-db.png" type="image/png">
+        <img class="post__image" alt="Sending register request via Postman" src="assets/images/blog/01/png/postman-register-no-db.png">
+    </picture>
 </div>
 
 <br><br>
@@ -802,7 +814,7 @@ export class AuthController {
     @UseInterceptors(ClassSerializerInterceptor)
     async registerUser(@Req() request: Request): Promise<User> {
         // Return the result of the promise from our auth service
-        return await this.authService.registerAdmin(request.body);
+        return await this.authService.registerUser(request.body);
     }
 }
 ```
@@ -814,7 +826,11 @@ Now let''s test what happens when we make two requests to this endpoint. The rea
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Sending register request with db connection via Postman" src="assets/images/blog/01/postman-register.png">
+    <picture>
+        <source srcset="assets/images/blog/01/postman-register.webp" type="image/webp">
+        <source srcset="assets/images/blog/01/png/postman-register.png" type="image/png">
+        <img class="post__image" alt="Sending register request with db connection via Postman" src="assets/images/blog/01/png/postman-register.png">
+    </picture>
 </div>
 
 <br>
@@ -824,7 +840,11 @@ When we try to make a request with the same credentials, our custom error will b
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Sending register request with error thrown" src="assets/images/blog/01/postman-register-error.png">
+    <picture>
+        <source srcset="assets/images/blog/01/postman-register-error.webp" type="image/webp">
+        <source srcset="assets/images/blog/01/png/postman-register-error.png" type="image/png">
+        <img class="post__image" alt="Sending register request with error thrown" src="assets/images/blog/01/png/postman-register-error.png">
+    </picture>
 </div>
 
 <br><br>
@@ -935,7 +955,11 @@ At this point we can test to see if we get a user object back with our login req
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="Sending login request with wrong credentials" src="assets/images/blog/01/postman-login-error.png">
+    <picture>
+        <source srcset="assets/images/blog/01/postman-login-error.webp" type="image/webp">
+        <source srcset="assets/images/blog/01/png/postman-login-error.png" type="image/png">
+        <img class="post__image" alt="Sending login request with wrong credentials" src="assets/images/blog/01/png/postman-login-error.png">
+    </picture>
 </div>
 
 <br>
@@ -1251,7 +1275,11 @@ After setting back in the controller, we can now test it out to see if it works 
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="JWT cookie in Postman" src="assets/images/blog/01/postman-login-cookie.png">
+    <picture>
+        <source srcset="assets/images/blog/01/postman-login-cookie.webp" type="image/webp">
+        <source srcset="assets/images/blog/01/png/postman-login-cookie.png" type="image/png">
+        <img class="post__image" alt="JWT cookie in Postman" src="assets/images/blog/01/png/postman-login-cookie.png">
+    </picture>
 </div>
 
 <br><br>
@@ -1337,7 +1365,11 @@ After spinning up the server and testing the endpoint with Postman, we can see t
 <br>
 
 <div class="post__image-container">
-    <img class="post__image" alt="401 Unauthorized response in Postman" src="assets/images/blog/01/postman-unauthorized.png">
+    <picture>
+        <source srcset="assets/images/blog/01/postman-unauthorized.webp" type="image/webp">
+        <source srcset="assets/images/blog/01/png/postman-unauthorized.png" type="image/png">
+        <img class="post__image" alt="401 Unauthorized response in Postman" src="assets/images/blog/01/png/postman-unauthorized.png">
+    </picture>
 </div>
 
 <br>
@@ -1348,7 +1380,8 @@ This concludes the starter example of getting JSON Web Token authentication to w
 
 Thank you for taking the time to read this post. I hope it was informative and help to get a basic JWT-based approach for authentication setup in your project. Please feel free to reach out, check out my [Github profile](https://github.com/maxwellmattryan) for other projects, or head back to the [blog](https://mattmaxwell.dev/blog) to read more!',
         'assets/images/blog/01/jwt.webp',
-        '2020-09-12 17:16:23.119169');
+        '2020-09-12 17:16:23.119169',
+        '2020-09-17 23:43:31.126472');
 
 
 -- CAUTION: This assumes that no starter data has been entered into the data base (going off of the number in the file)
