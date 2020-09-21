@@ -30,6 +30,7 @@
 
 .about__technology-list {
     display: grid;
+    grid-column-gap: $margin;
     grid-template-columns: 1fr 1fr;
     margin-bottom: $margin;
 }
