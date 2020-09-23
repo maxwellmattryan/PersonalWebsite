@@ -9,4 +9,9 @@ if (environment.production || environment.staging) {
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
+    .then(() => {
+        if('serviceWorker' in navigator && (environment.production || environment.staging)) {
+            navigator.serviceWorker.register('/ngsw-worker.js');
+        }
+    })
     .catch(err => console.error(err));
