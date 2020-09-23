@@ -21,7 +21,7 @@
                 Otherwise, here are some of the technologies that I work with:
             </p>
             <ul class='about__technology-list'>
-                <li class='about__technology-list-item' *ngFor='let technology of technologies'>
+                <li class='about__technology-list-item' *ngFor='let technology of technologies trackBy: this.trackingService.objectById'>
                     {{ technology.name }}
                 </li>
             </ul>

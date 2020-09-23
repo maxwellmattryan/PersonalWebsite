@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { ProfileTechnology } from '@app/shared/models';
+import { TrackingService } from '@app/core/services';
 
 @Component({
     selector: 'app-about',
@@ -12,7 +13,9 @@ export class AboutComponent implements OnInit {
     @Input() technologies: ProfileTechnology[];
     @Input() imageUrl: string;
 
-    constructor() { }
+    constructor(
+        public trackingService: TrackingService
+    ) { }
 
     ngOnInit(): void { }
 }

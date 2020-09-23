@@ -21,7 +21,7 @@
             <br><br>
             <mat-radio-group formControlName='author' name='author' required>
                 <mat-radio-button
-                    *ngFor='let author of authorData'
+                    *ngFor='let author of authorData trackBy: this.trackingService.objectById'
                     [value]='buildAuthorName(author)'
                 >{{ buildAuthorName(author) }}</mat-radio-button>
             </mat-radio-group>
@@ -32,7 +32,7 @@
             <br><br>
             <mat-radio-group formControlName='status' name='status' required>
                 <mat-radio-button
-                        *ngFor='let status of statusData'
+                        *ngFor='let status of statusData trackBy: this.trackingService.objectById'
                         [value]='status.status'
                 >{{ status.status }}</mat-radio-button>
             </mat-radio-group>
@@ -41,7 +41,7 @@
         <div class="form-field editor__form-field">
             <label class='form-field-label editor__form-field-label'>Topics</label>
             <br><br>
-            <div class='form__checkbox-item' formArrayName='topics' *ngFor='let topic of postForm.controls.topics["controls"]; let idx = index'>
+            <div class='form__checkbox-item' formArrayName='topics' *ngFor='let topic of postForm.controls.topics["controls"] trackBy: this.trackingService.objectById; let idx = index'>
                 <mat-checkbox [formControlName]='idx'>{{ topicData[idx].name }}</mat-checkbox>
                 <br>
             </div>

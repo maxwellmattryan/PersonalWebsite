@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { AuthService } from '@app/core/auth';
 import { Project } from '@app/shared/models';
-import { SeoService } from '@app/core/services';
+import { SeoService, TrackingService } from '@app/core/services';
 
 @Component({
     selector: 'app-project-collection',
@@ -14,7 +14,8 @@ export class ProjectCollectionComponent implements OnInit {
 
     constructor(
         public authService: AuthService,
-        private seoService: SeoService
+        private seoService: SeoService,
+        public trackingService: TrackingService
     ) { }
 
     ngOnInit(): void { }

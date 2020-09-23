@@ -6,7 +6,15 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { BlogPost } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/auth';
-import { BlogService, ComparisonService, EditorService, NotificationService, SeoService, ProfileService } from '@app/core/services';
+import {
+    BlogService,
+    ComparisonService,
+    EditorService,
+    NotificationService,
+    SeoService,
+    ProfileService,
+    TrackingService
+} from '@app/core/services';
 
 @Component({
     selector: 'app-post-view',
@@ -29,6 +37,7 @@ export class PostViewComponent implements OnInit {
         private profileService: ProfileService,
         public seoService: SeoService,
         private titleService: Title,
+        public trackingService: TrackingService,
         private router: Router
     ) { }
 

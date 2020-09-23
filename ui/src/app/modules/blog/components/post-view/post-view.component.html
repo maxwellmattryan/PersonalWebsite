@@ -16,7 +16,7 @@
     <p class='post__date' [innerHtml]='"Updated: " + seoService.getFormattedDate(post.updated_at)'></p>
     
     <div class='post__topic-container'>
-        <a class='post__topic-item' (click)='blogService.setActiveTopic(topic)' [routerLink]="['/blog']" *ngFor='let topic of post.topics'>
+        <a class='post__topic-item' (click)='blogService.setActiveTopic(topic)' [routerLink]="['/blog']" *ngFor='let topic of post.topics trackBy: this.trackingService.objectById'>
             {{ topic.name }}
         </a>
     </div>

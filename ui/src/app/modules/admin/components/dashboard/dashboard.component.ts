@@ -6,7 +6,13 @@ import { Title } from '@angular/platform-browser';
 import { Profile, ProfileStatus } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/auth';
-import { NotificationService, ComparisonService, EditorService, ProfileService } from '@app/core/services';
+import {
+    NotificationService,
+    ComparisonService,
+    EditorService,
+    ProfileService,
+    TrackingService
+} from '@app/core/services';
 
 @Component({
     selector: 'app-dashboard',
@@ -26,7 +32,8 @@ export class DashboardComponent implements OnInit {
         private editorService: EditorService,
         public notificationService: NotificationService,
         private profileService: ProfileService,
-        private titleService: Title
+        private titleService: Title,
+        public trackingService: TrackingService
     ) { }
 
     ngOnInit(): void {

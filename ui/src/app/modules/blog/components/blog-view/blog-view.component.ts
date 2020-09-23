@@ -5,7 +5,14 @@ import { Title } from '@angular/platform-browser';
 import { BlogPost, BlogTopic } from '@app/shared/models';
 import { ApiService } from '@app/core/http/api.service';
 import { AuthService } from '@app/core/auth';
-import { BlogService, ComparisonService, EditorService, NotificationService, ProfileService } from '@app/core/services';
+import {
+    BlogService,
+    ComparisonService,
+    EditorService,
+    NotificationService,
+    ProfileService,
+    TrackingService
+} from '@app/core/services';
 
 @Component({
     selector: 'app-blog-view',
@@ -29,7 +36,8 @@ export class BlogViewComponent implements OnInit {
         private editorService: EditorService,
         private notificationService: NotificationService,
         private profileService: ProfileService,
-        private titleService: Title
+        private titleService: Title,
+        public trackingService: TrackingService
     ) { }
 
     ngOnInit(): void {

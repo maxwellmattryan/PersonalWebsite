@@ -7,7 +7,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Profile, ProfileStatus, ProfileTechnology, Project } from '@app/shared/models';
 import { AuthService } from '@app/core/auth';
 import { ApiService } from '@app/core/http';
-import { ComparisonService, EditorService, NotificationService, ValidationService, ProfileService } from '@app/core/services';
+import {
+    ComparisonService,
+    EditorService,
+    NotificationService,
+    ValidationService,
+    ProfileService,
+    TrackingService
+} from '@app/core/services';
 
 @Component({
     selector: 'app-profile-editor',
@@ -37,6 +44,7 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
         private notificationService: NotificationService,
         private profileService: ProfileService,
         private titleService: Title,
+        public trackingService: TrackingService,
         private validationService: ValidationService
     ) { }
 

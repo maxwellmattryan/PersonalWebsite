@@ -12,7 +12,7 @@ import {
     NotificationService,
     ValidationService,
     ComparisonService,
-    SeoService
+    SeoService, TrackingService
 } from '@app/core/services';
 
 @Component({
@@ -40,6 +40,7 @@ export class PostEditorComponent implements OnDestroy, OnInit {
         private notificationService: NotificationService,
         private seoService: SeoService,
         private titleService: Title,
+        public trackingService: TrackingService,
         private validationService: ValidationService,
         private formBuilder: FormBuilder,
         private router: Router

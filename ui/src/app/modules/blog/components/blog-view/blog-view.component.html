@@ -25,7 +25,7 @@
                 </ng-container>
             </div>
 
-            <div class='blog__filter-btn-row' *ngFor='let topic of topics'>
+            <div class='blog__filter-btn-row' *ngFor='let topic of topics trackBy: this.trackingService.objectById'>
                 <button
                     aria-label='Filter blog topic'
                     [ngClass]="{'btn--active': topic.id === activeTopicId, 'blog__filter-btn--half': isAdmin}"

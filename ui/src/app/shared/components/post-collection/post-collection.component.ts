@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { BlogPost } from '@app/shared/models';
-import { BlogService, ComparisonService, SeoService } from '@app/core/services';
+import { BlogService, ComparisonService, SeoService, TrackingService } from '@app/core/services';
 
 @Component({
     selector: 'app-post-collection',
@@ -23,7 +23,8 @@ export class PostCollectionComponent implements OnInit {
     constructor(
         public blogService: BlogService,
         private comparisonService: ComparisonService,
-        public seoService: SeoService
+        public seoService: SeoService,
+        public trackingService: TrackingService
     ) { }
 
     ngOnInit(): void {

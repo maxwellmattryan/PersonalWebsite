@@ -13,7 +13,7 @@
         <div class='form-field editor__form-field'>
             <label class='form-field-label editor__form-field-label'>Profiles</label>
             <br><br>
-            <div class='form__checkbox-item' formArrayName='profiles' *ngFor='let profile of projectForm.controls.profiles["controls"]; let idx = index'>
+            <div class='form__checkbox-item' formArrayName='profiles' *ngFor='let profile of projectForm.controls.profiles["controls"] trackBy: this.trackingService.objectById; let idx = index'>
                 <mat-checkbox [formControlName]='idx'>{{ profileData[idx].name }}</mat-checkbox>
                 <br>
             </div>

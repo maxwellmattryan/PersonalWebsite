@@ -12,6 +12,7 @@ import {
     NotificationService,
     ProfileService,
     SeoService,
+    TrackingService,
     ValidationService
 } from './services';
 
@@ -36,6 +37,7 @@ import {
         NotificationService,
         ProfileService,
         SeoService,
+        TrackingService,
         ValidationService
     ]
 })
