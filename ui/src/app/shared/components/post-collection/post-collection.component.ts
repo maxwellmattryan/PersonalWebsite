@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 import { BlogPost } from '@app/shared/models';
 import { BlogService, ComparisonService, SeoService, TrackingService } from '@app/core/services';
@@ -6,7 +6,8 @@ import { BlogService, ComparisonService, SeoService, TrackingService } from '@ap
 @Component({
     selector: 'app-post-collection',
     templateUrl: './post-collection.component.html',
-    styleUrls: ['./post-collection.component.scss']
+    styleUrls: ['./post-collection.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostCollectionComponent implements OnInit {
     @Input() posts: BlogPost[];
