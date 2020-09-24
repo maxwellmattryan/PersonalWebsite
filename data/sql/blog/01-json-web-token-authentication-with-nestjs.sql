@@ -4,11 +4,7 @@ VALUES (1,
         'JSON Web Token (JWT) Authentication with NestJS',
         'A cookie-based approach to solving authentication',
         'Authentication is a huge concern among many when developing a web-based application. There exist multiple solutions for implementing mechanisms to authenticate users and post is an overview of the JWT-based approach.',
-        '# The NestJS Framework and Authentication
-
-<br>
-
-This project''s source code is visible here at its [GitHub repository](https://github.com/maxwellmattryan/nestjs-jwt-auth) if you wish to download it as a starter project and get going. If you''d like to see how I set up the the project as is in the repo the follow along with the rest of the post.
+        '_<span class=''text--note''>NOTE: </span><span class=''text--note-paragraph''>This project''s source code is visible here at its [GitHub repository](https://github.com/maxwellmattryan/nestjs-jwt-auth) if you wish to download it as a starter project and get going. If you''d like to see how I set up the the project as is in the repo the follow along with the rest of the post. </span>_
 
 <br><br>
 
@@ -17,6 +13,7 @@ This project''s source code is visible here at its [GitHub repository](https://g
 <br>
 
 In a literal sense, "authentication" refers to the act of proving some assertion, whether it be the identity of a person or the user of a computer system. It is not necessarily the process of identifying whatever the credentials may be but rather the process of verifying them.
+
 
 <br>
 
@@ -175,8 +172,8 @@ The output of the console should look similar to this. We can see NestJS initial
 <div class="post__image-container">
     <picture>
         <source srcset="assets/images/blog/01/morgan-logging-output.webp" type="image/webp">
-        <source srcset="assets/images/blog/01/png/morgan-logging-output.png" type="image/png">
-        <img class="post__image" alt="Output of npm morgan logging library" src="assets/images/blog/01/png/morgan-logging-output.png">
+        <source srcset="assets/images/blog/01/morgan-logging-output.png" type="image/png">
+        <img class="post__image" alt="Output of npm morgan logging library" src="assets/images/blog/01/morgan-logging-output.png">
     </picture>
 </div>
 
@@ -480,8 +477,8 @@ Spin up the server with `npm run start:dev` and check that the newly created ent
 <div class="post__image-container">
     <picture>
         <source srcset="assets/images/blog/01/datagrip-user-table.webp" type="image/webp">
-        <source srcset="assets/images/blog/01/png/datagrip-user-table.png" type="image/png">
-        <img class="post__image" alt="User table in database via Datagrip" src="assets/images/blog/01/png/datagrip-user-table.png">
+        <source srcset="assets/images/blog/01/datagrip-user-table.png" type="image/png">
+        <img class="post__image" alt="User table in database via Datagrip" src="assets/images/blog/01/datagrip-user-table.png">
     </picture>
 </div>
 
@@ -600,8 +597,8 @@ Now when running the server we should see the the new route for `/auth/register`
 <div class="post__image-container">
     <picture>
         <source srcset="assets/images/blog/01/postman-register-no-db.webp" type="image/webp">
-        <source srcset="assets/images/blog/01/png/postman-register-no-db.png" type="image/png">
-        <img class="post__image" alt="Sending register request via Postman" src="assets/images/blog/01/png/postman-register-no-db.png">
+        <source srcset="assets/images/blog/01/postman-register-no-db.png" type="image/png">
+        <img class="post__image" alt="Sending register request via Postman" src="assets/images/blog/01/postman-register-no-db.png">
     </picture>
 </div>
 
@@ -828,8 +825,8 @@ Now let''s test what happens when we make two requests to this endpoint. The rea
 <div class="post__image-container">
     <picture>
         <source srcset="assets/images/blog/01/postman-register.webp" type="image/webp">
-        <source srcset="assets/images/blog/01/png/postman-register.png" type="image/png">
-        <img class="post__image" alt="Sending register request with db connection via Postman" src="assets/images/blog/01/png/postman-register.png">
+        <source srcset="assets/images/blog/01/postman-register.png" type="image/png">
+        <img class="post__image" alt="Sending register request with db connection via Postman" src="assets/images/blog/01/postman-register.png">
     </picture>
 </div>
 
@@ -842,8 +839,8 @@ When we try to make a request with the same credentials, our custom error will b
 <div class="post__image-container">
     <picture>
         <source srcset="assets/images/blog/01/postman-register-error.webp" type="image/webp">
-        <source srcset="assets/images/blog/01/png/postman-register-error.png" type="image/png">
-        <img class="post__image" alt="Sending register request with error thrown" src="assets/images/blog/01/png/postman-register-error.png">
+        <source srcset="assets/images/blog/01/postman-register-error.png" type="image/png">
+        <img class="post__image" alt="Sending register request with error thrown" src="assets/images/blog/01/postman-register-error.png">
     </picture>
 </div>
 
@@ -957,8 +954,8 @@ At this point we can test to see if we get a user object back with our login req
 <div class="post__image-container">
     <picture>
         <source srcset="assets/images/blog/01/postman-login-error.webp" type="image/webp">
-        <source srcset="assets/images/blog/01/png/postman-login-error.png" type="image/png">
-        <img class="post__image" alt="Sending login request with wrong credentials" src="assets/images/blog/01/png/postman-login-error.png">
+        <source srcset="assets/images/blog/01/postman-login-error.png" type="image/png">
+        <img class="post__image" alt="Sending login request with wrong credentials" src="assets/images/blog/01/postman-login-error.png">
     </picture>
 </div>
 
@@ -1277,8 +1274,8 @@ After setting back in the controller, we can now test it out to see if it works 
 <div class="post__image-container">
     <picture>
         <source srcset="assets/images/blog/01/postman-login-cookie.webp" type="image/webp">
-        <source srcset="assets/images/blog/01/png/postman-login-cookie.png" type="image/png">
-        <img class="post__image" alt="JWT cookie in Postman" src="assets/images/blog/01/png/postman-login-cookie.png">
+        <source srcset="assets/images/blog/01/postman-login-cookie.png" type="image/png">
+        <img class="post__image" alt="JWT cookie in Postman" src="assets/images/blog/01/postman-login-cookie.png">
     </picture>
 </div>
 
@@ -1367,8 +1364,8 @@ After spinning up the server and testing the endpoint with Postman, we can see t
 <div class="post__image-container">
     <picture>
         <source srcset="assets/images/blog/01/postman-unauthorized.webp" type="image/webp">
-        <source srcset="assets/images/blog/01/png/postman-unauthorized.png" type="image/png">
-        <img class="post__image" alt="401 Unauthorized response in Postman" src="assets/images/blog/01/png/postman-unauthorized.png">
+        <source srcset="assets/images/blog/01/postman-unauthorized.png" type="image/png">
+        <img class="post__image" alt="401 Unauthorized response in Postman" src="assets/images/blog/01/postman-unauthorized.png">
     </picture>
 </div>
 

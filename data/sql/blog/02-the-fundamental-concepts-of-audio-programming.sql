@@ -4,7 +4,7 @@ VALUES (1,
         'The Fundamental Concepts of Audio Programming',
         'Writing code that represents and messes with digital audio signals',
         'Although it is ultimately a small niche within the realm of programming and software engineering as a whole, audio programming is a unique part that has not only interesting constraints for us to work within, but also endless possibilities to create interesting software and effects. To really delve into it, it''s important to understand a few fundamental concepts.',
-        '# What is Sound?
+        '## What is Sound?
 
 <br>
 
@@ -16,7 +16,7 @@ These acoustic vibrations are present everywhere we go, and they are detected by
 
 <br><br>
 
-## Dynamic Range
+### Dynamic Range
 
 <br>
 
@@ -28,7 +28,7 @@ This all happens in those bones in our ear that are vibrated by the eardrum and 
 
 <br><br>
 
-## Frequency
+### Frequency
 
 <br>
 
@@ -36,7 +36,7 @@ _Frequency_ is technically defined as the number of times a repetitive event occ
 
 <br><br>
 
-## Masking
+### Masking
 
 <br>
 
@@ -48,7 +48,7 @@ There are two types of masking, namely _frequency masking_ and _temporal masking
 
 <br><br>
 
-## Spatialization
+### Spatialization
 
 <br>
 
@@ -56,7 +56,7 @@ Evolutionarily speaking, humans have an incredible ability to detect the directi
 
 <br><br>
 
-# Digital Representation of Audio
+## Digital Representation of Audio
 
 <br>
 
@@ -64,7 +64,7 @@ At some point we need to make a transition into the digital world of audio to ta
 
 <br><br>
 
-## Pulse Code Modulation
+### Pulse Code Modulation
 
 <br>
 
@@ -72,7 +72,7 @@ _Pulse code modulation_ (PCM) is a standard form of digitally representing analo
 
 <br><br>
 
-## Sample Rate
+### Sample Rate
 
 <br>
 
@@ -83,8 +83,8 @@ In the real world, sound is what we hear as a result of continuous acoustic pres
 <div class="post__image-container">
     <picture>
         <source srcset="assets/images/blog/02/sample-rate.webp" type="image/webp">
-        <source srcset="assets/images/blog/02/png/sample-rate.png" type="image/png">
-        <img class="post__image" alt="Sampling rate visually explained" src="assets/images/blog/02/png/sample-rate.png">
+        <source srcset="assets/images/blog/02/sample-rate.png" type="image/png">
+        <img class="post__image" alt="Sampling rate visually explained" src="assets/images/blog/02/sample-rate.png">
     </picture>
 </div>
 
@@ -98,7 +98,7 @@ The reason why this happens is that the acoustic pressure waves being sampled ha
 
 <br><br>
 
-## Bit Depth
+### Bit Depth
 
 <br>
 
@@ -109,8 +109,8 @@ The concept called [bit depth](https://en.wikipedia.org/wiki/Audio_bit_depth) re
 <div class="post__image-container">
     <picture>
         <source srcset="assets/images/blog/02/bit-depth.webp" type="image/webp">
-        <source srcset="assets/images/blog/02/png/bit-depth.png" type="image/png">
-        <img class="post__image" alt="Bit depth visually explained" src="assets/images/blog/02/png/bit-depth.png">
+        <source srcset="assets/images/blog/02/bit-depth.png" type="image/png">
+        <img class="post__image" alt="Bit depth visually explained" src="assets/images/blog/02/bit-depth.png">
     </picture>
 </div>
 
@@ -128,7 +128,7 @@ In another example, the `.mp3` file format, as mentioned in [Designing Audio Eff
 
 <br><br>
 
-## Reconstruction
+### Reconstruction
 
 <br>
 
@@ -139,18 +139,18 @@ At some point, our bitstream of audio data is decoded and converted into the cor
 <div class="post__image-container">
     <picture>
         <source srcset="assets/images/blog/02/reconstruction-func.webp" type="image/webp">
-        <source srcset="assets/images/blog/02/png/reconstruction-func.png" type="image/png">
-        <img class="post__image" alt="Sample reconstruction function" src="assets/images/blog/02/png/reconstruction-func.png">
+        <source srcset="assets/images/blog/02/reconstruction-func.png" type="image/png">
+        <img class="post__image" alt="Sample reconstruction function" src="assets/images/blog/02/reconstruction-func.png">
     </picture>
 </div>
 
 <br><br>
 
-# Audio Buffers
+## Audio Buffers
 
 <br>
 
-## Callback
+### Callback
 
 <br>
 
@@ -158,11 +158,11 @@ The _audio callback_ is an important concept to learn about, especially when lea
 
 <br>
 
-_<span class=''text--warn''>WARNING: </span><span class=''text--warn-paragraph''>This callback occurs whether or not the buffer is filled. It is imperative that you guarantee that the code is executed in time. Audio is unique in that we don''t just care about the average throughput of our processing - we care about the minimal performance because we can NEVER afford to have dropouts (see "Real-time Constraints" below).</span>_
+_<span class=''text--warn''>WARNING: </span><span class=''text--warn-paragraph''>This callback occurs whether or not the buffer is filled. It is imperative that you guarantee that the code is written in time. Audio is unique in that we don''t just care about the average throughput of our processing - we care about the minimal performance because we can NEVER afford to have dropouts (see "Real-time Constraints" below).</span>_
 
 <br><br>
 
-## What is a Data Buffer?
+### What is a Data Buffer?
 
 <br>
 
@@ -170,7 +170,7 @@ In short, a [_data buffer_](https://en.wikipedia.org/wiki/Data_buffer) is a phys
 
 <br><br>
 
-## Circular Buffers
+### Circular Buffers
 
 <br>
 
@@ -178,7 +178,7 @@ Audio buffers are usually implemented as [_circular buffers_](https://en.wikiped
 
 <br><br>
 
-## Double Buffers
+### Double Buffers
 
 <br>
 
@@ -186,7 +186,7 @@ Double buffers, sometimes referred to and implemented as multiple buffers, is si
 
 <br><br>
 
-## Buffer Size
+### Buffer Size
 
 <br>
 
@@ -194,7 +194,7 @@ The size of the audio buffer is quite important when looking at things like late
 
 <br><br>
 
-## Real-time Constraints
+### Real-time Constraints
 
 <br>
 
@@ -210,7 +210,7 @@ There are more technically specific constraints as well such as lock-free thread
 
 <br><br>
 
-# Digital Signal Processing
+## Digital Signal Processing
 
 <br>
 
@@ -222,7 +222,7 @@ It''s important to mention that DSP is not limited to audio. Engineers, mathemat
 
 <br>
 
-Thank you for checking out this blog post! Please read more at my [blog page](https://mattmaxwell.dev/blog) or checkout the plugin that I built, [Rotor](https://drive.google.com/drive/folders/1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2?usp=sharing), to see these concepts in action or <a href=''assets/plugins/rotor.zip'' download=''rotor.zip''>download the plugin</a>. Cheers!',
+Thank you for checking out this blog post! Please read more at my [blog page](https://mattmaxwell.dev/blog) or checkout the plugin that I built, [Rotor](https://drive.google.com/drive/folders/1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2?usp=sharing), to see these concepts in action. Cheers!',
         'assets/images/blog/02/signal.webp',
         '2020-09-14 01:05:29.653050',
         '2020-09-20 18:02:18.526809');
