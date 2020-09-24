@@ -54,7 +54,7 @@ export function markedOptionsFactory(): MarkedOptions {
         MaterialModule,
         ReactiveFormsModule,
         SharedModule,
-        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production || environment.staging, registrationStrategy: 'registerImmediately' })
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })
     ],
     bootstrap: [AppComponent]
 })
