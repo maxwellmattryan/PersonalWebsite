@@ -95,39 +95,6 @@
                                 }
                             ],
                             "ngswConfigPath": "ngsw-config.json"
-                        },
-                        "staging": {
-                            "fileReplacements": [
-                                {
-                                    "replace": "src/environments/environment.ts",
-                                    "with": "src/environments/environment.stg.ts"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": {
-                                "hidden": true,
-                                "scripts": true,
-                                "styles": true
-                            },
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "extractLicenses": true,
-                            "vendorChunk": false,
-                            "buildOptimizer": true,
-                            "serviceWorker": true,
-                            "budgets": [
-                                {
-                                    "type": "initial",
-                                    "maximumWarning": "2mb",
-                                    "maximumError": "5mb"
-                                },
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb",
-                                    "maximumError": "10kb"
-                                }
-                            ]
                         }
                     }
                 },
@@ -142,9 +109,6 @@
                     "configurations": {
                         "production": {
                             "browserTarget": "ui:build:production"
-                        },
-                        "staging": {
-                            "browserTarget": "ui:build:staging"
                         }
                     }
                 },
@@ -195,9 +159,6 @@
                     "configurations": {
                         "production": {
                             "devServerTarget": "ui:serve:production"
-                        },
-                        "staging": {
-                            "devServerTarget": "ui:serve:staging"
                         }
                     }
                 }

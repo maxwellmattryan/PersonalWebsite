@@ -3,8 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-    production: process.env.NODE_ENV == 'production',
-    staging: process.env.NODE_ENV == 'staging',
+    production: false,
     ROOT_URL: 'http://localhost:3000',
     API_URL: 'http://localhost:3000/api'
 };
