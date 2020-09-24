@@ -1,8 +1,4 @@
-# The NestJS Framework and Authentication
-
-<br>
-
-This project's source code is visible here at its [GitHub repository](https://github.com/maxwellmattryan/nestjs-jwt-auth) if you wish to download it as a starter project and get going. If you'd like to see how I set up the the project as is in the repo the follow along with the rest of the post. 
+_<span class='text--note'>NOTE: </span><span class='text--note-paragraph'>This project's source code is visible here at its [GitHub repository](https://github.com/maxwellmattryan/nestjs-jwt-auth) if you wish to download it as a starter project and get going. If you'd like to see how I set up the the project as is in the repo the follow along with the rest of the post. </span>_
 
 <br><br>
 
@@ -11,6 +7,7 @@ This project's source code is visible here at its [GitHub repository](https://gi
 <br>
 
 In a literal sense, "authentication" refers to the act of proving some assertion, whether it be the identity of a person or the user of a computer system. It is not necessarily the process of identifying whatever the credentials may be but rather the process of verifying them.
+
 
 <br>
 

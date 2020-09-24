@@ -1,4 +1,4 @@
-# What is Sound?
+## What is Sound?
 
 <br>
 
@@ -10,7 +10,7 @@ These acoustic vibrations are present everywhere we go, and they are detected by
 
 <br><br>
 
-## Dynamic Range
+### Dynamic Range
 
 <br>
 
@@ -22,7 +22,7 @@ This all happens in those bones in our ear that are vibrated by the eardrum and 
 
 <br><br>
 
-## Frequency
+### Frequency
 
 <br>
 
@@ -30,7 +30,7 @@ _Frequency_ is technically defined as the number of times a repetitive event occ
 
 <br><br>
 
-## Masking
+### Masking
 
 <br>
 
@@ -42,7 +42,7 @@ There are two types of masking, namely _frequency masking_ and _temporal masking
 
 <br><br>
 
-## Spatialization
+### Spatialization
 
 <br>
 
@@ -50,7 +50,7 @@ Evolutionarily speaking, humans have an incredible ability to detect the directi
 
 <br><br>
 
-# Digital Representation of Audio
+## Digital Representation of Audio
 
 <br>
 
@@ -58,7 +58,7 @@ At some point we need to make a transition into the digital world of audio to ta
 
 <br><br>
 
-## Pulse Code Modulation
+### Pulse Code Modulation
 
 <br>
 
@@ -66,7 +66,7 @@ _Pulse code modulation_ (PCM) is a standard form of digitally representing analo
 
 <br><br>
 
-## Sample Rate
+### Sample Rate
 
 <br>
 
@@ -92,7 +92,7 @@ The reason why this happens is that the acoustic pressure waves being sampled ha
 
 <br><br>
 
-## Bit Depth
+### Bit Depth
 
 <br>
 
@@ -122,7 +122,7 @@ In another example, the `.mp3` file format, as mentioned in [Designing Audio Eff
 
 <br><br>
 
-## Reconstruction
+### Reconstruction
 
 <br>
 
@@ -140,11 +140,11 @@ At some point, our bitstream of audio data is decoded and converted into the cor
 
 <br><br>
 
-# Audio Buffers
+## Audio Buffers
 
 <br>
 
-## Callback
+### Callback
 
 <br>
 
@@ -156,7 +156,7 @@ _<span class='text--warn'>WARNING: </span><span class='text--warn-paragraph'>Thi
 
 <br><br>
 
-## What is a Data Buffer?
+### What is a Data Buffer?
 
 <br>
 
@@ -164,7 +164,7 @@ In short, a [_data buffer_](https://en.wikipedia.org/wiki/Data_buffer) is a phys
 
 <br><br>
 
-## Circular Buffers
+### Circular Buffers
 
 <br>
 
@@ -172,7 +172,7 @@ Audio buffers are usually implemented as [_circular buffers_](https://en.wikiped
 
 <br><br>
 
-## Double Buffers
+### Double Buffers
 
 <br>
 
@@ -180,7 +180,7 @@ Double buffers, sometimes referred to and implemented as multiple buffers, is si
 
 <br><br>
 
-## Buffer Size
+### Buffer Size
 
 <br>
 
@@ -188,7 +188,7 @@ The size of the audio buffer is quite important when looking at things like late
 
 <br><br>
 
-## Real-time Constraints
+### Real-time Constraints
 
 <br>
 
@@ -204,7 +204,7 @@ There are more technically specific constraints as well such as lock-free thread
 
 <br><br>
 
-# Digital Signal Processing
+## Digital Signal Processing
 
 <br>
 
