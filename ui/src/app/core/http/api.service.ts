@@ -137,26 +137,26 @@ export class ApiService {
     // ========
     createProject(project: Project): Observable<Project> {
         return this.http.post<Project>(
-            `${environment.API_URL}/projects`,
+            `${environment.API_URL}/portfolio/projects`,
             project
         );
     }
 
     deleteProject(id: number): Observable<any> {
-        return this.http.delete<any>(`${environment.API_URL}/projects/${id}`);
+        return this.http.delete<any>(`${environment.API_URL}/portfolio/projects/${id}`);
     }
 
     getProject(id: number): Observable<Project> {
-        return this.http.get<Project>(`${environment.API_URL}/projects/${id}`);
+        return this.http.get<Project>(`${environment.API_URL}/portfolio/projects/${id}`);
     }
 
     getProjects(): Observable<Project[]> {
-        return this.http.get<Project[]>(`${environment.API_URL}/projects`);
+        return this.http.get<Project[]>(`${environment.API_URL}/portfolio/projects`);
     }
 
     updateProject(project: Project): Observable<Project> {
         return this.http.put<Project>(
-            `${environment.API_URL}/projects/${project.id}`,
+            `${environment.API_URL}/portfolio/projects/${project.id}`,
             project
         );
     }
@@ -166,37 +166,37 @@ export class ApiService {
     // ========
     activateProfile(profileId: number): Observable<Profile> {
         return this.http.put<Profile>(
-            `${environment.API_URL}/profiles/${profileId}/activate`,
+            `${environment.API_URL}/portfolio/profiles/${profileId}/activate`,
             {}
         );
     }
 
     createProfile(profile: Profile): Observable<Profile> {
         return this.http.post<Profile>(
-            `${environment.API_URL}/profiles`,
+            `${environment.API_URL}/portfolio/profiles`,
             profile
         );
     }
 
     deleteProfile(id: number): Observable<any> {
-        return this.http.delete<any>(`${environment.API_URL}/profiles/${id}`)
+        return this.http.delete<any>(`${environment.API_URL}/portfolio/profiles/${id}`)
     }
 
     getProfiles(): Observable<Profile[]> {
-        return this.http.get<Profile[]>(`${environment.API_URL}/profiles`);
+        return this.http.get<Profile[]>(`${environment.API_URL}/portfolio/profiles`);
     }
 
     getProfileStatuses(): Observable<ProfileStatus[]> {
-        return this.http.get<ProfileStatus[]>(`${environment.API_URL}/profiles/statuses`);
+        return this.http.get<ProfileStatus[]>(`${environment.API_URL}/portfolio/profiles/statuses`);
     }
 
     getProfileTechnologies(id: number): Observable<ProfileTechnology[]> {
-        return this.http.get<ProfileTechnology[]>(`${environment.API_URL}/profiles/${id}/technologies`);
+        return this.http.get<ProfileTechnology[]>(`${environment.API_URL}/portfolio/profiles/${id}/technologies`);
     }
 
     updateProfile(profile: Profile): Observable<Profile> {
         return this.http.put<Profile>(
-            `${environment.API_URL}/profiles/${profile.id}`,
+            `${environment.API_URL}/portfolio/profiles/${profile.id}`,
             profile
         )
     }
