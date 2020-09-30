@@ -4,17 +4,25 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Title } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/auth';
 import {
     ComparisonService,
     EditorService,
     NotificationService,
     ValidationService,
-    ProfileService,
     TrackingService
 } from '@app/core/services';
-import { PortfolioProfile, PortfolioProfileStatus, PortfolioProfileTechnology, PortfolioProject } from '@app/modules/portfolio/models';
+import {
+    PortfolioProfile,
+    PortfolioProfileStatus,
+    PortfolioProfileTechnology,
+    PortfolioProject
+} from '@app/modules/portfolio/models';
+import {
+    PortfolioProfileApiService,
+    PortfolioProfileService,
+    PortfolioProjectApiService
+} from '@app/modules/portfolio/services';
 
 @Component({
     selector: 'app-portfolio-profile-editor',
@@ -37,12 +45,13 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
         private router: Router,
         private changeDetectionRef: ChangeDetectorRef,
         private formBuilder: FormBuilder,
-        private apiService: ApiService,
         private authService: AuthService,
         private comparisonService: ComparisonService,
         private editorService: EditorService,
         private notificationService: NotificationService,
-        private profileService: ProfileService,
+        private portfolioProfileService: PortfolioProfileService,
+        private portfolioProfileApiService: PortfolioProfileApiService,
+        private portfolioProjectApiService: PortfolioProjectApiService,
         private titleService: Title,
         public trackingService: TrackingService,
         private validationService: ValidationService
@@ -89,7 +98,7 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadProjectData(): void {
-        this.apiService.getProjects().subscribe((res: PortfolioProject[]) => {
+        this.portfolioProjectApiService.getProjects().subscribe((res: PortfolioProject[]) => {
             this.projectData = res.sort(this.comparisonService.projects);
 
             if(this.id && this.profileData) {
@@ -112,7 +121,7 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadStatusData(): void {
-        this.apiService.getProfileStatuses().subscribe((res: PortfolioProfileStatus[]) => {
+        this.portfolioProfileApiService.getProfileStatuses().subscribe((res: PortfolioProfileStatus[]) => {
             this.statusData = res;
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
@@ -153,17 +162,17 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
         const profile = this.buildFormProfileData();
 
         if(profile.status.status === 'ACTIVE')
-            this.profileService.setActiveProfile(profile);
+            this.portfolioProfileService.setActiveProfile(profile);
 
         if(profile.id === undefined) {
-            this.apiService.createProfile(profile).subscribe((res: PortfolioProfile) => {
+            this.portfolioProfileApiService.createProfile(profile).subscribe((res: PortfolioProfile) => {
                 this.notificationService.createNotification('Successfully created new profile!');
                 this.router.navigate(['admin']);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
-            this.apiService.updateProfile(profile).subscribe((res: PortfolioProfile) => {
+            this.portfolioProfileApiService.updateProfile(profile).subscribe((res: PortfolioProfile) => {
                 this.notificationService.createNotification('Successfully updated existing profile!');
                 this.router.navigate(['admin']);
             }, (error: HttpErrorResponse) => {

@@ -5,7 +5,8 @@ import { Title } from '@angular/platform-browser';
 import { Homepage } from '@app/shared/interfaces';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/auth';
-import { NotificationService, ComparisonService, ProfileService } from '@app/core/services';
+import { NotificationService, ComparisonService } from '@app/core/services';
+import { PortfolioProfileService } from '@app/modules/portfolio/services';
 
 @Component({
     selector: 'app-home-view',
@@ -22,7 +23,7 @@ export class HomeViewComponent implements OnInit {
         private authService: AuthService,
         private comparisonService: ComparisonService,
         private notificationService: NotificationService,
-        private profileService: ProfileService,
+        private profileService: PortfolioProfileService,
         private titleService: Title
     ) { }
 

@@ -12,7 +12,6 @@ import {
     EditorService,
     NotificationService,
     SeoService,
-    ProfileService,
     TrackingService
 } from '@app/core/services';
 
@@ -34,7 +33,6 @@ export class PostViewComponent implements OnInit {
         private comparisonService: ComparisonService,
         private editorService: EditorService,
         private notificationService: NotificationService,
-        private profileService: ProfileService,
         public seoService: SeoService,
         private titleService: Title,
         public trackingService: TrackingService,

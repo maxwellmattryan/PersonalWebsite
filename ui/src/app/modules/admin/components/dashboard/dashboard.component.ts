@@ -3,16 +3,15 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import { ApiService } from '@app/core/http';
-import { AuthService } from '@app/core/auth';
+import { AuthApiService, AuthService } from '@app/core/auth';
 import {
     NotificationService,
     ComparisonService,
     EditorService,
-    ProfileService,
     TrackingService
 } from '@app/core/services';
 import { PortfolioProfile, PortfolioProfileStatus } from '@app/modules/portfolio/models';
+import { PortfolioProfileApiService, PortfolioProfileService } from '@app/modules/portfolio/services';
 
 @Component({
     selector: 'app-dashboard',
@@ -26,12 +25,13 @@ export class DashboardComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private apiService: ApiService,
+        private authApiService: AuthApiService,
         public authService: AuthService,
         private comparisonService: ComparisonService,
         private editorService: EditorService,
         public notificationService: NotificationService,
-        private profileService: ProfileService,
+        private portfolioProfileService: PortfolioProfileService,
+        private portfolioProfileApiService: PortfolioProfileApiService,
         private titleService: Title,
         public trackingService: TrackingService
     ) { }
@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
     }
 
     populateProfiles(): void {
-        this.apiService.getProfiles().subscribe((res: PortfolioProfile[]) => {
+        this.portfolioProfileApiService.getProfiles().subscribe((res: PortfolioProfile[]) => {
             this.profiles = res.sort(this.comparisonService.profiles);
             this.setActiveProfile();
 
@@ -59,14 +59,14 @@ export class DashboardComponent implements OnInit {
 
     private setActiveProfile(): void {
         const activeProfile = this.profiles.find(p => p.status.status === 'ACTIVE');
-        this.profileService.setActiveProfile(activeProfile);
+        this.portfolioProfileService.setActiveProfile(activeProfile);
     }
 
     changeProfile(profile: PortfolioProfile): void {
         if(profile.status.status === 'ACTIVE') return;
 
-        this.apiService.activateProfile(profile.id).subscribe((res: PortfolioProfile) => {
-            this.profileService.setActiveProfile(res);
+        this.portfolioProfileApiService.activateProfile(profile.id).subscribe((res: PortfolioProfile) => {
+            this.portfolioProfileService.setActiveProfile(res);
 
             this.modifyProfileStatuses(res.id);
             this.notificationService.createNotification(`Successfully activated the "${res.name}" profile!`);
@@ -86,7 +86,7 @@ export class DashboardComponent implements OnInit {
     }
 
     onLogoutClick(): void {
-        this.apiService.logoutAdmin().subscribe(res => {
+        this.authApiService.logoutAdmin().subscribe(res => {
             this.notificationService.createNotification(`Bye, ${this.authService.getAdmin()}!`);
             this.authService.logoutAdmin();
             this.router.navigate(['admin']);
@@ -105,7 +105,7 @@ export class DashboardComponent implements OnInit {
             return;
         }
 
-        this.apiService.deleteProfile(profile.id).subscribe((res: any) => {
+        this.portfolioProfileApiService.deleteProfile(profile.id).subscribe((res: any) => {
             this.profiles = this.profiles.filter(p => p.id !== profile.id);
             this.notificationService.createNotification('Successfully delete profile!');
             if(profile.status.status === 'ACTIVE') location.reload();

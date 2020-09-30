@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 
@@ -10,9 +10,9 @@ import {
     ComparisonService,
     EditorService,
     NotificationService,
-    ProfileService,
     TrackingService
 } from '@app/core/services';
+import { PortfolioProfileService } from '@app/modules/portfolio/services';
 
 @Component({
     selector: 'app-blog-view',
@@ -35,13 +35,13 @@ export class BlogViewComponent implements OnInit {
         private comparisonService: ComparisonService,
         private editorService: EditorService,
         private notificationService: NotificationService,
-        private profileService: ProfileService,
+        private portfolioProfileService: PortfolioProfileService,
         private titleService: Title,
         public trackingService: TrackingService
     ) { }
 
     ngOnInit(): void {
-        this.titleService.setTitle(`${this.profileService.getActiveProfileName()} Blog | Matthew Maxwell`);
+        this.titleService.setTitle(`${this.portfolioProfileService.getActiveProfileName()} Blog | Matthew Maxwell`);
 
         this.isAdmin = this.authService.isLoggedIn();
 

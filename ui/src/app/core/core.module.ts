@@ -10,7 +10,6 @@ import {
     ComparisonService,
     EditorService,
     NotificationService,
-    ProfileService,
     SeoService,
     TrackingService,
     ValidationService
@@ -35,7 +34,6 @@ import {
         ComparisonService,
         EditorService,
         NotificationService,
-        ProfileService,
         SeoService,
         TrackingService,
         ValidationService

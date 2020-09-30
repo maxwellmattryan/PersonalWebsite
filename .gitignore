@@ -16,7 +16,6 @@
 /RUNNING_PID
 
 # Some data
-/data/sql/admin-stg-data.sql
 /data/sql/admin-prod-data.sql
 
 # Design folder

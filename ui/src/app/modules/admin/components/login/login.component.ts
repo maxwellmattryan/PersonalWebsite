@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { Admin } from '@app/shared/interfaces';
 import { ApiService } from '@app/core/http';
-import { AuthService } from '@app/core/auth';
+import { AuthApiService, AuthService } from '@app/core/auth';
 import { NotificationService, ValidationService } from '@app/core/services';
 
 @Component({
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private apiService: ApiService,
+        private authApiService: AuthApiService,
         private authService: AuthService,
         private notificationService: NotificationService,
         public validationService: ValidationService
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
             password: this.password
         };
 
-        this.apiService.loginAdmin(admin).subscribe(res => {
+        this.authApiService.loginAdmin(admin).subscribe(res => {
           this.authService.loginAdmin(res.id, res.username);
           this.notificationService.createNotification(`Welcome back, ${res.username}!`);
           this.router.navigate(['admin']);

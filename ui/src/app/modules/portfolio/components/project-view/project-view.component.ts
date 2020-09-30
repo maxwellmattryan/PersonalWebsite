@@ -3,10 +3,11 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/auth';
 import { EditorService, NotificationService, SeoService } from '@app/core/services';
+
 import { PortfolioProject } from '../../models';
+import { PortfolioProjectApiService } from '../../services';
 
 @Component({
     selector: 'app-project-view',
@@ -20,10 +21,10 @@ export class ProjectViewComponent implements OnInit {
     project: PortfolioProject;
 
     constructor(
-        private apiService: ApiService,
         private authService: AuthService,
         private editorService: EditorService,
         private notificationService: NotificationService,
+        private portfolioProjectApiService: PortfolioProjectApiService,
         public seoService: SeoService,
         private titleService: Title,
         private router: Router
@@ -34,12 +35,12 @@ export class ProjectViewComponent implements OnInit {
 
         const projectId = this.seoService.getIdFromUrl(this.router.url);
         if(!projectId) {
-            this.notificationService.createNotification('Unable to find project ID.');
+            this.notificationService.createNotification('Unable to find portfolio project ID.');
             this.router.navigate(['']);
             return;
         }
 
-        this.apiService.getProject(projectId).subscribe((res: PortfolioProject) => {
+        this.portfolioProjectApiService.getProject(projectId).subscribe((res: PortfolioProject) => {
             this.project = res;
 
             this.titleService.setTitle(`${res.name} - ${res.tagline} | Portfolio | Matthew Maxwell`);
@@ -56,7 +57,7 @@ export class ProjectViewComponent implements OnInit {
     }
 
     deleteProject(): void {
-        this.apiService.deleteProject(this.project.id).subscribe((res: any) => {
+        this.portfolioProjectApiService.deleteProject(this.project.id).subscribe((res: any) => {
             this.notificationService.createNotification('Successfully deleted the project!');
             this.router.navigate(['']);
         }, (error: HttpErrorResponse) => {

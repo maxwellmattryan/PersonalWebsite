@@ -5,7 +5,7 @@ import { PortfolioProfile } from '@app/modules/portfolio/models';
 @Injectable({
     providedIn: 'root'
 })
-export class ProfileService {
+export class PortfolioProfileService {
     private activeProfile: PortfolioProfile;
 
     constructor() { }

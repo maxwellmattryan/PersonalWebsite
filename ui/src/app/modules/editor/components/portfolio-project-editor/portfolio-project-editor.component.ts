@@ -4,7 +4,6 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/auth';
 import {
     EditorService,
@@ -13,7 +12,14 @@ import {
     ComparisonService,
     SeoService, TrackingService
 } from '@app/core/services';
-import { PortfolioProfile, PortfolioProject } from '@app/modules/portfolio/models';
+import {
+    PortfolioProfile,
+    PortfolioProject
+} from '@app/modules/portfolio/models';
+import {
+    PortfolioProfileApiService,
+    PortfolioProjectApiService
+} from '@app/modules/portfolio/services';
 
 @Component({
     selector: 'app-portfolio-project-editor',
@@ -31,12 +37,13 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
     isLoaded: boolean = false;
 
     constructor(
-        private apiService: ApiService,
         private authService: AuthService,
         private cdRef: ChangeDetectorRef,
         private comparisonService: ComparisonService,
         private editorService: EditorService,
         private notificationService: NotificationService,
+        private portfolioProfileApiService: PortfolioProfileApiService,
+        private portfolioProjectApiService: PortfolioProjectApiService,
         private seoService: SeoService,
         private titleService: Title,
         public trackingService: TrackingService,
@@ -82,7 +89,7 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadProfileData(): void {
-        this.apiService.getProfiles().subscribe((res: PortfolioProfile[]) => {
+        this.portfolioProfileApiService.getProfiles().subscribe((res: PortfolioProfile[]) => {
             this.profileData = res.sort(this.comparisonService.profiles);
 
             if(this.id && this.projectData) {
@@ -132,14 +139,14 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
         const project = this.buildFormProjectData();
 
         if(project.id === undefined) {
-            this.apiService.createProject(project).subscribe((res: PortfolioProject) => {
+            this.portfolioProjectApiService.createProject(project).subscribe((res: PortfolioProject) => {
                 this.notificationService.createNotification(`Successfully created new project!`);
                 this.router.navigate([`projects/${this.seoService.getCanonicalUrl(res.id, res.name)}`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
-            this.apiService.updateProject(project).subscribe((res: PortfolioProject) => {
+            this.portfolioProjectApiService.updateProject(project).subscribe((res: PortfolioProject) => {
                 this.notificationService.createNotification(`Successfully updated existing project!`);
                 this.router.navigate([`projects/${this.seoService.getCanonicalUrl(res.id, res.name)}`]);
             }, (error: HttpErrorResponse) => {
