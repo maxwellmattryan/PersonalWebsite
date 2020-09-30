@@ -10,11 +10,11 @@ import { PortfolioProject } from '../../models';
 import { PortfolioProjectApiService } from '../../services';
 
 @Component({
-    selector: 'app-project-view',
-    templateUrl: './project-view.component.html',
-    styleUrls: ['./project-view.component.scss']
+    selector: 'app-portfolio-project-view',
+    templateUrl: './portfolio-project-view.component.html',
+    styleUrls: ['./portfolio-project-view.component.scss']
 })
-export class ProjectViewComponent implements OnInit {
+export class PortfolioProjectViewComponent implements OnInit {
     isAdmin: boolean = false;
     isLoaded: boolean = false;
 

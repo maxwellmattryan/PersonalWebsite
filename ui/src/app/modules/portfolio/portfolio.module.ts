@@ -9,13 +9,14 @@ import { IconModule } from '@app/modules/icon/icon.module';
 import { PortfolioComponent } from './portfolio.component';
 import { PortfolioRoutingModule } from './portfolio-routing.module';
 
-import { ProjectViewComponent } from './components';
+import { PortfolioProjectCollectionComponent, PortfolioProjectViewComponent } from './components';
 import { PortfolioProfileService, PortfolioProfileApiService, PortfolioProjectApiService } from './services';
 
 @NgModule({
     declarations: [
         PortfolioComponent,
-        ProjectViewComponent
+        PortfolioProjectCollectionComponent,
+        PortfolioProjectViewComponent
     ],
     imports: [
         CommonModule,
@@ -23,6 +24,9 @@ import { PortfolioProfileService, PortfolioProfileApiService, PortfolioProjectAp
         MarkdownModule.forRoot(),
         PortfolioRoutingModule,
         SharedModule
+    ],
+    exports: [
+        PortfolioProjectCollectionComponent
     ],
     providers: [
         PortfolioProfileService,

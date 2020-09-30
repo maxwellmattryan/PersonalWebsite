@@ -5,12 +5,12 @@ import { SeoService, TrackingService } from '@app/core/services';
 import { PortfolioProject } from '@app/modules/portfolio/models';
 
 @Component({
-    selector: 'app-project-collection',
-    templateUrl: './project-collection.component.html',
-    styleUrls: ['./project-collection.component.scss'],
+    selector: 'app-portfolio-project-collection',
+    templateUrl: './portfolio-project-collection.component.html',
+    styleUrls: ['./portfolio-project-collection.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProjectCollectionComponent implements OnInit {
+export class PortfolioProjectCollectionComponent implements OnInit {
     @Input() projects: PortfolioProject[];
 
     constructor(

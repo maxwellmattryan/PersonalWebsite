@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PortfolioComponent } from './portfolio.component';
 
 import {
-    ProjectViewComponent
+    PortfolioProjectViewComponent
 } from './components';
 
 export const routes: Routes = [
@@ -14,7 +14,7 @@ export const routes: Routes = [
         children: [
             {
                 path: 'projects/:id/:uri',
-                component: ProjectViewComponent
+                component: PortfolioProjectViewComponent
             }
         ]
     }

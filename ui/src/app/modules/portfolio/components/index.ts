@@ -1,1 +1,2 @@
-export { ProjectViewComponent } from './project-view/project-view.component';
+export { PortfolioProjectCollectionComponent } from './portfolio-project-collection/portfolio-project-collection.component';
+export { PortfolioProjectViewComponent } from './portfolio-project-view/portfolio-project-view.component';
