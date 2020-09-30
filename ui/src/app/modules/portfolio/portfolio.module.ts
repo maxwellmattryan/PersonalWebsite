@@ -6,8 +6,8 @@ import { MarkdownModule } from 'ngx-markdown';
 import { SharedModule } from '@app/shared/shared.module';
 import { IconModule } from '@app/modules/icon/icon.module';
 
-import { ProjectComponent } from './project.component';
-import { ProjectRoutingModule } from './project-routing.module';
+import { PortfolioComponent } from './portfolio.component';
+import { PortfolioRoutingModule } from './portfolio-routing.module';
 
 import {
     ProjectViewComponent
@@ -15,15 +15,15 @@ import {
 
 @NgModule({
     declarations: [
-        ProjectComponent,
+        PortfolioComponent,
         ProjectViewComponent
     ],
     imports: [
         CommonModule,
         IconModule,
         MarkdownModule.forRoot(),
-        ProjectRoutingModule,
+        PortfolioRoutingModule,
         SharedModule
     ]
 })
-export class ProjectModule { }
+export class PortfolioModule { }

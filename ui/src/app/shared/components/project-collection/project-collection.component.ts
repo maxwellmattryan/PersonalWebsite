@@ -22,6 +22,6 @@ export class ProjectCollectionComponent implements OnInit {
     ngOnInit(): void { }
 
     getProjectUrl(id: number, name: string): string {
-        return `projects/${this.seoService.getCanonicalUrl(id, name)}`;
+        return `portfolio/projects/${this.seoService.getCanonicalUrl(id, name)}`;
     }
 }
