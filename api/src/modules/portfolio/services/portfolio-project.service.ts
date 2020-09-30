@@ -40,7 +40,7 @@ export class PortfolioProjectService {
             .createQueryBuilder()
             .delete()
             .from(PortfolioProject)
-            .where('project.id = :id', { id: id })
+            .where('portfolio_project.id = :id', { id: id })
             .execute();
     }
 

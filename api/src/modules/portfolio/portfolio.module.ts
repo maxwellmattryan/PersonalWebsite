@@ -9,12 +9,12 @@ import { PortfolioProjectController } from './controllers/portfolio-project.cont
 import { PortfolioProfile } from './entities/portfolio-profile.entity';
 import { PortfolioProfileStatus } from './entities/portfolio-profile-status.entity';
 import { PortfolioProfileTechnology } from './entities/portfolio-profile-technology.entity';
-import { PortfolioProject } from '@api/features/portfolio/entities/portfolio-project.entity';
+import { PortfolioProject } from '@api/modules/portfolio/entities/portfolio-project.entity';
 
 import { PortfolioProfileService } from './services/portfolio-profile.service';
 import { PortfolioProfileStatusService } from './services/portfolio-profile-status.service';
 import { PortfolioProfileTechnologyService } from './services/portfolio-profile-technology.service';
-import { PortfolioProjectService } from '@api/features/portfolio/services/portfolio-project.service';
+import { PortfolioProjectService } from '@api/modules/portfolio/services/portfolio-project.service';
 
 @Module({
     imports: [

@@ -7,10 +7,10 @@ import { AuthModule } from '@api/core/auth/auth.module';
 import { DatabaseModule } from '@api/core/database/database.module';
 import { HttpModule } from '@api/core/http/http.module';
 
-import { AdminModule } from '@api/features/admin/admin.module';
-import { ApiModule } from '@api/features/api/api.module';
-import { BlogModule } from '@api/features/blog/blog.module';
-import { PortfolioModule } from '@api/features/portfolio/portfolio.module';
+import { AdminModule } from '@api/modules/admin/admin.module';
+import { ApiModule } from '@api/modules/api/api.module';
+import { BlogModule } from '@api/modules/blog/blog.module';
+import { PortfolioModule } from '@api/modules/portfolio/portfolio.module';
 
 @Module({
     imports: [

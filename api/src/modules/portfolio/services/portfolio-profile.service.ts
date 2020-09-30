@@ -54,7 +54,7 @@ export class PortfolioProfileService {
             .createQueryBuilder()
             .delete()
             .from(PortfolioProfile)
-            .where('profile.id = :id', { id: id })
+            .where('portfolio_profile.id = :id', { id: id })
             .execute();
     }
 
@@ -91,7 +91,7 @@ export class PortfolioProfileService {
         // CAUTION: This query relies on the status to be set to 1 = 'ACTIVE' and 2 = 'INACTIVE'
         // CAUTION: This query modifies all rows so it is important that the id being used actually exists
         await this.portfolioProfileRepository.query(`
-            UPDATE profile
+            UPDATE portfolio_profile
             SET status_id = CASE WHEN id = ${activeId} THEN 1 ELSE 2 END,
                 updated_at = now();
         `);

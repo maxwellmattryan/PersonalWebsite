@@ -17,7 +17,7 @@ export class PortfolioProfileTechnologyService {
             .createQueryBuilder()
             .delete()
             .from(PortfolioProfileTechnology)
-            .where('profile_technology.profile_id = :id', { id: profileId })
+            .where('portfolio_profile_technology.profile_id = :id', { id: profileId })
             .execute();
     }
 

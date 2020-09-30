@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
-import { BlogModule } from '@api/features/blog/blog.module';
-import { PortfolioModule } from '@api/features/portfolio/portfolio.module';
+import { BlogModule } from '@api/modules/blog/blog.module';
+import { PortfolioModule } from '@api/modules/portfolio/portfolio.module';
 
 import { ApiController } from './controllers/api.controller';
 

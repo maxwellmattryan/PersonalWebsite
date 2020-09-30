@@ -2,13 +2,13 @@ import { Controller, Get, HttpCode, Param, Query, Req } from '@nestjs/common';
 
 import { Request } from 'express';
 
-import { BlogPostService } from '@api/features/blog/services/blog-post.service';
-import { PortfolioProfileService } from '@api/features/portfolio/services/portfolio-profile.service';
-import { PortfolioProjectService } from '@api/features/portfolio/services/portfolio-project.service';
+import { BlogPostService } from '@api/modules/blog/services/blog-post.service';
+import { PortfolioProfileService } from '@api/modules/portfolio/services/portfolio-profile.service';
+import { PortfolioProjectService } from '@api/modules/portfolio/services/portfolio-project.service';
 
-import { BlogPostsWereNotFoundException } from '@api/features/blog/exceptions/blog-post.exception'
-import { ActivePortfolioProfileWasNotFoundException } from '@api/features/portfolio/exceptions/portfolio-profile.exception';
-import { PortfolioProjectsWereNotFoundException } from '@api/features/portfolio/exceptions/portfolio-project.exception';
+import { BlogPostsWereNotFoundException } from '@api/modules/blog/exceptions/blog-post.exception'
+import { ActivePortfolioProfileWasNotFoundException } from '@api/modules/portfolio/exceptions/portfolio-profile.exception';
+import { PortfolioProjectsWereNotFoundException } from '@api/modules/portfolio/exceptions/portfolio-project.exception';
 
 @Controller()
 export class ApiController {

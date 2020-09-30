@@ -5,7 +5,7 @@ import { Request } from 'express';
 import { AuthService } from '../services/auth.service';
 import { JwtAuthGuard } from '../jwt/jwt-auth.guard';
 import { NotAllowedToRegisterException, WrongCredentialsWereProvidedException } from '../exceptions/auth.exception';
-import { Admin } from '@api/features/admin/entities/admin.entity';
+import { Admin } from '@api/modules/admin/entities/admin.entity';
 
 @Controller('auth')
 export class AuthController {

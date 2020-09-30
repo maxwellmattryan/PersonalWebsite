@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, ManyToMany } from 'typeorm';
-import { BlogPost } from '@api/features/blog/entities/blog-post.entity';
+import { BlogPost } from '@api/modules/blog/entities/blog-post.entity';
 
 @Entity('blog_topic')
 export class BlogTopic {
