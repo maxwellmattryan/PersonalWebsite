@@ -7,14 +7,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
 
-import { environment } from '@app/environments/environment';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { CoreModule } from '@app/core/core.module';
-import { SharedModule } from '@app/shared/shared.module';
-import { MaterialModule } from '@app/modules/material/material.module';
+import { environment } from '@ui/environments/environment';
+import { CoreModule } from '@ui/core/core.module';
+import { SharedModule } from '@ui/shared/shared.module';
+import { MaterialModule } from '@ui/modules/material/material.module';
 
 export function markedOptionsFactory(): MarkedOptions {
     const renderer = new MarkedRenderer();

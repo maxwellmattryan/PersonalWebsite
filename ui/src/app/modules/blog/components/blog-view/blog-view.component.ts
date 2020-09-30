@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 
-import { BlogPost, BlogTopic } from '@app/shared/models';
-import { ApiService } from '@app/core/http/api.service';
-import { AuthService } from '@app/core/auth';
+import { BlogPost, BlogTopic } from '@ui/shared/models';
+import { ApiService } from '@ui/core/http/api.service';
+import { AuthService } from '@ui/core/auth';
 import {
     BlogService,
     ComparisonService,
     EditorService,
     NotificationService,
     TrackingService
-} from '@app/core/services';
-import { PortfolioProfileService } from '@app/modules/portfolio/services';
+} from '@ui/core/services';
+import { PortfolioProfileService } from '@ui/modules/portfolio/services';
 
 @Component({
     selector: 'app-blog-view',

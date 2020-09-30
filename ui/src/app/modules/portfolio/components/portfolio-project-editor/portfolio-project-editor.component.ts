@@ -4,21 +4,21 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { AuthService } from '@app/core/auth';
+import { AuthService } from '@ui/core/auth';
 import {
-    EditorService,
     NotificationService,
     ValidationService,
     ComparisonService,
     SeoService, TrackingService
-} from '@app/core/services';
+} from '@ui/core/services';
 import {
     PortfolioProfile,
     PortfolioProject
 } from '../../models';
 import {
     PortfolioProfileApiService,
-    PortfolioProjectApiService, PortfolioProjectEditorService
+    PortfolioProjectApiService,
+    PortfolioProjectEditorService
 } from '../../services';
 
 @Component({
@@ -37,10 +37,10 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
         private authService: AuthService,
         private cdRef: ChangeDetectorRef,
         private comparisonService: ComparisonService,
-        private portfolioProjectEditorService: PortfolioProjectEditorService,
         private notificationService: NotificationService,
         private portfolioProfileApiService: PortfolioProfileApiService,
         private portfolioProjectApiService: PortfolioProjectApiService,
+        private portfolioProjectEditorService: PortfolioProjectEditorService,
         private seoService: SeoService,
         private titleService: Title,
         public trackingService: TrackingService,

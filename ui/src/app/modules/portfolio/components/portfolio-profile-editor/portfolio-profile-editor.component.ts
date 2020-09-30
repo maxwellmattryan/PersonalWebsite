@@ -4,25 +4,25 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Title } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { AuthService } from '@app/core/auth';
+import { AuthService } from '@ui/core/auth';
 import {
     ComparisonService,
     EditorService,
     NotificationService,
     ValidationService,
     TrackingService
-} from '@app/core/services';
+} from '@ui/core/services';
 import {
     PortfolioProfile,
     PortfolioProfileStatus,
     PortfolioProfileTechnology,
     PortfolioProject
-} from '@app/modules/portfolio/models';
+} from '@ui/modules/portfolio/models';
 import {
     PortfolioProfileApiService,
     PortfolioProfileService,
     PortfolioProjectApiService
-} from '@app/modules/portfolio/services';
+} from '@ui/modules/portfolio/services';
 
 @Component({
     selector: 'app-portfolio-profile-editor',

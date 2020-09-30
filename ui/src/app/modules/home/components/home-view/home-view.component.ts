@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 
-import { Homepage } from '@app/shared/interfaces';
-import { ApiService } from '@app/core/http';
-import { AuthService } from '@app/core/auth';
-import { NotificationService, ComparisonService } from '@app/core/services';
-import { PortfolioProfileService } from '@app/modules/portfolio/services';
+import { Homepage } from '@ui/shared/interfaces';
+import { ApiService } from '@ui/core/http';
+import { AuthService } from '@ui/core/auth';
+import { NotificationService, ComparisonService } from '@ui/core/services';
+import { PortfolioProfileService } from '@ui/modules/portfolio/services';
 
 @Component({
     selector: 'app-home-view',

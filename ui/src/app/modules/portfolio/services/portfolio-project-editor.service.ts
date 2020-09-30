@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { PortfolioProject } from '@app/modules/portfolio/models';
+import { PortfolioProject } from '@ui/modules/portfolio/models';
 
 @Injectable({
   providedIn: 'root'

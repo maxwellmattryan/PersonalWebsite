@@ -3,15 +3,15 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import { AuthApiService, AuthService } from '@app/core/auth';
+import { AuthApiService, AuthService } from '@ui/core/auth';
 import {
     NotificationService,
     ComparisonService,
     EditorService,
     TrackingService
-} from '@app/core/services';
-import { PortfolioProfile, PortfolioProfileStatus } from '@app/modules/portfolio/models';
-import { PortfolioProfileApiService, PortfolioProfileService } from '@app/modules/portfolio/services';
+} from '@ui/core/services';
+import { PortfolioProfile, PortfolioProfileStatus } from '@ui/modules/portfolio/models';
+import { PortfolioProfileApiService, PortfolioProfileService } from '@ui/modules/portfolio/services';
 
 @Component({
     selector: 'app-dashboard',

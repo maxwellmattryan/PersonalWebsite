@@ -2,10 +2,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Admin } from '@app/shared/interfaces';
-import { ApiService } from '@app/core/http';
-import { AuthApiService, AuthService } from '@app/core/auth';
-import { NotificationService, ValidationService } from '@app/core/services';
+import { AuthApiService, AuthService } from '@ui/core/auth';
+import { NotificationService, ValidationService } from '@ui/core/services';
+import { Admin } from '@ui/shared/interfaces';
 
 @Component({
     selector: 'app-login',

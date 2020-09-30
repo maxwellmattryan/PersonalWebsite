@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { environment } from '@app/environments/environment';
-import { Admin } from '@app/shared/interfaces';
+import { environment } from '@ui/environments/environment';
+import { Admin } from '@ui/shared/interfaces';
 
 import { ApiService } from '../http';
 

@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { ApiService } from '@app/core/http';
-import { environment } from '@app/environments/environment';
-import { PortfolioProject } from '@app/modules/portfolio/models';
+import { ApiService } from '@ui/core/http';
+import { environment } from '@ui/environments/environment';
+import { PortfolioProject } from '@ui/modules/portfolio/models';
 
 @Injectable({
   providedIn: 'root'

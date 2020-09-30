@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { PortfolioProfileTechnology } from '@app/modules/portfolio/models';
-import { TrackingService } from '@app/core/services';
+import { PortfolioProfileTechnology } from '@ui/modules/portfolio/models';
+import { TrackingService } from '@ui/core/services';
 
 @Component({
     selector: 'app-about',

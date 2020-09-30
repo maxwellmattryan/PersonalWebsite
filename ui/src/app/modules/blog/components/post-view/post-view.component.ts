@@ -3,9 +3,9 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { BlogPost } from '@app/shared/models';
-import { ApiService } from '@app/core/http';
-import { AuthService } from '@app/core/auth';
+import { BlogPost } from '@ui/shared/models';
+import { ApiService } from '@ui/core/http';
+import { AuthService } from '@ui/core/auth';
 import {
     BlogService,
     ComparisonService,
@@ -13,7 +13,7 @@ import {
     NotificationService,
     SeoService,
     TrackingService
-} from '@app/core/services';
+} from '@ui/core/services';
 
 @Component({
     selector: 'app-post-view',

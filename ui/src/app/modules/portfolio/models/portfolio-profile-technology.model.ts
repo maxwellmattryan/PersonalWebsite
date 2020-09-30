@@ -1,4 +1,4 @@
-import { Deserializable } from '@app/shared/models/deserializable.model';
+import { Deserializable } from '@ui/shared/models/deserializable.model';
 
 export class PortfolioProfileTechnology implements Deserializable {
     constructor(partial: Partial<PortfolioProfileTechnology>) {

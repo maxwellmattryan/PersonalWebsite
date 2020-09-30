@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { environment } from '@app/environments/environment';
+import { environment } from '@ui/environments/environment';
 import {
     BlogPost,
     BlogTopic,
     BlogPostStatus,
     BlogAuthor,
-} from '@app/shared/models';
+} from '@ui/shared/models';
 
 @Injectable({
     providedIn: 'root'

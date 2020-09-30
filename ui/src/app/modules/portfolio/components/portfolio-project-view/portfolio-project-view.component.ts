@@ -3,8 +3,8 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { AuthService } from '@app/core/auth';
-import { EditorService, NotificationService, SeoService } from '@app/core/services';
+import { AuthService } from '@ui/core/auth';
+import { NotificationService, SeoService } from '@ui/core/services';
 
 import { PortfolioProject } from '../../models';
 import { PortfolioProjectApiService, PortfolioProjectEditorService } from '../../services';
@@ -22,9 +22,9 @@ export class PortfolioProjectViewComponent implements OnInit {
 
     constructor(
         private authService: AuthService,
-        private portfolioProjectEditorService: PortfolioProjectEditorService,
         private notificationService: NotificationService,
         private portfolioProjectApiService: PortfolioProjectApiService,
+        private portfolioProjectEditorService: PortfolioProjectEditorService,
         public seoService: SeoService,
         private titleService: Title,
         private router: Router

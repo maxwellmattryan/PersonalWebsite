@@ -4,16 +4,16 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { AuthService } from '@app/core/auth';
-import { ApiService } from '@app/core/http';
+import { AuthService } from '@ui/core/auth';
+import { ApiService } from '@ui/core/http';
 import {
     EditorService,
     NotificationService,
     ValidationService,
     ComparisonService,
     SeoService, TrackingService
-} from '@app/core/services';
-import { BlogPost, BlogTopic, BlogPostStatus, BlogAuthor } from '@app/shared/models';
+} from '@ui/core/services';
+import { BlogPost, BlogTopic, BlogPostStatus, BlogAuthor } from '@ui/shared/models';
 
 @Component({
     selector: 'app-blog-post-editor',

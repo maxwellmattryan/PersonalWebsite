@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { BlogPost, BlogTopic } from '@app/shared/models';
-import { PortfolioProfile, PortfolioProfileTechnology, PortfolioProject } from '@app/modules/portfolio/models';
+import { BlogPost, BlogTopic } from '@ui/shared/models';
+import { PortfolioProfile, PortfolioProfileTechnology, PortfolioProject } from '@ui/modules/portfolio/models';
 
 @Injectable({
     providedIn: 'root'

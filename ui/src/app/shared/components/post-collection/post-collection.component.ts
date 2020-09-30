@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { BlogPost } from '@app/shared/models';
-import { BlogService, ComparisonService, SeoService, TrackingService } from '@app/core/services';
+import { BlogPost } from '@ui/shared/models';
+import { BlogService, ComparisonService, SeoService, TrackingService } from '@ui/core/services';
 
 @Component({
     selector: 'app-post-collection',

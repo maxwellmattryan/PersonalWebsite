@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { MarkdownModule } from 'ngx-markdown';
 
-import { SharedModule } from '@app/shared/shared.module';
+import { SharedModule } from '@ui/shared/shared.module';
 
 import { BlogComponent } from './blog.component';
 import { BlogRoutingModule } from './blog-routing.module';

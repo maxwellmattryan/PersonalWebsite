@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { ApiService } from '@app/core/http';
-import { AuthService } from '@app/core/auth';
-import { EditorService, NotificationService } from '@app/core/services';
-import { BlogTopic } from '@app/shared/models';
+import { ApiService } from '@ui/core/http';
+import { AuthService } from '@ui/core/auth';
+import { EditorService, NotificationService } from '@ui/core/services';
+import { BlogTopic } from '@ui/shared/models';
 
 @Component({
     selector: 'app-blog-topic-editor',
