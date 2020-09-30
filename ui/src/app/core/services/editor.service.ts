@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { BlogPost, BlogTopic } from '@app/shared/models';
-import { PortfolioProject, PortfolioProfile } from '@app/modules/portfolio/models';
+import { PortfolioProfile } from '@app/modules/portfolio/models';
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +9,6 @@ import { PortfolioProject, PortfolioProfile } from '@app/modules/portfolio/model
 export class EditorService {
     private post: BlogPost;
     private profile: PortfolioProfile;
-    private project: PortfolioProject;
     private topic: BlogTopic;
 
     constructor() { }
@@ -41,17 +40,7 @@ export class EditorService {
     }
 
     // PROJECT
-    getProject(): PortfolioProject {
-        return this.project;
-    }
 
-    hasProject(): boolean {
-        return this.project !== undefined;
-    }
-
-    setProject(project: PortfolioProject): void {
-        this.project = project;
-    }
 
     // TOPIC
     getTopic(): BlogTopic {

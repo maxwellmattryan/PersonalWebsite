@@ -12,14 +12,12 @@ import {
     BlogPostEditorComponent,
     BlogTopicEditorComponent,
     PortfolioProfileEditorComponent,
-    PortfolioProjectEditorComponent
 } from './components';
 
 @NgModule({
     declarations: [
         EditorComponent, 
         BlogPostEditorComponent,
-        PortfolioProjectEditorComponent,
         BlogTopicEditorComponent,
         PortfolioProfileEditorComponent
     ],

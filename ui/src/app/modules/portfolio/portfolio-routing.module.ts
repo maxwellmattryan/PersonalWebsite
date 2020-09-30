@@ -3,15 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { PortfolioComponent } from './portfolio.component';
 
-import {
-    PortfolioProjectViewComponent
-} from './components';
+import { PortfolioProjectEditorComponent, PortfolioProjectViewComponent } from './components';
 
 export const routes: Routes = [
     {
         path: '',
         component: PortfolioComponent,
         children: [
+            {
+                path: 'projects/editor',
+                component: PortfolioProjectEditorComponent
+            },
             {
                 path: 'projects/:id/:uri',
                 component: PortfolioProjectViewComponent

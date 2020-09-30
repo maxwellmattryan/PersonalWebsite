@@ -15,16 +15,15 @@ import {
 import {
     PortfolioProfile,
     PortfolioProject
-} from '@app/modules/portfolio/models';
+} from '../../models';
 import {
     PortfolioProfileApiService,
-    PortfolioProjectApiService
-} from '@app/modules/portfolio/services';
+    PortfolioProjectApiService, PortfolioProjectEditorService
+} from '../../services';
 
 @Component({
     selector: 'app-portfolio-project-editor',
     templateUrl: './portfolio-project-editor.component.html',
-    styleUrls: ['../../editor.component.scss']
 })
 export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
     profileData: PortfolioProfile[] = [];
@@ -32,15 +31,13 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
 
     projectForm: FormGroup;
 
-    @Input() id: number;
-
     isLoaded: boolean = false;
 
     constructor(
         private authService: AuthService,
         private cdRef: ChangeDetectorRef,
         private comparisonService: ComparisonService,
-        private editorService: EditorService,
+        private portfolioProjectEditorService: PortfolioProjectEditorService,
         private notificationService: NotificationService,
         private portfolioProfileApiService: PortfolioProfileApiService,
         private portfolioProjectApiService: PortfolioProjectApiService,
@@ -53,7 +50,7 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
     ) { }
 
     ngOnDestroy(): void {
-        this.editorService.setProject(null);
+        this.portfolioProjectEditorService.setProject(null);
     }
 
     ngOnInit(): void {
@@ -73,7 +70,7 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
 
     private setPageHideEvent(): void {
         window.onpagehide = () => {
-            this.editorService.setProject(null);
+            this.portfolioProjectEditorService.setProject(null);
         };
     }
 
@@ -85,14 +82,14 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadProjectData(): void {
-        this.projectData = this.editorService.getProject();
+        this.projectData = this.portfolioProjectEditorService.getProject();
     }
 
     private loadProfileData(): void {
         this.portfolioProfileApiService.getProfiles().subscribe((res: PortfolioProfile[]) => {
             this.profileData = res.sort(this.comparisonService.profiles);
 
-            if(this.id && this.projectData) {
+            if(this.projectData) {
                 this.setProfileControls(this.projectData.profiles.map(p => p.id));
             } else {
                 this.setProfileControls([]);
@@ -140,14 +137,14 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
 
         if(project.id === undefined) {
             this.portfolioProjectApiService.createProject(project).subscribe((res: PortfolioProject) => {
-                this.notificationService.createNotification(`Successfully created new project!`);
+                this.notificationService.createNotification(`Successfully created new portfolio project!`);
                 this.router.navigate([`projects/${this.seoService.getCanonicalUrl(res.id, res.name)}`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
             this.portfolioProjectApiService.updateProject(project).subscribe((res: PortfolioProject) => {
-                this.notificationService.createNotification(`Successfully updated existing project!`);
+                this.notificationService.createNotification(`Successfully updated existing portfolio project!`);
                 this.router.navigate([`projects/${this.seoService.getCanonicalUrl(res.id, res.name)}`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
