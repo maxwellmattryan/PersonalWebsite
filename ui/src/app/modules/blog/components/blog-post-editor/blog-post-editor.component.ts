@@ -13,12 +13,12 @@ import {
     ComparisonService,
     SeoService, TrackingService
 } from '@ui/core/services';
-import { BlogPost, BlogTopic, BlogPostStatus, BlogAuthor } from '@ui/shared/models';
+
+import { BlogPost, BlogTopic, BlogPostStatus, BlogAuthor } from '../../models';
 
 @Component({
     selector: 'app-blog-post-editor',
-    templateUrl: './blog-post-editor.component.html',
-    styleUrls: ['../../editor.component.scss']
+    templateUrl: './blog-post-editor.component.html'
 })
 export class BlogPostEditorComponent implements OnDestroy, OnInit {
     postData: BlogPost;
@@ -27,8 +27,6 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
     topicData: BlogTopic[] = [];
 
     postForm: FormGroup;
-
-    @Input() id: number;
 
     isLoaded: boolean = false;
 

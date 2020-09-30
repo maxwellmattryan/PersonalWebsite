@@ -5,7 +5,7 @@
     <h2 class='post__subtitle'>{{ post.subtitle }}</h2>
 
     <div class='post__btn-container' *ngIf='isAdmin'>
-        <a class='btn post__btn' (click)='sendPostToEditor()' routerLink='/editor' [queryParams]='{type: "post", id: post.id}'>
+        <a class='btn post__btn' (click)='sendPostToEditor()' routerLink='/blog/posts/editor'>
             &#x270F;
         </a>
         <a class='btn post__btn btn--warn' (click)='deletePost(post.id)' routerLink='/blog'>
@@ -16,7 +16,7 @@
     <p class='post__date' [innerHtml]='"Updated: " + seoService.getFormattedDate(post.updated_at)'></p>
     
     <div class='post__topic-container'>
-        <a class='post__topic-item' (click)='blogService.setActiveTopic(topic)' [routerLink]="['/blog']" *ngFor='let topic of post.topics trackBy: this.trackingService.objectById'>
+        <a class='post__topic-item' (click)='blogTopicService.setActiveTopic(topic)' [routerLink]="['/blog']" *ngFor='let topic of post.topics trackBy: this.trackingService.objectById'>
             {{ topic.name }}
         </a>
     </div>

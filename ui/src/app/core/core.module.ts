@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { ApiService } from './http';
 import { AuthService, AuthInterceptorService } from './auth';
 import {
-    BlogService,
     ComparisonService,
     EditorService,
     NotificationService,
@@ -30,7 +29,6 @@ import {
         },
         ApiService,
         AuthService,
-        BlogService,
         ComparisonService,
         EditorService,
         NotificationService,

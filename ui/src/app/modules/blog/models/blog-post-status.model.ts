@@ -1,4 +1,4 @@
-import { Deserializable } from './deserializable.model';
+import { Deserializable } from '@ui/shared/models/deserializable.model';
 
 export class BlogPostStatus implements Deserializable {
     constructor(partial: Partial<BlogPostStatus>) {

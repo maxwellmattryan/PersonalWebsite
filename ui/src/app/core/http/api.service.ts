@@ -9,7 +9,7 @@ import {
     BlogTopic,
     BlogPostStatus,
     BlogAuthor,
-} from '@ui/shared/models';
+} from '@ui/modules/blog/models';
 
 @Injectable({
     providedIn: 'root'

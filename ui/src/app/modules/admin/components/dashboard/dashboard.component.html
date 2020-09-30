@@ -11,10 +11,10 @@
     <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
         <h2>Blog</h2>
         <br>
-        <a class='btn dashboard__btn' [routerLink]="['/editor']" [queryParams]='{type: "post"}'>
+        <a class='btn dashboard__btn' routerLink='/blog/posts/editor'>
             Create Post
         </a>
-        <a class='btn dashboard__btn' [routerLink]="['/editor']" [queryParams]='{type: "topic"}'>
+        <a class='btn dashboard__btn' routerLink='/blog/topics/editor'>
             Create Topic
         </a>
         <br>

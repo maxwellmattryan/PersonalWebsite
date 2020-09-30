@@ -3,11 +3,9 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { BlogPost } from '@ui/shared/models';
 import { ApiService } from '@ui/core/http';
 import { AuthService } from '@ui/core/auth';
 import {
-    BlogService,
     ComparisonService,
     EditorService,
     NotificationService,
@@ -15,12 +13,15 @@ import {
     TrackingService
 } from '@ui/core/services';
 
+import { BlogPost } from '../../models';
+import { BlogTopicService } from '../../services';
+
 @Component({
-    selector: 'app-post-view',
-    templateUrl: './post-view.component.html',
-    styleUrls: ['./post-view.component.scss']
+    selector: 'app-blog-post-view',
+    templateUrl: './blog-post-view.component.html',
+    styleUrls: ['./blog-post-view.component.scss']
 })
-export class PostViewComponent implements OnInit {
+export class BlogPostViewComponent implements OnInit {
     isAdmin: boolean = false;
     isLoaded: boolean = false;
 
@@ -29,7 +30,7 @@ export class PostViewComponent implements OnInit {
     constructor(
         private apiService: ApiService,
         private authService: AuthService,
-        public blogService: BlogService,
+        public blogTopicService: BlogTopicService,
         private comparisonService: ComparisonService,
         private editorService: EditorService,
         private notificationService: NotificationService,

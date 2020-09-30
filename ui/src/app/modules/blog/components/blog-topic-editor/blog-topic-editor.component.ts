@@ -7,18 +7,16 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from '@ui/core/http';
 import { AuthService } from '@ui/core/auth';
 import { EditorService, NotificationService } from '@ui/core/services';
-import { BlogTopic } from '@ui/shared/models';
+
+import { BlogTopic } from '../../models';
 
 @Component({
     selector: 'app-blog-topic-editor',
-    templateUrl: './blog-topic-editor.component.html',
-    styleUrls: ['../../editor.component.scss']
+    templateUrl: './blog-topic-editor.component.html'
 })
 export class BlogTopicEditorComponent implements OnInit, OnDestroy {
     topicData: BlogTopic;
     topicForm: FormGroup;
-
-    @Input() id: number;
 
     isLoaded: boolean = false;
 

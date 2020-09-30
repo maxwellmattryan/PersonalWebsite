@@ -16,10 +16,6 @@ const routes: Routes = [
         loadChildren: () => import('@ui/modules/blog/blog.module').then(m => m.BlogModule)
     },
     {
-        path: 'editor',
-        loadChildren: () => import('@ui/modules/editor/editor.module').then(m => m.EditorModule)
-    },
-    {
         path: 'portfolio',
         loadChildren: () => import('@ui/modules/portfolio/portfolio.module').then(m => m.PortfolioModule)
     },

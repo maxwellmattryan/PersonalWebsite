@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 
-import { BlogPost, BlogTopic } from '@ui/shared/models';
 import { ApiService } from '@ui/core/http/api.service';
 import { AuthService } from '@ui/core/auth';
 import {
-    BlogService,
     ComparisonService,
     EditorService,
     NotificationService,
     TrackingService
 } from '@ui/core/services';
 import { PortfolioProfileService } from '@ui/modules/portfolio/services';
+
+import { BlogPost, BlogTopic } from '../../models';
+import { BlogTopicService } from '../../services';
 
 @Component({
     selector: 'app-blog-view',
@@ -31,7 +32,7 @@ export class BlogViewComponent implements OnInit {
     constructor(
         private apiService: ApiService,
         private authService: AuthService,
-        public blogService: BlogService,
+        public blogTopicService: BlogTopicService,
         private comparisonService: ComparisonService,
         private editorService: EditorService,
         private notificationService: NotificationService,
@@ -50,10 +51,10 @@ export class BlogViewComponent implements OnInit {
                 this.posts = res;
                 this.topics = this.getTopicsFromPosts().sort(this.comparisonService.topics);
 
-                if(this.blogService.hasActiveTopic()) {
-                    this.filterPosts(this.blogService.getActiveTopicId());
-                    this.blogService.setActiveTopic(null);
-                    this.blogService.getActiveTopicId();
+                if(this.blogTopicService.hasActiveTopic()) {
+                    this.filterPosts(this.blogTopicService.getActiveTopicId());
+                    this.blogTopicService.setActiveTopic(null);
+                    this.blogTopicService.getActiveTopicId();
                 }
 
                 this.isLoaded = true;
@@ -65,9 +66,9 @@ export class BlogViewComponent implements OnInit {
                 this.posts = res;
                 this.topics = this.getTopicsFromPosts().sort(this.comparisonService.topics);
 
-                if(this.blogService.hasActiveTopic()) {
-                    this.filterPosts(this.blogService.getActiveTopicId());
-                    this.blogService.setActiveTopic(null);
+                if(this.blogTopicService.hasActiveTopic()) {
+                    this.filterPosts(this.blogTopicService.getActiveTopicId());
+                    this.blogTopicService.setActiveTopic(null);
                 }
 
                 this.isLoaded = true;

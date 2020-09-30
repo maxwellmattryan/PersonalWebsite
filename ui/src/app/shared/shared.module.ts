@@ -13,7 +13,6 @@ import {
     HeaderComponent,
     LandingComponent,
     LoadingSpinnerComponent,
-    PostCollectionComponent
 } from './components';
 
 @NgModule({
@@ -23,7 +22,6 @@ import {
         HeaderComponent,
         LandingComponent,
         LoadingSpinnerComponent,
-        PostCollectionComponent
     ],
     imports: [
         CommonModule,
@@ -38,7 +36,6 @@ import {
         HeaderComponent,
         LandingComponent,
         LoadingSpinnerComponent,
-        PostCollectionComponent
     ]
 })
 export class SharedModule { }

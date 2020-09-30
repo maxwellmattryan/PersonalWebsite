@@ -36,8 +36,6 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
 
     profileForm: FormGroup;
 
-    @Input() id: number;
-
     isLoaded: boolean = false;
 
     constructor(
@@ -100,7 +98,7 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
         this.portfolioProjectApiService.getProjects().subscribe((res: PortfolioProject[]) => {
             this.projectData = res.sort(this.comparisonService.projects);
 
-            if(this.id && this.profileData) {
+            if(this.profileData) {
                 this.setProjectControls(this.profileData.projects.map(p => p.id));
             } else {
                 this.setProjectControls([]);

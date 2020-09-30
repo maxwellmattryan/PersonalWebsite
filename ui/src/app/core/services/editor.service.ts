@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { BlogPost, BlogTopic } from '@ui/shared/models';
+import { BlogPost, BlogTopic } from '@ui/modules/blog/models';
 import { PortfolioProfile } from '@ui/modules/portfolio/models';
 
 @Injectable({

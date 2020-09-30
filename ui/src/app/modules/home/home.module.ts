@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { BlogModule } from '@ui/modules/blog/blog.module';
 import { PortfolioModule } from '@ui/modules/portfolio/portfolio.module';
 import { SharedModule } from '@ui/shared/shared.module';
 
@@ -19,6 +20,7 @@ import {
     imports: [
         CommonModule,
         HomeRoutingModule,
+        BlogModule,
         PortfolioModule,
         SharedModule
     ]

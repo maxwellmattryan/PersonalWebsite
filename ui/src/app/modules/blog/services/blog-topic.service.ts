@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { BlogTopic } from '@ui/shared/models';
+import { BlogTopic } from '../models';
 
 @Injectable({
     providedIn: 'root'
 })
-export class BlogService {
+export class BlogTopicService {
     private activeTopic: BlogTopic;
 
     constructor() { }

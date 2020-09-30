@@ -1,15 +1,17 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { BlogPost } from '@ui/shared/models';
-import { BlogService, ComparisonService, SeoService, TrackingService } from '@ui/core/services';
+import { ComparisonService, SeoService, TrackingService } from '@ui/core/services';
+
+import { BlogPost } from '../../models';
+import { BlogTopicService } from '../../services';
 
 @Component({
-    selector: 'app-post-collection',
-    templateUrl: './post-collection.component.html',
-    styleUrls: ['./post-collection.component.scss'],
+    selector: 'app-blog-post-collection',
+    templateUrl: './blog-post-collection.component.html',
+    styleUrls: ['./blog-post-collection.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PostCollectionComponent implements OnInit {
+export class BlogPostCollectionComponent implements OnInit {
     @Input() posts: BlogPost[];
     
     @Input() showPreview: boolean;
@@ -22,7 +24,7 @@ export class PostCollectionComponent implements OnInit {
     nPostsToDisplay: number = 5;
 
     constructor(
-        public blogService: BlogService,
+        public blogTopicService: BlogTopicService,
         private comparisonService: ComparisonService,
         public seoService: SeoService,
         public trackingService: TrackingService
