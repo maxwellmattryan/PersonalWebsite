@@ -7,7 +7,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:prod": "ng run ui:serve -c=${NODE_ENV:=production}",
+    "start:prod": "ng serve --prod -c=${NODE_ENV:=production}",
     "build": "ng build",
     "build:prod": "ng build --prod -c=${NODE_ENV:=production}",
     "test": "ng test",
@@ -27,8 +27,6 @@
     "@angular/platform-browser-dynamic": "~10.1.2",
     "@angular/router": "~10.1.2",
     "@angular/service-worker": "^10.1.2",
-    "@ngstack/code-editor": "^1.0.0",
-    "angular-markdown-editor": "^2.0.2",
     "ngx-markdown": "^10.1.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
