@@ -5,30 +5,30 @@ import { Repository } from 'typeorm';
 
 import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
 import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
-import { ProjectAlreadyExistsException } from '../exceptions/project.exception';
+import { PortfolioProjectAlreadyExistsException } from '../exceptions/portfolio-project.exception';
 
-import { Project } from '../entities/project.entity';
+import { PortfolioProject } from '../entities/portfolio-project.entity';
 
 @Injectable()
-export class ProjectService {
+export class PortfolioProjectService {
     constructor(
-        @InjectRepository(Project)
-        private readonly projectRepository: Repository<Project>
+        @InjectRepository(PortfolioProject)
+        private readonly portfolioProjectRepository: Repository<PortfolioProject>
     ) { }
 
     public async existsInTable(id: number): Promise<boolean> {
-        return await this.projectRepository
+        return await this.portfolioProjectRepository
             .createQueryBuilder('p')
             .where('p.id = :id', { id: id })
             .getCount() > 0;
     }
 
-    public async createProject(projectData: Project): Promise<Project> {
-        const project: Project = this.projectRepository.create(projectData);
-        return await this.projectRepository.save(project)
+    public async createProject(projectData: PortfolioProject): Promise<PortfolioProject> {
+        const project: PortfolioProject = this.portfolioProjectRepository.create(projectData);
+        return await this.portfolioProjectRepository.save(project)
             .catch((error) => {
                 if(error.code === PostgresErrorCodes.UNIQUE_VIOLATION) {
-                    throw new ProjectAlreadyExistsException();
+                    throw new PortfolioProjectAlreadyExistsException();
                 } else {
                     throw new InternalServerErrorException();
                 }
@@ -36,38 +36,38 @@ export class ProjectService {
     }
 
     public async deleteProject(id: number): Promise<void> {
-        await this.projectRepository
+        await this.portfolioProjectRepository
             .createQueryBuilder()
             .delete()
-            .from(Project)
+            .from(PortfolioProject)
             .where('project.id = :id', { id: id })
             .execute();
     }
 
-    public async getProject(id: number): Promise<Project> {
-        return await this.projectRepository
+    public async getProject(id: number): Promise<PortfolioProject> {
+        return await this.portfolioProjectRepository
             .createQueryBuilder('p')
             .leftJoinAndSelect('p.profiles', 'prf')
             .where('p.id = :id', { id: id })
             .getOne();
     }
 
-    public async getProjects(): Promise<Project[]> {
-        return await this.projectRepository
+    public async getProjects(): Promise<PortfolioProject[]> {
+        return await this.portfolioProjectRepository
             .createQueryBuilder('p')
             .getMany();
     }
 
-    public async getProjectsForProfile(profileId: number): Promise<Project[]> {
-        return await this.projectRepository
+    public async getProjectsForProfile(profileId: number): Promise<PortfolioProject[]> {
+        return await this.portfolioProjectRepository
             .createQueryBuilder('p')
             .innerJoinAndSelect('p.profiles', 'prf')
             .where('prf.id = :id', { id: profileId })
             .getMany();
     }
 
-    public async updateProject(id: number, projectData: Project): Promise<Project> {
-        await this.projectRepository.save(projectData);
+    public async updateProject(id: number, projectData: PortfolioProject): Promise<PortfolioProject> {
+        await this.portfolioProjectRepository.save(projectData);
 
         return await this.getProject(id);
     }

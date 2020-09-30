@@ -3,26 +3,26 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
-import { ProfileTechnology } from '../entities/profile-technology.entity';
+import { PortfolioProfileTechnology } from '../entities/portfolio-profile-technology.entity';
 
 @Injectable()
-export class ProfileTechnologyService {
+export class PortfolioProfileTechnologyService {
     constructor(
-        @InjectRepository(ProfileTechnology)
-        private readonly profileTechnologyRepository: Repository<ProfileTechnology>
+        @InjectRepository(PortfolioProfileTechnology)
+        private readonly portfolioProfileTechnologyRepository: Repository<PortfolioProfileTechnology>
     ) { }
 
     public async deleteTechnologies(profileId: number): Promise<void> {
-        await this.profileTechnologyRepository
+        await this.portfolioProfileTechnologyRepository
             .createQueryBuilder()
             .delete()
-            .from(ProfileTechnology)
+            .from(PortfolioProfileTechnology)
             .where('profile_technology.profile_id = :id', { id: profileId })
             .execute();
     }
 
-    public async getTechnologies(profileId: number): Promise<ProfileTechnology[]> {
-        return await this.profileTechnologyRepository
+    public async getTechnologies(profileId: number): Promise<PortfolioProfileTechnology[]> {
+        return await this.portfolioProfileTechnologyRepository
             .createQueryBuilder('pt')
             .leftJoinAndSelect('pt.profile', 'p')
             .where('p.id = :id', { id: profileId })

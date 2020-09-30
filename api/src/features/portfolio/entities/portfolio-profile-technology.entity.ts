@@ -1,20 +1,20 @@
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Exclude } from 'class-transformer';
 
-import { Profile } from './profile.entity';
+import { PortfolioProfile } from './portfolio-profile.entity';
 
-@Entity('profile_technology')
-export class ProfileTechnology {
-    constructor(partial: Partial<ProfileTechnology>) {
+@Entity('portfolio_profile_technology')
+export class PortfolioProfileTechnology {
+    constructor(partial: Partial<PortfolioProfileTechnology>) {
         Object.assign(this, partial);
     }
 
     @PrimaryGeneratedColumn()
     public id?: number;
 
-    @ManyToOne(type => Profile, p => p.technologies)
+    @ManyToOne(type => PortfolioProfile, p => p.technologies)
     @Exclude()
-    public profile: Profile;
+    public profile: PortfolioProfile;
 
     @Column({ type: 'varchar', length: 50, nullable: false })
     public name: string;

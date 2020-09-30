@@ -4,26 +4,26 @@ import { Request } from 'express';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
-import { Profile } from '../entities/profile.entity';
-import { ProfileService } from '../services/profile.service';
+import { PortfolioProfile } from '../entities/portfolio-profile.entity';
+import { PortfolioProfileService } from '../services/portfolio-profile.service';
 import {
-    ProfilesWereNotFoundException,
-    ProfileWasNotFoundException,
-    ProfileCouldNotBeUpdatedException
-} from '../exceptions/profile.exception';
+    PortfolioProfilesWereNotFoundException,
+    PortfolioProfileWasNotFoundException,
+    PortfolioProfileCouldNotBeUpdatedException
+} from '../exceptions/portfolio-profile.exception';
 
-@Controller('profiles')
-export class ProfileController {
+@Controller('portfolio/profiles')
+export class PortfolioProfileController {
     constructor(
-        private readonly profileService: ProfileService
+        private readonly profileService: PortfolioProfileService
     ) { }
 
     @Get('')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    async getProfiles(@Req() request: Request): Promise<Profile[]> {
+    async getProfiles(@Req() request: Request): Promise<PortfolioProfile[]> {
         const profiles = await this.profileService.getProfiles();
-        if(profiles.length == 0) throw new ProfilesWereNotFoundException();
+        if(profiles.length == 0) throw new PortfolioProfilesWereNotFoundException();
 
         return profiles;
     }
@@ -31,16 +31,16 @@ export class ProfileController {
     @Post('')
     @HttpCode(201)
     @UseGuards(JwtAuthGuard)
-    async createProfile(@Req() request: Request): Promise<Profile> {
+    async createProfile(@Req() request: Request): Promise<PortfolioProfile> {
         return await this.profileService.createProfile(request.body);
     }
 
     @Put(':id')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    async updateProfile(@Param('id') id: number, @Req() request: Request): Promise<Profile> {
+    async updateProfile(@Param('id') id: number, @Req() request: Request): Promise<PortfolioProfile> {
         const profile = await this.profileService.updateProfile(id, request.body);
-        if(!profile) throw new ProfileCouldNotBeUpdatedException();
+        if(!profile) throw new PortfolioProfileCouldNotBeUpdatedException();
 
         return profile;
     }
@@ -49,7 +49,7 @@ export class ProfileController {
     @HttpCode(204)
     @UseGuards(JwtAuthGuard)
     async deleteProfile(@Param('id') id: number, @Req() request: Request): Promise<void> {
-        if(!(await this.profileService.existsInTable(id))) throw new ProfileWasNotFoundException();
+        if(!(await this.profileService.existsInTable(id))) throw new PortfolioProfileWasNotFoundException();
 
         await this.profileService.deleteProfile(id);
     }
@@ -57,10 +57,10 @@ export class ProfileController {
     @Put(':id/activate')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    async activateProfile(@Param('id') id: number, @Req() request: Request): Promise<Profile> {
+    async activateProfile(@Param('id') id: number, @Req() request: Request): Promise<PortfolioProfile> {
         // CAUTION: This check is required because all rows will be updated
         if(!(await this.profileService.existsInTable(id))) {
-            throw new ProfileWasNotFoundException();
+            throw new PortfolioProfileWasNotFoundException();
         }
 
         await this.profileService.resetProfileStatuses(id);

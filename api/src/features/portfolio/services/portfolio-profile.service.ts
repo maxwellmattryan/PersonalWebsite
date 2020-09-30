@@ -5,34 +5,34 @@ import { Repository } from 'typeorm';
 
 import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
 import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
-import { ProfileAlreadyExistsException } from '../exceptions/profile.exception';
+import { PortfolioProfileAlreadyExistsException } from '../exceptions/portfolio-profile.exception';
 
-import { Profile } from '../entities/profile.entity';
-import { ProfileTechnologyService } from '@api/features/profile/services/profile-technology.service';
-import { ProfileStatusService } from '@api/features/profile/services/profile-status.service';
+import { PortfolioProfile } from '../entities/portfolio-profile.entity';
+import { PortfolioProfileStatusService } from './portfolio-profile-status.service';
+import { PortfolioProfileTechnologyService } from './portfolio-profile-technology.service';
 
 @Injectable()
-export class ProfileService {
+export class PortfolioProfileService {
     constructor(
-        @InjectRepository(Profile)
-        private readonly profileRepository: Repository<Profile>,
-        private readonly profileStatusService: ProfileStatusService,
-        private readonly profileTechnologyService: ProfileTechnologyService
+        @InjectRepository(PortfolioProfile)
+        private readonly portfolioProfileRepository: Repository<PortfolioProfile>,
+        private readonly portfolioProfileStatusService: PortfolioProfileStatusService,
+        private readonly portfolioProfileTechnologyService: PortfolioProfileTechnologyService
     ) { }
 
     public async existsInTable(id: number): Promise<boolean> {
-        return await this.profileRepository
+        return await this.portfolioProfileRepository
             .createQueryBuilder('p')
             .where(`p.id = ${id}`)
             .getCount() > 0;
     }
 
-    public async createProfile(profileData: Profile): Promise<Profile> {
-        let profile: Profile = this.profileRepository.create(profileData);
-        profile = await this.profileRepository.save(profile)
+    public async createProfile(profileData: PortfolioProfile): Promise<PortfolioProfile> {
+        let profile: PortfolioProfile = this.portfolioProfileRepository.create(profileData);
+        profile = await this.portfolioProfileRepository.save(profile)
             .catch((error) => {
                 if(error.code === PostgresErrorCodes.UNIQUE_VIOLATION) {
-                    throw new ProfileAlreadyExistsException();
+                    throw new PortfolioProfileAlreadyExistsException();
                 } else {
                     throw new InternalServerErrorException();
                 }
@@ -48,18 +48,18 @@ export class ProfileService {
             await this.resetProfileStatuses((await this.getProfileByStatus('INACTIVE')).id);
         }
 
-        await this.profileTechnologyService.deleteTechnologies(id);
+        await this.portfolioProfileTechnologyService.deleteTechnologies(id);
 
-        await this.profileRepository
+        await this.portfolioProfileRepository
             .createQueryBuilder()
             .delete()
-            .from(Profile)
+            .from(PortfolioProfile)
             .where('profile.id = :id', { id: id })
             .execute();
     }
 
-    public async getProfile(id: number): Promise<Profile> {
-        return await this.profileRepository
+    public async getProfile(id: number): Promise<PortfolioProfile> {
+        return await this.portfolioProfileRepository
             .createQueryBuilder('p')
             .leftJoinAndSelect('p.technologies', 'pt')
             .leftJoinAndSelect('p.projects', 'prj')
@@ -68,8 +68,8 @@ export class ProfileService {
             .getOne();
     }
 
-    public async getProfileByStatus(status: string): Promise<Profile> {
-        return await this.profileRepository
+    public async getProfileByStatus(status: string): Promise<PortfolioProfile> {
+        return await this.portfolioProfileRepository
             .createQueryBuilder('p')
             .leftJoinAndSelect('p.technologies', 'pt')
             .leftJoinAndSelect('p.status', 'ps')
@@ -78,8 +78,8 @@ export class ProfileService {
             .getOne();
     }
 
-    public async getProfiles(): Promise<Profile[]> {
-        return await this.profileRepository
+    public async getProfiles(): Promise<PortfolioProfile[]> {
+        return await this.portfolioProfileRepository
             .createQueryBuilder('p')
             .leftJoinAndSelect('p.projects', 'prj')
             .leftJoinAndSelect('p.technologies', 'pt')
@@ -90,14 +90,14 @@ export class ProfileService {
     public async resetProfileStatuses(activeId: number): Promise<void> {
         // CAUTION: This query relies on the status to be set to 1 = 'ACTIVE' and 2 = 'INACTIVE'
         // CAUTION: This query modifies all rows so it is important that the id being used actually exists
-        await this.profileRepository.query(`
+        await this.portfolioProfileRepository.query(`
             UPDATE profile
             SET status_id = CASE WHEN id = ${activeId} THEN 1 ELSE 2 END,
                 updated_at = now();
         `);
     }
 
-    public async updateProfile(id: number, profileData: Profile): Promise<Profile> {
+    public async updateProfile(id: number, profileData: PortfolioProfile): Promise<PortfolioProfile> {
         // CAUTION: Make sure to activate profile if it was set in the editor and / or verify that at least one profile is always active
         if(id == (await this.getProfileByStatus('ACTIVE')).id) {
             if(profileData.status.status === 'INACTIVE') {
@@ -109,9 +109,9 @@ export class ProfileService {
             }
         }
 
-        await this.profileTechnologyService.deleteTechnologies(id);
+        await this.portfolioProfileTechnologyService.deleteTechnologies(id);
 
-        await this.profileRepository.save(profileData);
+        await this.portfolioProfileRepository.save(profileData);
 
         return await this.getProfile(id);
     }

@@ -10,8 +10,7 @@ import { HttpModule } from '@api/core/http/http.module';
 import { AdminModule } from '@api/features/admin/admin.module';
 import { ApiModule } from '@api/features/api/api.module';
 import { BlogModule } from '@api/features/blog/blog.module';
-import { ProfileModule } from '@api/features/profile/profile.module';
-import { ProjectModule } from '@api/features/project/project.module';
+import { PortfolioModule } from '@api/features/portfolio/portfolio.module';
 
 @Module({
     imports: [
@@ -36,8 +35,7 @@ import { ProjectModule } from '@api/features/project/project.module';
         AdminModule,
         ApiModule,
         BlogModule,
-        ProfileModule,
-        ProjectModule
+        PortfolioModule
     ],
     exports: [],
     controllers: [],

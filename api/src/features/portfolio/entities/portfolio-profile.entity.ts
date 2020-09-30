@@ -9,29 +9,28 @@ import {
     ManyToMany, JoinTable
 } from 'typeorm';
 
-import { ProfileStatus } from './profile-status.entity';
-import { ProfileTechnology } from './profile-technology.entity';
+import { PortfolioProfileStatus } from './portfolio-profile-status.entity';
+import { PortfolioProfileTechnology } from './portfolio-profile-technology.entity';
+import { PortfolioProject } from './portfolio-project.entity';
 
-import { Project } from '@api/features/project/entities/project.entity';
-
-@Entity('profile')
-export class Profile {
-    constructor(partial: Partial<Profile>) {
+@Entity('portfolio_profile')
+export class PortfolioProfile {
+    constructor(partial: Partial<PortfolioProfile>) {
         Object.assign(this, partial);
     }
 
     @PrimaryGeneratedColumn()
     public id?: number;
 
-    @ManyToOne(type => ProfileStatus, ps => ps.profiles)
-    public status: ProfileStatus;
+    @ManyToOne(type => PortfolioProfileStatus, ps => ps.profiles)
+    public status: PortfolioProfileStatus;
 
-    @OneToMany(type => ProfileTechnology, pt => pt.profile, { cascade: true, onDelete: 'CASCADE' })
-    public technologies: ProfileTechnology[];
+    @OneToMany(type => PortfolioProfileTechnology, pt => pt.profile, { cascade: true, onDelete: 'CASCADE' })
+    public technologies: PortfolioProfileTechnology[];
 
-    @ManyToMany(type => Project, p => p.profiles, { onDelete: 'CASCADE' })
+    @ManyToMany(type => PortfolioProject, p => p.profiles, { onDelete: 'CASCADE' })
     @JoinTable()
-    public projects: Project[];
+    public projects: PortfolioProject[];
 
     @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
     public name: string;
