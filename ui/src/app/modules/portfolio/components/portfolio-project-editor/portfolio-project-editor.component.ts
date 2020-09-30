@@ -8,7 +8,6 @@ import { AuthService } from '@ui/core/auth';
 import {
     NotificationService,
     ValidationService,
-    ComparisonService,
     SeoService, TrackingService
 } from '@ui/core/services';
 import {
@@ -17,6 +16,7 @@ import {
 } from '../../models';
 import {
     PortfolioProfileApiService,
+    PortfolioProfileComparisonService,
     PortfolioProjectApiService,
     PortfolioProjectEditorService
 } from '../../services';
@@ -36,9 +36,9 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
     constructor(
         private authService: AuthService,
         private cdRef: ChangeDetectorRef,
-        private comparisonService: ComparisonService,
         private notificationService: NotificationService,
         private portfolioProfileApiService: PortfolioProfileApiService,
+        private portfolioProfileComparisonService: PortfolioProfileComparisonService,
         private portfolioProjectApiService: PortfolioProjectApiService,
         private portfolioProjectEditorService: PortfolioProjectEditorService,
         private seoService: SeoService,
@@ -87,7 +87,7 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
 
     private loadProfileData(): void {
         this.portfolioProfileApiService.getProfiles().subscribe((res: PortfolioProfile[]) => {
-            this.profileData = res.sort(this.comparisonService.profiles);
+            this.profileData = res.sort(this.portfolioProfileComparisonService.profiles);
 
             if(this.projectData) {
                 this.setProfileControls(this.projectData.profiles.map(p => p.id));

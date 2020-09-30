@@ -6,14 +6,13 @@ import { ApiService } from '@ui/core/http/api.service';
 import { AuthService } from '@ui/core/auth';
 import {
     ComparisonService,
-    EditorService,
     NotificationService,
     TrackingService
 } from '@ui/core/services';
 import { PortfolioProfileService } from '@ui/modules/portfolio/services';
 
 import { BlogPost, BlogTopic } from '../../models';
-import { BlogTopicService } from '../../services';
+import { BlogTopicComparisonService, BlogTopicEditorService, BlogTopicService } from '../../services';
 
 @Component({
     selector: 'app-blog-view',
@@ -32,9 +31,9 @@ export class BlogViewComponent implements OnInit {
     constructor(
         private apiService: ApiService,
         private authService: AuthService,
+        private blogTopicComparisonService: BlogTopicComparisonService,
+        private blogTopicEditorService: BlogTopicEditorService,
         public blogTopicService: BlogTopicService,
-        private comparisonService: ComparisonService,
-        private editorService: EditorService,
         private notificationService: NotificationService,
         private portfolioProfileService: PortfolioProfileService,
         private titleService: Title,
@@ -49,7 +48,7 @@ export class BlogViewComponent implements OnInit {
         if(this.isAdmin) {
             this.apiService.getPosts(this.activeTopicId, false).subscribe((res: BlogPost[]) => {
                 this.posts = res;
-                this.topics = this.getTopicsFromPosts().sort(this.comparisonService.topics);
+                this.topics = this.getTopicsFromPosts().sort(this.blogTopicComparisonService.topics);
 
                 if(this.blogTopicService.hasActiveTopic()) {
                     this.filterPosts(this.blogTopicService.getActiveTopicId());
@@ -64,7 +63,7 @@ export class BlogViewComponent implements OnInit {
         } else {
             this.apiService.getPosts(this.activeTopicId).subscribe((res: BlogPost[]) => {
                 this.posts = res;
-                this.topics = this.getTopicsFromPosts().sort(this.comparisonService.topics);
+                this.topics = this.getTopicsFromPosts().sort(this.blogTopicComparisonService.topics);
 
                 if(this.blogTopicService.hasActiveTopic()) {
                     this.filterPosts(this.blogTopicService.getActiveTopicId());
@@ -109,7 +108,7 @@ export class BlogViewComponent implements OnInit {
     }
 
     sendTopicToEditor(topic: BlogTopic): void {
-        this.editorService.setTopic(topic);
+        this.blogTopicEditorService.setTopic(topic);
     }
 
     deleteTopic(topic: BlogTopic): void {

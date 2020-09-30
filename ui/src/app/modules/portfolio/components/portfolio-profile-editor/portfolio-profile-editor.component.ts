@@ -6,8 +6,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from '@ui/core/auth';
 import {
-    ComparisonService,
-    EditorService,
     NotificationService,
     ValidationService,
     TrackingService
@@ -20,8 +18,11 @@ import {
 } from '@ui/modules/portfolio/models';
 import {
     PortfolioProfileApiService,
+    PortfolioProfileComparisonService,
+    PortfolioProfileEditorService,
     PortfolioProfileService,
-    PortfolioProjectApiService
+    PortfolioProjectApiService,
+    PortfolioProjectComparisonService
 } from '@ui/modules/portfolio/services';
 
 @Component({
@@ -43,19 +44,20 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
         private changeDetectionRef: ChangeDetectorRef,
         private formBuilder: FormBuilder,
         private authService: AuthService,
-        private comparisonService: ComparisonService,
-        private editorService: EditorService,
         private notificationService: NotificationService,
         private portfolioProfileService: PortfolioProfileService,
         private portfolioProfileApiService: PortfolioProfileApiService,
+        private portfolioProfileComparisonService: PortfolioProfileComparisonService,
+        private portfolioProfileEditorService: PortfolioProfileEditorService,
         private portfolioProjectApiService: PortfolioProjectApiService,
+        private portfolioProjectComparisonService: PortfolioProjectComparisonService,
         private titleService: Title,
         public trackingService: TrackingService,
         private validationService: ValidationService
     ) { }
 
     ngOnDestroy(): void {
-        this.editorService.setProfile(null);
+        this.portfolioProfileEditorService.setProfile(null);
     }
 
     ngOnInit(): void {
@@ -77,7 +79,7 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
 
     private setPageHideEvent(): void {
         window.onpagehide = () => {
-            this.editorService.setProfile(null);
+            this.portfolioProfileEditorService.setProfile(null);
         }
     }
 
@@ -91,12 +93,12 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadProfileData(): void {
-        this.profileData = this.editorService.getProfile();
+        this.profileData = this.portfolioProfileEditorService.getProfile();
     }
 
     private loadProjectData(): void {
         this.portfolioProjectApiService.getProjects().subscribe((res: PortfolioProject[]) => {
-            this.projectData = res.sort(this.comparisonService.projects);
+            this.projectData = res.sort(this.portfolioProjectComparisonService.projects);
 
             if(this.profileData) {
                 this.setProjectControls(this.profileData.projects.map(p => p.id));
@@ -126,7 +128,7 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadTechnologyData(): void {
-        if(this.profileData) this.technologyData = this.profileData.technologies.sort(this.comparisonService.profileTechnologies);
+        if(this.profileData) this.technologyData = this.profileData.technologies.sort(this.portfolioProfileComparisonService.profileTechnologies);
     }
 
     private buildProfileForm(): void {

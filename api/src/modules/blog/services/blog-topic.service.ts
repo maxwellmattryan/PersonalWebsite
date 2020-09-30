@@ -55,6 +55,7 @@ export class BlogTopicService {
     public async getTopics(): Promise<BlogTopic[]> {
         return await this.blogTopicRepository
             .createQueryBuilder('bt')
+            .orderBy('bt.name', 'ASC')
             .getMany();
     }
 

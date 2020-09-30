@@ -6,9 +6,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { ApiService } from '@ui/core/http';
 import { AuthService } from '@ui/core/auth';
-import { EditorService, NotificationService } from '@ui/core/services';
+import { NotificationService } from '@ui/core/services';
 
 import { BlogTopic } from '../../models';
+import { BlogTopicEditorService } from '../../services';
 
 @Component({
     selector: 'app-blog-topic-editor',
@@ -23,7 +24,7 @@ export class BlogTopicEditorComponent implements OnInit, OnDestroy {
     constructor(
         private apiService: ApiService,
         private authService: AuthService,
-        private editorService: EditorService,
+        private blogTopicEditorService: BlogTopicEditorService,
         private formBuilder: FormBuilder,
         private notificationService: NotificationService,
         private titleService: Title,
@@ -31,7 +32,7 @@ export class BlogTopicEditorComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnDestroy(): void {
-        this.editorService.setTopic(null);
+        this.blogTopicEditorService.setTopic(null);
     }
 
     ngOnInit(): void {
@@ -51,7 +52,7 @@ export class BlogTopicEditorComponent implements OnInit, OnDestroy {
 
     private setPageHideEvent(): void {
         window.onpagehide = () => {
-            this.editorService.setPost(null);
+            this.blogTopicEditorService.setTopic(null);
         };
     }
 
@@ -62,7 +63,7 @@ export class BlogTopicEditorComponent implements OnInit, OnDestroy {
     }
 
     private loadTopicData(): void {
-        this.topicData = this.editorService.getTopic();
+        this.topicData = this.blogTopicEditorService.getTopic();
         this.isLoaded = true;
     }
 

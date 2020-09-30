@@ -6,15 +6,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from '@ui/core/http';
 import { AuthService } from '@ui/core/auth';
 import {
-    ComparisonService,
-    EditorService,
     NotificationService,
     SeoService,
     TrackingService
 } from '@ui/core/services';
 
 import { BlogPost } from '../../models';
-import { BlogTopicService } from '../../services';
+import { BlogPostEditorService, BlogTopicComparisonService, BlogTopicService } from '../../services';
 
 @Component({
     selector: 'app-blog-post-view',
@@ -30,9 +28,9 @@ export class BlogPostViewComponent implements OnInit {
     constructor(
         private apiService: ApiService,
         private authService: AuthService,
+        private blogPostEditorService: BlogPostEditorService,
+        private blogTopicComparisonService: BlogTopicComparisonService,
         public blogTopicService: BlogTopicService,
-        private comparisonService: ComparisonService,
-        private editorService: EditorService,
         private notificationService: NotificationService,
         public seoService: SeoService,
         private titleService: Title,
@@ -59,7 +57,7 @@ export class BlogPostViewComponent implements OnInit {
             this.titleService.setTitle(`${res.title} | Blog | Matthew Maxwell`);
 
             this.post = res;
-            this.post.topics.sort(this.comparisonService.topics);
+            this.post.topics.sort(this.blogTopicComparisonService.topics);
 
             this.isLoaded = true;
         }, (error: HttpErrorResponse) => {
@@ -68,7 +66,7 @@ export class BlogPostViewComponent implements OnInit {
     }
 
     sendPostToEditor(): void {
-        this.editorService.setPost(this.post);
+        this.blogPostEditorService.setPost(this.post);
     }
 
     deletePost(id: number): void {

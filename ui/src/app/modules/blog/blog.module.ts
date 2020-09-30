@@ -17,6 +17,7 @@ import {
     BlogTopicEditorComponent,
     BlogViewComponent
 } from './components';
+import { BlogPostEditorService, BlogTopicService } from './services';
 
 @NgModule({
     declarations: [
@@ -37,6 +38,10 @@ import {
     ],
     exports: [
         BlogPostCollectionComponent
+    ],
+    providers: [
+        BlogPostEditorService,
+        BlogTopicService
     ]
 })
 export class BlogModule { }

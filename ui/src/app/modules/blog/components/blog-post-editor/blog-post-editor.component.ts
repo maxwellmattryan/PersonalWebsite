@@ -15,6 +15,7 @@ import {
 } from '@ui/core/services';
 
 import { BlogPost, BlogTopic, BlogPostStatus, BlogAuthor } from '../../models';
+import { BlogPostEditorService, BlogTopicComparisonService } from '../../services';
 
 @Component({
     selector: 'app-blog-post-editor',
@@ -33,8 +34,8 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
     constructor(
         private apiService: ApiService,
         private authService: AuthService,
-        private comparisonService: ComparisonService,
-        private editorService: EditorService,
+        private blogPostEditorService: BlogPostEditorService,
+        private blogTopicComparisonService: BlogTopicComparisonService,
         private notificationService: NotificationService,
         private seoService: SeoService,
         private titleService: Title,
@@ -45,7 +46,7 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
     ) { }
 
     ngOnDestroy(): void {
-        this.editorService.setPost(null);
+        this.blogPostEditorService.setPost(null);
     }
 
     ngOnInit(): void {
@@ -65,7 +66,7 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
 
     private setPageHideEvent(): void {
         window.onpagehide = () => {
-            this.editorService.setPost(null);
+            this.blogPostEditorService.setPost(null);
         };
     }
 
@@ -79,7 +80,7 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadPostData(): void {
-        this.postData = this.editorService.getPost();
+        this.postData = this.blogPostEditorService.getPost();
     }
 
     private loadAuthorData(): void {
@@ -100,7 +101,7 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
 
     private loadTopicData(): void {
         this.apiService.getTopics().subscribe((res: BlogTopic[]) => {
-            this.topicData = res.sort(this.comparisonService.topics);
+            this.topicData = res.sort(this.blogTopicComparisonService.topics);
 
             if(this.postData) {
                 this.setTopicControls(this.postData.topics.map(t => t.id));

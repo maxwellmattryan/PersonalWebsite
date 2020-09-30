@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 
-import { PortfolioProject } from '@ui/modules/portfolio/models';
+import { EditorService } from '@ui/core/services';
+
+import { PortfolioProject } from '../models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PortfolioProjectEditorService {
+export class PortfolioProjectEditorService extends EditorService {
     private project: PortfolioProject;
 
-    constructor() { }
+    constructor() {
+        super();
+    }
 
     getProject(): PortfolioProject {
         return this.project;

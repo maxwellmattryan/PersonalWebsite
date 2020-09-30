@@ -6,12 +6,18 @@ import { Title } from '@angular/platform-browser';
 import { AuthApiService, AuthService } from '@ui/core/auth';
 import {
     NotificationService,
-    ComparisonService,
-    EditorService,
     TrackingService
 } from '@ui/core/services';
-import { PortfolioProfile, PortfolioProfileStatus } from '@ui/modules/portfolio/models';
-import { PortfolioProfileApiService, PortfolioProfileService } from '@ui/modules/portfolio/services';
+import {
+    PortfolioProfile,
+    PortfolioProfileStatus
+} from '@ui/modules/portfolio/models';
+import {
+    PortfolioProfileApiService,
+    PortfolioProfileComparisonService,
+    PortfolioProfileEditorService,
+    PortfolioProfileService
+} from '@ui/modules/portfolio/services';
 
 @Component({
     selector: 'app-dashboard',
@@ -27,11 +33,11 @@ export class DashboardComponent implements OnInit {
         private router: Router,
         private authApiService: AuthApiService,
         public authService: AuthService,
-        private comparisonService: ComparisonService,
-        private editorService: EditorService,
         public notificationService: NotificationService,
         private portfolioProfileService: PortfolioProfileService,
         private portfolioProfileApiService: PortfolioProfileApiService,
+        private portfolioProfileComparisonService: PortfolioProfileComparisonService,
+        private portfolioProfileEditorService: PortfolioProfileEditorService,
         private titleService: Title,
         public trackingService: TrackingService
     ) { }
@@ -48,7 +54,7 @@ export class DashboardComponent implements OnInit {
 
     populateProfiles(): void {
         this.portfolioProfileApiService.getProfiles().subscribe((res: PortfolioProfile[]) => {
-            this.profiles = res.sort(this.comparisonService.profiles);
+            this.profiles = res.sort(this.portfolioProfileComparisonService.profiles);
             this.setActiveProfile();
 
             this.isLoaded = true;
@@ -96,7 +102,7 @@ export class DashboardComponent implements OnInit {
     }
 
     sendProfileToEditor(profile: PortfolioProfile): void {
-        this.editorService.setProfile(profile);
+        this.portfolioProfileEditorService.setProfile(profile);
     }
 
     deleteProfile(profile: PortfolioProfile): void {
