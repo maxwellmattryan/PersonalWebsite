@@ -11,7 +11,6 @@ import { EditorRoutingModule } from './editor-routing.module';
 import {
     BlogPostEditorComponent,
     BlogTopicEditorComponent,
-    PortfolioProfileEditorComponent,
 } from './components';
 
 @NgModule({
@@ -19,7 +18,6 @@ import {
         EditorComponent, 
         BlogPostEditorComponent,
         BlogTopicEditorComponent,
-        PortfolioProfileEditorComponent
     ],
     imports: [
         CommonModule,

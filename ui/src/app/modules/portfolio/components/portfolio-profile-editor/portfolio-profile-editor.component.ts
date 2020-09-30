@@ -26,8 +26,7 @@ import {
 
 @Component({
     selector: 'app-portfolio-profile-editor',
-    templateUrl: './portfolio-profile-editor.component.html',
-    styleUrls: ['../../editor.component.scss']
+    templateUrl: './portfolio-profile-editor.component.html'
 })
 export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
     profileData: PortfolioProfile;

@@ -52,7 +52,7 @@
             <label class='form-field-label editor__form-field-label'>Technologies</label>
             <br><br>
             <div class='editor__profile-btn-row' formArrayName='technologies' *ngFor='let technology of profileForm.controls.technologies["controls"] trackBy: this.trackingService.objectById; let idx = index'>
-                <input class='editor__profile-form-field0' [formControlName]='idx' required autofocus>
+                <input class='editor__profile-form-field' [formControlName]='idx' required autofocus>
 
                 <button
                     aria-label='Move technology up'
