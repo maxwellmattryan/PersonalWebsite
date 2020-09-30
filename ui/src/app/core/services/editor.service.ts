@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 
-import { BlogPost, BlogTopic, Project, Profile } from '@app/shared/models';
+import { BlogPost, BlogTopic } from '@app/shared/models';
+import { PortfolioProject, PortfolioProfile } from '@app/modules/portfolio/models';
 
 @Injectable({
     providedIn: 'root'
 })
 export class EditorService {
     private post: BlogPost;
-    private profile: Profile;
-    private project: Project;
+    private profile: PortfolioProfile;
+    private project: PortfolioProject;
     private topic: BlogTopic;
 
     constructor() { }
@@ -27,7 +28,7 @@ export class EditorService {
     }
 
     // PROFILE
-    getProfile(): Profile {
+    getProfile(): PortfolioProfile {
         return this.profile;
     }
 
@@ -35,12 +36,12 @@ export class EditorService {
         return this.profile !== undefined;
     }
 
-    setProfile(profile: Profile): void {
+    setProfile(profile: PortfolioProfile): void {
         this.profile = profile;
     }
 
     // PROJECT
-    getProject(): Project {
+    getProject(): PortfolioProject {
         return this.project;
     }
 
@@ -48,7 +49,7 @@ export class EditorService {
         return this.project !== undefined;
     }
 
-    setProject(project: Project): void {
+    setProject(project: PortfolioProject): void {
         this.project = project;
     }
 

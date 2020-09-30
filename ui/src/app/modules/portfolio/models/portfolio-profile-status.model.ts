@@ -1,7 +1,7 @@
 import { Deserializable } from '@app/shared/models/deserializable.model';
 
-export class ProfileTechnology implements Deserializable {
-    constructor(partial: Partial<ProfileTechnology>) {
+export class PortfolioProfileStatus implements Deserializable {
+    constructor(partial: Partial<PortfolioProfileStatus>) {
         Object.assign(this, partial);
     }
 
@@ -12,6 +12,5 @@ export class ProfileTechnology implements Deserializable {
 
     id?: number;
 
-    name: string;
-    display_order: number;
+    status: string;
 }

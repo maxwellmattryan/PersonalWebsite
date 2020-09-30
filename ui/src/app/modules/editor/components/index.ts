@@ -1,4 +1,5 @@
-export { ProfileEditorComponent } from './profile-editor/profile-editor.component';
-export { PostEditorComponent } from './post-editor/post-editor.component';
-export { ProjectEditorComponent } from './project-editor/project-editor.component';
-export { TopicEditorComponent } from './topic-editor/topic-editor.component';
+export { BlogPostEditorComponent } from './blog-post-editor/blog-post-editor.component';
+export { BlogTopicEditorComponent } from './blog-topic-editor/blog-topic-editor.component';
+
+export { PortfolioProfileEditorComponent } from './portfolio-profile-editor/portfolio-profile-editor.component';
+export { PortfolioProjectEditorComponent } from './portfolio-project-editor/portfolio-project-editor.component';

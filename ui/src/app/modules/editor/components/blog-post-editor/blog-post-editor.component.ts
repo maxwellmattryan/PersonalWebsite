@@ -4,7 +4,6 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { BlogPost, BlogTopic, BlogPostStatus, BlogAuthor } from '@app/shared/models';
 import { AuthService } from '@app/core/auth';
 import { ApiService } from '@app/core/http';
 import {
@@ -14,13 +13,14 @@ import {
     ComparisonService,
     SeoService, TrackingService
 } from '@app/core/services';
+import { BlogPost, BlogTopic, BlogPostStatus, BlogAuthor } from '@app/shared/models';
 
 @Component({
-    selector: 'app-post-editor',
-    templateUrl: './post-editor.component.html',
+    selector: 'app-blog-post-editor',
+    templateUrl: './blog-post-editor.component.html',
     styleUrls: ['../../editor.component.scss']
 })
-export class PostEditorComponent implements OnDestroy, OnInit {
+export class BlogPostEditorComponent implements OnDestroy, OnInit {
     postData: BlogPost;
     authorData: BlogAuthor[] = [];
     statusData: BlogPostStatus[] = [];

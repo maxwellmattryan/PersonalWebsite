@@ -1,20 +1,20 @@
 import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { HttpErrorResponse } from '@angular/common/http';
 
-import { BlogTopic } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/auth';
 import { EditorService, NotificationService } from '@app/core/services';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Title } from '@angular/platform-browser';
+import { BlogTopic } from '@app/shared/models';
 
 @Component({
-    selector: 'app-topic-editor',
-    templateUrl: './topic-editor.component.html',
+    selector: 'app-blog-topic-editor',
+    templateUrl: './blog-topic-editor.component.html',
     styleUrls: ['../../editor.component.scss']
 })
-export class TopicEditorComponent implements OnInit, OnDestroy {
+export class BlogTopicEditorComponent implements OnInit, OnDestroy {
     topicData: BlogTopic;
     topicForm: FormGroup;
 

@@ -9,19 +9,19 @@ import { EditorComponent } from './editor.component';
 import { EditorRoutingModule } from './editor-routing.module';
 
 import {
-    PostEditorComponent,
-    ProfileEditorComponent,
-    ProjectEditorComponent,
-    TopicEditorComponent
+    BlogPostEditorComponent,
+    BlogTopicEditorComponent,
+    PortfolioProfileEditorComponent,
+    PortfolioProjectEditorComponent
 } from './components';
 
 @NgModule({
     declarations: [
         EditorComponent, 
-        PostEditorComponent,
-        ProjectEditorComponent,
-        TopicEditorComponent,
-        ProfileEditorComponent
+        BlogPostEditorComponent,
+        PortfolioProjectEditorComponent,
+        BlogTopicEditorComponent,
+        PortfolioProfileEditorComponent
     ],
     imports: [
         CommonModule,

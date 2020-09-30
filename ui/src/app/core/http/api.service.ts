@@ -8,14 +8,16 @@ import { Admin } from '@app/shared/interfaces';
 import { environment } from '@app/environments/environment';
 import {
     BlogPost,
-    Project,
-    Profile,
     BlogTopic,
     BlogPostStatus,
     BlogAuthor,
-    ProfileStatus,
-    ProfileTechnology
 } from '@app/shared/models';
+import {
+    PortfolioProject,
+    PortfolioProfile,
+    PortfolioProfileStatus,
+    PortfolioProfileTechnology
+} from '@app/modules/portfolio/models';
 
 @Injectable({
     providedIn: 'root'
@@ -135,8 +137,8 @@ export class ApiService {
     // ========
     // PROJECT
     // ========
-    createProject(project: Project): Observable<Project> {
-        return this.http.post<Project>(
+    createProject(project: PortfolioProject): Observable<PortfolioProject> {
+        return this.http.post<PortfolioProject>(
             `${environment.API_URL}/portfolio/projects`,
             project
         );
@@ -146,16 +148,16 @@ export class ApiService {
         return this.http.delete<any>(`${environment.API_URL}/portfolio/projects/${id}`);
     }
 
-    getProject(id: number): Observable<Project> {
-        return this.http.get<Project>(`${environment.API_URL}/portfolio/projects/${id}`);
+    getProject(id: number): Observable<PortfolioProject> {
+        return this.http.get<PortfolioProject>(`${environment.API_URL}/portfolio/projects/${id}`);
     }
 
-    getProjects(): Observable<Project[]> {
-        return this.http.get<Project[]>(`${environment.API_URL}/portfolio/projects`);
+    getProjects(): Observable<PortfolioProject[]> {
+        return this.http.get<PortfolioProject[]>(`${environment.API_URL}/portfolio/projects`);
     }
 
-    updateProject(project: Project): Observable<Project> {
-        return this.http.put<Project>(
+    updateProject(project: PortfolioProject): Observable<PortfolioProject> {
+        return this.http.put<PortfolioProject>(
             `${environment.API_URL}/portfolio/projects/${project.id}`,
             project
         );
@@ -164,15 +166,15 @@ export class ApiService {
     // ========
     // PROFILE
     // ========
-    activateProfile(profileId: number): Observable<Profile> {
-        return this.http.put<Profile>(
+    activateProfile(profileId: number): Observable<PortfolioProfile> {
+        return this.http.put<PortfolioProfile>(
             `${environment.API_URL}/portfolio/profiles/${profileId}/activate`,
             {}
         );
     }
 
-    createProfile(profile: Profile): Observable<Profile> {
-        return this.http.post<Profile>(
+    createProfile(profile: PortfolioProfile): Observable<PortfolioProfile> {
+        return this.http.post<PortfolioProfile>(
             `${environment.API_URL}/portfolio/profiles`,
             profile
         );
@@ -182,20 +184,20 @@ export class ApiService {
         return this.http.delete<any>(`${environment.API_URL}/portfolio/profiles/${id}`)
     }
 
-    getProfiles(): Observable<Profile[]> {
-        return this.http.get<Profile[]>(`${environment.API_URL}/portfolio/profiles`);
+    getProfiles(): Observable<PortfolioProfile[]> {
+        return this.http.get<PortfolioProfile[]>(`${environment.API_URL}/portfolio/profiles`);
     }
 
-    getProfileStatuses(): Observable<ProfileStatus[]> {
-        return this.http.get<ProfileStatus[]>(`${environment.API_URL}/portfolio/profiles/statuses`);
+    getProfileStatuses(): Observable<PortfolioProfileStatus[]> {
+        return this.http.get<PortfolioProfileStatus[]>(`${environment.API_URL}/portfolio/profiles/statuses`);
     }
 
-    getProfileTechnologies(id: number): Observable<ProfileTechnology[]> {
-        return this.http.get<ProfileTechnology[]>(`${environment.API_URL}/portfolio/profiles/${id}/technologies`);
+    getProfileTechnologies(id: number): Observable<PortfolioProfileTechnology[]> {
+        return this.http.get<PortfolioProfileTechnology[]>(`${environment.API_URL}/portfolio/profiles/${id}/technologies`);
     }
 
-    updateProfile(profile: Profile): Observable<Profile> {
-        return this.http.put<Profile>(
+    updateProfile(profile: PortfolioProfile): Observable<PortfolioProfile> {
+        return this.http.put<PortfolioProfile>(
             `${environment.API_URL}/portfolio/profiles/${profile.id}`,
             profile
         )

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { ProfileTechnology } from '@app/shared/models';
+import { PortfolioProfileTechnology } from '@app/modules/portfolio/models';
 import { TrackingService } from '@app/core/services';
 
 @Component({
@@ -11,7 +11,7 @@ import { TrackingService } from '@app/core/services';
 })
 export class AboutComponent implements OnInit {
     @Input() paragraph: string;
-    @Input() technologies: ProfileTechnology[];
+    @Input() technologies: PortfolioProfileTechnology[];
     @Input() imageUrl: string;
 
     constructor(

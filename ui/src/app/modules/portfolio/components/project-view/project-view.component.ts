@@ -6,7 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/auth';
 import { EditorService, NotificationService, SeoService } from '@app/core/services';
-import { Project } from '@app/shared/models';
+import { PortfolioProject } from '../../models';
 
 @Component({
     selector: 'app-project-view',
@@ -17,7 +17,7 @@ export class ProjectViewComponent implements OnInit {
     isAdmin: boolean = false;
     isLoaded: boolean = false;
 
-    project: Project;
+    project: PortfolioProject;
 
     constructor(
         private apiService: ApiService,
@@ -39,7 +39,7 @@ export class ProjectViewComponent implements OnInit {
             return;
         }
 
-        this.apiService.getProject(projectId).subscribe((res: Project) => {
+        this.apiService.getProject(projectId).subscribe((res: PortfolioProject) => {
             this.project = res;
 
             this.titleService.setTitle(`${res.name} - ${res.tagline} | Portfolio | Matthew Maxwell`);

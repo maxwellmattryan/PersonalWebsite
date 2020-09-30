@@ -1,22 +1,23 @@
-import { Deserializable } from './deserializable.model';
-import { Profile } from './profile.model';
+import { Deserializable } from '@app/shared/models/deserializable.model';
 
-export class Project implements Deserializable {
-    constructor(partial: Partial<Project>) {
+import { PortfolioProfile } from './portfolio-profile.model';
+
+export class PortfolioProject implements Deserializable {
+    constructor(partial: Partial<PortfolioProject>) {
         Object.assign(this, partial);
     }
 
     deserialize(input: any): this {
         Object.assign(this, input);
 
-        this.profiles = input.profiles.map(p => new Profile({ ...p }).deserialize(p));
+        this.profiles = input.profiles.map(p => new PortfolioProfile({ ...p }).deserialize(p));
 
         return this;
     }
 
     id?:            number;
 
-    profiles:       Profile[];
+    profiles:       PortfolioProfile[];
 
     name:           string;
     tagline:        string;

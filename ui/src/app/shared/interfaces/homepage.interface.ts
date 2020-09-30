@@ -1,8 +1,7 @@
 import { BlogPost } from '../models/blog-post.model';
-import { Profile } from '../models/profile.model';
-import { Project } from '../models/project.model';
+import { PortfolioProfile } from '@app/modules/portfolio/models';
 
 export interface Homepage {
     posts: BlogPost[];
-    profile: Profile;
+    profile: PortfolioProfile;
 }

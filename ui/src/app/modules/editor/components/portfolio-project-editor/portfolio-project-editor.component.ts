@@ -4,9 +4,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { Profile, Project } from '@app/shared/models';
-import { AuthService } from '@app/core/auth';
 import { ApiService } from '@app/core/http';
+import { AuthService } from '@app/core/auth';
 import {
     EditorService,
     NotificationService,
@@ -14,15 +13,16 @@ import {
     ComparisonService,
     SeoService, TrackingService
 } from '@app/core/services';
+import { PortfolioProfile, PortfolioProject } from '@app/modules/portfolio/models';
 
 @Component({
-    selector: 'app-project-editor',
-    templateUrl: './project-editor.component.html',
+    selector: 'app-portfolio-project-editor',
+    templateUrl: './portfolio-project-editor.component.html',
     styleUrls: ['../../editor.component.scss']
 })
-export class ProjectEditorComponent implements OnDestroy, OnInit {
-    profileData: Profile[] = [];
-    projectData: Project;
+export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
+    profileData: PortfolioProfile[] = [];
+    projectData: PortfolioProject;
 
     projectForm: FormGroup;
 
@@ -82,7 +82,7 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadProfileData(): void {
-        this.apiService.getProfiles().subscribe((res: Profile[]) => {
+        this.apiService.getProfiles().subscribe((res: PortfolioProfile[]) => {
             this.profileData = res.sort(this.comparisonService.profiles);
 
             if(this.id && this.projectData) {
@@ -132,14 +132,14 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
         const project = this.buildFormProjectData();
 
         if(project.id === undefined) {
-            this.apiService.createProject(project).subscribe((res: Project) => {
+            this.apiService.createProject(project).subscribe((res: PortfolioProject) => {
                 this.notificationService.createNotification(`Successfully created new project!`);
                 this.router.navigate([`projects/${this.seoService.getCanonicalUrl(res.id, res.name)}`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
-            this.apiService.updateProject(project).subscribe((res: Project) => {
+            this.apiService.updateProject(project).subscribe((res: PortfolioProject) => {
                 this.notificationService.createNotification(`Successfully updated existing project!`);
                 this.router.navigate([`projects/${this.seoService.getCanonicalUrl(res.id, res.name)}`]);
             }, (error: HttpErrorResponse) => {
@@ -148,17 +148,17 @@ export class ProjectEditorComponent implements OnDestroy, OnInit {
         }
     }
 
-    private buildFormProjectData(): Project {
+    private buildFormProjectData(): PortfolioProject {
         const profiles = this.buildFormProfileData();
 
-        return new Project({
+        return new PortfolioProject({
             ...this.projectForm.value,
             id: this.projectData ? this.projectData.id : undefined,
             profiles: profiles
         });
     }
 
-    private buildFormProfileData(): Profile[] {
+    private buildFormProfileData(): PortfolioProfile[] {
         return this.projectForm.value.profiles.map((p, idx) => {
             if(p) return this.profileData[idx];
         }).filter(p => p !== undefined);

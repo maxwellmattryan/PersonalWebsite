@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { AuthService } from '@app/core/auth';
-import { Project } from '@app/shared/models';
 import { SeoService, TrackingService } from '@app/core/services';
+import { PortfolioProject } from '@app/modules/portfolio/models';
 
 @Component({
     selector: 'app-project-collection',
@@ -11,7 +11,7 @@ import { SeoService, TrackingService } from '@app/core/services';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectCollectionComponent implements OnInit {
-    @Input() projects: Project[];
+    @Input() projects: PortfolioProject[];
 
     constructor(
         public authService: AuthService,

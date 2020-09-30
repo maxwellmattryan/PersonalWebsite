@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import { Profile } from '@app/shared/models';
+import { PortfolioProfile } from '@app/modules/portfolio/models';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProfileService {
-    private activeProfile: Profile;
+    private activeProfile: PortfolioProfile;
 
     constructor() { }
 
-    public getActiveProfile(): Profile {
+    public getActiveProfile(): PortfolioProfile {
         return this.activeProfile;
     }
 
@@ -18,7 +18,7 @@ export class ProfileService {
         return this.activeProfile ? this.activeProfile.name : 'Software Engineering';
     }
 
-    public setActiveProfile(profile: Profile): void {
+    public setActiveProfile(profile: PortfolioProfile): void {
         this.activeProfile = profile;
     }
 }

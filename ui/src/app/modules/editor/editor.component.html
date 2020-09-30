@@ -1,4 +1,5 @@
-<app-profile-editor *ngIf='type === "profile"' [id]='id'></app-profile-editor>
-<app-post-editor *ngIf='type === "post"' [id]='id'></app-post-editor>
-<app-project-editor *ngIf='type === "project"' [id]='id'></app-project-editor>
-<app-topic-editor *ngIf='type === "topic"' [id]='id'></app-topic-editor>
+<app-blog-post-editor *ngIf='type === "post"' [id]='id'></app-blog-post-editor>
+<app-blog-topic-editor *ngIf='type === "topic"' [id]='id'></app-blog-topic-editor>
+
+<app-portfolio-profile-editor *ngIf='type === "profile"' [id]='id'></app-portfolio-profile-editor>
+<app-portfolio-project-editor *ngIf='type === "project"' [id]='id'></app-portfolio-project-editor>

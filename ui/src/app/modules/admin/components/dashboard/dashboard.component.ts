@@ -3,7 +3,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import { Profile, ProfileStatus } from '@app/shared/models';
 import { ApiService } from '@app/core/http';
 import { AuthService } from '@app/core/auth';
 import {
@@ -13,6 +12,7 @@ import {
     ProfileService,
     TrackingService
 } from '@app/core/services';
+import { PortfolioProfile, PortfolioProfileStatus } from '@app/modules/portfolio/models';
 
 @Component({
     selector: 'app-dashboard',
@@ -20,7 +20,7 @@ import {
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-    profiles: Profile[];
+    profiles: PortfolioProfile[];
 
     isLoaded: boolean = false;
 
@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
     }
 
     populateProfiles(): void {
-        this.apiService.getProfiles().subscribe((res: Profile[]) => {
+        this.apiService.getProfiles().subscribe((res: PortfolioProfile[]) => {
             this.profiles = res.sort(this.comparisonService.profiles);
             this.setActiveProfile();
 
@@ -62,10 +62,10 @@ export class DashboardComponent implements OnInit {
         this.profileService.setActiveProfile(activeProfile);
     }
 
-    changeProfile(profile: Profile): void {
+    changeProfile(profile: PortfolioProfile): void {
         if(profile.status.status === 'ACTIVE') return;
 
-        this.apiService.activateProfile(profile.id).subscribe((res: Profile) => {
+        this.apiService.activateProfile(profile.id).subscribe((res: PortfolioProfile) => {
             this.profileService.setActiveProfile(res);
 
             this.modifyProfileStatuses(res.id);
@@ -78,9 +78,9 @@ export class DashboardComponent implements OnInit {
     private modifyProfileStatuses(activeId: number): void {
         this.profiles.forEach(p => {
             if(p.id === activeId) {
-                p.status = new ProfileStatus({ status: 'ACTIVE' });
+                p.status = new PortfolioProfileStatus({ status: 'ACTIVE' });
             } else {
-                p.status = new ProfileStatus({ status: 'INACTIVE' });
+                p.status = new PortfolioProfileStatus({ status: 'INACTIVE' });
             }
         });
     }
@@ -95,11 +95,11 @@ export class DashboardComponent implements OnInit {
         });
     }
 
-    sendProfileToEditor(profile: Profile): void {
+    sendProfileToEditor(profile: PortfolioProfile): void {
         this.editorService.setProfile(profile);
     }
 
-    deleteProfile(profile: Profile): void {
+    deleteProfile(profile: PortfolioProfile): void {
         if(this.profiles.length === 1) {
             this.notificationService.createNotification('Cannot delete only existing profile.');
             return;

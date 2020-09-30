@@ -4,9 +4,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Title } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { Profile, ProfileStatus, ProfileTechnology, Project } from '@app/shared/models';
-import { AuthService } from '@app/core/auth';
 import { ApiService } from '@app/core/http';
+import { AuthService } from '@app/core/auth';
 import {
     ComparisonService,
     EditorService,
@@ -15,17 +14,18 @@ import {
     ProfileService,
     TrackingService
 } from '@app/core/services';
+import { PortfolioProfile, PortfolioProfileStatus, PortfolioProfileTechnology, PortfolioProject } from '@app/modules/portfolio/models';
 
 @Component({
-    selector: 'app-profile-editor',
-    templateUrl: './profile-editor.component.html',
+    selector: 'app-portfolio-profile-editor',
+    templateUrl: './portfolio-profile-editor.component.html',
     styleUrls: ['../../editor.component.scss']
 })
-export class ProfileEditorComponent implements OnDestroy, OnInit {
-    profileData: Profile;
-    projectData: Project[] = [];
-    statusData: ProfileStatus[] = [];
-    technologyData: ProfileTechnology[] = [];
+export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
+    profileData: PortfolioProfile;
+    projectData: PortfolioProject[] = [];
+    statusData: PortfolioProfileStatus[] = [];
+    technologyData: PortfolioProfileTechnology[] = [];
 
     profileForm: FormGroup;
 
@@ -89,7 +89,7 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadProjectData(): void {
-        this.apiService.getProjects().subscribe((res: Project[]) => {
+        this.apiService.getProjects().subscribe((res: PortfolioProject[]) => {
             this.projectData = res.sort(this.comparisonService.projects);
 
             if(this.id && this.profileData) {
@@ -112,7 +112,7 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadStatusData(): void {
-        this.apiService.getProfileStatuses().subscribe((res: ProfileStatus[]) => {
+        this.apiService.getProfileStatuses().subscribe((res: PortfolioProfileStatus[]) => {
             this.statusData = res;
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
@@ -156,14 +156,14 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
             this.profileService.setActiveProfile(profile);
 
         if(profile.id === undefined) {
-            this.apiService.createProfile(profile).subscribe((res: Profile) => {
+            this.apiService.createProfile(profile).subscribe((res: PortfolioProfile) => {
                 this.notificationService.createNotification('Successfully created new profile!');
                 this.router.navigate(['admin']);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
-            this.apiService.updateProfile(profile).subscribe((res: Profile) => {
+            this.apiService.updateProfile(profile).subscribe((res: PortfolioProfile) => {
                 this.notificationService.createNotification('Successfully updated existing profile!');
                 this.router.navigate(['admin']);
             }, (error: HttpErrorResponse) => {
@@ -172,12 +172,12 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
         }
     }
 
-    private buildFormProfileData(): Profile {
+    private buildFormProfileData(): PortfolioProfile {
         const projects = this.buildFormProjectData();
         const status = this.buildFormStatusData();
         const technologies = this.buildFormTechnologyData();
 
-        return new Profile({
+        return new PortfolioProfile({
             ...this.profileForm.value,
             id: this.profileData ? this.profileData.id : undefined,
             projects: projects,
@@ -186,19 +186,19 @@ export class ProfileEditorComponent implements OnDestroy, OnInit {
         });
     }
 
-    private buildFormProjectData(): Project[] {
+    private buildFormProjectData(): PortfolioProject[] {
         return this.profileForm.value.projects.map((p, idx) => {
             if(p) return this.projectData[idx];
         }).filter(p => p !== undefined);
     }
 
-    private buildFormStatusData(): ProfileStatus {
+    private buildFormStatusData(): PortfolioProfileStatus {
         return this.statusData.find(s => s.status === this.profileForm.value.status);
     }
 
-    private buildFormTechnologyData(): ProfileTechnology[] {
+    private buildFormTechnologyData(): PortfolioProfileTechnology[] {
         return this.profileForm.value.technologies.map((t, idx) => {
-            return new ProfileTechnology({ name: t, display_order: idx + 1 });
+            return new PortfolioProfileTechnology({ name: t, display_order: idx + 1 });
         });
     }
 
