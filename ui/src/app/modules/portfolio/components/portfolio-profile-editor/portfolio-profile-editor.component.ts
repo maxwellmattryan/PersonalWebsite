@@ -105,8 +105,6 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
             }
 
             this.isLoaded = true;
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
         });
     }
 
@@ -120,8 +118,6 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
     private loadStatusData(): void {
         this.portfolioApiService.getProfileStatuses().subscribe((res: PortfolioProfileStatus[]) => {
             this.statusData = res;
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
         });
     }
 
@@ -165,15 +161,11 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
             this.portfolioApiService.createProfile(profile).subscribe((res: PortfolioProfile) => {
                 this.notificationService.createNotification('Successfully created new profile!');
                 this.router.navigate(['admin']);
-            }, (error: HttpErrorResponse) => {
-                this.notificationService.createNotification(error.error.message);
             });
         } else {
             this.portfolioApiService.updateProfile(profile).subscribe((res: PortfolioProfile) => {
                 this.notificationService.createNotification('Successfully updated existing profile!');
                 this.router.navigate(['admin']);
-            }, (error: HttpErrorResponse) => {
-                this.notificationService.createNotification(error.error.message);
             });
         }
     }

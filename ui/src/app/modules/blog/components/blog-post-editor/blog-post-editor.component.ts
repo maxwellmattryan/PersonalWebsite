@@ -83,16 +83,12 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
     private loadAuthorData(): void {
         this.blogApiService.getBlogAuthors().subscribe((res: BlogAuthor[]) => {
             this.authorData = res;
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
         });
     }
 
     private loadStatusData(): void {
         this.blogApiService.getPostStatuses().subscribe((res: BlogPostStatus[]) => {
             this.statusData = res;
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
         })
     }
 
@@ -107,8 +103,6 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
             }
 
             this.isLoaded = true;
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
         });
     }
 
@@ -156,15 +150,11 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
             this.blogApiService.createPost(post).subscribe((res: BlogPost) => {
                 this.notificationService.createNotification('Successfully created new post!');
                 this.router.navigate([`blog/posts/${this.seoService.getCanonicalUrl(res.id, res.title)}`]);
-            }, (error: HttpErrorResponse) => {
-                this.notificationService.createNotification(error.error.message);
             });
         } else {
             this.blogApiService.updatePost(post).subscribe((res: BlogPost) => {
                 this.notificationService.createNotification('Successfully updated existing post!');
                 this.router.navigate([`blog/posts/${this.seoService.getCanonicalUrl(res.id, res.title)}`]);
-            }, (error: HttpErrorResponse) => {
-                this.notificationService.createNotification(error.error.message);
             });
         }
     }

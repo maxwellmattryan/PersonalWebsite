@@ -60,8 +60,6 @@ export class BlogViewComponent implements OnInit {
                 }
 
                 this.isLoaded = true;
-            }, (error: HttpErrorResponse) => {
-                this.notificationService.createNotification(error.error.message);
             });
         } else {
             this.blogApiService.getPosts(this.activeTopicId).subscribe((res: BlogPost[]) => {
@@ -74,8 +72,6 @@ export class BlogViewComponent implements OnInit {
                 }
 
                 this.isLoaded = true;
-            }, (error: HttpErrorResponse) => {
-                this.notificationService.createNotification(error.error.message);
             });
         }
     }
@@ -97,8 +93,6 @@ export class BlogViewComponent implements OnInit {
             this.blogApiService.getPosts(topicId, false).subscribe((res: BlogPost[]) => {
                 this.posts = res;
                 this.activeTopicId = topicId;
-            }, (error: HttpErrorResponse) => {
-                this.notificationService.createNotification(error.error.message);
             });
         } else {
             this.blogApiService.getPosts(topicId).subscribe((res: BlogPost[]) => {

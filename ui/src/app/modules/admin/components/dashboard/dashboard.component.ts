@@ -56,8 +56,6 @@ export class DashboardComponent implements OnInit {
             this.setActiveProfile();
 
             this.isLoaded = true;
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
         });
     }
 
@@ -74,8 +72,6 @@ export class DashboardComponent implements OnInit {
 
             this.modifyProfileStatuses(res.id);
             this.notificationService.createNotification(`Successfully activated the "${res.name}" profile!`);
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
         });
     }
 
@@ -94,8 +90,6 @@ export class DashboardComponent implements OnInit {
             this.notificationService.createNotification(`Bye, ${this.authService.getAdmin()}!`);
             this.authService.logoutAdmin();
             this.router.navigate(['admin']);
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
         });
     }
 
@@ -113,8 +107,6 @@ export class DashboardComponent implements OnInit {
             this.profiles = this.profiles.filter(p => p.id !== profile.id);
             this.notificationService.createNotification('Successfully delete profile!');
             if(profile.status.status === 'ACTIVE') location.reload();
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
         });
     }
 }

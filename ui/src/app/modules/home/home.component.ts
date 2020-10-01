@@ -36,8 +36,6 @@ export class HomeComponent implements OnInit {
             this.titleService.setTitle(`${this.homepage.profile.name} Blog & Portfolio | Matthew Maxwell`);
 
             this.isLoaded = true;
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
         });
     }
 }
