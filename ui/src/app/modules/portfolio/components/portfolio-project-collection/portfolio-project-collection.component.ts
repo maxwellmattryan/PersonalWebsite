@@ -2,7 +2,8 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 
 import { AuthService } from '@ui/core/auth';
 import { SeoService, TrackingService } from '@ui/core/services';
-import { PortfolioProject } from '@ui/modules/portfolio/models';
+
+import { PortfolioProject } from '../../models';
 
 @Component({
     selector: 'app-portfolio-project-collection',

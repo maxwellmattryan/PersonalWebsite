@@ -2,16 +2,29 @@ import { Injectable } from '@angular/core';
 
 import { EditorService } from '@ui/core/services';
 
-import { PortfolioProject } from '../models';
+import { PortfolioProfile, PortfolioProject } from '../models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PortfolioProjectEditorService extends EditorService {
+export class PortfolioEditorService extends EditorService {
+    private profile: PortfolioProfile;
     private project: PortfolioProject;
 
     constructor() {
         super();
+    }
+
+    getProfile(): PortfolioProfile {
+        return this.profile;
+    }
+
+    hasProfile(): boolean {
+        return this.profile !== undefined;
+    }
+
+    setProfile(profile: PortfolioProfile): void {
+        this.profile = profile;
     }
 
     getProject(): PortfolioProject {

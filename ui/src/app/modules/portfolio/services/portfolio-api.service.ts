@@ -1,15 +1,20 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { ApiService } from '@ui/core/http';
 import { environment } from '@ui/environments/environment';
-import { PortfolioProfile, PortfolioProfileStatus, PortfolioProfileTechnology } from '@ui/modules/portfolio/models';
+import { ApiService } from '@ui/core/http';
+import {
+    PortfolioProfile,
+    PortfolioProfileStatus,
+    PortfolioProfileTechnology,
+    PortfolioProject
+} from '@ui/modules/portfolio/models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PortfolioProfileApiService extends ApiService {
+export class PortfolioApiService extends ApiService {
     constructor(http: HttpClient) {
         super(http);
     }
@@ -58,5 +63,37 @@ export class PortfolioProfileApiService extends ApiService {
             profile,
             { headers }
         )
+    }
+
+    createProject(project: PortfolioProject): Observable<PortfolioProject> {
+        const headers = this.contentTypeHeader();
+
+        return this.http.post<PortfolioProject>(
+            `${environment.API_URL}/portfolio/projects`,
+            project,
+            { headers }
+        );
+    }
+
+    deleteProject(id: number): Observable<any> {
+        return this.http.delete<any>(`${environment.API_URL}/portfolio/projects/${id}`);
+    }
+
+    getProject(id: number): Observable<PortfolioProject> {
+        return this.http.get<PortfolioProject>(`${environment.API_URL}/portfolio/projects/${id}`);
+    }
+
+    getProjects(): Observable<PortfolioProject[]> {
+        return this.http.get<PortfolioProject[]>(`${environment.API_URL}/portfolio/projects`);
+    }
+
+    updateProject(project: PortfolioProject): Observable<PortfolioProject> {
+        const headers = this.contentTypeHeader();
+
+        return this.http.put<PortfolioProject>(
+            `${environment.API_URL}/portfolio/projects/${project.id}`,
+            project,
+            { headers }
+        );
     }
 }

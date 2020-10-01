@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -10,20 +10,19 @@ import {
     ValidationService,
     TrackingService
 } from '@ui/core/services';
+
 import {
     PortfolioProfile,
     PortfolioProfileStatus,
     PortfolioProfileTechnology,
     PortfolioProject
-} from '@ui/modules/portfolio/models';
+} from '../../models';
 import {
-    PortfolioProfileApiService,
-    PortfolioProfileComparisonService,
-    PortfolioProfileEditorService,
+    PortfolioEditorService,
     PortfolioProfileService,
-    PortfolioProjectApiService,
-    PortfolioProjectComparisonService
-} from '@ui/modules/portfolio/services';
+    PortfolioApiService,
+    PortfolioComparisonService
+} from '../../services';
 
 @Component({
     selector: 'app-portfolio-profile-editor',
@@ -45,19 +44,17 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
         private formBuilder: FormBuilder,
         private authService: AuthService,
         private notificationService: NotificationService,
+        private portfolioApiService: PortfolioApiService,
+        private portfolioComparisonService: PortfolioComparisonService,
+        private portfolioEditorService: PortfolioEditorService,
         private portfolioProfileService: PortfolioProfileService,
-        private portfolioProfileApiService: PortfolioProfileApiService,
-        private portfolioProfileComparisonService: PortfolioProfileComparisonService,
-        private portfolioProfileEditorService: PortfolioProfileEditorService,
-        private portfolioProjectApiService: PortfolioProjectApiService,
-        private portfolioProjectComparisonService: PortfolioProjectComparisonService,
         private titleService: Title,
         public trackingService: TrackingService,
         private validationService: ValidationService
     ) { }
 
     ngOnDestroy(): void {
-        this.portfolioProfileEditorService.setProfile(null);
+        this.portfolioEditorService.setProfile(null);
     }
 
     ngOnInit(): void {
@@ -79,7 +76,7 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
 
     private setPageHideEvent(): void {
         window.onpagehide = () => {
-            this.portfolioProfileEditorService.setProfile(null);
+            this.portfolioEditorService.setProfile(null);
         }
     }
 
@@ -93,12 +90,12 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadProfileData(): void {
-        this.profileData = this.portfolioProfileEditorService.getProfile();
+        this.profileData = this.portfolioEditorService.getProfile();
     }
 
     private loadProjectData(): void {
-        this.portfolioProjectApiService.getProjects().subscribe((res: PortfolioProject[]) => {
-            this.projectData = res.sort(this.portfolioProjectComparisonService.projects);
+        this.portfolioApiService.getProjects().subscribe((res: PortfolioProject[]) => {
+            this.projectData = res.sort(this.portfolioComparisonService.projects);
 
             if(this.profileData) {
                 this.setProjectControls(this.profileData.projects.map(p => p.id));
@@ -120,7 +117,7 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadStatusData(): void {
-        this.portfolioProfileApiService.getProfileStatuses().subscribe((res: PortfolioProfileStatus[]) => {
+        this.portfolioApiService.getProfileStatuses().subscribe((res: PortfolioProfileStatus[]) => {
             this.statusData = res;
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
@@ -128,7 +125,7 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadTechnologyData(): void {
-        if(this.profileData) this.technologyData = this.profileData.technologies.sort(this.portfolioProfileComparisonService.profileTechnologies);
+        if(this.profileData) this.technologyData = this.profileData.technologies.sort(this.portfolioComparisonService.profileTechnologies);
     }
 
     private buildProfileForm(): void {
@@ -164,14 +161,14 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
             this.portfolioProfileService.setActiveProfile(profile);
 
         if(profile.id === undefined) {
-            this.portfolioProfileApiService.createProfile(profile).subscribe((res: PortfolioProfile) => {
+            this.portfolioApiService.createProfile(profile).subscribe((res: PortfolioProfile) => {
                 this.notificationService.createNotification('Successfully created new profile!');
                 this.router.navigate(['admin']);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
-            this.portfolioProfileApiService.updateProfile(profile).subscribe((res: PortfolioProfile) => {
+            this.portfolioApiService.updateProfile(profile).subscribe((res: PortfolioProfile) => {
                 this.notificationService.createNotification('Successfully updated existing profile!');
                 this.router.navigate(['admin']);
             }, (error: HttpErrorResponse) => {

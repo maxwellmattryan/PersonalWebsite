@@ -1,15 +1,14 @@
-import { Component, OnDestroy, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { ApiService } from '@ui/core/http';
 import { AuthService } from '@ui/core/auth';
 import { NotificationService } from '@ui/core/services';
 
 import { BlogTopic } from '../../models';
-import { BlogTopicEditorService } from '../../services';
+import { BlogApiService, BlogEditorService } from '../../services';
 
 @Component({
     selector: 'app-blog-topic-editor',
@@ -22,9 +21,9 @@ export class BlogTopicEditorComponent implements OnInit, OnDestroy {
     isLoaded: boolean = false;
 
     constructor(
-        private apiService: ApiService,
         private authService: AuthService,
-        private blogTopicEditorService: BlogTopicEditorService,
+        private blogApiService: BlogApiService,
+        private blogEditorService: BlogEditorService,
         private formBuilder: FormBuilder,
         private notificationService: NotificationService,
         private titleService: Title,
@@ -32,7 +31,7 @@ export class BlogTopicEditorComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnDestroy(): void {
-        this.blogTopicEditorService.setTopic(null);
+        this.blogEditorService.setTopic(null);
     }
 
     ngOnInit(): void {
@@ -52,7 +51,7 @@ export class BlogTopicEditorComponent implements OnInit, OnDestroy {
 
     private setPageHideEvent(): void {
         window.onpagehide = () => {
-            this.blogTopicEditorService.setTopic(null);
+            this.blogEditorService.setTopic(null);
         };
     }
 
@@ -63,7 +62,7 @@ export class BlogTopicEditorComponent implements OnInit, OnDestroy {
     }
 
     private loadTopicData(): void {
-        this.topicData = this.blogTopicEditorService.getTopic();
+        this.topicData = this.blogEditorService.getTopic();
         this.isLoaded = true;
     }
 
@@ -85,14 +84,14 @@ export class BlogTopicEditorComponent implements OnInit, OnDestroy {
         const topic = this.buildFormTopicData();
 
         if(topic.id === undefined) {
-            this.apiService.createTopic(topic).subscribe((res: BlogTopic) => {
+            this.blogApiService.createTopic(topic).subscribe((res: BlogTopic) => {
                 this.notificationService.createNotification('Successfully created new topic.');
                 this.router.navigate(['blog'])
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
-            this.apiService.updateTopic(topic).subscribe((res: BlogTopic) => {
+            this.blogApiService.updateTopic(topic).subscribe((res: BlogTopic) => {
                 this.notificationService.createNotification('Successfully updated existing topic.');
                 this.router.navigate(['blog'])
             }, (error: HttpErrorResponse) => {

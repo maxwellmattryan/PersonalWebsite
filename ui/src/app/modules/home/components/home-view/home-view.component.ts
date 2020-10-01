@@ -6,7 +6,7 @@ import { Homepage } from '@ui/shared/interfaces';
 import { ApiService } from '@ui/core/http';
 import { AuthService } from '@ui/core/auth';
 import { NotificationService } from '@ui/core/services';
-import { PortfolioProfileComparisonService, PortfolioProfileService } from '@ui/modules/portfolio/services';
+import { PortfolioComparisonService, PortfolioProfileService } from '@ui/modules/portfolio/services';
 
 @Component({
     selector: 'app-home-view',
@@ -22,7 +22,7 @@ export class HomeViewComponent implements OnInit {
         private apiService: ApiService,
         private authService: AuthService,
         private notificationService: NotificationService,
-        private portfolioProfileComparisonService: PortfolioProfileComparisonService,
+        private portfolioComparisonService: PortfolioComparisonService,
         private portfolioProfileService: PortfolioProfileService,
         private titleService: Title
     ) { }
@@ -30,7 +30,7 @@ export class HomeViewComponent implements OnInit {
     ngOnInit(): void {
         this.apiService.getHomepage().subscribe((res: Homepage) => {
             this.homepage = res;
-            this.homepage.profile.technologies = res.profile.technologies.sort(this.portfolioProfileComparisonService.profileTechnologies);
+            this.homepage.profile.technologies = res.profile.technologies.sort(this.portfolioComparisonService.profileTechnologies);
 
             this.portfolioProfileService.setActiveProfile(this.homepage.profile);
             this.titleService.setTitle(`${this.homepage.profile.name} Blog & Portfolio | Matthew Maxwell`);

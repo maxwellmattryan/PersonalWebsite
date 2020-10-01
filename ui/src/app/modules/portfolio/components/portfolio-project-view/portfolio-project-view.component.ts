@@ -7,7 +7,7 @@ import { AuthService } from '@ui/core/auth';
 import { NotificationService, SeoService } from '@ui/core/services';
 
 import { PortfolioProject } from '../../models';
-import { PortfolioProjectApiService, PortfolioProjectEditorService } from '../../services';
+import { PortfolioApiService, PortfolioEditorService } from '../../services';
 
 @Component({
     selector: 'app-portfolio-project-view',
@@ -23,8 +23,8 @@ export class PortfolioProjectViewComponent implements OnInit {
     constructor(
         private authService: AuthService,
         private notificationService: NotificationService,
-        private portfolioProjectApiService: PortfolioProjectApiService,
-        private portfolioProjectEditorService: PortfolioProjectEditorService,
+        private portfolioProjectApiService: PortfolioApiService,
+        private portfolioProjectEditorService: PortfolioEditorService,
         public seoService: SeoService,
         private titleService: Title,
         private router: Router

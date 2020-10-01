@@ -3,7 +3,6 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { ApiService } from '@ui/core/http';
 import { AuthService } from '@ui/core/auth';
 import {
     NotificationService,
@@ -12,7 +11,7 @@ import {
 } from '@ui/core/services';
 
 import { BlogPost } from '../../models';
-import { BlogPostEditorService, BlogTopicComparisonService, BlogTopicService } from '../../services';
+import { BlogApiService, BlogEditorService, BlogComparisonService, BlogTopicService } from '../../services';
 
 @Component({
     selector: 'app-blog-post-view',
@@ -26,10 +25,10 @@ export class BlogPostViewComponent implements OnInit {
     post: BlogPost;
 
     constructor(
-        private apiService: ApiService,
         private authService: AuthService,
-        private blogPostEditorService: BlogPostEditorService,
-        private blogTopicComparisonService: BlogTopicComparisonService,
+        private blogApiService: BlogApiService,
+        private blogEditorService: BlogEditorService,
+        private blogComparisonService: BlogComparisonService,
         public blogTopicService: BlogTopicService,
         private notificationService: NotificationService,
         public seoService: SeoService,
@@ -48,7 +47,7 @@ export class BlogPostViewComponent implements OnInit {
             return;
         }
 
-        this.apiService.getPost(postId).subscribe((res: BlogPost) => {
+        this.blogApiService.getPost(postId).subscribe((res: BlogPost) => {
             if(res.status.status !== 'PUBLISHED' && !this.isAdmin) {
                 this.notificationService.createNotification('Unable to view the blog post.');
                 this.router.navigate(['']);
@@ -57,7 +56,7 @@ export class BlogPostViewComponent implements OnInit {
             this.titleService.setTitle(`${res.title} | Blog | Matthew Maxwell`);
 
             this.post = res;
-            this.post.topics.sort(this.blogTopicComparisonService.topics);
+            this.post.topics.sort(this.blogComparisonService.topics);
 
             this.isLoaded = true;
         }, (error: HttpErrorResponse) => {
@@ -66,11 +65,11 @@ export class BlogPostViewComponent implements OnInit {
     }
 
     sendPostToEditor(): void {
-        this.blogPostEditorService.setPost(this.post);
+        this.blogEditorService.setPost(this.post);
     }
 
     deletePost(id: number): void {
-        this.apiService.deletePost(id).subscribe((res: any) => {
+        this.blogApiService.deletePost(id).subscribe((res: any) => {
             this.notificationService.createNotification('Successfully deleted blog post!');
             this.router.navigate(['/blog']);
         }, (error: HttpErrorResponse) => {

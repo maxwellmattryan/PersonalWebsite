@@ -13,9 +13,7 @@ import {
     PortfolioProfileStatus
 } from '@ui/modules/portfolio/models';
 import {
-    PortfolioProfileApiService,
-    PortfolioProfileComparisonService,
-    PortfolioProfileEditorService,
+    PortfolioApiService, PortfolioComparisonService, PortfolioEditorService,
     PortfolioProfileService
 } from '@ui/modules/portfolio/services';
 
@@ -35,9 +33,9 @@ export class DashboardComponent implements OnInit {
         public authService: AuthService,
         public notificationService: NotificationService,
         private portfolioProfileService: PortfolioProfileService,
-        private portfolioProfileApiService: PortfolioProfileApiService,
-        private portfolioProfileComparisonService: PortfolioProfileComparisonService,
-        private portfolioProfileEditorService: PortfolioProfileEditorService,
+        private portfolioApiService: PortfolioApiService,
+        private portfolioComparisonService: PortfolioComparisonService,
+        private portfolioEditorService: PortfolioEditorService,
         private titleService: Title,
         public trackingService: TrackingService
     ) { }
@@ -53,8 +51,8 @@ export class DashboardComponent implements OnInit {
     }
 
     populateProfiles(): void {
-        this.portfolioProfileApiService.getProfiles().subscribe((res: PortfolioProfile[]) => {
-            this.profiles = res.sort(this.portfolioProfileComparisonService.profiles);
+        this.portfolioApiService.getProfiles().subscribe((res: PortfolioProfile[]) => {
+            this.profiles = res.sort(this.portfolioComparisonService.profiles);
             this.setActiveProfile();
 
             this.isLoaded = true;
@@ -71,7 +69,7 @@ export class DashboardComponent implements OnInit {
     changeProfile(profile: PortfolioProfile): void {
         if(profile.status.status === 'ACTIVE') return;
 
-        this.portfolioProfileApiService.activateProfile(profile.id).subscribe((res: PortfolioProfile) => {
+        this.portfolioApiService.activateProfile(profile.id).subscribe((res: PortfolioProfile) => {
             this.portfolioProfileService.setActiveProfile(res);
 
             this.modifyProfileStatuses(res.id);
@@ -102,7 +100,7 @@ export class DashboardComponent implements OnInit {
     }
 
     sendProfileToEditor(profile: PortfolioProfile): void {
-        this.portfolioProfileEditorService.setProfile(profile);
+        this.portfolioEditorService.setProfile(profile);
     }
 
     deleteProfile(profile: PortfolioProfile): void {
@@ -111,7 +109,7 @@ export class DashboardComponent implements OnInit {
             return;
         }
 
-        this.portfolioProfileApiService.deleteProfile(profile.id).subscribe((res: any) => {
+        this.portfolioApiService.deleteProfile(profile.id).subscribe((res: any) => {
             this.profiles = this.profiles.filter(p => p.id !== profile.id);
             this.notificationService.createNotification('Successfully delete profile!');
             if(profile.status.status === 'ACTIVE') location.reload();

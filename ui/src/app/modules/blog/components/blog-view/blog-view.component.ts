@@ -2,17 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 
-import { ApiService } from '@ui/core/http/api.service';
 import { AuthService } from '@ui/core/auth';
 import {
-    ComparisonService,
     NotificationService,
     TrackingService
 } from '@ui/core/services';
 import { PortfolioProfileService } from '@ui/modules/portfolio/services';
 
 import { BlogPost, BlogTopic } from '../../models';
-import { BlogTopicComparisonService, BlogTopicEditorService, BlogTopicService } from '../../services';
+import {
+    BlogApiService,
+    BlogComparisonService,
+    BlogEditorService,
+    BlogTopicService
+} from '../../services';
 
 @Component({
     selector: 'app-blog-view',
@@ -29,10 +32,10 @@ export class BlogViewComponent implements OnInit {
     activeTopicId: number = -1;
 
     constructor(
-        private apiService: ApiService,
         private authService: AuthService,
-        private blogTopicComparisonService: BlogTopicComparisonService,
-        private blogTopicEditorService: BlogTopicEditorService,
+        private blogApiService: BlogApiService,
+        private blogComparisonService: BlogComparisonService,
+        private blogEditorService: BlogEditorService,
         public blogTopicService: BlogTopicService,
         private notificationService: NotificationService,
         private portfolioProfileService: PortfolioProfileService,
@@ -46,9 +49,9 @@ export class BlogViewComponent implements OnInit {
         this.isAdmin = this.authService.isLoggedIn();
 
         if(this.isAdmin) {
-            this.apiService.getPosts(this.activeTopicId, false).subscribe((res: BlogPost[]) => {
+            this.blogApiService.getPosts(this.activeTopicId, false).subscribe((res: BlogPost[]) => {
                 this.posts = res;
-                this.topics = this.getTopicsFromPosts().sort(this.blogTopicComparisonService.topics);
+                this.topics = this.getTopicsFromPosts().sort(this.blogComparisonService.topics);
 
                 if(this.blogTopicService.hasActiveTopic()) {
                     this.filterPosts(this.blogTopicService.getActiveTopicId());
@@ -61,9 +64,9 @@ export class BlogViewComponent implements OnInit {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
-            this.apiService.getPosts(this.activeTopicId).subscribe((res: BlogPost[]) => {
+            this.blogApiService.getPosts(this.activeTopicId).subscribe((res: BlogPost[]) => {
                 this.posts = res;
-                this.topics = this.getTopicsFromPosts().sort(this.blogTopicComparisonService.topics);
+                this.topics = this.getTopicsFromPosts().sort(this.blogComparisonService.topics);
 
                 if(this.blogTopicService.hasActiveTopic()) {
                     this.filterPosts(this.blogTopicService.getActiveTopicId());
@@ -91,14 +94,14 @@ export class BlogViewComponent implements OnInit {
 
     filterPosts(topicId: number): void {
         if(this.isAdmin) {
-            this.apiService.getPosts(topicId, false).subscribe((res: BlogPost[]) => {
+            this.blogApiService.getPosts(topicId, false).subscribe((res: BlogPost[]) => {
                 this.posts = res;
                 this.activeTopicId = topicId;
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
-            this.apiService.getPosts(topicId).subscribe((res: BlogPost[]) => {
+            this.blogApiService.getPosts(topicId).subscribe((res: BlogPost[]) => {
                 this.posts = res;
                 this.activeTopicId = topicId;
             }, (error: HttpErrorResponse) => {
@@ -108,11 +111,11 @@ export class BlogViewComponent implements OnInit {
     }
 
     sendTopicToEditor(topic: BlogTopic): void {
-        this.blogTopicEditorService.setTopic(topic);
+        this.blogEditorService.setTopic(topic);
     }
 
     deleteTopic(topic: BlogTopic): void {
-        this.apiService.deleteTopic(topic.id).subscribe((res: any) => {
+        this.blogApiService.deleteTopic(topic.id).subscribe((res: any) => {
             this.removeTopic(topic.id);
             this.notificationService.createNotification('Successfully deleted blog topic!');
             this.filterPosts(-1);

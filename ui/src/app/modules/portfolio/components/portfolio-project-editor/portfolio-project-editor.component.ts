@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -10,20 +10,20 @@ import {
     ValidationService,
     SeoService, TrackingService
 } from '@ui/core/services';
+
 import {
     PortfolioProfile,
     PortfolioProject
 } from '../../models';
 import {
-    PortfolioProfileApiService,
-    PortfolioProfileComparisonService,
-    PortfolioProjectApiService,
-    PortfolioProjectEditorService
+    PortfolioApiService,
+    PortfolioComparisonService,
+    PortfolioEditorService
 } from '../../services';
 
 @Component({
     selector: 'app-portfolio-project-editor',
-    templateUrl: './portfolio-project-editor.component.html',
+    templateUrl: './portfolio-project-editor.component.html'
 })
 export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
     profileData: PortfolioProfile[] = [];
@@ -37,20 +37,20 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
         private authService: AuthService,
         private cdRef: ChangeDetectorRef,
         private notificationService: NotificationService,
-        private portfolioProfileApiService: PortfolioProfileApiService,
-        private portfolioProfileComparisonService: PortfolioProfileComparisonService,
-        private portfolioProjectApiService: PortfolioProjectApiService,
-        private portfolioProjectEditorService: PortfolioProjectEditorService,
+        private portfolioApiService: PortfolioApiService,
+        private portfolioComparisonService: PortfolioComparisonService,
+        private portfolioEditorService: PortfolioEditorService,
         private seoService: SeoService,
         private titleService: Title,
         public trackingService: TrackingService,
         private validationService: ValidationService,
         private formBuilder: FormBuilder,
         private router: Router
-    ) { }
+    ) {
+    }
 
     ngOnDestroy(): void {
-        this.portfolioProjectEditorService.setProject(null);
+        this.portfolioEditorService.setProject(null);
     }
 
     ngOnInit(): void {
@@ -64,13 +64,13 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
     }
 
     private checkForAdmin(): void {
-        if(!this.authService.isLoggedIn())
+        if (!this.authService.isLoggedIn())
             this.router.navigate(['']);
     }
 
     private setPageHideEvent(): void {
         window.onpagehide = () => {
-            this.portfolioProjectEditorService.setProject(null);
+            this.portfolioEditorService.setProject(null);
         };
     }
 
@@ -82,14 +82,14 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadProjectData(): void {
-        this.projectData = this.portfolioProjectEditorService.getProject();
+        this.projectData = this.portfolioEditorService.getProject();
     }
 
     private loadProfileData(): void {
-        this.portfolioProfileApiService.getProfiles().subscribe((res: PortfolioProfile[]) => {
-            this.profileData = res.sort(this.portfolioProfileComparisonService.profiles);
+        this.portfolioApiService.getProfiles().subscribe((res: PortfolioProfile[]) => {
+            this.profileData = res.sort(this.portfolioComparisonService.profiles);
 
-            if(this.projectData) {
+            if (this.projectData) {
                 this.setProfileControls(this.projectData.profiles.map(p => p.id));
             } else {
                 this.setProfileControls([]);
@@ -109,25 +109,25 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
     }
 
     private buildProjectForm(): void {
-        if(this.projectData) {
+        if (this.projectData) {
             this.projectForm = this.formBuilder.group({
-                name:           this.formBuilder.control(this.projectData.name,        [Validators.required]),
-                profiles:       this.formBuilder.array  (this.profileData,             [this.validationService.hasMinElements()]),
-                tagline:        this.formBuilder.control(this.projectData.tagline,     [Validators.required]),
-                description:    this.formBuilder.control(this.projectData.description, [Validators.required]),
-                image_url:      this.formBuilder.control(this.projectData.image_url,   [Validators.required]),
-                link_name:      this.formBuilder.control(this.projectData.link_name,   [Validators.required]),
-                link_url:       this.formBuilder.control(this.projectData.link_url,    [Validators.required])
+                name: this.formBuilder.control(this.projectData.name, [Validators.required]),
+                profiles: this.formBuilder.array(this.profileData, [this.validationService.hasMinElements()]),
+                tagline: this.formBuilder.control(this.projectData.tagline, [Validators.required]),
+                description: this.formBuilder.control(this.projectData.description, [Validators.required]),
+                image_url: this.formBuilder.control(this.projectData.image_url, [Validators.required]),
+                link_name: this.formBuilder.control(this.projectData.link_name, [Validators.required]),
+                link_url: this.formBuilder.control(this.projectData.link_url, [Validators.required])
             });
         } else {
             this.projectForm = this.formBuilder.group({
-                name:           this.formBuilder.control('', [Validators.required]),
-                profiles:       this.formBuilder.array  ([], [this.validationService.hasMinElements()]),
-                tagline:        this.formBuilder.control('', [Validators.required]),
-                description:    this.formBuilder.control('', [Validators.required]),
-                image_url:      this.formBuilder.control('', [Validators.required]),
-                link_name:      this.formBuilder.control('', [Validators.required]),
-                link_url:       this.formBuilder.control('', [Validators.required])
+                name: this.formBuilder.control('', [Validators.required]),
+                profiles: this.formBuilder.array([], [this.validationService.hasMinElements()]),
+                tagline: this.formBuilder.control('', [Validators.required]),
+                description: this.formBuilder.control('', [Validators.required]),
+                image_url: this.formBuilder.control('', [Validators.required]),
+                link_name: this.formBuilder.control('', [Validators.required]),
+                link_url: this.formBuilder.control('', [Validators.required])
             });
         }
     }
@@ -135,17 +135,17 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
     onSubmit(): void {
         const project = this.buildFormProjectData();
 
-        if(project.id === undefined) {
-            this.portfolioProjectApiService.createProject(project).subscribe((res: PortfolioProject) => {
+        if (project.id === undefined) {
+            this.portfolioApiService.createProject(project).subscribe((res: PortfolioProject) => {
                 this.notificationService.createNotification(`Successfully created new portfolio project!`);
-                this.router.navigate([`projects/${this.seoService.getCanonicalUrl(res.id, res.name)}`]);
+                this.router.navigate([`projects/${ this.seoService.getCanonicalUrl(res.id, res.name) }`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
-            this.portfolioProjectApiService.updateProject(project).subscribe((res: PortfolioProject) => {
+            this.portfolioApiService.updateProject(project).subscribe((res: PortfolioProject) => {
                 this.notificationService.createNotification(`Successfully updated existing portfolio project!`);
-                this.router.navigate([`projects/${this.seoService.getCanonicalUrl(res.id, res.name)}`]);
+                this.router.navigate([`projects/${ this.seoService.getCanonicalUrl(res.id, res.name) }`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
@@ -164,7 +164,7 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
 
     private buildFormProfileData(): PortfolioProfile[] {
         return this.projectForm.value.profiles.map((p, idx) => {
-            if(p) return this.profileData[idx];
+            if (p) return this.profileData[idx];
         }).filter(p => p !== undefined);
     }
 }

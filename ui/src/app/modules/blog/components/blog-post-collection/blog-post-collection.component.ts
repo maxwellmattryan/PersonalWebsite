@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { ComparisonService, SeoService, TrackingService } from '@ui/core/services';
+import { SeoService, TrackingService } from '@ui/core/services';
 
 import { BlogPost } from '../../models';
-import { BlogTopicComparisonService, BlogTopicService } from '../../services';
+import { BlogComparisonService, BlogTopicService } from '../../services';
 
 @Component({
     selector: 'app-blog-post-collection',
@@ -24,7 +24,7 @@ export class BlogPostCollectionComponent implements OnInit {
     nPostsToDisplay: number = 5;
 
     constructor(
-        private blogTopicComparisonService: BlogTopicComparisonService,
+        private blogComparisonService: BlogComparisonService,
         public blogTopicService: BlogTopicService,
         public seoService: SeoService,
         public trackingService: TrackingService
@@ -32,7 +32,7 @@ export class BlogPostCollectionComponent implements OnInit {
 
     ngOnInit(): void {
         this.posts.forEach(p => {
-            p.topics.sort(this.blogTopicComparisonService.topics);
+            p.topics.sort(this.blogComparisonService.topics);
         });
     }
 

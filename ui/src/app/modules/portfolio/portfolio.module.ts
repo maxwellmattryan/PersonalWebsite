@@ -18,9 +18,10 @@ import {
     PortfolioProjectEditorComponent
 } from './components';
 import {
-    PortfolioProfileService,
-    PortfolioProfileApiService,
-    PortfolioProjectApiService
+    PortfolioApiService,
+    PortfolioComparisonService,
+    PortfolioEditorService,
+    PortfolioProfileService
 } from './services';
 
 @NgModule({
@@ -44,9 +45,10 @@ import {
         PortfolioProjectCollectionComponent
     ],
     providers: [
+        PortfolioApiService,
+        PortfolioComparisonService,
+        PortfolioEditorService,
         PortfolioProfileService,
-        PortfolioProfileApiService,
-        PortfolioProjectApiService
     ]
 })
 export class PortfolioModule { }

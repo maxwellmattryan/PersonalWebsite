@@ -5,17 +5,14 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { AuthService } from '@ui/core/auth';
-import { ApiService } from '@ui/core/http';
 import {
-    EditorService,
     NotificationService,
     ValidationService,
-    ComparisonService,
     SeoService, TrackingService
 } from '@ui/core/services';
 
 import { BlogPost, BlogTopic, BlogPostStatus, BlogAuthor } from '../../models';
-import { BlogPostEditorService, BlogTopicComparisonService } from '../../services';
+import { BlogApiService, BlogEditorService, BlogComparisonService } from '../../services';
 
 @Component({
     selector: 'app-blog-post-editor',
@@ -32,10 +29,10 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
     isLoaded: boolean = false;
 
     constructor(
-        private apiService: ApiService,
         private authService: AuthService,
-        private blogPostEditorService: BlogPostEditorService,
-        private blogTopicComparisonService: BlogTopicComparisonService,
+        private blogApiService: BlogApiService,
+        private blogEditorService: BlogEditorService,
+        private blogComparisonService: BlogComparisonService,
         private notificationService: NotificationService,
         private seoService: SeoService,
         private titleService: Title,
@@ -46,7 +43,7 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
     ) { }
 
     ngOnDestroy(): void {
-        this.blogPostEditorService.setPost(null);
+        this.blogEditorService.setPost(null);
     }
 
     ngOnInit(): void {
@@ -66,7 +63,7 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
 
     private setPageHideEvent(): void {
         window.onpagehide = () => {
-            this.blogPostEditorService.setPost(null);
+            this.blogEditorService.setPost(null);
         };
     }
 
@@ -80,11 +77,11 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadPostData(): void {
-        this.postData = this.blogPostEditorService.getPost();
+        this.postData = this.blogEditorService.getPost();
     }
 
     private loadAuthorData(): void {
-        this.apiService.getBlogAuthors().subscribe((res: BlogAuthor[]) => {
+        this.blogApiService.getBlogAuthors().subscribe((res: BlogAuthor[]) => {
             this.authorData = res;
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
@@ -92,7 +89,7 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadStatusData(): void {
-        this.apiService.getPostStatuses().subscribe((res: BlogPostStatus[]) => {
+        this.blogApiService.getPostStatuses().subscribe((res: BlogPostStatus[]) => {
             this.statusData = res;
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
@@ -100,8 +97,8 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
     }
 
     private loadTopicData(): void {
-        this.apiService.getTopics().subscribe((res: BlogTopic[]) => {
-            this.topicData = res.sort(this.blogTopicComparisonService.topics);
+        this.blogApiService.getTopics().subscribe((res: BlogTopic[]) => {
+            this.topicData = res.sort(this.blogComparisonService.topics);
 
             if(this.postData) {
                 this.setTopicControls(this.postData.topics.map(t => t.id));
@@ -156,14 +153,14 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
         const post = this.buildFormPostData();
 
         if(post.id === undefined) {
-            this.apiService.createPost(post).subscribe((res: BlogPost) => {
+            this.blogApiService.createPost(post).subscribe((res: BlogPost) => {
                 this.notificationService.createNotification('Successfully created new post!');
                 this.router.navigate([`blog/posts/${this.seoService.getCanonicalUrl(res.id, res.title)}`]);
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
-            this.apiService.updatePost(post).subscribe((res: BlogPost) => {
+            this.blogApiService.updatePost(post).subscribe((res: BlogPost) => {
                 this.notificationService.createNotification('Successfully updated existing post!');
                 this.router.navigate([`blog/posts/${this.seoService.getCanonicalUrl(res.id, res.title)}`]);
             }, (error: HttpErrorResponse) => {
