@@ -1,4 +1,4 @@
-import { Deserializable } from '@ui/shared/models/deserializable.model';
+import { Deserializable } from '@ui/core/models/deserializable.model';
 
 import { PortfolioProfileStatus } from './portfolio-profile-status.model';
 import { PortfolioProfileTechnology } from './portfolio-profile-technology.model';

@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 
 import { AuthApiService, AuthService } from '@ui/core/auth';
 import { NotificationService, ValidationService } from '@ui/core/services';
-import { Admin } from '@ui/shared/interfaces';
+
+import { Admin } from '../../interfaces';
 
 @Component({
     selector: 'app-register',

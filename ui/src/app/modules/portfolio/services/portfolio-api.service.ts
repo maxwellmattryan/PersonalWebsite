@@ -4,12 +4,13 @@ import { Observable } from 'rxjs';
 
 import { environment } from '@ui/environments/environment';
 import { ApiService } from '@ui/core/http';
+
 import {
     PortfolioProfile,
     PortfolioProfileStatus,
     PortfolioProfileTechnology,
     PortfolioProject
-} from '@ui/modules/portfolio/models';
+} from '../models';
 
 @Injectable({
   providedIn: 'root'

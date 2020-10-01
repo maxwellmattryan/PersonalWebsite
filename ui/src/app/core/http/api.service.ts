@@ -8,8 +8,8 @@ import { environment } from '@ui/environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export abstract class ApiService {
-    protected constructor(protected http: HttpClient) { }
+export class ApiService {
+    constructor(protected http: HttpClient) { }
 
     protected contentTypeHeader(contentType: string = 'application/json'): HttpHeaders {
         const headers = new HttpHeaders();

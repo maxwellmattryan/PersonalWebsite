@@ -3,6 +3,6 @@ import { Injectable } from '@angular/core';
 @Injectable({
     providedIn: 'root'
 })
-export abstract class ComparisonService {
-    protected constructor() { }
+export class ComparisonService {
+    constructor() { }
 }

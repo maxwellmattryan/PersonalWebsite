@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MarkdownModule } from 'ngx-markdown';
 
-import { SharedModule } from '@ui/shared/shared.module';
+import { CoreModule } from '@ui/core/core.module';
 import { MaterialModule } from '@ui/modules/material/material.module';
 
 import { BlogComponent } from './blog.component';
@@ -36,10 +36,10 @@ import {
     imports: [
         BlogRoutingModule,
         CommonModule,
+        CoreModule,
         MarkdownModule.forRoot(),
         MaterialModule,
-        ReactiveFormsModule,
-        SharedModule
+        ReactiveFormsModule
     ],
     exports: [
         BlogPostCollectionComponent

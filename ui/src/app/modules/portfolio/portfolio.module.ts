@@ -4,9 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MarkdownModule } from 'ngx-markdown';
 
+import { CoreModule } from '@ui/core/core.module';
 import { IconModule } from '@ui/modules/icon/icon.module';
 import { MaterialModule } from '@ui/modules/material/material.module';
-import { SharedModule } from '@ui/shared/shared.module';
 
 import { PortfolioComponent } from './portfolio.component';
 import { PortfolioRoutingModule } from './portfolio-routing.module';
@@ -34,12 +34,12 @@ import {
     ],
     imports: [
         CommonModule,
+        CoreModule,
         IconModule,
         MarkdownModule.forRoot(),
         MaterialModule,
         PortfolioRoutingModule,
-        ReactiveFormsModule,
-        SharedModule
+        ReactiveFormsModule
     ],
     exports: [
         PortfolioProjectCollectionComponent

@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 
 import { environment } from '@ui/environments/environment';
 import { ApiService } from '@ui/core/http';
-import { BlogAuthor, BlogPost, BlogPostStatus, BlogTopic } from '@ui/modules/blog/models';
+
+import { BlogAuthor, BlogPost, BlogPostStatus, BlogTopic } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,12 @@ export class BlogApiService extends ApiService {
     }
 
     createPost(post: BlogPost): Observable<BlogPost> {
+        const headers = this.contentTypeHeader();
+
         return this.http.post<BlogPost>(
             `${environment.API_URL}/blog/posts`,
-            post
+            post,
+            { headers }
         );
     }
 
@@ -50,16 +54,22 @@ export class BlogApiService extends ApiService {
     }
 
     updatePost(post: BlogPost): Observable<BlogPost> {
+        const headers = this.contentTypeHeader();
+
         return this.http.put<BlogPost>(
             `${environment.API_URL}/blog/posts/${post.id}`,
-            post
+            post,
+            { headers }
         );
     }
 
     createTopic(topic: BlogTopic): Observable<BlogTopic> {
+        const headers = this.contentTypeHeader();
+
         return this.http.post<BlogTopic>(
             `${environment.API_URL}/blog/topics`,
-            topic
+            topic,
+            { headers }
         );
     }
 
@@ -72,9 +82,12 @@ export class BlogApiService extends ApiService {
     }
 
     updateTopic(topic: BlogTopic): Observable<BlogTopic> {
+        const headers = this.contentTypeHeader();
+
         return this.http.put<BlogTopic>(
             `${environment.API_URL}/blog/topics/${topic.id}`,
-            topic
+            topic,
+            { headers }
         );
     }
 }

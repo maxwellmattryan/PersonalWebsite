@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-    selector: 'app-landing',
-    templateUrl: './landing.component.html',
-    styleUrls: ['./landing.component.scss'],
+    selector: 'app-home-landing',
+    templateUrl: './home-landing.component.html',
+    styleUrls: ['./home-landing.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LandingComponent implements OnInit {
+export class HomeLandingComponent implements OnInit {
     @Input() tagline: string;
     @Input() landing: string;
 

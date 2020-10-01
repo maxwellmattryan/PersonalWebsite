@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '@ui/environments/environment';
-import { Admin } from '@ui/shared/interfaces';
+import { Admin } from '@ui/modules/admin/interfaces';
 
 import { ApiService } from '../http';
 
@@ -17,10 +17,10 @@ export class AuthApiService extends ApiService {
 
     // TODO: Fix the use of 'any' and just get rid of that
 
-    public registerAdmin(admin: Admin): Observable<any> {
+    public registerAdmin(admin: Admin): Observable<Admin> {
         const headers = this.contentTypeHeader();
 
-        return this.http.post(
+        return this.http.post<Admin>(
             `${environment.API_URL}/auth/register`,
             admin,
             { headers }
@@ -31,10 +31,10 @@ export class AuthApiService extends ApiService {
         return this.http.post<any>(`${environment.API_URL}/auth/logout`, {});
     }
 
-    public loginAdmin(admin: Admin): Observable<any> {
+    public loginAdmin(admin: Admin): Observable<Admin> {
         const headers = this.contentTypeHeader();
 
-        return this.http.post<any>(
+        return this.http.post<Admin>(
             `${environment.API_URL}/auth/login`,
             admin,
             { headers }

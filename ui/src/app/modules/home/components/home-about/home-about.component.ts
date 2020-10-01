@@ -4,12 +4,12 @@ import { PortfolioProfileTechnology } from '@ui/modules/portfolio/models';
 import { TrackingService } from '@ui/core/services';
 
 @Component({
-    selector: 'app-about',
-    templateUrl: './about.component.html',
-    styleUrls: ['./about.component.scss'],
+    selector: 'app-home-about',
+    templateUrl: './home-about.component.html',
+    styleUrls: ['./home-about.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AboutComponent implements OnInit {
+export class HomeAboutComponent implements OnInit {
     @Input() paragraph: string;
     @Input() technologies: PortfolioProfileTechnology[];
     @Input() imageUrl: string;

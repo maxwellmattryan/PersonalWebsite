@@ -1,4 +1,4 @@
-import { Deserializable } from '@ui/shared/models/deserializable.model';
+import { Deserializable } from '@ui/core/models/deserializable.model';
 
 import { BlogAuthor } from './blog-author.model';
 import { BlogPostStatus } from './blog-post-status.model';

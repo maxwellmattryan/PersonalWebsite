@@ -6,6 +6,11 @@ import { Router } from '@angular/router';
 import { ApiService } from './http';
 import { AuthService, AuthInterceptorService } from './auth';
 import {
+    FooterComponent,
+    HeaderComponent,
+    LoadingSpinnerComponent
+} from './components';
+import {
     ComparisonService,
     EditorService,
     NotificationService,
@@ -15,8 +20,18 @@ import {
 } from './services';
 
 @NgModule({
+    declarations: [
+        FooterComponent,
+        HeaderComponent,
+        LoadingSpinnerComponent
+    ],
     imports: [
         CommonModule
+    ],
+    exports: [
+        FooterComponent,
+        HeaderComponent,
+        LoadingSpinnerComponent
     ],
     providers: [
         {
