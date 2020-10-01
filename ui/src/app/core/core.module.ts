@@ -3,11 +3,14 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { CoreRoutingModule } from './core-routing.module';
+
 import { ApiService } from './http';
 import { AuthService, AuthInterceptorService } from './auth';
 import {
     FooterComponent,
     HeaderComponent,
+    IconComponent,
     LoadingSpinnerComponent
 } from './components';
 import {
@@ -23,14 +26,17 @@ import {
     declarations: [
         FooterComponent,
         HeaderComponent,
+        IconComponent,
         LoadingSpinnerComponent
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        CoreRoutingModule
     ],
     exports: [
         FooterComponent,
         HeaderComponent,
+        IconComponent,
         LoadingSpinnerComponent
     ],
     providers: [
