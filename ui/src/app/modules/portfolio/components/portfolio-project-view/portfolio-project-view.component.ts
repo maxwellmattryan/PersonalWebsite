@@ -60,8 +60,6 @@ export class PortfolioProjectViewComponent implements OnInit {
         this.portfolioProjectApiService.deleteProject(this.project.id).subscribe((res: any) => {
             this.notificationService.createNotification('Successfully deleted the project!');
             this.router.navigate(['']);
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
         });
     }
 }

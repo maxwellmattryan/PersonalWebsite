@@ -21,6 +21,7 @@ import {
     TrackingService,
     ValidationService
 } from './services';
+import { HttpErrorInterceptorService } from '@ui/core/http/http-error-interceptor.service';
 
 @NgModule({
     declarations: [
@@ -42,20 +43,20 @@ import {
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
+            useFactory: function(notificationService: NotificationService) {
+                return new HttpErrorInterceptorService(notificationService);
+            },
+            multi: true,
+            deps: [NotificationService]
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
             useFactory: function(router: Router, authService: AuthService, notificationService: NotificationService) {
                 return new AuthInterceptorService(router, authService, notificationService);
             },
             multi: true,
             deps: [Router, AuthService, NotificationService]
-        },
-        ApiService,
-        AuthService,
-        ComparisonService,
-        EditorService,
-        NotificationService,
-        SeoService,
-        TrackingService,
-        ValidationService
+        }
     ]
 })
 export class CoreModule { }

@@ -59,8 +59,6 @@ export class BlogPostViewComponent implements OnInit {
             this.post.topics.sort(this.blogComparisonService.topics);
 
             this.isLoaded = true;
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
         });
     }
 
@@ -72,8 +70,6 @@ export class BlogPostViewComponent implements OnInit {
         this.blogApiService.deletePost(id).subscribe((res: any) => {
             this.notificationService.createNotification('Successfully deleted blog post!');
             this.router.navigate(['/blog']);
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
         });
     }
 }

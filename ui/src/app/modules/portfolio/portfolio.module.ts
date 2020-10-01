@@ -18,9 +18,7 @@ import {
 } from './components';
 import {
     PortfolioApiService,
-    PortfolioComparisonService,
-    PortfolioEditorService,
-    PortfolioProfileService
+    PortfolioComparisonService
 } from './services';
 
 @NgModule({
@@ -44,9 +42,7 @@ import {
     ],
     providers: [
         PortfolioApiService,
-        PortfolioComparisonService,
-        PortfolioEditorService,
-        PortfolioProfileService,
+        PortfolioComparisonService
     ]
 })
 export class PortfolioModule { }

@@ -11,8 +11,7 @@ import { HomeApiService } from './services';
 
 @Component({
     selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+    templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
     homepage: Homepage;
@@ -37,8 +36,6 @@ export class HomeComponent implements OnInit {
             this.titleService.setTitle(`${this.homepage.profile.name} Blog & Portfolio | Matthew Maxwell`);
 
             this.isLoaded = true;
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
         });
     }
 }

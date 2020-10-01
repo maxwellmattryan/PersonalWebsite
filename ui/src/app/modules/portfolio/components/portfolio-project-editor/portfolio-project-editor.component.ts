@@ -96,8 +96,6 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
             }
 
             this.isLoaded = true;
-        }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
         });
     }
 
@@ -139,15 +137,11 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
             this.portfolioApiService.createProject(project).subscribe((res: PortfolioProject) => {
                 this.notificationService.createNotification(`Successfully created new portfolio project!`);
                 this.router.navigate([`projects/${ this.seoService.getCanonicalUrl(res.id, res.name) }`]);
-            }, (error: HttpErrorResponse) => {
-                this.notificationService.createNotification(error.error.message);
             });
         } else {
             this.portfolioApiService.updateProject(project).subscribe((res: PortfolioProject) => {
                 this.notificationService.createNotification(`Successfully updated existing portfolio project!`);
                 this.router.navigate([`projects/${ this.seoService.getCanonicalUrl(res.id, res.name) }`]);
-            }, (error: HttpErrorResponse) => {
-                this.notificationService.createNotification(error.error.message);
             });
         }
     }

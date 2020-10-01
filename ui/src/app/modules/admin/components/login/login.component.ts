@@ -41,8 +41,6 @@ export class LoginComponent implements OnInit {
           this.authService.loginAdmin(res.id, res.username);
           this.notificationService.createNotification(`Welcome back, ${res.username}!`);
           this.router.navigate(['admin']);
-        }, (error: HttpErrorResponse) => {
-          this.notificationService.createNotification(error.error.message);
         });
     }
 }

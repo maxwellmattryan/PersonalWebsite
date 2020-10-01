@@ -46,7 +46,7 @@ export class BlogTopicEditorComponent implements OnInit, OnDestroy {
 
     private checkForAdmin(): void {
         if(!this.authService.isLoggedIn())
-            this.router.navigate(['/']);
+            this.router.navigate(['']);
     }
 
     private setPageHideEvent(): void {
@@ -87,15 +87,11 @@ export class BlogTopicEditorComponent implements OnInit, OnDestroy {
             this.blogApiService.createTopic(topic).subscribe((res: BlogTopic) => {
                 this.notificationService.createNotification('Successfully created new topic.');
                 this.router.navigate(['blog'])
-            }, (error: HttpErrorResponse) => {
-                this.notificationService.createNotification(error.error.message);
             });
         } else {
             this.blogApiService.updateTopic(topic).subscribe((res: BlogTopic) => {
                 this.notificationService.createNotification('Successfully updated existing topic.');
                 this.router.navigate(['blog'])
-            }, (error: HttpErrorResponse) => {
-                this.notificationService.createNotification(error.error.message);
             });
         }
     }

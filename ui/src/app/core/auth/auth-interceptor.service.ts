@@ -4,14 +4,14 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { NotificationService } from '../services';
+
 import { AuthService } from './auth.service';
-import { NotificationService } from '../services/notification.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthInterceptorService implements HttpInterceptor {
-
     constructor(
         private router: Router,
         private authService: AuthService,
