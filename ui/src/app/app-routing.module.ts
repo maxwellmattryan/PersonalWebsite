@@ -5,23 +5,19 @@ const routes: Routes = [
     { 
         path: '',
         pathMatch: 'full',
-        loadChildren: () => import('@app/modules/home/home.module').then(m => m.HomeModule)
+        loadChildren: () => import('@ui/modules/home/home.module').then(m => m.HomeModule)
     },
     {
         path: 'admin',
-        loadChildren: () => import('@app/modules/admin/admin.module').then(m => m.AdminModule)
+        loadChildren: () => import('@ui/modules/admin/admin.module').then(m => m.AdminModule)
     },
     {
         path: 'blog',
-        loadChildren: () => import('@app/modules/blog/blog.module').then(m => m.BlogModule)
+        loadChildren: () => import('@ui/modules/blog/blog.module').then(m => m.BlogModule)
     },
     {
-        path: 'editor',
-        loadChildren: () => import('@app/modules/editor/editor.module').then(m => m.EditorModule)
-    },
-    {
-        path: 'projects',
-        loadChildren: () => import('@app/modules/project/project.module').then(m => m.ProjectModule)
+        path: 'portfolio',
+        loadChildren: () => import('@ui/modules/portfolio/portfolio.module').then(m => m.PortfolioModule)
     },
     {
         path: '**',

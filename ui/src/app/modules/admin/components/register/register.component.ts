@@ -1,11 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Admin } from '@app/shared/interfaces';
-import { ApiService } from '@app/core/http';
-import { NotificationService, ValidationService } from '@app/core/services';
-import { HttpErrorResponse } from '@angular/common/http';
-import { AuthService } from '@app/core/auth';
+import { AuthApiService, AuthService } from '@ui/core/auth';
+import { NotificationService, ValidationService } from '@ui/core/services';
+
+import { Admin } from '../../interfaces';
 
 @Component({
     selector: 'app-register',
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private apiService: ApiService,
+        private authApiService: AuthApiService,
         private authService: AuthService,
         private notificationService: NotificationService,
         public validationService: ValidationService
@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
             password: this.password
         };
 
-        this.apiService.registerAdmin(admin).subscribe(res => {
+        this.authApiService.registerAdmin(admin).subscribe(res => {
             this.notificationService.createNotification(`Hello, ${admin.username}! Please log in.`);
             this.router.navigate(['admin/login']);
         }, (error: HttpErrorResponse) => {

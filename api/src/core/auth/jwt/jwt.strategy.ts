@@ -6,8 +6,8 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import { Request } from 'express';
 
-import { Admin } from '@api/features/admin/entities/admin.entity'
-import { AdminService } from '@api/features/admin/services/admin.service';
+import { Admin } from '@api/modules/admin/entities/admin.entity'
+import { AdminService } from '@api/modules/admin/services/admin.service';
 
 import { TokenPayload } from '../interfaces/token-payload.interface';
 

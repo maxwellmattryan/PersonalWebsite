@@ -1,18 +1,21 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 
-import { BlogPost, BlogTopic } from '@app/shared/models';
-import { ApiService } from '@app/core/http/api.service';
-import { AuthService } from '@app/core/auth';
+import { AuthService } from '@ui/core/auth';
 import {
-    BlogService,
-    ComparisonService,
-    EditorService,
     NotificationService,
-    ProfileService,
     TrackingService
-} from '@app/core/services';
+} from '@ui/core/services';
+import { PortfolioProfileService } from '@ui/modules/portfolio/services';
+
+import { BlogPost, BlogTopic } from '../../models';
+import {
+    BlogApiService,
+    BlogComparisonService,
+    BlogEditorService,
+    BlogTopicService
+} from '../../services';
 
 @Component({
     selector: 'app-blog-view',
@@ -29,31 +32,31 @@ export class BlogViewComponent implements OnInit {
     activeTopicId: number = -1;
 
     constructor(
-        private apiService: ApiService,
         private authService: AuthService,
-        public blogService: BlogService,
-        private comparisonService: ComparisonService,
-        private editorService: EditorService,
+        private blogApiService: BlogApiService,
+        private blogComparisonService: BlogComparisonService,
+        private blogEditorService: BlogEditorService,
+        public blogTopicService: BlogTopicService,
         private notificationService: NotificationService,
-        private profileService: ProfileService,
+        private portfolioProfileService: PortfolioProfileService,
         private titleService: Title,
         public trackingService: TrackingService
     ) { }
 
     ngOnInit(): void {
-        this.titleService.setTitle(`${this.profileService.getActiveProfileName()} Blog | Matthew Maxwell`);
+        this.titleService.setTitle(`${this.portfolioProfileService.getActiveProfileName()} Blog | Matthew Maxwell`);
 
         this.isAdmin = this.authService.isLoggedIn();
 
         if(this.isAdmin) {
-            this.apiService.getPosts(this.activeTopicId, false).subscribe((res: BlogPost[]) => {
+            this.blogApiService.getPosts(this.activeTopicId, false).subscribe((res: BlogPost[]) => {
                 this.posts = res;
-                this.topics = this.getTopicsFromPosts().sort(this.comparisonService.topics);
+                this.topics = this.getTopicsFromPosts().sort(this.blogComparisonService.topics);
 
-                if(this.blogService.hasActiveTopic()) {
-                    this.filterPosts(this.blogService.getActiveTopicId());
-                    this.blogService.setActiveTopic(null);
-                    this.blogService.getActiveTopicId();
+                if(this.blogTopicService.hasActiveTopic()) {
+                    this.filterPosts(this.blogTopicService.getActiveTopicId());
+                    this.blogTopicService.setActiveTopic(null);
+                    this.blogTopicService.getActiveTopicId();
                 }
 
                 this.isLoaded = true;
@@ -61,13 +64,13 @@ export class BlogViewComponent implements OnInit {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
-            this.apiService.getPosts(this.activeTopicId).subscribe((res: BlogPost[]) => {
+            this.blogApiService.getPosts(this.activeTopicId).subscribe((res: BlogPost[]) => {
                 this.posts = res;
-                this.topics = this.getTopicsFromPosts().sort(this.comparisonService.topics);
+                this.topics = this.getTopicsFromPosts().sort(this.blogComparisonService.topics);
 
-                if(this.blogService.hasActiveTopic()) {
-                    this.filterPosts(this.blogService.getActiveTopicId());
-                    this.blogService.setActiveTopic(null);
+                if(this.blogTopicService.hasActiveTopic()) {
+                    this.filterPosts(this.blogTopicService.getActiveTopicId());
+                    this.blogTopicService.setActiveTopic(null);
                 }
 
                 this.isLoaded = true;
@@ -91,14 +94,14 @@ export class BlogViewComponent implements OnInit {
 
     filterPosts(topicId: number): void {
         if(this.isAdmin) {
-            this.apiService.getPosts(topicId, false).subscribe((res: BlogPost[]) => {
+            this.blogApiService.getPosts(topicId, false).subscribe((res: BlogPost[]) => {
                 this.posts = res;
                 this.activeTopicId = topicId;
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
             });
         } else {
-            this.apiService.getPosts(topicId).subscribe((res: BlogPost[]) => {
+            this.blogApiService.getPosts(topicId).subscribe((res: BlogPost[]) => {
                 this.posts = res;
                 this.activeTopicId = topicId;
             }, (error: HttpErrorResponse) => {
@@ -108,11 +111,11 @@ export class BlogViewComponent implements OnInit {
     }
 
     sendTopicToEditor(topic: BlogTopic): void {
-        this.editorService.setTopic(topic);
+        this.blogEditorService.setTopic(topic);
     }
 
     deleteTopic(topic: BlogTopic): void {
-        this.apiService.deleteTopic(topic.id).subscribe((res: any) => {
+        this.blogApiService.deleteTopic(topic.id).subscribe((res: any) => {
             this.removeTopic(topic.id);
             this.notificationService.createNotification('Successfully deleted blog topic!');
             this.filterPosts(-1);

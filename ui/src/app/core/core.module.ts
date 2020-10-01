@@ -3,22 +3,41 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { CoreRoutingModule } from './core-routing.module';
+
 import { ApiService } from './http';
 import { AuthService, AuthInterceptorService } from './auth';
 import {
-    BlogService,
+    FooterComponent,
+    HeaderComponent,
+    IconComponent,
+    LoadingSpinnerComponent
+} from './components';
+import {
     ComparisonService,
     EditorService,
     NotificationService,
-    ProfileService,
     SeoService,
     TrackingService,
     ValidationService
 } from './services';
 
 @NgModule({
+    declarations: [
+        FooterComponent,
+        HeaderComponent,
+        IconComponent,
+        LoadingSpinnerComponent
+    ],
     imports: [
-        CommonModule
+        CommonModule,
+        CoreRoutingModule
+    ],
+    exports: [
+        FooterComponent,
+        HeaderComponent,
+        IconComponent,
+        LoadingSpinnerComponent
     ],
     providers: [
         {
@@ -31,11 +50,9 @@ import {
         },
         ApiService,
         AuthService,
-        BlogService,
         ComparisonService,
         EditorService,
         NotificationService,
-        ProfileService,
         SeoService,
         TrackingService,
         ValidationService

@@ -4,8 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { BlogComponent } from './blog.component';
 
 import {
-    BlogViewComponent,
-    PostViewComponent
+    BlogPostEditorComponent,
+    BlogPostViewComponent,
+    BlogTopicEditorComponent,
+    BlogViewComponent
 } from './components';
 
 const routes: Routes = [
@@ -18,8 +20,16 @@ const routes: Routes = [
                 component: BlogViewComponent
             },
             {
+                path: 'posts/editor',
+                component: BlogPostEditorComponent
+            },
+            {
                 path: 'posts/:id/:uri',
-                component: PostViewComponent
+                component: BlogPostViewComponent
+            },
+            {
+                path: 'topics/editor',
+                component: BlogTopicEditorComponent
             }
         ]
     }

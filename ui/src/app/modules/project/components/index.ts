@@ -1,1 +1,0 @@
-export { ProjectViewComponent } from './project-view/project-view.component';

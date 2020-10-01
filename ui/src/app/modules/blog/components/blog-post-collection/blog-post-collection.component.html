@@ -1,0 +1,51 @@
+<div class='section posts' *ngIf='posts'>
+    <h2 class='posts__header'>Posts</h2>
+
+    <div class='line-divider'></div>
+
+    <div class='container posts__post-container'>
+            <div class='posts__post' *ngFor='let post of getPosts() trackBy: this.trackingService.objectById; let idx = index' [ngClass]="{'posts__post--rjust': idx % 2 !== 0}">
+                <a class=posts__post-anchor-wrapper [routerLink]="[this.getPostUrl(post.id, post.title)]">
+                    <h3 class='posts__post-title' *ngIf='post.status.status === "PUBLISHED"'>{{ post.title }}</h3>
+                    <h3 class='posts__post-title' *ngIf='post.status.status !== "PUBLISHED"'>{{ post.status.status + ": " + post.title }}</h3>
+
+                    <h4 class='posts__post-subtitle'>{{ post.subtitle }}</h4>
+                </a>
+
+
+                <div class='posts__post-topic-list' *ngIf='showTopics'>
+                    <a
+                            class='posts__post-topic-item'
+                            *ngFor='let topic of post.topics'
+                            (click)='blogTopicService.setActiveTopic(topic)'
+                            [routerLink]="['/blog']"
+                    >
+                        {{ topic.name }}
+                    </a>
+                </div>
+
+                <p class='posts__post-preview' *ngIf='showPreview'>
+                    {{ post.preview.split(' ').slice(0, 44).join(' ') }} ...
+                </p>
+
+                <p class='posts__post-date' [innerHTML]='seoService.getFormattedDate(post.updated_at)'></p>
+            </div>
+    </div>
+
+    <button
+        aria-label='Display more posts'
+        [ngClass]="{'btn--hide': nPostsToDisplay >= posts.length}"
+        class='btn posts__load-btn'
+        (click)='displayMorePosts()'
+    >
+        Load More
+    </button>
+
+    <a
+        *ngIf='showReadmore'
+        class='btn posts__readmore-btn'
+        routerLink='/blog'
+    >
+        See Blog
+    </a>
+</div>

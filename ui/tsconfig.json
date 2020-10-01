@@ -16,8 +16,8 @@
       "dom"
     ],
     "paths": {
-        "@app/*": ["src/app/*"],
-        "@app/environments/*": ["src/environments/*"]
+        "@ui/*": ["src/app/*"],
+        "@ui/environments/*": ["src/environments/*"]
     }
   },
   "angularCompilerOptions": {

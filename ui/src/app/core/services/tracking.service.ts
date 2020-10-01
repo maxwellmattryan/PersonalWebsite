@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BlogAuthor } from '@app/shared/models';
 
 @Injectable({
     providedIn: 'root'

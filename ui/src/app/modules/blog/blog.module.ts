@@ -1,29 +1,54 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MarkdownModule } from 'ngx-markdown';
 
-import { SharedModule } from '@app/shared/shared.module';
+import { CoreModule } from '@ui/core/core.module';
+import { MaterialModule } from '@ui/modules/material/material.module';
 
 import { BlogComponent } from './blog.component';
 import { BlogRoutingModule } from './blog-routing.module';
 
 import {
-    BlogViewComponent,
-    PostViewComponent
+    BlogPostCollectionComponent,
+    BlogPostEditorComponent,
+    BlogPostViewComponent,
+    BlogTopicEditorComponent,
+    BlogViewComponent
 } from './components';
+import {
+    BlogApiService,
+    BlogComparisonService,
+    BlogEditorService,
+    BlogTopicService
+} from './services';
 
 @NgModule({
     declarations: [
         BlogComponent,
-        BlogViewComponent,
-        PostViewComponent
+        BlogPostCollectionComponent,
+        BlogPostEditorComponent,
+        BlogPostViewComponent,
+        BlogTopicEditorComponent,
+        BlogViewComponent
     ],
     imports: [
         BlogRoutingModule,
         CommonModule,
+        CoreModule,
         MarkdownModule.forRoot(),
-        SharedModule
+        MaterialModule,
+        ReactiveFormsModule
+    ],
+    exports: [
+        BlogPostCollectionComponent
+    ],
+    providers: [
+        BlogApiService,
+        BlogComparisonService,
+        BlogEditorService,
+        BlogTopicService
     ]
 })
 export class BlogModule { }

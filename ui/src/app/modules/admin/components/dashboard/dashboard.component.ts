@@ -3,16 +3,19 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import { Profile, ProfileStatus } from '@app/shared/models';
-import { ApiService } from '@app/core/http';
-import { AuthService } from '@app/core/auth';
+import { AuthApiService, AuthService } from '@ui/core/auth';
 import {
     NotificationService,
-    ComparisonService,
-    EditorService,
-    ProfileService,
     TrackingService
-} from '@app/core/services';
+} from '@ui/core/services';
+import {
+    PortfolioProfile,
+    PortfolioProfileStatus
+} from '@ui/modules/portfolio/models';
+import {
+    PortfolioApiService, PortfolioComparisonService, PortfolioEditorService,
+    PortfolioProfileService
+} from '@ui/modules/portfolio/services';
 
 @Component({
     selector: 'app-dashboard',
@@ -20,18 +23,19 @@ import {
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-    profiles: Profile[];
+    profiles: PortfolioProfile[];
 
     isLoaded: boolean = false;
 
     constructor(
         private router: Router,
-        private apiService: ApiService,
+        private authApiService: AuthApiService,
         public authService: AuthService,
-        private comparisonService: ComparisonService,
-        private editorService: EditorService,
         public notificationService: NotificationService,
-        private profileService: ProfileService,
+        private portfolioProfileService: PortfolioProfileService,
+        private portfolioApiService: PortfolioApiService,
+        private portfolioComparisonService: PortfolioComparisonService,
+        private portfolioEditorService: PortfolioEditorService,
         private titleService: Title,
         public trackingService: TrackingService
     ) { }
@@ -47,8 +51,8 @@ export class DashboardComponent implements OnInit {
     }
 
     populateProfiles(): void {
-        this.apiService.getProfiles().subscribe((res: Profile[]) => {
-            this.profiles = res.sort(this.comparisonService.profiles);
+        this.portfolioApiService.getProfiles().subscribe((res: PortfolioProfile[]) => {
+            this.profiles = res.sort(this.portfolioComparisonService.profiles);
             this.setActiveProfile();
 
             this.isLoaded = true;
@@ -59,14 +63,14 @@ export class DashboardComponent implements OnInit {
 
     private setActiveProfile(): void {
         const activeProfile = this.profiles.find(p => p.status.status === 'ACTIVE');
-        this.profileService.setActiveProfile(activeProfile);
+        this.portfolioProfileService.setActiveProfile(activeProfile);
     }
 
-    changeProfile(profile: Profile): void {
+    changeProfile(profile: PortfolioProfile): void {
         if(profile.status.status === 'ACTIVE') return;
 
-        this.apiService.activateProfile(profile.id).subscribe((res: Profile) => {
-            this.profileService.setActiveProfile(res);
+        this.portfolioApiService.activateProfile(profile.id).subscribe((res: PortfolioProfile) => {
+            this.portfolioProfileService.setActiveProfile(res);
 
             this.modifyProfileStatuses(res.id);
             this.notificationService.createNotification(`Successfully activated the "${res.name}" profile!`);
@@ -78,15 +82,15 @@ export class DashboardComponent implements OnInit {
     private modifyProfileStatuses(activeId: number): void {
         this.profiles.forEach(p => {
             if(p.id === activeId) {
-                p.status = new ProfileStatus({ status: 'ACTIVE' });
+                p.status = new PortfolioProfileStatus({ status: 'ACTIVE' });
             } else {
-                p.status = new ProfileStatus({ status: 'INACTIVE' });
+                p.status = new PortfolioProfileStatus({ status: 'INACTIVE' });
             }
         });
     }
 
     onLogoutClick(): void {
-        this.apiService.logoutAdmin().subscribe(res => {
+        this.authApiService.logoutAdmin().subscribe(res => {
             this.notificationService.createNotification(`Bye, ${this.authService.getAdmin()}!`);
             this.authService.logoutAdmin();
             this.router.navigate(['admin']);
@@ -95,17 +99,17 @@ export class DashboardComponent implements OnInit {
         });
     }
 
-    sendProfileToEditor(profile: Profile): void {
-        this.editorService.setProfile(profile);
+    sendProfileToEditor(profile: PortfolioProfile): void {
+        this.portfolioEditorService.setProfile(profile);
     }
 
-    deleteProfile(profile: Profile): void {
+    deleteProfile(profile: PortfolioProfile): void {
         if(this.profiles.length === 1) {
             this.notificationService.createNotification('Cannot delete only existing profile.');
             return;
         }
 
-        this.apiService.deleteProfile(profile.id).subscribe((res: any) => {
+        this.portfolioApiService.deleteProfile(profile.id).subscribe((res: any) => {
             this.profiles = this.profiles.filter(p => p.id !== profile.id);
             this.notificationService.createNotification('Successfully delete profile!');
             if(profile.status.status === 'ACTIVE') location.reload();
