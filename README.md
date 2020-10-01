@@ -7,7 +7,6 @@ Welcome to the codebase for my personal website! The stack consists of Angular (
 - [Angular](#Angular)
     - [Core](#Core)
     - [Modules](#Modules)
-    - [Shared](#Shared)
 - [NestJS](#NestJS)
     - [API](#API)
     - [Architecture](#Architecture)
@@ -32,31 +31,26 @@ Angular is quite a robust framework and really provides a maintainable solution 
 These services are used across the entire applications, so it is most organizationally useful to put things like the HTTP client, authentication mechanisms, and any other application-wide services into a singular place.
 
 - Authentication
-    - Logs admin in / out
-    - Check if admin is logged in
-    - Load / store token and admin username to local storage
-    - Returns HttpHeaders with authorization key-value for JWT
-    - Contains interceptor for handling 401 / 403 errors
+    - AuthService
+    - AuthApiService
+    - AuthInterceptorService
+- Components
+    - FooterComponent
+    - HeaderComponent
+    - IconComponent
+    - LoadingSpinnerComponent
 - HTTP
-    - Handles all outgoing requests to the API
+    - ApiService
+    - HttpErrorInterceptorService
+- Models
+    - Deserializable
 - Services
-    - Blog
-        - Get and set active topic to display
-    - Comparison
-        - Contains functions to sort arrays of the various models, etc.
-    - Editor
-        - Get, has, and set operations for the various editor components
-    - Notification
-        - Creates Angular Material SnackBar popup
-    - Profile
-        - Stores and updates the active profile for the website
-    - SEO
-        - Formats the URI of anything as long as it's given an ID number and some string identifier (name, title, etc.)
-        - Retrieves IDs from URLs containing the same structure returning by the method above
-        - Given a Date object, returns a string with formatted superscripts for the date along with month names
-    - Validation
-        - Using ValidatorFn, verifies that at least one item is selected from an editor's FormArray
-        - Verifies admin credentials when logging in (and registering*)
+    - ComparisonService
+    - EditorService
+    - NotificationService
+    - SeoService
+    - TrackingService
+    - ValidationService
 
 _\*This functionality will not be available on app's deployment._
 
@@ -65,52 +59,56 @@ _\*This functionality will not be available on app's deployment._
 Each module roughly corresponds to a page view of the web app and contains the necessary components for handling the logic of that particular route. With them being located in a 'modules' folder, they are able to be re-used effectively and efficiently.
 
 - Admin
-    - DashboardComponent
-    - LoginComponent
-    - RegisterComponent
+    - Components
+        - DashboardComponent
+        - LoginComponent
+        - RegisterComponent
+    - Interfaces
+        - Admin
 - Blog
-    - BlogViewComponent
-    - PostViewComponent
-- Editor
-    - PostEditorComponent
-    - ProfileEditorComponent
-    - ProjectEditorComponent
-    - TopicEditorComponent
+    - Components
+        - BlogPostCollectionComponent
+        - BlogPostEditorComponent
+        - BlogPostViewComponent
+        - BlogTopicEditorComponent
+        - BlogViewComponent
+    - Models
+        - BlogAuthor
+        - BlogPost
+        - BlogPostStatus
+        - BlogTopic
+    - Services
+        - BlogApiService
+        - BlogComparisonService
+        - BlogEditorService
+        - BlogTopicService
 - Home
-    - HomeViewComponent
-- Icon
-    - SVG-embedded components
+    - Components
+        - HomeAboutComponent
+        - HomeLandingComponent
+    - Interfaces
+        - Homepage
+    - Services
+        - HomeApiService
 - Material
     - Modules from Angular Material
-- Project
-    - ProjectViewComponent
-
-### Shared
-
-The 'shared' folder contains all of the things that are going to be commonly used throughout the entire application and will appear on a majority of the pages. Having access to all of these needed Angular structures through a single 'shared' access point has made the whole development (and debug) process a lot easier.
-
-- Components
-    - AboutComponent
-    - FooterComponent
-    - HeaderComponent
-    - LandingComponent
-    - LoadingSpinnerComponent
-    - PostCollectionComponent
-    - ProjectCollectionComponent
-- Interfaces
-    - Admin
-    - Homepage
-- Models
-    - Blog Author
-    - Blog Post
-    - Blog Post Status
-    - Blog Topic
-    - Deserializable
-    - Profile 
-    - Profile Status
-    - Profile Technology
-    - Project
-
+- Portfolio
+    - Components
+        - PortfolioProfileEditorComponent
+        - PortfolioProjectCollectionComponent
+        - PortfolioProjectEditorComponent
+        - PortfolioProjectViewComponent
+    - Models
+        - PortfolioProfile
+        - PortfolioProfileStatus
+        - PortfolioProfileTechnology
+        - PortfolioProject
+    - Services
+        - PortfolioApiService
+        - PortfolioComparisonService
+        - PortfolioEditorService
+        - PortfolioProfileService
+        
 ## NestJS
 
 Writing with Typescript is a joy and being able to use it in the backend is incredibly nice. There is minimal context shifting between working with the client-side and server-side code and having compile-tile error checking really helps to increase productivity. NestJS is a backend framework that integrates Typescript into a Express-based environment in a Angular-like style. 
@@ -173,43 +171,41 @@ Similar to Angular, it's module packaging is great and feels incredibly consiste
         - Removes the topic with the corresponding `id` from the database
         - 204
 
-- /api/profiles
-    - `GET /api/profiles`
+- /api/portfolio
+    - `GET /api/portfolio/profiles`
         - Retrieves list of all profiles in the database
         - 200
-    - `POST /api/profiles`
+    - `POST /api/portfolio/profiles`
         - Creates and saves a new profile to the database
         - 201
-    - `PUT /api/profiles/:id`
+    - `PUT /api/portfolio/profiles/:id`
         - Updates profile data from the client for the profile with the corresponding `id`
         - 200
-    - `DELETE /api/profiles/:id`
+    - `DELETE /api/portfolio/profiles/:id`
         - Removes the profile with the corresponding `id` from the database
         - 204
-    - `PUT /api/profiles/:id/activate`
+    - `PUT /api/portfolio/profiles/:id/activate`
         - Sets the profile with the corresponding `id` as the application's active profile while setting all other profiles as inactive
         - 200
-    - `GET /api/profiles/:id/technologies`
+    - `GET /api/portfolio/profiles/:id/technologies`
         - Retrieves list of all technologies belonging to the profile with the corresponding `id`
         - 200
-    - `GET /api/profiles/statuses`
+    - `GET /api/portfolio/profiles/statuses`
         - Retrieves list of all profile statuses in the database
         - 200
-        
-- /api/projects
-    - `GET /api/projects`
+    - `GET /api/portfolio/projects`
         - Retrieves list of all projects in the database
         - 200
-    - `POST /api/projects`
+    - `POST /api/portfolio/projects`
         - Creates and saves a new project to the database
         - 201
-    - `GET /api/projects/:id`
+    - `GET /api/portfolio/projects/:id`
         - Retrieves a single project corresponding to the `id` path parameter
         - 200
-    - `PUT /api/projects/:id`
+    - `PUT /api/portfolio/projects/:id`
         - Updates project data from the client for the project with the corresponding `id`
         - 200
-    - `DELETE /api/projects/:id`
+    - `DELETE /api/portfolio/projects/:id`
         - Removes the project with the corresponding `id` from the database
         - 204
 
@@ -227,7 +223,7 @@ I structured this application in a "layered architecture" style, which correspon
     - http/
         - ...
         - `http.module.ts`
-- features/
+- modules/
     - admin/
         - ...
         - `admin.module.ts`
@@ -237,12 +233,9 @@ I structured this application in a "layered architecture" style, which correspon
     - blog/
         - ...
         - `blog.module.ts`
-    - profile/
+    - portfolio/
         - ...
-        - `profile.module.ts`
-    - project/
-        - ...
-        - `project.module.ts`
+        - `portfolio.module.ts`
 
 #### Controllers
 
@@ -302,16 +295,16 @@ NOTE: What I have listed below is simply the more relevant fields for each table
 - Blog Topic
     - Name
     - Description
-- Profile
+- Portfolio Profile
     - Name
     - Tagline
     - Landing
     - About
     - Status (ACTIVE, INACTIVE)
-- Profile Technology
+- Portfolio Profile Technology
     - Name
     - Display Order
-- Project
+- Portfolio Project
     - Name
     - Tagline
     - Description
