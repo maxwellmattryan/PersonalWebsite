@@ -19,9 +19,7 @@ import {
 } from './components';
 import {
     BlogApiService,
-    BlogComparisonService,
-    BlogEditorService,
-    BlogTopicService
+    BlogComparisonService
 } from './services';
 
 @NgModule({
@@ -46,9 +44,7 @@ import {
     ],
     providers: [
         BlogApiService,
-        BlogComparisonService,
-        BlogEditorService,
-        BlogTopicService
+        BlogComparisonService
     ]
 })
 export class BlogModule { }

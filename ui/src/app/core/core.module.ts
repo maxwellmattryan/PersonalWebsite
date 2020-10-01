@@ -47,15 +47,7 @@ import {
             },
             multi: true,
             deps: [Router, AuthService, NotificationService]
-        },
-        ApiService,
-        AuthService,
-        ComparisonService,
-        EditorService,
-        NotificationService,
-        SeoService,
-        TrackingService,
-        ValidationService
+        }
     ]
 })
 export class CoreModule { }

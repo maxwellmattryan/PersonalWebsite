@@ -46,7 +46,7 @@ export class BlogTopicEditorComponent implements OnInit, OnDestroy {
 
     private checkForAdmin(): void {
         if(!this.authService.isLoggedIn())
-            this.router.navigate(['/']);
+            this.router.navigate(['']);
     }
 
     private setPageHideEvent(): void {

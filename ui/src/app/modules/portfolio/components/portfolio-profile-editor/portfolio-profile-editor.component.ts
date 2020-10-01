@@ -91,6 +91,7 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
 
     private loadProfileData(): void {
         this.profileData = this.portfolioEditorService.getProfile();
+        console.log(this.profileData);
     }
 
     private loadProjectData(): void {

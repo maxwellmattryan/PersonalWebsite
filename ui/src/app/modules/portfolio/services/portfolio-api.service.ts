@@ -13,7 +13,7 @@ import {
 } from '../models';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class PortfolioApiService extends ApiService {
     constructor(http: HttpClient) {

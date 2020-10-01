@@ -32,10 +32,10 @@ export class DashboardComponent implements OnInit {
         private authApiService: AuthApiService,
         public authService: AuthService,
         public notificationService: NotificationService,
-        private portfolioProfileService: PortfolioProfileService,
         private portfolioApiService: PortfolioApiService,
         private portfolioComparisonService: PortfolioComparisonService,
         private portfolioEditorService: PortfolioEditorService,
+        private portfolioProfileService: PortfolioProfileService,
         private titleService: Title,
         public trackingService: TrackingService
     ) { }
