@@ -8,17 +8,13 @@ import { environment } from '@ui/environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class ApiService {
-    constructor(protected http: HttpClient) { }
+export abstract class ApiService {
+    protected constructor(protected http: HttpClient) { }
 
     protected contentTypeHeader(contentType: string = 'application/json'): HttpHeaders {
         const headers = new HttpHeaders();
         headers.set('Content-Type', contentType);
 
         return headers;
-    }
-
-    getHomepage(): Observable<any> {
-        return this.http.get<any>(`${environment.API_URL}/homepage`);
     }
 }

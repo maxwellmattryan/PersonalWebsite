@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 
-import { Homepage } from '@ui/shared/interfaces';
-import { ApiService } from '@ui/core/http';
 import { AuthService } from '@ui/core/auth';
 import { NotificationService } from '@ui/core/services';
 import { PortfolioComparisonService, PortfolioProfileService } from '@ui/modules/portfolio/services';
+
+import { Homepage } from '../../interfaces';
+import { HomeApiService } from '../../services';
 
 @Component({
     selector: 'app-home-view',
@@ -19,8 +20,8 @@ export class HomeViewComponent implements OnInit {
     isLoaded: boolean = false;
 
     constructor(
-        private apiService: ApiService,
         private authService: AuthService,
+        private homeApiService: HomeApiService,
         private notificationService: NotificationService,
         private portfolioComparisonService: PortfolioComparisonService,
         private portfolioProfileService: PortfolioProfileService,
@@ -28,7 +29,7 @@ export class HomeViewComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.apiService.getHomepage().subscribe((res: Homepage) => {
+        this.homeApiService.getHomepage().subscribe((res: Homepage) => {
             this.homepage = res;
             this.homepage.profile.technologies = res.profile.technologies.sort(this.portfolioComparisonService.profileTechnologies);
 

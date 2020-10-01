@@ -8,9 +8,8 @@ import { SharedModule } from '@ui/shared/shared.module';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
 
-import {
-    HomeViewComponent
-} from './components';
+import { HomeViewComponent } from './components';
+import { HomeApiService } from './services';
 
 @NgModule({
     declarations: [
@@ -23,6 +22,9 @@ import {
         BlogModule,
         PortfolioModule,
         SharedModule
+    ],
+    providers: [
+        HomeApiService
     ]
 })
 export class HomeModule { }
