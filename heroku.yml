@@ -1,8 +1,0 @@
-build:
-  docker:
-    api: api/Dockerfile
-    ui: ui/Dockerfile
-
-run:
-  api: bundle exec puma -C config/puma.rb
-  ui: bundle exec puma -C config/puma.rb
