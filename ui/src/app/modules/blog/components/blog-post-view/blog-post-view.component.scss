@@ -1,3 +1,4 @@
+@import 'markdown';
 @import 'variables';
 
 .post__btn-container {
@@ -55,78 +56,11 @@
     width: 100%;
 }
 
-markdown ::ng-deep a {
-    color: $color-primary;
-    display: inline-block;
-}
-
-markdown ::ng-deep div img {
-    text-align: center;
-    width: 100%;
-}
-
-markdown ::ng-deep img {
-    height: auto;
-    width: 100%;
-}
-
-markdown ::ng-deep p code {
-    background-color: $color-dark-light;
-    box-sizing: border-box;
-    color: $color-white;
-    margin: 0 calc(#{$quarter-margin} / 2);
-    padding: calc(#{$quarter-padding} / 4) calc(#{$quarter-padding} / 2);
-}
-
-markdown ::ng-deep .text {
-    &--note {
-        color: $color-primary;
-
-        &-paragraph {
-            color: $color-primary-light;
-        }
-    }
-
-    &--caution {
-        color: $color-caution;
-
-        &-paragraph {
-            color: $color-caution-light;
-        }
-    }
-
-    &--warn {
-        color: $color-warn;
-
-        &-paragraph {
-            color: $color-warn-light;
-        }
-    }
-
-    &--tip {
-        color: $color-go;
-
-        &-paragraph {
-            color: $color-go-light;
-        }
-    }
-}
-
 @media only screen and (min-width: 768px) {
     .post__topic-item {
         &:hover {
             text-decoration: underline;
         }
-    }
-
-    markdown ::ng-deep a {
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-
-    markdown ::ng-deep img {
-        width: 64%;
     }
 
     .post__image {

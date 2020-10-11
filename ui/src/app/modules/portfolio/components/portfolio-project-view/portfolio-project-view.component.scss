@@ -1,3 +1,4 @@
+@import 'markdown';
 @import 'variables';
 
 .project {
@@ -60,34 +61,11 @@
     width: 100%;
 }
 
-markdown ::ng-deep a {
-    color: $color-primary;
-    display: inline-block;
-}
-
-markdown ::ng-deep img {
-    box-sizing: border-box;
-    text-align: center;
-    max-width: 90%;
-}
-
-markdown ::ng-deep p code {
-    background-color: $color-dark-light;
-    box-sizing: border-box;
-    color: $color-white;
-    margin: 0 calc(#{$quarter-margin} / 2);
-    padding: calc(#{$quarter-padding} / 4) calc(#{$quarter-padding} / 2);
-}
-
 @media only screen and (min-width: 768px) {
     .project__external-icon {
         &:hover {
             transform: translateY($hover-transition-transform);
         }
-    }
-
-    markdown ::ng-deep a:hover {
-        text-decoration: underline;
     }
 
     .project__image {
