@@ -16,12 +16,8 @@ import { PortfolioModule } from '@api/modules/portfolio/portfolio.module';
     imports: [
         ConfigModule.forRoot({
             validationSchema: Joi.object({
-                POSTGRES_SOCKET_PATH: Joi.string(),
-                POSTGRES_HOST: Joi.string().required(),
-                POSTGRES_PORT: Joi.number().required(),
-                POSTGRES_USER: Joi.string().required(),
-                POSTGRES_PASSWORD: Joi.string().required(),
-                POSTGRES_DB: Joi.string().required(),
+                DATABASE_URL: Joi.string().required(),
+                DATABASE_USE_SSL: Joi.boolean().required(),
 
                 JWT_SECRET: Joi.string().required(),
                 JWT_EXPIRES_IN: Joi.string().required()

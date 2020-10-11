@@ -12,16 +12,12 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
             useFactory: (configService: ConfigService) => {
                 return ({
                     type: 'postgres',
-                    extra: configService.get('POSTGRES_USE_SSL') ? { ssl: { rejectUnauthorized: false } } : { },
-                    ssl: configService.get('POSTGRES_USE_SSL') || false,
-                    host: configService.get('POSTGRES_SOCKET_PATH') || configService.get('POSTGRES_HOST'),
-                    port: configService.get('POSTGRES_PORT'),
-                    username: configService.get('POSTGRES_USER'),
-                    password: configService.get('POSTGRES_PASSWORD'),
-                    database: configService.get('POSTGRES_DB'),
                     namingStrategy: new SnakeNamingStrategy(),
-                    entities: [__dirname + '/../../modules/**/*.entity{.ts,.js}'],
-                    synchronize: true
+                    synchronize: true,
+                    url: configService.get('DATABASE_URL'),
+                    ssl: configService.get('DATABASE_USE_SSL'),
+                    extra: configService.get('DATABASE_USE_SSL') ? { ssl: { rejectUnauthorized: false } } : { },
+                    entities: [__dirname + '/../../modules/**/*.entity{.ts,.js}']
                 });
             }
         })
