@@ -3,20 +3,18 @@
 **/target
 
 # IntelliJ-based files and folders
-/.idea
-/.idea_modules
+.idea
+.idea_modules
 
 # Ignore metals VS Code extension
-/.metals
+.metals
 
-/.classpath
-/.project
-/.settings
+.classpath
+.project
+.settings
 
-/RUNNING_PID
+RUNNING_PID
 
-# Some data
-/data/admin/admin-prod-data.sql
-
-# Design folder
-/design
+# My folders 
+data
+design
