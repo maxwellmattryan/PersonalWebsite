@@ -1,4 +1,4 @@
-# mattmaxwell.tech
+# mattmaxwell.dev
 
 Welcome to the codebase for my personal website! The stack consists of Angular (Typescript), NestJS (Typescript) and PostgreSQL. Please visit the url, [mattmaxwell.dev](https://mattmaxwell.dev), to see it in action!
 
