@@ -12,7 +12,8 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
             useFactory: (configService: ConfigService) => {
                 return ({
                     type: 'postgres',
-                    extra: { socketPath: configService.get('POSTGRES_SOCKET_PATH') },
+                    extra: configService.get('POSTGRES_USE_SSL') ? { ssl: { rejectUnauthorized: false } } : { },
+                    ssl: configService.get('POSTGRES_USE_SSL') || false,
                     host: configService.get('POSTGRES_SOCKET_PATH') || configService.get('POSTGRES_HOST'),
                     port: configService.get('POSTGRES_PORT'),
                     username: configService.get('POSTGRES_USER'),
@@ -21,7 +22,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
                     namingStrategy: new SnakeNamingStrategy(),
                     entities: [__dirname + '/../../modules/**/*.entity{.ts,.js}'],
                     synchronize: true
-                })
+                });
             }
         })
     ]
