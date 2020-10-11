@@ -71,12 +71,11 @@ markdown ::ng-deep img {
 }
 
 markdown ::ng-deep p code {
-    // NOTE: Use commented lines for interesting border effect
-    //border: 1px solid $color-go-light;
-    //padding: calc(#{$quarter-padding} / 4) calc(#{$quarter-padding} / 2);
-
-    padding: 0 calc(#{$quarter-padding} / 2);
-    color: $color-go-light;
+    background-color: $color-dark-light;
+    box-sizing: border-box;
+    color: $color-white;
+    margin: 0 calc(#{$quarter-margin} / 2);
+    padding: calc(#{$quarter-padding} / 4) calc(#{$quarter-padding} / 2);
 }
 
 markdown ::ng-deep .text {
