@@ -5,7 +5,7 @@ start_time=$(date +%s)
 for i in "$@"; do
     case $i in
     -a|--api)
-        git subtree push --prefix api heroku-api master
+        git subtree push --prefix api heroku-api master & 
         echo -e "\nSUCCESS: Pushed API source code to Heroku\n"
         shift
         ;;
