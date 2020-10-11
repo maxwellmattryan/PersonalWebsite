@@ -5,7 +5,7 @@ VALUES (1,
         'Writing code that represents and messes with digital audio signals',
         'Although it is ultimately a small niche within the realm of programming and software engineering as a whole, audio programming is a unique part that has not only interesting constraints for us to work within, but also endless possibilities to create interesting software and effects. To really delve into it, it''s important to understand a few fundamental concepts.',
         'MARKDOWN HERE',
-        'assets/images/blog/02/signal.webp',
+        'assets/images/blog/002/signal.webp',
         '2020-09-14 01:05:29.653050',
         '2020-09-20 18:02:18.526809');
 

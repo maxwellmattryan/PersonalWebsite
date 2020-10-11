@@ -103,6 +103,14 @@ markdown ::ng-deep .text {
             color: $color-warn-light;
         }
     }
+
+    &--tip {
+        color: $color-go;
+
+        &-paragraph {
+            color: $color-go-light;
+        }
+    }
 }
 
 @media only screen and (min-width: 768px) {

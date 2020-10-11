@@ -5,7 +5,7 @@ VALUES (1,
         'A cookie-based approach to solving authentication',
         'Authentication is a huge concern among many when developing a web-based application. There exist multiple solutions for implementing mechanisms to authenticate users and post is an overview of the JWT-based approach.',
         'MARKDOWN HERE',
-        'assets/images/blog/01/jwt.webp',
+        'assets/images/blog/001/jwt.webp',
         '2020-09-12 17:16:23.119169',
         '2020-09-17 23:43:31.126472');
 
