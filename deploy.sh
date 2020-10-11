@@ -5,13 +5,29 @@ start_time=$(date +%s)
 for i in "$@"; do
     case $i in
     -a|--api)
-        git subtree push --prefix api heroku-api master
-        echo -e "SUCCESS: Pushed API code changes to mattmaxwell-api on Heroku"
+        cd api/
+    
+        heroku container:push web
+        echo -e "SUCCESS: Pushed API container\n"
+    
+        heroku container:release web
+        echo -e "SUCCESS: Released API container\n"
+    
+        cd ../
+
         shift
         ;;
     -u|--ui)
-        git subtree push --prefix ui heroku-ui master
-        echo -e "SUCCESS: Pushed UI code changes to mattmaxwell-ui on Heroku"
+        cd ui/
+    
+        heroku container:push web
+        echo -e "SUCCESS: Pushed UI container\n"
+    
+        heroku container:release web
+        echo -e "SUCCESS: Released UI container\n"
+    
+        cd ../
+        
         shift
         ;;
     esac
