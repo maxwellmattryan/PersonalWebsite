@@ -15,10 +15,7 @@ Welcome to the codebase for my personal website! The stack consists of Angular (
     - [Error Handling](#Error-Handling)
 - [PostgreSQL](#PostgreSQL)
     - [Schema](#Schema)
-- [Google Cloud Platform](#Google-Cloud-Platform)
-    - [Cloud Run](#Cloud-Run)
-    - [Cloud Build](#Cloud-Build)
-    - [Cloud SQL](#Cloud-SQL)
+- [Heroku](#Heroku)
 - [Search Engine Optimization](#Search-Engine-Optimization)
 - [Acknowledgements](#Acknowledgements)
 
@@ -312,21 +309,9 @@ NOTE: What I have listed below is simply the more relevant fields for each table
     - Link Name
     - Link URL
 
-## Google Cloud Platform
+## Heroku
 
-### Cloud Run
-
-Cloud-Run is a tool within the GCP environment that deploys services, which can conveniently host both sides of fullstack applications. It is easy enough to create one, seeing that you're even able to setup the Continuous Deployment (CD) pipeline that can watch repositories on GitHub for pushes to certain branches.
-
-It is also easy to setup multiple services to use for different environments like production, staging, and development. The Cloud Run feature also contains a custom domain mapper that easily integrates domain routing to the different services, so it beyond easy to get a frontend and backend started.
-
-### Cloud Build
-
-As stated earlier, when new pull requests are merged and pushes are made to a branch, builds trigger that are pointed to the different services. I have two builds for pull requests that only build the source code whenever any branch is pushed to. I have two staging builds that build and deploy the corresponding staging services for my UI and API whenever a push is made to my repository's `develop` branch, as well as a duplicate setup for production for the `production` branch.
-
-### Cloud SQL
-
-Each environment (stg, prod, etc.) has a corresponding PostgreSQL instance in Google's Cloud SQL platform. They are declared as connections both in the services' environment variables and connections configuration.
+The current deployment uses Heroku, where it is easy and affordable to get apps up and running. 
 
 ## Search Engine Optimization
 
