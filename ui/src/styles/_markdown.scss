@@ -1,5 +1,23 @@
 @import 'variables';
 
+markdown ::ng-deep h1,
+markdown ::ng-deep h2,
+markdown ::ng-deep h3,
+markdown ::ng-deep h4,
+markdown ::ng-deep h5,
+markdown ::ng-deep h6 {
+    margin: calc(#{$margin} * 1.25) 0 calc(#{$margin} * 0.75);
+}
+
+markdown ::ng-deep p,
+markdown ::ng-deep img {
+    margin: $half-margin 0;
+}
+
+markdown ::ng-deep pre {
+    margin: calc(#{$half-margin} * 1.0) 0 calc(#{$half-margin} * 1.5); 
+}
+
 markdown ::ng-deep a {
     color: $color-primary;
     display: inline-block;
