@@ -13,7 +13,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "preinstall": "npm install @angular/cli"
+    "preinstall": "npm install @angular/cli && npm install @angular/compiler-cli"
   },
   "dependencies": {
     "@angular-devkit/build-angular": "^0.1001.2",
