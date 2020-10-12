@@ -7,18 +7,18 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:prod": "ng serve --prod",
+    "start:prod": "ng serve --prod --port $PORT",
     "build": "ng build",
     "build:prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "preinstall": "npm install -g @angular/cli"
+    "e2e": "ng e2e"
   },
   "dependencies": {
     "@angular-devkit/build-angular": "^0.1001.2",
     "@angular/animations": "~10.1.2",
     "@angular/cdk": "^10.2.1",
+    "@angular/cli": "^10.1.6",
     "@angular/common": "~10.1.2",
     "@angular/compiler": "~10.1.2",
     "@angular/compiler-cli": "~10.1.2",
@@ -35,7 +35,6 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular/cli": "^10.1.6",
     "@types/hammerjs": "^2.0.36",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
