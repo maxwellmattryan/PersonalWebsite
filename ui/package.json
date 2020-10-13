@@ -7,7 +7,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:prod": "ng serve --prod --port $PORT",
+    "start:prod": "http-server -p $PORT dist",
     "build": "ng build",
     "build:prod": "ng build --prod",
     "test": "ng test",
@@ -30,6 +30,7 @@
     "@angular/router": "~10.1.2",
     "@angular/service-worker": "^10.1.2",
     "@types/node": "^12.12.57",
+    "http-server": "^0.12.3",
     "ngx-markdown": "^10.1.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
