@@ -1,5 +1,8 @@
 These keywords are for differentiating between task types and should be used in the PR titles and branch names, like `prefix/branch_name`.
 
+- `build`
+  - dist bundle compiled from new changes is pushed
+  - usually automated in bash script
 - `chore`
   - simple grunt tasks (updating library, dependency, language spec, etc.)
   - no production code change
@@ -13,6 +16,9 @@ These keywords are for differentiating between task types and should be used in 
   - playing around or testing new things
 - `test`
   - adding missing tests or refactoring tests
+  - no production code change
+- `update`
+  - adding a small change to a file (i.e. picture, documentation)
   - no production code change
 
 ## Summary
