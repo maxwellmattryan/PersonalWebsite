@@ -7,7 +7,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:prod": "serve . -l $PORT -s",
+    "start:prod": "serve dist -l $PORT -s",
     "build:prod": "ng build --prod",
     "build:dev": "ng build",
     "test": "ng test",
