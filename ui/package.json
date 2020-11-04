@@ -7,8 +7,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:prod": "http-server -p $PORT dist",
-    "build:prod": "ng build --configuration=production",
+    "start:prod": "serve . -l $PORT -s",
+    "build:prod": "ng build --prod",
     "build:dev": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -30,9 +30,9 @@
     "@angular/router": "~10.1.2",
     "@angular/service-worker": "^10.1.2",
     "@types/node": "^12.12.57",
-    "http-server": "^0.12.3",
     "ngx-markdown": "^10.1.1",
     "rxjs": "~6.5.4",
+    "serve": "^11.3.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
