@@ -1,6 +1,7 @@
 @import 'variables';
 
 .dashboard {
+    height: calc(100vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
 }
 
 .dashboard__header {
@@ -43,8 +44,4 @@
         margin: 0 $eighth-margin;
         width: $extra-small-btn-width;
     }
-}
-
-@media only screen and (min-width: 768px) {
-    //min-height: calc(98vh - #{$header-height} - #{$section-divider-height} - #{$footer-height} * 2);
 }

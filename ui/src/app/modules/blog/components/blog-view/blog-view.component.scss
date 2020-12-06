@@ -100,6 +100,7 @@
 
         .topics {
             margin: 0 auto;
+            min-height: calc(100vh - #{$header-height});
         }
     }
 }
