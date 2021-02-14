@@ -3,3 +3,4 @@ export { BlogModule } from './blog/blog.module';
 export { HomeModule } from './home/home.module';
 export { MaterialModule } from './material/material.module';
 export { PortfolioModule } from './portfolio/portfolio.module';
+export { StoreModule } from './store/store.module';
