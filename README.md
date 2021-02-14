@@ -10,7 +10,7 @@ Welcome to the codebase for my personal website! The stack consists of Angular, 
 - [Search Engine Optimization](#Search-Engine-Optimization)
 - [Acknowledgements](#Acknowledgements)
 
-*NOTE: To see the README information for the front and backends, please check them out in their respective [UI](ui/README.md) and [API](api/README.md) folders.*
+*NOTE: To see the README information for the front and backends, please check them out in their respective [UI](ui/) and [API](api/) folders.*
 
 ## Database
 
