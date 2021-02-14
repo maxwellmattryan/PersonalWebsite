@@ -9,6 +9,6 @@ export class StoreController {
     @Get('')
     @HttpCode(200)
     async getStore(@Req() request: Request): Promise<string> {
-        return "Welcome to the store!";
+        return JSON.stringify("Welcome to the shop!");
     }
 }
