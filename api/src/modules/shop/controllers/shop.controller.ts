@@ -2,8 +2,8 @@ import { Controller, Get, HttpCode, Req } from '@nestjs/common';
 
 import { Request } from 'express';
 
-@Controller('store')
-export class StoreController {
+@Controller('shop')
+export class ShopController {
     constructor() { }
 
     @Get('')

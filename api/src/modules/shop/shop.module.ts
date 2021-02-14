@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { StoreController } from '@api/modules/store/controllers/store.controller';
+import { ShopController } from '@api/modules/shop/controllers/shop.controller';
 
 // entities
 
@@ -10,8 +10,8 @@ import { StoreController } from '@api/modules/store/controllers/store.controller
     imports: [],
     exports: [],
     controllers: [
-        StoreController
+        ShopController
     ],
     providers: []
 })
-export class StoreModule { }
+export class ShopModule { }

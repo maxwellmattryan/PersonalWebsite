@@ -22,7 +22,7 @@ import {
 } from '../../services';
 
 @Component({
-    selector: 'app-portfolio-project-editor',
+    selector: 'ui-portfolio-project-editor',
     templateUrl: './portfolio-project-editor.component.html'
 })
 export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {

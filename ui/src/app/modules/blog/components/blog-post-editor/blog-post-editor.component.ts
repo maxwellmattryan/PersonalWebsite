@@ -15,7 +15,7 @@ import { BlogPost, BlogTopic, BlogPostStatus, BlogAuthor } from '../../models';
 import { BlogApiService, BlogEditorService, BlogComparisonService } from '../../services';
 
 @Component({
-    selector: 'app-blog-post-editor',
+    selector: 'ui-blog-post-editor',
     templateUrl: './blog-post-editor.component.html'
 })
 export class BlogPostEditorComponent implements OnDestroy, OnInit {

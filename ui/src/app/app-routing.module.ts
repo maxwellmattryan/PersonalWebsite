@@ -20,8 +20,8 @@ const routes: Routes = [
         loadChildren: () => import('@ui/modules/portfolio/portfolio.module').then(m => m.PortfolioModule)
     },
     {
-        path: 'store',
-        loadChildren: () => import('@ui/modules/store/store.module').then(m => m.StoreModule)
+        path: 'shop',
+        loadChildren: () => import('@ui/modules/shop/shop.module').then(m => m.ShopModule)
     },
     {
         path: '**',

@@ -13,9 +13,9 @@ export class ShopApiService extends ApiService {
         super(http);
     }
 
-    getStore(): Observable<string> {
+    getShop(): Observable<string> {
         return this.http.get<string>(
-            `${environment.API_URL}/store`,
+            `${environment.API_URL}/shop`,
             {},
         );
     }

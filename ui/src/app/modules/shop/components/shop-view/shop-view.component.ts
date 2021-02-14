@@ -3,17 +3,18 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NotificationService } from '@ui/core/services';
-import { ShopApiService } from '@ui/modules/store/services';
+
+import { ShopApiService } from '../../services';
 
 @Component({
-    selector: 'ui-store-view',
-    templateUrl: './store-view.component.html',
-    styleUrls: ['./store-view.component.scss']
+    selector: 'ui-shop-view',
+    templateUrl: './shop-view.component.html',
+    styleUrls: ['./shop-view.component.scss']
 })
-export class StoreViewComponent implements OnInit {
+export class ShopViewComponent implements OnInit {
     public isLoaded: boolean = false;
 
-    public store: string = 'Yo. ';
+    public shop: string = 'Yo. ';
 
     constructor(
         private router: Router,
@@ -22,8 +23,8 @@ export class StoreViewComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.shopApiService.getStore().subscribe((res: string) => {
-            this.store += res;
+        this.shopApiService.getShop().subscribe((res: string) => {
+            this.shop += res;
 
             this.isLoaded = true;
         }, (error: HttpErrorResponse) => {

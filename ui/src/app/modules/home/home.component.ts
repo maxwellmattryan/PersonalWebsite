@@ -10,7 +10,7 @@ import { Homepage } from './interfaces';
 import { HomeApiService } from './services';
 
 @Component({
-    selector: 'app-home',
+    selector: 'ui-home',
     templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {

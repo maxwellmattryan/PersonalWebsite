@@ -6,7 +6,7 @@ import { SeoService, TrackingService } from '@ui/core/services';
 import { PortfolioProject } from '../../models';
 
 @Component({
-    selector: 'app-portfolio-project-collection',
+    selector: 'ui-portfolio-project-collection',
     templateUrl: './portfolio-project-collection.component.html',
     styleUrls: ['./portfolio-project-collection.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
