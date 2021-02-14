@@ -1,16 +1,24 @@
 # mattmaxwell.dev
 
-Welcome to the codebase for my personal website! The stack consists of Angular, NestJS, and PostgreSQL. Please visit the url, [mattmaxwell.dev](https://mattmaxwell.dev), to see it in action!
+Welcome to the codebase for my personal web application! The stack consists of Angular, NestJS, and PostgreSQL. Please visit the url, [mattmaxwell.dev](https://mattmaxwell.dev), to see it in action!
 
 ## Overview
 
+- [API](#API)
+- [UI](#UI)
 - [Database](#Database)
 - [Deployment](#Deployment)
 - [Storage](#Storage)
 - [Search Engine Optimization](#Search-Engine-Optimization)
 - [Acknowledgements](#Acknowledgements)
 
-*NOTE: To see the README information for the front and backends, please check them out in their respective [UI](ui/) and [API](api/) folders.*
+## API
+
+The API is built with the [NestJS](https://nestjs.com/) framework, which offers an incredibly similar feel to Angular. It has many capabilities, so please feel free to read more on the [API page](api/).
+
+## UI
+
+The UI is built with the [Angular](https://angular.io/) framework, offering an extensive and well-maintained library of functionality to use on the client-side. Check out the [UI page](ui/) to read more.
 
 ## Database
 
