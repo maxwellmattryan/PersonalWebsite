@@ -1,27 +1,27 @@
-# AngularSrc
+# UI 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.6.
+## Overview
 
-## Development server
+Angular is quite a robust framework and really provides a maintainable solution to creating dynamic web applications. The project is setup with three main folders, which are 'core', 'modules', and 'shared, each of which is explained below.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Architecture
 
-## Code scaffolding
+Similar to the backend, the frontend project is broken up into modules where each one corresponds to a large distinct chunk of functionality, like a blog or a portfolio.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The per-module design is similar to [layered architecture](https://en.wikipedia.org/wiki/Multitier_architecture) pattern, but the components use services more loosely from other modules if needed and business logic isn't necessarily as strictly contained as it is in the backend. 
 
-## Build
+It should also be noted that terminology is sort of constrained to that which is used in the Angular ecosystem. The terms to note here are "component", "service", and "model". 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Components
 
-## Running unit tests
+These are the main entities responsible for the interaction the users have with the backend. Components contain all of the functionality responsible for handling routes, including the services and other logic needed for business needs.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Services
 
-## Running end-to-end tests
+Services are classes that provide specific functionality to components where they are instantiated. These can be anything including input validation, API requests, and anything else that you could need.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Models
 
-## Further help
+Models are pre-defined data structures that typically correspond to the data that we'll be passing back and forth in requests. They do **NOT** contain functionality, rather properties.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+*NOTE: It's worth looking into partial class construction in ES6+ so that it is possible to create instances of our data types with nullable entries.*
