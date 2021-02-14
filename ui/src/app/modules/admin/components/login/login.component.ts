@@ -8,7 +8,7 @@ import { NotificationService, ValidationService } from '@ui/core/services';
 import { Admin } from '../../interfaces';
 
 @Component({
-    selector: 'app-login',
+    selector: 'ui-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })

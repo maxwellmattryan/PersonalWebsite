@@ -18,7 +18,7 @@ import {
 } from '@ui/modules/portfolio/services';
 
 @Component({
-    selector: 'app-dashboard',
+    selector: 'ui-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss']
 })

@@ -14,7 +14,7 @@ import { BlogPost } from '../../models';
 import { BlogApiService, BlogEditorService, BlogComparisonService, BlogTopicService } from '../../services';
 
 @Component({
-    selector: 'app-blog-post-view',
+    selector: 'ui-blog-post-view',
     templateUrl: './blog-post-view.component.html',
     styleUrls: ['./blog-post-view.component.scss']
 })

@@ -6,7 +6,7 @@ import { BlogPost } from '../../models';
 import { BlogComparisonService, BlogTopicService } from '../../services';
 
 @Component({
-    selector: 'app-blog-post-collection',
+    selector: 'ui-blog-post-collection',
     templateUrl: './blog-post-collection.component.html',
     styleUrls: ['./blog-post-collection.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -18,7 +18,7 @@ import {
 } from '../../services';
 
 @Component({
-    selector: 'app-blog-view',
+    selector: 'ui-blog-view',
     templateUrl: './blog-view.component.html',
     styleUrls: ['./blog-view.component.scss']
 })

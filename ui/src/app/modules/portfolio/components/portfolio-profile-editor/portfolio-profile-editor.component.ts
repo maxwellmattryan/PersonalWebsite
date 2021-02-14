@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from '@ui/core/auth';
 import {
@@ -25,7 +24,7 @@ import {
 } from '../../services';
 
 @Component({
-    selector: 'app-portfolio-profile-editor',
+    selector: 'ui-portfolio-profile-editor',
     templateUrl: './portfolio-profile-editor.component.html'
 })
 export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
@@ -91,7 +90,6 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
 
     private loadProfileData(): void {
         this.profileData = this.portfolioEditorService.getProfile();
-        console.log(this.profileData);
     }
 
     private loadProjectData(): void {

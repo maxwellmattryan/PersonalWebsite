@@ -11,6 +11,7 @@ import { AdminModule } from '@api/modules/admin/admin.module';
 import { ApiModule } from '@api/modules/api/api.module';
 import { BlogModule } from '@api/modules/blog/blog.module';
 import { PortfolioModule } from '@api/modules/portfolio/portfolio.module';
+import { ShopModule } from '@api/modules/shop/shop.module';
 
 @Module({
     imports: [
@@ -31,7 +32,8 @@ import { PortfolioModule } from '@api/modules/portfolio/portfolio.module';
         AdminModule,
         ApiModule,
         BlogModule,
-        PortfolioModule
+        PortfolioModule,
+        ShopModule
     ],
     exports: [],
     controllers: [],

@@ -10,7 +10,7 @@ import { PortfolioProject } from '../../models';
 import { PortfolioApiService, PortfolioEditorService } from '../../services';
 
 @Component({
-    selector: 'app-portfolio-project-view',
+    selector: 'ui-portfolio-project-view',
     templateUrl: './portfolio-project-view.component.html',
     styleUrls: ['./portfolio-project-view.component.scss']
 })
