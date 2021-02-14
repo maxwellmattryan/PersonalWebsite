@@ -7,7 +7,7 @@ import {
     StoreViewComponent
 } from './components';
 
-export const routes: Routes = [
+const routes: Routes = [
     {
         path: '',
         component: StoreComponent,

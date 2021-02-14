@@ -1,1 +1,7 @@
-<p>Welcome to the shop!</p>
+<div class='shop' *ngIf='isLoaded; else loading'>
+    <h2>{{ store }}</h2>
+</div>
+
+<ng-template #loading>
+    <app-loading-spinner></app-loading-spinner>
+</ng-template>

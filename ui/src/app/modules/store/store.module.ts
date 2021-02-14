@@ -6,7 +6,9 @@ import { MaterialModule } from '@ui/modules/material/material.module';
 
 import { StoreComponent } from './store.component';
 import { StoreRoutingModule } from './store-routing.module';
+
 import { StoreViewComponent } from './components';
+import { ShopApiService } from './services';
 
 @NgModule({
     declarations: [
@@ -20,6 +22,8 @@ import { StoreViewComponent } from './components';
         StoreRoutingModule
     ],
     exports: [],
-    providers: []
+    providers: [
+        ShopApiService
+    ]
 })
 export class StoreModule { }
