@@ -1,5 +1,11 @@
 #!/bin/bash
 
+BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+if [ "$BRANCH" != "main" ]; then
+    echo -e "App MUST be deployed from the main branch!\n\nAborting script"
+    exit 1;
+fi
+
 start_time=$(date +%s)
 
 API_IMAGE=mattmaxwell-api
