@@ -8,6 +8,8 @@
 
 start_time=$(date +%s)
 
+NODE_VERSION=12.18-alpine
+
 API_IMAGE=mattmaxwell-api
 UI_IMAGE=mattmaxwell-ui
 DOMAIN=mattmaxwell.tech
@@ -96,7 +98,7 @@ docker rmi "$API_IMAGE:latest"
 docker rmi "$UI_IMAGE:latest"
 docker rmi "$GCP_API_IMAGE_PATH:latest"
 docker rmi "$GCP_UI_IMAGE_PATH:latest"
-docker rmi "$(docker images | grep node)"
+docker rmi "node:$NODE_VERSION"
 docker image prune
 echo -e "\n($(expr $START)/$STEPS) SUCCESS: Removed local images\n"
 
