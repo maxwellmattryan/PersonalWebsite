@@ -23,11 +23,12 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
                 return ({
                     type: 'postgres',
-                    host: socketPath || configService.get('DB_HOST'),
+                    host: configService.get('DB_HOST'),
                     port: configService.get('DB_PORT'),
                     username: configService.get('DB_USER'),
                     password: configService.get('DB_PASS'),
                     database: configService.get('DB_NAME'),
+                    ssl: true,
                     extra: extra,
                     entities: [__dirname + '/../../modules/**/*.entity{.ts,.js}'],
                     namingStrategy: new SnakeNamingStrategy(),
