@@ -23,7 +23,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
                 return ({
                     type: 'postgres',
-                    host: configService.get('DB_HOST'),
+                    host: socketPath || configService.get('DB_HOST'),
                     port: configService.get('DB_PORT'),
                     username: configService.get('DB_USER'),
                     password: configService.get('DB_PASS'),
