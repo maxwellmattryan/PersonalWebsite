@@ -3,7 +3,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-import { config } from 'rxjs';
 
 @Module({
     imports: [
