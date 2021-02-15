@@ -10,16 +10,15 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
             imports: [ConfigModule],
             inject: [ConfigService],
             useFactory: (configService: ConfigService) => {
+                const sslOptions = {
+                    rejectUnauthorized: false,
+                    ca: Buffer.from(process.env.DB_SSL_CA, 'base64').toString('ascii'),
+                    cert: Buffer.from(process.env.DB_SSL_CERT, 'base64').toString('ascii'),
+                    key: Buffer.from(process.env.DB_SSL_KEY, 'base64').toString('ascii'),
+                };
+
                 const socketPath = configService.get('DB_SOCKET_PATH');
-                const extra = socketPath ? {
-                    socketPath: socketPath,
-                    ssl: {
-                        rejectUnauthorized: false,
-                        ca: Buffer.from(process.env.DB_SSL_CA, 'base64').toString('ascii'),
-                        cert: Buffer.from(process.env.DB_SSL_CERT, 'base64').toString('ascii'),
-                        key: Buffer.from(process.env.DB_SSL_KEY, 'base64').toString('ascii'),
-                    }
-                } : { };
+                const extraOptions = socketPath ? { socketPath: socketPath } : { };
 
                 return ({
                     type: 'postgres',
@@ -28,11 +27,13 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
                     username: configService.get('DB_USER'),
                     password: configService.get('DB_PASS'),
                     database: configService.get('DB_NAME'),
-                    ssl: true,
-                    extra: extra,
+                    ssl: sslOptions,
+                    extra: extraOptions,
                     entities: [__dirname + '/../../modules/**/*.entity{.ts,.js}'],
                     namingStrategy: new SnakeNamingStrategy(),
                     synchronize: true,
+                    logging: true,
+                    logNotifications: true
                 });
             }
         })

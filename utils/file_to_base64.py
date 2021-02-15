@@ -4,9 +4,9 @@
 import base64
 import os
 
-SSL_CA_PATH = '../conf/ssl/server-ca.pem'
-SSL_CERT_PATH = '../conf/ssl/client-cert.pem'
-SSL_KEY_PATH = '../conf/ssl/client-key.pem'
+SSL_CA_PATH = '../conf/ssl/api-service/server-ca.pem'
+SSL_CERT_PATH = '../conf/ssl/api-service/client-cert.pem'
+SSL_KEY_PATH = '../conf/ssl/api-service/client-key.pem'
 
 def to_base_64(filepath: str) -> str:
     script_dir = os.path.dirname(__file__)

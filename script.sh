@@ -43,7 +43,7 @@ if [ "$API_ACTION" = true ] && [ "$UI_ACTION" = true ]
 then
     STEPS=9
 else
-    STEPS=6
+    STEPS=5
 fi
 
 START=1
@@ -76,7 +76,7 @@ if [ "$UI_ACTION" = true ]; then
     echo -e "Starting UI build and deployment...\n"
 
     docker build . --tag "$UI_IMAGE"
-    echo -e "\n($(expr $START)/$STEPS) SUCCESS: Built API image on local machine\n"
+    echo -e "\n($(expr $START)/$STEPS) SUCCESS: Built UI image on local machine\n"
 
     docker tag "$UI_IMAGE" "$GCP_UI_IMAGE_PATH"
     echo -e "\n($(expr $START + 1)/$STEPS) SUCCESS: Tagged local UI image with name in Container Registry\n"
