@@ -17,8 +17,12 @@ import { ShopModule } from '@api/modules/shop/shop.module';
     imports: [
         ConfigModule.forRoot({
             validationSchema: Joi.object({
-                DATABASE_URL: Joi.string().required(),
-                DATABASE_USE_SSL: Joi.boolean().required(),
+                DB_SOCKET_PATH: Joi.string(),
+                DB_HOST: Joi.string().required(),
+                DB_PORT: Joi.number().required(),
+                DB_USER: Joi.string().required(),
+                DB_PASS: Joi.string().required(),
+                DB_USE_SSL: Joi.boolean().required(),
 
                 JWT_SECRET: Joi.string().required(),
                 JWT_EXPIRES_IN: Joi.string().required()
