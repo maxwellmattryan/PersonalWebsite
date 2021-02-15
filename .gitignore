@@ -6,9 +6,6 @@
 .idea
 .idea_modules
 
-# Remove deploy bash script from repository
-deploy.sh
-
 # Ignore metals VS Code extension
 .metals
 
