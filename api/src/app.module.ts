@@ -24,6 +24,7 @@ import { ShopModule } from '@api/modules/shop/shop.module';
                 DB_PORT: Joi.number().required(),
                 DB_USER: Joi.string().required(),
                 DB_PASS: Joi.string().required(),
+                DB_NAME: Joi.string().required(),
 
                 DB_SOCKET_PATH: Joi.string(),
                 DB_SSL_CA: Joi.string(),

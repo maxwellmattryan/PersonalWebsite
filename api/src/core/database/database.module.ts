@@ -24,7 +24,7 @@ import { config } from 'rxjs';
 
                 return ({
                     type: 'postgres',
-                    host: socketPath || configService.get('DB_HOST'),
+                    host: configService.get('DB_HOST'),
                     port: configService.get('DB_PORT'),
                     username: configService.get('DB_USER'),
                     password: configService.get('DB_PASS'),
