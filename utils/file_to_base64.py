@@ -1,3 +1,6 @@
+# NOTE: This script was used for encoding the SSL certificate files to base64
+# so they could be used as environment variables for TypeORM configuration.
+
 import base64
 import os
 

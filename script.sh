@@ -100,7 +100,7 @@ docker rmi "$(docker images | grep node)"
 docker image prune
 echo -e "\n($(expr $START)/$STEPS) SUCCESS: Removed local images\n"
 
-echo -e "Completed build and deployment of app! Check it out at https://$DOMAIN/\n"
+echo -e "Completed app build and deployment! Check it out at https://$DOMAIN/\n"
 
 convertsecs() {
     ((m = (${1} % 3600) / 60))

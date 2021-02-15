@@ -22,11 +22,11 @@ import { ShopModule } from '@api/modules/shop/shop.module';
                 DB_PORT: Joi.number().required(),
                 DB_USER: Joi.string().required(),
                 DB_PASS: Joi.string().required(),
-                DB_USE_SSL: Joi.boolean().required(),
 
-                SSL_CA: Joi.string(),
-                SSL_CERT: Joi.string(),
-                SSL_KEY: Joi.string(),
+                DB_USE_SSL: Joi.boolean(),
+                DB_SSL_CA: Joi.string(),
+                DB_SSL_CERT: Joi.string(),
+                DB_SSL_KEY: Joi.string(),
 
                 JWT_SECRET: Joi.string().required(),
                 JWT_EXPIRES_IN: Joi.string().required()
