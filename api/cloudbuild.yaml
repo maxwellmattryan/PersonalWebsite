@@ -4,7 +4,7 @@ steps:
           - build
           - '--no-cache'
           - '-t'
-          - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
+          - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_IMAGE_NAME'
           - api
           - '-f'
           - api/Dockerfile
@@ -29,7 +29,7 @@ steps:
 #      id: Deploy
 #      entrypoint: gcloud
 images:
-    - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
+    - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_IMAGE_NAME'
 timeout: 600s
 options:
     substitutionOption: ALLOW_LOOSE
@@ -38,7 +38,7 @@ options:
 #    _LABELS: gcb-trigger-id=2974a040-b2a6-4a8d-ad54-649cc620869d
 #    _TRIGGER_ID: 2974a040-b2a6-4a8d-ad54-649cc620869d
 #    _PLATFORM: managed
-#    _SERVICE_NAME: mattmaxwell-prod-api
+#    _SERVICE_NAME: mattmaxwell-api
 #    _DEPLOY_REGION: us-central1
 tags:
     - gcp-cloud-build-deploy-cloud-run
