@@ -1,5 +1,5 @@
 <div class='shop' *ngIf='isLoaded; else loading'>
-    <h2>{{ shop }}</h2>
+    <h2 *ngFor='let p of products'>{{ p.name }}</h2>
 </div>
 
 <ng-template #loading>

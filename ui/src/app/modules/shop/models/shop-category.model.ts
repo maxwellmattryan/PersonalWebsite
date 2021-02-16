@@ -15,13 +15,12 @@ export class ShopCategory implements Deserializable {
         return this;
     }
 
-    public id: number;
+    public id?: number;
 
-    public products: ShopProduct[];
+    public products?: ShopProduct[];
 
     public name: string;
 
     public created_at?: Date;
-
     public updated_at?: Date;
 }

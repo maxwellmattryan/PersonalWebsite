@@ -1,9 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '@ui/environments/environment';
+
 import { ApiService } from '@ui/core/http';
+
+import { ShopProduct, ShopProductStatus } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +20,16 @@ export class ShopApiService extends ApiService {
         return this.http.get<string>(
             `${environment.API_URL}/shop`,
             {},
+        );
+    }
+
+    getProducts(status: string = ''): Observable<ShopProduct[]> {
+        let params = new HttpParams();
+        if(status != '') params = params.set('status', status);
+
+        return this.http.get<ShopProduct[]>(
+            `${environment.API_URL}/shop/products`,
+            { params: params }
         );
     }
 }

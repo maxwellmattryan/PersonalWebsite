@@ -15,12 +15,19 @@ export class ShopProductStatus implements Deserializable {
         return this;
     }
 
-    public id: number;
+    public id?: number;
 
-    public products: ShopProduct[];
+    public products?: ShopProduct[];
 
     public status: string;
 
     public created_at?: Date;
     public updated_at?: Date;
+}
+
+export enum ShopProductStatuses {
+    AVAILABLE =     'AVAILABLE',
+    UNAVAILABLE =   'UNAVAILABLE',
+    DISCONTINUED =  'DISCONTINUED',
+    REMOVED =       'REMOVED'
 }

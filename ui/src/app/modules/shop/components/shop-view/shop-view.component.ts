@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NotificationService } from '@ui/core/services';
 
 import { ShopApiService } from '../../services';
+import { ShopProduct, ShopProductStatuses } from '../../models';
 
 @Component({
     selector: 'ui-shop-view',
@@ -14,7 +15,7 @@ import { ShopApiService } from '../../services';
 export class ShopViewComponent implements OnInit {
     public isLoaded: boolean = false;
 
-    public shop: string = 'Yo. ';
+    public products: ShopProduct[];
 
     constructor(
         private router: Router,
@@ -23,8 +24,8 @@ export class ShopViewComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.shopApiService.getShop().subscribe((res: string) => {
-            this.shop += res;
+        this.shopApiService.getProducts(ShopProductStatuses.AVAILABLE).subscribe((res: ShopProduct[]) => {
+            this.products = res;
 
             this.isLoaded = true;
         }, (error: HttpErrorResponse) => {

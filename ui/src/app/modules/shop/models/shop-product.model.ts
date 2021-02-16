@@ -17,10 +17,10 @@ export class ShopProduct implements Deserializable {
         return this;
     }
 
-    public id: number;
+    public id?: number;
 
-    public status: ShopProductStatus;
-    public category: ShopCategory;
+    public status: ShopProductStatus | number | string;
+    public category: ShopCategory | number | string;
 
     public name: string;
     public amount: number;
