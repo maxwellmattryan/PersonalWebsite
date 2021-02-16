@@ -15,6 +15,9 @@
 
 RUNNING_PID
 
+# Build bundles / packages
+**/dist
+
 # My folders 
 conf
 data
