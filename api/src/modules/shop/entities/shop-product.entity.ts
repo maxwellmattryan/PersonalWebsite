@@ -1,5 +1,7 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { ShopCategory } from '@api/modules/shop/entities/shop-category.entity';
+
+import { ShopCategory } from '../entities/shop-category.entity';
+import { ShopProductStatus } from '../entities/shop-product-status.entity';
 
 @Entity('shop_product')
 export class ShopProduct {
@@ -10,7 +12,10 @@ export class ShopProduct {
     @PrimaryGeneratedColumn()
     public id: number;
 
-    @ManyToOne(type => ShopCategory, sc => sc.products)
+    @ManyToOne(type => ShopProductStatus, sps => sps.products, { nullable: false })
+    public status: ShopProductStatus;
+
+    @ManyToOne(type => ShopCategory, sc => sc.products, { nullable: false })
     public category: ShopCategory;
 
     @Column({ type: 'varchar', length: 50, nullable: false, unique: true })

@@ -61,7 +61,8 @@ export class PortfolioProjectController {
     @HttpCode(204)
     @UseGuards(JwtAuthGuard)
     async deleteProject(@Param('id') id: number, @Req() request: Request): Promise<void> {
-        if(!(await this.projectService.existsInTable(id))) throw new PortfolioProjectWasNotFoundException();
+        if(!(await this.projectService.existsInTable(id)))
+            throw new PortfolioProjectWasNotFoundException();
 
         await this.projectService.deleteProject(id);
     }

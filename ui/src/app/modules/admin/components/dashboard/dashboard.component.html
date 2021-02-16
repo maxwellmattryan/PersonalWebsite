@@ -33,7 +33,7 @@
     </div>
 
     <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
-        <h2>Profiles</h2>
+        <h2 class='dashboard__profile-header'>Profiles</h2>
         <br>
         <div class='dashboard__profile-btn-row' *ngFor='let profile of profiles trackBy: this.trackingService.objectById'>
             <button
