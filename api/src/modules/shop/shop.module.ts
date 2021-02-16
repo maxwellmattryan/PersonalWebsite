@@ -2,12 +2,13 @@ import { Module } from '@nestjs/common';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { ShopController } from '@api/modules/shop/controllers/shop.controller';
+import { ShopController } from './controllers/shop.controller';
+import { ShopProductController } from './controllers/shop-product.controller';
 
 import { ShopCategory } from './entities/shop-category.entity';
 import { ShopProduct } from './entities/shop-product.entity';
 
-// services
+import { ShopProductService } from './services/shop-product.service';
 
 @Module({
     imports: [
@@ -15,8 +16,11 @@ import { ShopProduct } from './entities/shop-product.entity';
     ],
     exports: [],
     controllers: [
-        ShopController
+        ShopController,
+        ShopProductController
     ],
-    providers: []
+    providers: [
+        ShopProductService
+    ]
 })
 export class ShopModule { }
