@@ -18,6 +18,7 @@ GCP_HOSTNAME=gcr.io
 GCP_PLATFORM=managed
 GCP_REGION=us-central1
 GCP_PROJECT_ID=mattmaxwell-304801
+GCP_VPC_CONNECTOR=mattmaxwell-api
 GCP_API_SERVICE=mattmaxwell-api
 GCP_UI_SERVICE=mattmaxwell-ui
 GCP_API_IMAGE_PATH="$GCP_HOSTNAME/$GCP_PROJECT_ID/$API_IMAGE"
@@ -62,7 +63,7 @@ if [ "$API_ACTION" = true ]; then
     docker push "$GCP_API_IMAGE_PATH"
     echo -e "\n($(expr $START + 2)/$STEPS) SUCCESS: Pushed API image to Container Registry\n"
 
-    gcloud run deploy "$GCP_API_SERVICE" --image="$GCP_API_IMAGE_PATH" --platform="$GCP_PLATFORM" --region="$GCP_REGION"
+    gcloud run deploy "$GCP_API_SERVICE" --image="$GCP_API_IMAGE_PATH" --platform="$GCP_PLATFORM" --region="$GCP_REGION" --vpc-connector="$GCP_VPC_CONNECTOR" --vpc-egress=all
     echo -e "\n($(expr $START + 3)/$STEPS) SUCCESS: Deployed API image to Cloud Run service\n"
 
     START=5
