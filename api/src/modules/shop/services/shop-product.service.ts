@@ -55,13 +55,13 @@ export class ShopProductService {
             .getMany();
     }
 
-    public async getProductsByStatus(status: ShopProductStatus | string): Promise<ShopProduct[]> {
+    public async getProductsByStatus(status: ShopProductStatus | number | string): Promise<ShopProduct[]> {
         return await this.shopProductRepository
             .createQueryBuilder('sp')
             .leftJoinAndSelect('sp.category', 'sc')
             .leftJoinAndSelect('sp.status', 'sps')
-            .where('sps.status = :status', { status: (status as ShopProductStatus).status || status })
-            .orWhere('sps.id = :id', { id: (status as ShopProductStatus).id })
+            .where('sps.status = :status', { status: (status as ShopProductStatus).status || typeof status === 'string' ? status : '' })
+            .orWhere('sps.id = :id', { id: (status as ShopProductStatus).id || isNaN(Number(status)) ? -1 : status })
             .getMany();
     }
 
