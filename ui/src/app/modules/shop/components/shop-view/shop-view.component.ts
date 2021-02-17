@@ -41,6 +41,7 @@ export class ShopViewComponent implements OnInit {
 
         this.shopApiService.getProducts(ShopProductStatuses.AVAILABLE).subscribe((res: ShopProduct[]) => {
             this.products = res;
+            console.log(this.products);
             this.categories = this.getCategoriesFromProducts();
 
             if(this.shopCategoryService.hasActiveCategory()) {

@@ -4,8 +4,27 @@
     <div class='line-divider'></div>
 
     <div class='container products__product-container'>
-        <div class='products__product' *ngFor='let p of products trackBy: this.trackingService.objectById; let idx = index'>
-            <h3 class='products__product-header'>{{ p.name }}</h3>
-        </div>
+        <ng-container *ngFor='let p of products trackBy: this.trackingService.objectById; let idx = index'>
+            <div class='products__product'>
+                <h3 class='products__product-header'>{{ p.name }}</h3>
+
+                <div class='products__product-image-container'>
+                    <picture>
+                        <source [srcset]='p.image_url' type="image/webp">
+                        <source [srcset]="p.image_url.substring(0, p.image_url.length - 4) + 'png'" type="image/png">
+                        <img class='products__product-image' [alt]='p.name + " thumbnail"' [src]='p.image_url.substring(0, p.image_url.length - 4) + "png"'>
+                    </picture>
+                </div>
+
+                <p class='products__product-preview'>{{ p.description }}</p>
+
+                <p class='products__product-description'>{{ p.description }}</p>
+
+                <p class='products__product-amount'>${{ p.amount }}</p>
+                <a class='btn btn--go products__product-buy-btn'>BUY</a>
+            </div>
+
+            <div class='line-divider'></div>
+        </ng-container>
     </div>
 </div>
