@@ -19,8 +19,8 @@ export class ShopProduct implements Deserializable {
 
     public id?: number;
 
-    public status: ShopProductStatus | number | string;
-    public category: ShopCategory | number | string;
+    public status: ShopProductStatus;
+    public category: ShopCategory;
 
     public name: string;
     public amount: number;

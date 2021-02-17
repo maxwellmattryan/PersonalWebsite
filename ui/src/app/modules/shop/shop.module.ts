@@ -7,12 +7,13 @@ import { MaterialModule } from '@ui/modules/material/material.module';
 import { ShopComponent } from './shop.component';
 import { ShopRoutingModule } from './shop-routing.module';
 
-import { ShopViewComponent } from './components';
-import { ShopApiService } from './services';
+import { ShopProductCollectionComponent, ShopViewComponent } from './components';
+import { ShopApiService, ShopCategoryService, ShopComparisonService } from './services';
 
 @NgModule({
     declarations: [
         ShopComponent,
+        ShopProductCollectionComponent,
         ShopViewComponent
     ],
     imports: [
@@ -21,9 +22,13 @@ import { ShopApiService } from './services';
         MaterialModule,
         ShopRoutingModule
     ],
-    exports: [],
+    exports: [
+        ShopProductCollectionComponent
+    ],
     providers: [
-        ShopApiService
+        ShopApiService,
+        ShopCategoryService,
+        ShopComparisonService
     ]
 })
 export class ShopModule { }

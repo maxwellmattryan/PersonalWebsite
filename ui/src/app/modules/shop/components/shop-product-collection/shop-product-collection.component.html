@@ -1,0 +1,11 @@
+<div class='section products' *ngIf='products'>
+    <h2 class='products__header'>Products</h2>
+
+    <div class='line-divider'></div>
+
+    <div class='container products__product-container'>
+        <div class='products__product' *ngFor='let p of products trackBy: this.trackingService.objectById; let idx = index'>
+            <h3 class='products__product-header'>{{ p.name }}</h3>
+        </div>
+    </div>
+</div>

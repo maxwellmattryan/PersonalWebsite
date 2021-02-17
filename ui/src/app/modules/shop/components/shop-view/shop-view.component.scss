@@ -1,0 +1,93 @@
+@import 'variables';
+
+.shop {
+    background-color: $color-dark;
+    display: grid;
+    grid-template-areas:
+        "header"
+        "categories"
+        "products";
+    height: auto;
+
+    .shop__header {
+        grid-area: header;
+    }
+
+    .shop__categories {
+        grid-area: categories;
+        min-height: auto;
+        margin: 0;
+    }
+
+    .products {
+        grid-area: products;
+    }
+}
+
+.shop__header {
+    margin: 0 auto $margin;
+    padding: $padding;
+    text-align: center;
+}
+
+.shop__filter-header {
+    margin-bottom: $half-margin;
+}
+
+.shop__filter-btn-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.shop__filter-btn {
+    font-size: 90%;
+    height: $btn-height;
+    line-height: $btn-height;
+    width: 100%;
+
+    &--add, &--edit {
+        height: $small-btn-height;
+        line-height: $small-btn-height;
+        margin-left: $half-margin;
+    }
+
+    &--add {
+        font-size: 170%;
+        width: calc(56px * 2 + #{$half-margin});
+    }
+
+    &--edit {
+        font-size: 118%;
+        width: 56px;
+    }
+
+    &--half {
+        min-width: 184px;
+    }
+}
+
+.shop__filter-btn-row {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+
+    &--all {
+        margin-bottom: $margin;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .shop {
+        grid-template-areas:
+            "header header header header header"
+            "categories products products products products";
+
+        .shop__categories {
+            margin: 0 auto;
+            min-height: calc(100vh - #{$header-height});
+        }
+    }
+}
