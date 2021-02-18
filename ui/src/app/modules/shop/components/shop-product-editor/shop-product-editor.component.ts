@@ -62,22 +62,22 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
         // load status data
         // load category data
 
-        this.buildProductForm();
+        this.productForm = this.buildProductForm();
     }
 
     private loadProductData(): void {
         this.productData = this.shopEditorService.getProduct();
     }
 
-    private buildProductForm(): void {
+    private buildProductForm(): FormGroup {
         const isEmpty = this.productData === undefined;
-        const priceRegex: RegExp = /^\d*[.,]?\d{0,2}$/;
+        const decimalRegex: RegExp = /^(?![.,])\d*[.,]?\d{0,2}$/;
 
-        this.productForm = this.formBuilder.group({
+        return this.formBuilder.group({
             name: this.formBuilder.control(isEmpty ? '' : this.productData.name, [Validators.required]),
             //category
             //status: this.formBuilder.control(isEmpty ? 'AVAILABLE' : this.productData.status.status, [Validators.required]),
-            amount: this.formBuilder.control(isEmpty ? '' : this.productData.amount, [Validators.required, Validators.pattern(priceRegex)]),
+            amount: this.formBuilder.control(isEmpty ? '' : this.productData.amount, [Validators.required, Validators.pattern(decimalRegex)]),
             preview: this.formBuilder.control(isEmpty ? '' : this.productData.preview, [Validators.required]),
             description: this.formBuilder.control(isEmpty ? '' : this.productData.description, [Validators.required]),
             image_url: this.formBuilder.control(isEmpty ? '' : this.productData.image_url, [Validators.required])
@@ -85,6 +85,22 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
     }
 
     public onSubmit(): void {
+        const product = this.buildProduct();
+        console.log(this.productForm);
+        console.log(product);
 
+        if(product.id === undefined) {
+            // create product
+        } else {
+            // update product
+        }
+    }
+
+    private buildProduct(): ShopProduct {
+        return new ShopProduct({
+            ...this.productForm.value,
+            id: this.productData ? this.productData.id : undefined,
+            amount: Number((this.productForm.value as ShopProduct).amount)
+        });
     }
 }
