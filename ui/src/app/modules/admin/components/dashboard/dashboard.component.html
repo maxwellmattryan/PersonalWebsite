@@ -8,66 +8,82 @@
         <a class='btn dashboard__btn' (click)='notificationService.createNotification("This functionality is not available.")'>Register</a>
     </div>
 
-    <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
-        <h2>Blog</h2>
-        <br>
-        <a class='btn dashboard__btn' routerLink='/blog/posts/editor'>
-            Create Post
-        </a>
-        <a class='btn dashboard__btn' routerLink='/blog/topics/editor'>
-            Create Topic
-        </a>
-        <br>
-    </div>
+    <div class='section-divider--half'></div>
 
-    <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
-        <h2>Portfolio</h2>
-        <br>
-        <a class='btn dashboard__btn' routerLink='/portfolio/profiles/editor'>
-            Create Profile
-        </a>
-        <a class='btn dashboard__btn' routerLink='/portfolio/projects/editor'>
-            Create Project
-        </a>
-        <br>
-    </div>
-
-    <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
-        <h2 class='dashboard__profile-header'>Profiles</h2>
-        <br>
-        <div class='dashboard__profile-btn-row' *ngFor='let profile of profiles trackBy: this.trackingService.objectById'>
-            <button
-                    aria-label='Activate profile'
-                    [ngClass]="{'btn--active': profile.status.status == 'ACTIVE' }"
-                    class='btn dashboard__profile-btn'
-                    (click)='changeProfile(profile)'
-                    type='button'
-            >
-                {{ profile.name }}
-            </button>
-
-            <a
-                    class='btn dashboard__profile-btn--edit'
-                    (click)='sendProfileToEditor(profile)'
-                    routerLink='/portfolio/profiles/editor'
-                    [queryParams]='{type: "profile", id: profile.id}'
-            >
-                &#x270F;
+    <div class='dashboard__container'>
+        <div class='dashboard__portfolio-btn-container dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
+            <h2>Portfolio</h2>
+            <br>
+            <a class='btn dashboard__btn' routerLink='/portfolio/profiles/editor'>
+                Create Profile
             </a>
-            <a
-                    class='btn dashboard__profile-btn--edit btn--warn'
-                    (click)='deleteProfile(profile)'
-            >
-                &#x2715;
+            <a class='btn dashboard__btn' routerLink='/portfolio/projects/editor'>
+                Create Project
             </a>
+            <br>
         </div>
 
-        <br><br>
-    </div>
+        <div class='dashboard__profile-btn-container dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
+            <h2 class='dashboard__profile-header'>Profiles :</h2>
+            <br>
+            <div class='dashboard__profile-btn-row' *ngFor='let profile of profiles trackBy: this.trackingService.objectById'>
+                <button
+                        aria-label='Activate profile'
+                        [ngClass]="{'btn--active': profile.status.status == 'ACTIVE' }"
+                        class='btn dashboard__profile-btn'
+                        (click)='changeProfile(profile)'
+                        type='button'
+                >
+                    {{ profile.name }}
+                </button>
 
-    <div class='dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
-        <div class='section-divider--half'></div>
-        <a class='btn dashboard__btn btn--warn' (click)="onLogoutClick()">Logout</a>
+                <a
+                        class='btn dashboard__profile-btn--edit'
+                        (click)='sendProfileToEditor(profile)'
+                        routerLink='/portfolio/profiles/editor'
+                        [queryParams]='{type: "profile", id: profile.id}'
+                >
+                    &#x270F;
+                </a>
+                <a
+                        class='btn dashboard__profile-btn--edit btn--warn'
+                        (click)='deleteProfile(profile)'
+                >
+                    &#x2715;
+                </a>
+            </div>
+
+            <br><br>
+        </div>
+
+        <div class='dashboard__blog-btn-container dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
+            <h2>Blog</h2>
+            <br>
+            <a class='btn dashboard__btn' routerLink='/blog/posts/editor'>
+                Create Post
+            </a>
+            <a class='btn dashboard__btn' routerLink='/blog/topics/editor'>
+                Create Topic
+            </a>
+            <br>
+        </div>
+
+        <div class='dashboard__shop-btn-container dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
+            <h2>Shop</h2>
+            <br>
+            <a class='btn dashboard__btn' routerLink='/shop/products/editor'>
+                Create Product
+            </a>
+            <a class='btn dashboard__btn' routerLink='/shop/categories/editor'>
+                Create Category
+            </a>
+            <br>
+        </div>
+
+        <div class='dashboard__logout-btn-container dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
+            <div class='section-divider--half'></div>
+            <a class='btn dashboard__btn btn--warn' (click)="onLogoutClick()">Logout</a>
+        </div>
     </div>
 </div>
 
