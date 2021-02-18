@@ -76,7 +76,7 @@ export class ShopProductService {
         await this.shopProductRepository
             .createQueryBuilder()
             .delete()
-            .from(ShopProduct, )
+            .from(ShopProduct)
             .where('shop_product.id = :id', { id: id })
             .execute();
     }

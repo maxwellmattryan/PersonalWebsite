@@ -32,4 +32,10 @@ export class ShopApiService extends ApiService {
             { params: params }
         );
     }
+
+    // update product
+
+    deleteProduct(productId: number): Observable<void> {
+        return this.http.delete<void>(`${environment.API_URL}/shop/products/${productId}`);
+    }
 }
