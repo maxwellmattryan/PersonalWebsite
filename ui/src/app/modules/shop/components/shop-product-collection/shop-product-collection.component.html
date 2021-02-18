@@ -20,8 +20,9 @@
 
                 <p class='products__product-description'>{{ p.description }}</p>
 
-                <p class='products__product-amount'>${{ p.amount }}</p>
-                <a class='btn btn--go products__product-buy-btn'>BUY</a>
+                <a [ngClass]="{'products__product-buy-btn--compress': isAdmin}" class='btn btn--go products__product-buy-btn'>
+                    ${{ p.amount }}
+                </a>
 
                 <ng-container *ngIf='isAdmin'>
                     <button
