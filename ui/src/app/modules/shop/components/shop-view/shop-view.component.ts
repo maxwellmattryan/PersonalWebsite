@@ -74,6 +74,8 @@ export class ShopViewComponent implements OnInit {
     }
 
     public deleteCategory(category: ShopCategory): void {
+        if(!window.confirm(`Are you sure you want to delete this category?`)) return;
+
         console.log(-1);
     }
 }

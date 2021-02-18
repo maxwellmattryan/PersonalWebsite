@@ -103,6 +103,8 @@ export class DashboardComponent implements OnInit {
             return;
         }
 
+        if(!window.confirm(`Are you sure you want to delete this profile?`)) return;
+
         this.portfolioApiService.deleteProfile(profile.id).subscribe((res: any) => {
             this.profiles = this.profiles.filter(p => p.id !== profile.id);
             this.notificationService.createNotification('Successfully delete profile!');
