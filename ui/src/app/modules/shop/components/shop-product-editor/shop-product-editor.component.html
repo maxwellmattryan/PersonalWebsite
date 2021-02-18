@@ -10,19 +10,16 @@
             <input formControlName='name' required autofocus>
         </div>
 
-<!--        <div class='form-field editor__form-field'>-->
-<!--            <label class='form-field-label editor__form-field-label'>Profiles</label>-->
-<!--            <br><br>-->
-<!--            <div class='form__checkbox-item' formArrayName='profiles' *ngFor='let profile of projectForm.controls.profiles["controls"] trackBy: this.trackingService.objectById; let idx = index'>-->
-<!--                <mat-checkbox [formControlName]='idx'>{{ profileData[idx].name }}</mat-checkbox>-->
-<!--                <br>-->
-<!--            </div>-->
-<!--        </div>-->
-
         <div class='form-field editor__form-field'>
-            <label class='form-field-label editor__form-field-label'>Tagline</label>
+            <label class='form-field-label editor__form-field-label'>Amount</label>
             <br><br>
-            <input formControlName='tagline' required>
+            <input formControlName='amount' required>
+        </div>
+
+        <div class="form-field form-field--large editor__form-field">
+            <label class='form-field-label editor__form-field-label'>Preview</label>
+            <br><br>
+            <input formControlName='preview' required>
         </div>
 
         <div class="form-field form-field--large editor__form-field">

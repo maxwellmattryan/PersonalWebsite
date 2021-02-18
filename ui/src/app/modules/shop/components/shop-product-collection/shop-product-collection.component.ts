@@ -4,7 +4,7 @@ import { AuthService } from '@ui/core/auth';
 import { NotificationService, SeoService, TrackingService } from '@ui/core/services';
 
 import { ShopProduct } from '../../models';
-import { ShopApiService } from '../../services';
+import { ShopApiService, ShopEditorService } from '../../services';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -25,6 +25,7 @@ export class ShopProductCollectionComponent implements OnInit {
         private readonly notificationService: NotificationService,
         private readonly seoService: SeoService,
         private readonly shopApiService: ShopApiService,
+        private readonly shopEditorService: ShopEditorService,
         public readonly trackingService: TrackingService
     ) { }
 
@@ -37,7 +38,7 @@ export class ShopProductCollectionComponent implements OnInit {
     }
 
     public sendProductToEditor(product: ShopProduct): void {
-        console.log(-1);
+        this.shopEditorService.setProduct(product);
     }
 
     public deleteProduct(productId: number): void {
