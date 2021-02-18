@@ -10,7 +10,7 @@
     height: auto;
 
     .blog__header {
-        grid-area: blog-header;
+        grid-area: header;
     }
     .topics {
         grid-area: topics;
@@ -95,8 +95,8 @@
 
     .blog {
         grid-template-areas:
-          "blog-header blog-header blog-header blog-header"
-          "posts posts posts topics";
+          "header header header header header"
+          "topics posts posts posts posts";
 
         .topics {
             margin: 0 auto;
