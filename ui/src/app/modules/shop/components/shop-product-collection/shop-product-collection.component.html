@@ -16,12 +16,12 @@
                     </picture>
                 </div>
 
-                <p class='products__product-preview'>{{ p.description }}</p>
+                <p class='products__product-preview'>{{ p.preview }}</p>
 
                 <p class='products__product-description'>{{ p.description }}</p>
 
                 <a [ngClass]="{'products__product-buy-btn--compress': isAdmin}" class='btn btn--go products__product-buy-btn'>
-                    ${{ p.amount }}
+                    {{ p.amount <= 0.0 ? "FREE" : "$ " + p.amount }}
                 </a>
 
                 <ng-container *ngIf='isAdmin'>
@@ -43,7 +43,7 @@
                 </ng-container>
             </div>
 
-            <div class='line-divider'></div>
+            <div *ngIf='idx !== products.length - 1' class='line-divider'></div>
         </ng-container>
     </div>
 </div>

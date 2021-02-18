@@ -25,6 +25,9 @@ export class ShopProduct {
     public amount: number;
 
     @Column({ type: 'text', nullable: false })
+    public preview: string;
+
+    @Column({ type: 'text', nullable: false })
     public description: string;
 
     @Column({ type: 'text', nullable: false })

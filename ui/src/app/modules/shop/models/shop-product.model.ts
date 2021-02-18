@@ -24,6 +24,7 @@ export class ShopProduct implements Deserializable {
 
     public name: string;
     public amount: number;
+    public preview: string;
     public description: string;
     public image_url: string;
 
