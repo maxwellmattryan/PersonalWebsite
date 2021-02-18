@@ -22,6 +22,24 @@
 
                 <p class='products__product-amount'>${{ p.amount }}</p>
                 <a class='btn btn--go products__product-buy-btn'>BUY</a>
+
+                <ng-container *ngIf='isAdmin'>
+                    <button
+                            aria-label='Edit shop product'
+                            class='btn products__product-add-btn'
+                            (click)='sendProductToEditor(p)'
+                    >
+                        &#x270F;
+                    </button>
+                    <button
+                            aria-label='Delete shop product'
+                            class='btn btn--warn products__product-delete-btn'
+                            (click)='deleteProduct(p)'
+                            type='button'
+                    >
+                        &#x2715;
+                    </button>
+                </ng-container>
             </div>
 
             <div class='line-divider'></div>
