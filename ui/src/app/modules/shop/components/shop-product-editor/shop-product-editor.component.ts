@@ -97,10 +97,12 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
     }
 
     private buildProduct(): ShopProduct {
+        const p = (this.productForm.value as ShopProduct);
+
         return new ShopProduct({
-            ...this.productForm.value,
+            ...p,
             id: this.productData ? this.productData.id : undefined,
-            amount: Number((this.productForm.value as ShopProduct).amount)
+            amount: Number(p.amount)
         });
     }
 }

@@ -52,4 +52,8 @@ export class ShopProductCollectionComponent implements OnInit {
             this.notificationService.createNotification(error.error.message);
         })
     }
+
+    public formatAmount(n: number): string {
+        return Number(n).toFixed(2);
+    }
 }

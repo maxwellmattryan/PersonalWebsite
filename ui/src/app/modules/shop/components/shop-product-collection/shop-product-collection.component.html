@@ -23,7 +23,7 @@
                 </p>
 
                 <a [ngClass]="{'products__product-buy-btn--compress': isAdmin}" class='btn btn--go products__product-buy-btn'>
-                    {{ p.amount <= 0.0 ? "FREE" : "$ " + p.amount }}
+                    {{ p.amount <= 0 ? "FREE" : "$ " + formatAmount(p.amount) }}
                 </a>
 
                 <ng-container *ngIf='isAdmin'>
