@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '@ui/core/auth';
+import { ValidationService } from '@ui/core/services';
 
 import { ShopProduct } from '../../models';
 import { ShopEditorService } from '../../services';
@@ -23,6 +24,7 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
         private readonly authService: AuthService,
         private readonly shopEditorService: ShopEditorService,
         private readonly titleService: Title,
+        private readonly validationService: ValidationService,
         private readonly formBuilder: FormBuilder,
         private readonly router: Router
     ) { }
@@ -69,12 +71,13 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
 
     private buildProductForm(): void {
         const isEmpty = this.productData === undefined;
+        const priceRegex: RegExp = /^\d*[.,]?\d{0,2}$/;
 
         this.productForm = this.formBuilder.group({
             name: this.formBuilder.control(isEmpty ? '' : this.productData.name, [Validators.required]),
             //category
             //status: this.formBuilder.control(isEmpty ? 'AVAILABLE' : this.productData.status.status, [Validators.required]),
-            amount: this.formBuilder.control(isEmpty ? '' : this.productData.amount, [Validators.required]),
+            amount: this.formBuilder.control(isEmpty ? '' : this.productData.amount, [Validators.required, Validators.pattern(priceRegex)]),
             preview: this.formBuilder.control(isEmpty ? '' : this.productData.preview, [Validators.required]),
             description: this.formBuilder.control(isEmpty ? '' : this.productData.description, [Validators.required]),
             image_url: this.formBuilder.control(isEmpty ? '' : this.productData.image_url, [Validators.required])
