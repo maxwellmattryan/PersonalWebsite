@@ -18,7 +18,9 @@
 
                 <p class='products__product-preview'>{{ p.preview }}</p>
 
-                <p class='products__product-description'>{{ p.description }}</p>
+                <p class='products__product-description'>
+                    <markdown [data]='p.description'></markdown>
+                </p>
 
                 <a [ngClass]="{'products__product-buy-btn--compress': isAdmin}" class='btn btn--go products__product-buy-btn'>
                     {{ p.amount <= 0.0 ? "FREE" : "$ " + p.amount }}
