@@ -23,3 +23,10 @@ export class ShopProductStatus {
     @UpdateDateColumn({ type: 'timestamp', default: () => 'now()', onUpdate: 'now()' })
     public updated_at?: Date;
 }
+
+export enum ShopProductStatuses {
+    AVAILABLE =     'AVAILABLE',
+    UNAVAILABLE =   'UNAVAILABLE',
+    DISCONTINUED =  'DISCONTINUED',
+    REMOVED =       'REMOVED'
+}

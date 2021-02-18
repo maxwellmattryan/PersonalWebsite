@@ -35,7 +35,13 @@ export class ShopApiService extends ApiService {
 
     // update product
 
-    deleteProduct(productId: number): Observable<void> {
-        return this.http.delete<void>(`${environment.API_URL}/shop/products/${productId}`);
+    deleteProduct(productId: number, softDelete: boolean = true): Observable<void> {
+        let params = new HttpParams();
+        if(softDelete) params = params.set('softDelete', 'true');
+
+        return this.http.delete<void>(
+            `${environment.API_URL}/shop/products/${productId}`,
+            { params: params }
+        );
     }
 }

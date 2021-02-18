@@ -58,10 +58,13 @@ export class ShopProductController {
     @Delete(':id')
     @HttpCode(204)
     @UseGuards(JwtAuthGuard)
-    public async deleteProduct(@Param('id') id: number, @Req() request: Request): Promise<void> {
+    public async deleteProduct(@Query() query, @Param('id') id: number, @Req() request: Request): Promise<void> {
         if(!(await this.shopProductService.existsInTable(id)))
             throw new ShopProductWasNotFoundException();
 
-        await this.shopProductService.deleteProduct(id);
+        if(query.softDelete)
+            await this.shopProductService.softDeleteProduct(id);
+        else
+            await this.shopProductService.deleteProduct(id);
     }
 }
