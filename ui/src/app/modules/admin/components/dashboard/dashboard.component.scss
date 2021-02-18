@@ -1,7 +1,7 @@
 @import 'variables';
 
 .dashboard {
-    //min-height: calc(100vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
+    min-height: calc(100vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
 }
 
 .dashboard__header {
