@@ -47,7 +47,7 @@ export class ShopViewComponent implements OnInit {
 
             if(this.isAdmin) {
                 this.shopApiService.getCategories().subscribe((res: ShopCategory[]) => {
-                    this.categories = res;
+                    this.categories = res.sort(this.shopComparisonService.categories);
                 });
                 this.shopApiService.getProductStatuses().subscribe((res: ShopProductStatus[]) => {
                     this.statuses = res.filter(s => s.status !== 'REMOVED');
@@ -93,8 +93,15 @@ export class ShopViewComponent implements OnInit {
     public filterProducts(): ShopProduct[] {
         if(this.activeCategoryId === -1)
             return this.products;
-        else
-            return this.products.filter(p => p.category.id === this.activeCategoryId);
+        else {
+            const activeProducts = this.products.filter(p => p.category.id === this.activeCategoryId);
+            if(activeProducts.length < 1) {
+                this.activeCategoryId = -1;
+                return this.products;
+            } else {
+                return activeProducts;
+            }
+        }
     }
 
     public loadProductsByStatus(statusId: number): void {
