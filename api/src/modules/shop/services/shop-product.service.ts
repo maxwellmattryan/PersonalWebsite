@@ -8,15 +8,15 @@ import { InternalServerErrorException } from '@api/core/http/exceptions/http.exc
 
 import { ShopProduct } from '../entities/shop-product.entity';
 import { ShopProductAlreadyExistsException } from '../exceptions/shop-product.exception';
-import { ShopProductStatus, ShopProductStatuses } from '../entities/shop-product-status.entity';
+import { ShopProductStatus } from '../entities/shop-product-status.entity';
+import { ShopProductStatusService } from '../services/shop-product-status.service';
 
 @Injectable()
 export class ShopProductService {
     constructor(
         @InjectRepository(ShopProduct)
         private readonly shopProductRepository: Repository<ShopProduct>,
-        @InjectRepository(ShopProductStatus)
-        private readonly shopProductStatusRepository: Repository<ShopProductStatus>
+        private readonly shopProductStatusService: ShopProductStatusService
     ) { }
 
     public async existsInTable(id: number): Promise<boolean> {
@@ -67,14 +67,6 @@ export class ShopProductService {
             .getMany();
     }
 
-    public async getProductStatus(status: ShopProductStatus | number | string): Promise<ShopProductStatus> {
-        return await this.shopProductStatusRepository
-            .createQueryBuilder('sps')
-            .where('sps.status = :status', { status: (status as ShopProductStatus).status || typeof status === 'string' ? status : '' })
-            .orWhere('sps.id = :id', { id: (status as ShopProductStatus).id || isNaN(Number(status)) ? -1 : status })
-            .getOne();
-    }
-
     public async updateProduct(id: number, productData: ShopProduct): Promise<ShopProduct> {
         const newProduct = new ShopProduct({ id: id, ...productData });
         await this.shopProductRepository.save(newProduct);
@@ -97,7 +89,7 @@ export class ShopProductService {
         if(product.status.status === 'REMOVED') return;
 
         product.name += '_';
-        product.status = await this.getProductStatus('REMOVED');
+        product.status = await this.shopProductStatusService.getStatus('REMOVED');
 
         await this.shopProductRepository.save(product);
     }

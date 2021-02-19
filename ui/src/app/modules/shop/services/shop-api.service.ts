@@ -33,6 +33,10 @@ export class ShopApiService extends ApiService {
         );
     }
 
+    getProductStatuses(): Observable<ShopProductStatus[]> {
+        return this.http.get<ShopProductStatus[]>(`${environment.API_URL}/shop/product-statuses`);
+    }
+
     // update product
 
     deleteProduct(productId: number, softDelete: boolean = true): Observable<void> {

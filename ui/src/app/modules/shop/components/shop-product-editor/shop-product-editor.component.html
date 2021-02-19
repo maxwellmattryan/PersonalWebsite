@@ -10,6 +10,17 @@
             <input formControlName='name' required autofocus>
         </div>
 
+        <div class="form-field editor__form-field">
+            <label class='form-field-label editor__form-field-label'>Status</label>
+            <br><br>
+            <mat-radio-group formControlName='status' name='status' required>
+                <mat-radio-button
+                        *ngFor='let s of statusData trackBy: this.trackingService.objectById'
+                        [value]='s.status'
+                >{{ s.status }}</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
         <div class='form-field editor__form-field'>
             <label class='form-field-label editor__form-field-label'>Amount (USD)</label>
             <br><br>
