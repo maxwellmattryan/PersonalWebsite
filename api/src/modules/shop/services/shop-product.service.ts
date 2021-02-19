@@ -7,9 +7,9 @@ import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum
 import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
 
 import { ShopProduct } from '../entities/shop-product.entity';
-import { ShopProductAlreadyExistsException } from '../exceptions/shop-product.exception';
 import { ShopProductStatus } from '../entities/shop-product-status.entity';
 import { ShopProductStatusService } from '../services/shop-product-status.service';
+import { ShopProductAlreadyExistsException } from '../exceptions/shop-product.exception';
 
 @Injectable()
 export class ShopProductService {

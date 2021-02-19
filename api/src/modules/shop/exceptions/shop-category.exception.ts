@@ -1,4 +1,10 @@
-import { NotFoundException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
+
+export class ShopCategoryAlreadyExistsException extends BadRequestException {
+    constructor() {
+        super('Shop category already exists.');
+    }
+}
 
 export class ShopCategoryWasNotFoundException extends NotFoundException {
     constructor() {

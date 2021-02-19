@@ -1,16 +1,25 @@
-import { Controller, Get, HttpCode, Param, Req } from '@nestjs/common';
+import { Controller, Get, HttpCode, Param, Post, Req, UseGuards } from '@nestjs/common';
 
 import { Request } from 'express';
 
+import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
+
 import { ShopCategory } from '../entities/shop-category.entity';
-import { ShopCategoriesWereNotFoundException, ShopCategoryWasNotFoundException } from '../exceptions/shop-category.exception';
 import { ShopCategoryService } from '../services/shop-category.service';
+import { ShopCategoriesWereNotFoundException, ShopCategoryWasNotFoundException } from '../exceptions/shop-category.exception';
 
 @Controller('shop/categories')
 export class ShopCategoryController {
     constructor(
         private readonly shopCategoryService: ShopCategoryService
     ) { }
+
+    @Post('')
+    @HttpCode(201)
+    @UseGuards(JwtAuthGuard)
+    public async createCategory(@Req() request: Request): Promise<ShopCategory> {
+        return await this.shopCategoryService.createCategory(request.body);
+    }
 
     @Get(':id')
     @HttpCode(200)
