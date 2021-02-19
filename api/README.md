@@ -123,9 +123,24 @@ Repositories are the objects that actual more or less represents and corresponds
         - 204
 
 - /api/shop
-    - `GET      /api/shop`
-        - Retrieves store information such as products, categories, etc.
+    - `GET      /api/shop/categories`
+        - Retrieves list of all categories in the database
         - 200
+    - `POST     /api/shop/categories`
+        - Creates and saves a new category to the database
+        - 201
+    - `GET      /api/shop/categories/:id`
+        - Retrieves a single category corresponding to the `id` path parameter
+        - 200
+    - `PUT      /api/shop/categories/:id`
+        - Updates category data from the client for the product with the corresponding `id`
+        - 200
+    - `DELETE   /api/shop/categories/:id`
+        - Removes the category with the corresponding `id` from database
+        - 204
+    - `POST     /api/shop/customers`
+        - Creates and saves a new customer to the database
+        - 201
     - `GET      /api/shop/products`
         - Retrieves list of all products in the database
         - 200
@@ -144,19 +159,7 @@ Repositories are the objects that actual more or less represents and corresponds
     - `GET      /api/shop/product-statuses`
         - Retrieves list of all product statuses in the database
         - 200
-    - `GET      /api/shop/categories`
-        - Retrieves list of all categories in the database
-        - 200
-    - `POST     /api/shop/categories`
-        - Creates and saves a new category to the database
+    - `POST     /api/shop/orders`
+        - Creates and saves a new order to the database
         - 201
-    - `GET      /api/shop/categories/:id`
-        - Retrieves a single category corresponding to the `id` path parameter
-        - 200
-    - `PUT      /api/shop/categories/:id`
-        - Updates category data from the client for the product with the corresponding `id`
-        - 200
-    - `DELETE   /api/shop/categories/:id`
-        - Removes the category with the corresponding `id` from database
-        - 204
         
