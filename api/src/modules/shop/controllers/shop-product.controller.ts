@@ -16,13 +16,6 @@ export class ShopProductController {
         private readonly shopProductStatusService: ShopProductStatusService
     ) { }
 
-    @Post('')
-    @HttpCode(201)
-    @UseGuards(JwtAuthGuard)
-    public async createProduct(@Req() request: Request): Promise<ShopProduct> {
-        return await this.shopProductService.createProduct(request.body);
-    }
-
     @Get('')
     @HttpCode(200)
     public async getProducts(@Query() query, @Req() request: Request): Promise<ShopProduct[]> {
@@ -36,6 +29,13 @@ export class ShopProductController {
         if(!products) throw new ShopProductsWereNotFoundException();
 
         return products;
+    }
+
+    @Post('')
+    @HttpCode(201)
+    @UseGuards(JwtAuthGuard)
+    public async createProduct(@Req() request: Request): Promise<ShopProduct> {
+        return await this.shopProductService.createProduct(request.body);
     }
 
     @Get(':id')

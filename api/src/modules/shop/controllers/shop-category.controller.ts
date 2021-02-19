@@ -14,6 +14,15 @@ export class ShopCategoryController {
         private readonly shopCategoryService: ShopCategoryService
     ) { }
 
+    @Get('')
+    @HttpCode(200)
+    public async getCategories(@Req() request: Request): Promise<ShopCategory[]> {
+        const categories = await this.shopCategoryService.getCategories();
+        if(!categories) throw new ShopCategoriesWereNotFoundException();
+
+        return categories;
+    }
+
     @Post('')
     @HttpCode(201)
     @UseGuards(JwtAuthGuard)
@@ -28,15 +37,6 @@ export class ShopCategoryController {
         if(!category) throw new ShopCategoryWasNotFoundException();
 
         return category;
-    }
-
-    @Get('')
-    @HttpCode(200)
-    public async getCategories(@Req() request: Request): Promise<ShopCategory[]> {
-        const categories = await this.shopCategoryService.getCategories();
-        if(!categories) throw new ShopCategoriesWereNotFoundException();
-
-        return categories;
     }
 
     @Put(':id')
