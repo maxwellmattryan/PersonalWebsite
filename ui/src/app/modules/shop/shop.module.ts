@@ -10,12 +10,18 @@ import { MaterialModule } from '@ui/modules/material/material.module';
 import { ShopComponent } from './shop.component';
 import { ShopRoutingModule } from './shop-routing.module';
 
-import { ShopProductCollectionComponent, ShopProductEditorComponent, ShopViewComponent } from './components';
-import { ShopApiService, ShopCategoryService, ShopComparisonService } from './services';
+import {
+    ShopCategoryEditorComponent,
+    ShopProductCollectionComponent,
+    ShopProductEditorComponent,
+    ShopViewComponent
+} from './components';
+import { ShopApiService, ShopCategoryService, ShopComparisonService, ShopEditorService } from './services';
 
 @NgModule({
     declarations: [
         ShopComponent,
+        ShopCategoryEditorComponent,
         ShopProductCollectionComponent,
         ShopProductEditorComponent,
         ShopViewComponent
@@ -34,7 +40,8 @@ import { ShopApiService, ShopCategoryService, ShopComparisonService } from './se
     providers: [
         ShopApiService,
         ShopCategoryService,
-        ShopComparisonService
+        ShopComparisonService,
+        ShopEditorService
     ]
 })
 export class ShopModule { }

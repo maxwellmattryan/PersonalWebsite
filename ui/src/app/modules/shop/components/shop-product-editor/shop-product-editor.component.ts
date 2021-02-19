@@ -17,6 +17,7 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
     public isLoaded: boolean = false;
 
     private productData: ShopProduct;
+
     public productStatusData: ShopProductStatus[];
     public categoryData: ShopCategory[];
 
