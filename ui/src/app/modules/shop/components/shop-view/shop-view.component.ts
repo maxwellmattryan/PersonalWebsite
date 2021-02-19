@@ -76,6 +76,10 @@ export class ShopViewComponent implements OnInit {
     public deleteCategory(category: ShopCategory): void {
         if(!this.notificationService.deleteConfirmation('shop category')) return;
 
-        console.log(-1);
+        this.shopApiService.deleteCategory(category.id).subscribe((res: any) => {
+            this.notificationService.createNotification('Successfully deleted shop category!');
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message, '', 3600);
+        });
     }
 }

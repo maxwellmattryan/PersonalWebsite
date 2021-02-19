@@ -103,17 +103,17 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
         const category = this.buildCategory();
         console.log(category);
 
-        // if(category.id === undefined) {
-        //     this.shopApiService.createCategory(category).subscribe((res: ShopCategory) => {
-        //         this.notificationService.createNotification('Successfully created shop category!');
-        //         this.router.navigate(['shop']);
-        //     });
-        // } else {
-        //     this.shopApiService.updateCategory(category).subscribe((res: ShopCategory) => {
-        //         this.notificationService.createNotification('Successfully updated existing shop category!');
-        //         this.router.navigate(['shop']);
-        //     });
-        // }
+        if(category.id === undefined) {
+            this.shopApiService.createCategory(category).subscribe((res: ShopCategory) => {
+                this.notificationService.createNotification('Successfully created shop category!');
+                this.router.navigate(['shop']);
+            });
+        } else {
+            this.shopApiService.updateCategory(category).subscribe((res: ShopCategory) => {
+                this.notificationService.createNotification('Successfully updated existing shop category!');
+                this.router.navigate(['shop']);
+            });
+        }
     }
 
     private buildCategory(): ShopCategory {

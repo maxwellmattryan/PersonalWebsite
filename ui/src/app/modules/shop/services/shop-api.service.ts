@@ -26,6 +26,24 @@ export class ShopApiService extends ApiService {
         );
     }
 
+    getCategories(): Observable<ShopCategory[]> {
+        return this.http.get<ShopCategory[]>(`${environment.API_URL}/shop/categories`);
+    }
+
+    updateCategory(category: ShopCategory): Observable<ShopCategory> {
+        const headers = this.contentTypeHeader();
+
+        return this.http.put<ShopCategory>(
+            `${environment.API_URL}/shop/categories/${category.id}`,
+            category,
+            { headers }
+        );
+    }
+
+    deleteCategory(categoryId: number): Observable<void> {
+        return this.http.delete<void>(`${environment.API_URL}/shop/categories/${categoryId}`);
+    }
+
     createProduct(product: ShopProduct): Observable<ShopProduct> {
         const headers = this.contentTypeHeader();
 
@@ -34,10 +52,6 @@ export class ShopApiService extends ApiService {
             product,
             { headers }
         );
-    }
-
-    getCategories(): Observable<ShopCategory[]> {
-        return this.http.get<ShopCategory[]>(`${environment.API_URL}/shop/categories`);
     }
 
     getProducts(status: string = ''): Observable<ShopProduct[]> {
@@ -52,16 +66,6 @@ export class ShopApiService extends ApiService {
 
     getProductStatuses(): Observable<ShopProductStatus[]> {
         return this.http.get<ShopProductStatus[]>(`${environment.API_URL}/shop/product-statuses`);
-    }
-
-    updateCategory(category: ShopCategory): Observable<ShopCategory> {
-        const headers = this.contentTypeHeader();
-
-        return this.http.put<ShopCategory>(
-            `${environment.API_URL}/shop/categories/${category.id}`,
-            category,
-            { headers }
-        );
     }
 
     updateProduct(product: ShopProduct): Observable<ShopProduct> {

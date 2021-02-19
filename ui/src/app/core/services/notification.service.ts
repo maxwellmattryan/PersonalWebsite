@@ -19,7 +19,7 @@ export class NotificationService {
         return window.confirm(`Are you sure you want to delete this ${item}?`);
     }
 
-    createNotification(message: string, action: string = '', duration: number = 2000): void {
+    createNotification(message: string, action: string = '', duration: number = 2400): void {
         this.zone.run(() => {
             this.snackBar.open(message, action, {
                 duration: duration

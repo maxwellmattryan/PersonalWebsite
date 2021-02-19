@@ -7,7 +7,11 @@ import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum
 import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
 
 import { ShopCategory } from '../entities/shop-category.entity';
-import { ShopCategoryAlreadyExistsException } from '../exceptions/shop-category.exception';
+import {
+    ShopCategoryAlreadyExistsException,
+    ShopCategoryCouldNotBeDeletedException
+} from '../exceptions/shop-category.exception';
+import { ShopProduct } from '@api/modules/shop/entities/shop-product.entity';
 
 @Injectable()
 export class ShopCategoryService {
@@ -15,6 +19,13 @@ export class ShopCategoryService {
         @InjectRepository(ShopCategory)
         private readonly shopCategoryRepository: Repository<ShopCategory>
     ) { }
+
+    public async existsInTable(id: number): Promise<boolean> {
+        return await this.shopCategoryRepository
+            .createQueryBuilder('sc')
+            .where('sc.id = :id', { id: id })
+            .getCount() > 0;
+    }
 
     public async createCategory(categoryData: ShopCategory): Promise<ShopCategory> {
         const category: ShopCategory = this.shopCategoryRepository.create(categoryData);
@@ -47,5 +58,20 @@ export class ShopCategoryService {
         await this.shopCategoryRepository.save(newCategory);
 
         return await this.getCategory(id);
+    }
+
+    public async deleteCategory(id: number): Promise<void> {
+        await this.shopCategoryRepository
+            .createQueryBuilder()
+            .delete()
+            .from(ShopCategory)
+            .where('shop_category.id = :id', { id: id })
+            .execute()
+            .catch((error) => {
+                if(error.code === PostgresErrorCodes.FOREIGN_KEY_VIOLATION)
+                    throw new ShopCategoryCouldNotBeDeletedException();
+                else
+                    throw new InternalServerErrorException();
+            })
     }
 }

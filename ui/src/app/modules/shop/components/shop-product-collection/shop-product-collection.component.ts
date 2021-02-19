@@ -47,7 +47,7 @@ export class ShopProductCollectionComponent implements OnInit {
         this.shopApiService.deleteProduct(productId).subscribe((res: void) => {
             this.products = this.products.filter(p => p.id !== productId);
 
-            this.notificationService.createNotification('Successfully deleted product!');
+            this.notificationService.createNotification('Successfully deleted shop product!');
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
         })

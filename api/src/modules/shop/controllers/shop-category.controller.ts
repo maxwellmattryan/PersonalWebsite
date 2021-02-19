@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
 
 import { Request } from 'express';
 
@@ -47,5 +47,15 @@ export class ShopCategoryController {
         if(!category) throw new ShopCategoryCouldNotBeUpdatedException();
 
         return category;
+    }
+
+    @Delete(':id')
+    @HttpCode(204)
+    @UseGuards(JwtAuthGuard)
+    public async deleteCategory(@Param('id') id: number, @Req() request: Request): Promise<void> {
+        if(!(await this.shopCategoryService.existsInTable(id)))
+            throw new ShopCategoryWasNotFoundException();
+
+        await this.shopCategoryService.deleteCategory(id);
     }
 }
