@@ -1,17 +1,33 @@
 import { Module } from '@nestjs/common';
 
-import { ShopController } from '@api/modules/shop/controllers/shop.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
-// entities
+import { ShopCategoryController } from './controllers/shop-category.controller';
+import { ShopProductController } from './controllers/shop-product.controller';
+import { ShopProductStatusController } from './controllers/shop-product-status.controller';
 
-// services
+import { ShopCategory } from './entities/shop-category.entity';
+import { ShopProduct } from './entities/shop-product.entity';
+import { ShopProductStatus } from './entities/shop-product-status.entity';
+
+import { ShopCategoryService } from './services/shop-category.service';
+import { ShopProductService } from './services/shop-product.service';
+import { ShopProductStatusService } from './services/shop-product-status.service';
 
 @Module({
-    imports: [],
+    imports: [
+        TypeOrmModule.forFeature([ShopCategory, ShopProduct, ShopProductStatus])
+    ],
     exports: [],
     controllers: [
-        ShopController
+        ShopCategoryController,
+        ShopProductController,
+        ShopProductStatusController
     ],
-    providers: []
+    providers: [
+        ShopCategoryService,
+        ShopProductService,
+        ShopProductStatusService
+    ]
 })
 export class ShopModule { }

@@ -16,7 +16,6 @@ export class PortfolioEditorService extends EditorService {
     }
 
     getProfile(): PortfolioProfile {
-        console.log(this.profile);
         return this.profile;
     }
 
@@ -26,7 +25,6 @@ export class PortfolioEditorService extends EditorService {
 
     setProfile(profile: PortfolioProfile): void {
         this.profile = profile;
-        console.log(this.profile);
     }
 
     getProject(): PortfolioProject {

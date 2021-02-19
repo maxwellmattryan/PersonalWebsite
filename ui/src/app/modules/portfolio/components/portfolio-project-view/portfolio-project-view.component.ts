@@ -57,6 +57,8 @@ export class PortfolioProjectViewComponent implements OnInit {
     }
 
     deleteProject(): void {
+        if(!this.notificationService.deleteConfirmation('project')) return;
+
         this.portfolioProjectApiService.deleteProject(this.project.id).subscribe((res: any) => {
             this.notificationService.createNotification('Successfully deleted the project!');
             this.router.navigate(['']);

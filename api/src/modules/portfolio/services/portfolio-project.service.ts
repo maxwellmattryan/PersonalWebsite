@@ -5,9 +5,9 @@ import { Repository } from 'typeorm';
 
 import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
 import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
-import { PortfolioProjectAlreadyExistsException } from '../exceptions/portfolio-project.exception';
 
 import { PortfolioProject } from '../entities/portfolio-project.entity';
+import { PortfolioProjectAlreadyExistsException } from '../exceptions/portfolio-project.exception';
 
 @Injectable()
 export class PortfolioProjectService {

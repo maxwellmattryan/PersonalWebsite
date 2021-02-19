@@ -48,32 +48,17 @@ export class BlogViewComponent implements OnInit {
 
         this.isAdmin = this.authService.isLoggedIn();
 
-        if(this.isAdmin) {
-            this.blogApiService.getPosts(this.activeTopicId, false).subscribe((res: BlogPost[]) => {
-                this.posts = res;
-                this.topics = this.getTopicsFromPosts().sort(this.blogComparisonService.topics);
+        this.blogApiService.getPosts(this.activeTopicId, !this.isAdmin).subscribe((res: BlogPost[]) => {
+            this.posts = res;
+            this.topics = this.getTopicsFromPosts().sort(this.blogComparisonService.topics);
 
-                if(this.blogTopicService.hasActiveTopic()) {
-                    this.filterPosts(this.blogTopicService.getActiveTopicId());
-                    this.blogTopicService.setActiveTopic(null);
-                    this.blogTopicService.getActiveTopicId();
-                }
+            if(this.blogTopicService.hasActiveTopic()) {
+                this.filterPosts(this.blogTopicService.getActiveTopicId());
+                this.blogTopicService.setActiveTopic(null);
+            }
 
-                this.isLoaded = true;
-            });
-        } else {
-            this.blogApiService.getPosts(this.activeTopicId).subscribe((res: BlogPost[]) => {
-                this.posts = res;
-                this.topics = this.getTopicsFromPosts().sort(this.blogComparisonService.topics);
-
-                if(this.blogTopicService.hasActiveTopic()) {
-                    this.filterPosts(this.blogTopicService.getActiveTopicId());
-                    this.blogTopicService.setActiveTopic(null);
-                }
-
-                this.isLoaded = true;
-            });
-        }
+            this.isLoaded = true;
+        });
     }
 
     private getTopicsFromPosts(): BlogTopic[] {
@@ -109,6 +94,8 @@ export class BlogViewComponent implements OnInit {
     }
 
     deleteTopic(topic: BlogTopic): void {
+        if(!this.notificationService.deleteConfirmation('blog topic')) return;
+
         this.blogApiService.deleteTopic(topic.id).subscribe((res: any) => {
             this.removeTopic(topic.id);
             this.notificationService.createNotification('Successfully deleted blog topic!');

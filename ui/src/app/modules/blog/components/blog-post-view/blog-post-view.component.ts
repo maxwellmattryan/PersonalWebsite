@@ -67,6 +67,8 @@ export class BlogPostViewComponent implements OnInit {
     }
 
     deletePost(id: number): void {
+        if(!this.notificationService.deleteConfirmation('blog post')) return;
+
         this.blogApiService.deletePost(id).subscribe((res: any) => {
             this.notificationService.createNotification('Successfully deleted blog post!');
             this.router.navigate(['/blog']);

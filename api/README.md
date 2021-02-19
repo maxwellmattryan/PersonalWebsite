@@ -122,8 +122,41 @@ Repositories are the objects that actual more or less represents and corresponds
         - Removes the project with the corresponding `id` from the database
         - 204
 
-- /api/store
-    - `GET      /api/store`
+- /api/shop
+    - `GET      /api/shop`
         - Retrieves store information such as products, categories, etc.
         - 200
+    - `GET      /api/shop/products`
+        - Retrieves list of all products in the database
+        - 200
+    - `POST     /api/shop/products`
+        - Creates and saves a new product to the database
+        - 201
+    - `GET      /api/shop/products/:id`
+        - Retrieves a single product corresponding to the `id` path parameter
+        - 200
+    - `PUT      /api/shop/products/:id`
+        - Updates product data from the client for the product with the corresponding `id`
+        - 200
+    - `DELETE   /api/shop/products/:id`
+        - Removes the product with the corresponding `id` from database (will "soft delete" if unable to fully remove)
+        - 204
+    - `GET      /api/shop/product-statuses`
+        - Retrieves list of all product statuses in the database
+        - 200
+    - `GET      /api/shop/categories`
+        - Retrieves list of all categories in the database
+        - 200
+    - `POST     /api/shop/categories`
+        - Creates and saves a new category to the database
+        - 201
+    - `GET      /api/shop/categories/:id`
+        - Retrieves a single category corresponding to the `id` path parameter
+        - 200
+    - `PUT      /api/shop/categories/:id`
+        - Updates category data from the client for the product with the corresponding `id`
+        - 200
+    - `DELETE   /api/shop/categories/:id`
+        - Removes the category with the corresponding `id` from database
+        - 204
         
