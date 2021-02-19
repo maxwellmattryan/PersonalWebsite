@@ -72,9 +72,8 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
     }
 
     private loadProductData(): void {
-        this.shopApiService.getProducts('', 'REMOVED').subscribe((res: ShopProduct[]) => {
+        this.shopApiService.getProducts('AVAILABLE').subscribe((res: ShopProduct[]) => {
             this.productData = res.sort(this.shopComparisonService.products);
-            console.log(this.productData);
 
             if(this.categoryData) {
                 this.setProductControls(this.categoryData.products.map(p => p.id));
@@ -120,9 +119,18 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
     private buildCategory(): ShopCategory {
         const c = (this.categoryForm.value as ShopCategory);
 
+        const p = this.buildProducts();
+
         return new ShopCategory({
             ...c,
-            id: this.categoryData ? this.categoryData.id : undefined
+            id: this.categoryData ? this.categoryData.id : undefined,
+            products: p
         });
+    }
+
+    private buildProducts(): ShopProduct[] {
+        return (this.categoryForm.value as ShopCategory).products.map((p, idx) => {
+            if(p) return this.productData[idx];
+        }).filter(p => p !== undefined);
     }
 }

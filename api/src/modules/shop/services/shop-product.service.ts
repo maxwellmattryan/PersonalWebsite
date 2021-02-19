@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 
 import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
 import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
@@ -62,8 +62,8 @@ export class ShopProductService {
             .createQueryBuilder('sp')
             .leftJoinAndSelect('sp.category', 'sc')
             .leftJoinAndSelect('sp.status', 'sps')
-            .where('sps.status = :status', { status: (status as ShopProductStatus).status || typeof status === 'string' ? status : '' })
-            .orWhere('sps.id = :id', { id: (status as ShopProductStatus).id || isNaN(Number(status)) ? -1 : status })
+            .where(`sps.status = :status`, { status: (status as ShopProductStatus).status || typeof status === 'string' ? status : '' })
+            .orWhere(`sps.id = :id`, { id: (status as ShopProductStatus).id || isNaN(Number(status)) ? -1 : status })
             .getMany();
     }
 

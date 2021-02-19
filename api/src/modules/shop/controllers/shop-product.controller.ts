@@ -6,12 +6,14 @@ import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
 import { ShopProduct } from '../entities/shop-product.entity';
 import { ShopProductService } from '../services/shop-product.service';
+import { ShopProductStatusService } from '../services/shop-product-status.service';
 import { ShopProductCouldNotBeUpdatedException, ShopProductsWereNotFoundException, ShopProductWasNotFoundException } from '../exceptions/shop-product.exception';
 
 @Controller('shop/products')
 export class ShopProductController {
     constructor(
-        private readonly shopProductService: ShopProductService
+        private readonly shopProductService: ShopProductService,
+        private readonly shopProductStatusService: ShopProductStatusService
     ) { }
 
     @Post('')
