@@ -15,9 +15,20 @@
             <br><br>
             <mat-radio-group formControlName='status' name='status' required>
                 <mat-radio-button
-                        *ngFor='let s of statusData trackBy: this.trackingService.objectById'
+                        *ngFor='let s of productStatusData trackBy: this.trackingService.objectById'
                         [value]='s.status'
                 >{{ s.status }}</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <div class="form-field editor__form-field">
+            <label class='form-field-label editor__form-field-label'>Category</label>
+            <br><br>
+            <mat-radio-group formControlName='category' name='category' required>
+                <mat-radio-button
+                        *ngFor='let c of categoryData trackBy: this.trackingService.objectById'
+                        [value]='c.name'
+                >{{ c.name }}</mat-radio-button>
             </mat-radio-group>
         </div>
 

@@ -6,7 +6,7 @@ import { environment } from '@ui/environments/environment';
 
 import { ApiService } from '@ui/core/http';
 
-import { ShopProduct, ShopProductStatus } from '../models';
+import { ShopCategory, ShopProduct, ShopProductStatus } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +16,18 @@ export class ShopApiService extends ApiService {
         super(http);
     }
 
-    getShop(): Observable<string> {
-        return this.http.get<string>(
-            `${environment.API_URL}/shop`,
-            {},
+    createProduct(product: ShopProduct): Observable<ShopProduct> {
+        const headers = this.contentTypeHeader();
+
+        return this.http.post<ShopProduct>(
+            `${environment.API_URL}/shop/products`,
+            product,
+            { headers }
         );
+    }
+
+    getCategories(): Observable<ShopCategory[]> {
+        return this.http.get<ShopCategory[]>(`${environment.API_URL}/shop/categories`);
     }
 
     getProducts(status: string = ''): Observable<ShopProduct[]> {
@@ -29,7 +36,7 @@ export class ShopApiService extends ApiService {
 
         return this.http.get<ShopProduct[]>(
             `${environment.API_URL}/shop/products`,
-            { params: params }
+            { params }
         );
     }
 
@@ -37,7 +44,15 @@ export class ShopApiService extends ApiService {
         return this.http.get<ShopProductStatus[]>(`${environment.API_URL}/shop/product-statuses`);
     }
 
-    // update product
+    updateProduct(product: ShopProduct): Observable<ShopProduct> {
+        const headers = this.contentTypeHeader();
+
+        return this.http.put<ShopProduct>(
+            `${environment.API_URL}/shop/products/${product.id}`,
+            product,
+            { headers }
+        );
+    }
 
     deleteProduct(productId: number, softDelete: boolean = true): Observable<void> {
         let params = new HttpParams();

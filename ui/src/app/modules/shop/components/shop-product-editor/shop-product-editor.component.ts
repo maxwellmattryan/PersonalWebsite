@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '@ui/core/auth';
-import { TrackingService, ValidationService } from '@ui/core/services';
+import { NotificationService, TrackingService, ValidationService } from '@ui/core/services';
 
 import { ShopCategory, ShopProduct, ShopProductStatus } from '../../models';
 import { ShopApiService, ShopComparisonService, ShopEditorService } from '../../services';
@@ -17,13 +17,14 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
     public isLoaded: boolean = false;
 
     private productData: ShopProduct;
-    public statusData: ShopProductStatus[];
+    public productStatusData: ShopProductStatus[];
     public categoryData: ShopCategory[];
 
     public productForm: FormGroup;
 
     constructor(
         private readonly authService: AuthService,
+        private readonly notificationService: NotificationService,
         private readonly shopApiService: ShopApiService,
         private readonly shopComparisonService: ShopComparisonService,
         private readonly shopEditorService: ShopEditorService,
@@ -65,7 +66,7 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
         this.loadProductData();
 
         this.loadProductStatusData();
-        // load category data
+        this.loadCategoryData();
 
         this.buildProductForm();
     }
@@ -74,10 +75,15 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
         this.productData = this.shopEditorService.getProduct();
     }
 
-    private loadProductStatusData() {
+    private loadProductStatusData(): void {
         this.shopApiService.getProductStatuses().subscribe((res: ShopProductStatus[]) => {
-           this.statusData = res.sort(this.shopComparisonService.productStatuses);
-           console.log(this.statusData);
+           this.productStatusData = res.sort(this.shopComparisonService.productStatuses);
+        });
+    }
+
+    private loadCategoryData(): void {
+        this.shopApiService.getCategories().subscribe((res: ShopCategory[]) => {
+            this.categoryData = res.sort(this.shopComparisonService.categories);
         });
     }
 
@@ -87,7 +93,7 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
 
         this.productForm = this.formBuilder.group({
             name: this.formBuilder.control(isEmpty ? '' : this.productData.name, [Validators.required]),
-            //category
+            category: this.formBuilder.control(isEmpty ? '' : this.productData.category.name, [Validators.required]),
             status: this.formBuilder.control(isEmpty ? 'AVAILABLE' : this.productData.status.status, [Validators.required]),
             amount: this.formBuilder.control(isEmpty ? '' : this.productData.amount, [Validators.required, Validators.pattern(decimalRegex)]),
             preview: this.formBuilder.control(isEmpty ? '' : this.productData.preview, [Validators.required]),
@@ -98,30 +104,40 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
 
     public onSubmit(): void {
         const product = this.buildProduct();
-        console.log(this.productForm);
-        console.log(product);
 
         if(product.id === undefined) {
-            // create product
+            this.shopApiService.createProduct(product).subscribe((res: ShopProduct) => {
+                this.notificationService.createNotification('Successfully created new product!');
+                this.router.navigate(['shop']);
+            });
         } else {
-            // update product
+            this.shopApiService.updateProduct(product).subscribe((res: ShopProduct) => {
+                this.notificationService.createNotification('Successfully updated existing product!');
+                this.router.navigate(['shop']);
+            });
         }
     }
 
     private buildProduct(): ShopProduct {
         const p = (this.productForm.value as ShopProduct);
 
-        const s = this.buildStatus();
+        const c = this.buildCategory();
+        const s = this.buildProductStatus();
 
         return new ShopProduct({
-            ...p,
+            ...this.productForm.value,
             id: this.productData ? this.productData.id : undefined,
             amount: Number(p.amount),
-            status: s
+            status: s,
+            category: c
         });
     }
 
-    private buildStatus(): ShopProductStatus {
-        return this.statusData.find(s => s.status === this.productForm.value.status);
+    private buildCategory(): ShopCategory {
+        return this.categoryData.find(c => c.name === this.productForm.value.category);
+    }
+
+    private buildProductStatus(): ShopProductStatus {
+        return this.productStatusData.find(s => s.status === this.productForm.value.status);
     }
 }
