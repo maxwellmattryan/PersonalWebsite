@@ -88,7 +88,7 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
     }
 
     private buildProductForm(): void {
-        const isEmpty = this.productData === undefined;
+        const isEmpty: boolean = !Boolean(this.productForm);
         const decimalRegex: RegExp = /^(?![.,])\d*[.,]?\d{0,2}$/;
 
         this.productForm = this.formBuilder.group({
