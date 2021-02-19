@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, Param, Post, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
 
 import { Request } from 'express';
 
@@ -6,7 +6,7 @@ import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
 import { ShopCategory } from '../entities/shop-category.entity';
 import { ShopCategoryService } from '../services/shop-category.service';
-import { ShopCategoriesWereNotFoundException, ShopCategoryWasNotFoundException } from '../exceptions/shop-category.exception';
+import { ShopCategoriesWereNotFoundException, ShopCategoryCouldNotBeUpdatedException, ShopCategoryWasNotFoundException } from '../exceptions/shop-category.exception';
 
 @Controller('shop/categories')
 export class ShopCategoryController {
@@ -37,5 +37,15 @@ export class ShopCategoryController {
         if(!categories) throw new ShopCategoriesWereNotFoundException();
 
         return categories;
+    }
+
+    @Put(':id')
+    @HttpCode(200)
+    @UseGuards(JwtAuthGuard)
+    public async updateCategory(@Param('id') id: number, @Req() request: Request): Promise<ShopCategory> {
+        const category = await this.shopCategoryService.updateCategory(id, request.body);
+        if(!category) throw new ShopCategoryCouldNotBeUpdatedException();
+
+        return category;
     }
 }

@@ -6,6 +6,12 @@ export class ShopCategoryAlreadyExistsException extends BadRequestException {
     }
 }
 
+export class ShopCategoryCouldNotBeUpdatedException extends BadRequestException {
+    constructor() {
+        super('Shop category could not be updated.');
+    }
+}
+
 export class ShopCategoryWasNotFoundException extends NotFoundException {
     constructor() {
         super('Unable to find shop category.');

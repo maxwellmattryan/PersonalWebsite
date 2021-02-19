@@ -41,4 +41,11 @@ export class ShopCategoryService {
             .createQueryBuilder('sc')
             .getMany();
     }
+
+    public async updateCategory(id: number, categoryData: ShopCategory): Promise<ShopCategory> {
+        const newCategory = new ShopCategory({ id: id, ...categoryData });
+        await this.shopCategoryRepository.save(newCategory);
+
+        return await this.getCategory(id);
+    }
 }
