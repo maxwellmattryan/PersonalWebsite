@@ -11,7 +11,6 @@ import {
     ShopCategoryAlreadyExistsException,
     ShopCategoryCouldNotBeDeletedException, ShopCategoryCouldNotBeUpdatedException
 } from '../exceptions/shop-category.exception';
-import { ShopProduct } from '@api/modules/shop/entities/shop-product.entity';
 
 @Injectable()
 export class ShopCategoryService {
