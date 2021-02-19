@@ -16,11 +16,10 @@ import { ShopApiService, ShopComparisonService, ShopEditorService } from '../../
 export class ShopProductEditorComponent implements OnInit, OnDestroy {
     public isLoaded: boolean = false;
 
-    private productData: ShopProduct;
-
-    public productStatusData: ShopProductStatus[];
     public categoryData: ShopCategory[];
+    public productStatusData: ShopProductStatus[];
 
+    private productData: ShopProduct;
     public productForm: FormGroup;
 
     constructor(

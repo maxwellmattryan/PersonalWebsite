@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '@ui/core/auth';
 
-import { ShopCategory } from '../../models';
-import { ShopApiService, ShopEditorService } from '../../services';
-import { NotificationService } from '@ui/core/services';
+import { ShopCategory, ShopProduct } from '../../models';
+import { ShopApiService, ShopComparisonService, ShopEditorService } from '../../services';
+import { NotificationService, TrackingService } from '@ui/core/services';
 
 @Component({
     selector: 'ui-shop-category-editor',
@@ -16,16 +16,19 @@ import { NotificationService } from '@ui/core/services';
 export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
     public isLoaded: boolean = false;
 
-    public categoryData: ShopCategory;
+    public productData: ShopProduct[];
 
+    private categoryData: ShopCategory;
     public categoryForm: FormGroup;
 
     constructor(
         private readonly authService: AuthService,
         private readonly notificationService: NotificationService,
         private readonly shopApiService: ShopApiService,
+        private readonly shopComparisonService: ShopComparisonService,
         private readonly shopEditorService: ShopEditorService,
         private readonly titleService: Title,
+        public readonly trackingService: TrackingService,
         private readonly formBuilder: FormBuilder,
         private readonly router: Router
     ) { }
@@ -58,6 +61,9 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
 
     private initCategoryForm(): void {
         this.loadCategoryData();
+
+        this.loadProductData();
+
         this.buildCategoryForm();
     }
 
@@ -65,11 +71,32 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
         this.categoryData = this.shopEditorService.getCategory();
     }
 
+    private loadProductData(): void {
+        this.shopApiService.getProducts('', 'REMOVED').subscribe((res: ShopProduct[]) => {
+            this.productData = res.sort(this.shopComparisonService.products);
+            console.log(this.productData);
+
+            if(this.categoryData) {
+                this.setProductControls(this.categoryData.products.map(p => p.id));
+            } else {
+                this.setProductControls([]);
+            }
+        });
+    }
+
+    private setProductControls(associatedProductIds: number[]): void {
+        this.productData.forEach(p => {
+            const control: FormControl = this.formBuilder.control(associatedProductIds.includes(p.id));
+            (this.categoryForm.controls.products as FormArray).push(control);
+        });
+    }
+
     private buildCategoryForm(): void {
         const isEmpty: boolean = !this.shopEditorService.hasCategory();
 
         this.categoryForm = this.formBuilder.group({
-            name: this.formBuilder.control(isEmpty ? '' : this.categoryData.name, [Validators.required])
+            name: this.formBuilder.control(isEmpty ? '' : this.categoryData.name, [Validators.required]),
+            products: this.formBuilder.array(isEmpty ? [] : this.productData, [])
         });
     }
 
@@ -77,22 +104,25 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
         const category = this.buildCategory();
         console.log(category);
 
-        if(category.id === undefined) {
-            this.shopApiService.createCategory(category).subscribe((res: ShopCategory) => {
-                this.notificationService.createNotification('Successfully created shop category!');
-                this.router.navigate(['shop']);
-            });
-        } else {
-            this.shopApiService.updateCategory(category).subscribe((res: ShopCategory) => {
-                this.notificationService.createNotification('Successfully updated existing shop category!');
-                this.router.navigate(['shop']);
-            });
-        }
+        // if(category.id === undefined) {
+        //     this.shopApiService.createCategory(category).subscribe((res: ShopCategory) => {
+        //         this.notificationService.createNotification('Successfully created shop category!');
+        //         this.router.navigate(['shop']);
+        //     });
+        // } else {
+        //     this.shopApiService.updateCategory(category).subscribe((res: ShopCategory) => {
+        //         this.notificationService.createNotification('Successfully updated existing shop category!');
+        //         this.router.navigate(['shop']);
+        //     });
+        // }
     }
 
     private buildCategory(): ShopCategory {
         const c = (this.categoryForm.value as ShopCategory);
 
-        return new ShopCategory({ ...c });
+        return new ShopCategory({
+            ...c,
+            id: this.categoryData ? this.categoryData.id : undefined
+        });
     }
 }

@@ -40,9 +40,12 @@ export class ShopApiService extends ApiService {
         return this.http.get<ShopCategory[]>(`${environment.API_URL}/shop/categories`);
     }
 
-    getProducts(status: string = ''): Observable<ShopProduct[]> {
+    getProducts(status: string = '', exclude: string = ''): Observable<ShopProduct[]> {
         let params = new HttpParams();
-        if(status != '') params = params.set('status', status);
+        if(status != '')
+            params = params.set('status', status);
+        else if(exclude != '')
+            params = params.set('exclude', exclude);
 
         return this.http.get<ShopProduct[]>(
             `${environment.API_URL}/shop/products`,

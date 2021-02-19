@@ -10,6 +10,15 @@
             <input formControlName='name' required autofocus>
         </div>
 
+        <div class="form-field editor__form-field">
+            <label class='form-field-label editor__form-field-label'>Products</label>
+            <br><br>
+            <div class='form__checkbox-item' formArrayName='products' *ngFor='let p of categoryForm.controls.products["controls"] trackBy: this.trackingService.objectById; let idx = index'>
+                <mat-checkbox [formControlName]='idx'>{{ productData[idx].name }}</mat-checkbox>
+                <br>
+            </div>
+        </div>
+
         <button
                 aria-label='Submit project'
                 [ngClass]="{'btn--inactive': !categoryForm.valid}"

@@ -6,7 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { AuthService } from '@ui/core/auth';
 import { NotificationService, TrackingService } from '@ui/core/services';
 
-import { ShopApiService, ShopCategoryService, ShopComparisonService } from '../../services';
+import { ShopApiService, ShopCategoryService, ShopComparisonService, ShopEditorService } from '../../services';
 import { ShopCategory, ShopProduct, ShopProductStatuses } from '../../models';
 
 @Component({
@@ -30,12 +30,13 @@ export class ShopViewComponent implements OnInit {
         private shopApiService: ShopApiService,
         private shopCategoryService: ShopCategoryService,
         private shopComparisonService: ShopComparisonService,
+        private shopEditorService: ShopEditorService,
         private titleService: Title,
         public trackingService: TrackingService
     ) { }
 
     ngOnInit(): void {
-        this.titleService.setTitle(`Online Shop | Matthew Maxwell`);
+        this.titleService.setTitle(`Shop | Matthew Maxwell`);
 
         this.isAdmin = this.authService.isLoggedIn();
 
@@ -69,7 +70,7 @@ export class ShopViewComponent implements OnInit {
     }
 
     public sendCategoryToEditor(category: ShopCategory): void {
-        console.log(-1);
+        this.shopEditorService.setCategory(category);
     }
 
     public deleteCategory(category: ShopCategory): void {

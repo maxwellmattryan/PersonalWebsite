@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { ComparisonService } from '@ui/core/services';
 
-import { ShopCategory, ShopProductStatus } from '../models';
+import { ShopCategory, ShopProduct, ShopProductStatus } from '../models';
 
 export enum Comparisons {
     CATEGORY = 'name'
@@ -19,6 +19,13 @@ export class ShopComparisonService extends ComparisonService {
     categories = (c1: ShopCategory, c2: ShopCategory) => {
         if(c1.name > c2.name) return 1;
         if(c1.name < c2.name) return -1;
+
+        return 0;
+    };
+
+    products = (p1: ShopProduct, p2: ShopProduct) => {
+        if(p1.name > p2.name) return 1;
+        if(p2.name < p2.name) return -1;
 
         return 0;
     };
