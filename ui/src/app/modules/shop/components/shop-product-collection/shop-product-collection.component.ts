@@ -42,7 +42,7 @@ export class ShopProductCollectionComponent implements OnInit {
     }
 
     public deleteProduct(productId: number): void {
-        if(!window.confirm(`Are you sure you want to delete this product?`)) return;
+        if(!this.notificationService.deleteConfirmation('shop product')) return;
 
         this.shopApiService.deleteProduct(productId).subscribe((res: void) => {
             this.products = this.products.filter(p => p.id !== productId);

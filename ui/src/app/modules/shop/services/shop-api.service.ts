@@ -16,6 +16,16 @@ export class ShopApiService extends ApiService {
         super(http);
     }
 
+    createCategory(category: ShopCategory): Observable<ShopCategory> {
+        const headers = this.contentTypeHeader();
+
+        return this.http.post<ShopCategory>(
+            `${environment.API_URL}/shop/categories`,
+            category,
+            { headers }
+        );
+    }
+
     createProduct(product: ShopProduct): Observable<ShopProduct> {
         const headers = this.contentTypeHeader();
 
@@ -42,6 +52,16 @@ export class ShopApiService extends ApiService {
 
     getProductStatuses(): Observable<ShopProductStatus[]> {
         return this.http.get<ShopProductStatus[]>(`${environment.API_URL}/shop/product-statuses`);
+    }
+
+    updateCategory(category: ShopCategory): Observable<ShopCategory> {
+        const headers = this.contentTypeHeader();
+
+        return this.http.put<ShopCategory>(
+            `${environment.API_URL}/shop/categories/${category.id}`,
+            category,
+            { headers }
+        );
     }
 
     updateProduct(product: ShopProduct): Observable<ShopProduct> {

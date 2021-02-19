@@ -67,7 +67,7 @@ export class BlogPostViewComponent implements OnInit {
     }
 
     deletePost(id: number): void {
-        if(!window.confirm(`Are you sure you want to delete this post?`)) return;
+        if(!this.notificationService.deleteConfirmation('blog post')) return;
 
         this.blogApiService.deletePost(id).subscribe((res: any) => {
             this.notificationService.createNotification('Successfully deleted blog post!');

@@ -94,7 +94,7 @@ export class BlogViewComponent implements OnInit {
     }
 
     deleteTopic(topic: BlogTopic): void {
-        if(!window.confirm(`Are you sure you want to delete this topic?`)) return;
+        if(!this.notificationService.deleteConfirmation('blog topic')) return;
 
         this.blogApiService.deleteTopic(topic.id).subscribe((res: any) => {
             this.removeTopic(topic.id);

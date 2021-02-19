@@ -108,12 +108,12 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
 
         if(product.id === undefined) {
             this.shopApiService.createProduct(product).subscribe((res: ShopProduct) => {
-                this.notificationService.createNotification('Successfully created new product!');
+                this.notificationService.createNotification('Successfully created new shop product!');
                 this.router.navigate(['shop']);
             });
         } else {
             this.shopApiService.updateProduct(product).subscribe((res: ShopProduct) => {
-                this.notificationService.createNotification('Successfully updated existing product!');
+                this.notificationService.createNotification('Successfully updated existing shop product!');
                 this.router.navigate(['shop']);
             });
         }
@@ -126,7 +126,7 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
         const s = this.buildProductStatus();
 
         return new ShopProduct({
-            ...this.productForm.value,
+            ...p,
             id: this.productData ? this.productData.id : undefined,
             amount: Number(p.amount),
             status: s,
