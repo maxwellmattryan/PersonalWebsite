@@ -37,11 +37,10 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
         this.titleService.setTitle('Shop Category Editor | Matthew Maxwell');
 
         this.checkForAdmin();
+
         this.setPageHideEvent();
 
         this.initCategoryForm();
-
-        this.isLoaded = true;
     }
 
     ngOnDestroy() {
@@ -55,7 +54,7 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
 
     private setPageHideEvent(): void {
         window.onpagehide = () => {
-            this.shopEditorService.setProduct(null);
+            this.shopEditorService.setCategory(null);
         };
     }
 
@@ -80,12 +79,15 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
             } else {
                 this.setProductControls([]);
             }
+
+            this.isLoaded = true;
         });
     }
 
     private setProductControls(associatedProductIds: number[]): void {
         this.productData.forEach(p => {
-            const control: FormControl = this.formBuilder.control(associatedProductIds.includes(p.id));
+            const isAssociated = associatedProductIds.includes(p.id);
+            const control: FormControl = this.formBuilder.control({ value: isAssociated, disabled: isAssociated });
             (this.categoryForm.controls.products as FormArray).push(control);
         });
     }
@@ -95,13 +97,12 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
 
         this.categoryForm = this.formBuilder.group({
             name: this.formBuilder.control(isEmpty ? '' : this.categoryData.name, [Validators.required]),
-            products: this.formBuilder.array(isEmpty ? [] : this.productData, [])
+            products: this.formBuilder.array([], [])
         });
     }
 
     public onSubmit(): void {
         const category = this.buildCategory();
-        console.log(category);
 
         if(category.id === undefined) {
             this.shopApiService.createCategory(category).subscribe((res: ShopCategory) => {

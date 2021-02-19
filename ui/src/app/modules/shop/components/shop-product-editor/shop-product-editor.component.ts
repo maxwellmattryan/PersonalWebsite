@@ -6,7 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { AuthService } from '@ui/core/auth';
 import { NotificationService, TrackingService, ValidationService } from '@ui/core/services';
 
-import { ShopCategory, ShopProduct, ShopProductStatus } from '../../models';
+import { ShopCategory, ShopProduct, ShopProductStatus, ShopProductStatuses } from '../../models';
 import { ShopApiService, ShopComparisonService, ShopEditorService } from '../../services';
 
 @Component({
@@ -94,7 +94,7 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
         this.productForm = this.formBuilder.group({
             name: this.formBuilder.control(isEmpty ? '' : this.productData.name, [Validators.required]),
             category: this.formBuilder.control(isEmpty ? '' : this.productData.category.name, [Validators.required]),
-            status: this.formBuilder.control(isEmpty ? 'AVAILABLE' : this.productData.status.status, [Validators.required]),
+            status: this.formBuilder.control(isEmpty ? ShopProductStatuses.AVAILABLE : this.productData.status.status, [Validators.required]),
             amount: this.formBuilder.control(isEmpty ? '' : this.productData.amount, [Validators.required, Validators.pattern(decimalRegex)]),
             preview: this.formBuilder.control(isEmpty ? '' : this.productData.preview, [Validators.required]),
             description: this.formBuilder.control(isEmpty ? '' : this.productData.description, [Validators.required]),

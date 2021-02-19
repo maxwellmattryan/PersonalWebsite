@@ -9,7 +9,7 @@ import { InternalServerErrorException } from '@api/core/http/exceptions/http.exc
 import { ShopCategory } from '../entities/shop-category.entity';
 import {
     ShopCategoryAlreadyExistsException,
-    ShopCategoryCouldNotBeDeletedException
+    ShopCategoryCouldNotBeDeletedException, ShopCategoryCouldNotBeUpdatedException
 } from '../exceptions/shop-category.exception';
 import { ShopProduct } from '@api/modules/shop/entities/shop-product.entity';
 
@@ -55,7 +55,13 @@ export class ShopCategoryService {
 
     public async updateCategory(id: number, categoryData: ShopCategory): Promise<ShopCategory> {
         const newCategory = new ShopCategory({ id: id, ...categoryData });
-        await this.shopCategoryRepository.save(newCategory);
+        await this.shopCategoryRepository.save(newCategory)
+            .catch((error) => {
+                if(error.code === PostgresErrorCodes.NOT_NULL_VIOLATION)
+                    throw new ShopCategoryCouldNotBeUpdatedException();
+                else
+                    throw new InternalServerErrorException();
+            });
 
         return await this.getCategory(id);
     }

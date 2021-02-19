@@ -3,7 +3,6 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ShopCategoryController } from './controllers/shop-category.controller';
-import { ShopController } from './controllers/shop.controller';
 import { ShopProductController } from './controllers/shop-product.controller';
 import { ShopProductStatusController } from './controllers/shop-product-status.controller';
 
@@ -22,7 +21,6 @@ import { ShopProductStatusService } from './services/shop-product-status.service
     exports: [],
     controllers: [
         ShopCategoryController,
-        ShopController,
         ShopProductController,
         ShopProductStatusController
     ],

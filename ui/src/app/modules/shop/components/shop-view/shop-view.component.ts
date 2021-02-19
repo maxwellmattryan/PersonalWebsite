@@ -70,7 +70,11 @@ export class ShopViewComponent implements OnInit {
     }
 
     public sendCategoryToEditor(category: ShopCategory): void {
-        this.shopEditorService.setCategory(category);
+        const associatedProducts = this.products.filter((p, idx, arr) => p.category.id === category.id);
+        this.shopEditorService.setCategory(new ShopCategory({
+            ...category,
+            products: associatedProducts
+        }));
     }
 
     public deleteCategory(category: ShopCategory): void {
