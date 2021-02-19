@@ -17,6 +17,7 @@ import { ShopProductStatus } from './entities/shop-product-status.entity';
 import { ShopCategoryService } from './services/shop-category.service';
 import { ShopCustomerService } from './services/shop-customer-service.service';
 import { ShopOrderService } from './services/shop-order.service';
+import { ShopPaymentService } from './services/shop-payment.service';
 import { ShopProductService } from './services/shop-product.service';
 import { ShopProductStatusService } from './services/shop-product-status.service';
 
@@ -36,6 +37,7 @@ import { ShopProductStatusService } from './services/shop-product-status.service
         ShopCategoryService,
         ShopCustomerService,
         ShopOrderService,
+        ShopPaymentService,
         ShopProductService,
         ShopProductStatusService
     ]

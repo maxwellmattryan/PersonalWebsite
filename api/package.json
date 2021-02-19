@@ -29,6 +29,7 @@
     "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "^7.6.12",
     "@nestjs/typeorm": "^7.1.5",
+    "@stripe/stripe-js": "^1.12.1",
     "@types/bcrypt": "^3.0.0",
     "@types/cookie-parser": "^1.4.2",
     "@types/hapi__joi": "^17.1.6",
@@ -50,6 +51,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",
+    "stripe": "^8.137.0",
     "typeorm": "^0.2.31",
     "typeorm-naming-strategies": "^2.0.0"
   },
