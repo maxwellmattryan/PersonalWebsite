@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from '@ui/core/auth';
 import { NotificationService, SeoService, TrackingService } from '@ui/core/services';
 
 import { ShopProduct } from '../../models';
 import { ShopApiService, ShopEditorService } from '../../services';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'ui-shop-product-collection',
@@ -46,7 +46,6 @@ export class ShopProductCollectionComponent implements OnInit {
 
         this.shopApiService.deleteProduct(productId).subscribe((res: void) => {
             this.products = this.products.filter(p => p.id !== productId);
-
             this.notificationService.createNotification('Successfully deleted shop product!');
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);

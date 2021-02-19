@@ -80,7 +80,10 @@ export class ShopProductService {
             .delete()
             .from(ShopProduct)
             .where('shop_product.id = :id', { id: id })
-            .execute();
+            .execute()
+            .catch((error) => {
+                // TODO: Add logic for handling foreign key issues once order tables are in
+            });
     }
 
     public async softDeleteProduct(id: number): Promise<void> {
