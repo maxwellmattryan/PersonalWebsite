@@ -8,7 +8,7 @@ Welcome to the codebase for my personal web application! The stack consists of A
 - [UI](#UI)
 - [Database](#Database)
 - [Deployment](#Deployment)
-- [Storage](#Storage)
+- [Payment Processing](#Payment-Processing)
 - [Search Engine Optimization](#Search-Engine-Optimization)
 - [Acknowledgements](#Acknowledgements)
 
@@ -26,7 +26,11 @@ Although there are no 1:1 relationships in this database design, there is fortun
 
 ## Deployment
 
-The current deployment uses Heroku, where it is easy and affordable to get apps up and running. While I ultimately prefer GCP, it is too expensive for this type of application. 
+The current deployment is hosted on [Google Cloud Platform](https://cloud.google.com). To help save costs, I am using a system of building locally and pushing the images to the corresponding Cloud Run service.  
+
+## Payment Processing
+
+[Stripe](https://stripe.com/) is currently implemented for handling any and all of the details related to processing payments for shop products. More specifically, I'm using [Stripe Checkout](https://stripe.com/payments/checkout) for handling the UI / UX needs since it does exactly what I need.
 
 ## Search Engine Optimization
 
