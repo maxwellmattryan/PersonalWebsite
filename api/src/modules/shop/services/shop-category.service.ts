@@ -11,6 +11,13 @@ export class ShopCategoryService {
         private readonly shopCategoryRepository: Repository<ShopCategory>
     ) { }
 
+    public async getCategory(id: number): Promise<ShopCategory> {
+        return await this.shopCategoryRepository
+            .createQueryBuilder('sc')
+            .where('sc.id = :id', { id: id })
+            .getOne();
+    }
+
     public async getCategories(): Promise<ShopCategory[]> {
         return await this.shopCategoryRepository
             .createQueryBuilder('sc')
