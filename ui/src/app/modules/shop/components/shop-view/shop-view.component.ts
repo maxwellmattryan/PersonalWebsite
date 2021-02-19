@@ -99,14 +99,13 @@ export class ShopViewComponent implements OnInit {
 
     public loadProductsByStatus(statusId: number): void {
         this.shopApiService.getProducts(statusId.toString()).subscribe((res: ShopProduct[]) => {
-            if(res.length < 1 ||
-                (res.filter(p => p.category.id === this.activeCategoryId).length < 1 && this.activeCategoryId !== -1)
-            ) {
+            if(res.length < 1) {
                 this.notificationService.createNotification('No shop products contain this status.');
                 return;
             }
 
             this.products = res.sort(this.shopComparisonService.products);
+            this.activeCategoryId = -1;
             this.activeStatusId = statusId;
         });
     }
