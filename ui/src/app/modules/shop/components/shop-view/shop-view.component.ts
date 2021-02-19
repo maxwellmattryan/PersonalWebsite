@@ -7,7 +7,7 @@ import { AuthService } from '@ui/core/auth';
 import { NotificationService, TrackingService } from '@ui/core/services';
 
 import { ShopApiService, ShopCategoryService, ShopComparisonService, ShopEditorService } from '../../services';
-import { ShopCategory, ShopProduct, ShopProductStatuses } from '../../models';
+import { ShopCategory, ShopProduct, ShopProductStatus, ShopProductStatuses } from '../../models';
 
 @Component({
     selector: 'ui-shop-view',
@@ -18,10 +18,12 @@ export class ShopViewComponent implements OnInit {
     public isAdmin: boolean = false;
     public isLoaded: boolean = false;
 
-    public products: ShopProduct[];
     public categories: ShopCategory[];
+    public products: ShopProduct[];
+    public statuses: ShopProductStatus[];
 
     activeCategoryId: number = -1;
+    activeStatusId: number = 1;
 
     constructor(
         private router: Router,
@@ -41,17 +43,21 @@ export class ShopViewComponent implements OnInit {
         this.isAdmin = this.authService.isLoggedIn();
 
         this.shopApiService.getProducts(ShopProductStatuses.AVAILABLE).subscribe((res: ShopProduct[]) => {
-            this.products = res;
+            this.products = res.sort(this.shopComparisonService.products);
 
-            if(this.isAdmin)
+            if(this.isAdmin) {
                 this.shopApiService.getCategories().subscribe((res: ShopCategory[]) => {
                     this.categories = res;
                 });
+                this.shopApiService.getProductStatuses().subscribe((res: ShopProductStatus[]) => {
+                    this.statuses = res.filter(s => s.status !== 'REMOVED');
+                });
+            }
             else
                 this.categories = this.getCategoriesFromProducts();
 
             if(this.shopCategoryService.hasActiveCategory())
-                this.filterProducts(this.shopCategoryService.getActiveCategoryId());
+                this.activeCategoryId = this.shopCategoryService.getActiveCategoryId();
 
             this.isLoaded = true;
 
@@ -70,8 +76,39 @@ export class ShopViewComponent implements OnInit {
         return Array.from(categories.values()).sort(this.shopComparisonService.categories);
     }
 
-    public filterProducts(categoryId: number): ShopProduct[] {
-        return this.products.filter((val, idx, arr) => val.category.id === categoryId);
+    public setActiveCategory(category: ShopCategory, reset: boolean = false): void {
+        if(reset) {
+            this.activeCategoryId = -1;
+        } else {
+            if(this.products.filter(p => p.category.id === category.id).length < 1) {
+                this.notificationService.createNotification('No shop products are in this category.');
+                return;
+            }
+
+            this.shopCategoryService.setActiveCategory(category);
+            this.activeCategoryId = category.id;
+        }
+    }
+
+    public filterProducts(): ShopProduct[] {
+        if(this.activeCategoryId === -1)
+            return this.products;
+        else
+            return this.products.filter(p => p.category.id === this.activeCategoryId);
+    }
+
+    public loadProductsByStatus(statusId: number): void {
+        this.shopApiService.getProducts(statusId.toString()).subscribe((res: ShopProduct[]) => {
+            if(res.length < 1 ||
+                (res.filter(p => p.category.id === this.activeCategoryId).length < 1 && this.activeCategoryId !== -1)
+            ) {
+                this.notificationService.createNotification('No shop products contain this status.');
+                return;
+            }
+
+            this.products = res.sort(this.shopComparisonService.products);
+            this.activeStatusId = statusId;
+        });
     }
 
     public sendCategoryToEditor(category: ShopCategory): void {

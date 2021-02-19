@@ -1,63 +1,86 @@
 <div class='shop' *ngIf='isLoaded; else loading'>
     <h1 class='shop__header'>Welcome to my shop!</h1>
 
-    <div class='section shop__categories'>
-        <h2 class='shop__filter-header'>Categories</h2>
+    <div class='section shop__side'>
+        <div class='shop__categories'>
+            <h2 class='shop__filter-header'>Categories</h2>
 
-        <div class='line-divider'></div>
+            <div class='line-divider'></div>
 
-        <div class='shop__filter-btn-container'>
-            <div class='shop__filter-btn-row shop__filter-btn-row--all'>
-                <button
-                        aria-label='Select all categories'
-                        [ngClass]="{'btn--active': activeCategoryId === -1, 'shop__filter-btn--half': isAdmin}"
-                        class='btn shop__filter-btn shop__filter-btn--all'
-                        type='button'
-                >
-                    All
-                </button>
-
-                <ng-container *ngIf='isAdmin'>
-                    <button aria-label='Add shop category' class='btn btn--go shop__filter-btn--add' routerLink='/shop/categories/editor'>
-                        &#x2b;
-                    </button>
-                </ng-container>
-            </div>
-
-            <div class='shop__filter-btn-row' *ngFor='let c of categories trackBy: this.trackingService.objectById'>
-                <button
-                        aria-label='Filter shop category'
-                        [ngClass]="{'btn--active': c.id === activeCategoryId, 'shop__filter-btn--half': isAdmin}"
-                        class='btn shop__filter-btn'
-                        (click)='filterProducts(c.id)'
-                        type='button'
-                >
-                    {{ c.name }}
-                </button>
-
-                <ng-container *ngIf='isAdmin'>
+            <div class='shop__filter-btn-container'>
+                <div class='shop__filter-btn-row shop__filter-btn-row--all'>
                     <button
-                            aria-label='Edit blog topic'
-                            class='btn shop__filter-btn--edit'
-                            (click)='sendCategoryToEditor(c)'
-                            routerLink='/shop/categories/editor'
-                    >
-                        &#x270F;
-                    </button>
-                    <button
-                            aria-label='Delete shop topic'
-                            class='btn shop__filter-btn--edit btn--warn'
-                            (click)='deleteCategory(c)'
+                            aria-label='Select all categories'
+                            [ngClass]="{'btn--active': activeCategoryId === -1, 'shop__filter-btn--half': isAdmin}"
+                            class='btn shop__filter-btn shop__filter-btn--all'
+                            (click)='setActiveCategory(null, true)'
                             type='button'
                     >
-                        &#x2715;
+                        All
                     </button>
-                </ng-container>
+
+                    <ng-container *ngIf='isAdmin'>
+                        <button aria-label='Add shop category' class='btn btn--go shop__filter-btn--add' routerLink='/shop/categories/editor'>
+                            &#x2b;
+                        </button>
+                    </ng-container>
+                </div>
+
+                <div class='shop__filter-btn-row' *ngFor='let c of categories trackBy: this.trackingService.objectById'>
+                    <button
+                            aria-label='Filter shop category'
+                            [ngClass]="{'btn--active': c.id === activeCategoryId, 'shop__filter-btn--half': isAdmin}"
+                            class='btn shop__filter-btn'
+                            (click)='setActiveCategory(c)'
+                            type='button'
+                    >
+                        {{ c.name }}
+                    </button>
+
+                    <ng-container *ngIf='isAdmin'>
+                        <button
+                                aria-label='Edit blog topic'
+                                class='btn shop__filter-btn--edit'
+                                (click)='sendCategoryToEditor(c)'
+                                routerLink='/shop/categories/editor'
+                        >
+                            &#x270F;
+                        </button>
+                        <button
+                                aria-label='Delete shop topic'
+                                class='btn shop__filter-btn--edit btn--warn'
+                                (click)='deleteCategory(c)'
+                                type='button'
+                        >
+                            &#x2715;
+                        </button>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf='isAdmin' class='shop__extras'>
+            <h2 class='shop__filter-header'>Statuses</h2>
+
+            <div class='line-divider'></div>
+
+            <div class='shop__filter-btn-container'>
+                <div class='shop__filter-btn-row' *ngFor='let s of statuses trackBy: this.trackingService.objectById'>
+                    <button
+                            aria-label='Filter shop status'
+                            [ngClass]="{'btn--active': s.id === activeStatusId}"
+                            class='btn shop__filter-btn shop__filter-btn--expand'
+                            (click)='loadProductsByStatus(s.id)'
+                            type='button'
+                    >
+                        {{ s.status }}
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <ui-shop-product-collection [products]='products' baseRoute='products/'></ui-shop-product-collection>
+    <ui-shop-product-collection [products]='filterProducts()' baseRoute='products/'></ui-shop-product-collection>
 </div>
 
 <ng-template #loading>

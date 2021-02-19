@@ -19,7 +19,7 @@ export class ShopCategoryService {
         return (this.activeCategory !== undefined);
     }
 
-    setActiveCategory(topic: ShopCategory): void {
-        this.activeCategory = topic;
+    setActiveCategory(category: ShopCategory): void {
+        this.activeCategory = category;
     }
 }
