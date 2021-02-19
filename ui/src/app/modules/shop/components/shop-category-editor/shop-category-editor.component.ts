@@ -44,7 +44,7 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.shopEditorService.setProduct(null);
+        this.shopEditorService.setCategory(null);
     }
 
     private checkForAdmin(): void {
@@ -130,7 +130,7 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
     }
 
     private buildProducts(): ShopProduct[] {
-        return (this.categoryForm.value as ShopCategory).products.map((p, idx) => {
+        return (this.categoryForm.getRawValue() as ShopCategory).products.map((p, idx) => {
             if(p) return this.productData[idx];
         }).filter(p => p !== undefined);
     }

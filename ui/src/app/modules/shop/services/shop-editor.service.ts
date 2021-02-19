@@ -20,7 +20,7 @@ export class ShopEditorService extends EditorService {
     }
 
     hasCategory(): boolean {
-        return this.category !== undefined;
+        return this.category != null;
     }
 
     setCategory(category: ShopCategory): void {
@@ -32,7 +32,7 @@ export class ShopEditorService extends EditorService {
     }
 
     hasProduct(): boolean {
-        return this.product !== undefined;
+        return this.product != null;
     }
 
     setProduct(product: ShopProduct): void {

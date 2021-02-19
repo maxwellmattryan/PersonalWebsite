@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { Repository } from 'typeorm';
+import { getConnection, In, Repository } from 'typeorm';
 
 import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
 import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
@@ -11,7 +11,7 @@ import {
     ShopCategoryAlreadyExistsException,
     ShopCategoryCouldNotBeDeletedException, ShopCategoryCouldNotBeUpdatedException
 } from '../exceptions/shop-category.exception';
-import { ShopProduct } from '@api/modules/shop/entities/shop-product.entity';
+import { ShopProduct } from '../entities/shop-product.entity';
 
 @Injectable()
 export class ShopCategoryService {
@@ -54,14 +54,23 @@ export class ShopCategoryService {
     }
 
     public async updateCategory(id: number, categoryData: ShopCategory): Promise<ShopCategory> {
-        const newCategory = new ShopCategory({ id: id, ...categoryData });
-        await this.shopCategoryRepository.save(newCategory)
+        const newCategory = new ShopCategory({ id: id, name: categoryData.name });
+        await this.shopCategoryRepository.update(id, newCategory)
             .catch((error) => {
                 if(error.code === PostgresErrorCodes.NOT_NULL_VIOLATION)
                     throw new ShopCategoryCouldNotBeUpdatedException();
                 else
                     throw new InternalServerErrorException();
             });
+
+        if(categoryData.products) {
+            await getConnection()
+                .createQueryBuilder()
+                .update(ShopProduct)
+                .set({ category: newCategory })
+                .where({ id: In(categoryData.products.map(p => p.id)) })
+                .execute();
+        }
 
         return await this.getCategory(id);
     }

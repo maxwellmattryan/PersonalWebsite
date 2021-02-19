@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { Not, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
 import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
@@ -82,7 +82,10 @@ export class ShopProductService {
             .where('shop_product.id = :id', { id: id })
             .execute()
             .catch((error) => {
-                // TODO: Add logic for handling foreign key issues once order tables are in
+                if(error.code === PostgresErrorCodes.FOREIGN_KEY_VIOLATION)
+                    this.softDeleteProduct(id);
+                else
+                    throw new InternalServerErrorException();
             });
     }
 

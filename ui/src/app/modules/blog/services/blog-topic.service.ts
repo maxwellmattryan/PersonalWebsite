@@ -16,7 +16,7 @@ export class BlogTopicService {
     }
 
     hasActiveTopic(): boolean {
-        return (this.activeTopic !== undefined);
+        return this.activeTopic != null;
     }
 
     setActiveTopic(topic: BlogTopic): void {
