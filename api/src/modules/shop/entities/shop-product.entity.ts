@@ -1,7 +1,8 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 import { ShopCategory } from '../entities/shop-category.entity';
 import { ShopProductStatus } from '../entities/shop-product-status.entity';
+import { ShopOrder } from './shop-order.entity';
 
 @Entity('shop_product')
 export class ShopProduct {
@@ -11,6 +12,9 @@ export class ShopProduct {
 
     @PrimaryGeneratedColumn()
     public id: number;
+
+    @OneToMany(type => ShopOrder, so => so.product)
+    public orders: ShopOrder[];
 
     @ManyToOne(type => ShopProductStatus, sps => sps.products, { nullable: false })
     public status: ShopProductStatus;
