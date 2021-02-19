@@ -43,8 +43,6 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
         this.setPageHideEvent();
 
         this.initProductForm();
-
-        this.isLoaded = true;
     }
 
     ngOnDestroy() {
@@ -84,6 +82,8 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
     private loadCategoryData(): void {
         this.shopApiService.getCategories().subscribe((res: ShopCategory[]) => {
             this.categoryData = res.sort(this.shopComparisonService.categories);
+
+            this.isLoaded = true;
         });
     }
 
