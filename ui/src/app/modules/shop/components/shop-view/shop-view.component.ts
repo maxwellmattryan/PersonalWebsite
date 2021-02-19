@@ -42,14 +42,19 @@ export class ShopViewComponent implements OnInit {
 
         this.shopApiService.getProducts(ShopProductStatuses.AVAILABLE).subscribe((res: ShopProduct[]) => {
             this.products = res;
-            this.categories = this.getCategoriesFromProducts();
 
-            if(this.shopCategoryService.hasActiveCategory()) {
+            if(this.isAdmin)
+                this.shopApiService.getCategories().subscribe((res: ShopCategory[]) => {
+                    this.categories = res;
+                });
+            else
+                this.categories = this.getCategoriesFromProducts();
+
+            if(this.shopCategoryService.hasActiveCategory())
                 this.filterProducts(this.shopCategoryService.getActiveCategoryId());
-                this.shopCategoryService.setActiveCategory(null);
-            }
 
             this.isLoaded = true;
+
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
             this.router.navigate(['']);
@@ -81,6 +86,8 @@ export class ShopViewComponent implements OnInit {
         if(!this.notificationService.deleteConfirmation('shop category')) return;
 
         this.shopApiService.deleteCategory(category.id).subscribe((res: any) => {
+            this.categories = this.categories.filter(c => c.id !== category.id);
+
             this.notificationService.createNotification('Successfully deleted shop category!');
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message, '', 3600);
