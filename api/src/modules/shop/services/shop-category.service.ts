@@ -56,6 +56,7 @@ export class ShopCategoryService {
         const newCategory = new ShopCategory({ id: id, ...categoryData });
         await this.shopCategoryRepository.save(newCategory)
             .catch((error) => {
+                console.log(error);
                 if(error.code === PostgresErrorCodes.NOT_NULL_VIOLATION)
                     throw new ShopCategoryCouldNotBeUpdatedException();
                 else

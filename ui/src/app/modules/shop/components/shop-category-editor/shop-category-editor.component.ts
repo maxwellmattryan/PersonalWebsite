@@ -44,7 +44,7 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.shopEditorService.setProduct(null);
+        this.shopEditorService.setCategory(null);
     }
 
     private checkForAdmin(): void {
