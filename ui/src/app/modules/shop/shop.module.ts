@@ -16,7 +16,13 @@ import {
     ShopProductEditorComponent,
     ShopViewComponent
 } from './components';
-import { ShopApiService, ShopCategoryService, ShopComparisonService, ShopEditorService } from './services';
+import {
+    ShopApiService,
+    ShopCategoryService,
+    ShopCheckoutService,
+    ShopComparisonService,
+    ShopEditorService
+} from './services';
 
 @NgModule({
     declarations: [
@@ -40,6 +46,7 @@ import { ShopApiService, ShopCategoryService, ShopComparisonService, ShopEditorS
     providers: [
         ShopApiService,
         ShopCategoryService,
+        ShopCheckoutService,
         ShopComparisonService,
         ShopEditorService
     ]

@@ -22,7 +22,11 @@
                     <markdown [data]='p.description'></markdown>
                 </p>
 
-                <a [ngClass]="{'products__product-buy-btn--compress': isAdmin}" class='btn btn--go products__product-buy-btn'>
+                <a
+                    [ngClass]="{'products__product-buy-btn--compress': isAdmin}"
+                    class='btn btn--go products__product-buy-btn'
+                    (click)='beginCheckout(p);'
+                >
                     {{ p.amount <= 0 ? "FREE" : "$ " + formatAmount(p.amount) }}
                 </a>
 

@@ -5,7 +5,7 @@ import { AuthService } from '@ui/core/auth';
 import { NotificationService, SeoService, TrackingService } from '@ui/core/services';
 
 import { ShopProduct } from '../../models';
-import { ShopApiService, ShopEditorService } from '../../services';
+import { ShopApiService, ShopCheckoutService, ShopEditorService } from '../../services';
 
 @Component({
     selector: 'ui-shop-product-collection',
@@ -25,6 +25,7 @@ export class ShopProductCollectionComponent implements OnInit {
         private readonly notificationService: NotificationService,
         private readonly seoService: SeoService,
         private readonly shopApiService: ShopApiService,
+        private readonly shopCheckoutService: ShopCheckoutService,
         private readonly shopEditorService: ShopEditorService,
         public readonly trackingService: TrackingService
     ) { }
@@ -54,5 +55,9 @@ export class ShopProductCollectionComponent implements OnInit {
 
     public formatAmount(n: number): string {
         return Number(n).toFixed(2);
+    }
+
+    public beginCheckout(productData: ShopProduct): void {
+        this.shopCheckoutService.goToCheckout(productData).subscribe();
     }
 }

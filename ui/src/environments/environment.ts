@@ -4,8 +4,9 @@
 
 export const environment = {
     production: false,
-    ROOT_URL: 'http://localhost:3000',
-    API_URL: 'http://localhost:3000/api'
+    BASE_URL: 'http://localhost:3000',
+    API_URL: 'http://localhost:3000/api',
+    STRIPE_PK: 'pk_test_51IKRehEOcFDOpmIpBMzfUxFTOxVdTRlpb2eyYsHKqqKniIeFDX6FkdJzrtYhjnXuZIqzT9SfCKiBfy6ZAbWYIYZU001BMOMbzM'
 };
 
 /*
