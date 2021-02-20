@@ -19,6 +19,8 @@ export class ShopProductCollectionComponent implements OnInit {
     @Input() baseRoute: string = 'shop/products';
 
     public isAdmin: boolean = false;
+    public hasStartedCheckout: boolean = false;
+    public checkoutProductId: number = -1;
 
     constructor(
         private readonly authService: AuthService,
@@ -57,7 +59,9 @@ export class ShopProductCollectionComponent implements OnInit {
         return Number(n).toFixed(2);
     }
 
-    public beginCheckout(productData: ShopProduct): void {
+    public startCheckout(productData: ShopProduct): void {
+        this.hasStartedCheckout = true;
+        this.checkoutProductId = productData.id;
         this.shopCheckoutService.goToCheckout(productData).subscribe();
     }
 }
