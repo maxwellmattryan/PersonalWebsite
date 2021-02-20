@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, Req } from '@nestjs/common';
+import { Controller, HttpCode, Post, Req } from '@nestjs/common';
 
 import { Request } from 'express';
 
@@ -10,8 +10,8 @@ export class ShopCheckoutController {
         private readonly shopCheckoutService: ShopCheckoutService
     ) { }
 
-    @Get('init')
-    @HttpCode(200)
+    @Post('init')
+    @HttpCode(201)
     public async getCheckoutSession(@Req() request: Request): Promise<{id: string}> {
         return this.shopCheckoutService.getCheckoutSessionId(request.body);
     }

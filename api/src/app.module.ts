@@ -32,6 +32,7 @@ import { ShopModule } from '@api/modules/shop/shop.module';
                 DB_SSL_KEY: Joi.string(),
 
                 BASE_URL: Joi.string().required(),
+                API_URL: Joi.string().required(),
 
                 STRIPE_SK: Joi.string().required(),
                 STRIPE_PK: Joi.string().required()

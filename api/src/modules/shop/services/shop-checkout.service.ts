@@ -37,8 +37,8 @@ export class ShopCheckoutService {
 
     private async createCheckoutSession(lineItems: ShopLineItem[]): Promise<Stripe.Checkout.Session> {
         const baseUrl: string = this.configService.get('BASE_URL');
-        const successUrl: string = `${baseUrl}/shop/checkout/success?sessionId={CHECKOUT_SESSION_ID}`;
-        const cancelUrl: string = `${baseUrl}/shop/checkout/cancel`
+        const successUrl: string = `${baseUrl}/shop/checkout?success=true&sessionId={CHECKOUT_SESSION_ID}`;
+        const cancelUrl: string = `${baseUrl}/shop/checkout?success=false`
 
         return this.stripe.checkout.sessions.create({
             payment_method_types: ['card'],
