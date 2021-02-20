@@ -1,0 +1,19 @@
+@import 'variables';
+
+.checkout__header {
+    margin: calc(2 * #{$margin}) 0;
+    text-align: center;
+}
+
+.checkout__info {
+    margin-bottom: $margin;
+    width: 100%;
+
+    .checkout__info-link {
+        color: $color-primary;
+    }
+}
+
+.checkout__last {
+
+}

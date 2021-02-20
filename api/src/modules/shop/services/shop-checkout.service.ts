@@ -25,8 +25,8 @@ export class ShopCheckoutService {
 
     private createLineItem(productData: ShopProduct): ShopLineItem {
         return {
-            // TODO: id = stripe_product_id
-            // TODO: price_id = stripe_price_id
+            // TODO: id = stripe_product_id (?)
+            // TODO: price_id = stripe_price_id (?)
             name: productData.name,
             description: productData.preview,
             amount: productData.amount * 100,
