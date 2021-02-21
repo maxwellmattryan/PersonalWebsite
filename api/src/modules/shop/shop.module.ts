@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { HttpModule, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 
@@ -25,6 +25,7 @@ import { ShopProductStatusService } from './services/shop-product-status.service
 @Module({
     imports: [
         ConfigModule.forRoot(),
+        HttpModule,
         TypeOrmModule.forFeature([ShopCategory, ShopCustomer, ShopOrder, ShopProduct, ShopProductStatus])
     ],
     exports: [],
