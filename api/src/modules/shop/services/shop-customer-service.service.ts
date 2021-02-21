@@ -16,10 +16,11 @@ export class ShopCustomerService {
         private readonly shopCustomerRepository: Repository<ShopCustomer>
     ) { }
 
-    public async existsInTable(id: number): Promise<boolean> {
+    public async existsInTable(id: number = -1, email: string = ''): Promise<boolean> {
         return await this.shopCustomerRepository
             .createQueryBuilder('sc')
             .where('sc.id = :id', { id: id })
+            .orWhere('sc.email = :email', { email: email })
             .getCount() > 0;
     }
 
@@ -36,10 +37,11 @@ export class ShopCustomerService {
         return await this.getCustomer(customer.id);
     }
 
-    public async getCustomer(id: number): Promise<ShopCustomer> {
+    public async getCustomer(id: number = -1, email: string = ''): Promise<ShopCustomer> {
         return await this.shopCustomerRepository
             .createQueryBuilder('sc')
             .where('sc.id = :id', { id: id })
+            .orWhere('sc.email = :email', { email: email })
             .getOne();
     }
 }

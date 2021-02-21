@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { ObfuscationService } from '@ui/core/services/obfuscation.service';
+import { ObfuscationService } from '@ui/core/services';
 
 @Component({
     selector: 'ui-home-landing',

@@ -17,3 +17,13 @@
 .checkout__last {
 
 }
+
+@media only screen and (min-width: 768px) {
+    .checkout {
+        min-height: calc(100vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
+    }
+
+    .checkout__info-link:hover {
+        text-decoration: underline;
+    }
+}

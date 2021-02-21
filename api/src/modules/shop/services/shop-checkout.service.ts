@@ -18,15 +18,13 @@ export class ShopCheckoutService {
 
     public async getCheckoutSessionId(productData: ShopProduct): Promise<{id: string}> {
         const item: ShopLineItem = await this.createLineItem(productData);
-        const { id } = await this.createCheckoutSession([item]);
+        const { id } = await this.createCheckoutSession(productData.id, [item]);
 
         return { id };
     }
 
     private createLineItem(productData: ShopProduct): ShopLineItem {
         return {
-            // TODO: id = stripe_product_id (?)
-            // TODO: price_id = stripe_price_id (?)
             name: productData.name,
             description: productData.preview,
             amount: productData.amount * 100,
@@ -35,9 +33,9 @@ export class ShopCheckoutService {
         };
     }
 
-    private async createCheckoutSession(lineItems: ShopLineItem[]): Promise<Stripe.Checkout.Session> {
+    private async createCheckoutSession(productId: number, lineItems: ShopLineItem[]): Promise<Stripe.Checkout.Session> {
         const baseUrl: string = this.configService.get('BASE_URL');
-        const successUrl: string = `${baseUrl}/shop/checkout?success=true&sessionId={CHECKOUT_SESSION_ID}`;
+        const successUrl: string = `${baseUrl}/shop/checkout?success=true&sessionId={CHECKOUT_SESSION_ID}&productId=${productId}`;
         const cancelUrl: string = `${baseUrl}/shop/checkout?success=false`
 
         return this.stripe.checkout.sessions.create({

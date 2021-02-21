@@ -33,6 +33,8 @@ export class ShopOrderService {
     public async getOrder(id: number): Promise<ShopOrder> {
         return await this.shopOrderRepository
             .createQueryBuilder('so')
+            .leftJoinAndSelect('so.product', 'sp')
+            .leftJoinAndSelect('so.customer', 'sc')
             .where('so.id = :id', { id: id })
             .getOne();
     }
