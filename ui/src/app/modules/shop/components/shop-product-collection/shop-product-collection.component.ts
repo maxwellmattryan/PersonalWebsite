@@ -61,24 +61,27 @@ export class ShopProductCollectionComponent implements OnInit {
     }
 
     public startCheckout(productData: ShopProduct): void {
-        this.hasStartedCheckout = true;
         this.checkoutProductId = productData.id;
 
         if(productData.amount <= 0.0) {
             this.showDialog();
         } else {
+            this.hasStartedCheckout = true;
             this.shopCheckoutService.goToCheckout(productData).subscribe();
         }
     }
 
     public showDialog(): void {
         let modal = document.getElementById(this.modalId);
+
+        modal.classList.remove('init');
         modal.classList.remove('hidden');
         modal.classList.add('show');
     }
 
     public closeDialog(): void {
         let modal = document.getElementById(this.modalId);
+
         modal.classList.remove('show');
         modal.classList.add('hidden');
     }

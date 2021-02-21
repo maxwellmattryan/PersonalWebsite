@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'ui-shop-checkout-modal',
@@ -6,6 +6,9 @@ import { Component, ElementRef, OnInit } from '@angular/core';
     styleUrls: ['./shop-checkout-modal.component.scss']
 })
 export class ShopCheckoutModalComponent implements OnInit {
+    @Input()
+    public modalId: string = '';
+
     constructor(private readonly elem: ElementRef) { }
 
     ngOnInit(): void {
@@ -15,7 +18,7 @@ export class ShopCheckoutModalComponent implements OnInit {
     }
 
     public close(): void {
-        let modal = document.getElementById('shop-checkout-modal');
+        let modal = document.getElementById(this.modalId);
 
         modal.classList.remove('show');
         modal.classList.add('hidden');
