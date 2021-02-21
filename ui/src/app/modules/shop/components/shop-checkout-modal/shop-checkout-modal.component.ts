@@ -1,4 +1,7 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { ShopCustomer } from '../../models';
 
 @Component({
     selector: 'ui-shop-checkout-modal',
@@ -9,12 +12,18 @@ export class ShopCheckoutModalComponent implements OnInit {
     @Input()
     public modalId: string = '';
 
-    constructor(private readonly elem: ElementRef) { }
+    @Output()
+    public customerEvent = new EventEmitter<ShopCustomer>();
+
+    public checkoutForm: FormGroup;
+
+    constructor(
+        private readonly elem: ElementRef,
+        private readonly formBuilder: FormBuilder
+    ) { }
 
     ngOnInit(): void {
-        this.elem.nativeElement.addEventListener('click', () => {
-            this.close();
-        });
+        this.buildCheckoutForm();
     }
 
     public close(): void {
@@ -22,5 +31,22 @@ export class ShopCheckoutModalComponent implements OnInit {
 
         modal.classList.remove('show');
         modal.classList.add('hidden');
+    }
+
+    private buildCheckoutForm(): void {
+        this.checkoutForm = this.formBuilder.group({
+            email: this.formBuilder.control('', [Validators.required, Validators.email])
+        });
+    }
+
+    public onSubmit(): void {
+        const customer = this.buildCustomer();
+        this.customerEvent.emit(customer);
+    }
+
+    private buildCustomer(): any {
+        return new ShopCustomer({
+            ...this.checkoutForm.value
+        });
     }
 }

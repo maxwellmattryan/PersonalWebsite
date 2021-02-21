@@ -33,11 +33,19 @@
     border-radius: 0.5rem;
     bottom: $modal-vertical-res;
     left: $modal-horizontal-res;
-    padding: calc(4 * #{$padding}) calc(1.5 * #{$padding}) calc(2 * #{$padding});
+    padding: calc(3 * #{$padding}) calc(1.5 * #{$padding}) calc(2 * #{$padding});
     position: fixed;
     right: $modal-horizontal-res;
     top: $modal-vertical-res;
     z-index: 1100;
+}
+
+.modal-content {
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
 
     .modal-header {
         text-align: center;
@@ -45,7 +53,7 @@
     }
 
     .modal-info {
-
+        margin-bottom: $margin;
     }
 }
 
@@ -95,13 +103,5 @@
         padding: calc(3 * #{$padding}) calc(2 * #{$padding}) calc(2 * #{$padding});
         right: $modal-horizontal;
         top: $modal-vertical;
-
-        .modal-header {
-            margin-bottom: calc(2 * #{$margin});
-        }
-
-        .modal-info {
-
-        }
     }
 }

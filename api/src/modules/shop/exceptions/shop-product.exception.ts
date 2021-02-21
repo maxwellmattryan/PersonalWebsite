@@ -1,5 +1,11 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 
+export class InvalidShopProductException extends BadRequestException {
+    constructor() {
+        super('Shop product is invalid.');
+    }
+}
+
 export class ShopProductAlreadyExistsException extends BadRequestException {
     constructor() {
         super('Shop product already exists.');
