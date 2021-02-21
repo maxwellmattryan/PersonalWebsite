@@ -17,6 +17,6 @@
 
 @media only screen and (min-width: 786px) {
     .section {
-        min-height: calc(98vh - #{$header-height} - #{$section-divider-height} - #{$footer-height} * 2);
+        min-height: calc(99vh - #{$header-height} - #{$section-divider-height} - #{$footer-height} * 2);
     }
 }

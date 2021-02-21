@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { ObfuscationService } from '@ui/core/services/obfuscation.service';
 
 @Component({
@@ -25,6 +26,9 @@ export class ShopCheckoutComponent implements OnInit {
             const wasSuccess = Boolean(params.success);
             if(wasSuccess) {
                 console.log(params);
+
+                // REQUEST
+
                 this.isLoaded = true;
             }
             else {
