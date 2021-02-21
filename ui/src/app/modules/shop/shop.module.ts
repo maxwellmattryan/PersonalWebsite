@@ -13,6 +13,7 @@ import { ShopRoutingModule } from './shop-routing.module';
 import {
     ShopCategoryEditorComponent,
     ShopCheckoutComponent,
+    ShopCheckoutModalComponent,
     ShopProductCollectionComponent,
     ShopProductEditorComponent,
     ShopViewComponent
@@ -30,6 +31,7 @@ import {
         ShopComponent,
         ShopCategoryEditorComponent,
         ShopCheckoutComponent,
+        ShopCheckoutModalComponent,
         ShopProductCollectionComponent,
         ShopProductEditorComponent,
         ShopViewComponent

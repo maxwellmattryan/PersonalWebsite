@@ -21,6 +21,7 @@ export class ShopProductCollectionComponent implements OnInit {
     public isAdmin: boolean = false;
     public hasStartedCheckout: boolean = false;
     public checkoutProductId: number = -1;
+    public modalId: string = 'shop-checkout-modal';
 
     constructor(
         private readonly authService: AuthService,
@@ -62,6 +63,23 @@ export class ShopProductCollectionComponent implements OnInit {
     public startCheckout(productData: ShopProduct): void {
         this.hasStartedCheckout = true;
         this.checkoutProductId = productData.id;
-        this.shopCheckoutService.goToCheckout(productData).subscribe();
+
+        if(productData.amount <= 0.0) {
+            this.showDialog();
+        } else {
+            this.shopCheckoutService.goToCheckout(productData).subscribe();
+        }
+    }
+
+    public showDialog(): void {
+        let modal = document.getElementById(this.modalId);
+        modal.classList.remove('hidden');
+        modal.classList.add('show');
+    }
+
+    public closeDialog(): void {
+        let modal = document.getElementById(this.modalId);
+        modal.classList.remove('show');
+        modal.classList.add('hidden');
     }
 }
