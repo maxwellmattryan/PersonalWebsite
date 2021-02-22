@@ -10,7 +10,6 @@
         "build": "nest build",
         "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
         "start": "nest start",
-        "prestart:dev": "bash -c \"GOOGLE_APPLICATION_CREDENTIALS=$(echo $(grep GCLOUD_CREDENTIALS .env | cut -d '=' -f2)= | base64 -di)\"",
         "start:dev": "nest start --watch",
         "start:debug": "nest start --debug --watch",
         "start:prod": "node dist/main",

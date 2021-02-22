@@ -100,9 +100,9 @@ export class ShopCheckoutController {
     @Get('test')
     @HttpCode(200)
     public async testStuff(@Req() request: Request): Promise<any> {
-        const credentials = this.configService.get('GOOGLE_APPLICATION_CREDENTIALS');
+        const credentials = Buffer.from(process.env.GCLOUD_CREDENTIALS, 'base64').toString();
         const storage = new Storage({
-            keyFilename: credentials
+            credentials: JSON.parse(credentials)
         });
 
         const bucketName = this.configService.get('GCLOUD_STORAGE_BUCKET');
