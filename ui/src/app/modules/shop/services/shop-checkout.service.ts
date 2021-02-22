@@ -49,12 +49,17 @@ export class ShopCheckoutService extends ApiService {
         );
     }
 
-    // completeCheckout(): Observable<ShopOrder> {
-    //     return this.http.post<ShopOrder>(
-    //         `${environment.API_URL}/shop/checkout/complete`
-    //
-    //     );
-    // }
+    completeCheckout(productId: number, sessionId: string): Observable<ShopOrder> {
+        let params = new HttpParams();
+        params = params.set('productId', productId.toString());
+        params = params.set('sessionId', sessionId);
+
+        return this.http.post<ShopOrder>(
+            `${environment.API_URL}/shop/checkout/complete`,
+            { },
+            { params: params }
+        );
+    }
 
     completeFreeCheckout(productId: number, customerEmail: string): Observable<ShopOrder> {
         let params = new HttpParams();

@@ -29,6 +29,7 @@ export class ShopCheckoutComponent implements OnInit {
         this.activatedRoute.queryParams.subscribe(params => {
             if(params.success == 'true') {
                 const productId = params.productId;
+                console.log(params);
 
                 if(params.bypassStripe == 'true') {
                     const customerEmail = this.shopCheckoutService.getCustomer().email;
@@ -38,10 +39,10 @@ export class ShopCheckoutComponent implements OnInit {
                     });
                 } else {
                     const sessionId = params.sessionId;
-                    // this.shopCheckoutService.completeCheckout(productId, sessionId).subscribe((res: ShopOrder) => {
-                    //     console.log(res);
-                    //     this.isLoaded = true;
-                    // });
+                    this.shopCheckoutService.completeCheckout(productId, sessionId).subscribe((res: ShopOrder) => {
+                        console.log(res);
+                        this.isLoaded = true;
+                    });
                 }
 
             }
