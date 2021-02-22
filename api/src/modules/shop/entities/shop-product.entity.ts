@@ -25,6 +25,9 @@ export class ShopProduct {
     @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
     public name: string;
 
+    @Column({ type: 'varchar', nullable: false, unique: true })
+    public filename: string;
+
     @Column({ type: 'decimal', nullable: false })
     public amount: number;
 

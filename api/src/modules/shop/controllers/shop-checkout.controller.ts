@@ -113,13 +113,13 @@ export class ShopCheckoutController {
 
         const bucketName = this.configService.get('GCLOUD_STORAGE_BUCKET');
         const bucket = await storage.bucket(bucketName);
-        const files = await bucket.getFiles({ prefix: 'rotor' });
-        const file = files[0][0];
+        const file = await bucket.file('rotor.zip');
 
-        const date = new Date();
-        date.setDate(date.getDate() + 0.5);
-
-        const signedUrl = await file.getSignedUrl({ action: 'read', expires: date });
+        const signedUrlOptions = {
+            action: 'read',
+            expires: Date.now() + 12 * 60 * 60 * 1000
+        };
+        const signedUrl = await file.getSignedUrl((signedUrlOptions as any));
         console.log(signedUrl);
 
         return signedUrl;
