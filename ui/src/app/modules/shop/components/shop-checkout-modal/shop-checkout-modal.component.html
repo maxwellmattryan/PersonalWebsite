@@ -1,0 +1,31 @@
+<div [id]='modalId' class='modal hidden'>
+    <div class='modal-background' (click)='close()'></div>
+
+    <div class='modal-body'>
+        <button class='modal-close-btn' (click)='close()'>&#10006;</button>
+
+        <div class='modal-content'>
+            <h1 class='modal-header'>Shop Checkout</h1>
+            <div class='modal-info'>
+                Please enter the following information to receive an email containing a download URL.
+            </div>
+
+            <form class='editor__form' [formGroup]='checkoutForm' (ngSubmit)='onSubmit()'>
+                <div class='form-field editor__form-field'>
+                    <label class='form-field-label editor__form-field-label'>Email</label>
+                    <br><br>
+                    <input formControlName='email' required autofocus>
+                </div>
+
+                <button
+                        aria-label='Submit shop category'
+                        [ngClass]="{'btn--inactive': !checkoutForm.valid}"
+                        class='btn editor__form-btn  editor__form-btn--submit'
+                        [disabled]='!checkoutForm.valid'
+                >
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
-
+import { HttpModule, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 
 import { ShopCategoryController } from './controllers/shop-category.controller';
+import { ShopCheckoutController } from './controllers/shop-checkout.controller';
 import { ShopCustomerControllerController } from './controllers/shop-customer-controller.controller';
 import { ShopOrderController } from './controllers/shop-order.controller';
 import { ShopProductController } from './controllers/shop-product.controller';
@@ -17,16 +18,20 @@ import { ShopProductStatus } from './entities/shop-product-status.entity';
 import { ShopCategoryService } from './services/shop-category.service';
 import { ShopCustomerService } from './services/shop-customer-service.service';
 import { ShopOrderService } from './services/shop-order.service';
+import { ShopCheckoutService } from './services/shop-checkout.service';
 import { ShopProductService } from './services/shop-product.service';
 import { ShopProductStatusService } from './services/shop-product-status.service';
 
 @Module({
     imports: [
+        ConfigModule.forRoot(),
+        HttpModule,
         TypeOrmModule.forFeature([ShopCategory, ShopCustomer, ShopOrder, ShopProduct, ShopProductStatus])
     ],
     exports: [],
     controllers: [
         ShopCategoryController,
+        ShopCheckoutController,
         ShopCustomerControllerController,
         ShopOrderController,
         ShopProductController,
@@ -34,6 +39,7 @@ import { ShopProductStatusService } from './services/shop-product-status.service
     ],
     providers: [
         ShopCategoryService,
+        ShopCheckoutService,
         ShopCustomerService,
         ShopOrderService,
         ShopProductService,

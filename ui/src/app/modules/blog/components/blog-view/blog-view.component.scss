@@ -103,4 +103,8 @@
             min-height: calc(100vh - #{$header-height});
         }
     }
+
+    ::ng-deep .section-divider {
+        height: 0;
+    }
 }

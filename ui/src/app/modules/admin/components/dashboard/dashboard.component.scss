@@ -1,7 +1,7 @@
 @import 'variables';
 
 .dashboard {
-    min-height: calc(100vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
+    min-height: calc(99vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
 }
 
 .dashboard__header {
@@ -86,6 +86,14 @@
 }
 
 @media only screen and (min-width: 768px) {
+    ::ng-deep .section-divider {
+        height: 3.7vh;
+    }
+
+    .dashboard {
+        min-height: calc(99vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
+    }
+
     .dashboard__portfolio-btn-container {
         grid-column: 1 / 2;
         grid-row: 1 / 2;

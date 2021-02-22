@@ -18,6 +18,9 @@ RUNNING_PID
 # Build bundles / packages
 **/dist
 
+# Environment vars
+**/.env
+
 # My folders 
 conf
 data

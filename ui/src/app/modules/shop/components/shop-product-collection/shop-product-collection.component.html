@@ -22,8 +22,19 @@
                     <markdown [data]='p.description'></markdown>
                 </p>
 
-                <a [ngClass]="{'products__product-buy-btn--compress': isAdmin}" class='btn btn--go products__product-buy-btn'>
-                    {{ p.amount <= 0 ? "FREE" : "$ " + formatAmount(p.amount) }}
+                <a
+                    [ngClass]="{'products__product-buy-btn--compress': isAdmin, 'btn--loading': hasStartedCheckout && p.id === checkoutProductId }"
+                    class='btn btn--go products__product-buy-btn'
+                    (click)='startCheckout(p);'
+                >
+                    <ng-container *ngIf='!(hasStartedCheckout && p.id === checkoutProductId)'>
+                        {{ p.amount <= 0 ? "FREE" : "$ " + formatAmount(p.amount) }}
+                    </ng-container>
+                    <ng-container *ngIf='hasStartedCheckout && p.id === checkoutProductId'>
+                        <div class='btn-loader-container'>
+                            <div class='btn-loader'></div>
+                        </div>
+                    </ng-container>
                 </a>
 
                 <ng-container *ngIf='isAdmin'>
@@ -50,3 +61,5 @@
         </ng-container>
     </div>
 </div>
+
+<ui-shop-checkout-modal [modalId]='modalId' (customerEvent)='startFreeCheckout($event)'></ui-shop-checkout-modal>

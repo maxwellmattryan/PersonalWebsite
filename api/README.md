@@ -138,6 +138,12 @@ Repositories are the objects that actual more or less represents and corresponds
     - `DELETE   /api/shop/categories/:id`
         - Removes the category with the corresponding `id` from database
         - 204
+    - `POST     /api/shop/checkout/init`
+        - Returns Stripe session ID to client
+        - 201
+    - `POST     /api/shop/checkout/complete`
+        - Returns order made by customer (or already-existing order if customer purchased the same item(s))
+        - 200 
     - `POST     /api/shop/customers`
         - Creates and saves a new customer to the database
         - 201

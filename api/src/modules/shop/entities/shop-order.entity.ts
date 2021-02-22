@@ -1,4 +1,12 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    ManyToOne,
+    PrimaryColumn,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from 'typeorm';
 
 import { ShopCustomer } from './shop-customer.entity';
 import { ShopProduct } from './shop-product.entity';
@@ -22,7 +30,7 @@ export class ShopOrder {
     public amount: number;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'now()' })
-    public placed_at?: Date;
+    public created_at?: Date;
 
     @UpdateDateColumn({ type: 'timestamp', default: () => 'now()', onUpdate: 'now()' })
     public updated_at?: Date;

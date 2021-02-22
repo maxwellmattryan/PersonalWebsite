@@ -12,16 +12,26 @@ import { ShopRoutingModule } from './shop-routing.module';
 
 import {
     ShopCategoryEditorComponent,
+    ShopCheckoutComponent,
+    ShopCheckoutModalComponent,
     ShopProductCollectionComponent,
     ShopProductEditorComponent,
     ShopViewComponent
 } from './components';
-import { ShopApiService, ShopCategoryService, ShopComparisonService, ShopEditorService } from './services';
+import {
+    ShopApiService,
+    ShopCategoryService,
+    ShopCheckoutService,
+    ShopComparisonService,
+    ShopEditorService
+} from './services';
 
 @NgModule({
     declarations: [
         ShopComponent,
         ShopCategoryEditorComponent,
+        ShopCheckoutComponent,
+        ShopCheckoutModalComponent,
         ShopProductCollectionComponent,
         ShopProductEditorComponent,
         ShopViewComponent
@@ -40,6 +50,7 @@ import { ShopApiService, ShopCategoryService, ShopComparisonService, ShopEditorS
     providers: [
         ShopApiService,
         ShopCategoryService,
+        ShopCheckoutService,
         ShopComparisonService,
         ShopEditorService
     ]

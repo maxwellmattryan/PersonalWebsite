@@ -1,0 +1,107 @@
+@import 'variables';
+
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 1000;
+    transition: opacity;
+}
+
+.modal-background {
+    background-color: black;
+    bottom: 0;
+    left: 0;
+    opacity: 0.9;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 900;
+}
+
+.modal-close-btn {
+    background-color: $color-dark;
+    color: white;
+    cursor: pointer;
+    font-size: 150%;
+    left: $padding;
+    position: absolute;
+    top: $padding;
+}
+
+.modal-body {
+    background: $color-dark;
+    border-radius: 0.5rem;
+    bottom: $modal-vertical-res;
+    left: $modal-horizontal-res;
+    padding: calc(3 * #{$padding}) calc(1.5 * #{$padding}) calc(2 * #{$padding});
+    position: fixed;
+    right: $modal-horizontal-res;
+    top: $modal-vertical-res;
+    z-index: 1100;
+}
+
+.modal-content {
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+    .modal-header {
+        text-align: center;
+        margin-bottom: calc(2 * #{$margin});
+    }
+
+    .modal-info {
+        margin-bottom: $margin;
+    }
+}
+
+.show {
+    opacity: 1.0;
+    pointer-events: all;
+
+    .modal-body {
+        animation: open 1s forwards;
+    }
+}
+
+.hidden {
+    opacity: 0.0;
+    pointer-events: none;
+}
+
+@keyframes open {
+    0% {
+        opacity: 0.0;
+        transform: scale(0.75);
+    }
+    25% {
+        transform: scale(1.0);
+    }
+    100% {
+        opacity: 1.0;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .modal-background {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+    }
+
+    .modal-close-btn {
+        left: $padding;
+        top: $padding;
+    }
+
+    .modal-body {
+        bottom: $modal-vertical;
+        left: $modal-horizontal;
+        padding: calc(3 * #{$padding}) calc(2 * #{$padding}) calc(2 * #{$padding});
+        right: $modal-horizontal;
+        top: $modal-vertical;
+    }
+}
