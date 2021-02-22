@@ -134,23 +134,23 @@
         .products__product-add-btn,
         .products__product-delete-btn {
             grid-column: 3 / 4;
-            justify-self: center;
+            justify-self: flex-start;
         }
 
         .products__product-buy-btn {
-            grid-row: 1 / 4;
+            grid-row: 1 / 2;
 
             &--compress {
-                grid-row: 3 / 4;
+                grid-row: 1 / 2;
             }
         }
 
         .products__product-add-btn {
-            grid-row: 1 / 2;
+            grid-row: 2 / 3;
         }
 
         .products__product-delete-btn {
-            grid-row: 2 / 3;
+            grid-row: 3 / 4;
         }
 
         .btn {
