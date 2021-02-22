@@ -29,11 +29,12 @@ export class ShopCheckoutComponent implements OnInit {
         this.activatedRoute.queryParams.subscribe(params => {
             if(params.success == 'true') {
                 const productId = params.productId;
-                console.log(params);
 
                 if(params.bypassStripe == 'true') {
-                    const customerEmail = this.shopCheckoutService.getCustomer().email;
-                    this.shopCheckoutService.completeFreeCheckout(productId, customerEmail).subscribe((res: ShopOrder) => {
+                    const customer = this.shopCheckoutService.getCustomer();
+                    if(!customer) this.router.navigate(['shop']);
+
+                    this.shopCheckoutService.completeFreeCheckout(productId, customer.email).subscribe((res: ShopOrder) => {
                         console.log(res);
                         this.isLoaded = true;
                     });
