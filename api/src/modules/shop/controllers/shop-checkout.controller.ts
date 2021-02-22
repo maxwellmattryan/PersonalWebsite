@@ -35,9 +35,10 @@ export class ShopCheckoutController {
 
     @Post('complete')
     @HttpCode(200)
-    public async getCheckoutSession(@Query() query, @Req() request: Request): Promise<any> {
+    public async completeCheckoutSession(@Query() query, @Req() request: Request): Promise<any> {
         let customer: ShopCustomer;
         let product: ShopProduct;
+        let order: ShopOrder;
 
         if(query.freeProduct == "true") {
             customer = new ShopCustomer({
@@ -73,17 +74,22 @@ export class ShopCheckoutController {
         else
             customer = await this.shopCustomerService.createCustomer(customer);
 
-        let order = new ShopOrder({
-            customer: customer,
-            product: product,
-            amount: product.amount
-        });
-        order = await this.shopOrderService.createOrder(order);
+        const checkedOrder = await this.shopOrderService.getOrderByCustomerAndProduct(customer.id, product.id);
+        if(checkedOrder != undefined) {
+            order = checkedOrder;
+        } else {
+            order = new ShopOrder({
+                customer: customer,
+                product: product,
+                amount: product.amount
+            });
+            order = await this.shopOrderService.createOrder(order);
+        }
+
 
         // TODO: 3. create signed URL with Cloud Storage
-
-
         // TODO: 4. Send email to customer with URL
+
 
         return order;
     }
