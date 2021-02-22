@@ -15,8 +15,9 @@ import { ShopCustomer } from '../entities/shop-customer.entity';
 import { ShopOrder } from '../entities/shop-order.entity';
 import { ShopProduct } from '../entities/shop-product.entity';
 
-import { InvalidShopProductException } from '@api/modules/shop/exceptions/shop-product.exception';
-import { InvalidStripeSessionIdException } from '../exceptions/stripe.exception';
+import { InvalidCheckoutSessionException } from '../exceptions/shop-checkout.exception';
+import { InvalidShopProductException } from '../exceptions/shop-product.exception';
+import { InvalidStripeSessionException } from '../exceptions/stripe.exception';
 
 @Controller('shop/checkout')
 export class ShopCheckoutController {
@@ -38,6 +39,11 @@ export class ShopCheckoutController {
     @Post('complete')
     @HttpCode(200)
     public async completeCheckoutSession(@Query() query, @Req() request: Request): Promise<any> {
+        if(isNaN(Number(query.productId)) ||
+            (query.sessionId == undefined && query.freeProduct != 'true') ||
+            (query.sessionId != undefined && (query.freeProduct == 'true' || query.freeProduct != undefined)))
+            throw new InvalidCheckoutSessionException();
+
         let customer: ShopCustomer;
         let product: ShopProduct;
         let order: ShopOrder;
@@ -58,7 +64,7 @@ export class ShopCheckoutController {
 
             const sessionData = await this.httpService.get(`${url}/${query.sessionId}`, { headers: headers })
                 .pipe(map(res => res.data), catchError(e => {
-                    throw new InvalidStripeSessionIdException()
+                    throw new InvalidStripeSessionException();
                 })).toPromise();
 
             customer = new ShopCustomer({
@@ -111,7 +117,7 @@ export class ShopCheckoutController {
         const file = files[0][0];
 
         const date = new Date();
-        date.setDate(date.getDate() + 1);
+        date.setDate(date.getDate() + 0.5);
 
         const signedUrl = await file.getSignedUrl({ action: 'read', expires: date });
         console.log(signedUrl);
