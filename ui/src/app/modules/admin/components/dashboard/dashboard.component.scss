@@ -91,7 +91,7 @@
 
 @media only screen and (min-width: 768px) {
     ::ng-deep .section-divider {
-        height: 9vh;
+        height: 9vh !important;
     }
 
     ::ng-deep .line-divider {
