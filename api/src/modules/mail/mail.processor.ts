@@ -39,7 +39,7 @@ export class MailProcessor {
                 ...plainToClass(ShopCustomer, job.data.customer),
                 url: 'https://mattmaxwell.dev'
             },
-            subject: `Download URLs | mattm`,
+            subject: `Download URL(s)`,
             to: job.data.customer.email
         })
         .then((res: any) => {

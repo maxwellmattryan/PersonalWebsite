@@ -20,7 +20,7 @@ import { MailService } from './mail.service';
                     }
                 },
                 defaults: {
-                    from: `${process.env.MAILER_USER}@gmail.com`
+                    from: `mattmaxwell.dev <${process.env.MAILER_USER}@gmail.com>`
                 },
                 template: {
                     dir: __dirname + '/templates',
