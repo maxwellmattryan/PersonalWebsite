@@ -1,7 +1,7 @@
 import { BadRequestException } from '@nestjs/common';
 
-export class InvalidStripeSessionIdException extends BadRequestException {
+export class InvalidStripeSessionException extends BadRequestException {
     constructor() {
-        super('The Stripe session ID is invalid.');
+        super('The Stripe session is invalid.');
     }
 }

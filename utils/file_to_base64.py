@@ -8,6 +8,8 @@ SSL_CA_PATH = '../conf/ssl/api-service/server-ca.pem'
 SSL_CERT_PATH = '../conf/ssl/api-service/client-cert.pem'
 SSL_KEY_PATH = '../conf/ssl/api-service/client-key.pem'
 
+GCLOUD_CREDENTIALS_PATH = '../conf/gcloud/mattmaxwell-c33f23ca6057.json'
+
 def to_base_64(filepath: str) -> str:
     script_dir = os.path.dirname(__file__)
     path = os.path.join(script_dir, filepath) 
@@ -24,9 +26,7 @@ def to_base_64(filepath: str) -> str:
     return encoded
 
 def main():
-    ssl_ca = to_base_64(SSL_CA_PATH)
-    ssl_cert = to_base_64(SSL_CERT_PATH)
-    ssl_key = to_base_64(SSL_KEY_PATH)
+    gcloud_credentials = to_base_64(GCLOUD_CREDENTIALS_PATH)
 
 if __name__ == '__main__':
     main()

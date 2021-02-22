@@ -1,8 +1,10 @@
-import { Controller, HttpCode, HttpService, Post, Query, Req } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpService, Post, Query, Req } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { map, catchError } from 'rxjs/operators';
 
 import { Request } from 'express';
+
+import { Storage } from '@google-cloud/storage';
 
 import { ShopCheckoutService } from '../services/shop-checkout.service';
 import { ShopCustomerService } from '../services/shop-customer-service.service';
@@ -13,8 +15,9 @@ import { ShopCustomer } from '../entities/shop-customer.entity';
 import { ShopOrder } from '../entities/shop-order.entity';
 import { ShopProduct } from '../entities/shop-product.entity';
 
-import { InvalidShopProductException } from '@api/modules/shop/exceptions/shop-product.exception';
-import { InvalidStripeSessionIdException } from '../exceptions/stripe.exception';
+import { InvalidCheckoutSessionException } from '../exceptions/shop-checkout.exception';
+import { InvalidShopProductException } from '../exceptions/shop-product.exception';
+import { InvalidStripeSessionException } from '../exceptions/stripe.exception';
 
 @Controller('shop/checkout')
 export class ShopCheckoutController {
@@ -36,6 +39,11 @@ export class ShopCheckoutController {
     @Post('complete')
     @HttpCode(200)
     public async completeCheckoutSession(@Query() query, @Req() request: Request): Promise<any> {
+        if(isNaN(Number(query.productId)) ||
+            (query.sessionId == undefined && query.freeProduct != 'true') ||
+            (query.sessionId != undefined && (query.freeProduct == 'true' || query.freeProduct != undefined)))
+            throw new InvalidCheckoutSessionException();
+
         let customer: ShopCustomer;
         let product: ShopProduct;
         let order: ShopOrder;
@@ -56,7 +64,7 @@ export class ShopCheckoutController {
 
             const sessionData = await this.httpService.get(`${url}/${query.sessionId}`, { headers: headers })
                 .pipe(map(res => res.data), catchError(e => {
-                    throw new InvalidStripeSessionIdException()
+                    throw new InvalidStripeSessionException();
                 })).toPromise();
 
             customer = new ShopCustomer({
@@ -88,9 +96,32 @@ export class ShopCheckoutController {
 
 
         // TODO: 3. create signed URL with Cloud Storage
+
+
         // TODO: 4. Send email to customer with URL
 
-
         return order;
+    }
+
+    @Get('test')
+    @HttpCode(200)
+    public async testStuff(@Req() request: Request): Promise<any> {
+        const credentials = Buffer.from(process.env.GCLOUD_CREDENTIALS, 'base64').toString();
+        const storage = new Storage({
+            credentials: JSON.parse(credentials)
+        });
+
+        const bucketName = this.configService.get('GCLOUD_STORAGE_BUCKET');
+        const bucket = await storage.bucket(bucketName);
+        const file = await bucket.file('rotor.zip');
+
+        const signedUrlOptions = {
+            action: 'read',
+            expires: Date.now() + 12 * 60 * 60 * 1000
+        };
+        const signedUrl = await file.getSignedUrl((signedUrlOptions as any));
+        console.log(signedUrl);
+
+        return signedUrl;
     }
 }

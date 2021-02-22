@@ -1,12 +1,16 @@
 @import 'variables';
 
 .dashboard {
-    min-height: calc(99vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
+    height: calc(100vh - #{$header-height} - #{$footer-height} * 1 - #{$section-divider-height});
+
+    //&--expand {
+    //    height: calc(100vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
+    //}
 }
 
 .dashboard__header {
     text-align: center;
-    margin-bottom: $margin;
+    margin-bottom: $half-margin;
 }
 
 .dashboard__container {
@@ -87,11 +91,15 @@
 
 @media only screen and (min-width: 768px) {
     ::ng-deep .section-divider {
-        height: 3.7vh;
+        height: 9vh !important;
+    }
+
+    ::ng-deep .line-divider {
+        margin-bottom: calc(2 * #{$margin});
     }
 
     .dashboard {
-        min-height: calc(99vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
+        min-height: calc(100vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
     }
 
     .dashboard__portfolio-btn-container {

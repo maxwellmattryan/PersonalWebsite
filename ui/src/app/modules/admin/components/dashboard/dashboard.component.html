@@ -1,4 +1,4 @@
-<div class='section dashboard' *ngIf='isLoaded; else loading'>
+<div class='section dashboard' [ngClass]="{'dashboard--expand': !authService.isLoggedIn()}" *ngIf='isLoaded; else loading'>
     <h1 class='dashboard__header'>Dashboard</h1>
 
     <div class="line-divider"></div>
@@ -7,8 +7,6 @@
         <a class='btn dashboard__btn' [routerLink]="['/admin/login']">Login</a>
         <a class='btn dashboard__btn' (click)='notificationService.createNotification("This functionality is not available.")'>Register</a>
     </div>
-
-    <div class='section-divider--half'></div>
 
     <div class='dashboard__container'>
         <div class='dashboard__portfolio-btn-container dashboard__btn-container' *ngIf='authService.isLoggedIn()'>

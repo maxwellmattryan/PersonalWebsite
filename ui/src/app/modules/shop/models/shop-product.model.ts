@@ -23,6 +23,7 @@ export class ShopProduct implements Deserializable {
     public category: ShopCategory;
 
     public name: string;
+    public filename: string;
     public amount: number;
     public preview: string;
     public description: string;
