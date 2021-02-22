@@ -93,6 +93,7 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
 
         this.productForm = this.formBuilder.group({
             name: this.formBuilder.control(isEmpty ? '' : this.productData.name, [Validators.required]),
+            filename: this.formBuilder.control(isEmpty ? '' : this.productData.filename, [Validators.required]),
             category: this.formBuilder.control(isEmpty ? '' : this.productData.category.name, [Validators.required]),
             status: this.formBuilder.control(isEmpty ? ShopProductStatuses.AVAILABLE : this.productData.status.status, [Validators.required]),
             amount: this.formBuilder.control(isEmpty ? '' : this.productData.amount, [Validators.required, Validators.pattern(decimalRegex)]),
