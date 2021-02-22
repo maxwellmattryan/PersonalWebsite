@@ -41,7 +41,15 @@ import { ShopModule } from '@api/modules/shop/shop.module';
 
                 GOOGLE_CLOUD_PROJECT: Joi.string().required(),
                 GCLOUD_STORAGE_BUCKET: Joi.string().required(),
-                GCLOUD_CREDENTIALS: Joi.string().required()
+                GCLOUD_CREDENTIALS: Joi.string().required(),
+
+                MAILER_HOST: Joi.string().required(),
+                MAILER_PORT: Joi.string().required(),
+                MAILER_USER: Joi.string().required(),
+                MAILER_PASS: Joi.string().required(),
+                MAILER_QUEUE_NAME: Joi.string().required(),
+                MAILER_QUEUE_HOST: Joi.string().required(),
+                MAILER_QUEUE_PORT: Joi.number().required()
             })
         }),
 

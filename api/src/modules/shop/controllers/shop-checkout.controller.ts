@@ -6,6 +6,8 @@ import { Request } from 'express';
 
 import { Storage } from '@google-cloud/storage';
 
+import { MailService } from '@api/modules/mail/mail.service';
+
 import { ShopCheckoutService } from '../services/shop-checkout.service';
 import { ShopCustomerService } from '../services/shop-customer-service.service';
 import { ShopOrderService } from '../services/shop-order.service';
@@ -24,6 +26,7 @@ export class ShopCheckoutController {
     constructor(
         private readonly configService: ConfigService,
         private readonly httpService: HttpService,
+        private readonly mailService: MailService,
         private readonly shopCheckoutService: ShopCheckoutService,
         private readonly shopCustomerService: ShopCustomerService,
         private readonly shopOrderService: ShopOrderService,
@@ -123,5 +126,14 @@ export class ShopCheckoutController {
         console.log(signedUrl);
 
         return signedUrl;
+    }
+
+    @Get('email')
+    @HttpCode(200)
+    public async testEmail(@Req() request: Request): Promise<void> {
+        const customer = new ShopCustomer({
+            email: 'maxwellmattryan@gmail.com'
+        });
+        await this.mailService.sendTestEmail(customer);
     }
 }
