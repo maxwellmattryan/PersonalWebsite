@@ -91,9 +91,11 @@ export class ShopProductCollectionComponent implements OnInit {
     public startFreeCheckout(customerData: ShopCustomer): void {
         if(this.checkoutProductId == -1) return;
 
+        this.shopCheckoutService.setCustomer(customerData);
+
         this.router.navigate(
             ['shop/checkout'],
-            { queryParams: { success: 'true' }}
+            { queryParams: { success: 'true', productId: this.checkoutProductId, bypassStripe: 'true' }}
         );
     }
 }

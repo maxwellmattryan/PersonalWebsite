@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { from, Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 
@@ -9,12 +9,14 @@ import { environment } from '@ui/environments/environment';
 
 import { ApiService } from '@ui/core/http';
 
-import { ShopProduct } from '../models';
+import { ShopCustomer, ShopOrder, ShopProduct } from '../models';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ShopCheckoutService extends ApiService {
+    private customer: ShopCustomer;
+
     constructor(http: HttpClient) {
         super(http);
     }
@@ -45,5 +47,32 @@ export class ShopCheckoutService extends ApiService {
                 stripe.redirectToCheckout({ sessionId })
             )
         );
+    }
+
+    // completeCheckout(): Observable<ShopOrder> {
+    //     return this.http.post<ShopOrder>(
+    //         `${environment.API_URL}/shop/checkout/complete`
+    //
+    //     );
+    // }
+
+    completeFreeCheckout(productId: number, customerEmail: string): Observable<ShopOrder> {
+        let params = new HttpParams();
+        params = params.set('productId', productId.toString());
+        params = params.set('freeProduct', 'true');
+
+        return this.http.post<ShopOrder>(
+            `${environment.API_URL}/shop/checkout/complete`,
+        { email: customerEmail },
+            { params: params }
+        );
+    }
+
+    getCustomer(): ShopCustomer {
+        return this.customer;
+    }
+
+    setCustomer(customerData: ShopCustomer): void {
+        this.customer = customerData;
     }
 }

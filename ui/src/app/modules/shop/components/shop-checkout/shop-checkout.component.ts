@@ -3,6 +3,8 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { NotificationService, ObfuscationService } from '@ui/core/services';
+import { ShopCheckoutService } from '../../services';
+import { ShopOrder } from '@ui/modules/shop/models';
 
 @Component({
     selector: 'ui-shop-checkout',
@@ -15,6 +17,7 @@ export class ShopCheckoutComponent implements OnInit {
     constructor(
         private readonly notificationService: NotificationService,
         public readonly obfuscationService: ObfuscationService,
+        private readonly shopCheckoutService: ShopCheckoutService,
         private readonly titleService: Title,
         private readonly activatedRoute: ActivatedRoute,
         private readonly router: Router
@@ -24,13 +27,23 @@ export class ShopCheckoutComponent implements OnInit {
         this.titleService.setTitle('Shop Checkout | Matthew Maxwell')
 
         this.activatedRoute.queryParams.subscribe(params => {
-            const wasSuccess = params.success == "true";
-            if(wasSuccess) {
-                console.log(params);
+            if(params.success == 'true') {
+                const productId = params.productId;
 
-                // TODO: Make API request to /api/shop/checkout/complete
+                if(params.bypassStripe == 'true') {
+                    const customerEmail = this.shopCheckoutService.getCustomer().email;
+                    this.shopCheckoutService.completeFreeCheckout(productId, customerEmail).subscribe((res: ShopOrder) => {
+                        console.log(res);
+                        this.isLoaded = true;
+                    });
+                } else {
+                    const sessionId = params.sessionId;
+                    // this.shopCheckoutService.completeCheckout(productId, sessionId).subscribe((res: ShopOrder) => {
+                    //     console.log(res);
+                    //     this.isLoaded = true;
+                    // });
+                }
 
-                this.isLoaded = true;
             }
             else {
                 this.notificationService.createNotification('The payment process was canceled.');
