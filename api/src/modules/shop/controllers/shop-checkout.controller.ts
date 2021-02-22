@@ -1,8 +1,10 @@
-import { Controller, HttpCode, HttpService, Post, Query, Req } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpService, Post, Query, Req } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { map, catchError } from 'rxjs/operators';
 
 import { Request } from 'express';
+
+import { Storage } from '@google-cloud/storage';
 
 import { ShopCheckoutService } from '../services/shop-checkout.service';
 import { ShopCustomerService } from '../services/shop-customer-service.service';
@@ -93,5 +95,16 @@ export class ShopCheckoutController {
         // TODO: 4. Send email to customer with URL
 
         return order;
+    }
+
+    @Get('test')
+    @HttpCode(200)
+    public async testStuff(@Req() request: Request): Promise<any> {
+        const storage = new Storage();
+        const bucket = await storage.bucket(this.configService.get('GCLOUD_STORAGE_BUCKET'));
+        const files = await bucket.getFiles();
+        console.log(files);
+
+        return -1;
     }
 }
