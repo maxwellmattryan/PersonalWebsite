@@ -88,8 +88,9 @@ export class ShopCheckoutController {
 
 
         // TODO: 3. create signed URL with Cloud Storage
-        // TODO: 4. Send email to customer with URL
 
+
+        // TODO: 4. Send email to customer with URL
 
         return order;
     }
