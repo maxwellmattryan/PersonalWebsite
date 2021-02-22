@@ -39,7 +39,7 @@ import { ShopModule } from '@api/modules/shop/shop.module';
                 STRIPE_SK: Joi.string().required(),
                 STRIPE_PK: Joi.string().required(),
 
-                GOOGLE_APPLICATION_CREDENTIALS: Joi.string(),
+                GOOGLE_APPLICATION_CREDENTIALS: Joi.string().required(),
                 GOOGLE_CLOUD_PROJECT: Joi.string().required(),
                 GCLOUD_STORAGE_BUCKET: Joi.string().required(),
                 GCLOUD_CREDENTIALS: Joi.string().required()

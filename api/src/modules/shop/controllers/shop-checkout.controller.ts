@@ -100,11 +100,22 @@ export class ShopCheckoutController {
     @Get('test')
     @HttpCode(200)
     public async testStuff(@Req() request: Request): Promise<any> {
-        const storage = new Storage();
-        const bucket = await storage.bucket(this.configService.get('GCLOUD_STORAGE_BUCKET'));
-        const files = await bucket.getFiles();
-        console.log(files);
+        const credentials = this.configService.get('GOOGLE_APPLICATION_CREDENTIALS');
+        const storage = new Storage({
+            keyFilename: credentials
+        });
 
-        return -1;
+        const bucketName = this.configService.get('GCLOUD_STORAGE_BUCKET');
+        const bucket = await storage.bucket(bucketName);
+        const files = await bucket.getFiles({ prefix: 'rotor' });
+        const file = files[0][0];
+
+        const date = new Date();
+        date.setDate(date.getDate() + 1);
+
+        const signedUrl = await file.getSignedUrl({ action: 'read', expires: date });
+        console.log(signedUrl);
+
+        return signedUrl;
     }
 }
