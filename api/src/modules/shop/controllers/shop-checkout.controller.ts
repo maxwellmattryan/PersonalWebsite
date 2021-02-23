@@ -6,6 +6,8 @@ import { Request } from 'express';
 
 import { Storage } from '@google-cloud/storage';
 
+import { GCloudStorageService } from '@api/core/gcloud/gcloud-storage.service';
+
 import { MailService } from '@api/modules/mail/mail.service';
 
 import { ShopCheckoutService } from '../services/shop-checkout.service';
@@ -25,6 +27,7 @@ import { InvalidStripeSessionException } from '../exceptions/stripe.exception';
 export class ShopCheckoutController {
     constructor(
         private readonly configService: ConfigService,
+        private readonly gCloudStorageService: GCloudStorageService,
         private readonly httpService: HttpService,
         private readonly mailService: MailService,
         private readonly shopCheckoutService: ShopCheckoutService,
@@ -109,18 +112,12 @@ export class ShopCheckoutController {
     @Get('test')
     @HttpCode(200)
     public async testStuff(@Req() request: Request): Promise<any> {
-        const credentials = Buffer.from(process.env.GCLOUD_CREDENTIALS, 'base64').toString();
-        const storage = new Storage({
-            credentials: JSON.parse(credentials)
-        });
-
-        const bucketName = this.configService.get('GCLOUD_STORAGE_BUCKET');
-        const bucket = await storage.bucket(bucketName);
-        const file = await bucket.file('rotor.zip');
+        const bucket = this.gCloudStorageService.getBucket();
+        const file = bucket.file('rotor.zip');
 
         const signedUrlOptions = {
             action: 'read',
-            expires: Date.now() + 12 * 60 * 60 * 1000
+            expires: Date.now() + 12 * 60 * 60 * 1000 // NOTE: h * m * s * ms
         };
         const signedUrl = await file.getSignedUrl((signedUrlOptions as any));
         console.log(signedUrl);

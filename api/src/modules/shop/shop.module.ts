@@ -2,6 +2,8 @@ import { HttpModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { GCloudModule } from '@api/core/gcloud/gcloud.module';
+
 import { MailModule } from '@api/modules/mail/mail.module';
 
 import { ShopCategoryController } from './controllers/shop-category.controller';
@@ -27,6 +29,7 @@ import { ShopProductStatusService } from './services/shop-product-status.service
 @Module({
     imports: [
         ConfigModule.forRoot(),
+        GCloudModule,
         HttpModule,
         MailModule,
         TypeOrmModule.forFeature([ShopCategory, ShopCustomer, ShopOrder, ShopProduct, ShopProductStatus])
