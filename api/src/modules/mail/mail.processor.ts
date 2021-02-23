@@ -1,10 +1,13 @@
 import { Logger } from '@nestjs/common';
 import { OnQueueActive, OnQueueCompleted, OnQueueFailed, Process, Processor } from '@nestjs/bull';
 import { MailerService } from '@nestjs-modules/mailer';
+
 import { Job } from 'bull';
-import { ShopCustomer } from '@api/modules/shop/entities/shop-customer.entity';
 import { plainToClass } from 'class-transformer';
-import { FailedToSendDownloadEmailException } from '@api/modules/mail/mail.exception';
+
+import { ShopCustomer } from '@api/modules/shop/entities/shop-customer.entity';
+
+import { FailedToSendDownloadEmailException } from './mail.exception';
 
 @Processor(process.env.MAILER_QUEUE_NAME)
 export class MailProcessor {

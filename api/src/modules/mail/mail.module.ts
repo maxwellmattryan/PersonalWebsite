@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { MailerModule, MailerService } from '@nestjs-modules/mailer';
-import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { MailerModule} from '@nestjs-modules/mailer';
 import { BullModule } from '@nestjs/bull';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 import { MailProcessor } from './mail.processor';
 import { MailService } from './mail.service';
@@ -31,17 +31,16 @@ import { MailService } from './mail.service';
                 }
             })
         }),
-        BullModule.registerQueueAsync({
-            name: process.env.MAILER_QUEUE,
-            useFactory: () => ({
-                redis: {
-                    host: process.env.MAILER_QUEUE_HOST,
-                    port: Number(process.env.MAILER_QUEUE_PORT)
-                }
-            })
+        BullModule.registerQueue({
+            name: process.env.MAILER_QUEUE_NAME,
+            redis: {
+                host: process.env.MAILER_QUEUE_HOST,
+                port: Number(process.env.MAILER_QUEUE_PORT) || 6379
+            }
         })
     ],
     exports: [
+        BullModule,
         MailService
     ],
     controllers: [],
