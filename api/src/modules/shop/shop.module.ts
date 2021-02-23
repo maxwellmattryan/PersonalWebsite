@@ -8,7 +8,7 @@ import { MailModule } from '@api/modules/mail/mail.module';
 
 import { ShopCategoryController } from './controllers/shop-category.controller';
 import { ShopCheckoutController } from './controllers/shop-checkout.controller';
-import { ShopCustomerControllerController } from './controllers/shop-customer-controller.controller';
+import { ShopCustomerController } from './controllers/shop-customer.controller';
 import { ShopOrderController } from './controllers/shop-order.controller';
 import { ShopProductController } from './controllers/shop-product.controller';
 import { ShopProductStatusController } from './controllers/shop-product-status.controller';
@@ -21,7 +21,7 @@ import { ShopProductStatus } from './entities/shop-product-status.entity';
 
 import { ShopCategoryService } from './services/shop-category.service';
 import { ShopCheckoutService } from './services/shop-checkout.service';
-import { ShopCustomerService } from './services/shop-customer-service.service';
+import { ShopCustomerService } from './services/shop-customer.service';
 import { ShopOrderService } from './services/shop-order.service';
 import { ShopProductService } from './services/shop-product.service';
 import { ShopProductStatusService } from './services/shop-product-status.service';
@@ -38,7 +38,7 @@ import { ShopProductStatusService } from './services/shop-product-status.service
     controllers: [
         ShopCategoryController,
         ShopCheckoutController,
-        ShopCustomerControllerController,
+        ShopCustomerController,
         ShopOrderController,
         ShopProductController,
         ShopProductStatusController

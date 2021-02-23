@@ -12,14 +12,14 @@ import { MailService } from '@api/modules/mail/mail.service';
 import { ShopCustomer } from '../entities/shop-customer.entity';
 import { ShopOrder } from '../entities/shop-order.entity';
 
-import { ShopCustomerService } from '../services/shop-customer-service.service';
+import { ShopCustomerService } from '../services/shop-customer.service';
 import { ShopOrderService } from '../services/shop-order.service';
 
 import { ShopCustomerWasNotFoundException } from '../exceptions/shop-customer.exception';
 import { ShopOrdersWereNotFoundException } from '../exceptions/shop-order.exception';
 
 @Controller('shop/customers')
-export class ShopCustomerControllerController {
+export class ShopCustomerController {
     constructor(
         private readonly gCloudStorageService: GCloudStorageService,
         private readonly mailService: MailService,
@@ -41,7 +41,7 @@ export class ShopCustomerControllerController {
         const customer: ShopCustomer = await this.shopCustomerService.getCustomer(-1, email);
         if(!customer) throw new ShopCustomerWasNotFoundException();
 
-        const orders: ShopOrder[] = await this.shopOrderService.getShopOrdersByCustomer(customer.id);
+        const orders: ShopOrder[] = await this.shopOrderService.getOrdersByCustomer(customer.id);
         if(!orders) throw new ShopOrdersWereNotFoundException();
 
         const productFilenames = orders.map(so => so.product.filename);

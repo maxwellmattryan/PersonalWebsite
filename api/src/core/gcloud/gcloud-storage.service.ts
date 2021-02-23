@@ -16,13 +16,7 @@ export class GCloudStorageService {
         this.storage = new Storage({
             credentials: JSON.parse(this.credentials)
         });
-
-        const bucketName = this.configService.get('GCLOUD_STORAGE_BUCKET');
-        this.bucket = this.storage.bucket(bucketName);
-    }
-
-    public getBucket(): Bucket {
-        return this.bucket;
+        this.bucket = this.storage.bucket(this.configService.get('GCLOUD_STORAGE_BUCKET'));
     }
 
     public async getSignedUrl(filename: string): Promise<string> {
@@ -31,6 +25,7 @@ export class GCloudStorageService {
 
     public async getSignedUrls(filenames: string[]): Promise<string[]> {
         const signedUrlOptions = this.signedUrlOptions();
+
         let signedUrls: string[] = [];
         for(const filename in filenames) {
             const [signedUrl] = await this.bucket.file(filename).getSignedUrl(signedUrlOptions);
