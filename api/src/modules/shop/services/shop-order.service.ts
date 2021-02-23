@@ -52,8 +52,17 @@ export class ShopOrderService {
             .createQueryBuilder('so')
             .leftJoinAndSelect('so.product', 'sp')
             .leftJoinAndSelect('so.customer', 'sc')
-            .where('so.customer = :customer', { customer: customerId })
-            .andWhere('so.product = :product', { product: productId })
+            .where('sc.customerId = :customerId', { customerId: customerId })
+            .andWhere('sc.productId = :productId', { productId: productId })
             .getOne();
+    }
+    
+    public async getShopOrdersByCustomer(customerId: number): Promise<ShopOrder[]> {
+        return await this.shopOrderRepository
+            .createQueryBuilder('so')
+            .leftJoinAndSelect('so.product', 'sp')
+            .leftJoinAndSelect('so.customer', 'sc')
+            .where('sc.id = :id', { id: customerId })
+            .getMany();
     }
 }
