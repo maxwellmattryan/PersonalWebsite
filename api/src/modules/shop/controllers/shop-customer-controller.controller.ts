@@ -2,7 +2,11 @@ import { Controller, HttpCode, Post, Req, UseGuards } from '@nestjs/common';
 
 import { Request } from 'express';
 
+import { File } from '@google-cloud/storage';
+
+import { GCloudStorageService } from '@api/core/gcloud/gcloud-storage.service';
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
+
 import { MailService } from '@api/modules/mail/mail.service';
 
 import { ShopCustomer } from '../entities/shop-customer.entity';
@@ -17,6 +21,7 @@ import { ShopOrdersWereNotFoundException } from '../exceptions/shop-order.except
 @Controller('shop/customers')
 export class ShopCustomerControllerController {
     constructor(
+        private readonly gCloudStorageService: GCloudStorageService,
         private readonly mailService: MailService,
         private readonly shopCustomerService: ShopCustomerService,
         private readonly shopOrderService: ShopOrderService
@@ -38,10 +43,11 @@ export class ShopCustomerControllerController {
 
         const orders: ShopOrder[] = await this.shopOrderService.getShopOrdersByCustomer(customer.id);
         if(!orders) throw new ShopOrdersWereNotFoundException();
-        const products = orders.map(so => so.product);
-        console.log(products);
 
-        // TODO: Generate signed URLs for each product via filename
+        const productFilenames = orders.map(so => so.product.filename);
+        const signedUrls = await this.gCloudStorageService.getSignedUrls(productFilenames);
+        console.log(signedUrls);
+
         // TODO: Send data to mail template engine
     }
 }

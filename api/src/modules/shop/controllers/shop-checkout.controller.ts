@@ -112,17 +112,7 @@ export class ShopCheckoutController {
     @Get('test')
     @HttpCode(200)
     public async testStuff(@Req() request: Request): Promise<any> {
-        const bucket = this.gCloudStorageService.getBucket();
-        const file = bucket.file('rotor.zip');
-
-        const signedUrlOptions = {
-            action: 'read',
-            expires: Date.now() + 12 * 60 * 60 * 1000 // NOTE: h * m * s * ms
-        };
-        const signedUrl = await file.getSignedUrl((signedUrlOptions as any));
-        console.log(signedUrl);
-
-        return signedUrl;
+        return await this.gCloudStorageService.getSignedUrl('rotor.zip');
     }
 
     @Get('email')
