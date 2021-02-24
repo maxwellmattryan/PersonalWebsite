@@ -18,13 +18,8 @@ export class MailService {
             .catch((error) => { console.log(error); })
     }
 
-    public async sendOrderDownloadEmail(order: ShopOrder, signedUrl: string): Promise<void> {
-        await this.mailQueue.add('order-download', { order: order, signedUrl: signedUrl })
-            .catch((error) => { console.log(error); })
-    }
-
-    public async sendTestEmail(customer: ShopCustomer): Promise<void> {
-        await this.mailQueue.add('test', { customer })
+    public async sendOrderConfirmationEmail(order: ShopOrder, signedUrl: string): Promise<void> {
+        await this.mailQueue.add('order-confirmation', { order: order, signedUrl: signedUrl })
             .catch((error) => { console.log(error); })
     }
 }

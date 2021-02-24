@@ -15,6 +15,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ShopCheckoutComponent implements OnInit {
     public isLoaded: boolean = false;
 
+    public order: ShopOrder;
+
     constructor(
         private readonly notificationService: NotificationService,
         public readonly obfuscationService: ObfuscationService,
@@ -32,24 +34,23 @@ export class ShopCheckoutComponent implements OnInit {
                 const productId = params.productId;
                 const isFreeProduct: boolean = params.freeProduct == 'true';
 
+                const callbackFn = (res: ShopOrder) => {
+                    this.order = res;
+                    this.isLoaded = true;
+                };
+                const errorFn = (error: HttpErrorResponse) => {
+                    this.notificationService.createNotification(error.error.message, '', 3600);
+                    this.router.navigate(['shop']);
+                };
+
                 if(isFreeProduct) {
                     const customer = this.shopCheckoutService.getCustomer();
                     if(!customer) this.router.navigate(['shop']);
 
-                    this.shopCheckoutService.completeFreeCheckout(productId, customer.email).subscribe((res: ShopOrder) => {
-                        this.isLoaded = true;
-                    }, (error: HttpErrorResponse) => {
-                        this.notificationService.createNotification(error.error.message, '', 3600);
-                        this.router.navigate(['shop']);
-                    });
+                    this.shopCheckoutService.completeFreeCheckout(productId, customer.email).subscribe(callbackFn, errorFn);
                 } else {
                     const sessionId = params.sessionId;
-                    this.shopCheckoutService.completeCheckout(productId, sessionId).subscribe((res: ShopOrder) => {
-                        this.isLoaded = true;
-                    }, (error: HttpErrorResponse) => {
-                        this.notificationService.createNotification(error.error.message, '', 3600);
-                        this.router.navigate(['shop']);
-                    });
+                    this.shopCheckoutService.completeCheckout(productId, sessionId).subscribe(callbackFn, errorFn);
                 }
 
             }
@@ -58,5 +59,9 @@ export class ShopCheckoutComponent implements OnInit {
                 this.router.navigate(['shop']);
             }
         });
+    }
+
+    public paddedOrderNumber(amount: number = 5): string {
+        return String(this.order.id).padStart(amount, '0');
     }
 }

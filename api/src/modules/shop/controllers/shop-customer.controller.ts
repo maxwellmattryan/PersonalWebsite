@@ -32,16 +32,6 @@ export class ShopCustomerController {
         return await this.shopCustomerService.createCustomer(request.body);
     }
 
-    @Get('email')
-    @HttpCode(200)
-    @UseGuards(JwtAuthGuard)
-    public async testEmail(@Req() request: Request): Promise<void> {
-        const customer = await this.shopCustomerService.getCustomer(-1, request.body.email);
-        if(!customer) throw new ShopCustomerWasNotFoundException();
-
-        await this.mailService.sendTestEmail(customer);
-    }
-
     @Post('help')
     @HttpCode(201)
     public async helpCustomer(@Req() request: Request): Promise<void> {

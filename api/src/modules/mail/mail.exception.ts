@@ -6,14 +6,8 @@ export class FailedToSendMultiDownloadEmailException extends BadRequestException
     }
 }
 
-export class FailedToSendOrderDownloadEmailException extends BadRequestException {
+export class FailedToSendOrderConfirmationEmailException extends BadRequestException {
     constructor() {
-        super('Failed to send order download email.');
-    }
-}
-
-export class FailedToSendTestEmailException extends BadRequestException {
-    constructor() {
-        super('Failed to send test email.');
+        super('Failed to send order confirmation email.');
     }
 }
