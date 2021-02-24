@@ -54,7 +54,6 @@ export class ShopCustomerController {
 
         const productFilenames = orders.map(so => so.product.filename);
         const signedUrls = await this.gCloudStorageService.getSignedUrls(productFilenames);
-        console.log(signedUrls);
 
         await this.mailService.sendMultiDownloadEmail(customer, signedUrls);
     }

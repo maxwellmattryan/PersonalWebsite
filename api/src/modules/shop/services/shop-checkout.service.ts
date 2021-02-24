@@ -75,7 +75,7 @@ export class ShopCheckoutService {
         const customer = await this.getCustomerForCheckout((sessionData as any).customer_details.email);
         const product = await this.shopProductService.getProduct(productId);
 
-        if(product.amount != (sessionData as any).amount_total / 100.0)
+        if(product.amount != (sessionData as any).amount_total / 100.0 || product.amount <= 0.0)
             throw new InvalidShopProductException();
 
         return await this.getOrderForCheckout(customer, product);
@@ -84,7 +84,7 @@ export class ShopCheckoutService {
     public async getFreeCheckoutOrder(customerEmail: string, productId: number): Promise<ShopOrder> {
         const customer = await this.getCustomerForCheckout(customerEmail);
         const product = await this.shopProductService.getProduct(productId);
-        if(product.amount > 0) throw new InvalidShopProductException();
+        if(product.amount > 0.0) throw new InvalidShopProductException();
 
         return await this.getOrderForCheckout(customer, product);
     }

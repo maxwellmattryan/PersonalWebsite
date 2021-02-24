@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, HttpService, Post, Query, Req } from '@nestjs/common';
+import { Controller, HttpCode, HttpService, Post, Query, Req } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import { Request } from 'express';
@@ -8,10 +8,8 @@ import { GCloudStorageService } from '@api/core/gcloud/gcloud-storage.service';
 import { MailService } from '@api/modules/mail/mail.service';
 
 import { ShopCheckoutService } from '../services/shop-checkout.service';
-import { ShopCustomerService } from '../services/shop-customer.service';
 
 import { InvalidCheckoutSessionException } from '../exceptions/shop-checkout.exception';
-import { ShopCustomerWasNotFoundException } from '../exceptions/shop-customer.exception';
 
 @Controller('shop/checkout')
 export class ShopCheckoutController {

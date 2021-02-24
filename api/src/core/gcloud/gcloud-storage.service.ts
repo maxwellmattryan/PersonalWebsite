@@ -27,7 +27,7 @@ export class GCloudStorageService {
         const signedUrlOptions = this.signedUrlOptions();
 
         let signedUrls: string[] = [];
-        for(const filename in filenames) {
+        for(const filename of filenames) {
             const [signedUrl] = await this.bucket.file(filename).getSignedUrl(signedUrlOptions);
             signedUrls.push(signedUrl);
         }
