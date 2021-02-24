@@ -95,7 +95,7 @@ export class ShopProductCollectionComponent implements OnInit {
 
         this.router.navigate(
             ['shop/checkout'],
-            { queryParams: { success: 'true', productId: this.checkoutProductId, bypassStripe: 'true' }}
+            { queryParams: { success: 'true', productId: this.checkoutProductId, freeProduct: 'true' }}
         );
     }
 }

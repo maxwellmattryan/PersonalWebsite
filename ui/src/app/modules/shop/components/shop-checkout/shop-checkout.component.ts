@@ -30,8 +30,9 @@ export class ShopCheckoutComponent implements OnInit {
         this.activatedRoute.queryParams.subscribe(params => {
             if(params.success == 'true') {
                 const productId = params.productId;
+                const isFreeProduct: boolean = params.freeProduct == 'true';
 
-                if(params.bypassStripe == 'true') {
+                if(isFreeProduct) {
                     const customer = this.shopCheckoutService.getCustomer();
                     if(!customer) this.router.navigate(['shop']);
 
