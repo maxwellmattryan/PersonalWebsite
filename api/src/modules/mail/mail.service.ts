@@ -11,9 +11,14 @@ export class MailService {
     constructor(
         @InjectQueue(process.env.MAILER_QUEUE_NAME)
         private mailQueue: Queue
-    ) {}
+    ) { }
 
-    public async sendOrderEmail(order: ShopOrder, signedUrl: string): Promise<void> {
+    public async sendMultiDownloadEmail(customer: ShopCustomer, signedUrls: string[]): Promise<void> {
+        await this.mailQueue.add('multi-download', { customer: customer, signedUrls: signedUrls })
+            .catch((error) => { console.log(error); })
+    }
+
+    public async sendOrderDownloadEmail(order: ShopOrder, signedUrl: string): Promise<void> {
         await this.mailQueue.add('order-download', { order: order, signedUrl: signedUrl })
             .catch((error) => { console.log(error); })
     }

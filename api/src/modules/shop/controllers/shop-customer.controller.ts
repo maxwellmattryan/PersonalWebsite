@@ -48,6 +48,6 @@ export class ShopCustomerController {
         const signedUrls = await this.gCloudStorageService.getSignedUrls(productFilenames);
         console.log(signedUrls);
 
-        // TODO: Send data to mail template engine
+        await this.mailService.sendMultiDownloadEmail(customer, signedUrls);
     }
 }

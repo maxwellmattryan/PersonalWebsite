@@ -1,8 +1,14 @@
 import { BadRequestException } from '@nestjs/common';
 
-export class FailedToSendOrderEmailException extends BadRequestException {
+export class FailedToSendMultiDownloadEmailException extends BadRequestException {
     constructor() {
-        super('Failed to send order email.');
+        super('Failed to send multi download email.');
+    }
+}
+
+export class FailedToSendOrderDownloadEmailException extends BadRequestException {
+    constructor() {
+        super('Failed to send order download email.');
     }
 }
 
