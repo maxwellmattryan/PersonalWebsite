@@ -1,1 +1,29 @@
-<p>shop-faq-view works!</p>
+<div class='section faq'>
+    <h1 class='faq__header'>Shop FAQ</h1>
+
+    <div class='line-divider'></div>
+
+    <div class='faq__categories'>
+        <div class='faq__category'>
+            <div class='faq__category-header-container' (click)='toggleCategory("bugs")'>
+                <p class='faq__category-header'>Bugs</p>
+            </div>
+
+            <div id='faq__bugs' class='faq__category-info faq__category-info--hidden'>
+                <div id='faq__bugs-q-1' class='faq__category-info-q-container faq__category-info-q-container--hidden' (click)='toggleAnswer("faq__bugs-q-1")'>
+                    <p class='faq__category-info-q'>I found a bug - how should I tell you about it?</p>
+                </div>
+
+                <div class='faq__category-info-a-container faq__category-info-a-container--hidden'>
+                    <p class='faq__category-info-a'>
+                        <a class='faq__category-info-link'>Email</a>
+                        me with a bug report, and I'll look into getting it fixed.
+                        If the project has a corresponding repository on GitHub, then
+                        I'll most likely create an offical "issue" on their (just in
+                        case you'd like to see progress).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
