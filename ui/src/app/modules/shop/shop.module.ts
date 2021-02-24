@@ -14,6 +14,7 @@ import {
     ShopCategoryEditorComponent,
     ShopCheckoutComponent,
     ShopCheckoutModalComponent,
+    ShopFaqViewComponent,
     ShopProductCollectionComponent,
     ShopProductEditorComponent,
     ShopViewComponent
@@ -32,6 +33,7 @@ import {
         ShopCategoryEditorComponent,
         ShopCheckoutComponent,
         ShopCheckoutModalComponent,
+        ShopFaqViewComponent,
         ShopProductCollectionComponent,
         ShopProductEditorComponent,
         ShopViewComponent
