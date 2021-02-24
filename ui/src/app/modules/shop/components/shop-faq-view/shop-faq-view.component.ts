@@ -22,6 +22,7 @@ export class ShopFaqViewComponent implements OnInit {
     private categoryHiddenClass: string = 'faq__category-info--hidden';
 
     public emailForm: FormGroup;
+    public hasSubmittedEmail: boolean = false;
 
     constructor(
         private readonly notificationService: NotificationService,
@@ -43,8 +44,11 @@ export class ShopFaqViewComponent implements OnInit {
     }
 
     public onEmailSubmit(): void {
+        this.hasSubmittedEmail = true;
+
         const email = (this.emailForm.value as any).email;
         this.shopApiService.helpCustomer(email).subscribe((res: void) => {
+            this.initEmailForm();
             this.notificationService.createNotification('Successfully sent download URL(s) to email! It may take a moment to show up in your inbox.', '', 3600);
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);

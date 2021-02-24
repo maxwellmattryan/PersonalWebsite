@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { AuthService } from '@ui/core/auth';
 import { NotificationService, SeoService, TrackingService } from '@ui/core/services';
 
 import { ShopCustomer, ShopProduct } from '../../models';
 import { ShopApiService, ShopCheckoutService, ShopEditorService } from '../../services';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'ui-shop-product-collection',
@@ -85,8 +86,15 @@ export class ShopProductCollectionComponent implements OnInit {
         } else {
             this.hasStartedCheckout = true;
             this.shopCheckoutService.goToCheckout(productData).subscribe();
+
+            setTimeout(this.timeoutFn, 6000)
         }
     }
+
+    private timeoutFn = () => {
+        this.hasStartedCheckout = false;
+        this.notificationService.createNotification('Sorry, Stripe Checkout is not initializing - please refresh and try again!');
+    };
 
     public startFreeCheckout(customerData: ShopCustomer): void {
         if(this.checkoutProductId == -1) return;
