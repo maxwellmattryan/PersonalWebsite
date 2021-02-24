@@ -6,7 +6,7 @@
     <p class='faq__info'>
         Thanks for visiting my shop and the FAQ page. If you can't find the answers to your questions
         as always I am available via
-        <a class='text-link faq__info-link'>
+        <a class='text-link faq__info-link' (click)='obfuscationService.handleEmailClick($event)' [href]='"mailto:" + obfuscationService.constructEmail()'>
             email
         </a>
         so please reach out. Cheers!
@@ -38,7 +38,7 @@
                     <div class='faq__category-info-a-p-container'>
                         <p class='faq__category-info-a'>
                             Please
-                            <a class='text-link faq__category-info-link'>
+                            <a class='text-link faq__category-info-link' (click)='obfuscationService.handleEmailClick($event)' [href]='"mailto:" + obfuscationService.constructEmail()'>
                                 email
                             </a>
                             me with a bug report, and I will look into getting it fixed.
@@ -217,7 +217,7 @@
                         </p>
                         <p class='faq__category-info-a'>
                             If none of that works, then send me an
-                            <a class='text-link faq__category-info-link'>
+                            <a class='text-link faq__category-info-link' (click)='obfuscationService.handleEmailClick($event)' [href]='"mailto:" + obfuscationService.constructEmail()'>
                                 email
                             </a>
                             and we can troubleshoot it together!
@@ -246,7 +246,7 @@
                         <p class='faq__category-info-a'>
                             If there is an issue with the plugin, I would love to hear about it. Please send
                             me an
-                            <a class='text-link faq__category-info-link'>
+                            <a class='text-link faq__category-info-link' (click)='obfuscationService.handleEmailClick($event)' [href]='"mailto:" + obfuscationService.constructEmail()'>
                                 email
                             </a>
                             with some details and I can start looking into how to make it better for you!

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { NotificationService } from '@ui/core/services';
+import { NotificationService, ObfuscationService } from '@ui/core/services';
 
 import { ShopApiService } from '../../services';
 
@@ -26,6 +26,7 @@ export class ShopFaqViewComponent implements OnInit {
 
     constructor(
         private readonly notificationService: NotificationService,
+        public readonly obfuscationService: ObfuscationService,
         private readonly shopApiService: ShopApiService,
         private readonly titleService: Title,
         private readonly formBuilder: FormBuilder
