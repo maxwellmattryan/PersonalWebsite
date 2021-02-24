@@ -22,6 +22,12 @@ export class MailProcessor {
         return String(orderId).padStart(paddingAmount, '0');
     }
 
+    private zip(arr1: any[], arr2: any[]): any[] {
+        return arr1.map((val, idx, arr) => {
+            return [val, arr2[idx]];
+        });
+    }
+
     @OnQueueActive()
     private onActive(job: Job): void {
         this.logger.debug(`Processing job ${job.id} of type ${job.name}. Data: ${JSON.stringify(job.data)}`);
@@ -38,14 +44,14 @@ export class MailProcessor {
     }
 
     @Process('multi-download')
-    private async sendMultiDownloadEmail(job: Job<{ customer: ShopCustomer, signedUrls: string[] }>): Promise<any> {
+    private async sendMultiDownloadEmail(job: Job<{ customer: ShopCustomer, orders: ShopOrder[], signedUrls: string[] }>): Promise<any> {
         this.logger.log(`Sending multi download email to '${job.data.customer.email}'`);
 
         await this.mailerService.sendMail({
             template: 'multi-download',
             context: {
                 ...plainToClass(ShopCustomer, job.data.customer),
-                signedUrls: job.data.signedUrls
+                orders: this.zip(job.data.orders, job.data.signedUrls)
             },
             subject: `Download URL(s) | mattmaxwell.dev`,
             to: job.data.customer.email

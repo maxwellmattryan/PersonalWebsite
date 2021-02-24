@@ -13,8 +13,8 @@ export class MailService {
         private mailQueue: Queue
     ) { }
 
-    public async sendMultiDownloadEmail(customer: ShopCustomer, signedUrls: string[]): Promise<void> {
-        await this.mailQueue.add('multi-download', { customer: customer, signedUrls: signedUrls })
+    public async sendMultiDownloadEmail(customer: ShopCustomer, orders: ShopOrder[], signedUrls: string[]): Promise<void> {
+        await this.mailQueue.add('multi-download', { customer: customer, orders: orders, signedUrls: signedUrls })
             .catch((error) => { console.log(error); })
     }
 
