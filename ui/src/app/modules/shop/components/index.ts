@@ -1,5 +1,5 @@
 export { ShopCategoryEditorComponent } from './shop-category-editor/shop-category-editor.component';
-export { ShopCheckoutComponent } from './shop-checkout/shop-checkout.component';
+export { ShopCheckoutViewComponent } from './shop-checkout-view/shop-checkout-view.component';
 export { ShopCheckoutModalComponent } from './shop-checkout-modal/shop-checkout-modal.component';
 export { ShopFaqViewComponent } from './shop-faq-view/shop-faq-view.component';
 export { ShopProductCollectionComponent } from './shop-product-collection/shop-product-collection.component';

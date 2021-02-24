@@ -8,11 +8,11 @@ import { ShopOrder } from '@ui/modules/shop/models';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-    selector: 'ui-shop-checkout',
-    templateUrl: './shop-checkout.component.html',
-    styleUrls: ['./shop-checkout.component.scss']
+    selector: 'ui-shop-checkout-view',
+    templateUrl: './shop-checkout-view.component.html',
+    styleUrls: ['./shop-checkout-view.component.scss']
 })
-export class ShopCheckoutComponent implements OnInit {
+export class ShopCheckoutViewComponent implements OnInit {
     public isLoaded: boolean = false;
 
     public order: ShopOrder;
