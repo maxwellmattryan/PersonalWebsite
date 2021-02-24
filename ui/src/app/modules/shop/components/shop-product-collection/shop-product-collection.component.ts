@@ -21,7 +21,7 @@ export class ShopProductCollectionComponent implements OnInit {
     @Input() baseRoute: string = 'shop/products';
 
     public isAdmin: boolean = false;
-    public hasStartedCheckout: boolean = false;
+    public isStartingCheckout: boolean = false;
     public checkoutProductId: number = -1;
     public modalId: string = 'shop-checkout-modal';
 
@@ -84,16 +84,20 @@ export class ShopProductCollectionComponent implements OnInit {
         if(productData.amount <= 0.0) {
             this.showDialog();
         } else {
-            this.hasStartedCheckout = true;
-            this.shopCheckoutService.goToCheckout(productData).subscribe();
+            this.isStartingCheckout = true;
+            this.shopCheckoutService.goToCheckout(productData).subscribe((res: any) => {
+                this.isStartingCheckout = false;
+            });
 
-            setTimeout(this.timeoutFn, 6000)
+            setTimeout(this.timeoutFn, 10000);
         }
     }
 
     private timeoutFn = () => {
-        this.hasStartedCheckout = false;
-        this.notificationService.createNotification('Sorry, Stripe Checkout is not initializing - please refresh and try again!');
+        if(!this.isStartingCheckout) return;
+
+        this.isStartingCheckout = false;
+        this.notificationService.createNotification('Sorry, unable to initialize Stripe Checkout. Please refresh and try again.', '', 3600);
     };
 
     public startFreeCheckout(customerData: ShopCustomer): void {

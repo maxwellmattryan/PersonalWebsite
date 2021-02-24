@@ -320,7 +320,14 @@
                                     class='btn editor__form-btn  editor__form-btn--submit'
                                     [disabled]='!emailForm.valid'
                             >
-                                Submit
+                                <ng-container *ngIf='!isSubmittingEmail'>
+                                    Submit
+                                </ng-container>
+                                <ng-container *ngIf='isSubmittingEmail'>
+                                    <div class='btn-loader-container'>
+                                        <div class='btn-loader'></div>
+                                    </div>
+                                </ng-container>
                             </button>
                         </form>
                     </div>

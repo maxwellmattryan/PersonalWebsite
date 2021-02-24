@@ -22,7 +22,7 @@ export class ShopFaqViewComponent implements OnInit {
     private categoryHiddenClass: string = 'faq__category-info--hidden';
 
     public emailForm: FormGroup;
-    public hasSubmittedEmail: boolean = false;
+    public isSubmittingEmail: boolean = false;
 
     constructor(
         private readonly notificationService: NotificationService,
@@ -44,16 +44,27 @@ export class ShopFaqViewComponent implements OnInit {
     }
 
     public onEmailSubmit(): void {
-        this.hasSubmittedEmail = true;
+        this.isSubmittingEmail = true;
+
+        setTimeout(this.timeoutFn, 10000);
 
         const email = (this.emailForm.value as any).email;
         this.shopApiService.helpCustomer(email).subscribe((res: void) => {
+            this.isSubmittingEmail = false;
             this.initEmailForm();
-            this.notificationService.createNotification('Successfully sent download URL(s) to email! It may take a moment to show up in your inbox.', '', 3600);
+            this.notificationService.createNotification('Successfully sent download URL(s) to your email! It may take a moment to show up in your inbox.', '', 3600);
         }, (error: HttpErrorResponse) => {
-            this.notificationService.createNotification(error.error.message);
+            this.isSubmittingEmail = false;
+            this.notificationService.createNotification('Sorry, unable to find customer. Please check that your email is correct.', '', 3600);
         });
     }
+
+    private timeoutFn = () => {
+        if(!this.isSubmittingEmail) return;
+
+        this.isSubmittingEmail = false;
+        this.notificationService.createNotification('Sorry, unable to reach server. Please refresh and try again.');
+    };
 
     public toggleCategory(category: FaqCategory, event: Event): void {
         const id = `faq__${category}`;
