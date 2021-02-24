@@ -23,12 +23,17 @@
 .faq__category-header-container {
     display: flex;
     flex-direction: row;
-}
 
-.faq__category-header {
-    font-size: 150%;
-    font-weight: 700;
-    margin-bottom: $half-margin;
+    .faq__category-header-btn {
+        align-self: center;
+    }
+
+    .faq__category-header {
+        align-self: center;
+        font-size: 150%;
+        font-weight: 700;
+        margin-bottom: $half-margin;
+    }
 }
 
 .faq__category-info {
@@ -103,7 +108,7 @@
 }
 
 .faq__category-header-btn {
-    margin-right: $margin;
+    margin-right: $half-margin;
 }
 
 .faq__category-header-btn,
@@ -112,12 +117,13 @@
     border: none;
     font-size: 120%;
     max-height: $margin;
-    min-width: $small-btn-width;
+    min-width: calc(0.5 * #{$small-btn-width});
+    transform: translateY(-0.25rem);
 }
 
 .faq__category-info-q-btn,
 .faq__category-info-a-btn {
-    margin: 0 $half-margin 0 $margin;
+    margin: 0 $quarter-margin;
 }
 
 .faq__email-form {
@@ -173,5 +179,24 @@
 @media only screen and (min-width: 768px) {
     .faq {
         min-height: calc(100vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
+    }
+
+    .faq__category-info {
+        margin: 0 $margin;
+    }
+
+    .faq__category-header-btn {
+        margin-right: $margin;
+    }
+
+    .faq__category-info-q-btn,
+    .faq__category-info-a-btn {
+        margin: 0 $half-margin 0 $margin;
+    }
+
+    .faq__category-header-btn,
+    .faq__category-info-q-btn,
+    .faq__category-info-a-btn {
+        min-width: $small-btn-width;
     }
 }
