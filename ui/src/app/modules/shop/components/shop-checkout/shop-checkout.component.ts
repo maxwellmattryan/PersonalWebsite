@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService, ObfuscationService } from '@ui/core/services';
 import { ShopCheckoutService } from '../../services';
 import { ShopOrder } from '@ui/modules/shop/models';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'ui-shop-checkout',
@@ -35,14 +36,18 @@ export class ShopCheckoutComponent implements OnInit {
                     if(!customer) this.router.navigate(['shop']);
 
                     this.shopCheckoutService.completeFreeCheckout(productId, customer.email).subscribe((res: ShopOrder) => {
-                        console.log(res);
                         this.isLoaded = true;
+                    }, (error: HttpErrorResponse) => {
+                        this.notificationService.createNotification(error.error.message);
+                        this.router.navigate(['shop']);
                     });
                 } else {
                     const sessionId = params.sessionId;
                     this.shopCheckoutService.completeCheckout(productId, sessionId).subscribe((res: ShopOrder) => {
-                        console.log(res);
                         this.isLoaded = true;
+                    }, (error: HttpErrorResponse) => {
+                        this.notificationService.createNotification(error.error.message);
+                        this.router.navigate(['shop']);
                     });
                 }
 

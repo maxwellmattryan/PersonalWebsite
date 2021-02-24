@@ -14,6 +14,7 @@ import { ShopProductService } from './shop-product.service';
 
 import { InvalidShopProductException } from '../exceptions/shop-product.exception';
 import { InvalidStripeSessionException } from '../exceptions/stripe.exception';
+import { ShopCustomerHasAlreadyPurchasedProductException } from '../exceptions/shop-customer.exception';
 
 export type ShopLineItem = Stripe.Checkout.SessionCreateParams.LineItem;
 
@@ -97,15 +98,13 @@ export class ShopCheckoutService {
     public async getOrderForCheckout(customer: ShopCustomer, product: ShopProduct): Promise<ShopOrder> {
         const checkedOrder: ShopOrder = await this.shopOrderService.getOrderByCustomerAndProduct(customer.id, product.id);
         const hasOrderBeenMadeBefore: boolean = checkedOrder != undefined;
-        if(hasOrderBeenMadeBefore) {
-            return checkedOrder;
-        }
-        else {
+        if(hasOrderBeenMadeBefore)
+            throw new ShopCustomerHasAlreadyPurchasedProductException();
+        else
             return await this.shopOrderService.createOrder(new ShopOrder({
                 customer: customer,
                 product: product,
                 amount: product.amount
             }));
-        }
     }
 }
