@@ -20,8 +20,7 @@ export class ShopCheckoutController {
         private readonly gCloudStorageService: GCloudStorageService,
         private readonly httpService: HttpService,
         private readonly mailService: MailService,
-        private readonly shopCheckoutService: ShopCheckoutService,
-        private readonly shopCustomerService: ShopCustomerService
+        private readonly shopCheckoutService: ShopCheckoutService
     ) { }
 
     @Post('init')
@@ -33,12 +32,12 @@ export class ShopCheckoutController {
     @Post('complete')
     @HttpCode(200)
     public async completeCheckoutSession(@Query() query, @Req() request: Request): Promise<any> {
+        const isFreeOrder: boolean = query.freeProduct === 'true';
         if(isNaN(Number(query.productId)) ||
-            (query.sessionId == undefined && query.freeProduct != 'true') ||
-            (query.sessionId != undefined && (query.freeProduct == 'true' || query.freeProduct != undefined)))
+            (query.sessionId == undefined && !isFreeOrder) ||
+            (query.sessionId != undefined && (isFreeOrder || query.freeProduct != undefined)))
             throw new InvalidCheckoutSessionException();
 
-        const isFreeOrder: boolean = query.freeProduct === 'true';
         const order = await (isFreeOrder ?
             this.shopCheckoutService.getFreeCheckoutOrder(request.body.email, query.productId)
             : this.shopCheckoutService.getCheckoutOrder(query.sessionId, query.productId)
@@ -49,14 +48,5 @@ export class ShopCheckoutController {
         await this.mailService.sendOrderDownloadEmail(order, signedUrl);
 
         return order;
-    }
-
-    @Get('email')
-    @HttpCode(200)
-    public async testEmail(@Req() request: Request): Promise<void> {
-        const customer = await this.shopCustomerService.getCustomer(-1, request.body.email);
-        if(!customer) throw new ShopCustomerWasNotFoundException();
-
-        await this.mailService.sendTestEmail(customer);
     }
 }

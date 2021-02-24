@@ -84,6 +84,7 @@ export class ShopCheckoutService {
     public async getFreeCheckoutOrder(customerEmail: string, productId: number): Promise<ShopOrder> {
         const customer = await this.getCustomerForCheckout(customerEmail);
         const product = await this.shopProductService.getProduct(productId);
+        if(product.amount > 0) throw new InvalidShopProductException();
 
         return await this.getOrderForCheckout(customer, product);
     }
