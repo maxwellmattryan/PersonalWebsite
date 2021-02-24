@@ -21,8 +21,9 @@
         margin: 0;
     }
 
+    .shop__resources,
     .shop__categories {
-        margin-bottom: calc(2 * #{$margin});
+        margin-bottom: calc(3 * #{$margin});
     }
 
     .products {
@@ -36,16 +37,19 @@
     text-align: center;
 }
 
+.shop__resources-header,
 .shop__filter-header {
     margin-bottom: $half-margin;
 }
 
+.shop__resources-btn-container,
 .shop__filter-btn-container {
     align-items: center;
     display: flex;
     flex-direction: column;
 }
 
+.shop__resources-btn,
 .shop__filter-btn {
     font-size: 90%;
     height: $btn-height;
@@ -73,6 +77,7 @@
     }
 }
 
+.shop__resources-btn-row,
 .shop__filter-btn-row {
     align-items: center;
     display: flex;
@@ -86,6 +91,10 @@
 }
 
 @media only screen and (min-width: 768px) {
+    ::ng-deep .line-divider {
+        margin-bottom: $margin;
+    }
+
     .shop__filter-btn {
         font-size: 90%;
         height: $large-btn-height;
