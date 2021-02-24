@@ -5,6 +5,8 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { Job } from 'bull';
 import { plainToClass } from 'class-transformer';
 
+import { UtilsService } from '@api/core/utils/utils.service';
+
 import { ShopCustomer } from '@api/modules/shop/entities/shop-customer.entity';
 import { ShopOrder } from '@api/modules/shop/entities/shop-order.entity';
 
@@ -15,17 +17,12 @@ export class MailProcessor {
     private readonly logger = new Logger(this.constructor.name)
 
     constructor(
-        private readonly mailerService: MailerService
+        private readonly mailerService: MailerService,
+        private readonly utilsService: UtilsService
     ) { }
 
     private formatOrderId(orderId: number | string, paddingAmount: number = 5): string {
         return String(orderId).padStart(paddingAmount, '0');
-    }
-
-    private zip(arr1: any[], arr2: any[]): any[] {
-        return arr1.map((val, idx, arr) => {
-            return [val, arr2[idx]];
-        });
     }
 
     @OnQueueActive()
@@ -51,7 +48,7 @@ export class MailProcessor {
             template: 'multi-download',
             context: {
                 ...plainToClass(ShopCustomer, job.data.customer),
-                orders: this.zip(job.data.orders, job.data.signedUrls)
+                orders: this.utilsService.zip(job.data.orders, job.data.signedUrls)
             },
             subject: `Download URL(s) | mattmaxwell.dev`,
             to: job.data.customer.email

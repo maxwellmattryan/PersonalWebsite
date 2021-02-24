@@ -7,6 +7,7 @@ import { AuthModule } from '@api/core/auth/auth.module';
 import { DatabaseModule } from '@api/core/database/database.module';
 import { GCloudModule } from '@api/core/gcloud/gcloud.module';
 import { HttpModule } from '@api/core/http/http.module';
+import { UtilsModule } from '@api/core/utils/utils.module';
 
 import { AdminModule } from '@api/modules/admin/admin.module';
 import { ApiModule } from '@api/modules/api/api.module';
@@ -58,6 +59,7 @@ import { ShopModule } from '@api/modules/shop/shop.module';
         DatabaseModule,
         GCloudModule,
         HttpModule,
+        UtilsModule,
 
         AdminModule,
         ApiModule,

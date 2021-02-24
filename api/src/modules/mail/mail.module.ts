@@ -3,6 +3,8 @@ import { MailerModule} from '@nestjs-modules/mailer';
 import { BullModule } from '@nestjs/bull';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
+import { UtilsModule } from '@api/core/utils/utils.module';
+
 import { MailProcessor } from './mail.processor';
 import { MailService } from './mail.service';
 
@@ -37,7 +39,8 @@ import { MailService } from './mail.service';
                 host: process.env.MAILER_QUEUE_HOST,
                 port: Number(process.env.MAILER_QUEUE_PORT) || 6379
             }
-        })
+        }),
+        UtilsModule
     ],
     exports: [
         BullModule,
