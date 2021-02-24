@@ -87,4 +87,14 @@ export class ShopApiService extends ApiService {
             { params: params }
         );
     }
+
+    helpCustomer(customerEmail: string): Observable<void> {
+        const headers = this.contentTypeHeader();
+
+        return this.http.post<void>(
+            `${environment.API_URL}/shop/customers/help`,
+            { email: customerEmail },
+            { headers }
+        );
+    }
 }

@@ -304,8 +304,25 @@
                     </button>
                     <div class='faq__category-info-a-p-container'>
                         <p class='faq__category-info-a'>
-                            TODO: Make me into a form!
+                            Please enter the following information to receive an email
+                            containing download URLs.
                         </p>
+                        <form class='faq__email-form' [formGroup]='emailForm' (ngSubmit)='onEmailSubmit()'>
+                            <div class='form-field editor__form-field'>
+                                <label class='faq__email-form-label form-field-label editor__form-field-label'>Email</label>
+                                <br><br>
+                                <input formControlName='email' required autofocus>
+                            </div>
+
+                            <button
+                                    aria-label='Submit email'
+                                    [ngClass]="{'btn--inactive': !emailForm.valid}"
+                                    class='btn editor__form-btn  editor__form-btn--submit'
+                                    [disabled]='!emailForm.valid'
+                            >
+                                Submit
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -120,6 +120,14 @@
     margin: 0 $half-margin 0 $margin;
 }
 
+.faq__email-form {
+    margin-top: $margin;
+
+    .faq__email-form-label {
+        font-size: 110%;
+    }
+}
+
 ::ng-deep code {
     background-color: $color-dark-light;
     box-sizing: border-box;

@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { NotificationService } from '@ui/core/services';
+
+import { ShopApiService } from '../../services';
 
 export type FaqCategory = 'bugs' | 'compatibility' | 'installation' | 'purchasing';
 
@@ -14,9 +21,35 @@ export class ShopFaqViewComponent implements OnInit {
     private categoryShowClass: string = 'faq__category-info--show';
     private categoryHiddenClass: string = 'faq__category-info--hidden';
 
-    constructor() { }
+    public emailForm: FormGroup;
 
-    ngOnInit(): void { }
+    constructor(
+        private readonly notificationService: NotificationService,
+        private readonly shopApiService: ShopApiService,
+        private readonly titleService: Title,
+        private readonly formBuilder: FormBuilder
+    ) { }
+
+    ngOnInit(): void {
+        this.titleService.setTitle('Shop FAQ | Matthew Maxwell');
+
+        this.initEmailForm();
+    }
+
+    private initEmailForm(): void {
+        this.emailForm = this.formBuilder.group({
+            email: this.formBuilder.control('', [Validators.required, Validators.email])
+        });
+    }
+
+    public onEmailSubmit(): void {
+        const email = (this.emailForm.value as any).email;
+        this.shopApiService.helpCustomer(email).subscribe((res: void) => {
+            this.notificationService.createNotification('Successfully sent download URL(s) to email! It may take a moment to show up in your inbox.', '', 3600);
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+        });
+    }
 
     public toggleCategory(category: FaqCategory, event: Event): void {
         const id = `faq__${category}`;
