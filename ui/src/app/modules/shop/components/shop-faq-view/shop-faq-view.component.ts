@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-export type FaqCategory = 'compatibility' | 'documentation' | 'bugs';
+export type FaqCategory = 'bugs' | 'compatibility' | 'documentation' | 'installation' | 'purchasing';
 
 @Component({
     selector: 'ui-shop-faq-view',
