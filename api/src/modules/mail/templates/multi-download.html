@@ -3,7 +3,7 @@
 <head>
     <style>
         html, body {
-            font-family: arial, verdana, sans-serif;
+            font-family: arial, verdana;
         }
 
         .email__intro,
@@ -28,7 +28,7 @@
             <p class='email__intro'>Hello!</p>
             
             <p class='email__first'>
-                Please use the following URL(s) to begin downloading. If you have any questions, take a look at the
+                Please use the following URL(s) to begin your downloading. If you have any questions, checkout the
                 <a class='email__link' href='https://mattmaxwell.tech/shop/faq' target='_blank'>
                     shop's FAQ page
                 </a>
@@ -39,12 +39,7 @@
                 if you just wanna chat!
             </p>
 
-            {{#each signedUrls}}
-                <a class='email__link email__link--download' href='{{ this }}' target='_blank'>
-                    Download
-                </a>
-                <br>
-            {{/each}}
+            <a class='email__link email__link--download' href='https://mattmaxwell.dev' target='_blank'>Download</a>
 
             <p class='email__last'>Thank you endlessly for your support! It makes it quite fun and meaningful to develop and put together these products for the community. Cheers!</p>
 
