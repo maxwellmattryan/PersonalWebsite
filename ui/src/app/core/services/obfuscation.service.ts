@@ -21,7 +21,7 @@ export class ObfuscationService {
     }
 
     constructEmailWith(name: string, domain: string, extension: string = 'com'): string {
-        return `${this.uglify(name)}${this.funkyChar}at${this.funkyChar}}${this.uglify(domain)}${this.funkyChar}dot${this.funkyChar}${extension}`;
+        return `${this.uglify(name)}${this.funkyChar}at${this.funkyChar}${this.uglify(domain)}${this.funkyChar}dot${this.funkyChar}${extension}`;
     }
 
     handleEmailClickWith(event: Event, name: string, domain: string, extension: string = 'com'): void {
