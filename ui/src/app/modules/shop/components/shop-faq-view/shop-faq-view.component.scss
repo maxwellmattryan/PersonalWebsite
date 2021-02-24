@@ -13,24 +13,28 @@
 }
 
 .faq__category {
-
+    margin-bottom: $margin;
 }
 
 .faq__category-header-container {
-    cursor: pointer;
-    pointer-events: all;
+    display: flex;
+    flex-direction: row;
 }
 
 .faq__category-header {
-    font-size: 120%;
+    font-size: 150%;
     font-weight: 700;
+    margin-bottom: $half-margin;
 }
 
 .faq__category-info {
+    align-content: center;
+    flex-direction: column;
+    margin-left: $margin;
     width: 100%;
 
     &--show {
-        display: inline-block;
+        display: flex;
     }
 
     &--hidden {
@@ -38,13 +42,20 @@
     }
 }
 
+.faq__category-info-q-container,
 .faq__category-info-q-container {
-    cursor: pointer;
-    pointer-events: all;
+    min-height: $margin;
+}
+
+.faq__category-info-q-container {
+    align-content: center;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: $quarter-margin;
 
     &--show {
         + .faq__category-info-a-container {
-            display: inline-block;
+            display: flex;
         }
     }
 
@@ -53,18 +64,48 @@
             display: none;
         }
     }
-}
 
-.faq__category-info-q {
+    .faq__category-info-q-btn {
 
+    }
+
+    .faq__category-info-q {
+        color: $color-white;
+        min-height: $margin;
+    }
 }
 
 .faq__category-info-a-container {
+    align-content: center;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: $half-margin;
 
+    .faq__category-info-a-btn {
+        opacity: 0.0;
+    }
+
+    .faq__category-info-a {
+
+    }
 }
 
-.faq__category-info-a {
+.faq__category-header-btn {
+    margin-right: $margin;
+}
 
+.faq__category-header-btn,
+.faq__category-info-q-btn,
+.faq__category-info-a-btn {
+    border: none;
+    font-size: 120%;
+    max-height: $margin;
+    min-width: $small-btn-width;
+}
+
+.faq__category-info-q-btn,
+.faq__category-info-a-btn {
+    margin: 0 $half-margin 0 $margin;
 }
 
 @media only screen and (min-width: 768px) {

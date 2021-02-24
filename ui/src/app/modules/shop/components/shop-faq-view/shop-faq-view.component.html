@@ -5,18 +5,95 @@
 
     <div class='faq__categories'>
         <div class='faq__category'>
-            <div class='faq__category-header-container' (click)='toggleCategory("bugs")'>
+            <div class='faq__category-header-container'>
+                <button class='btn faq__category-header-btn' (click)='toggleCategory("compatibility", $event)'>
+                    &#x2b;
+                </button>
+                <p class='faq__category-header'>Compatibility</p>
+            </div>
+
+            <div id='faq__compatibility' class='faq__category-info faq__category-info--hidden'>
+                <div id='faq__compatibility-q-1' class='faq__category-info-q-container faq__category-info-q-container--hidden'>
+                    <button class='btn faq__category-info-q-btn' (click)='toggleAnswer("faq__compatibility-q-1", $event)'>
+                        &#x2b;
+                    </button>
+                    <p class='faq__category-info-q'>
+                        I found a bug - how should I tell you about it?
+                    </p>
+                </div>
+
+                <div class='faq__category-info-a-container faq__category-info-a-container--hidden'>
+                    <button class='btn faq__category-info-a-btn'>
+                        &#x2b;
+                    </button>
+                    <p class='faq__category-info-a'>
+                        <a class='text-link faq__category-info-link'>Email</a>
+                        me with a bug report, and I'll look into getting it fixed.
+                        If the project has a corresponding repository on GitHub, then
+                        I'll most likely create an offical "issue" on their (just in
+                        case you'd like to see progress).
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class='faq__category'>
+            <div class='faq__category-header-container'>
+                <button class='btn faq__category-header-btn' (click)='toggleCategory("documentation", $event)'>
+                    &#x2b;
+                </button>
+                <p class='faq__category-header'>Documentation</p>
+            </div>
+
+            <div id='faq__documentation' class='faq__category-info faq__category-info--hidden'>
+                <div id='faq__documentation-q-1' class='faq__category-info-q-container faq__category-info-q-container--hidden'>
+                    <button class='btn faq__category-info-q-btn' (click)='toggleAnswer("faq__documentation-q-1", $event)'>
+                        &#x2b;
+                    </button>
+                    <p class='faq__category-info-q'>
+                        I found a bug - how should I tell you about it?
+                    </p>
+                </div>
+
+                <div class='faq__category-info-a-container faq__category-info-a-container--hidden'>
+                    <button class='btn faq__category-info-a-btn'>
+                        &#x2b;
+                    </button>
+                    <p class='faq__category-info-a'>
+                        <a class='text-link faq__category-info-link'>Email</a>
+                        me with a bug report, and I'll look into getting it fixed.
+                        If the project has a corresponding repository on GitHub, then
+                        I'll most likely create an offical "issue" on their (just in
+                        case you'd like to see progress).
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class='faq__category'>
+            <div class='faq__category-header-container'>
+                <button class='btn faq__category-header-btn' (click)='toggleCategory("bugs", $event)'>
+                    &#x2b;
+                </button>
                 <p class='faq__category-header'>Bugs</p>
             </div>
 
             <div id='faq__bugs' class='faq__category-info faq__category-info--hidden'>
-                <div id='faq__bugs-q-1' class='faq__category-info-q-container faq__category-info-q-container--hidden' (click)='toggleAnswer("faq__bugs-q-1")'>
-                    <p class='faq__category-info-q'>I found a bug - how should I tell you about it?</p>
+                <div id='faq__bugs-q-1' class='faq__category-info-q-container faq__category-info-q-container--hidden'>
+                    <button class='btn faq__category-info-q-btn' (click)='toggleAnswer("faq__bugs-q-1", $event)'>
+                        &#x2b;
+                    </button>
+                    <p class='faq__category-info-q'>
+                        I found a bug - how should I tell you about it?
+                    </p>
                 </div>
 
                 <div class='faq__category-info-a-container faq__category-info-a-container--hidden'>
+                    <button class='btn faq__category-info-a-btn'>
+                        &#x2b;
+                    </button>
                     <p class='faq__category-info-a'>
-                        <a class='faq__category-info-link'>Email</a>
+                        <a class='text-link faq__category-info-link'>Email</a>
                         me with a bug report, and I'll look into getting it fixed.
                         If the project has a corresponding repository on GitHub, then
                         I'll most likely create an offical "issue" on their (just in
