@@ -133,8 +133,11 @@ if [ "$UI_ACTION" = true ]; then
     docker rmi "$GCP_UI_IMAGE_PATH:latest"
     echo -e "SUCCESS: Removed UI image(s)!\n"
 
-    if [ "$STEPS" = 12 ]; then
+    if [ "$STEPS" = 12 ]
+    then
         START=12
+    else
+        START=7
     fi
 
     cd ../
