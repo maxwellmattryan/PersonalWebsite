@@ -7,5 +7,5 @@
     <h2 class='landing__tagline'>{{ tagline }}</h2>
     <p class='landing__landing'>{{ landing }}</p>
     <br>
-    <a class='btn landing__contact-btn' (click)='obfuscationService.openEmail($event, "maxwellmattryan", "gmail")' [href]='obfuscationService.constructEmail("maxwellmattryan", "gmail")'>Contact Me</a>
+    <a class='btn landing__contact-btn' (click)='obfuscationService.handleEmailClick($event)' [href]='"mailto:" + obfuscationService.constructEmail()'>Contact Me</a>
 </div>
