@@ -39,7 +39,7 @@ export class ShopCheckoutComponent implements OnInit {
                     this.shopCheckoutService.completeFreeCheckout(productId, customer.email).subscribe((res: ShopOrder) => {
                         this.isLoaded = true;
                     }, (error: HttpErrorResponse) => {
-                        this.notificationService.createNotification(error.error.message);
+                        this.notificationService.createNotification(error.error.message, '', 3600);
                         this.router.navigate(['shop']);
                     });
                 } else {
@@ -47,7 +47,7 @@ export class ShopCheckoutComponent implements OnInit {
                     this.shopCheckoutService.completeCheckout(productId, sessionId).subscribe((res: ShopOrder) => {
                         this.isLoaded = true;
                     }, (error: HttpErrorResponse) => {
-                        this.notificationService.createNotification(error.error.message);
+                        this.notificationService.createNotification(error.error.message, '', 3600);
                         this.router.navigate(['shop']);
                     });
                 }

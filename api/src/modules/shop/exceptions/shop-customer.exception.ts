@@ -8,7 +8,7 @@ export class ShopCustomerAlreadyExistsException extends BadRequestException {
 
 export class ShopCustomerHasAlreadyPurchasedProductException extends BadRequestException {
     constructor() {
-        super('You have already purchased this product. Please visit the FAQ page to see how to download previously bought products.');
+        super('It looks like you have already purchased this product. Please visit the FAQ page to see how to download it again.');
     }
 }
 

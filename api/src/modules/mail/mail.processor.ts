@@ -18,6 +18,10 @@ export class MailProcessor {
         private readonly mailerService: MailerService
     ) { }
 
+    private formatOrderId(orderId: number | string, paddingAmount: number = 5): string {
+        return String(orderId).padStart(paddingAmount, '0');
+    }
+
     @OnQueueActive()
     private onActive(job: Job): void {
         this.logger.debug(`Processing job ${job.id} of type ${job.name}. Data: ${JSON.stringify(job.data)}`);
@@ -59,11 +63,13 @@ export class MailProcessor {
     private async sendOrderDownloadEmail(job: Job<{ order: ShopOrder, signedUrl: string }>): Promise<any> {
         this.logger.log(`Sending order download email to '${job.data.order.customer.email}'`);
 
+        const orderNumber: string = this.formatOrderId(job.data.order.id);
         await this.mailerService.sendMail({
             template: 'order-download',
             context: {
                 ...plainToClass(ShopOrder, job.data.order),
-                signedUrl: job.data.signedUrl
+                signedUrl: job.data.signedUrl,
+                orderNumber: orderNumber
             },
             subject: `Download URL | ${job.data.order.product.name} | mattmaxwell.dev`,
             to: job.data.order.customer.email
