@@ -150,43 +150,6 @@
             </div>
         </div>
 
-        <div *ngIf='false' class='faq__category'>
-            <div class='faq__category-header-container'>
-                <button class='btn faq__category-header-btn' (click)='toggleCategory("documentation", $event)'>
-                    &#x2b;
-                </button>
-                <p class='faq__category-header'>Documentation</p>
-            </div>
-
-            <div id='faq__documentation' class='faq__category-info faq__category-info--hidden'>
-                <div id='faq__documentation-q-1' class='faq__category-info-q-container faq__category-info-q-container--hidden'>
-                    <button class='btn faq__category-info-q-btn' (click)='toggleAnswer("faq__documentation-q-1", $event)'>
-                        &#x2b;
-                    </button>
-                    <p class='faq__category-info-q'>
-                        I found a bug - how should I tell you about it?
-                    </p>
-                </div>
-
-                <div class='faq__category-info-a-container faq__category-info-a-container--hidden'>
-                    <button class='btn faq__category-info-a-btn'>
-                        &#x2b;
-                    </button>
-                    <div class='faq__category-info-a-p-container'>
-                        <p class='faq__category-info-a'>
-                            <a class='text-link faq__category-info-link'>
-                                Email
-                            </a>
-                            me with a bug report, and I will look into getting it fixed.
-                            If the project has a corresponding GitHub repository, then
-                            I will most likely create an offical "issue" on there, which you are
-                            more than welcome to checkout!
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class='faq__category'>
             <div class='faq__category-header-container'>
                 <button class='btn faq__category-header-btn' (click)='toggleCategory("installation", $event)'>
