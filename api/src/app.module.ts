@@ -5,7 +5,9 @@ import * as Joi from '@hapi/joi';
 
 import { AuthModule } from '@api/core/auth/auth.module';
 import { DatabaseModule } from '@api/core/database/database.module';
+import { GCloudModule } from '@api/core/gcloud/gcloud.module';
 import { HttpModule } from '@api/core/http/http.module';
+import { UtilsModule } from '@api/core/utils/utils.module';
 
 import { AdminModule } from '@api/modules/admin/admin.module';
 import { ApiModule } from '@api/modules/api/api.module';
@@ -41,13 +43,23 @@ import { ShopModule } from '@api/modules/shop/shop.module';
 
                 GOOGLE_CLOUD_PROJECT: Joi.string().required(),
                 GCLOUD_STORAGE_BUCKET: Joi.string().required(),
-                GCLOUD_CREDENTIALS: Joi.string().required()
+                GCLOUD_CREDENTIALS: Joi.string().required(),
+
+                MAILER_HOST: Joi.string().required(),
+                MAILER_PORT: Joi.string().required(),
+                MAILER_USER: Joi.string().required(),
+                MAILER_PASS: Joi.string().required(),
+                MAILER_QUEUE_NAME: Joi.string().required(),
+                MAILER_QUEUE_HOST: Joi.string().required(),
+                MAILER_QUEUE_PORT: Joi.number().required()
             })
         }),
 
         AuthModule,
         DatabaseModule,
+        GCloudModule,
         HttpModule,
+        UtilsModule,
 
         AdminModule,
         ApiModule,

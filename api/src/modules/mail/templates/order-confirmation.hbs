@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <title>Order Confirmation Email</title>
+    <style>
+        html, body {
+            font-family: arial, verdana, sans-serif;
+        }
+
+        .email__intro,
+        .email__info {
+            margin-bottom: 3rem;
+        }
+
+        .email__first,
+        .email__last {
+            margin-bottom: 2rem;
+        }
+
+        .email__last {
+            margin-top: 2rem;
+        }
+
+        .email__link--download {
+            display: block;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+<div class='email'>
+    <div class='email__body'>
+        <p class='email__intro'>Hello!</p>
+
+        <p class='email__first'>
+            Thank you so much for your purchase - your support means a great deal to me!
+        </p>
+
+        <p class='email__info'>
+            For reference, your order number is #<span class='order-number'>{{ orderNumber }}</span>.
+            Please click on the filename below to begin downloading. If you have any questions, take a look at the
+            <a class='email__link' href='https://mattmaxwell.tech/shop/faq' target='_blank'>
+                shop's FAQ page
+            </a>
+            or feel free to send me an
+            <a class='email__link' href='mailto:maxwellmattryan@gmail.com' target='_blank'>
+                email
+            </a>
+            if you just wanna chat!
+        </p>
+
+        <a class='email__link email__link--download' href={{ signedUrl }} target='_blank'>
+            {{ product.filename }}
+        </a>
+
+        <p class='email__last'>I hope you really enjoy using {{ product.name }}. I'd love to checkout anything you create with it in the future, so always feel free to share. Cheers!</p>
+
+        <p class='email__outro'>Sincerely,</p>
+
+        <p class='email__outro'>Matthew</p>
+    </div>
+</div>
+</body>
+</html>

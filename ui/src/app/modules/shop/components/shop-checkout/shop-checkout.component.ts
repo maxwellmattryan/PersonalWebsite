@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService, ObfuscationService } from '@ui/core/services';
 import { ShopCheckoutService } from '../../services';
 import { ShopOrder } from '@ui/modules/shop/models';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'ui-shop-checkout',
@@ -13,6 +14,8 @@ import { ShopOrder } from '@ui/modules/shop/models';
 })
 export class ShopCheckoutComponent implements OnInit {
     public isLoaded: boolean = false;
+
+    public order: ShopOrder;
 
     constructor(
         private readonly notificationService: NotificationService,
@@ -29,21 +32,25 @@ export class ShopCheckoutComponent implements OnInit {
         this.activatedRoute.queryParams.subscribe(params => {
             if(params.success == 'true') {
                 const productId = params.productId;
+                const isFreeProduct: boolean = params.freeProduct == 'true';
 
-                if(params.bypassStripe == 'true') {
+                const callbackFn = (res: ShopOrder) => {
+                    this.order = res;
+                    this.isLoaded = true;
+                };
+                const errorFn = (error: HttpErrorResponse) => {
+                    this.notificationService.createNotification(error.error.message, '', 3600);
+                    this.router.navigate(['shop']);
+                };
+
+                if(isFreeProduct) {
                     const customer = this.shopCheckoutService.getCustomer();
                     if(!customer) this.router.navigate(['shop']);
 
-                    this.shopCheckoutService.completeFreeCheckout(productId, customer.email).subscribe((res: ShopOrder) => {
-                        console.log(res);
-                        this.isLoaded = true;
-                    });
+                    this.shopCheckoutService.completeFreeCheckout(productId, customer.email).subscribe(callbackFn, errorFn);
                 } else {
                     const sessionId = params.sessionId;
-                    this.shopCheckoutService.completeCheckout(productId, sessionId).subscribe((res: ShopOrder) => {
-                        console.log(res);
-                        this.isLoaded = true;
-                    });
+                    this.shopCheckoutService.completeCheckout(productId, sessionId).subscribe(callbackFn, errorFn);
                 }
 
             }
@@ -52,5 +59,9 @@ export class ShopCheckoutComponent implements OnInit {
                 this.router.navigate(['shop']);
             }
         });
+    }
+
+    public paddedOrderNumber(amount: number = 5): string {
+        return String(this.order.id).padStart(amount, '0');
     }
 }

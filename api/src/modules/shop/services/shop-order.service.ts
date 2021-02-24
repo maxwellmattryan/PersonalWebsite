@@ -7,7 +7,8 @@ import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum
 import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
 
 import { ShopOrder } from '../entities/shop-order.entity';
-import { ShopOrderAlreadyExistsException } from '@api/modules/shop/exceptions/shop-order.exception';
+
+import { ShopOrderAlreadyExistsException } from '../exceptions/shop-order.exception';
 
 @Injectable()
 export class ShopOrderService {
@@ -19,8 +20,8 @@ export class ShopOrderService {
     public async hasBeenMadeBefore(customerId: number, productId: number): Promise<boolean> {
         return await this.shopOrderRepository
             .createQueryBuilder('so')
-            .where('so.customer = :customer', { customer: customerId})
-            .andWhere('so.product = :product', { product: productId })
+            .where('so.customer_id = :customerId', { customerId: customerId})
+            .andWhere('so.product_id = :product', { productId: productId })
             .getCount() > 1;
     }
 
@@ -52,8 +53,17 @@ export class ShopOrderService {
             .createQueryBuilder('so')
             .leftJoinAndSelect('so.product', 'sp')
             .leftJoinAndSelect('so.customer', 'sc')
-            .where('so.customer = :customer', { customer: customerId })
-            .andWhere('so.product = :product', { product: productId })
+            .where('so.customer_id = :customerId', { customerId: customerId })
+            .andWhere('so.product_id = :productId', { productId: productId })
             .getOne();
+    }
+    
+    public async getOrdersByCustomer(customerId: number): Promise<ShopOrder[]> {
+        return await this.shopOrderRepository
+            .createQueryBuilder('so')
+            .leftJoinAndSelect('so.product', 'sp')
+            .leftJoinAndSelect('so.customer', 'sc')
+            .where('sc.id = :customerId', { customerId: customerId })
+            .getMany();
     }
 }
