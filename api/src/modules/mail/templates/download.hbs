@@ -1,3 +1,5 @@
 <h1>Thanks for your purchase!</h1>
-<p>Please click the link below to download your product!</p>
-<p><a href='{{ url }}' target='_blank'>Download</a></p>
+<p>Please click the link(s) below to begin downloading.</p>
+{{#each signedUrls}}
+    <p><a href='{{ this }}' target='_blank'>Download</a></p>
+{{/each}}

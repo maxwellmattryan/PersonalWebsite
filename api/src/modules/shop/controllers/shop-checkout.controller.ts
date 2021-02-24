@@ -8,10 +8,10 @@ import { GCloudStorageService } from '@api/core/gcloud/gcloud-storage.service';
 import { MailService } from '@api/modules/mail/mail.service';
 
 import { ShopCheckoutService } from '../services/shop-checkout.service';
-
-import { ShopCustomer } from '../entities/shop-customer.entity';
+import { ShopCustomerService } from '../services/shop-customer.service';
 
 import { InvalidCheckoutSessionException } from '../exceptions/shop-checkout.exception';
+import { ShopCustomerWasNotFoundException } from '../exceptions/shop-customer.exception';
 
 @Controller('shop/checkout')
 export class ShopCheckoutController {
@@ -21,6 +21,7 @@ export class ShopCheckoutController {
         private readonly httpService: HttpService,
         private readonly mailService: MailService,
         private readonly shopCheckoutService: ShopCheckoutService,
+        private readonly shopCustomerService: ShopCustomerService
     ) { }
 
     @Post('init')
@@ -43,8 +44,9 @@ export class ShopCheckoutController {
             : this.shopCheckoutService.getCheckoutOrder(query.sessionId, query.productId)
         );
 
-        // PASS ORDER TO GCLOUD STORAGE SERVICE
-        // PASS SIGNED URLS TO MAIL SERVICE
+        const signedUrl = await this.gCloudStorageService.getSignedUrl(order.product.filename);
+
+        await this.mailService.sendOrderEmail(order, signedUrl);
 
         return order;
     }
@@ -52,9 +54,9 @@ export class ShopCheckoutController {
     @Get('email')
     @HttpCode(200)
     public async testEmail(@Req() request: Request): Promise<void> {
-        const customer = new ShopCustomer({
-            email: 'maxwellmattryan@gmail.com'
-        });
+        const customer = await this.shopCustomerService.getCustomer(-1, request.body.email);
+        if(!customer) throw new ShopCustomerWasNotFoundException();
+
         await this.mailService.sendTestEmail(customer);
     }
 }

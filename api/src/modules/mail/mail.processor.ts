@@ -6,8 +6,9 @@ import { Job } from 'bull';
 import { plainToClass } from 'class-transformer';
 
 import { ShopCustomer } from '@api/modules/shop/entities/shop-customer.entity';
+import { ShopOrder } from '@api/modules/shop/entities/shop-order.entity';
 
-import { FailedToSendDownloadEmailException } from './mail.exception';
+import { FailedToSendOrderEmailException, FailedToSendTestEmailException } from './mail.exception';
 
 @Processor(process.env.MAILER_QUEUE_NAME)
 export class MailProcessor {
@@ -32,25 +33,46 @@ export class MailProcessor {
         this.logger.debug(`Failed job ${job.id} of type ${job.name}. Error: ${error.message}`, error.stack);
     }
 
-    @Process('download')
-    private async sendDownloadEmail(job: Job<{ customer: ShopCustomer }>): Promise<any> {
-        this.logger.log(`Sending download email to '${job.data.customer.email}'`);
+    @Process('order-download')
+    private async sendDownloadEmail(job: Job<{ order: ShopOrder, signedUrl: string }>): Promise<any> {
+        this.logger.log(`Sending download email to '${job.data.order.customer.email}'`);
 
         await this.mailerService.sendMail({
             template: 'download',
             context: {
-                ...plainToClass(ShopCustomer, job.data.customer),
-                url: 'https://mattmaxwell.dev'
+                ...plainToClass(ShopOrder, job.data.order),
+                signedUrls: [job.data.signedUrl]
             },
-            subject: `Download URL(s)`,
+            subject: `Download URL | ${job.data.order.product.name} | mattmaxwell.dev`,
+            to: job.data.order.customer.email
+        })
+        .then((res: any) => {
+            return res;
+        })
+        .catch((error) => {
+            this.logger.error(`Failed to send order email to '${job.data.order.customer.email}'`, error.stack);
+            throw new FailedToSendOrderEmailException();
+        });
+    }
+
+    @Process('test')
+    private async sendTestEmail(job: Job<{ customer: ShopCustomer }>): Promise<any> {
+        this.logger.log(`Sending test email to '${job.data.customer.email}'`);
+
+        await this.mailerService.sendMail({
+            template: 'test',
+            context: {
+                ...plainToClass(ShopCustomer, job.data.customer.email)
+            },
+            subject: `Test Email | mattmaxwell.dev`,
             to: job.data.customer.email
         })
         .then((res: any) => {
             return res;
         })
         .catch((error) => {
-            this.logger.error(`Failed to send download email to '${job.data.customer.email}'`, error.stack);
-            throw new FailedToSendDownloadEmailException();
+            this.logger.error(`Failed to send test email to '${job.data.customer.email}'`, error.stack);
+            throw new FailedToSendTestEmailException();
         });
     }
 }
