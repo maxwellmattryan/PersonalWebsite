@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from '@ui/core/auth';
 import {
+    FileService,
     NotificationService,
     SeoService,
     TrackingService
@@ -30,6 +30,7 @@ export class BlogPostViewComponent implements OnInit {
         private blogEditorService: BlogEditorService,
         private blogComparisonService: BlogComparisonService,
         public blogTopicService: BlogTopicService,
+        public fileService: FileService,
         private notificationService: NotificationService,
         public seoService: SeoService,
         private titleService: Title,

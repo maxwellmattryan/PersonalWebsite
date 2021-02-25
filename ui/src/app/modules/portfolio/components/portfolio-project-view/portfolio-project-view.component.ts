@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from '@ui/core/auth';
-import { NotificationService, SeoService } from '@ui/core/services';
+import { FileService, NotificationService, SeoService } from '@ui/core/services';
 
 import { PortfolioProject } from '../../models';
 import { PortfolioApiService, PortfolioEditorService } from '../../services';
@@ -22,6 +22,7 @@ export class PortfolioProjectViewComponent implements OnInit {
 
     constructor(
         private authService: AuthService,
+        public fileService: FileService,
         private notificationService: NotificationService,
         private portfolioProjectApiService: PortfolioApiService,
         private portfolioProjectEditorService: PortfolioEditorService,

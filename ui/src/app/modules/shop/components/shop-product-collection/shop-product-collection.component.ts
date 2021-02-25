@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '@ui/core/auth';
-import { NotificationService, SeoService, TrackingService } from '@ui/core/services';
+import { FileService, NotificationService, SeoService, TrackingService } from '@ui/core/services';
 
 import { ShopCustomer, ShopProduct } from '../../models';
 import { ShopApiService, ShopCheckoutService, ShopEditorService } from '../../services';
@@ -27,6 +27,7 @@ export class ShopProductCollectionComponent implements OnInit {
 
     constructor(
         private readonly authService: AuthService,
+        public readonly fileService: FileService,
         private readonly notificationService: NotificationService,
         private readonly seoService: SeoService,
         private readonly shopApiService: ShopApiService,
