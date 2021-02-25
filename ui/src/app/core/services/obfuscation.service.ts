@@ -25,13 +25,7 @@ export class ObfuscationService {
     }
 
     handleEmailClickWith(event: Event, name: string, domain: string, extension: string = 'com'): void {
-        const mailToUrl = `mailto:${name}@${domain}.${extension}`;
-        const elem: HTMLAnchorElement = (<HTMLAnchorElement>event.target);
-        elem.href = mailToUrl;
-
-        setTimeout(() => {
-            elem.href = `mailto:${this.constructEmailWith(name, domain, extension)}`;
-        }, 100);
+        window.location.href = `mailto:${name}@${domain}.${extension}`;
     }
 
     private uglify(s: string): string {
