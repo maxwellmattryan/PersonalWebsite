@@ -46,7 +46,7 @@ export class ShopCheckoutController {
         if(!order.has_sent_email) {
             const signedUrl = await this.gCloudStorageService.getSignedUrl(order.product.filename);
 
-            await this.mailService.sendOrderConfirmationEmail(order, signedUrl);
+            await this.mailService.sendConfirmationEmail(order, signedUrl);
 
             order = await this.shopOrderService.updateOrder(order.id, order);
         }

@@ -18,8 +18,8 @@ export class MailService {
             .catch((error) => { console.log(error); })
     }
 
-    public async sendOrderConfirmationEmail(order: ShopOrder, signedUrl: string): Promise<void> {
-        await this.mailQueue.add('order-confirmation', { order: order, signedUrl: signedUrl })
+    public async sendConfirmationEmail(order: ShopOrder, signedUrl: string): Promise<void> {
+        await this.mailQueue.add('confirmation', { order: order, signedUrl: signedUrl })
             .catch((error) => { console.log(error); })
     }
 }

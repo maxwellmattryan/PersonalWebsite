@@ -61,19 +61,20 @@ export class MailProcessor {
             });
     }
 
-    @Process('order-confirmation')
+    @Process('confirmation')
     private async sendOrderConfirmationEmail(job: Job<{ order: ShopOrder, signedUrl: string }>): Promise<any> {
         this.logger.log(`Sending order download email to '${job.data.order.customer.email}'`);
 
+        const isFreeOrder: boolean = job.data.order.amount <= 0.0;
         const orderNumber: string = this.utilsService.pad(job.data.order.id);
         await this.mailerService.sendMail({
-            template: 'order-confirmation',
+            template: `${isFreeOrder ? 'download' : 'order'}-confirmation`,
             context: {
                 ...plainToClass(ShopOrder, job.data.order),
                 signedUrl: job.data.signedUrl,
                 orderNumber: orderNumber
             },
-            subject: `${job.data.order.product.name} | Order Confirmation | mattmaxwell.dev`,
+            subject: `${job.data.order.product.name} | ${isFreeOrder ? 'Download' : 'Order'} Confirmation | mattmaxwell.dev`,
             to: job.data.order.customer.email
         })
         .then((res: any) => {
