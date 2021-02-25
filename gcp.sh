@@ -6,7 +6,7 @@ convertsecs() {
     printf "%02dm %02ds\n" $m $s
 }
 
-NODE_VERSION=15.8.0-alpine3.10
+NODE_VERSION=15.10.0-alpine3.10
 
 API_IMAGE=mattmaxwell-api
 UI_IMAGE=mattmaxwell-ui
