@@ -5,7 +5,7 @@
 
     <div class='container projects__project-container'>
         <div class='projects__project' *ngFor='let project of projects trackBy: this.trackingService.objectById; let idx = index' [ngClass]="{'projects__project--rjust': idx % 2 === 0}">
-            <div class='projects__project-background' [ngStyle]="{ 'background-image': 'url(' + project.image_url.substring(0, project.image_url.length - 4) + 'png)' }"></div>
+            <div class='projects__project-background' [ngStyle]="{ 'background-image': 'url(' + fileService.getImageUri(project.image_url, 'png') + ')' }"></div>
 
             <a class='projects__project-anchor-wrapper' [routerLink]="[this.getProjectUrl(project.id, project.name)]">
                 <h3 class='projects__project-name projects__project-name--link'>{{ project.name }}</h3>
