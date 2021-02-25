@@ -20,7 +20,12 @@ export function markedOptionsFactory(): MarkedOptions {
 
     renderer.link = (href, title, text) => {
         const html = linkRenderer.call(renderer, href, title, text);
-        return html.replace(/^<a /, '<a role="link" target="_blank" rel="nofollow noopener noreferrer" ');
+
+        const isAppUrl = href.includes(environment.BASE_URL);
+        const replacement = isAppUrl ? '<a role="link" '
+            : '<a role="link" target="_blank" rel="nofollow noopener noreferrer" ';
+
+        return html.replace(/^<a /, replacement);
     }
 
     return {
