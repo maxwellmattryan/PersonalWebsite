@@ -11,7 +11,6 @@ export class FileController {
     @Get()
     @HttpCode(200)
     public async getFile(@Query() query, @Req() request: Request, @Res() response: Response): Promise<File> {
-        console.log(query.uri);
         return response.sendFile(query.uri, { root: 'assets' });
     }
 }

@@ -19,6 +19,8 @@ export class FileService extends ApiService {
     public getImageUri(relativeUri: string = '', format: ImageFormat): string {
         const noExt = relativeUri.match(/[^.]*/)[0];
 
+        console.log('YO');
+
         return `${environment.API_URL}/file?uri=${noExt}.${format}`;
     }
 }

@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 import { AuthService } from '@ui/core/auth';
 import { FileService, NotificationService, SeoService, TrackingService } from '@ui/core/services';
@@ -12,7 +11,8 @@ import { ShopApiService, ShopCheckoutService, ShopEditorService } from '../../se
 @Component({
     selector: 'ui-shop-product-collection',
     templateUrl: './shop-product-collection.component.html',
-    styleUrls: ['./shop-product-collection.component.scss']
+    styleUrls: ['./shop-product-collection.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShopProductCollectionComponent implements OnInit {
     @Input() products: ShopProduct[];

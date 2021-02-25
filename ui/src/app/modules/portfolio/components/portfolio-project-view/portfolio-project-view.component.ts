@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -12,7 +12,8 @@ import { PortfolioApiService, PortfolioEditorService } from '../../services';
 @Component({
     selector: 'ui-portfolio-project-view',
     templateUrl: './portfolio-project-view.component.html',
-    styleUrls: ['./portfolio-project-view.component.scss']
+    styleUrls: ['./portfolio-project-view.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PortfolioProjectViewComponent implements OnInit {
     isAdmin: boolean = false;
@@ -22,6 +23,7 @@ export class PortfolioProjectViewComponent implements OnInit {
 
     constructor(
         private authService: AuthService,
+        private changeDetectorRef: ChangeDetectorRef,
         public fileService: FileService,
         private notificationService: NotificationService,
         private portfolioProjectApiService: PortfolioApiService,
@@ -47,6 +49,8 @@ export class PortfolioProjectViewComponent implements OnInit {
             this.titleService.setTitle(`${res.name} - ${res.tagline} | Portfolio | Matthew Maxwell`);
 
             this.isLoaded = true;
+
+            this.changeDetectorRef.detectChanges();
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
             this.router.navigate(['']);
