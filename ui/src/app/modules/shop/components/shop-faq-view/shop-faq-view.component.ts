@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -12,7 +12,8 @@ export type FaqCategory = 'bugs' | 'compatibility' | 'installation' | 'purchasin
 @Component({
     selector: 'ui-shop-faq-view',
     templateUrl: './shop-faq-view.component.html',
-    styleUrls: ['./shop-faq-view.component.scss']
+    styleUrls: ['./shop-faq-view.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShopFaqViewComponent implements OnInit {
     private answerShowClass: string = 'faq__category-info-q-container--show';
@@ -25,6 +26,7 @@ export class ShopFaqViewComponent implements OnInit {
     public isSubmittingEmail: boolean = false;
 
     constructor(
+        private changeDetectorRef: ChangeDetectorRef,
         private readonly notificationService: NotificationService,
         public readonly obfuscationService: ObfuscationService,
         private readonly shopApiService: ShopApiService,
@@ -54,9 +56,13 @@ export class ShopFaqViewComponent implements OnInit {
             this.isSubmittingEmail = false;
             this.initEmailForm();
             this.notificationService.createNotification('Successfully sent download URL(s) to your email! It may take a moment to show up in your inbox.', '', 3600);
+
+            this.changeDetectorRef.detectChanges();
         }, (error: HttpErrorResponse) => {
             this.isSubmittingEmail = false;
             this.notificationService.createNotification('Sorry, unable to find customer. Please check that your email is correct.', '', 3600);
+
+            this.changeDetectorRef.detectChanges();
         });
     }
 

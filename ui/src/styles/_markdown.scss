@@ -6,12 +6,12 @@ markdown ::ng-deep h3,
 markdown ::ng-deep h4,
 markdown ::ng-deep h5,
 markdown ::ng-deep h6 {
-    margin: calc(#{$margin} * 1.25) 0 calc(#{$margin} * 0.75);
+    margin: calc(#{$margin} * 1.75) 0 calc(#{$margin} * 0.75);
 }
 
 markdown ::ng-deep p,
 markdown ::ng-deep img {
-    margin: $half-margin 0;
+    margin: $margin 0;
 }
 
 markdown ::ng-deep pre {

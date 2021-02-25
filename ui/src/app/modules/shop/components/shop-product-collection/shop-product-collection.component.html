@@ -10,9 +10,9 @@
 
                 <div class='products__product-image-container'>
                     <picture>
-                        <source [srcset]='p.image_url' type="image/webp">
-                        <source [srcset]="p.image_url.substring(0, p.image_url.length - 4) + 'png'" type="image/png">
-                        <img class='products__product-image' [alt]='p.name + " thumbnail"' [src]='p.image_url.substring(0, p.image_url.length - 4) + "png"'>
+                        <source [srcset]='fileService.getImageUri(p.image_url, "webp")' type='image/webp'>
+                        <source [srcset]='fileService.getImageUri(p.image_url, "png")' type='image/png'>
+                        <img class='products__product-image' [alt]='p.name + " thumbnail"' [src]='fileService.getImageUri(p.image_url, "png")'>
                     </picture>
                 </div>
 

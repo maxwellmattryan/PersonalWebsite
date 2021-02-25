@@ -29,8 +29,8 @@
 
         <div class='about__portrait-container'>
             <picture>
-                <source [srcset]='imageUrl' type="image/webp">
-                <source [srcset]="imageUrl.substring(0, imageUrl.length - 4) + 'png'" type="image/png">
+                <source [srcset]='fileService.getImageUri(imageUrl, "webp")' type="image/webp">
+                <source [srcset]='fileService.getImageUri(imageUrl, "png")' type='image/png'>
                 <img class='about__portrait' alt='Profile image' [src]='imageUrl.substring(0, imageUrl.length - 4) + "png"'>
             </picture>
         </div>
