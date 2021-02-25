@@ -5,6 +5,7 @@ import * as Joi from '@hapi/joi';
 
 import { AuthModule } from '@api/core/auth/auth.module';
 import { DatabaseModule } from '@api/core/database/database.module';
+import { FileModule } from '@api/core/file/file.module';
 import { GCloudModule } from '@api/core/gcloud/gcloud.module';
 import { HttpModule } from '@api/core/http/http.module';
 import { UtilsModule } from '@api/core/utils/utils.module';
@@ -57,6 +58,7 @@ import { ShopModule } from '@api/modules/shop/shop.module';
 
         AuthModule,
         DatabaseModule,
+        FileModule,
         GCloudModule,
         HttpModule,
         UtilsModule,

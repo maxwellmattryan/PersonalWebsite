@@ -1,4 +1,6 @@
-import { Controller, Get, HttpCode, Param, Req, Res } from '@nestjs/common';
+import { Controller, Get, HttpCode, Param, Query, Req, Res } from '@nestjs/common';
+
+import { Request, Response } from 'express';
 
 export type File = any;
 
@@ -6,9 +8,10 @@ export type File = any;
 export class FileController {
     constructor() { }
 
-    @Get(':path')
+    @Get()
     @HttpCode(200)
-    public async getFile(@Param('path') path: string, @Req() request: Request, @Res() response: Response): Promise<File> {
-        console.log(path);
+    public async getFile(@Query() query, @Req() request: Request, @Res() response: Response): Promise<File> {
+        console.log(query.uri);
+        return response.sendFile(query.uri, { root: 'assets' });
     }
 }

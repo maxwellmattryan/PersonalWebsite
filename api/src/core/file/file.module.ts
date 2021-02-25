@@ -1,9 +1,16 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+
+import { FileController } from './file.controller';
 
 @Module({
-    imports: [],
+    imports: [
+        ConfigModule.forRoot()
+    ],
     exports: [],
-    controllers: [],
+    controllers: [
+        FileController
+    ],
     providers: []
 })
 export class FileModule { }
