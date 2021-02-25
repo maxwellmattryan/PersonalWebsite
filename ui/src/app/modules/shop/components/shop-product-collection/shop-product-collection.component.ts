@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { AuthService } from '@ui/core/auth';
 import { NotificationService, SeoService, TrackingService } from '@ui/core/services';
 
 import { ShopCustomer, ShopProduct } from '../../models';
 import { ShopApiService, ShopCheckoutService, ShopEditorService } from '../../services';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'ui-shop-product-collection',
@@ -20,7 +21,7 @@ export class ShopProductCollectionComponent implements OnInit {
     @Input() baseRoute: string = 'shop/products';
 
     public isAdmin: boolean = false;
-    public hasStartedCheckout: boolean = false;
+    public isStartingCheckout: boolean = false;
     public checkoutProductId: number = -1;
     public modalId: string = 'shop-checkout-modal';
 
@@ -83,10 +84,21 @@ export class ShopProductCollectionComponent implements OnInit {
         if(productData.amount <= 0.0) {
             this.showDialog();
         } else {
-            this.hasStartedCheckout = true;
-            this.shopCheckoutService.goToCheckout(productData).subscribe();
+            this.isStartingCheckout = true;
+            this.shopCheckoutService.goToCheckout(productData).subscribe((res: any) => {
+                this.isStartingCheckout = false;
+            });
+
+            setTimeout(this.timeoutFn, 10000);
         }
     }
+
+    private timeoutFn = () => {
+        if(!this.isStartingCheckout) return;
+
+        this.isStartingCheckout = false;
+        this.notificationService.createNotification('Sorry, unable to initialize Stripe Checkout. Please refresh and try again.', '', 3600);
+    };
 
     public startFreeCheckout(customerData: ShopCustomer): void {
         if(this.checkoutProductId == -1) return;

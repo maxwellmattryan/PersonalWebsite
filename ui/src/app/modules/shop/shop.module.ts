@@ -12,8 +12,9 @@ import { ShopRoutingModule } from './shop-routing.module';
 
 import {
     ShopCategoryEditorComponent,
-    ShopCheckoutComponent,
+    ShopCheckoutViewComponent,
     ShopCheckoutModalComponent,
+    ShopFaqViewComponent,
     ShopProductCollectionComponent,
     ShopProductEditorComponent,
     ShopViewComponent
@@ -30,8 +31,9 @@ import {
     declarations: [
         ShopComponent,
         ShopCategoryEditorComponent,
-        ShopCheckoutComponent,
+        ShopCheckoutViewComponent,
         ShopCheckoutModalComponent,
+        ShopFaqViewComponent,
         ShopProductCollectionComponent,
         ShopProductEditorComponent,
         ShopViewComponent

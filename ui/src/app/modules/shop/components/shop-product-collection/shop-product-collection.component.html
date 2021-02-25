@@ -23,16 +23,16 @@
                 </p>
 
                 <a
-                    [ngClass]="{'products__product-buy-btn--compress': isAdmin, 'btn--loading': hasStartedCheckout && p.id === checkoutProductId }"
+                    [ngClass]="{'products__product-buy-btn--compress': isAdmin, 'btn--loading': isStartingCheckout && p.id === checkoutProductId }"
                     class='btn btn--go products__product-buy-btn'
                     (click)='startCheckout(p);'
                 >
-                    <ng-container *ngIf='!(hasStartedCheckout && p.id === checkoutProductId)'>
+                    <ng-container *ngIf='!(isStartingCheckout && p.id === checkoutProductId)'>
                         {{ p.amount <= 0 ? "FREE" : "$ " + formatAmount(p.amount) }}
                     </ng-container>
-                    <ng-container *ngIf='hasStartedCheckout && p.id === checkoutProductId'>
+                    <ng-container *ngIf='isStartingCheckout && p.id === checkoutProductId'>
                         <div class='btn-loader-container'>
-                            <div class='btn-loader'></div>
+                            <div class='btn-loader--go'></div>
                         </div>
                     </ng-container>
                 </a>

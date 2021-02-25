@@ -5,7 +5,8 @@ import { ShopComponent } from './shop.component';
 
 import {
     ShopCategoryEditorComponent,
-    ShopCheckoutComponent,
+    ShopCheckoutViewComponent,
+    ShopFaqViewComponent,
     ShopProductEditorComponent,
     ShopViewComponent
 } from './components';
@@ -25,7 +26,11 @@ const routes: Routes = [
             },
             {
                 path: 'checkout',
-                component: ShopCheckoutComponent
+                component: ShopCheckoutViewComponent
+            },
+            {
+                path: 'faq',
+                component: ShopFaqViewComponent
             },
             {
                 path: 'products/editor',

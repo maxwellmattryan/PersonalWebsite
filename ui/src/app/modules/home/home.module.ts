@@ -9,13 +9,18 @@ import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
 
 import { HomeApiService } from './services';
-import { HomeAboutComponent, HomeLandingComponent } from './components';
+import {
+    HomeAboutComponent,
+    HomeLandingComponent,
+    HomeShopComponent
+} from './components';
 
 @NgModule({
     declarations: [
         HomeComponent,
         HomeAboutComponent,
-        HomeLandingComponent
+        HomeLandingComponent,
+        HomeShopComponent
     ],
     imports: [
         CommonModule,

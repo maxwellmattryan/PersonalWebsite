@@ -1,6 +1,7 @@
 @import 'variables';
 
 .modal {
+    color: $color-white;
     display: block;
     position: fixed;
     z-index: 1000;
@@ -35,17 +36,8 @@
         cursor: pointer;
         font-size: 150%;
         height: calc(1.5 * #{$btn-height});
-        line-height: calc(1.5 * #{$btn-height});
-        transform: translateY(-$padding);
         border-top-left-radius: 0.5rem;
-
-        p {
-            position: absolute;
-            height: calc(1.5 * #{$btn-height});
-            line-height: calc(1.5 * #{$btn-height});
-            padding: $quarter-padding calc(1 * #{$padding});
-            border-top-left-radius: 0.5rem;
-        }
+        padding: $quarter-padding calc(1 * #{$padding});
     }
 }
 
@@ -113,14 +105,9 @@
         top: 0;
     }
 
-    .modal-close-btn:hover {
+    .modal-close-btn-container button:hover {
         background-color: $color-primary;
         color: $color-dark;
-
-        p {
-            background-color: $color-primary;
-            color: $color-dark;
-        }
     }
 
     .modal-body {
