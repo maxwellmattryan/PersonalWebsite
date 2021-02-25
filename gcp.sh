@@ -65,13 +65,13 @@ then
     echo -e "To switch to the correct branch, please use:\n\n\tgit checkout main"
     exit 1;
 else
-    echo -e "\t[\u2714] Branch is set to \"main\"\n"
+    echo -e "\t[\u2714] Branch is set to \"main\""
 fi
 
 CURRENT_GCP_PROJECT=$(gcloud config get-value project)
 if [ "$CURRENT_GCP_PROJECT" != "$GCP_PROJECT_ID" ];
 then
-    echo -e "\t[\u2718] Cloud SDK's configuration is set for $GCP_PROJECT_ID\n"
+    echo -e "\n\t[\u2718] Cloud SDK's configuration is set for $GCP_PROJECT_ID\n"
     echo -e "To properly configure the SDK for this project, use:\n\n\tgcloud config set project $GCP_PROJECT_ID"
     exit 1;
 else
