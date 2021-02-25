@@ -29,6 +29,9 @@ export class ShopOrder {
     @Column({ type: 'decimal', nullable: false })
     public amount: number;
 
+    @Column({ type: 'boolean', nullable: false, default: false })
+    public has_sent_email: boolean;
+
     @CreateDateColumn({ type: 'timestamp', default: () => 'now()' })
     public created_at?: Date;
 

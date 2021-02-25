@@ -8,6 +8,7 @@ import { GCloudStorageService } from '@api/core/gcloud/gcloud-storage.service';
 import { MailService } from '@api/modules/mail/mail.service';
 
 import { ShopCheckoutService } from '../services/shop-checkout.service';
+import { ShopOrderService } from '../services/shop-order.service';
 
 import { InvalidCheckoutSessionException } from '../exceptions/shop-checkout.exception';
 
@@ -18,7 +19,8 @@ export class ShopCheckoutController {
         private readonly gCloudStorageService: GCloudStorageService,
         private readonly httpService: HttpService,
         private readonly mailService: MailService,
-        private readonly shopCheckoutService: ShopCheckoutService
+        private readonly shopCheckoutService: ShopCheckoutService,
+        private readonly shopOrderService: ShopOrderService
     ) { }
 
     @Post('init')
@@ -36,14 +38,19 @@ export class ShopCheckoutController {
             (query.sessionId != undefined && (isFreeOrder || query.freeProduct != undefined)))
             throw new InvalidCheckoutSessionException();
 
-        const order = await (isFreeOrder ?
+        let order = await (isFreeOrder ?
             this.shopCheckoutService.getFreeCheckoutOrder(request.body.email, query.productId)
             : this.shopCheckoutService.getCheckoutOrder(query.sessionId, query.productId)
         );
 
-        const signedUrl = await this.gCloudStorageService.getSignedUrl(order.product.filename);
+        if(!order.has_sent_email) {
+            const signedUrl = await this.gCloudStorageService.getSignedUrl(order.product.filename);
 
-        await this.mailService.sendOrderConfirmationEmail(order, signedUrl);
+            await this.mailService.sendOrderConfirmationEmail(order, signedUrl);
+
+            order = await this.shopOrderService.updateOrder(order.id, order);
+        }
+
 
         return order;
     }

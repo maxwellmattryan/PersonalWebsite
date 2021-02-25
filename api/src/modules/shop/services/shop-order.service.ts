@@ -66,4 +66,15 @@ export class ShopOrderService {
             .where('sc.id = :customerId', { customerId: customerId })
             .getMany();
     }
+
+    public async updateOrder(id: number, orderData: ShopOrder, hasSentEmail: boolean = true): Promise<ShopOrder> {
+        const newOrder = new ShopOrder({
+            ...orderData,
+            id: id,
+            has_sent_email: hasSentEmail
+        });
+        await this.shopOrderRepository.save(newOrder);
+
+        return await this.getOrder(id);
+    }
 }

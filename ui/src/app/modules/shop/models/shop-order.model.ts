@@ -24,6 +24,8 @@ export class ShopOrder implements Deserializable {
 
     public amount: number;
 
+    public has_sent_email: boolean;
+
     public created_at?: Date;
     public updated_at?: Date;
 }
