@@ -6,11 +6,19 @@ the information in here has to be consistent to have proper SEO optimization -->
     <!-- Static URLs -->
     <url>
         <loc>https://mattmaxwell.dev</loc>
-        <priority>0.5</priority>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://mattmaxwell.dev/blog</loc>
         <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://mattmaxwell.dev/shop</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://mattmaxwell.dev/shop/faq</loc>
+        <priority>0.3</priority>
     </url>
 
     <!-- Projects -->
@@ -53,6 +61,11 @@ the information in here has to be consistent to have proper SEO optimization -->
     <url>
         <loc>https://mattmaxwell.dev/blog/posts/2/the-fundamental-concepts-of-audio-programming</loc>
         <lastmod>2020-09-14T01:05:29.653050</lastmod>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <loc>https://mattmaxwell.dev/blog/posts/3/creating-a-continuous-integration-ci-pipeline-for-juce-plugins</loc>
+        <lastmod>2020-10-15 02:27:25.907561</lastmod>
         <priority>0.4</priority>
     </url>
 </urlset>

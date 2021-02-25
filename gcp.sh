@@ -62,8 +62,8 @@ BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 if [ "$BRANCH" != "main" ];
 then
     echo -e "\t[\u2718] Branch is set to \"main\"\n"
-#    echo -e "To switch to the correct branch, please use:\n\n\tgit checkout main"
-#    exit 1;
+    echo -e "To switch to the correct branch, please use:\n\n\tgit checkout main"
+    exit 1;
 else
     echo -e "\t[\u2714] Branch is set to \"main\"\n"
 fi
