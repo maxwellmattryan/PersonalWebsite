@@ -1,12 +1,14 @@
 <div class='section-container home-view' *ngIf='isLoaded; else loading'>
-    <app-home-landing [tagline]='homepage.profile.tagline' [landing]='homepage.profile.landing'></app-home-landing>
-    <app-home-about [paragraph]='homepage.profile.about' [technologies]='homepage.profile.technologies' [imageUrl]='homepage.profile.image_url'></app-home-about>
+    <ui-home-landing [tagline]='homepage.profile.tagline' [landing]='homepage.profile.landing'></ui-home-landing>
+    <ui-home-about [paragraph]='homepage.profile.about' [technologies]='homepage.profile.technologies' [imageUrl]='homepage.profile.image_url'></ui-home-about>
     <div class="section-divider"></div>
-    <app-portfolio-project-collection [projects]='homepage.profile.projects'></app-portfolio-project-collection>
+    <ui-portfolio-project-collection [projects]='homepage.profile.projects'></ui-portfolio-project-collection>
     <div class="section-divider"></div>
-    <app-blog-post-collection [posts]="homepage.posts" [showTopics]='true' [showPreview]='true' [showReadmore]='true'></app-blog-post-collection>
+    <ui-blog-post-collection [posts]="homepage.posts" [showTopics]='true' [showPreview]='true' [showReadmore]='true'></ui-blog-post-collection>
+    <div class="section-divider"></div>
+    <ui-home-shop></ui-home-shop>
 </div>
 
 <ng-template #loading>
-    <app-loading-spinner></app-loading-spinner>
+    <ui-loading-spinner></ui-loading-spinner>
 </ng-template>

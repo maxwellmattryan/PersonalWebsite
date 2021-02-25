@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
+import { FileService, TrackingService } from '@ui/core/services';
+
 import { PortfolioProfileTechnology } from '@ui/modules/portfolio/models';
-import { TrackingService } from '@ui/core/services';
 
 @Component({
-    selector: 'app-home-about',
+    selector: 'ui-home-about',
     templateUrl: './home-about.component.html',
     styleUrls: ['./home-about.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -15,7 +16,8 @@ export class HomeAboutComponent implements OnInit {
     @Input() imageUrl: string;
 
     constructor(
-        public trackingService: TrackingService
+        public readonly fileService: FileService,
+        public readonly trackingService: TrackingService
     ) { }
 
     ngOnInit(): void { }

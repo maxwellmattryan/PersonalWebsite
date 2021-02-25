@@ -1,0 +1,33 @@
+@import 'variables';
+
+.checkout__header {
+    margin: calc(2 * #{$margin}) 0;
+    text-align: center;
+}
+
+.checkout__order-number {
+    margin-bottom: $margin;
+}
+
+.checkout__info {
+    margin-bottom: $margin;
+    width: 100%;
+
+    .checkout__info-link {
+        color: $color-primary;
+    }
+}
+
+.checkout__last {
+
+}
+
+@media only screen and (min-width: 768px) {
+    .checkout {
+        min-height: calc(100vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
+    }
+
+    .checkout__info-link:hover {
+        text-decoration: underline;
+    }
+}

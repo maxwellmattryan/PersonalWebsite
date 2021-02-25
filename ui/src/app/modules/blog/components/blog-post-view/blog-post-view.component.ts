@@ -1,22 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from '@ui/core/auth';
-import {
-    NotificationService,
-    SeoService,
-    TrackingService
-} from '@ui/core/services';
+import { FileService, NotificationService, SeoService, TrackingService } from '@ui/core/services';
 
 import { BlogPost } from '../../models';
-import { BlogApiService, BlogEditorService, BlogComparisonService, BlogTopicService } from '../../services';
+import { BlogApiService, BlogComparisonService, BlogEditorService, BlogTopicService } from '../../services';
 
 @Component({
-    selector: 'app-blog-post-view',
+    selector: 'ui-blog-post-view',
     templateUrl: './blog-post-view.component.html',
-    styleUrls: ['./blog-post-view.component.scss']
+    styleUrls: ['./blog-post-view.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BlogPostViewComponent implements OnInit {
     isAdmin: boolean = false;
@@ -30,6 +26,8 @@ export class BlogPostViewComponent implements OnInit {
         private blogEditorService: BlogEditorService,
         private blogComparisonService: BlogComparisonService,
         public blogTopicService: BlogTopicService,
+        private changeDetectorRef: ChangeDetectorRef,
+        public fileService: FileService,
         private notificationService: NotificationService,
         public seoService: SeoService,
         private titleService: Title,
@@ -59,6 +57,8 @@ export class BlogPostViewComponent implements OnInit {
             this.post.topics.sort(this.blogComparisonService.topics);
 
             this.isLoaded = true;
+
+            this.changeDetectorRef.detectChanges();
         });
     }
 
@@ -67,6 +67,8 @@ export class BlogPostViewComponent implements OnInit {
     }
 
     deletePost(id: number): void {
+        if(!this.notificationService.deleteConfirmation('blog post')) return;
+
         this.blogApiService.deletePost(id).subscribe((res: any) => {
             this.notificationService.createNotification('Successfully deleted blog post!');
             this.router.navigate(['/blog']);

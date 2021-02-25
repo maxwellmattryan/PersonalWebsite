@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
@@ -18,7 +17,7 @@ import {
 } from '@ui/modules/portfolio/services';
 
 @Component({
-    selector: 'app-dashboard',
+    selector: 'ui-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss']
 })
@@ -102,6 +101,8 @@ export class DashboardComponent implements OnInit {
             this.notificationService.createNotification('Cannot delete only existing profile.');
             return;
         }
+
+        if(!this.notificationService.deleteConfirmation('profile')) return;
 
         this.portfolioApiService.deleteProfile(profile.id).subscribe((res: any) => {
             this.profiles = this.profiles.filter(p => p.id !== profile.id);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-blog',
+    selector: 'ui-blog',
     templateUrl: './blog.component.html'
 })
 export class BlogComponent implements OnInit {

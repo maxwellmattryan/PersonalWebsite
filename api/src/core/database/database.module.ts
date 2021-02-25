@@ -10,14 +10,26 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
             imports: [ConfigModule],
             inject: [ConfigService],
             useFactory: (configService: ConfigService) => {
+                const socketPath = configService.get('DB_SOCKET_PATH');
+                const sslOptions = socketPath ? {
+                    rejectUnauthorized: false,
+                    ca: Buffer.from(process.env.DB_SSL_CA, 'base64').toString('ascii'),
+                    cert: Buffer.from(process.env.DB_SSL_CERT, 'base64').toString('ascii'),
+                    key: Buffer.from(process.env.DB_SSL_KEY, 'base64').toString('ascii'),
+                } : { };
+                const extraOptions = socketPath ? { socketPath: socketPath, ssl: sslOptions } : { };
+
                 return ({
                     type: 'postgres',
+                    host: configService.get('DB_HOST'),
+                    port: configService.get('DB_PORT'),
+                    username: configService.get('DB_USER'),
+                    password: configService.get('DB_PASS'),
+                    database: configService.get('DB_NAME'),
+                    extra: extraOptions,
+                    entities: [__dirname + '/../../modules/**/*.entity{.ts,.js}'],
                     namingStrategy: new SnakeNamingStrategy(),
-                    synchronize: true,
-                    url: configService.get('DATABASE_URL'),
-                    ssl: configService.get('DATABASE_USE_SSL'),
-                    extra: configService.get('DATABASE_USE_SSL') ? { ssl: { rejectUnauthorized: false } } : { },
-                    entities: [__dirname + '/../../modules/**/*.entity{.ts,.js}']
+                    synchronize: true
                 });
             }
         })

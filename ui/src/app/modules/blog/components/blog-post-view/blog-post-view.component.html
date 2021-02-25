@@ -25,9 +25,9 @@
     
     <div class='post__image-container'>
         <picture>
-            <source [srcset]="post.image_url" type="image/webp">
-            <source [srcset]="post.image_url.substring(0, post.image_url.length - 4) + 'png'" type="image/png">
-            <img class='post__image' alt='Blog post image' [src]='post.image_url.substring(0, post.image_url.length - 4) + "png"'>
+            <source [srcset]='fileService.getImageUri(post.image_url, "webp")' type='image/webp'>
+            <source [srcset]='fileService.getImageUri(post.image_url, "png")' type='image/png'>
+            <img class='post__image' alt='Blog post image' [src]='fileService.getImageUri(post.image_url, "png")'>
         </picture>
     </div>
 
@@ -35,5 +35,5 @@
 </div>
 
 <ng-template #loading>
-    <app-loading-spinner></app-loading-spinner>
+    <ui-loading-spinner></ui-loading-spinner>
 </ng-template>

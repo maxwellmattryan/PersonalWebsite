@@ -15,7 +15,7 @@
 
     <div class='project__external-container'>
         <a class='icon project__external-icon' [href]='project.link_url' target='_blank' rel='noopener noreferrer'>
-            <app-icon [name]='project.link_name'></app-icon>
+            <ui-icon [name]='project.link_name'></ui-icon>
         </a>
     </div>
 
@@ -24,9 +24,9 @@
     <div class='project__image-link-container'>
         <a class='project__image-link' [href]='project.link_url' target='_blank' rel='noopener noreferrer'>
             <picture>
-                <source [srcset]="project.image_url" type="image/webp">
-                <source [srcset]="project.image_url.substring(0, project.image_url.length - 4) + 'png'" type="image/png">
-                <img class='project__image' [src]='project.image_url.substring(0, project.image_url.length - 4) + "png"' [alt]='project.name + "image"' height=150>
+                <source [srcset]='fileService.getImageUri(project.image_url, "webp")' type='image/webp'>
+                <source [srcset]='fileService.getImageUri(project.image_url, "png")' type='image/png'>
+                <img class='project__image' [src]='fileService.getImageUri(project.image_url, "png")' [alt]='project.name + "image"' height=150>
             </picture>
         </a>
     </div>
@@ -36,5 +36,5 @@
 </div>
 
 <ng-template #loading>
-    <app-loading-spinner></app-loading-spinner>
+    <ui-loading-spinner></ui-loading-spinner>
 </ng-template>

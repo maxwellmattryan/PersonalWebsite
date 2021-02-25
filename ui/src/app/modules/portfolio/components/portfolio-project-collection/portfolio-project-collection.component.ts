@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { AuthService } from '@ui/core/auth';
-import { SeoService, TrackingService } from '@ui/core/services';
+import { FileService, SeoService, TrackingService } from '@ui/core/services';
 
 import { PortfolioProject } from '../../models';
 
 @Component({
-    selector: 'app-portfolio-project-collection',
+    selector: 'ui-portfolio-project-collection',
     templateUrl: './portfolio-project-collection.component.html',
     styleUrls: ['./portfolio-project-collection.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -15,9 +15,10 @@ export class PortfolioProjectCollectionComponent implements OnInit {
     @Input() projects: PortfolioProject[];
 
     constructor(
-        public authService: AuthService,
-        private seoService: SeoService,
-        public trackingService: TrackingService
+        public readonly authService: AuthService,
+        public readonly fileService: FileService,
+        private readonly seoService: SeoService,
+        public readonly trackingService: TrackingService
     ) { }
 
     ngOnInit(): void { }

@@ -1,0 +1,65 @@
+<div class='section products' *ngIf='products'>
+    <h2 class='products__header'>Products</h2>
+
+    <div class='line-divider'></div>
+
+    <div class='container products__product-container'>
+        <ng-container *ngFor='let p of products trackBy: this.trackingService.objectById; let idx = index'>
+            <div class='products__product'>
+                <h3 class='products__product-header'>{{ p.name }}</h3>
+
+                <div class='products__product-image-container'>
+                    <picture>
+                        <source [srcset]='fileService.getImageUri(p.image_url, "webp")' type='image/webp'>
+                        <source [srcset]='fileService.getImageUri(p.image_url, "png")' type='image/png'>
+                        <img class='products__product-image' [alt]='p.name + " thumbnail"' [src]='fileService.getImageUri(p.image_url, "png")'>
+                    </picture>
+                </div>
+
+                <p class='products__product-preview'>{{ p.preview }}</p>
+
+                <p class='products__product-description'>
+                    <markdown [data]='p.description'></markdown>
+                </p>
+
+                <a
+                    [ngClass]="{'products__product-buy-btn--compress': isAdmin, 'btn--loading': isStartingCheckout && p.id === checkoutProductId }"
+                    class='btn btn--go products__product-buy-btn'
+                    (click)='startCheckout(p);'
+                >
+                    <ng-container *ngIf='!(isStartingCheckout && p.id === checkoutProductId)'>
+                        {{ p.amount <= 0 ? "FREE" : "$ " + formatAmount(p.amount) }}
+                    </ng-container>
+                    <ng-container *ngIf='isStartingCheckout && p.id === checkoutProductId'>
+                        <div class='btn-loader-container'>
+                            <div class='btn-loader--go'></div>
+                        </div>
+                    </ng-container>
+                </a>
+
+                <ng-container *ngIf='isAdmin'>
+                    <button
+                            aria-label='Edit shop product'
+                            class='btn products__product-add-btn'
+                            (click)='sendProductToEditor(p)'
+                            routerLink='/shop/products/editor'
+                    >
+                        &#x270F;
+                    </button>
+                    <button
+                            aria-label='Delete shop product'
+                            class='btn btn--warn products__product-delete-btn'
+                            (click)='deleteProduct(p.id)'
+                            type='button'
+                    >
+                        &#x2715;
+                    </button>
+                </ng-container>
+            </div>
+
+            <div *ngIf='idx !== products.length - 1' class='line-divider'></div>
+        </ng-container>
+    </div>
+</div>
+
+<ui-shop-checkout-modal [modalId]='modalId' (customerEvent)='startFreeCheckout($event)'></ui-shop-checkout-modal>

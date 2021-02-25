@@ -7,6 +7,7 @@ import * as cookieParser from 'cookie-parser';
 import * as helmet from 'helmet';
 import * as morgan from 'morgan';
 import * as rateLimit from 'express-rate-limit';
+import { join } from 'path';
 
 import { AppModule } from '@api/app.module';
 
@@ -36,6 +37,8 @@ async function bootstrap() {
     ));
 
     app.use(compression());
+
+    app.useStaticAssets(join(__dirname, '..', 'assets'));
 
     app.setGlobalPrefix('api');
 

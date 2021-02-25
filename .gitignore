@@ -6,9 +6,6 @@
 .idea
 .idea_modules
 
-# Remove deploy bash script from repository
-deploy.sh
-
 # Ignore metals VS Code extension
 .metals
 
@@ -18,6 +15,13 @@ deploy.sh
 
 RUNNING_PID
 
+# Build bundles / packages
+**/dist
+
+# Environment vars
+**/.env.**
+
 # My folders 
+conf
 data
 design

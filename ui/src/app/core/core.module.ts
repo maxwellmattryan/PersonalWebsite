@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 
 import { CoreRoutingModule } from './core-routing.module';
 
-import { ApiService } from './http';
 import { AuthService, AuthInterceptorService } from './auth';
 import {
     FooterComponent,
@@ -14,12 +13,7 @@ import {
     LoadingSpinnerComponent
 } from './components';
 import {
-    ComparisonService,
-    EditorService,
     NotificationService,
-    SeoService,
-    TrackingService,
-    ValidationService
 } from './services';
 import { HttpErrorInterceptorService } from '@ui/core/http/http-error-interceptor.service';
 

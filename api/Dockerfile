@@ -1,5 +1,5 @@
 ## BUILD STAGE ##
-FROM node:12.18-alpine AS builder
+FROM node:15.10.0-alpine3.10 AS builder
 
 WORKDIR /usr/src/app
 
@@ -12,7 +12,7 @@ COPY . .
 RUN npm run build
 
 ## PRODUCTION STAGE ##
-FROM node:12.18-alpine AS prod
+FROM node:15.10.0-alpine3.10 AS prod
 
 WORKDIR /usr/src/app
 

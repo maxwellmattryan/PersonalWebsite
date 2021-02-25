@@ -1,0 +1,127 @@
+@import 'variables';
+
+.shop {
+    background-color: $color-dark;
+    display: grid;
+    grid-template-areas:
+        "header"
+        "categories"
+        "products";
+    height: auto;
+
+    .shop__header {
+        grid-area: header;
+    }
+
+    .shop__side {
+        display: flex;
+        flex-direction: column;
+        grid-area: categories;
+        min-height: auto;
+        margin: 0;
+    }
+
+    .shop__resources,
+    .shop__categories {
+        margin-bottom: calc(3 * #{$margin});
+    }
+
+    .products {
+        grid-area: products;
+    }
+}
+
+.shop__header {
+    margin: 0 auto $margin;
+    padding: $padding;
+    text-align: center;
+}
+
+.shop__resources-header,
+.shop__filter-header {
+    margin-bottom: $half-margin;
+}
+
+.shop__resources-btn-container,
+.shop__filter-btn-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.shop__resources-btn,
+.shop__filter-btn {
+    font-size: 90%;
+    height: $btn-height;
+    line-height: $btn-height;
+    width: 100%;
+
+    &--add, &--edit {
+        height: $small-btn-height;
+        line-height: $small-btn-height;
+        margin-left: $half-margin;
+    }
+
+    &--add {
+        font-size: 170%;
+        width: calc(56px * 2 + #{$half-margin});
+    }
+
+    &--edit {
+        font-size: 118%;
+        width: 56px;
+    }
+
+    &--half {
+        min-width: 184px;
+    }
+}
+
+.shop__resources-btn-row,
+.shop__filter-btn-row {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+
+    &--all {
+        margin-bottom: $margin;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    ::ng-deep .line-divider {
+        margin-bottom: $margin;
+    }
+
+    .shop__filter-btn {
+        font-size: 90%;
+        height: $large-btn-height;
+        line-height: $large-btn-height;
+        width: $large-btn-width;
+
+        &--add, &--edit {
+            width: 52px;
+        }
+
+        &--add {
+            width: calc(52px + 52px + #{$half-margin});
+        }
+
+        &--expand {
+            width: 100%;
+        }
+    }
+
+    .shop {
+        grid-template-areas:
+            "header header header header header"
+            "categories products products products products";
+
+        .shop__side {
+            margin: 0 auto;
+            min-height: calc(100vh - #{$header-height});
+        }
+    }
+}

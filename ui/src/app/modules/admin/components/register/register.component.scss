@@ -1,7 +1,7 @@
 @import 'variables';
 
 .register {
-    height: calc(100vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
+    height: calc(98vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
 }
 
 .register__header {
@@ -22,4 +22,10 @@
     line-height: $btn-height;
     margin-top: $half-margin;
     width: 180px;
+}
+
+@media only screen and (min-width: 768px) {
+    ::ng-deep .section-divider {
+        height: 15vh;
+    }
 }
