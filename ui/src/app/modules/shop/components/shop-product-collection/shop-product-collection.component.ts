@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '@ui/core/auth';
 import { FileService, NotificationService, SeoService, TrackingService } from '@ui/core/services';
 
-import { ShopCustomer, ShopProduct } from '../../models';
+import { ShopCustomer, ShopProduct, ShopProductStatuses } from '../../models';
 import { ShopApiService, ShopCheckoutService, ShopEditorService } from '../../services';
 
 @Component({
@@ -80,6 +80,11 @@ export class ShopProductCollectionComponent implements OnInit {
     }
 
     public startCheckout(productData: ShopProduct): void {
+        if(productData.status.status != ShopProductStatuses.AVAILABLE) {
+            this.notificationService.createNotification(`Sorry, unable to buy product because it is ${productData.status.status.toLowerCase()}.`, '', 3600);
+            return;
+        }
+
         this.checkoutProductId = productData.id;
 
         if(productData.amount <= 0.0) {
