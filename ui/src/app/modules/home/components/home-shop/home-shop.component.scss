@@ -1,0 +1,29 @@
+@import 'variables';
+
+.home-shop {
+    min-height: calc(50vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
+}
+
+.home-shop__header {
+
+}
+
+.home-shop__description {
+    color: $color-light;
+    margin-bottom: $margin;
+
+    .home-shop__description-link {
+
+    }
+}
+
+.home-shop__shop-btn {
+    height: $btn-height;
+    line-height: $btn-height;
+    max-width: 316px;
+    width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+
+}
