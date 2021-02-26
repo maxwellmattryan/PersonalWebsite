@@ -95,6 +95,10 @@
 }
 
 @media only screen and (min-width: 768px) {
+    ::ng-deep .section-divider {
+        height: 14vh !important;
+    }
+
     .editor__profile-btn {
         &--edit, &--warn {
             font-size: 120%;

@@ -39,12 +39,14 @@ export class ShopCheckoutService {
     }
 
     private createLineItem(productData: ShopProduct): ShopLineItem {
+        const taxRateId: string = this.configService.get('STRIPE_TAX_RATE_ID');
         return {
             name: productData.name,
             description: productData.preview,
             amount: productData.amount * 100,
             currency: 'usd',
-            quantity: 1
+            quantity: 1,
+            tax_rates: [taxRateId]
         };
     }
 
