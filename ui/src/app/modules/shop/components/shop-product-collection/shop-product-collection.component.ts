@@ -93,6 +93,9 @@ export class ShopProductCollectionComponent implements OnInit {
             this.isStartingCheckout = true;
             this.shopCheckoutService.goToCheckout(productData).subscribe((res: any) => {
                 this.isStartingCheckout = false;
+            }, (error: HttpErrorResponse) => {
+                console.log(error.error.message);
+                this.isStartingCheckout = false;
             });
 
             setTimeout(this.timeoutFn, 10000);
