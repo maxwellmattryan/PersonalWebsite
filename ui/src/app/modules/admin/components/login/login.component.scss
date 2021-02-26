@@ -1,7 +1,7 @@
 @import 'variables';
 
 .login {
-    height: calc(98vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
+    min-height: calc(100vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
 }
 
 .login__header {
@@ -25,6 +25,6 @@
 
 @media only screen and (min-width: 768px) {
     ::ng-deep .section-divider {
-        height: 15vh;
+        height: 14vh !important;
     }
 }
