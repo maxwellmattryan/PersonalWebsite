@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
-import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
+import { InternalServerErrorException } from '@api/core/http/http.exception';
 import { PortfolioProfileAlreadyExistsException } from '../exceptions/portfolio-profile.exception';
 
 import { PortfolioProfile } from '../entities/portfolio-profile.entity';
