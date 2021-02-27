@@ -5,7 +5,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 
 import { AuthService } from '@ui/core/auth';
 
-import { ShopCategory, ShopProduct } from '../../models';
+import { ShopCategory, ShopProduct, ShopProductStatuses } from '../../models';
 import { ShopApiService, ShopComparisonService, ShopEditorService } from '../../services';
 import { NotificationService, TrackingService } from '@ui/core/services';
 
@@ -71,7 +71,7 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
     }
 
     private loadProductData(): void {
-        this.shopApiService.getProducts('AVAILABLE').subscribe((res: ShopProduct[]) => {
+        this.shopApiService.getProducts(ShopProductStatuses.AVAILABLE).subscribe((res: ShopProduct[]) => {
             this.productData = res.sort(this.shopComparisonService.products);
 
             if(this.categoryData) {

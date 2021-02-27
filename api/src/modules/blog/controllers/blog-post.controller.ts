@@ -21,13 +21,13 @@ export class BlogPostController {
     @Get('')
     @HttpCode(200)
     async getPosts(
-        @Query('topic_id') topicId: string,
+        @Query('topicId') topicId: string,
         @Query('published') published: string,
         @Req() request: Request
     ): Promise<BlogPost[]> {
         let posts: BlogPost[];
 
-        if(published !== undefined) {
+        if(published === 'true') {
             if(topicId) {
                 posts = await this.blogPostService.getPostsByStatusAndTopic('PUBLISHED', parseInt(topicId));
             } else {

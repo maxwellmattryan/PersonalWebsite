@@ -6,27 +6,38 @@ import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
 import { ShopProduct } from '../entities/shop-product.entity';
 import { ShopProductService } from '../services/shop-product.service';
-import { ShopProductStatusService } from '../services/shop-product-status.service';
 import { ShopProductCouldNotBeUpdatedException, ShopProductsWereNotFoundException, ShopProductWasNotFoundException } from '../exceptions/shop-product.exception';
 
 @Controller('shop/products')
 export class ShopProductController {
     constructor(
-        private readonly shopProductService: ShopProductService,
-        private readonly shopProductStatusService: ShopProductStatusService
+        private readonly shopProductService: ShopProductService
     ) { }
 
     @Get('')
     @HttpCode(200)
-    public async getProducts(@Query() query, @Req() request: Request): Promise<ShopProduct[]> {
+    public async getProducts(
+        @Query('statusId') statusId,
+        @Query('categoryId') categoryId,
+        @Req() request: Request
+    ): Promise<ShopProduct[]> {
         let products: ShopProduct[];
 
-        if(query.status)
-            products = await this.shopProductService.getProductsByStatus(query.status);
-        else
-            products = await this.shopProductService.getProducts();
+        if(statusId) {
+            if(categoryId) {
+                products = await this.shopProductService.getProductsByStatusAndCategory(statusId, categoryId);
+            } else {
+                products = await this.shopProductService.getProductsByStatus(statusId);
+            }
+        } else {
+            if(categoryId) {
+                products = await this.shopProductService.getProductsByCategory(categoryId);
+            } else {
+                products = await this.shopProductService.getProducts();
+            }
+        }
 
-        if(!products) throw new ShopProductsWereNotFoundException();
+        if(products.length === 0) throw new ShopProductsWereNotFoundException();
 
         return products;
     }

@@ -26,8 +26,8 @@ export class ShopProductStatus implements Deserializable {
 }
 
 export enum ShopProductStatuses {
-    AVAILABLE =     'AVAILABLE',
-    UNAVAILABLE =   'UNAVAILABLE',
-    DISCONTINUED =  'DISCONTINUED',
-    REMOVED =       'REMOVED'
+    AVAILABLE =     1,
+    UNAVAILABLE =   2,
+    DISCONTINUED =  3,
+    REMOVED =       4
 }

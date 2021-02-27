@@ -16,7 +16,7 @@ export class ShopProductStatusController {
     @HttpCode(200)
     public async getStatuses(@Req() request: Request): Promise<ShopProductStatus[]> {
         const statuses = await this.shopProductStatusService.getStatuses();
-        if(!statuses) throw new ShopProductStatusesWereNotFoundException();
+        if(statuses.length === 0) throw new ShopProductStatusesWereNotFoundException();
 
         return statuses;
     }

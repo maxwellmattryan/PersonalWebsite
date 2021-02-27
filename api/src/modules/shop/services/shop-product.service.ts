@@ -6,9 +6,12 @@ import { Repository } from 'typeorm';
 import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
 import { InternalServerErrorException } from '@api/core/http/http.exception';
 
+import { ShopCategory } from '../entities/shop-category.entity';
 import { ShopProduct } from '../entities/shop-product.entity';
 import { ShopProductStatus } from '../entities/shop-product-status.entity';
+
 import { ShopProductStatusService } from '../services/shop-product-status.service';
+
 import { ShopProductAlreadyExistsException } from '../exceptions/shop-product.exception';
 
 @Injectable()
@@ -57,6 +60,16 @@ export class ShopProductService {
             .getMany();
     }
 
+    public async getProductsByCategory(category: ShopCategory | number | string): Promise<ShopProduct[]> {
+        return await this.shopProductRepository
+            .createQueryBuilder('sp')
+            .leftJoinAndSelect('sp.category', 'sc')
+            .leftJoinAndSelect('sp.status', 'sps')
+            .where(`sc.name = :name`, { name: (category as ShopCategory).name || typeof category === 'string' ? category : '' })
+            .orWhere(`sc.id = :id`, { id: (category as ShopCategory).id || isNaN(Number(category)) ? -1 : category })
+            .getMany();
+    }
+
     public async getProductsByStatus(status: ShopProductStatus | number | string): Promise<ShopProduct[]> {
         return await this.shopProductRepository
             .createQueryBuilder('sp')
@@ -64,6 +77,16 @@ export class ShopProductService {
             .leftJoinAndSelect('sp.status', 'sps')
             .where(`sps.status = :status`, { status: (status as ShopProductStatus).status || typeof status === 'string' ? status : '' })
             .orWhere(`sps.id = :id`, { id: (status as ShopProductStatus).id || isNaN(Number(status)) ? -1 : status })
+            .getMany();
+    }
+
+    public async getProductsByStatusAndCategory(statusId: number, categoryId: number): Promise<ShopProduct[]> {
+        return await this.shopProductRepository
+            .createQueryBuilder('sp')
+            .leftJoinAndSelect('sp.category', 'sc')
+            .leftJoinAndSelect('sp.status', 'sps')
+            .where(`sps.id = :id`, { id: statusId })
+            .andWhere(`sc.id = :id`, { id: categoryId })
             .getMany();
     }
 

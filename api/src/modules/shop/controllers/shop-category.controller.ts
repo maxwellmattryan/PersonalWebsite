@@ -18,7 +18,7 @@ export class ShopCategoryController {
     @HttpCode(200)
     public async getCategories(@Req() request: Request): Promise<ShopCategory[]> {
         const categories = await this.shopCategoryService.getCategories();
-        if(!categories) throw new ShopCategoriesWereNotFoundException();
+        if(categories.length === 0) throw new ShopCategoriesWereNotFoundException();
 
         return categories;
     }

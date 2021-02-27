@@ -11,12 +11,19 @@
                 <div class='shop__filter-btn-row shop__filter-btn-row--all'>
                     <button
                             aria-label='Select all categories'
-                            [ngClass]="{'btn--active': activeCategoryId === -1, 'shop__filter-btn--half': isAdmin}"
+                            [ngClass]="{'btn-loading': isLoadingByCategory && activeCategoryId === -1, 'btn--active': activeCategoryId === -1, 'shop__filter-btn--half': isAdmin}"
                             class='btn shop__filter-btn shop__filter-btn--all'
-                            (click)='setActiveCategory(null, true)'
+                            (click)='filterProductsByCategory(-1)'
                             type='button'
                     >
-                        All
+                        <ng-container *ngIf='isLoadingByCategory && activeCategoryId === -1'>
+                            <div class='btn-loader-container'>
+                                <div class='btn-loader'></div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf='!(isLoadingByCategory && activeCategoryId === -1)'>
+                            All
+                        </ng-container>
                     </button>
 
                     <ng-container *ngIf='isAdmin'>
@@ -29,12 +36,19 @@
                 <div class='shop__filter-btn-row' *ngFor='let c of categories trackBy: this.trackingService.objectById'>
                     <button
                             aria-label='Filter shop category'
-                            [ngClass]="{'btn--active': c.id === activeCategoryId, 'shop__filter-btn--half': isAdmin}"
+                            [ngClass]="{'btn-loading': isLoadingByCategory && c.id === activeCategoryId, 'btn--active': c.id === activeCategoryId, 'shop__filter-btn--half': isAdmin}"
                             class='btn shop__filter-btn'
-                            (click)='setActiveCategory(c)'
+                            (click)='filterProductsByCategory(c.id)'
                             type='button'
                     >
-                        {{ c.name }}
+                        <ng-container *ngIf='isLoadingByCategory && c.id === activeCategoryId'>
+                            <div class='btn-loader-container'>
+                                <div class='btn-loader'></div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf='!(isLoadingByCategory && c.id === activeCategoryId)'>
+                            {{ c.name }}
+                        </ng-container>
                     </button>
 
                     <ng-container *ngIf='isAdmin'>
@@ -101,7 +115,7 @@
         </div>
     </div>
 
-    <ui-shop-product-collection [products]='filterProducts()' baseRoute='products/'></ui-shop-product-collection>
+    <ui-shop-product-collection [products]='products' baseRoute='products/'></ui-shop-product-collection>
 </div>
 
 <ng-template #loading>

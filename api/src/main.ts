@@ -9,7 +9,7 @@ import * as rateLimit from 'express-rate-limit';
 import { join } from 'path';
 
 import { AppModule } from '@api/app.module';
-import { HttpRequestLoggingInterceptor } from '@api/core/http/http-request-logging.interceptor';
+import { HttpLoggingInterceptor } from '@api/core/http/http-logging-interceptor.service';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -31,7 +31,7 @@ async function bootstrap() {
 
     app.use(cookieParser(process.env.JWT_SECRET));
 
-    app.useGlobalInterceptors(new HttpRequestLoggingInterceptor());
+    app.useGlobalInterceptors(new HttpLoggingInterceptor());
     app.useGlobalInterceptors(new ClassSerializerInterceptor(
         app.get(Reflector)
     ));

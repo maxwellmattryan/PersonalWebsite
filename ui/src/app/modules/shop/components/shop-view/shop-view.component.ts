@@ -25,6 +25,7 @@ export class ShopViewComponent implements OnInit {
     activeCategoryId: number = -1;
     activeStatusId: number = 1;
 
+    public isLoadingByCategory: boolean = false;
     public isLoadingByStatus: boolean = false;
 
     constructor(
@@ -78,39 +79,27 @@ export class ShopViewComponent implements OnInit {
         return Array.from(categories.values()).sort(this.shopComparisonService.categories);
     }
 
-    public setActiveCategory(category: ShopCategory, reset: boolean = false): void {
-        if(reset) {
-            this.activeCategoryId = -1;
-        } else {
-            if(this.products.filter(p => p.category.id === category.id).length < 1) {
-                this.notificationService.createNotification('No shop products are in this category.');
-                return;
-            }
+    public filterProductsByCategory(categoryId: number): void {
+        const previousCategoryId = this.activeCategoryId;
+        this.activeCategoryId = categoryId;
+        this.isLoadingByCategory = true;
 
-            this.shopCategoryService.setActiveCategory(category);
-            this.activeCategoryId = category.id;
-        }
-    }
-
-    public filterProducts(): ShopProduct[] {
-        if(this.activeCategoryId === -1)
-            return this.products;
-        else {
-            const activeProducts = this.products.filter(p => p.category.id === this.activeCategoryId);
-            if(activeProducts.length < 1) {
-                this.activeCategoryId = -1;
-                return this.products;
-            } else {
-                return activeProducts;
-            }
-        }
+        this.shopApiService.getProducts(this.activeStatusId, this.activeCategoryId).subscribe((res: ShopProduct[]) => {
+            this.products = res;
+            this.isLoadingByCategory = false;
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+            this.isLoadingByCategory = false;
+            this.activeCategoryId = previousCategoryId;
+        });
     }
 
     public loadProductsByStatus(statusId: number): void {
+        const previousStatusId = this.activeStatusId;
         this.activeStatusId = statusId;
         this.isLoadingByStatus = true;
 
-        this.shopApiService.getProducts(statusId.toString()).subscribe((res: ShopProduct[]) => {
+        this.shopApiService.getProducts(statusId).subscribe((res: ShopProduct[]) => {
             if(res.length < 1) {
                 this.notificationService.createNotification('No shop products contain this status.');
                 return;
@@ -121,7 +110,7 @@ export class ShopViewComponent implements OnInit {
             this.isLoadingByStatus = false;
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
-            this.activeStatusId = 1;
+            this.activeStatusId = previousStatusId;
             this.isLoadingByStatus = false;
         });
     }
