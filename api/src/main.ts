@@ -5,11 +5,11 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
 import * as helmet from 'helmet';
-import * as morgan from 'morgan';
 import * as rateLimit from 'express-rate-limit';
 import { join } from 'path';
 
 import { AppModule } from '@api/app.module';
+import { HttpRequestLoggingInterceptor } from '@api/core/http/http-request-logging.interceptor';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -29,9 +29,9 @@ async function bootstrap() {
 
     app.use(helmet());
 
-    app.use(morgan('tiny'));
     app.use(cookieParser(process.env.JWT_SECRET));
 
+    app.useGlobalInterceptors(new HttpRequestLoggingInterceptor());
     app.useGlobalInterceptors(new ClassSerializerInterceptor(
         app.get(Reflector)
     ));

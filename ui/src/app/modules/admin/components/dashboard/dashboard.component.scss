@@ -79,6 +79,10 @@
     }
 }
 
+.btn-loader-container {
+    height: calc(0.9 * #{$btn-height});
+}
+
 .dashboard__profile-header {
     font-size: 1.2rem;
     font-style: normal;

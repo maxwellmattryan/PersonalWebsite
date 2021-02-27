@@ -59,20 +59,6 @@
             </div>
         </div>
 
-        <div class='shop__resources'>
-            <h2 class='shop__resources-header'>Resources</h2>
-
-            <div class='line-divider'></div>
-
-            <div class='shop__resources-btn-container'>
-                <div class='shop__resources-btn-row'>
-                    <a class="btn shop__resources-btn shop__resources-btn--expand" routerLink='/shop/faq'>
-                        Shop FAQ
-                    </a>
-                </div>
-            </div>
-        </div>
-
         <div *ngIf='isAdmin' class='shop__extras'>
             <h2 class='shop__filter-header'>Statuses</h2>
 
@@ -89,6 +75,20 @@
                     >
                         {{ s.status }}
                     </button>
+                </div>
+            </div>
+        </div>
+
+        <div class='shop__resources'>
+            <h2 class='shop__resources-header'>Resources</h2>
+
+            <div class='line-divider'></div>
+
+            <div class='shop__resources-btn-container'>
+                <div class='shop__resources-btn-row'>
+                    <a class="btn shop__resources-btn shop__resources-btn--expand" routerLink='/shop/faq'>
+                        Shop FAQ
+                    </a>
                 </div>
             </div>
         </div>

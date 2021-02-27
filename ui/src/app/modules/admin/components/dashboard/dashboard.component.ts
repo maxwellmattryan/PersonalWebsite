@@ -15,6 +15,7 @@ import {
     PortfolioApiService, PortfolioComparisonService, PortfolioEditorService,
     PortfolioProfileService
 } from '@ui/modules/portfolio/services';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'ui-dashboard',
@@ -25,6 +26,11 @@ export class DashboardComponent implements OnInit {
     profiles: PortfolioProfile[];
 
     isLoaded: boolean = false;
+
+    public activeProfileId: number = -1;
+
+    public isActivatingProfile: boolean = false;
+    public isLoggingOut: boolean = false;
 
     constructor(
         private router: Router,
@@ -66,11 +72,20 @@ export class DashboardComponent implements OnInit {
     changeProfile(profile: PortfolioProfile): void {
         if(profile.status.status === 'ACTIVE') return;
 
+        this.activeProfileId = profile.id;
+        this.isActivatingProfile = true;
+
         this.portfolioApiService.activateProfile(profile.id).subscribe((res: PortfolioProfile) => {
             this.portfolioProfileService.setActiveProfile(res);
+            this.activeProfileId = -1;
+            this.isActivatingProfile = false;
 
             this.modifyProfileStatuses(res.id);
             this.notificationService.createNotification(`Successfully activated the "${res.name}" profile!`);
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+            this.activeProfileId = -1;
+            this.isActivatingProfile = false;
         });
     }
 
@@ -85,10 +100,16 @@ export class DashboardComponent implements OnInit {
     }
 
     onLogoutClick(): void {
+        this.isLoggingOut = true;
+
         this.authApiService.logoutAdmin().subscribe(res => {
+            this.isLoggingOut = false;
             this.notificationService.createNotification(`Bye, ${this.authService.getAdmin()}!`);
             this.authService.logoutAdmin();
             this.router.navigate(['admin']);
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+            this.isLoggingOut = false;
         });
     }
 

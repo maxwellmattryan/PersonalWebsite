@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
-import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
+import { InternalServerErrorException } from '@api/core/http/http.exception';
 
 import { ShopCustomer } from '../entities/shop-customer.entity';
 import { ShopCustomerAlreadyExistsException } from '../exceptions/shop-customer.exception';

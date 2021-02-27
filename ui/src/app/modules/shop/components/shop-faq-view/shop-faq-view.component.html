@@ -8,49 +8,10 @@
         as always I am available via
         <a class='text-link faq__info-link' (click)='obfuscationService.handleEmailClick($event)' [href]='"mailto:" + obfuscationService.constructEmail()'>
             email
-        </a>
-        so please reach out. Cheers!
+        </a> so please reach out. Cheers!
     </p>
 
     <div class='faq__categories'>
-        <div class='faq__category'>
-            <div class='faq__category-header-container'>
-                <button class='btn faq__category-header-btn' (click)='toggleCategory("bugs", $event)'>
-                    &#x2b;
-                </button>
-                <p class='faq__category-header'>Bugs</p>
-            </div>
-
-            <div id='faq__bugs' class='faq__category-info faq__category-info--hidden'>
-                <div id='faq__bugs-q-1' class='faq__category-info-q-container faq__category-info-q-container--hidden'>
-                    <button class='btn faq__category-info-q-btn' (click)='toggleAnswer("faq__bugs-q-1", $event)'>
-                        &#x2b;
-                    </button>
-                    <p class='faq__category-info-q'>
-                        I found a bug - how should I tell you about it?
-                    </p>
-                </div>
-
-                <div class='faq__category-info-a-container faq__category-info-a-container--hidden'>
-                    <button class='btn faq__category-info-a-btn'>
-                        &#x2b;
-                    </button>
-                    <div class='faq__category-info-a-p-container'>
-                        <p class='faq__category-info-a'>
-                            Please
-                            <a class='text-link faq__category-info-link' (click)='obfuscationService.handleEmailClick($event)' [href]='"mailto:" + obfuscationService.constructEmail()'>
-                                email
-                            </a>
-                            me with a bug report, and I will look into getting it fixed.
-                            If the project has a corresponding GitHub repository, then
-                            I will most likely create an offical "issue" on there, which you are
-                            more than welcome to checkout and follow!
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class='faq__category'>
             <div class='faq__category-header-container'>
                 <button class='btn faq__category-header-btn' (click)='toggleCategory("compatibility", $event)'>
@@ -142,8 +103,7 @@
                             has quite a few advantages over VST such as dynamic I/O, silence flagging, and more. Check out the
                             <a class='text-link faq__category-info-link' href='https://github.com/steinbergmedia/vst3sdk#about-vst-3' target='_blank'>
                                 README
-                            </a>
-                            on Steinberg's VST3 GitHub repo to see more about the differences.
+                            </a> on Steinberg's VST3 GitHub repo to see more about the differences.
                         </p>
                     </div>
                 </div>
@@ -219,8 +179,7 @@
                             If none of that works, then send me an
                             <a class='text-link faq__category-info-link' (click)='obfuscationService.handleEmailClick($event)' [href]='"mailto:" + obfuscationService.constructEmail()'>
                                 email
-                            </a>
-                            and we can troubleshoot it together!
+                            </a> and we can troubleshoot it together!
                         </p>
                     </div>
                 </div>
@@ -248,8 +207,7 @@
                             me an
                             <a class='text-link faq__category-info-link' (click)='obfuscationService.handleEmailClick($event)' [href]='"mailto:" + obfuscationService.constructEmail()'>
                                 email
-                            </a>
-                            with some details and I can start looking into how to make it better for you!
+                            </a> with some details and I can start looking into how to make it better for you!
                         </p>
                     </div>
                 </div>
@@ -341,6 +299,114 @@
                                 </ng-container>
                             </button>
                         </form>
+                    </div>
+                </div>
+
+                <div id='faq__purchasing-q-3' class='faq__category-info-q-container faq__category-info-q-container--hidden'>
+                    <button class='btn faq__category-info-q-btn' (click)='toggleAnswer("faq__purchasing-q-3", $event)'>
+                        &#x2b;
+                    </button>
+                    <div class='faq__category-info-a-p-container'>
+                        <p class='faq__category-info-q'>
+                            What payment methods do you accept?
+                        </p>
+                    </div>
+                </div>
+
+                <div class='faq__category-info-a-container faq__category-info-a-container--hidden'>
+                    <button class='btn faq__category-info-a-btn'>
+                        &#x2b;
+                    </button>
+                    <div class='faq__category-info-a-p-container'>
+                        <p class='faq__category-info-a'>
+                            I currently am accepting card payments via the Stripe Checkout sessions, which
+                            allows for several major brand debit and credit cards.
+                        </p>
+                        <span class='text--note'>
+                                NOTE:
+                            </span>
+                        <span class='text--note-paragraph'>
+                            Alternatively, I am open to accepting payment in cryptocurrencies (only IOTA, ETH, and BTC). I have no support for this built-in to the shop, so you will have to send me an
+                            <a class='text-link faq__category-info-link' href='https://stripe.com/'>
+                                email
+                            </a>, so I can create the order manually.
+                        </span>
+                    </div>
+                </div>
+
+                <div id='faq__purchasing-q-4' class='faq__category-info-q-container faq__category-info-q-container--hidden'>
+                    <button class='btn faq__category-info-q-btn' (click)='toggleAnswer("faq__purchasing-q-4", $event)'>
+                        &#x2b;
+                    </button>
+                    <div class='faq__category-info-a-p-container'>
+                        <p class='faq__category-info-q'>
+                            How do I know that your handling payments securely?
+                        </p>
+                    </div>
+                </div>
+
+                <div class='faq__category-info-a-container faq__category-info-a-container--hidden'>
+                    <button class='btn faq__category-info-a-btn'>
+                        &#x2b;
+                    </button>
+                    <div class='faq__category-info-a-p-container'>
+                        <p class='faq__category-info-a'>
+                            I implemented
+                            <a class='text-link faq__category-info-link' href='https://stripe.com/'>
+                                Stripe
+                            </a> (specifically
+                            <a class='text-link faq__category-info-link' href='https://stripe.com/payments/checkout'>
+                                Stripe Checkout
+                            </a>) to handle the important details of the transaction and payment. This service
+                            is used abundantly across the internet for all sorts of ecommerce platforms,
+                            even including organizations like Google and Amazon.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='faq__category'>
+            <div class='faq__category-header-container'>
+                <button class='btn faq__category-header-btn' (click)='toggleCategory("troubleshooting", $event)'>
+                    &#x2b;
+                </button>
+                <p class='faq__category-header'>Troubleshooting</p>
+            </div>
+
+            <div id='faq__troubleshooting' class='faq__category-info faq__category-info--hidden'>
+                <div id='faq__troubleshooting-q-1' class='faq__category-info-q-container faq__category-info-q-container--hidden'>
+                    <button class='btn faq__category-info-q-btn' (click)='toggleAnswer("faq__troubleshooting-q-1", $event)'>
+                        &#x2b;
+                    </button>
+                    <p class='faq__category-info-q'>
+                        I found a bug - who should I tell?
+                    </p>
+                </div>
+
+                <div class='faq__category-info-a-container faq__category-info-a-container--hidden'>
+                    <button class='btn faq__category-info-a-btn'>
+                        &#x2b;
+                    </button>
+                    <div class='faq__category-info-a-p-container'>
+                        <p class='faq__category-info-a'>
+                            Please
+                            <a class='text-link faq__category-info-link' (click)='obfuscationService.handleEmailClick($event)' [href]='"mailto:" + obfuscationService.constructEmail()'>
+                                email
+                            </a> me with a bug report, and I will look into getting it fixed.
+                            If the project has a corresponding GitHub repository, then
+                            I will most likely create an offical "issue" on there, which you are
+                            more than welcome to checkout and follow!
+                        </p>
+                        <p class='faq__category-info-a'>
+                            <span class='text--note'>
+                                NOTE:
+                            </span>
+                            <span class='text--note-paragraph'>
+                                If you are able to find the product's repository, feel free to open an
+                                issue there yourself!
+                            </span>
+                        </p>
                     </div>
                 </div>
             </div>
