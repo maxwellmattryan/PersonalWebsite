@@ -18,11 +18,11 @@ import {
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-    selector: 'ui-dashboard',
-    templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.scss']
+    selector: 'ui-dashboard-view',
+    templateUrl: './dashboard-view.component.html',
+    styleUrls: ['./dashboard-view.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardViewComponent implements OnInit {
     profiles: PortfolioProfile[];
 
     isLoaded: boolean = false;

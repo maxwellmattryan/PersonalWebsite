@@ -8,15 +8,15 @@ import { NotificationService, ValidationService } from '@ui/core/services';
 import { Admin } from '../../interfaces';
 
 @Component({
-    selector: 'ui-register',
-    templateUrl: './register.component.html',
-    styleUrls: ['./register.component.scss']
+    selector: 'ui-login-view',
+    templateUrl: './login-view.component.html',
+    styleUrls: ['./login-view.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class LoginViewComponent implements OnInit {
     username: string = '';
     password: string = '';
 
-    public isRegistering: boolean = false;
+    public isLoggingIn: boolean = false;
 
     constructor(
         private router: Router,
@@ -27,30 +27,28 @@ export class RegisterComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.notificationService.createNotification('This functionality is not available.');
-        this.router.navigate(['admin']);
-
         if(this.authService.isLoggedIn()) {
-            this.notificationService.createNotification('Already logged in.');
-            this.router.navigate(['admin']);
+          this.notificationService.createNotification('Already logged in.');
+          this.router.navigate(['admin']);
         }
     }
 
-    onRegisterSubmit(): void {
-        this.isRegistering = true;
+    onLoginSubmit(): void {
+        this.isLoggingIn = true;
 
         const admin: Admin = {
             username: this.username,
             password: this.password
         };
 
-        this.authApiService.registerAdmin(admin).subscribe(res => {
-            this.notificationService.createNotification(`Hello, ${admin.username}! Please log in.`);
-            this.isRegistering = false;
-            this.router.navigate(['admin/login']);
+        this.authApiService.loginAdmin(admin).subscribe(res => {
+          this.authService.loginAdmin(res.id, res.username);
+          this.isLoggingIn = false;
+          this.notificationService.createNotification(`Welcome back, ${res.username}!`);
+          this.router.navigate(['admin']);
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
-            this.isRegistering = false;
+            this.isLoggingIn = false;
         });
     }
 }

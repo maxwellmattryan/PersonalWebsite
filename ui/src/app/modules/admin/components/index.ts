@@ -1,3 +1,3 @@
-export { DashboardComponent } from './dashboard/dashboard.component';
-export { LoginComponent } from './login/login.component';
-export { RegisterComponent } from './register/register.component';
+export { DashboardViewComponent } from './dashboard-view/dashboard-view.component';
+export { LoginViewComponent } from './login-view/login-view.component';
+export { RegisterViewComponent } from './register-view/register-view.component';
