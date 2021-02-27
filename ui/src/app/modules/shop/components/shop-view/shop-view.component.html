@@ -68,12 +68,19 @@
                 <div class='shop__filter-btn-row' *ngFor='let s of statuses trackBy: this.trackingService.objectById'>
                     <button
                             aria-label='Filter shop status'
-                            [ngClass]="{'btn--active': s.id === activeStatusId}"
+                            [ngClass]="{'btn-loading': isLoadingByStatus && s.id === activeStatusId, 'btn--active': s.id === activeStatusId}"
                             class='btn shop__filter-btn shop__filter-btn--expand'
                             (click)='loadProductsByStatus(s.id)'
                             type='button'
                     >
-                        {{ s.status }}
+                        <ng-container *ngIf='isLoadingByStatus && s.id === activeStatusId'>
+                            <div class='btn-loader-container'>
+                                <div class='btn-loader'></div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf='!(isLoadingByStatus && s.id === activeStatusId)'>
+                            {{ s.status }}
+                        </ng-container>
                     </button>
                 </div>
             </div>

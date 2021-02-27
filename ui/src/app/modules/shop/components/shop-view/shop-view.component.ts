@@ -25,6 +25,8 @@ export class ShopViewComponent implements OnInit {
     activeCategoryId: number = -1;
     activeStatusId: number = 1;
 
+    public isLoadingByStatus: boolean = false;
+
     constructor(
         private router: Router,
         private authService: AuthService,
@@ -38,7 +40,7 @@ export class ShopViewComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.titleService.setTitle(`Shop | Matthew Maxwell`);
+        this.titleService.setTitle(`Digital Audio Shop | Matthew Maxwell`);
 
         this.isAdmin = this.authService.isLoggedIn();
 
@@ -105,6 +107,9 @@ export class ShopViewComponent implements OnInit {
     }
 
     public loadProductsByStatus(statusId: number): void {
+        this.activeStatusId = statusId;
+        this.isLoadingByStatus = true;
+
         this.shopApiService.getProducts(statusId.toString()).subscribe((res: ShopProduct[]) => {
             if(res.length < 1) {
                 this.notificationService.createNotification('No shop products contain this status.');
@@ -113,7 +118,11 @@ export class ShopViewComponent implements OnInit {
 
             this.products = res.sort(this.shopComparisonService.products);
             this.activeCategoryId = -1;
-            this.activeStatusId = statusId;
+            this.isLoadingByStatus = false;
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+            this.activeStatusId = 1;
+            this.isLoadingByStatus = false;
         });
     }
 
