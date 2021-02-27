@@ -7,7 +7,7 @@ import { NotificationService, ObfuscationService } from '@ui/core/services';
 
 import { ShopApiService } from '../../services';
 
-export type FaqCategory = 'bugs' | 'compatibility' | 'installation' | 'purchasing';
+export type FaqCategory = | 'compatibility' | 'installation' | 'purchasing' | 'troubleshooting';
 
 @Component({
     selector: 'ui-shop-faq-view',
