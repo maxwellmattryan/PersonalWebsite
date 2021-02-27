@@ -70,13 +70,12 @@ export class ShopProductService {
             .getMany();
     }
 
-    public async getProductsByStatus(status: ShopProductStatus | number | string): Promise<ShopProduct[]> {
+    public async getProductsByStatus(status: ShopProductStatus | number): Promise<ShopProduct[]> {
         return await this.shopProductRepository
             .createQueryBuilder('sp')
             .leftJoinAndSelect('sp.category', 'sc')
             .leftJoinAndSelect('sp.status', 'sps')
-            .where(`sps.status = :status`, { status: (status as ShopProductStatus).status || typeof status === 'string' ? status : '' })
-            .orWhere(`sps.id = :id`, { id: (status as ShopProductStatus).id || isNaN(Number(status)) ? -1 : status })
+            .where(`sp.status_id = :statusId`, { statusId: (status as ShopProductStatus).id || status })
             .getMany();
     }
 
