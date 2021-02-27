@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 
 export type File = any;
 
-@Controller('file')
+@Controller('files')
 export class FileController {
     constructor() { }
 
