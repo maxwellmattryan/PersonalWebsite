@@ -10,7 +10,7 @@ NODE_VERSION=15.10.0-alpine3.10
 
 API_IMAGE=mattmaxwell-api
 UI_IMAGE=mattmaxwell-ui
-DOMAIN=mattmaxwell.tech
+DOMAIN=mattmaxwell.dev
 
 GCP_HOSTNAME=gcr.io
 GCP_PLATFORM=managed
