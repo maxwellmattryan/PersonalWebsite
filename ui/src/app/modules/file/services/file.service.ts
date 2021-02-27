@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { ApiService } from '../http';
 import { environment } from '@ui/environments/environment';
+import { ApiService } from '@ui/core/http';
 
 export type ImageFormat = 'png' | 'webp';
 

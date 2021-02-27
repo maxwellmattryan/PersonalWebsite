@@ -85,6 +85,15 @@
             <br>
         </div>
 
+        <div class='dashboard__files-btn-container dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
+            <h2>Files</h2>
+            <br>
+            <a class='btn dashboard__btn' routerLink='/portfolio/profiles/editor'>
+                Upload File
+            </a>
+            <br>
+        </div>
+
         <div class='dashboard__logout-btn-container dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
             <div class='section-divider--half'></div>
             <a

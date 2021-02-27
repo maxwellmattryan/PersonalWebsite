@@ -3,7 +3,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { AuthService } from '@ui/core/auth';
-import { FileService, NotificationService, SeoService, TrackingService } from '@ui/core/services';
+import { NotificationService, SeoService, TrackingService } from '@ui/core/services';
+
+import { FileService } from '@ui/modules/file/services';
 
 import { ShopCustomer, ShopProduct, ShopProductStatuses } from '../../models';
 import { ShopApiService, ShopCheckoutService, ShopEditorService } from '../../services';
