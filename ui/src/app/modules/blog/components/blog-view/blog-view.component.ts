@@ -31,6 +31,8 @@ export class BlogViewComponent implements OnInit {
 
     activeTopicId: number = -1;
 
+    public isFilteringPosts: boolean = false;
+
     constructor(
         private authService: AuthService,
         private blogApiService: BlogApiService,
@@ -74,17 +76,26 @@ export class BlogViewComponent implements OnInit {
     }
 
     filterPosts(topicId: number): void {
+        this.activeTopicId = topicId;
+        this.isFilteringPosts = true;
+
         if(this.isAdmin) {
             this.blogApiService.getPosts(topicId, false).subscribe((res: BlogPost[]) => {
                 this.posts = res;
-                this.activeTopicId = topicId;
+                this.isFilteringPosts = false;
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+                this.isFilteringPosts = false;
+                this.activeTopicId = -1;
             });
         } else {
             this.blogApiService.getPosts(topicId).subscribe((res: BlogPost[]) => {
                 this.posts = res;
-                this.activeTopicId = topicId;
+                this.isFilteringPosts = false;
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
+                this.isFilteringPosts = false;
+                this.activeTopicId = -1;
             });
         }
     }

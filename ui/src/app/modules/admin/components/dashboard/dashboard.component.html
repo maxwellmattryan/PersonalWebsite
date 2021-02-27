@@ -27,12 +27,19 @@
             <div class='dashboard__profile-btn-row' *ngFor='let profile of profiles trackBy: this.trackingService.objectById'>
                 <button
                         aria-label='Activate profile'
-                        [ngClass]="{'btn--active': profile.status.status == 'ACTIVE' }"
+                        [ngClass]="{'btn-loading': isActivatingProfile && profile.id === activeProfileId, 'btn--active': profile.status.status == 'ACTIVE' }"
                         class='btn dashboard__profile-btn'
                         (click)='changeProfile(profile)'
                         type='button'
                 >
-                    {{ profile.name }}
+                    <ng-container *ngIf='isActivatingProfile && profile.id === activeProfileId'>
+                        <div class='btn-loader-container'>
+                            <div class='btn-loader'></div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf='!(isActivatingProfile && profile.id === activeProfileId)'>
+                        {{ profile.name }}
+                    </ng-container>
                 </button>
 
                 <a
@@ -80,7 +87,20 @@
 
         <div class='dashboard__logout-btn-container dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
             <div class='section-divider--half'></div>
-            <a class='btn dashboard__btn btn--warn' (click)="onLogoutClick()">Logout</a>
+            <a
+                class='btn dashboard__btn btn--warn'
+                [ngClass]="{'btn-loading': isLoggingOut}"
+                (click)="onLogoutClick()"
+            >
+                <ng-container *ngIf='isLoggingOut'>
+                    <div class='btn-loader-container'>
+                        <div class='btn-loader--warn'></div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf='!isLoggingOut'>
+                    Logout
+                </ng-container>
+            </a>
         </div>
     </div>
 </div>
