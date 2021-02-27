@@ -23,8 +23,8 @@ export class ShopProductController {
     ): Promise<ShopProduct[]> {
         let products: ShopProduct[];
 
-        if(statusId) {
-            if(categoryId) {
+        if(statusId != -1) {
+            if(categoryId != -1) {
                 products = await this.shopProductService.getProductsByStatusAndCategory(statusId, categoryId);
             } else {
                 products = await this.shopProductService.getProductsByStatus(statusId);

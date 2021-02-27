@@ -55,10 +55,10 @@ export class ShopApiService extends ApiService {
     }
 
     // NOTE: statusId is set to 1 by default to correspond with 'AVAILABLE' products
-    getProducts(statusId: number = 1, categoryId: number = -1): Observable<ShopProduct[]> {
+    getProducts(statusId: string = '', categoryId: string = ''): Observable<ShopProduct[]> {
         let params = new HttpParams();
-        if(statusId != -1) params = params.set('statusId', statusId.toString());
-        if(categoryId != -1) params = params.set('categoryId', categoryId.toString());
+        if(statusId != '') params = params.set('statusId', statusId);
+        if(categoryId != '') params = params.set('categoryId', categoryId);
 
         return this.http.get<ShopProduct[]>(
             `${environment.API_URL}/shop/products`,

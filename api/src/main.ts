@@ -9,7 +9,7 @@ import * as rateLimit from 'express-rate-limit';
 import { join } from 'path';
 
 import { AppModule } from '@api/app.module';
-import { HttpLoggingInterceptor } from '@api/core/http/http-logging-interceptor.service';
+import { HttpLoggingInterceptor } from '@api/core/http/http-logging.interceptor';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule, {

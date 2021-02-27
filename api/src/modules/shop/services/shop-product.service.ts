@@ -85,8 +85,8 @@ export class ShopProductService {
             .createQueryBuilder('sp')
             .leftJoinAndSelect('sp.category', 'sc')
             .leftJoinAndSelect('sp.status', 'sps')
-            .where(`sps.id = :id`, { id: statusId })
-            .andWhere(`sc.id = :id`, { id: categoryId })
+            .where(`sp.category_id = :categoryId`, { categoryId: categoryId })
+            .andWhere(`sp.status_id = :statusId`, { statusId: statusId })
             .getMany();
     }
 

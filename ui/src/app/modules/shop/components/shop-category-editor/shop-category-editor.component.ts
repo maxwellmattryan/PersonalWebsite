@@ -71,7 +71,7 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
     }
 
     private loadProductData(): void {
-        this.shopApiService.getProducts(ShopProductStatuses.AVAILABLE).subscribe((res: ShopProduct[]) => {
+        this.shopApiService.getProducts(ShopProductStatuses.AVAILABLE.toString()).subscribe((res: ShopProduct[]) => {
             this.productData = res.sort(this.shopComparisonService.products);
 
             if(this.categoryData) {

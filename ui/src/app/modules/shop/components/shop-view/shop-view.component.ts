@@ -45,7 +45,7 @@ export class ShopViewComponent implements OnInit {
 
         this.isAdmin = this.authService.isLoggedIn();
 
-        this.shopApiService.getProducts(ShopProductStatuses.AVAILABLE).subscribe((res: ShopProduct[]) => {
+        this.shopApiService.getProducts(ShopProductStatuses.AVAILABLE.toString()).subscribe((res: ShopProduct[]) => {
             this.products = res.sort(this.shopComparisonService.products);
 
             if(this.isAdmin) {
@@ -84,7 +84,7 @@ export class ShopViewComponent implements OnInit {
         this.activeCategoryId = categoryId;
         this.isLoadingByCategory = true;
 
-        this.shopApiService.getProducts(this.activeStatusId, this.activeCategoryId).subscribe((res: ShopProduct[]) => {
+        this.shopApiService.getProducts(this.activeStatusId.toString(), this.activeCategoryId.toString()).subscribe((res: ShopProduct[]) => {
             this.products = res;
             this.isLoadingByCategory = false;
         }, (error: HttpErrorResponse) => {
@@ -97,20 +97,22 @@ export class ShopViewComponent implements OnInit {
     public loadProductsByStatus(statusId: number): void {
         const previousStatusId = this.activeStatusId;
         this.activeStatusId = statusId;
+        const previousCategoryId = this.activeCategoryId;
+        this.activeCategoryId = -1;
         this.isLoadingByStatus = true;
 
-        this.shopApiService.getProducts(statusId).subscribe((res: ShopProduct[]) => {
+        this.shopApiService.getProducts(this.activeStatusId.toString(), this.activeCategoryId.toString()).subscribe((res: ShopProduct[]) => {
             if(res.length < 1) {
                 this.notificationService.createNotification('No shop products contain this status.');
                 return;
             }
 
             this.products = res.sort(this.shopComparisonService.products);
-            this.activeCategoryId = -1;
             this.isLoadingByStatus = false;
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
             this.activeStatusId = previousStatusId;
+            this.activeCategoryId = previousCategoryId;
             this.isLoadingByStatus = false;
         });
     }
