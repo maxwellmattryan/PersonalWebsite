@@ -88,7 +88,10 @@
         <div class='dashboard__files-btn-container dashboard__btn-container' *ngIf='authService.isLoggedIn()'>
             <h2>Files</h2>
             <br>
-            <a class='btn dashboard__btn' routerLink='/portfolio/profiles/editor'>
+            <a
+                class='btn dashboard__btn'
+                (click)='startUploadProcess();'
+            >
                 Upload File
             </a>
             <br>
@@ -113,6 +116,8 @@
         </div>
     </div>
 </div>
+
+<ui-file-upload-modal [modalId]='modalId'></ui-file-upload-modal>
 
 <ng-template #loading>
     <ui-loading-spinner></ui-loading-spinner>

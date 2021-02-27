@@ -16,13 +16,15 @@ import {
     NotificationService,
 } from './services';
 import { HttpErrorInterceptorService } from '@ui/core/http/http-error-interceptor.service';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
     declarations: [
         FooterComponent,
         HeaderComponent,
         IconComponent,
-        LoadingSpinnerComponent
+        LoadingSpinnerComponent,
+        ModalComponent
     ],
     imports: [
         CommonModule,

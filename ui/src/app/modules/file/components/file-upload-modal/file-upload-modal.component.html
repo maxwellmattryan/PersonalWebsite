@@ -1,1 +1,42 @@
-<p>file-upload-modal works!</p>
+<div [id]='modalId' class='modal hidden'>
+    <div class='modal__background' (click)='closeModal()'></div>
+
+    <div class='modal__body'>
+        <div class='modal__close-btn-container'>
+            <button aria-label='Close shop checkout modal' class='modal__close-btn' (click)='closeModal()'>
+                &#10006;
+            </button>
+            <div class='modal__close-btn-spacer'></div>
+        </div>
+
+        <div class='modal__content'>
+            <h1 class='modal__header'>File Upload</h1>
+            <div class='modal__info'>
+                Please enter the following information to upload a file.
+            </div>
+
+            <form class='editor__form' [formGroup]='modalForm' (ngSubmit)='submitModalForm()'>
+                <div class='form-field editor__form-field'>
+                    <label class='form-field-label editor__form-field-label'>File</label>
+                    <br><br>
+                    <input formControlName='file' required autofocus>
+                </div>
+
+                <div class='form-field editor__form-field'>
+                    <label class='form-field-label editor__form-field-label'>URI</label>
+                    <br><br>
+                    <input formControlName='uri' required autofocus>
+                </div>
+
+                <button
+                        aria-label='Submit shop category'
+                        [ngClass]="{'btn--inactive': !modalForm.valid}"
+                        class='btn editor__form-btn  editor__form-btn--submit'
+                        [disabled]='!modalForm.valid'
+                >
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -55,13 +55,6 @@ export class ShopProductCollectionComponent implements OnInit {
         modal.classList.add('show');
     }
 
-    public closeDialog(): void {
-        let modal = document.getElementById(this.modalId);
-
-        modal.classList.remove('show');
-        modal.classList.add('hidden');
-    }
-
     public sendProductToEditor(product: ShopProduct): void {
         this.shopEditorService.setProduct(product);
     }

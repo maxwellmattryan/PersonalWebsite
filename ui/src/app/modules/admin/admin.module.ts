@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 
 import { CoreModule } from '@ui/core/core.module';
 
+import { FileModule } from '@ui/modules/file/file.module';
+
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
 
@@ -24,6 +26,7 @@ import {
         AdminRoutingModule,
         CommonModule,
         CoreModule,
+        FileModule,
         FormsModule
     ]
 })

@@ -32,6 +32,8 @@ export class DashboardViewComponent implements OnInit {
     public isActivatingProfile: boolean = false;
     public isLoggingOut: boolean = false;
 
+    public modalId: string = 'file-upload-modal';
+
     constructor(
         private router: Router,
         private authApiService: AuthApiService,
@@ -130,5 +132,17 @@ export class DashboardViewComponent implements OnInit {
             this.notificationService.createNotification('Successfully delete profile!');
             if(profile.status.status === 'ACTIVE') location.reload();
         });
+    }
+
+    public startUploadProcess(): void {
+        this.showDialog();
+    }
+
+    private showDialog(): void {
+        let modal = document.getElementById(this.modalId);
+
+        modal.classList.remove('init');
+        modal.classList.remove('hidden');
+        modal.classList.add('show');
     }
 }

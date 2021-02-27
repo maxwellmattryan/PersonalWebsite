@@ -6,7 +6,6 @@ import { ShopCustomer } from '../../models';
 @Component({
     selector: 'ui-shop-checkout-modal',
     templateUrl: './shop-checkout-modal.component.html',
-    styleUrls: ['./shop-checkout-modal.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShopCheckoutModalComponent implements OnInit {
