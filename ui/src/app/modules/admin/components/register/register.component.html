@@ -20,11 +20,18 @@
             
         <button
             aria-label='Register submit'
-            [ngClass]="{'btn--inactive': !validationService.hasValidAdminCredentials(username, password)}"
+            [ngClass]="{'btn-loading': isRegistering, 'btn--inactive': !validationService.hasValidAdminCredentials(username, password)}"
             class='btn register__form-btn'
             [disabled]='!validationService.hasValidAdminCredentials(username, password)'
         >
-            Submit
+            <ng-container *ngIf='isRegistering'>
+                <div class='btn-loader-container'>
+                    <div class='btn-loader'></div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf='!isRegistering'>
+                Submit
+            </ng-container>
         </button>
     </form>
 </div>

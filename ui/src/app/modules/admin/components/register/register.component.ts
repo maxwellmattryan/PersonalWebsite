@@ -16,6 +16,8 @@ export class RegisterComponent implements OnInit {
     username: string = '';
     password: string = '';
 
+    public isRegistering: boolean = false;
+
     constructor(
         private router: Router,
         private authApiService: AuthApiService,
@@ -35,6 +37,8 @@ export class RegisterComponent implements OnInit {
     }
 
     onRegisterSubmit(): void {
+        this.isRegistering = true;
+
         const admin: Admin = {
             username: this.username,
             password: this.password
@@ -42,7 +46,11 @@ export class RegisterComponent implements OnInit {
 
         this.authApiService.registerAdmin(admin).subscribe(res => {
             this.notificationService.createNotification(`Hello, ${admin.username}! Please log in.`);
+            this.isRegistering = false;
             this.router.navigate(['admin/login']);
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+            this.isRegistering = false;
         });
     }
 }

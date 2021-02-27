@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
     username: string = '';
     password: string = '';
 
+    public isLoggingIn: boolean = false;
+
     constructor(
         private router: Router,
         private authApiService: AuthApiService,
@@ -32,6 +34,8 @@ export class LoginComponent implements OnInit {
     }
 
     onLoginSubmit(): void {
+        this.isLoggingIn = true;
+
         const admin: Admin = {
             username: this.username,
             password: this.password
@@ -39,8 +43,12 @@ export class LoginComponent implements OnInit {
 
         this.authApiService.loginAdmin(admin).subscribe(res => {
           this.authService.loginAdmin(res.id, res.username);
+          this.isLoggingIn = false;
           this.notificationService.createNotification(`Welcome back, ${res.username}!`);
           this.router.navigate(['admin']);
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+            this.isLoggingIn = false;
         });
     }
 }
