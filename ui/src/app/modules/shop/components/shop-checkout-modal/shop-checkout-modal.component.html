@@ -1,9 +1,9 @@
 <div [id]='modalId' class='modal hidden'>
-    <div class='modal__background' (click)='close()'></div>
+    <div class='modal__background' (click)='closeModal()'></div>
 
     <div class='modal__body'>
         <div class='modal__close-btn-container'>
-            <button aria-label='Close shop checkout modal' class='modal__close-btn' (click)='close()'>
+            <button aria-label='Close shop checkout modal' class='modal__close-btn' (click)='closeModal()'>
                 &#10006;
             </button>
             <div class='modal__close-btn-spacer'></div>
@@ -15,7 +15,7 @@
                 Please enter the following information to receive an email containing a download URL.
             </div>
 
-            <form class='editor__form' [formGroup]='checkoutForm' (ngSubmit)='onSubmit()'>
+            <form class='editor__form' [formGroup]='modalForm' (ngSubmit)='submitModalForm()'>
                 <div class='form-field editor__form-field'>
                     <label class='form-field-label editor__form-field-label'>Email</label>
                     <br><br>
@@ -24,9 +24,9 @@
 
                 <button
                         aria-label='Submit shop category'
-                        [ngClass]="{'btn--inactive': !checkoutForm.valid}"
+                        [ngClass]="{'btn--inactive': !modalForm.valid}"
                         class='btn editor__form-btn  editor__form-btn--submit'
-                        [disabled]='!checkoutForm.valid'
+                        [disabled]='!modalForm.valid'
                 >
                     Submit
                 </button>

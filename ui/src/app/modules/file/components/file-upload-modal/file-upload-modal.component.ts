@@ -20,7 +20,7 @@ export class FileUploadModalComponent extends ModalComponent<File> {
     }
 
     protected buildModalForm(): void {
-        const pathRegex: RegExp = /^(.+)\/([^\/]+)$/;
+        const pathRegex: RegExp = /^[^\/]+\/?(?:[^\/]+\/?)*$/;
 
         this.modalForm = this.formBuilder.group({
             file: this.formBuilder.control('', [Validators.required]),
