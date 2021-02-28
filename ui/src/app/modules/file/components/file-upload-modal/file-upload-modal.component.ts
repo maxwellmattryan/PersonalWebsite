@@ -1,9 +1,14 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
 import { ModalComponent } from '@ui/core/components/modal/modal.component';
 import { FormBuilder, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { NotificationService } from '@ui/core/services';
+
+import { FileService } from '../../services';
 
 export type FileData = {
-    filename: string,
+    file: File,
     uri: string
 };
 
@@ -13,11 +18,16 @@ export type FileData = {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileUploadModalComponent extends ModalComponent<File> {
-    public filename: string = 'Select File';
+    public isSelectingFile: boolean = false;
+    public isUploadingFile: boolean = false;
+
+    private file: File;
 
     constructor(
         protected readonly elem: ElementRef,
-        protected readonly formBuilder: FormBuilder
+        private readonly fileService: FileService,
+        protected readonly formBuilder: FormBuilder,
+        private readonly notificationService: NotificationService
     ) {
         super(elem, formBuilder);
     }
@@ -40,37 +50,35 @@ export class FileUploadModalComponent extends ModalComponent<File> {
     }
 
     public changeFilename(event: Event): void {
-        const match = this.extractFilenameFromPath((<HTMLInputElement>event.target).value);
-
-        let filename: string;
-        if(match)
-            filename = match.length > 21 ? `${match.substring(0, 18)}...` : match;
-        else
-            filename = 'unknown';
-
-        this.filename = filename;
-    }
-
-    private extractFilenameFromPath(path: string): string {
-        const filenameRegex = /[^\\]*$/;
-        return path.match(filenameRegex)[0];
+        this.file = (event.target as any).files[0];
     }
 
     public submitModalForm(): void {
-        const data: FileData = this.buildModalFormData();
-        console.log(data);
+        if(!this.file) return;
 
+        this.isUploadingFile = true;
+
+        const fileData: FileData = this.buildModalFormData();
         const formData = new FormData();
-        formData.append(data.filename, this.modalForm.get('file').value);
-        console.log(formData);
+        formData.append('file', fileData.file, fileData.file.name);
 
-        // TODO: Get the actual data from the file
+        this.fileService.uploadFile(formData, fileData).subscribe((res: void) => {
+            console.log(res);
+            this.isUploadingFile = false;
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+            this.isUploadingFile = false;
+        });
     }
 
     private buildModalFormData(): FileData {
         return {
-            filename: this.extractFilenameFromPath(this.modalForm.value.file),
+            file: this.file,
             uri: this.modalForm.value.uri
         }
     }
+
+    public filename(): string {
+        return this.file ? this.file.name : 'Select All'
+    };
 }

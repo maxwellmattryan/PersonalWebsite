@@ -19,9 +19,21 @@
                 <div class='form-field editor__form-field'>
                     <label class='form-field-label editor__form-field-label'>File</label>
                     <br><br>
-                    <label (click)='selectFile(fileInput)' class='file-input__label editor__form-field-label'>
-                        {{ filename }}
-                    </label>
+                    <button
+                        (click)='selectFile(fileInput)'
+                        [ngClass]="{'btn-loading': isSelectingFile }"
+                        class='file-input__label editor__form-field-label'
+                        type='button'
+                    >
+                        <ng-container *ngIf='isSelectingFile'>
+                            <div class='btn-loader-container'>
+                                <div class='btn-loader'></div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf='!isSelectingFile'>
+                            {{ filename() }}
+                        </ng-container>
+                    </button>
                     <input #fileInput class='file-input__field' (change)='changeFilename($event)' formControlName='file' type='file' size='60' required autofocus>
                 </div>
 
@@ -32,12 +44,19 @@
                 </div>
 
                 <button
-                        aria-label='Submit shop category'
-                        [ngClass]="{'btn--inactive': !modalForm.valid}"
+                        aria-label='Select file to upload'
+                        [ngClass]="{'btn-loading': isUploadingFile, 'btn--inactive': !modalForm.valid}"
                         class='btn editor__form-btn  editor__form-btn--submit'
                         [disabled]='!modalForm.valid'
                 >
-                    Submit
+                    <ng-container *ngIf='isUploadingFile'>
+                        <div class='btn-loader-container'>
+                            <div class='btn-loader'></div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf='!isUploadingFile'>
+                        Submit
+                    </ng-container>
                 </button>
             </form>
         </div>
