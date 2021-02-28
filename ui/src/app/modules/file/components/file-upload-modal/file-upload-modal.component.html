@@ -15,7 +15,7 @@
                 Please enter the following information to upload a file.
             </div>
 
-            <form class='editor__form' [formGroup]='modalForm' (ngSubmit)='submitModalForm()'>
+            <form class='editor__form' [formGroup]='modalForm' (ngSubmit)='submitModalForm()' enctype='multipart/form-data'>
                 <div class='form-field editor__form-field'>
                     <label class='form-field-label editor__form-field-label'>File</label>
                     <br><br>
@@ -38,9 +38,9 @@
                 </div>
 
                 <div class='form-field editor__form-field'>
-                    <label class='form-field-label editor__form-field-label'>URI</label>
+                    <label class='form-field-label editor__form-field-label'>Folder</label>
                     <br><br>
-                    <input formControlName='uri' required autofocus>
+                    <input formControlName='folder' required autofocus>
                 </div>
 
                 <button

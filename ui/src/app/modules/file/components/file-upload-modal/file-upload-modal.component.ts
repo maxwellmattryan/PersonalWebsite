@@ -9,7 +9,7 @@ import { FileService } from '../../services';
 
 export type FileData = {
     file: File,
-    uri: string
+    folder: string
 };
 
 @Component({
@@ -37,12 +37,27 @@ export class FileUploadModalComponent extends ModalComponent<File> {
     }
 
     protected buildModalForm(): void {
-        const pathRegex: RegExp = /^[^/].*/;
+        const pathRegex: RegExp = /^(?!\/)(?!.*(?:^|\/)\.\.\/).+/;
 
         this.modalForm = this.formBuilder.group({
             file: this.formBuilder.control('', [Validators.required]),
-            uri: this.formBuilder.control('', [Validators.required, Validators.pattern(pathRegex)])
+            folder: this.formBuilder.control('', [Validators.required, Validators.pattern(pathRegex)])
         });
+    }
+
+    public closeModal(): void {
+        super.closeModal();
+
+        this.resetModal();
+    }
+
+    public resetModal() {
+        this.isSelectingFile = false;
+        this.isUploadingFile = false;
+
+        this.file = undefined;
+
+        this.buildModalForm();
     }
 
     public selectFile(elem: HTMLElement): void {
@@ -63,8 +78,8 @@ export class FileUploadModalComponent extends ModalComponent<File> {
         formData.append('file', fileData.file, fileData.file.name);
 
         this.fileService.uploadFile(formData, fileData).subscribe((res: void) => {
-            console.log(res);
             this.isUploadingFile = false;
+            console.log(res);
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
             this.isUploadingFile = false;
@@ -74,7 +89,7 @@ export class FileUploadModalComponent extends ModalComponent<File> {
     private buildModalFormData(): FileData {
         return {
             file: this.file,
-            uri: this.modalForm.value.uri
+            folder: this.modalForm.value.folder
         }
     }
 

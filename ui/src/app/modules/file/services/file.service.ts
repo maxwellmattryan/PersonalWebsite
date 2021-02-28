@@ -29,7 +29,7 @@ export class FileService extends ApiService {
         const headers = this.contentTypeHeader('multipart/form-data');
 
         let params = new HttpParams();
-        params = params.set('uri', fileData.uri);
+        params = params.set('folder', fileData.folder);
 
         return this.http.post<void>(
             `${environment.API_URL}/files/upload`,

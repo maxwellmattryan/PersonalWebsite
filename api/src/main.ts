@@ -38,7 +38,7 @@ async function bootstrap() {
 
     app.use(compression());
 
-    app.useStaticAssets(join(__dirname, '..', 'assets'));
+    app.useStaticAssets(join(__dirname, '..', 'files'));
 
     app.setGlobalPrefix('api');
 
