@@ -19,7 +19,10 @@
                 <div class='form-field editor__form-field'>
                     <label class='form-field-label editor__form-field-label'>File</label>
                     <br><br>
-                    <input formControlName='file' required autofocus>
+                    <label (click)='selectFile(fileInput)' class='file-input__label editor__form-field-label'>
+                        {{ filename }}
+                    </label>
+                    <input #fileInput class='file-input__field' (change)='changeFilename($event)' formControlName='file' type='file' size='60' required autofocus>
                 </div>
 
                 <div class='form-field editor__form-field'>

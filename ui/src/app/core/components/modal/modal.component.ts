@@ -18,11 +18,14 @@ export class ModalComponent<T> implements OnInit {
     constructor(
         protected readonly elem: ElementRef,
         protected readonly formBuilder: FormBuilder
-    ) { }
+    ) {
+    }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+    }
 
-    protected buildModalForm(): void { }
+    protected buildModalForm(): void {
+    }
 
     public closeModal(): void {
         let modal = document.getElementById(this.modalId);
@@ -31,5 +34,6 @@ export class ModalComponent<T> implements OnInit {
         modal.classList.add('hidden');
     }
 
-    public submitModalForm(): void { }
+    public submitModalForm(): void {
+    }
 }
