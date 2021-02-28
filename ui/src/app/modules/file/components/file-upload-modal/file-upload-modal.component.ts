@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 import { ModalComponent } from '@ui/core/components/modal/modal.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -24,6 +24,7 @@ export class FileUploadModalComponent extends ModalComponent<File> {
     private file: File;
 
     constructor(
+        private readonly changeDetectorRef: ChangeDetectorRef,
         protected readonly elem: ElementRef,
         private readonly fileService: FileService,
         protected readonly formBuilder: FormBuilder,
@@ -58,6 +59,8 @@ export class FileUploadModalComponent extends ModalComponent<File> {
         this.file = undefined;
 
         this.buildModalForm();
+
+        this.changeDetectorRef.detectChanges();
     }
 
     public selectFile(elem: HTMLElement): void {
@@ -78,11 +81,11 @@ export class FileUploadModalComponent extends ModalComponent<File> {
         formData.append('file', fileData.file, fileData.file.name);
 
         this.fileService.uploadFile(formData, fileData).subscribe((res: void) => {
-            this.isUploadingFile = false;
-            console.log(res);
+            this.notificationService.createNotification('Successfully uploaded new file!');
+            this.resetModal();
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
-            this.isUploadingFile = false;
+            this.resetModal();
         });
     }
 

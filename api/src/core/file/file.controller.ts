@@ -14,7 +14,7 @@ export const DiskStorage = () => diskStorage({
         cb(null, file.originalname);
     },
     destination: (req, file, cb) => {
-        const uri: string = 'files/' + req.query.uri.toString() || '';
+        const uri: string = 'files/' + req.query.folder.toString() || '';
 
         if(!fs.existsSync(uri)) {
             fs.mkdirSync(uri, { recursive: true })
