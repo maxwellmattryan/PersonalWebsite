@@ -32,7 +32,8 @@ export class DashboardViewComponent implements OnInit {
     public isActivatingProfile: boolean = false;
     public isLoggingOut: boolean = false;
 
-    public modalId: string = 'file-upload-modal';
+    public uploadModalId: string = 'file-upload-modal';
+    public deleteModalId: string = 'file-delete-modal';
 
     constructor(
         private router: Router,
@@ -135,14 +136,18 @@ export class DashboardViewComponent implements OnInit {
     }
 
     public startUploadProcess(): void {
-        this.showDialog();
+        this.showDialog(this.uploadModalId);
     }
 
-    private showDialog(): void {
-        let modal = document.getElementById(this.modalId);
+    public startDeleteProcess(): void {
+        this.showDialog(this.deleteModalId);
+    }
 
-        modal.classList.remove('init');
-        modal.classList.remove('hidden');
-        modal.classList.add('show');
+    private showDialog(modalId: string): void {
+        let m = document.getElementById(modalId);
+
+        m.classList.remove('init');
+        m.classList.remove('hidden');
+        m.classList.add('show');
     }
 }

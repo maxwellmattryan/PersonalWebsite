@@ -37,4 +37,14 @@ export class FileService extends ApiService {
             { headers: headers, params: params }
         );
     }
+
+    public deleteFile(uri: string): Observable<void> {
+        let params = new HttpParams();
+        params = params.set('uri', uri);
+
+        return this.http.delete<void>(
+            `${environment.API_URL}/files/delete`,
+            { params: params }
+        );
+    }
 }

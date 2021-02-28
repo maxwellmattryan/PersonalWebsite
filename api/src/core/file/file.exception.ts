@@ -1,4 +1,10 @@
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
+
+export class FileWasNotFoundException extends NotFoundException {
+    constructor() {
+        super('Unable to find file with specified URI.');
+    }
+}
 
 export class InvalidFileUriException extends BadRequestException {
     constructor() {

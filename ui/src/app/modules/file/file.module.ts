@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FileUploadModalComponent } from './components';
 
 import { FileService } from './services';
+import { FileDeleteModalComponent } from './components/file-delete-modal/file-delete-modal.component';
 
 @NgModule({
     imports: [
@@ -12,10 +13,12 @@ import { FileService } from './services';
         ReactiveFormsModule
     ],
     exports: [
-        FileUploadModalComponent
+        FileUploadModalComponent,
+        FileDeleteModalComponent
     ],
     declarations: [
-        FileUploadModalComponent
+        FileUploadModalComponent,
+        FileDeleteModalComponent
     ],
     providers: [
         FileService

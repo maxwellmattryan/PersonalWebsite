@@ -85,7 +85,8 @@ export class FileUploadModalComponent extends ModalComponent<File> {
             this.resetModal();
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
-            this.resetModal();
+            this.isUploadingFile = false;
+            this.changeDetectorRef.detectChanges();
         });
     }
 

@@ -90,9 +90,15 @@
             <br>
             <a
                 class='btn dashboard__btn'
-                (click)='startUploadProcess();'
+                (click)='startUploadProcess()'
             >
                 Upload File
+            </a>
+            <a
+                class='btn btn--warn dashboard__btn'
+                (click)='startDeleteProcess()'
+            >
+                Delete File
             </a>
             <br>
         </div>
@@ -117,7 +123,8 @@
     </div>
 </div>
 
-<ui-file-upload-modal [modalId]='modalId'></ui-file-upload-modal>
+<ui-file-upload-modal [modalId]='uploadModalId'></ui-file-upload-modal>
+<ui-file-delete-modal [modalId]='deleteModalId'></ui-file-delete-modal>
 
 <ng-template #loading>
     <ui-loading-spinner></ui-loading-spinner>

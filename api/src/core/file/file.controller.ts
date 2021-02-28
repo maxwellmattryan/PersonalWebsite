@@ -1,9 +1,10 @@
-import { Controller, Get, HttpCode, Param, Post, Query, Req, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, Param, Post, Query, Req, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 import { Request, Response } from 'express';
 import { diskStorage } from 'multer';
-import { InvalidFileUriException } from './file.exception';
+import { FileWasNotFoundException, InvalidFileUriException } from './file.exception';
+import path from 'path';
 
 const fs = require('fs');
 
@@ -33,6 +34,8 @@ export const StorageOptions = () => {
 
 @Controller('files')
 export class FileController {
+    private uriRegex: RegExp = /^(?!\/)(?!.*(?:^|\/)\.\.\/).+/;
+
     constructor() { }
 
     @Get()
@@ -46,11 +49,24 @@ export class FileController {
     @UseInterceptors(FileInterceptor('file', StorageOptions()))
     public async uploadFile(
         @UploadedFile() file: Express.Multer.File,
-        @Query('folder') folder,
+        @Query('folder') folder: string,
         @Req() request: Request
     ): Promise<void> {
-        const pathRegex: RegExp = /^(?!\/)(?!.*(?:^|\/)\.\.\/).+/;
-        if(!pathRegex.test(folder)) throw new InvalidFileUriException();
+        if(!this.uriRegex.test(folder)) throw new InvalidFileUriException();
+
+        return;
+    }
+
+    @Delete('delete')
+    @HttpCode(204)
+    public async deleteFile(@Query('uri') uri: string, @Req() request: Request): Promise<void> {
+        if(!this.uriRegex.test(uri)) throw new InvalidFileUriException();
+
+        const fullUri: string = `files/${uri}`;
+        if(fs.existsSync(fullUri))
+            fs.unlinkSync(fullUri);
+        else
+            throw new FileWasNotFoundException();
 
         return;
     }
