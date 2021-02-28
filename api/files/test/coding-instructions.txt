@@ -1,0 +1,27 @@
+Instructions for Coding Section:
+
+The coding questions in this exam deal with a TV database. The schema for this database is given below. 
+
+Actor (aid, fname, lname, gender, dob)
+
+Show (sid, name, description, release_date, rent_price, cid)
+
+Channel (cid, name, region)
+
+Cast (aid, sid, role)
+
+ 
+
+A tuple in the Cast relation represents that a person from the Actor relation starred in a Show with a specific role. There can be multiple Cast rows with the same aid (e.g. if Matthew Rhys stars in two shows, there would be two rows with the same aid, but a different sid). 
+
+ 
+
+Actor.aid, Show.sid, Channel.cid == primary keys of the corresponding tables
+
+Cast.aid and Cast.sid == primary key of Cast 
+
+Show.cid == foreign key to Channel.cid 
+
+Cast.aid == foreign key to Actor.aid
+
+Cast.sid == foreign key to Show.sid

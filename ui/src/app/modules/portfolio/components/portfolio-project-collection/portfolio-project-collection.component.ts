@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { AuthService } from '@ui/core/auth';
-import { FileService, SeoService, TrackingService } from '@ui/core/services';
+import { SeoService, TrackingService } from '@ui/core/services';
+
+import { FileService } from '@ui/modules/file/services';
 
 import { PortfolioProject } from '../../models';
 

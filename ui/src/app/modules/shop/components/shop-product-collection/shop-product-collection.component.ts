@@ -3,7 +3,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { AuthService } from '@ui/core/auth';
-import { FileService, NotificationService, SeoService, TrackingService } from '@ui/core/services';
+import { NotificationService, SeoService, TrackingService } from '@ui/core/services';
+
+import { FileService } from '@ui/modules/file/services';
 
 import { ShopCustomer, ShopProduct, ShopProductStatuses } from '../../models';
 import { ShopApiService, ShopCheckoutService, ShopEditorService } from '../../services';
@@ -51,13 +53,6 @@ export class ShopProductCollectionComponent implements OnInit {
         modal.classList.remove('init');
         modal.classList.remove('hidden');
         modal.classList.add('show');
-    }
-
-    public closeDialog(): void {
-        let modal = document.getElementById(this.modalId);
-
-        modal.classList.remove('show');
-        modal.classList.add('hidden');
     }
 
     public sendProductToEditor(product: ShopProduct): void {

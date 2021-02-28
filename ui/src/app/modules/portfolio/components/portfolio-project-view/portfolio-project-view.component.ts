@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from '@ui/core/auth';
-import { FileService, NotificationService, SeoService } from '@ui/core/services';
+import { NotificationService, SeoService } from '@ui/core/services';
+
+import { FileService } from '@ui/modules/file/services';
 
 import { PortfolioProject } from '../../models';
 import { PortfolioApiService, PortfolioEditorService } from '../../services';

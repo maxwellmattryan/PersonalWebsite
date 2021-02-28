@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { FileService, TrackingService } from '@ui/core/services';
+import { TrackingService } from '@ui/core/services';
+
+import { FileService } from '@ui/modules/file/services';
 
 import { PortfolioProfileTechnology } from '@ui/modules/portfolio/models';
 

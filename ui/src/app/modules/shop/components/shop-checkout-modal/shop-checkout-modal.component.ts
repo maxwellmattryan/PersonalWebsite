@@ -1,53 +1,40 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { ShopCustomer } from '../../models';
+import { ModalComponent } from '@ui/core/components/modal/modal.component';
 
 @Component({
     selector: 'ui-shop-checkout-modal',
     templateUrl: './shop-checkout-modal.component.html',
-    styleUrls: ['./shop-checkout-modal.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShopCheckoutModalComponent implements OnInit {
-    @Input()
-    public modalId: string = '';
-
-    @Output()
-    public customerEvent = new EventEmitter<ShopCustomer>();
-
-    public checkoutForm: FormGroup;
-
+export class ShopCheckoutModalComponent extends ModalComponent<ShopCustomer> {
     constructor(
-        private readonly elem: ElementRef,
-        private readonly formBuilder: FormBuilder
-    ) { }
+        protected readonly elem: ElementRef,
+        protected readonly formBuilder: FormBuilder
+    ) {
+        super(elem, formBuilder);
+    }
 
     ngOnInit(): void {
-        this.buildCheckoutForm();
+        this.buildModalForm();
     }
 
-    public close(): void {
-        let modal = document.getElementById(this.modalId);
-
-        modal.classList.remove('show');
-        modal.classList.add('hidden');
-    }
-
-    private buildCheckoutForm(): void {
-        this.checkoutForm = this.formBuilder.group({
+    protected buildModalForm(): void {
+        this.modalForm = this.formBuilder.group({
             email: this.formBuilder.control('', [Validators.required, Validators.email])
         });
     }
 
-    public onSubmit(): void {
+    public submitModalForm(): void {
         const customer = this.buildCustomer();
-        this.customerEvent.emit(customer);
+        this.modalEvent.emit(customer);
     }
 
     private buildCustomer(): any {
         return new ShopCustomer({
-            ...this.checkoutForm.value
+            ...this.modalForm.value
         });
     }
 }

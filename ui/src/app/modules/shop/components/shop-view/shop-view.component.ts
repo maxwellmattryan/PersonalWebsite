@@ -97,22 +97,20 @@ export class ShopViewComponent implements OnInit {
     public loadProductsByStatus(statusId: number): void {
         const previousStatusId = this.activeStatusId;
         this.activeStatusId = statusId;
-        const previousCategoryId = this.activeCategoryId;
-        this.activeCategoryId = -1;
         this.isLoadingByStatus = true;
 
-        this.shopApiService.getProducts(this.activeStatusId.toString(), this.activeCategoryId.toString()).subscribe((res: ShopProduct[]) => {
+        this.shopApiService.getProducts(this.activeStatusId.toString(), '').subscribe((res: ShopProduct[]) => {
             if(res.length < 1) {
                 this.notificationService.createNotification('No shop products contain this status.');
                 return;
             }
 
             this.products = res.sort(this.shopComparisonService.products);
+            this.activeCategoryId = -1;
             this.isLoadingByStatus = false;
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
             this.activeStatusId = previousStatusId;
-            this.activeCategoryId = previousCategoryId;
             this.isLoadingByStatus = false;
         });
     }
