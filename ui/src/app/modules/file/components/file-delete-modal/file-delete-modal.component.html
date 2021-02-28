@@ -25,16 +25,16 @@
                 <button
                         aria-label='Select file to upload'
                         [ngClass]="{'btn-loading': isDeletingFile, 'btn--inactive': !modalForm.valid}"
-                        class='btn editor__form-btn  editor__form-btn--submit'
+                        class='btn btn--warn editor__form-btn  editor__form-btn--submit'
                         [disabled]='!modalForm.valid'
                 >
                     <ng-container *ngIf='isDeletingFile'>
                         <div class='btn-loader-container'>
-                            <div class='btn-loader'></div>
+                            <div class='btn-loader btn-loader--warn'></div>
                         </div>
                     </ng-container>
                     <ng-container *ngIf='!isDeletingFile'>
-                        Submit
+                        Delete
                     </ng-container>
                 </button>
             </form>

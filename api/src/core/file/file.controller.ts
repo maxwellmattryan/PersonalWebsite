@@ -1,10 +1,9 @@
-import { Controller, Delete, Get, HttpCode, Param, Post, Query, Req, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, Post, Query, Req, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 import { Request, Response } from 'express';
 import { diskStorage } from 'multer';
-import { FileWasNotFoundException, InvalidFileUriException } from './file.exception';
-import path from 'path';
+import { CannotDeleteFolderException, FileWasNotFoundException, InvalidFileUriException } from './file.exception';
 
 const fs = require('fs');
 
@@ -63,8 +62,13 @@ export class FileController {
         if(!this.uriRegex.test(uri)) throw new InvalidFileUriException();
 
         const fullUri: string = `files/${uri}`;
-        if(fs.existsSync(fullUri))
-            fs.unlinkSync(fullUri);
+        if(fs.existsSync(fullUri)) {
+            try {
+                fs.unlinkSync(fullUri);
+            } catch(err) {
+                throw new CannotDeleteFolderException();
+            }
+        }
         else
             throw new FileWasNotFoundException();
 
