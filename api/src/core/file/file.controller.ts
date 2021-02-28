@@ -1,9 +1,22 @@
-import { Controller, Delete, Get, HttpCode, Post, Query, Req, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+import {
+    Controller,
+    Delete,
+    Get,
+    HttpCode,
+    Post,
+    Query,
+    Req,
+    Res,
+    UploadedFile,
+    UseGuards,
+    UseInterceptors
+} from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 import { Request, Response } from 'express';
 import { diskStorage } from 'multer';
 import { CannotDeleteFolderException, FileWasNotFoundException, InvalidFileUriException } from './file.exception';
+import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
 const fs = require('fs');
 
@@ -45,6 +58,7 @@ export class FileController {
 
     @Post('upload')
     @HttpCode(201)
+    @UseGuards(JwtAuthGuard)
     @UseInterceptors(FileInterceptor('file', StorageOptions()))
     public async uploadFile(
         @UploadedFile() file: Express.Multer.File,
@@ -58,6 +72,7 @@ export class FileController {
 
     @Delete('delete')
     @HttpCode(204)
+    @UseGuards(JwtAuthGuard)
     public async deleteFile(@Query('uri') uri: string, @Req() request: Request): Promise<void> {
         if(!this.uriRegex.test(uri)) throw new InvalidFileUriException();
 
