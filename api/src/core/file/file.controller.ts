@@ -53,6 +53,9 @@ export class FileController {
     @Get()
     @HttpCode(200)
     public async getFile(@Query('uri') uri, @Req() request: Request, @Res() response: Response): Promise<File> {
+        if(!fs.existsSync(`files/${uri}`))
+            throw new FileWasNotFoundException();
+
         return response.sendFile(uri, { root: 'files' });
     }
 
