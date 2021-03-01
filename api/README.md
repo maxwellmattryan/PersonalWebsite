@@ -84,6 +84,17 @@ Repositories are the objects that actual more or less represents and corresponds
         - Removes the topic with the corresponding `id` from the database
         - 204
 
+- /api/files
+    - `GET      /api/files`
+        - Retrieves file given a specified URI (via query param)
+        - 200
+    - `POST     /api/files/upload`
+        - Uploads a given file at a specified folder path (via query param) to the server
+        - 201
+    - `DELETE   /api/files/delete`
+        - Deletes file given a specified URI (via query param)
+        - 204
+
 - /api/portfolio
     - `GET      /api/portfolio/profiles`
         - Retrieves list of all profiles in the database
@@ -147,6 +158,9 @@ Repositories are the objects that actual more or less represents and corresponds
     - `POST     /api/shop/customers`
         - Creates and saves a new customer to the database
         - 201
+    - `POST     /api/shop/customers/help`
+        - Sends email to customer with URLs to download purchased products
+        - 200
     - `GET      /api/shop/products`
         - Retrieves list of all products in the database
         - 200
