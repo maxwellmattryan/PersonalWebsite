@@ -3,18 +3,20 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
+import { EntityService } from '@api/core/database/entity.service';
 import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
 import { InternalServerErrorException } from '@api/core/http/http.exception';
-import { BlogTopicAlreadyExistsException } from '../exceptions/blog-topic.exception';
 
 import { BlogTopic } from '../entities/blog-topic.entity';
 
+import { BlogTopicAlreadyExistsException } from '../exceptions/blog-topic.exception';
+
 @Injectable()
-export class BlogTopicService {
+export class BlogTopicService extends EntityService<BlogTopic> {
     constructor(
         @InjectRepository(BlogTopic)
         private readonly blogTopicRepository: Repository<BlogTopic>
-    ) { }
+    ) { super(); }
 
     public async existsInTable(id: number): Promise<boolean> {
         return await this.blogTopicRepository
@@ -24,10 +26,13 @@ export class BlogTopicService {
     }
 
     public async createTopic(topicData: BlogTopic): Promise<BlogTopic> {
-        const topic: BlogTopic = this.blogTopicRepository.create(topicData);
+        let topic: BlogTopic = this.blogTopicRepository.create(topicData);
+        topic.id = this.createId(topic.name);
+        console.log(topic.id);
 
         return await this.blogTopicRepository.save(topic)
             .catch((error) => {
+                console.log(error);
                 if(error.code === PostgresErrorCodes.UNIQUE_VIOLATION) {
                     throw new BlogTopicAlreadyExistsException();
                 } else {
