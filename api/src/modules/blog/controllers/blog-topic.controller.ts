@@ -1,6 +1,14 @@
-import { Controller, Post, HttpCode, UseGuards, Req, Put, Param, Delete, Get } from '@nestjs/common';
-
-import { Request } from 'express'
+import {
+    Controller,
+    Post,
+    HttpCode,
+    UseGuards,
+    Put,
+    Param,
+    Delete,
+    Get,
+    Body,
+} from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 import { Id } from "@api/core/database/entity.service";
@@ -28,9 +36,9 @@ export class BlogTopicController {
     @HttpCode(201)
     @UseGuards(JwtAuthGuard)
     async createTopic(
-        @Req() request: Request
+        @Body() topicData: BlogTopic
     ): Promise<BlogTopic> {
-        return await this.blogTopicService.createTopic(request.body);
+        return await this.blogTopicService.createTopic(topicData);
     }
 
     @Get(':id')
@@ -49,9 +57,9 @@ export class BlogTopicController {
     @UseGuards(JwtAuthGuard)
     async updateTopic(
         @Param('id') id: Id,
-        @Req() request: Request
+        @Body() topicData: BlogTopic
     ): Promise<BlogTopic> {
-        const topic = await this.blogTopicService.updateTopic(id, request.body);
+        const topic = await this.blogTopicService.updateTopic(id, topicData);
         if(!topic) throw new BlogTopicCouldNotBeUpdated();
 
         return topic;

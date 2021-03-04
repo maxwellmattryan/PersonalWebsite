@@ -41,7 +41,7 @@ export class BlogApiService extends ApiService {
         let params = new HttpParams();
 
         if(topicId != -1) params = params.set('topicId', topicId.toString());
-        if(publishedOnly) params = params.set('published', 'true');
+        if(publishedOnly) params = params.set('isPublished', 'true');
 
         return this.http.get<BlogPost[]>(
             `${environment.API_URL}/blog/posts`,

@@ -1,6 +1,15 @@
-import { Controller, Get, HttpCode, Param, Req, Query, Put, UseGuards, Post, Delete } from '@nestjs/common';
-
-import { Request } from 'express';
+import {
+    Controller,
+    Get,
+    HttpCode,
+    Param,
+    Query,
+    Put,
+    UseGuards,
+    Post,
+    Delete,
+    Body
+} from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 import { Id } from "@api/core/database/entity.service";
@@ -23,11 +32,11 @@ export class BlogPostController {
     @HttpCode(200)
     async getPosts(
         @Query('topicId') topicId: Id,
-        @Query('published') published: string
+        @Query('published') isPublished: string
     ): Promise<BlogPost[]> {
         let posts: BlogPost[];
 
-        if(published === 'true') {
+        if(isPublished === 'true') {
             if(topicId)
                 posts = await this.blogPostService.getPostsByStatusAndTopic('PUBLISHED', parseInt(<string>topicId));
             else
@@ -48,9 +57,9 @@ export class BlogPostController {
     @HttpCode(201)
     @UseGuards(JwtAuthGuard)
     async createPost(
-        @Req() request: Request
+        @Body() postData: BlogPost
     ): Promise<BlogPost> {
-        return await this.blogPostService.createPost(request.body);
+        return await this.blogPostService.createPost(postData);
     }
 
     @Get(':id')
@@ -69,9 +78,9 @@ export class BlogPostController {
     @UseGuards(JwtAuthGuard)
     async updatePost(
         @Param('id') id: Id,
-        @Req() request: Request
+        @Body() postData: BlogPost
     ): Promise<BlogPost> {
-        const post = await this.blogPostService.updatePost(id, request.body);
+        const post = await this.blogPostService.updatePost(id, postData);
         if(!post) throw new BlogPostCouldNotBeUpdated();
 
         return post;

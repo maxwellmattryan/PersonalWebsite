@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { CacheInterceptor, CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import * as Joi from '@hapi/joi';
@@ -15,9 +15,13 @@ import { ApiModule } from '@api/modules/api/api.module';
 import { BlogModule } from '@api/modules/blog/blog.module';
 import { PortfolioModule } from '@api/modules/portfolio/portfolio.module';
 import { ShopModule } from '@api/modules/shop/shop.module';
+import { APP_INTERCEPTOR } from "@nestjs/core";
 
 @Module({
     imports: [
+        CacheModule.register({
+            ttl: 3 * 60
+        }),
         ConfigModule.forRoot({
             validationSchema: Joi.object({
                 JWT_SECRET: Joi.string().required(),
@@ -71,6 +75,11 @@ import { ShopModule } from '@api/modules/shop/shop.module';
     ],
     exports: [],
     controllers: [],
-    providers: []
+    providers: [
+        {
+            provide: APP_INTERCEPTOR,
+            useClass: CacheInterceptor
+        }
+    ]
 })
 export class AppModule { }
