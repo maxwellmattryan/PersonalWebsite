@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 
+import { Id } from '@ui/core/models/model';
+
 @Injectable({
     providedIn: 'root'
 })
 export class SeoService {
     constructor() { }
 
-    getCanonicalUrl(id: number, name: string): string {
+    getCanonicalUrl(id: Id, name: string): string {
         return `${id}/${this.formatUri(name)}`;
     }
 
@@ -34,9 +36,10 @@ export class SeoService {
     }
 
     // CAUTION: Be careful using when there are multiple ids in the url string (will return the first one)
-    getIdFromUrl(url: string): number {
-        const idString = url.split('/').find(n => !Number.isNaN(parseInt(n)));
+    getIdFromUrl(url: string): Id {
+        const idRegex: RegExp = /\/[A-Z0-9]{6}\//;
+        const id = <Id>url.match(idRegex)[0].replace(/[/]/g, '');
 
-        return parseInt(idString);
+        return id;
     }
 }

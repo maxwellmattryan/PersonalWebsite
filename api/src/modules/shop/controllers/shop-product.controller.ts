@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
+import { Id } from '@api/core/database/entity.service';
 
 import { ShopProduct } from '../entities/shop-product.entity';
 import { ShopProductService } from '../services/shop-product.service';
 import { ShopProductCouldNotBeUpdatedException, ShopProductsWereNotFoundException, ShopProductWasNotFoundException } from '../exceptions/shop-product.exception';
-import { Id } from "@api/core/database/entity.service";
 
 @Controller('shop/products')
 export class ShopProductController {

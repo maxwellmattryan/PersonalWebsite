@@ -7,7 +7,7 @@ import {
     PrimaryColumn
 } from 'typeorm';
 
-import { Id } from "@api/core/database/entity.service";
+import { Id } from '@api/core/database/entity.service';
 
 import { BlogPost } from '@api/modules/blog/entities/blog-post.entity';
 

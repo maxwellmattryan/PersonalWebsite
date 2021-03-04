@@ -28,8 +28,8 @@ export class LoginViewComponent implements OnInit {
 
     ngOnInit(): void {
         if(this.authService.isLoggedIn()) {
-          this.notificationService.createNotification('Already logged in.');
-          this.router.navigate(['admin']);
+            this.notificationService.createNotification('Already logged in.');
+            this.router.navigate(['admin']);
         }
     }
 
@@ -42,10 +42,10 @@ export class LoginViewComponent implements OnInit {
         };
 
         this.authApiService.loginAdmin(admin).subscribe(res => {
-          this.authService.loginAdmin(res.id, res.username);
-          this.isLoggingIn = false;
-          this.notificationService.createNotification(`Welcome back, ${res.username}!`);
-          this.router.navigate(['admin']);
+            this.authService.loginAdmin(res.id, res.username);
+            this.isLoggingIn = false;
+            this.notificationService.createNotification(`Welcome back, ${res.username}!`);
+            this.router.navigate(['admin']);
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
             this.isLoggingIn = false;

@@ -1,3 +1,4 @@
+import { Id } from '@ui/core/models/model';
 import { Deserializable } from '@ui/core/models/deserializable.model';
 
 import { PortfolioProfile } from './portfolio-profile.model';
@@ -15,7 +16,7 @@ export class PortfolioProject implements Deserializable {
         return this;
     }
 
-    id?:            number;
+    id?:            Id;
 
     profiles:       PortfolioProfile[];
 

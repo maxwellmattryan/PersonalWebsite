@@ -6,7 +6,7 @@ import {
     ManyToMany, PrimaryColumn
 } from 'typeorm';
 
-import { Id } from "@api/core/database/entity.service";
+import { Id } from '@api/core/database/entity.service';
 
 import { PortfolioProfile } from './portfolio-profile.entity';
 

@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-import { Id } from "@api/core/database/entity.service";
+import { Id } from '@api/core/database/entity.service';
 
 @Entity('blog_author')
 export class BlogAuthor {

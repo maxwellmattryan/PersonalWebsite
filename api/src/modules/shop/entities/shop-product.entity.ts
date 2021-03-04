@@ -8,7 +8,7 @@ import {
     UpdateDateColumn
 } from 'typeorm';
 
-import { Id } from "@api/core/database/entity.service";
+import { Id } from '@api/core/database/entity.service';
 
 import { ShopCategory } from '../entities/shop-category.entity';
 import { ShopProductStatus } from '../entities/shop-product-status.entity';

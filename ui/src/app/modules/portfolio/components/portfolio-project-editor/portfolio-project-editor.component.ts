@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { AuthService } from '@ui/core/auth';
+import { Id } from '@ui/core/models/model';
 import {
     NotificationService,
     ValidationService,
@@ -99,7 +99,7 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
         });
     }
 
-    private setProfileControls(associatedProfileIds: number[]): void {
+    private setProfileControls(associatedProfileIds: Id[]): void {
         this.profileData.forEach(p => {
             const control: FormControl = this.formBuilder.control(associatedProfileIds.includes(p.id));
             (this.projectForm.controls.profiles as FormArray).push(control);

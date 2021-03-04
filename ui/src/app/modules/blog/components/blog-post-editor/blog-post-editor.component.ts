@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit, Input } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { AuthService } from '@ui/core/auth';
+import { Id } from '@ui/core/models/model';
 import {
     NotificationService,
     ValidationService,
@@ -106,7 +106,7 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
         });
     }
 
-    private setTopicControls(associatedTopicIds: number[]): void {
+    private setTopicControls(associatedTopicIds: Id[]): void {
         this.topicData.forEach(t => {
             const control: FormControl = this.formBuilder.control(associatedTopicIds.includes(t.id));
             (this.postForm.controls.topics as FormArray).push(control);

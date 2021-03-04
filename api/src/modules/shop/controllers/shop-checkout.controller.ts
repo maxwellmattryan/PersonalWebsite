@@ -2,7 +2,7 @@ import { Body, Controller, HttpCode, HttpService, Post, Query } from '@nestjs/co
 import { ConfigService } from '@nestjs/config';
 
 import { GCloudStorageService } from '@api/core/gcloud/gcloud-storage.service';
-import { Id } from "@api/core/database/entity.service";
+import { Id } from '@api/core/database/entity.service';
 
 import { MailService } from '@api/modules/mail/mail.service';
 

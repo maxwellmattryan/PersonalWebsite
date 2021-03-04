@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '@ui/core/auth';
+import { Id } from '@ui/core/models/model';
 import {
     NotificationService,
     ValidationService,
@@ -106,7 +107,7 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
         });
     }
 
-    private setProjectControls(associatedProjectIds: number[]): void {
+    private setProjectControls(associatedProjectIds: Id[]): void {
         this.projectData.forEach(p => {
             const control: FormControl = this.formBuilder.control(associatedProjectIds.includes(p.id));
             (this.profileForm.controls.projects as FormArray).push(control);

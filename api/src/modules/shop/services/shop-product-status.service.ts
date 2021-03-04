@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
-import { EntityService, Id } from "@api/core/database/entity.service";
+import { EntityService, Id } from '@api/core/database/entity.service';
 
 import { ShopProductStatus } from '../entities/shop-product-status.entity';
 

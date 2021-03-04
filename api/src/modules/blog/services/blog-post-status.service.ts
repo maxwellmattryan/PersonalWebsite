@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
-import { EntityService } from "@api/core/database/entity.service";
+import { EntityService } from '@api/core/database/entity.service';
 
 import { BlogPostStatus } from '../entities/blog-post-status.entity';
 

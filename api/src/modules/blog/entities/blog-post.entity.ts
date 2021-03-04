@@ -8,7 +8,7 @@ import {
     JoinTable, PrimaryColumn
 } from 'typeorm';
 
-import { Id } from "@api/core/database/entity.service";
+import { Id } from '@api/core/database/entity.service';
 
 import { BlogAuthor } from './blog-author.entity';
 import { BlogPostStatus } from './blog-post-status.entity';

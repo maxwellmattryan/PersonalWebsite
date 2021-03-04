@@ -8,7 +8,7 @@ import {
     ManyToMany, JoinTable, PrimaryColumn
 } from 'typeorm';
 
-import { Id } from "@api/core/database/entity.service";
+import { Id } from '@api/core/database/entity.service';
 
 import { PortfolioProfileStatus } from './portfolio-profile-status.entity';
 import { PortfolioProfileTechnology } from './portfolio-profile-technology.entity';

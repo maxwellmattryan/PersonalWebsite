@@ -1,5 +1,7 @@
+import { Id } from '@ui/core/models/model';
+
 export interface Admin {
-    id?: number;
+    id?: Id;
     username: string;
     password?: string;
 }

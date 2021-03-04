@@ -3,12 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
+import { EntityService, Id } from '@api/core/database/entity.service';
 import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
 import { InternalServerErrorException } from '@api/core/http/http.exception';
 import { BlogPostAlreadyExistsException } from '../exceptions/blog-post.exception';
 
 import { BlogPost } from '../entities/blog-post.entity';
-import { EntityService, Id } from "@api/core/database/entity.service";
 
 @Injectable()
 export class BlogPostService extends EntityService<BlogPost> {

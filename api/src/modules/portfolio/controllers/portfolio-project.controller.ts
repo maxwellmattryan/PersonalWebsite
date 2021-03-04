@@ -1,7 +1,7 @@
 import { Controller, Put, HttpCode, UseGuards, Param, Post, Get, Delete, Body } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
-import { Id } from "@api/core/database/entity.service";
+import { Id } from '@api/core/database/entity.service';
 
 import { PortfolioProfileService } from '../services/portfolio-profile.service';
 

@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
-import { Id } from "@api/core/database/entity.service";
+import { Id } from '@api/core/database/entity.service';
 
 import { BlogPost } from '../entities/blog-post.entity';
 import { BlogPostService } from '../services/blog-post.service';

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from '@ui/environments/environment';
 import { ApiService } from '@ui/core/http';
+import { Id } from "@ui/core/models/model";
 
 import {
     PortfolioProfile,
@@ -20,7 +21,7 @@ export class PortfolioApiService extends ApiService {
         super(http);
     }
 
-    activateProfile(profileId: number): Observable<PortfolioProfile> {
+    activateProfile(profileId: Id): Observable<PortfolioProfile> {
         const headers = this.contentTypeHeader();
 
         return this.http.put<PortfolioProfile>(
@@ -40,7 +41,7 @@ export class PortfolioApiService extends ApiService {
         );
     }
 
-    deleteProfile(id: number): Observable<any> {
+    deleteProfile(id: Id): Observable<any> {
         return this.http.delete<any>(`${environment.API_URL}/portfolio/profiles/${id}`)
     }
 
@@ -52,7 +53,7 @@ export class PortfolioApiService extends ApiService {
         return this.http.get<PortfolioProfileStatus[]>(`${environment.API_URL}/portfolio/profiles/statuses`);
     }
 
-    getProfileTechnologies(id: number): Observable<PortfolioProfileTechnology[]> {
+    getProfileTechnologies(id: Id): Observable<PortfolioProfileTechnology[]> {
         return this.http.get<PortfolioProfileTechnology[]>(`${environment.API_URL}/portfolio/profiles/${id}/technologies`);
     }
 
@@ -76,11 +77,11 @@ export class PortfolioApiService extends ApiService {
         );
     }
 
-    deleteProject(id: number): Observable<any> {
+    deleteProject(id: Id): Observable<any> {
         return this.http.delete<any>(`${environment.API_URL}/portfolio/projects/${id}`);
     }
 
-    getProject(id: number): Observable<PortfolioProject> {
+    getProject(id: Id): Observable<PortfolioProject> {
         return this.http.get<PortfolioProject>(`${environment.API_URL}/portfolio/projects/${id}`);
     }
 

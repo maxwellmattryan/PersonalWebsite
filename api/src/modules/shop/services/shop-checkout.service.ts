@@ -4,6 +4,8 @@ import { catchError, map } from 'rxjs/operators';
 
 import { Stripe } from 'stripe';
 
+import { Id } from '@api/core/database/entity.service';
+
 import { ShopCustomer } from '../entities/shop-customer.entity';
 import { ShopOrder } from '../entities/shop-order.entity';
 import { ShopProduct } from '../entities/shop-product.entity';
@@ -15,7 +17,6 @@ import { ShopProductService } from './shop-product.service';
 import { InvalidShopProductException } from '../exceptions/shop-product.exception';
 import { InvalidStripeSessionException } from '../exceptions/stripe.exception';
 import { ShopCustomerHasAlreadyPurchasedProductException } from '../exceptions/shop-customer.exception';
-import { Id } from "@api/core/database/entity.service";
 
 export type ShopLineItem = Stripe.Checkout.SessionCreateParams.LineItem;
 

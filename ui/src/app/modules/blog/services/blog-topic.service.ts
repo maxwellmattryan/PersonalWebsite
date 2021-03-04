@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { Id } from '@ui/core/models/model';
+
 import { BlogTopic } from '../models';
 
 @Injectable({
@@ -10,7 +12,7 @@ export class BlogTopicService {
 
     constructor() { }
 
-    getActiveTopicId(): number {
+    getActiveTopicId(): Id {
         if(!this.activeTopic) return -1;
         return this.activeTopic.id;
     }
