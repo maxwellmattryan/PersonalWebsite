@@ -1,7 +1,5 @@
 import { PortfolioProfileStatusService } from '../services/portfolio-profile-status.service';
-import { Controller, Get, HttpCode, Req, UseGuards } from '@nestjs/common';
-
-import { Request } from 'express';
+import { Controller, Get, HttpCode, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
@@ -17,7 +15,7 @@ export class PortfolioProfileStatusController {
     @Get('')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    async getProfileStatuses(@Req() request: Request): Promise<PortfolioProfileStatus[]> {
+    async getProfileStatuses(): Promise<PortfolioProfileStatus[]> {
         const statuses = await this.profileStatusService.getStatuses();
         if(statuses.length === 0) throw new PortfolioProfileStatusesWereNotFoundException();
 

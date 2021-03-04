@@ -1,5 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
+
+import { Id } from "@api/core/database/entity.service";
 
 @Entity('admin')
 export class Admin {
@@ -7,8 +9,8 @@ export class Admin {
         Object.assign(this, partial);
     }
 
-    @PrimaryGeneratedColumn()
-    public id?: number;
+    @PrimaryColumn({ type: 'varchar' })
+    public id?: Id;
 
     @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
     public username: string;

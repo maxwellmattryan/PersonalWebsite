@@ -1,11 +1,12 @@
-import { Controller, HttpCode, Post, Req, Get, UseGuards, Body } from '@nestjs/common';
+import { Controller, HttpCode, Post, UseGuards, Body, Res } from '@nestjs/common';
 
-import { Request } from 'express';
+import { Response } from 'express';
+
+import { Admin } from '@api/modules/admin/entities/admin.entity';
 
 import { AuthService } from '../services/auth.service';
 import { JwtAuthGuard } from '../jwt/jwt-auth.guard';
 import { NotAllowedToRegisterException, WrongCredentialsWereProvidedException } from '../exceptions/auth.exception';
-import { Admin } from '@api/modules/admin/entities/admin.entity';
 
 @Controller('auth')
 export class AuthController {
@@ -15,27 +16,33 @@ export class AuthController {
 
     @Post('register')
     @HttpCode(201)
-    async register(@Req() request: Request): Promise<Admin> {
+    async register(): Promise<Admin> {
         // return await this.authService.registerAdmin(request.body);
         throw new NotAllowedToRegisterException();
     }
 
     @Post('login')
     @HttpCode(200)
-    async login(@Req() request: Request): Promise<Admin> {
-        const admin = await this.authService.authenticateAdmin(request.body);
+    async login(
+        @Body() adminData: Admin,
+        @Res() response: Response
+    ): Promise<void> {
+        const admin = await this.authService.authenticateAdmin(adminData);
         if(!admin) throw new WrongCredentialsWereProvidedException();
 
         const jwtCookie = this.authService.generateCookieWithJwtToken(admin);
-        request.res.setHeader('Set-Cookie', jwtCookie);
+        response.setHeader('Set-Cookie', jwtCookie);
 
-        return admin;
+        response.send(admin);
     }
 
     @Post('logout')
     @HttpCode(204)
     @UseGuards(JwtAuthGuard)
-    async logout(@Req() request: Request): Promise<void> {
-        request.res.clearCookie('Authentication');
+    async logout(
+        @Res() response: Response
+    ): Promise<void> {
+        response.clearCookie('Authentication');
+        response.send();
     }
 }

@@ -27,7 +27,7 @@ export class BlogPostService extends EntityService<BlogPost> {
     public async createPost(postData: BlogPost): Promise<BlogPost> {
         const post: BlogPost = this.createEntity(
             this.blogPostRepository.create(postData),
-            'title'
+            ['title']
         );
 
         return this.blogPostRepository.save(post)
@@ -104,8 +104,6 @@ export class BlogPostService extends EntityService<BlogPost> {
     }
 
     public async updatePost(id: Id, postData: BlogPost): Promise<BlogPost> {
-        await this.blogPostRepository.save(postData);
-
-        return this.getPost(id);
+        return this.blogPostRepository.save(postData);
     }
 }

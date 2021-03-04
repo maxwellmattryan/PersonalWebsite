@@ -1,13 +1,14 @@
 import {
     Column,
     Entity,
-    PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
     ManyToOne,
     OneToMany,
-    ManyToMany, JoinTable
+    ManyToMany, JoinTable, PrimaryColumn
 } from 'typeorm';
+
+import { Id } from "@api/core/database/entity.service";
 
 import { PortfolioProfileStatus } from './portfolio-profile-status.entity';
 import { PortfolioProfileTechnology } from './portfolio-profile-technology.entity';
@@ -19,8 +20,8 @@ export class PortfolioProfile {
         Object.assign(this, partial);
     }
 
-    @PrimaryGeneratedColumn()
-    public id?: number;
+    @PrimaryColumn({ type: 'varchar' })
+    public id?: Id;
 
     @ManyToOne(type => PortfolioProfileStatus, ps => ps.profiles)
     public status: PortfolioProfileStatus;

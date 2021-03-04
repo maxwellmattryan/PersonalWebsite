@@ -1,8 +1,7 @@
-import { Controller, Delete, Get, HttpCode, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
-
-import { Request } from 'express';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
+import { Id } from "@api/core/database/entity.service";
 
 import { ShopCategory } from '../entities/shop-category.entity';
 import { ShopCategoryService } from '../services/shop-category.service';
@@ -16,7 +15,7 @@ export class ShopCategoryController {
 
     @Get('')
     @HttpCode(200)
-    public async getCategories(@Req() request: Request): Promise<ShopCategory[]> {
+    public async getCategories(): Promise<ShopCategory[]> {
         const categories = await this.shopCategoryService.getCategories();
         if(categories.length === 0) throw new ShopCategoriesWereNotFoundException();
 
@@ -26,13 +25,17 @@ export class ShopCategoryController {
     @Post('')
     @HttpCode(201)
     @UseGuards(JwtAuthGuard)
-    public async createCategory(@Req() request: Request): Promise<ShopCategory> {
-        return await this.shopCategoryService.createCategory(request.body);
+    public async createCategory(
+        @Body() categoryData: ShopCategory
+    ): Promise<ShopCategory> {
+        return this.shopCategoryService.createCategory(categoryData);
     }
 
     @Get(':id')
     @HttpCode(200)
-    public async getCategory(@Param('id') id: number, @Req() request: Request): Promise<ShopCategory> {
+    public async getCategory(
+        @Param('id') id: Id
+    ): Promise<ShopCategory> {
         const category = await this.shopCategoryService.getCategory(id);
         if(!category) throw new ShopCategoryWasNotFoundException();
 
@@ -42,8 +45,11 @@ export class ShopCategoryController {
     @Put(':id')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    public async updateCategory(@Param('id') id: number, @Req() request: Request): Promise<ShopCategory> {
-        const category = await this.shopCategoryService.updateCategory(id, request.body);
+    public async updateCategory(
+        @Param('id') id: Id,
+        @Body() categoryData: ShopCategory
+    ): Promise<ShopCategory> {
+        const category = await this.shopCategoryService.updateCategory(id, categoryData);
         if(!category) throw new ShopCategoryCouldNotBeUpdatedException();
 
         return category;
@@ -52,7 +58,9 @@ export class ShopCategoryController {
     @Delete(':id')
     @HttpCode(204)
     @UseGuards(JwtAuthGuard)
-    public async deleteCategory(@Param('id') id: number, @Req() request: Request): Promise<void> {
+    public async deleteCategory(
+        @Param('id') id: Id
+    ): Promise<void> {
         if(!(await this.shopCategoryService.existsInTable(id)))
             throw new ShopCategoryWasNotFoundException();
 

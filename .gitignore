@@ -21,7 +21,7 @@ RUNNING_PID
 # Environment vars
 **/.env.**
 
-# My folders 
-conf
+# My folders
 data
+conf
 design

@@ -1,6 +1,4 @@
-import { Controller, Get, HttpCode, Post, Req, UseGuards } from '@nestjs/common';
-
-import { Request } from 'express';
+import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common';
 
 import { GCloudStorageService } from '@api/core/gcloud/gcloud-storage.service';
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
@@ -28,14 +26,18 @@ export class ShopCustomerController {
     @Post('')
     @HttpCode(201)
     @UseGuards(JwtAuthGuard)
-    public async createCustomer(@Req() request: Request): Promise<ShopCustomer> {
-        return await this.shopCustomerService.createCustomer(request.body);
+    public async createCustomer(
+        @Body() customerData: ShopCustomer
+    ): Promise<ShopCustomer> {
+        return this.shopCustomerService.createCustomer(customerData);
     }
 
     @Post('help')
     @HttpCode(201)
-    public async helpCustomer(@Req() request: Request): Promise<void> {
-        const email: string = request.body.email;
+    public async helpCustomer(
+        @Body() customerData: ShopCustomer
+    ): Promise<void> {
+        const email: string = customerData.email;
         const customer: ShopCustomer = await this.shopCustomerService.getCustomer(-1, email);
         if(!customer) throw new ShopCustomerWasNotFoundException();
 

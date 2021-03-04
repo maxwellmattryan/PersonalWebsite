@@ -1,12 +1,11 @@
 import {
     Entity,
-    PrimaryGeneratedColumn,
     ManyToOne,
     Column,
     CreateDateColumn,
     UpdateDateColumn,
     ManyToMany,
-    JoinTable
+    JoinTable, PrimaryColumn
 } from 'typeorm';
 
 import { Id } from "@api/core/database/entity.service";
@@ -21,7 +20,7 @@ export class BlogPost {
         Object.assign(this, partial);
     }
 
-    @PrimaryGeneratedColumn()
+    @PrimaryColumn({ type: 'varchar' })
     public id?: Id;
 
     @ManyToOne(type => BlogAuthor, ba => ba.id)

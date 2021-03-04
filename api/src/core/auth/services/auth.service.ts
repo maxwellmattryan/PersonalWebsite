@@ -20,7 +20,7 @@ export class AuthService {
     public async registerAdmin(adminData: Admin): Promise<Admin> {
         const passwordHash = await bcrypt.hash(adminData.password, 10);
 
-        return await this.adminService.createAdmin({ ...adminData, password: passwordHash });
+        return this.adminService.createAdmin({ ...adminData, password: passwordHash });
     }
 
     public async authenticateAdmin(adminData: Admin): Promise<Admin> {
@@ -34,7 +34,7 @@ export class AuthService {
     }
 
     public generateCookieWithJwtToken(admin: Admin): string {
-        const payload: TokenPayload = { adminId: admin.id, username: admin.username };
+        const payload: TokenPayload = { id: admin.id, username: admin.username };
         const token = this.jwtService.sign(payload);
         const expiresIn = this.configService.get<string>('JWT_EXPIRES_IN');
 

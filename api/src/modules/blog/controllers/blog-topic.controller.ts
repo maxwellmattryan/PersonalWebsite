@@ -38,7 +38,7 @@ export class BlogTopicController {
     async createTopic(
         @Body() topicData: BlogTopic
     ): Promise<BlogTopic> {
-        return await this.blogTopicService.createTopic(topicData);
+        return this.blogTopicService.createTopic(topicData);
     }
 
     @Get(':id')

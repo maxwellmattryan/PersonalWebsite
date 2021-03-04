@@ -14,13 +14,17 @@ export class EntityService<T> {
     private digest: Digest = 'base64';
     private hashAlgorithm: HashAlgorithm = 'sha256';
 
-    public createEntity(entityData: T, uniqueProperty: string): T {
-        if(!entityData[uniqueProperty])
-            throw new InvalidEntityPropertyException();
+    public createEntity(entityData: T, uniqueProperties: string[]): T {
+        uniqueProperties.forEach(p => {
+            if(!entityData[p])
+                throw new InvalidEntityPropertyException();
+        });
+
+        const identifier: string = uniqueProperties.map(p => entityData[p]).join(' ');
 
         return {
             ...entityData,
-            id: this.createStringHashId(entityData[uniqueProperty])
+            id: this.createStringHashId(identifier)
         };
     }
 

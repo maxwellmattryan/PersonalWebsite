@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+
+import { Id } from "@api/core/database/entity.service";
 
 import { PortfolioProfile } from './portfolio-profile.entity';
 
@@ -8,8 +10,8 @@ export class PortfolioProfileStatus {
         Object.assign(this, partial);
     }
 
-    @PrimaryGeneratedColumn()
-    public id?: number;
+    @PrimaryColumn({ type: 'varchar' })
+    public id?: Id;
 
     @Column({ type: 'varchar', length: 50, nullable: false })
     public status: string;

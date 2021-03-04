@@ -1,12 +1,11 @@
-import { Controller, Delete, Get, HttpCode, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
-
-import { Request } from 'express';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
 import { ShopProduct } from '../entities/shop-product.entity';
 import { ShopProductService } from '../services/shop-product.service';
 import { ShopProductCouldNotBeUpdatedException, ShopProductsWereNotFoundException, ShopProductWasNotFoundException } from '../exceptions/shop-product.exception';
+import { Id } from "@api/core/database/entity.service";
 
 @Controller('shop/products')
 export class ShopProductController {
@@ -17,9 +16,8 @@ export class ShopProductController {
     @Get('')
     @HttpCode(200)
     public async getProducts(
-        @Query('statusId') statusId,
-        @Query('categoryId') categoryId,
-        @Req() request: Request
+        @Query('statusId') statusId: Id,
+        @Query('categoryId') categoryId: Id
     ): Promise<ShopProduct[]> {
         let products: ShopProduct[];
 
@@ -45,13 +43,17 @@ export class ShopProductController {
     @Post('')
     @HttpCode(201)
     @UseGuards(JwtAuthGuard)
-    public async createProduct(@Req() request: Request): Promise<ShopProduct> {
-        return await this.shopProductService.createProduct(request.body);
+    public async createProduct(
+        @Body() productData: ShopProduct
+    ): Promise<ShopProduct> {
+        return this.shopProductService.createProduct(productData);
     }
 
     @Get(':id')
     @HttpCode(200)
-    public async getProduct(@Param('id') id: number, @Req() request: Request): Promise<ShopProduct> {
+    public async getProduct(
+        @Param('id') id: Id,
+    ): Promise<ShopProduct> {
         const product: ShopProduct = await this.shopProductService.getProduct(id);
         if(!product) throw new ShopProductWasNotFoundException();
 
@@ -61,8 +63,11 @@ export class ShopProductController {
     @Put(':id')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    public async updateProduct(@Param('id') id: number, @Req() request: Request): Promise<ShopProduct> {
-        const product = await this.shopProductService.updateProduct(id, request.body);
+    public async updateProduct(
+        @Param('id') id: Id,
+        @Body() productData: ShopProduct
+    ): Promise<ShopProduct> {
+        const product = await this.shopProductService.updateProduct(id, productData);
         if(!product) throw new ShopProductCouldNotBeUpdatedException();
 
         return product;
@@ -71,11 +76,14 @@ export class ShopProductController {
     @Delete(':id')
     @HttpCode(204)
     @UseGuards(JwtAuthGuard)
-    public async deleteProduct(@Query() query, @Param('id') id: number, @Req() request: Request): Promise<void> {
+    public async deleteProduct(
+        @Param('id') id: Id,
+        @Query('doSoftDelete') doSoftDelete: boolean
+    ): Promise<void> {
         if(!(await this.shopProductService.existsInTable(id)))
             throw new ShopProductWasNotFoundException();
 
-        if(query.softDelete)
+        if(doSoftDelete)
             await this.shopProductService.softDeleteProduct(id);
         else
             await this.shopProductService.deleteProduct(id);

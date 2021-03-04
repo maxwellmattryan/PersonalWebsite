@@ -28,7 +28,7 @@ export class BlogTopicService extends EntityService<BlogTopic> {
     public async createTopic(topicData: BlogTopic): Promise<BlogTopic> {
         const topic: BlogTopic = this.createEntity(
             this.blogTopicRepository.create(topicData),
-            'name'
+            ['name']
         );
 
         return this.blogTopicRepository.save(topic).catch((error) => {
@@ -63,9 +63,7 @@ export class BlogTopicService extends EntityService<BlogTopic> {
             .getMany();
     }
 
-    public async updateTopic(id: Id, data: BlogTopic): Promise<BlogTopic> {
-        await this.blogTopicRepository.update(id, data);
-
-        return await this.getTopic(id);
+    public async updateTopic(id: Id, topicData: BlogTopic): Promise<BlogTopic> {
+        return this.blogTopicRepository.save(topicData);
     }
 }

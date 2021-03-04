@@ -59,7 +59,7 @@ export class BlogPostController {
     async createPost(
         @Body() postData: BlogPost
     ): Promise<BlogPost> {
-        return await this.blogPostService.createPost(postData);
+        return this.blogPostService.createPost(postData);
     }
 
     @Get(':id')
