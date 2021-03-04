@@ -9,6 +9,8 @@ import {
     JoinTable
 } from 'typeorm';
 
+import { Id } from "@api/core/database/entity.service";
+
 import { BlogAuthor } from './blog-author.entity';
 import { BlogPostStatus } from './blog-post-status.entity';
 import { BlogTopic } from './blog-topic.entity';
@@ -20,7 +22,7 @@ export class BlogPost {
     }
 
     @PrimaryGeneratedColumn()
-    public id?: number;
+    public id?: Id;
 
     @ManyToOne(type => BlogAuthor, ba => ba.id)
     public author: BlogAuthor;

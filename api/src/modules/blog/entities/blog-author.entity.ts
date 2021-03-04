@@ -1,5 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+import { Id } from "@api/core/database/entity.service";
+
 @Entity('blog_author')
 export class BlogAuthor {
     constructor(partial: Partial<BlogAuthor>) {
@@ -7,7 +9,7 @@ export class BlogAuthor {
     }
 
     @PrimaryGeneratedColumn()
-    public id?: number;
+    public id?: Id;
 
     @Column({ type: 'varchar', length: 50, nullable: false })
     public first_name: string;

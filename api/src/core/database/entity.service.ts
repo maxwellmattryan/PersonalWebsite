@@ -2,16 +2,29 @@ import { Injectable } from '@nestjs/common';
 
 import { createHash } from 'crypto';
 
+import { InvalidEntityPropertyException } from "./entity.exception";
+
 export type Digest = 'base64' | 'hex';
-export type Id = 'string' | 'number';
 export type HashAlgorithm = 'sha256' | 'md5' | 'RSA-SHA256';
+
+export type Id = string | number;
 
 @Injectable()
 export class EntityService<T> {
-    private hashAlgorithm: HashAlgorithm = 'sha256';
     private digest: Digest = 'base64';
+    private hashAlgorithm: HashAlgorithm = 'sha256';
 
-    public createStringHashId(identifier: string | number | Date, length = 6): Id {
+    public createEntity(entityData: T, uniqueProperty: string): T {
+        if(!entityData[uniqueProperty])
+            throw new InvalidEntityPropertyException();
+
+        return {
+            ...entityData,
+            id: this.createStringHashId(entityData[uniqueProperty])
+        };
+    }
+
+    private createStringHashId(identifier: string | number | Date, length = 6): Id {
         const now: string = new Date().toString();
 
         return <Id>createHash(this.hashAlgorithm)

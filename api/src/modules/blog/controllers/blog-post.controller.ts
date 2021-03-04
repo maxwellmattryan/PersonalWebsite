@@ -3,6 +3,7 @@ import { Controller, Get, HttpCode, Param, Req, Query, Put, UseGuards, Post, Del
 import { Request } from 'express';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
+import { Id } from "@api/core/database/entity.service";
 
 import { BlogPost } from '../entities/blog-post.entity';
 import { BlogPostService } from '../services/blog-post.service';
@@ -21,24 +22,21 @@ export class BlogPostController {
     @Get('')
     @HttpCode(200)
     async getPosts(
-        @Query('topicId') topicId: string,
-        @Query('published') published: string,
-        @Req() request: Request
+        @Query('topicId') topicId: Id,
+        @Query('published') published: string
     ): Promise<BlogPost[]> {
         let posts: BlogPost[];
 
         if(published === 'true') {
-            if(topicId) {
-                posts = await this.blogPostService.getPostsByStatusAndTopic('PUBLISHED', parseInt(topicId));
-            } else {
+            if(topicId)
+                posts = await this.blogPostService.getPostsByStatusAndTopic('PUBLISHED', parseInt(<string>topicId));
+            else
                 posts = await this.blogPostService.getPostsByStatus('PUBLISHED');
-            }
         } else {
-            if(topicId) {
-                posts = await this.blogPostService.getPostsByTopic(parseInt(topicId));
-            } else {
+            if(topicId)
+                posts = await this.blogPostService.getPostsByTopic(parseInt(<string>topicId));
+            else
                 posts = await this.blogPostService.getPosts();
-            }
         }
 
         if(posts.length == 0) throw new BlogPostsWereNotFoundException();
@@ -49,13 +47,17 @@ export class BlogPostController {
     @Post('')
     @HttpCode(201)
     @UseGuards(JwtAuthGuard)
-    async createPost(@Req() request: Request): Promise<BlogPost> {
+    async createPost(
+        @Req() request: Request
+    ): Promise<BlogPost> {
         return await this.blogPostService.createPost(request.body);
     }
 
     @Get(':id')
     @HttpCode(200)
-    async getPost(@Param('id') id: number, @Req() request: Request): Promise<BlogPost> {
+    async getPost(
+        @Param('id') id: Id
+    ): Promise<BlogPost> {
         const post = await this.blogPostService.getPost(id);
         if(!post) throw new BlogPostWasNotFoundException();
 
@@ -65,7 +67,10 @@ export class BlogPostController {
     @Put(':id')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    async updatePost(@Param('id') id: number, @Req() request: Request): Promise<BlogPost> {
+    async updatePost(
+        @Param('id') id: Id,
+        @Req() request: Request
+    ): Promise<BlogPost> {
         const post = await this.blogPostService.updatePost(id, request.body);
         if(!post) throw new BlogPostCouldNotBeUpdated();
 
@@ -75,8 +80,11 @@ export class BlogPostController {
     @Delete(':id')
     @HttpCode(204)
     @UseGuards(JwtAuthGuard)
-    async deletePost(@Param('id') id: number, @Req() request: Request): Promise<void> {
-        if(!(await this.blogPostService.existsInTable(id))) throw new BlogPostWasNotFoundException();
+    async deletePost(
+        @Param('id') id: Id
+    ): Promise<void> {
+        if(!(await this.blogPostService.existsInTable(id)))
+            throw new BlogPostWasNotFoundException();
 
         await this.blogPostService.deletePost(id);
     }

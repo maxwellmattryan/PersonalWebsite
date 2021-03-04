@@ -17,7 +17,7 @@ export class BlogTopicController {
 
     @Get('')
     @HttpCode(200)
-    async getTopics(@Req() request: Request): Promise<BlogTopic[]> {
+    async getTopics(): Promise<BlogTopic[]> {
         const topics = await this.blogTopicService.getTopics();
         if(topics.length == 0) throw new BlogTopicsWereNotFoundException();
 
@@ -27,13 +27,17 @@ export class BlogTopicController {
     @Post('')
     @HttpCode(201)
     @UseGuards(JwtAuthGuard)
-    async createTopic(@Req() request: Request): Promise<BlogTopic> {
+    async createTopic(
+        @Req() request: Request
+    ): Promise<BlogTopic> {
         return await this.blogTopicService.createTopic(request.body);
     }
 
     @Get(':id')
     @HttpCode(200)
-    async getTopic(@Param('id') id: Id, @Req() request: Request): Promise<BlogTopic> {
+    async getTopic(
+        @Param('id') id: Id
+    ): Promise<BlogTopic> {
         const topic = await this.blogTopicService.getTopic(id);
         if(!topic) throw new BlogTopicWasNotFoundException();
 
@@ -43,7 +47,10 @@ export class BlogTopicController {
     @Put(':id')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    async updateTopic(@Param('id') id: Id, @Req() request: Request): Promise<BlogTopic> {
+    async updateTopic(
+        @Param('id') id: Id,
+        @Req() request: Request
+    ): Promise<BlogTopic> {
         const topic = await this.blogTopicService.updateTopic(id, request.body);
         if(!topic) throw new BlogTopicCouldNotBeUpdated();
 
@@ -53,8 +60,11 @@ export class BlogTopicController {
     @Delete(':id')
     @HttpCode(204)
     @UseGuards(JwtAuthGuard)
-    async deleteTopic(@Param('id') id: Id, @Req() request: Request): Promise<void> {
-        if(!(await this.blogTopicService.existsInTable(id))) throw new BlogTopicWasNotFoundException();
+    async deleteTopic(
+        @Param('id') id: Id
+    ): Promise<void> {
+        if(!(await this.blogTopicService.existsInTable(id)))
+            throw new BlogTopicWasNotFoundException();
 
         await this.blogTopicService.deleteTopic(id);
     }
