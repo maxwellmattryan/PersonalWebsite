@@ -20,7 +20,7 @@ export class BlogTopicService extends EntityService<BlogTopic> {
     super();
   }
 
-  public async existsInTable(id: any): Promise<boolean> {
+  public async existsInTable(id: Id): Promise<boolean> {
     return (
       (await this.blogTopicRepository
         .createQueryBuilder('bt')
@@ -32,7 +32,6 @@ export class BlogTopicService extends EntityService<BlogTopic> {
   public async createTopic(topicData: BlogTopic): Promise<BlogTopic> {
     const topic: BlogTopic = this.blogTopicRepository.create(topicData);
     topic.id = this.createStringHashId(topic.name);
-    console.log(topic.id);
 
     return await this.blogTopicRepository.save(topic).catch((error) => {
       if (error.code === PostgresErrorCodes.UNIQUE_VIOLATION) {
