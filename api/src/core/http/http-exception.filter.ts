@@ -4,7 +4,7 @@ import { BaseExceptionFilter } from '@nestjs/core';
 export class HttpExceptionFilter extends BaseExceptionFilter {
     private readonly logger: Logger = new Logger('HttpExceptionLogger');
 
-    catch(exception: object, host: ArgumentsHost) {
+    catch(exception: Record<string, unknown>, host: ArgumentsHost) {
         try {
             const statusCode = ((exception as any).response as any).statusCode;
             const error = ((exception as any).response as any).error;

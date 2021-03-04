@@ -2,11 +2,13 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    PrimaryGeneratedColumn,
     UpdateDateColumn,
     ManyToMany,
     PrimaryColumn
 } from 'typeorm';
+
+import { Id } from "@api/core/database/entity.service";
+
 import { BlogPost } from '@api/modules/blog/entities/blog-post.entity';
 
 @Entity('blog_topic')
@@ -15,8 +17,8 @@ export class BlogTopic {
         Object.assign(this, partial);
     }
 
-    @PrimaryColumn({ type: 'int' })
-    public id?: number;
+    @PrimaryColumn({ type: 'varchar' })
+    public id?: Id;
 
     @ManyToMany(type => BlogPost, bp => bp.topics, { onDelete: 'CASCADE' })
     public posts: BlogPost[];

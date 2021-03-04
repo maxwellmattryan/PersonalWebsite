@@ -38,7 +38,6 @@ import { ShopModule } from '@api/modules/shop/shop.module';
                 API_URL: Joi.string().required(),
 
                 STRIPE_API_URL: Joi.string().required(),
-                STRIPE_API_KEY: Joi.string().required(),
                 STRIPE_SK: Joi.string().required(),
                 STRIPE_PK: Joi.string().required(),
                 STRIPE_TAX_RATE_ID: Joi.string().required(),

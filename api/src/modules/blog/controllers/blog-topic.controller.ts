@@ -3,6 +3,7 @@ import { Controller, Post, HttpCode, UseGuards, Req, Put, Param, Delete, Get } f
 import { Request } from 'express'
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
+import { Id } from "@api/core/database/entity.service";
 
 import { BlogTopic } from '../entities/blog-topic.entity';
 import { BlogTopicService } from '../services/blog-topic.service';
@@ -32,7 +33,7 @@ export class BlogTopicController {
 
     @Get(':id')
     @HttpCode(200)
-    async getTopic(@Param('id') id: number, @Req() request: Request): Promise<BlogTopic> {
+    async getTopic(@Param('id') id: Id, @Req() request: Request): Promise<BlogTopic> {
         const topic = await this.blogTopicService.getTopic(id);
         if(!topic) throw new BlogTopicWasNotFoundException();
 
@@ -42,7 +43,7 @@ export class BlogTopicController {
     @Put(':id')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    async updateTopic(@Param('id') id: number, @Req() request: Request): Promise<BlogTopic> {
+    async updateTopic(@Param('id') id: Id, @Req() request: Request): Promise<BlogTopic> {
         const topic = await this.blogTopicService.updateTopic(id, request.body);
         if(!topic) throw new BlogTopicCouldNotBeUpdated();
 
@@ -52,7 +53,7 @@ export class BlogTopicController {
     @Delete(':id')
     @HttpCode(204)
     @UseGuards(JwtAuthGuard)
-    async deleteTopic(@Param('id') id: number, @Req() request: Request): Promise<void> {
+    async deleteTopic(@Param('id') id: Id, @Req() request: Request): Promise<void> {
         if(!(await this.blogTopicService.existsInTable(id))) throw new BlogTopicWasNotFoundException();
 
         await this.blogTopicService.deleteTopic(id);
