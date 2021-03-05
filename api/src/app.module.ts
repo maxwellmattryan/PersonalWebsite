@@ -1,5 +1,6 @@
 import { CacheInterceptor, CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
 import * as Joi from '@hapi/joi';
 
@@ -15,7 +16,7 @@ import { ApiModule } from '@api/modules/api/api.module';
 import { BlogModule } from '@api/modules/blog/blog.module';
 import { PortfolioModule } from '@api/modules/portfolio/portfolio.module';
 import { ShopModule } from '@api/modules/shop/shop.module';
-import { APP_INTERCEPTOR } from "@nestjs/core";
+import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
 
 @Module({
     imports: [
@@ -59,6 +60,10 @@ import { APP_INTERCEPTOR } from "@nestjs/core";
                 MAILER_QUEUE_PORT: Joi.number().required()
             })
         }),
+        ThrottlerModule.forRoot({
+            ttl: 60,
+            limit: 20
+        }),
 
         AuthModule,
         DatabaseModule,
@@ -79,6 +84,10 @@ import { APP_INTERCEPTOR } from "@nestjs/core";
         {
             provide: APP_INTERCEPTOR,
             useClass: CacheInterceptor
+        },
+        {
+            provide: APP_GUARD,
+            useClass: ThrottlerGuard
         }
     ]
 })
