@@ -17,7 +17,7 @@
         If you have any questions, please refer to the
         <a class='checkout__info-link' routerLink='/shop/faq'>FAQ page</a>
         or feel free to send me an
-        <a class='checkout__info-link' [href]='"mailto:" + obfuscationService.constructEmail()'>email</a>.
+        <a class='checkout__info-link' (click)='obfuscationService.handleEmailClick()' [href]='"mailto:" + obfuscationService.constructEmail()'>email</a>.
     </p>
 
     <p class='checkout__last'>
