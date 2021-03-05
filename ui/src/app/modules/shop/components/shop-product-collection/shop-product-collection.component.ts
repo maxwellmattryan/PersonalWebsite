@@ -78,7 +78,7 @@ export class ShopProductCollectionComponent implements OnInit {
     public startCheckout(productData: ShopProduct): void {
         if(productData.status.id != ShopProductStatuses.AVAILABLE) {
             this.notificationService.createNotification(`Sorry, unable to buy product because it is ${productData.status.status.toLowerCase()}.`, '', 3600);
-            // return;
+            return;
         }
 
         this.checkoutProductId = productData.id;
