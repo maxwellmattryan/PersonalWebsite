@@ -1,5 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
+
+import { Id } from '@api/core/database/entity.service';
 
 import { PortfolioProfile } from './portfolio-profile.entity';
 
@@ -9,8 +11,8 @@ export class PortfolioProfileTechnology {
         Object.assign(this, partial);
     }
 
-    @PrimaryGeneratedColumn()
-    public id?: number;
+    @PrimaryColumn({ type: 'varchar', length: 6 })
+    public id?: Id;
 
     @ManyToOne(type => PortfolioProfile, p => p.technologies)
     @Exclude()

@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 
 import { Repository } from 'typeorm';
 
+import { EntityService, Id } from '@api/core/database/entity.service';
 import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
 import { InternalServerErrorException } from '@api/core/http/http.exception';
 
@@ -11,13 +12,13 @@ import { ShopOrder } from '../entities/shop-order.entity';
 import { ShopOrderAlreadyExistsException } from '../exceptions/shop-order.exception';
 
 @Injectable()
-export class ShopOrderService {
+export class ShopOrderService extends EntityService<ShopOrder> {
     constructor(
         @InjectRepository(ShopOrder)
         private readonly shopOrderRepository: Repository<ShopOrder>
-    ) { }
+    ) { super(); }
 
-    public async hasBeenMadeBefore(customerId: number, productId: number): Promise<boolean> {
+    public async hasBeenMadeBefore(customerId: Id, productId: Id): Promise<boolean> {
         return await this.shopOrderRepository
             .createQueryBuilder('so')
             .where('so.customer_id = :customerId', { customerId: customerId})
@@ -26,8 +27,12 @@ export class ShopOrderService {
     }
 
     public async createOrder(orderData: ShopOrder): Promise<ShopOrder> {
-        const order: ShopOrder = this.shopOrderRepository.create(orderData);
-        await this.shopOrderRepository.save(order)
+        const order: ShopOrder = this.createEntity(
+            this.shopOrderRepository.create(orderData),
+            ['customer', 'product']
+        );
+
+        return this.shopOrderRepository.save(order)
             .catch((error) => {
                 if(error.code === PostgresErrorCodes.UNIQUE_VIOLATION) {
                     throw new ShopOrderAlreadyExistsException();
@@ -35,12 +40,10 @@ export class ShopOrderService {
                     throw new InternalServerErrorException();
                 }
             });
-
-        return await this.getOrder(order.id);
     }
 
-    public async getOrder(id: number): Promise<ShopOrder> {
-        return await this.shopOrderRepository
+    public async getOrder(id: Id): Promise<ShopOrder> {
+        return this.shopOrderRepository
             .createQueryBuilder('so')
             .leftJoinAndSelect('so.product', 'sp')
             .leftJoinAndSelect('so.customer', 'sc')
@@ -48,8 +51,8 @@ export class ShopOrderService {
             .getOne();
     }
 
-    public async getOrderByCustomerAndProduct(customerId: number, productId: number): Promise<ShopOrder> {
-        return await this.shopOrderRepository
+    public async getOrderByCustomerAndProduct(customerId: Id, productId: Id): Promise<ShopOrder> {
+        return this.shopOrderRepository
             .createQueryBuilder('so')
             .leftJoinAndSelect('so.product', 'sp')
             .leftJoinAndSelect('so.customer', 'sc')
@@ -58,8 +61,8 @@ export class ShopOrderService {
             .getOne();
     }
     
-    public async getOrdersByCustomer(customerId: number): Promise<ShopOrder[]> {
-        return await this.shopOrderRepository
+    public async getOrdersByCustomer(customerId: Id): Promise<ShopOrder[]> {
+        return this.shopOrderRepository
             .createQueryBuilder('so')
             .leftJoinAndSelect('so.product', 'sp')
             .leftJoinAndSelect('so.customer', 'sc')
@@ -67,14 +70,11 @@ export class ShopOrderService {
             .getMany();
     }
 
-    public async updateOrder(id: number, orderData: ShopOrder, hasSentEmail: boolean = true): Promise<ShopOrder> {
+    public async updateOrder(id: Id, orderData: ShopOrder, hasSentEmail: boolean = true): Promise<ShopOrder> {
         const newOrder = new ShopOrder({
             ...orderData,
-            id: id,
             has_sent_email: hasSentEmail
         });
-        await this.shopOrderRepository.save(newOrder);
-
-        return await this.getOrder(id);
+        return this.shopOrderRepository.save(newOrder);
     }
 }

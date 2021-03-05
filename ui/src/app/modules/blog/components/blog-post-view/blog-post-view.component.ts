@@ -9,6 +9,7 @@ import { FileService } from '@ui/modules/file/services';
 
 import { BlogPost } from '../../models';
 import { BlogApiService, BlogComparisonService, BlogEditorService, BlogTopicService } from '../../services';
+import { Id } from '@ui/core/models/model';
 
 @Component({
     selector: 'ui-blog-post-view',
@@ -68,7 +69,7 @@ export class BlogPostViewComponent implements OnInit {
         this.blogEditorService.setPost(this.post);
     }
 
-    deletePost(id: number): void {
+    deletePost(id: Id): void {
         if(!this.notificationService.deleteConfirmation('blog post')) return;
 
         this.blogApiService.deletePost(id).subscribe((res: any) => {

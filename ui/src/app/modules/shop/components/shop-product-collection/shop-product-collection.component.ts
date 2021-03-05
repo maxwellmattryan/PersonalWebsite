@@ -3,6 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { AuthService } from '@ui/core/auth';
+import { Id } from '@ui/core/models/model';
 import { NotificationService, SeoService, TrackingService } from '@ui/core/services';
 
 import { FileService } from '@ui/modules/file/services';
@@ -24,7 +25,7 @@ export class ShopProductCollectionComponent implements OnInit {
 
     public isAdmin: boolean = false;
     public isStartingCheckout: boolean = false;
-    public checkoutProductId: number = -1;
+    public checkoutProductId: Id = -1;
     public modalId: string = 'shop-checkout-modal';
 
     constructor(
@@ -77,7 +78,7 @@ export class ShopProductCollectionComponent implements OnInit {
     public startCheckout(productData: ShopProduct): void {
         if(productData.status.id != ShopProductStatuses.AVAILABLE) {
             this.notificationService.createNotification(`Sorry, unable to buy product because it is ${productData.status.status.toLowerCase()}.`, '', 3600);
-            return;
+            // return;
         }
 
         this.checkoutProductId = productData.id;
@@ -111,7 +112,7 @@ export class ShopProductCollectionComponent implements OnInit {
 
         this.router.navigate(
             ['shop/checkout'],
-            { queryParams: { success: 'true', productId: this.checkoutProductId, freeProduct: 'true' }}
+            { queryParams: { success: 'true', productId: this.checkoutProductId, isFreeProduct: 'true' }}
         );
     }
 }

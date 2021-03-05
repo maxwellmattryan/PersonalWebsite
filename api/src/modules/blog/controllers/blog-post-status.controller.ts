@@ -1,6 +1,4 @@
-import { Controller, Get, HttpCode, Req, UseGuards } from '@nestjs/common';
-
-import { Request } from 'express';
+import { Controller, Get, HttpCode, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
@@ -8,7 +6,7 @@ import { BlogPostStatus } from '../entities/blog-post-status.entity';
 import { BlogPostStatusService } from '../services/blog-post-status.service';
 import { BlogPostStatusesWereNotFoundException } from '../exceptions/blog-post-status.exception';
 
-@Controller('blog/posts/statuses')
+@Controller('blog/post-statuses')
 export class BlogPostStatusController {
     constructor(
         private readonly blogPostStatusService: BlogPostStatusService
@@ -17,7 +15,7 @@ export class BlogPostStatusController {
     @Get('')
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
-    async getPostStatuses(@Req() request: Request): Promise<BlogPostStatus[]> {
+    async getPostStatuses(): Promise<BlogPostStatus[]> {
         const statuses = await this.blogPostStatusService.getStatuses();
         if(statuses.length === 0) throw new BlogPostStatusesWereNotFoundException();
 

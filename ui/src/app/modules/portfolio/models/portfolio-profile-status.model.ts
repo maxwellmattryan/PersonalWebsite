@@ -1,3 +1,4 @@
+import { Id } from '@ui/core/models/model';
 import { Deserializable } from '@ui/core/models/deserializable.model';
 
 export class PortfolioProfileStatus implements Deserializable {
@@ -10,7 +11,7 @@ export class PortfolioProfileStatus implements Deserializable {
         return this;
     }
 
-    id?: number;
+    id?: Id;
 
     status: string;
 }

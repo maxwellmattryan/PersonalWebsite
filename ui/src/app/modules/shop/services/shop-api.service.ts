@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '@ui/environments/environment';
-
 import { ApiService } from '@ui/core/http';
+import { Id } from '@ui/core/models/model';
 
-import { ShopCategory, ShopProduct, ShopProductStatus } from '../models';
+import { ShopCategory, ShopCustomer, ShopProduct, ShopProductStatus } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +40,7 @@ export class ShopApiService extends ApiService {
         );
     }
 
-    deleteCategory(categoryId: number): Observable<void> {
+    deleteCategory(categoryId: Id): Observable<void> {
         return this.http.delete<void>(`${environment.API_URL}/shop/categories/${categoryId}`);
     }
 
@@ -55,10 +55,10 @@ export class ShopApiService extends ApiService {
     }
 
     // NOTE: statusId is set to 1 by default to correspond with 'AVAILABLE' products
-    getProducts(statusId: string = '', categoryId: string = ''): Observable<ShopProduct[]> {
+    getProducts(statusId: Id = '', categoryId: Id = ''): Observable<ShopProduct[]> {
         let params = new HttpParams();
-        if(statusId != '') params = params.set('statusId', statusId);
-        if(categoryId != '') params = params.set('categoryId', categoryId);
+        if(statusId != '') params = params.set('statusId', <string>statusId);
+        if(categoryId != '') params = params.set('categoryId', <string>categoryId);
 
         return this.http.get<ShopProduct[]>(
             `${environment.API_URL}/shop/products`,
@@ -80,9 +80,9 @@ export class ShopApiService extends ApiService {
         );
     }
 
-    deleteProduct(productId: number, softDelete: boolean = true): Observable<void> {
+    deleteProduct(productId: Id, softDelete: boolean = true): Observable<void> {
         let params = new HttpParams();
-        if(softDelete) params = params.set('softDelete', 'true');
+        if(softDelete) params = params.set('doSoftDelete', 'true');
 
         return this.http.delete<void>(
             `${environment.API_URL}/shop/products/${productId}`,
@@ -90,12 +90,14 @@ export class ShopApiService extends ApiService {
         );
     }
 
-    helpCustomer(customerEmail: string): Observable<void> {
+    helpCustomer(customerData: ShopCustomer): Observable<void> {
         const headers = this.contentTypeHeader();
+
+        console.log(customerData);
 
         return this.http.post<void>(
             `${environment.API_URL}/shop/customers/help`,
-            { email: customerEmail },
+            { ...customerData },
             { headers }
         );
     }

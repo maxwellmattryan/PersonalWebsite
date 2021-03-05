@@ -32,7 +32,7 @@ export class ShopCheckoutViewComponent implements OnInit {
         this.activatedRoute.queryParams.subscribe(params => {
             if(params.success == 'true') {
                 const productId = params.productId;
-                const isFreeProduct: boolean = params.freeProduct == 'true';
+                const isFreeProduct: boolean = params.isFreeProduct == 'true';
 
                 const callbackFn = (res: ShopOrder) => {
                     this.order = res;
@@ -59,9 +59,5 @@ export class ShopCheckoutViewComponent implements OnInit {
                 this.router.navigate(['shop']);
             }
         });
-    }
-
-    public paddedOrderNumber(amount: number = 5): string {
-        return String(this.order.id).padStart(amount, '0');
     }
 }

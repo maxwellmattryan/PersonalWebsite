@@ -2,11 +2,11 @@ import { ClassSerializerInterceptor } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 
+import { join } from 'path';
+
 import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
 import * as helmet from 'helmet';
-import * as rateLimit from 'express-rate-limit';
-import { join } from 'path';
 
 import { AppModule } from '@api/app.module';
 import { HttpLoggingInterceptor } from '@api/core/http/http-logging.interceptor';
@@ -21,11 +21,6 @@ async function bootstrap() {
         methods: 'GET,POST,PUT,DELETE,BATCH,OPTIONS',
         credentials: true
     });
-
-    app.use(rateLimit({
-        windowMs: 15 * 60 * 1000,
-        max: 100
-    }));
 
     app.use(helmet());
 

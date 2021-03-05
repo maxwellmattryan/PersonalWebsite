@@ -16,7 +16,7 @@ export class ObfuscationService {
         return this.constructEmailWith(this.name, this.domain, this.extension);
     }
 
-    handleEmailClick(event: Event): void {
+    handleEmailClick(event: Event = undefined): void {
         this.handleEmailClickWith(event, this.name, this.domain, this.extension);
     }
 
@@ -24,7 +24,7 @@ export class ObfuscationService {
         return `${this.uglify(name)}${this.funkyChar}at${this.funkyChar}${this.uglify(domain)}${this.funkyChar}dot${this.funkyChar}${extension}`;
     }
 
-    handleEmailClickWith(event: Event, name: string, domain: string, extension: string = 'com'): void {
+    handleEmailClickWith(event: Event = undefined, name: string, domain: string, extension: string = 'com'): void {
         window.location.href = `mailto:${name}@${domain}.${extension}`;
     }
 

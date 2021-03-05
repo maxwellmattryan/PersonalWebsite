@@ -1,4 +1,13 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    OneToMany,
+    PrimaryColumn,
+    UpdateDateColumn
+} from 'typeorm';
+
+import { Id } from '@api/core/database/entity.service';
 
 import { ShopProduct } from '../entities/shop-product.entity';
 
@@ -8,8 +17,8 @@ export class ShopProductStatus {
         Object.assign(this, partial);
     }
 
-    @PrimaryGeneratedColumn()
-    public id: number;
+    @PrimaryColumn({ type: 'varchar', length: 6 })
+    public id?: Id;
 
     @OneToMany(type => ShopProduct, sp => sp.status)
     public products: ShopProduct[];

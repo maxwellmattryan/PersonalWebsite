@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
+import { EntityService, Id } from '@api/core/database/entity.service';
 import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
 import { InternalServerErrorException } from '@api/core/http/http.exception';
 
@@ -15,14 +16,14 @@ import { ShopProductStatusService } from '../services/shop-product-status.servic
 import { ShopProductAlreadyExistsException } from '../exceptions/shop-product.exception';
 
 @Injectable()
-export class ShopProductService {
+export class ShopProductService extends EntityService<ShopProduct> {
     constructor(
         @InjectRepository(ShopProduct)
         private readonly shopProductRepository: Repository<ShopProduct>,
         private readonly shopProductStatusService: ShopProductStatusService
-    ) { }
+    ) { super(); }
 
-    public async existsInTable(id: number): Promise<boolean> {
+    public async existsInTable(id: Id): Promise<boolean> {
         return await this.shopProductRepository
             .createQueryBuilder('sp')
             .where('sp.id = :id', { id: id })
@@ -30,8 +31,12 @@ export class ShopProductService {
     }
 
     public async createProduct(productData: ShopProduct): Promise<ShopProduct> {
-        const product: ShopProduct = this.shopProductRepository.create(productData);
-        await this.shopProductRepository.save(product)
+        const product: ShopProduct = this.createEntity(
+            this.shopProductRepository.create(productData),
+            ['name']
+        );
+
+        return this.shopProductRepository.save(product)
             .catch((error) => {
                 if(error.code === PostgresErrorCodes.UNIQUE_VIOLATION) {
                     throw new ShopProductAlreadyExistsException();
@@ -39,12 +44,10 @@ export class ShopProductService {
                     throw new InternalServerErrorException();
                 }
             });
-
-        return await this.getProduct(product.id);
     }
 
-    public async getProduct(id: number): Promise<ShopProduct> {
-        return await this.shopProductRepository
+    public async getProduct(id: Id): Promise<ShopProduct> {
+        return this.shopProductRepository
             .createQueryBuilder('sp')
             .leftJoinAndSelect('sp.category', 'sc')
             .leftJoinAndSelect('sp.status', 'sps')
@@ -53,25 +56,25 @@ export class ShopProductService {
     }
 
     public async getProducts(): Promise<ShopProduct[]> {
-        return await this.shopProductRepository
+        return this.shopProductRepository
             .createQueryBuilder('sp')
             .leftJoinAndSelect('sp.category', 'sc')
             .leftJoinAndSelect('sp.status', 'sps')
             .getMany();
     }
 
-    public async getProductsByCategory(category: ShopCategory | number | string): Promise<ShopProduct[]> {
-        return await this.shopProductRepository
+    public async getProductsByCategory(category: ShopCategory | Id): Promise<ShopProduct[]> {
+        return this.shopProductRepository
             .createQueryBuilder('sp')
             .leftJoinAndSelect('sp.category', 'sc')
             .leftJoinAndSelect('sp.status', 'sps')
-            .where(`sc.name = :name`, { name: (category as ShopCategory).name || typeof category === 'string' ? category : '' })
-            .orWhere(`sc.id = :id`, { id: (category as ShopCategory).id || isNaN(Number(category)) ? -1 : category })
+            .where(`sc.name = :name`, { name: (category as ShopCategory).name || '' })
+            .orWhere(`sc.id = :id`, { id: (category as ShopCategory).id || category })
             .getMany();
     }
 
-    public async getProductsByStatus(status: ShopProductStatus | number): Promise<ShopProduct[]> {
-        return await this.shopProductRepository
+    public async getProductsByStatus(status: ShopProductStatus | Id): Promise<ShopProduct[]> {
+        return this.shopProductRepository
             .createQueryBuilder('sp')
             .leftJoinAndSelect('sp.category', 'sc')
             .leftJoinAndSelect('sp.status', 'sps')
@@ -79,8 +82,8 @@ export class ShopProductService {
             .getMany();
     }
 
-    public async getProductsByStatusAndCategory(statusId: number, categoryId: number): Promise<ShopProduct[]> {
-        return await this.shopProductRepository
+    public async getProductsByStatusAndCategory(statusId: Id, categoryId: Id): Promise<ShopProduct[]> {
+        return this.shopProductRepository
             .createQueryBuilder('sp')
             .leftJoinAndSelect('sp.category', 'sc')
             .leftJoinAndSelect('sp.status', 'sps')
@@ -89,14 +92,12 @@ export class ShopProductService {
             .getMany();
     }
 
-    public async updateProduct(id: number, productData: ShopProduct): Promise<ShopProduct> {
+    public async updateProduct(id: Id, productData: ShopProduct): Promise<ShopProduct> {
         const newProduct = new ShopProduct({ id: id, ...productData });
-        await this.shopProductRepository.save(newProduct);
-
-        return await this.getProduct(id);
+        return this.shopProductRepository.save(newProduct);
     }
 
-    public async deleteProduct(id: number): Promise<void> {
+    public async deleteProduct(id: Id): Promise<void> {
         await this.shopProductRepository
             .createQueryBuilder()
             .delete()
@@ -111,7 +112,7 @@ export class ShopProductService {
             });
     }
 
-    public async softDeleteProduct(id: number): Promise<void> {
+    public async softDeleteProduct(id: Id): Promise<void> {
         let product: ShopProduct = await this.getProduct(id);
 
         if(product.status.status === 'REMOVED') return;

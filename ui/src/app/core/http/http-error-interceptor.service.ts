@@ -25,6 +25,13 @@ export class HttpErrorInterceptorService implements HttpInterceptor {
             case 404:
                 this.notificationService.createNotification(error.error.message);
                 break;
+            case 429:
+                this.notificationService.createNotification(
+                  'Oops, you are not supposed to see this error. Please email me if you read this - I would really appreciate it!',
+                  'Email',
+                  4200
+                );
+                break;
             default:
                 this.notificationService.createNotification(error.message);
                 break;

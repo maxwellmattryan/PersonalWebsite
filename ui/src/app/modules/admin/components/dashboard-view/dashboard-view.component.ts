@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { AuthApiService, AuthService } from '@ui/core/auth';
+import { Id } from '@ui/core/models/model';
 import {
     NotificationService,
     TrackingService
 } from '@ui/core/services';
+
 import {
     PortfolioProfile,
     PortfolioProfileStatus
@@ -15,7 +18,6 @@ import {
     PortfolioApiService, PortfolioComparisonService, PortfolioEditorService,
     PortfolioProfileService
 } from '@ui/modules/portfolio/services';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'ui-dashboard-view',
@@ -27,7 +29,7 @@ export class DashboardViewComponent implements OnInit {
 
     isLoaded: boolean = false;
 
-    public activeProfileId: number = -1;
+    public activeProfileId: Id = -1;
 
     public isActivatingProfile: boolean = false;
     public isLoggingOut: boolean = false;
@@ -92,7 +94,7 @@ export class DashboardViewComponent implements OnInit {
         });
     }
 
-    private modifyProfileStatuses(activeId: number): void {
+    private modifyProfileStatuses(activeId: Id): void {
         this.profiles.forEach(p => {
             if(p.id === activeId) {
                 p.status = new PortfolioProfileStatus({ status: 'ACTIVE' });

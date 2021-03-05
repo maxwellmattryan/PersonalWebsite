@@ -17,6 +17,6 @@ export class ShopOrderController {
     @HttpCode(201)
     @UseGuards(JwtAuthGuard)
     public async createOrder(@Req() request: Request): Promise<ShopOrder> {
-        return await this.shopOrderService.createOrder(request.body);
+        return this.shopOrderService.createOrder(request.body);
     }
 }

@@ -4,9 +4,10 @@ import {
     Entity,
     ManyToOne,
     PrimaryColumn,
-    PrimaryGeneratedColumn,
     UpdateDateColumn
 } from 'typeorm';
+
+import { Id } from '@api/core/database/entity.service';
 
 import { ShopCustomer } from './shop-customer.entity';
 import { ShopProduct } from './shop-product.entity';
@@ -17,8 +18,8 @@ export class ShopOrder {
         Object.assign(this, partial);
     }
 
-    @PrimaryGeneratedColumn()
-    public id: number;
+    @PrimaryColumn({ type: 'varchar', length: 6 })
+    public id?: Id;
 
     @ManyToOne(type => ShopCustomer, sc => sc.orders, { nullable: false })
     public customer: ShopCustomer;
@@ -28,6 +29,9 @@ export class ShopOrder {
 
     @Column({ type: 'decimal', nullable: false })
     public amount: number;
+
+    @Column({ type: 'decimal', nullable: false })
+    public taxed_amount: number;
 
     @Column({ type: 'boolean', nullable: false, default: false })
     public has_sent_email: boolean;

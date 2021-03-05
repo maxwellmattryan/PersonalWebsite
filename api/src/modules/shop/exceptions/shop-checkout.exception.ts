@@ -5,3 +5,9 @@ export class InvalidCheckoutSessionException extends BadRequestException {
         super('The checkout session is invalid.');
     }
 }
+
+export class InvalidTaxRateException extends BadRequestException {
+    constructor() {
+        super('The tax rate is invalid.');
+    }
+}

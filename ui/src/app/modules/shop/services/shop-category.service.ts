@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { Id } from '@ui/core/models/model';
+
 import { ShopCategory } from '../models';
 
 @Injectable({
@@ -10,7 +12,7 @@ export class ShopCategoryService {
 
     constructor() { }
 
-    getActiveCategoryId(): number {
+    getActiveCategoryId(): Id {
         if(!this.activeCategory) return -1;
         return this.activeCategory.id;
     }

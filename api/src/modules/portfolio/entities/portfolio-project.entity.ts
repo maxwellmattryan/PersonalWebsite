@@ -1,11 +1,12 @@
 import {
     Entity,
-    PrimaryGeneratedColumn,
     Column,
     CreateDateColumn,
     UpdateDateColumn,
-    ManyToMany
+    ManyToMany, PrimaryColumn
 } from 'typeorm';
+
+import { Id } from '@api/core/database/entity.service';
 
 import { PortfolioProfile } from './portfolio-profile.entity';
 
@@ -15,8 +16,8 @@ export class PortfolioProject {
         Object.assign(this, partial);
     }
 
-    @PrimaryGeneratedColumn()
-    public id?: number;
+    @PrimaryColumn({ type: 'varchar', length: 6 })
+    public id?: Id;
 
     @ManyToMany(type => PortfolioProfile, p => p.projects, { onDelete: 'CASCADE' })
     public profiles: PortfolioProfile[];

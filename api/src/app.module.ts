@@ -1,5 +1,6 @@
-import { Module } from '@nestjs/common';
+import { CacheInterceptor, CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
 import * as Joi from '@hapi/joi';
 
@@ -15,9 +16,13 @@ import { ApiModule } from '@api/modules/api/api.module';
 import { BlogModule } from '@api/modules/blog/blog.module';
 import { PortfolioModule } from '@api/modules/portfolio/portfolio.module';
 import { ShopModule } from '@api/modules/shop/shop.module';
+import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
 
 @Module({
     imports: [
+        CacheModule.register({
+            ttl: 60 // seconds
+        }),
         ConfigModule.forRoot({
             validationSchema: Joi.object({
                 JWT_SECRET: Joi.string().required(),
@@ -38,7 +43,6 @@ import { ShopModule } from '@api/modules/shop/shop.module';
                 API_URL: Joi.string().required(),
 
                 STRIPE_API_URL: Joi.string().required(),
-                STRIPE_API_KEY: Joi.string().required(),
                 STRIPE_SK: Joi.string().required(),
                 STRIPE_PK: Joi.string().required(),
                 STRIPE_TAX_RATE_ID: Joi.string().required(),
@@ -56,6 +60,10 @@ import { ShopModule } from '@api/modules/shop/shop.module';
                 MAILER_QUEUE_PORT: Joi.number().required()
             })
         }),
+        ThrottlerModule.forRoot({
+            ttl: 60,
+            limit: 20
+        }),
 
         AuthModule,
         DatabaseModule,
@@ -72,6 +80,15 @@ import { ShopModule } from '@api/modules/shop/shop.module';
     ],
     exports: [],
     controllers: [],
-    providers: []
+    providers: [
+        {
+            provide: APP_INTERCEPTOR,
+            useClass: CacheInterceptor
+        },
+        {
+            provide: APP_GUARD,
+            useClass: ThrottlerGuard
+        }
+    ]
 })
 export class AppModule { }
