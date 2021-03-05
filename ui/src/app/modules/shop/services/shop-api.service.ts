@@ -6,7 +6,7 @@ import { environment } from '@ui/environments/environment';
 import { ApiService } from '@ui/core/http';
 import { Id } from '@ui/core/models/model';
 
-import { ShopCategory, ShopProduct, ShopProductStatus } from '../models';
+import { ShopCategory, ShopCustomer, ShopProduct, ShopProductStatus } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -90,12 +90,14 @@ export class ShopApiService extends ApiService {
         );
     }
 
-    helpCustomer(customerEmail: string): Observable<void> {
+    helpCustomer(customerData: ShopCustomer): Observable<void> {
         const headers = this.contentTypeHeader();
+
+        console.log(customerData);
 
         return this.http.post<void>(
             `${environment.API_URL}/shop/customers/help`,
-            { email: customerEmail },
+            { ...customerData },
             { headers }
         );
     }
