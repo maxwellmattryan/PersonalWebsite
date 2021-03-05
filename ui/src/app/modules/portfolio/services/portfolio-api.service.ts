@@ -50,7 +50,7 @@ export class PortfolioApiService extends ApiService {
     }
 
     getProfileStatuses(): Observable<PortfolioProfileStatus[]> {
-        return this.http.get<PortfolioProfileStatus[]>(`${environment.API_URL}/portfolio/profiles/statuses`);
+        return this.http.get<PortfolioProfileStatus[]>(`${environment.API_URL}/portfolio/profile-statuses`);
     }
 
     getProfileTechnologies(id: Id): Observable<PortfolioProfileTechnology[]> {

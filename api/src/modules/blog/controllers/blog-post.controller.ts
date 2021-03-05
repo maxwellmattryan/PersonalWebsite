@@ -32,7 +32,7 @@ export class BlogPostController {
     @HttpCode(200)
     async getPosts(
         @Query('topicId') topicId: Id,
-        @Query('published') isPublished: string
+        @Query('isPublished') isPublished: string
     ): Promise<BlogPost[]> {
         let posts: BlogPost[];
 

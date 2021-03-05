@@ -51,7 +51,7 @@ export class BlogApiService extends ApiService {
     }
 
     getPostStatuses(): Observable<BlogPostStatus[]> {
-        return this.http.get<BlogPostStatus[]>(`${environment.API_URL}/blog/posts/statuses`);
+        return this.http.get<BlogPostStatus[]>(`${environment.API_URL}/blog/post-statuses`);
     }
 
     updatePost(post: BlogPost): Observable<BlogPost> {

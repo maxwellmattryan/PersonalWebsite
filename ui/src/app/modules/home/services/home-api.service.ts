@@ -16,6 +16,6 @@ export class HomeApiService extends ApiService {
     }
 
     getHomepage(): Observable<Homepage> {
-        return this.http.get<Homepage>(`${environment.API_URL}/homepage`);
+        return this.http.get<Homepage>(`${environment.API_URL}/home`);
     }
 }

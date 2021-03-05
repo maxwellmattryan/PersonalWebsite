@@ -6,7 +6,7 @@ import { BlogPostStatus } from '../entities/blog-post-status.entity';
 import { BlogPostStatusService } from '../services/blog-post-status.service';
 import { BlogPostStatusesWereNotFoundException } from '../exceptions/blog-post-status.exception';
 
-@Controller('blog/posts/statuses')
+@Controller('blog/post-statuses')
 export class BlogPostStatusController {
     constructor(
         private readonly blogPostStatusService: BlogPostStatusService

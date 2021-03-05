@@ -19,7 +19,7 @@ export class ApiController {
         private readonly projectService: PortfolioProjectService
     ) { }
 
-    @Get('homepage')
+    @Get('home')
     @HttpCode(200)
     async getHomepage(): Promise<{ profile: PortfolioProfile, posts: BlogPost[] }> {
         const profile = await this.profileService.getProfileByStatus('ACTIVE');

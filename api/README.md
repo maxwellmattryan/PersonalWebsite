@@ -31,7 +31,7 @@ Repositories are the objects that actual more or less represents and corresponds
 ## Usage
 
 - /api
-    - `GET      /api/homepage`
+    - `GET      /api/home`
         - Retrieves data needed to populate homepage components on the client side (profile, projects, blog posts, etc.)
         - 200
 
@@ -55,6 +55,7 @@ Repositories are the objects that actual more or less represents and corresponds
         - 200
     - `POST     /api/blog/posts`
         - Creates and saves a new post to the database
+        - Params: topicId (string), isPublished (boolean)
         - 201
     - `GET      /api/blog/posts/:id`
         - Retrieves a single post corresponding to the `id` path parameter
@@ -65,7 +66,7 @@ Repositories are the objects that actual more or less represents and corresponds
     - `DELETE   /api/blog/posts/:id`
         - Removes the post with the corresponding `id` from the database
         - 204
-    - `GET      /api/blog/posts/statuses`
+    - `GET      /api/blog/post-statuses`
         - Retrieves list of all post statuses in the database
         - 200
     - `GET      /api/blog/topics`
@@ -114,7 +115,7 @@ Repositories are the objects that actual more or less represents and corresponds
     - `GET      /api/portfolio/profiles/:id/technologies`
         - Retrieves list of all technologies belonging to the profile with the corresponding `id`
         - 200
-    - `GET      /api/portfolio/profiles/statuses`
+    - `GET      /api/portfolio/profile-statuses`
         - Retrieves list of all profile statuses in the database
         - 200
     - `GET      /api/portfolio/projects`
