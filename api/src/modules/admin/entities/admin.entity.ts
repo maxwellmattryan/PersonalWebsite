@@ -9,7 +9,7 @@ export class Admin {
         Object.assign(this, partial);
     }
 
-    @PrimaryColumn({ type: 'varchar' })
+    @PrimaryColumn({ type: 'varchar', length: 6 })
     public id?: Id;
 
     @Column({ type: 'varchar', length: 50, nullable: false, unique: true })

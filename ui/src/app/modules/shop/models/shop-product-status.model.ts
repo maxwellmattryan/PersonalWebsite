@@ -1,3 +1,4 @@
+import { Id } from '@ui/core/models/model';
 import { Deserializable } from '@ui/core/models/deserializable.model';
 
 import { ShopProduct } from './shop-product.model';
@@ -15,7 +16,7 @@ export class ShopProductStatus implements Deserializable {
         return this;
     }
 
-    public id?: number;
+    public id?: Id;
 
     public products?: ShopProduct[];
 
@@ -26,8 +27,8 @@ export class ShopProductStatus implements Deserializable {
 }
 
 export enum ShopProductStatuses {
-    AVAILABLE =     1,
-    UNAVAILABLE =   2,
-    DISCONTINUED =  3,
-    REMOVED =       4
+    AVAILABLE     = 'AXQBK7',
+    UNAVAILABLE   = '5Z06AN',
+    DISCONTINUED  = '85P8TU',
+    REMOVED       = '2U5UC0'
 }

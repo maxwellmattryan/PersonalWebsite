@@ -71,10 +71,10 @@ export class ShopOrderService extends EntityService<ShopOrder> {
     }
 
     public async updateOrder(id: Id, orderData: ShopOrder, hasSentEmail: boolean = true): Promise<ShopOrder> {
-        const newOrder = this.createEntity(
-            new ShopOrder({...orderData, has_sent_email: hasSentEmail }),
-            ['customer', 'product']
-        );
+        const newOrder = new ShopOrder({
+            ...orderData,
+            has_sent_email: hasSentEmail
+        });
         return this.shopOrderRepository.save(newOrder);
     }
 }

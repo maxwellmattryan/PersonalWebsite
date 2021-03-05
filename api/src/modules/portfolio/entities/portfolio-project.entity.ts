@@ -16,7 +16,7 @@ export class PortfolioProject {
         Object.assign(this, partial);
     }
 
-    @PrimaryColumn({ type: 'varchar' })
+    @PrimaryColumn({ type: 'varchar', length: 6 })
     public id?: Id;
 
     @ManyToMany(type => PortfolioProfile, p => p.projects, { onDelete: 'CASCADE' })

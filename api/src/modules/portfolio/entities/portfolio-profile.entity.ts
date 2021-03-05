@@ -20,7 +20,7 @@ export class PortfolioProfile {
         Object.assign(this, partial);
     }
 
-    @PrimaryColumn({ type: 'varchar' })
+    @PrimaryColumn({ type: 'varchar', length: 6 })
     public id?: Id;
 
     @ManyToOne(type => PortfolioProfileStatus, ps => ps.profiles)

@@ -86,12 +86,12 @@ export class BlogTopicEditorComponent implements OnInit, OnDestroy {
         if(topic.id === undefined) {
             this.blogApiService.createTopic(topic).subscribe((res: BlogTopic) => {
                 this.notificationService.createNotification('Successfully created new topic.');
-                // this.router.navigate(['blog']);
+                this.router.navigate(['blog']);
             });
         } else {
             this.blogApiService.updateTopic(topic).subscribe((res: BlogTopic) => {
                 this.notificationService.createNotification('Successfully updated existing topic.');
-                // this.router.navigate(['blog']);
+                this.router.navigate(['blog']);
             });
         }
     }

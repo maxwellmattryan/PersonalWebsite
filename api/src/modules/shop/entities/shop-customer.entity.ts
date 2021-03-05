@@ -18,7 +18,7 @@ export class ShopCustomer {
         Object.assign(this, partial);
     }
 
-    @PrimaryColumn({ type: 'varchar' })
+    @PrimaryColumn({ type: 'varchar', length: 6 })
     public id?: Id;
 
     @OneToMany(type => ShopOrder, so => so.customer)

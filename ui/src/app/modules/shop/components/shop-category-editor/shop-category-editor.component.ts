@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '@ui/core/auth';
+import { Id } from '@ui/core/models/model';
 
 import { ShopCategory, ShopProduct, ShopProductStatuses } from '../../models';
 import { ShopApiService, ShopComparisonService, ShopEditorService } from '../../services';
@@ -84,7 +85,7 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
         });
     }
 
-    private setProductControls(associatedProductIds: number[]): void {
+    private setProductControls(associatedProductIds: Id[]): void {
         this.productData.forEach(p => {
             const isAssociated = associatedProductIds.includes(p.id);
             const control: FormControl = this.formBuilder.control({ value: isAssociated, disabled: isAssociated });

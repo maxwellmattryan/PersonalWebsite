@@ -33,7 +33,7 @@ export class PortfolioProfileController {
     async createProfile(
         @Body() profileData: PortfolioProfile
     ): Promise<PortfolioProfile> {
-        return this.profileService.createProfile(profileData);
+        return await this.profileService.createProfile(profileData);
     }
 
     @Put(':id')

@@ -18,7 +18,7 @@ export class ShopOrder {
         Object.assign(this, partial);
     }
 
-    @PrimaryColumn({ type: 'varchar' })
+    @PrimaryColumn({ type: 'varchar', length: 6 })
     public id?: Id;
 
     @ManyToOne(type => ShopCustomer, sc => sc.orders, { nullable: false })
@@ -29,6 +29,9 @@ export class ShopOrder {
 
     @Column({ type: 'decimal', nullable: false })
     public amount: number;
+
+    @Column({ type: 'decimal', nullable: false })
+    public taxed_amount: number;
 
     @Column({ type: 'boolean', nullable: false, default: false })
     public has_sent_email: boolean;

@@ -66,13 +66,11 @@ export class MailProcessor {
         this.logger.log(`Sending order download email to '${job.data.order.customer.email}'`);
 
         const isFreeOrder: boolean = job.data.order.amount <= 0.0;
-        const orderNumber: string = this.utilsService.pad(job.data.order.id);
         await this.mailerService.sendMail({
             template: `${isFreeOrder ? 'download' : 'order'}-confirmation`,
             context: {
                 ...plainToClass(ShopOrder, job.data.order),
-                signedUrl: job.data.signedUrl,
-                orderNumber: orderNumber
+                signedUrl: job.data.signedUrl
             },
             subject: `${job.data.order.product.name} | ${isFreeOrder ? 'Download' : 'Order'} Confirmation | mattmaxwell.dev`,
             to: job.data.order.customer.email

@@ -8,7 +8,7 @@ export class BlogAuthor {
         Object.assign(this, partial);
     }
 
-    @PrimaryColumn({ type: 'varchar' })
+    @PrimaryColumn({ type: 'varchar', length: 6 })
     public id?: Id;
 
     @Column({ type: 'varchar', length: 50, nullable: false })

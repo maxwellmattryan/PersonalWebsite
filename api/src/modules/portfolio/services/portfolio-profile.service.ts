@@ -25,7 +25,7 @@ export class PortfolioProfileService extends EntityService<PortfolioProfile> {
     public async existsInTable(id: Id): Promise<boolean> {
         return await this.portfolioProfileRepository
             .createQueryBuilder('p')
-            .where(`p.id = ${id}`)
+            .where(`p.id = :id`, { id: id })
             .getCount() > 0;
     }
 
@@ -33,6 +33,9 @@ export class PortfolioProfileService extends EntityService<PortfolioProfile> {
         const profile: PortfolioProfile = this.createEntity(
             this.portfolioProfileRepository.create(profileData),
             ['name']
+        );
+        profile.technologies = profile.technologies.map(t =>
+            this.portfolioProfileTechnologyService.createEntity(t, ['name'])
         );
 
         if(profile.status.status === 'ACTIVE')
@@ -97,7 +100,7 @@ export class PortfolioProfileService extends EntityService<PortfolioProfile> {
         // CAUTION: This query modifies all rows so it is important that the id being used actually exists
         await this.portfolioProfileRepository.query(`
             UPDATE portfolio_profile
-            SET status_id = CASE WHEN id = ${activeId} THEN 9CI7WO ELSE G3SU5I END,
+            SET status_id = CASE WHEN id = '${activeId}' THEN '9CI7WO' ELSE 'G3SU5I' END,
                 updated_at = now();
         `);
     }

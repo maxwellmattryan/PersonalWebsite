@@ -36,14 +36,12 @@ export class ShopCheckoutController {
     @Post('complete')
     @HttpCode(200)
     public async completeCheckoutSession(
+        @Query('isFreeProduct') isFreeProduct: boolean,
         @Query('productId') productId: Id,
         @Query('sessionId') sessionId: string,
-        @Query('isFreeProduct') isFreeProduct: boolean,
         @Body() customerData: ShopCustomer
     ): Promise<any> {
-        if(isNaN(Number(productId)) ||
-            (sessionId == undefined && !isFreeProduct) ||
-            (sessionId != undefined && (isFreeProduct || isFreeProduct != undefined)))
+        if(!(productId && (sessionId || isFreeProduct)))
             throw new InvalidCheckoutSessionException();
 
         let order = await (isFreeProduct ?
@@ -58,7 +56,6 @@ export class ShopCheckoutController {
 
             order = await this.shopOrderService.updateOrder(order.id, order);
         }
-
 
         return order;
     }

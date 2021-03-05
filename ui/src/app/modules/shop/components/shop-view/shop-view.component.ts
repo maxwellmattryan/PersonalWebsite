@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '@ui/core/auth';
+import { Id } from '@ui/core/models/model';
 import { NotificationService, TrackingService } from '@ui/core/services';
 
 import { ShopApiService, ShopCategoryService, ShopComparisonService, ShopEditorService } from '../../services';
@@ -22,8 +23,8 @@ export class ShopViewComponent implements OnInit {
     public products: ShopProduct[];
     public statuses: ShopProductStatus[];
 
-    activeCategoryId: number = -1;
-    activeStatusId: number = 1;
+    activeCategoryId: Id = -1;
+    activeStatusId: Id = ShopProductStatuses.AVAILABLE;
 
     public isLoadingByCategory: boolean = false;
     public isLoadingByStatus: boolean = false;
@@ -45,7 +46,7 @@ export class ShopViewComponent implements OnInit {
 
         this.isAdmin = this.authService.isLoggedIn();
 
-        this.shopApiService.getProducts(ShopProductStatuses.AVAILABLE.toString()).subscribe((res: ShopProduct[]) => {
+        this.shopApiService.getProducts(ShopProductStatuses.AVAILABLE).subscribe((res: ShopProduct[]) => {
             this.products = res.sort(this.shopComparisonService.products);
 
             if(this.isAdmin) {
@@ -79,7 +80,7 @@ export class ShopViewComponent implements OnInit {
         return Array.from(categories.values()).sort(this.shopComparisonService.categories);
     }
 
-    public filterProductsByCategory(categoryId: number): void {
+    public filterProductsByCategory(categoryId: Id): void {
         const previousCategoryId = this.activeCategoryId;
         this.activeCategoryId = categoryId;
         this.isLoadingByCategory = true;
@@ -94,7 +95,7 @@ export class ShopViewComponent implements OnInit {
         });
     }
 
-    public loadProductsByStatus(statusId: number): void {
+    public loadProductsByStatus(statusId: Id): void {
         const previousStatusId = this.activeStatusId;
         this.activeStatusId = statusId;
         this.isLoadingByStatus = true;

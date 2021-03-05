@@ -16,8 +16,11 @@ export class EntityService<T> {
 
     public createEntity(entityData: T, uniqueProperties: string[]): T {
         uniqueProperties.forEach(p => {
-            if(!entityData[p])
+            if(!entityData[p]) {
+                console.log(entityData);
+                console.log(p);
                 throw new InvalidEntityPropertyException();
+            }
         });
 
         const identifier: string = uniqueProperties.map(p => entityData[p]).join(' ');
@@ -32,7 +35,7 @@ export class EntityService<T> {
         const now: string = new Date().toString();
 
         return <Id>createHash(this.hashAlgorithm)
-            .update(identifier + now)
+            .update(identifier + now + this.getRandomInt(1_000_000))
             .digest(this.digest)
             .toString()
             .replace(/[^A-Z0-9]/g, this.generateRandomIdChar)

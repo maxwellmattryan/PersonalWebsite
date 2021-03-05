@@ -38,12 +38,12 @@ export class BlogPostController {
 
         if(isPublished === 'true') {
             if(topicId)
-                posts = await this.blogPostService.getPostsByStatusAndTopic('PUBLISHED', parseInt(<string>topicId));
+                posts = await this.blogPostService.getPostsByStatusAndTopic('PUBLISHED', topicId);
             else
                 posts = await this.blogPostService.getPostsByStatus('PUBLISHED');
         } else {
             if(topicId)
-                posts = await this.blogPostService.getPostsByTopic(parseInt(<string>topicId));
+                posts = await this.blogPostService.getPostsByTopic(topicId);
             else
                 posts = await this.blogPostService.getPosts();
         }

@@ -20,7 +20,7 @@ import { APP_INTERCEPTOR } from "@nestjs/core";
 @Module({
     imports: [
         CacheModule.register({
-            ttl: 3 * 60
+            ttl: 60 // seconds
         }),
         ConfigModule.forRoot({
             validationSchema: Joi.object({
