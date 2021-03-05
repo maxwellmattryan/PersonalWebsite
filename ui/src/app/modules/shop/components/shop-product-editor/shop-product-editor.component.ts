@@ -22,6 +22,8 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
     private productData: ShopProduct;
     public productForm: FormGroup;
 
+    public isSubmittingForm: boolean = false;
+
     constructor(
         private readonly authService: AuthService,
         private readonly notificationService: NotificationService,
@@ -92,7 +94,7 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
         const decimalRegex: RegExp = /^(?![.,])\d*[.,]?\d{0,2}$/;
 
         this.productForm = this.formBuilder.group({
-            name: this.formBuilder.control(isEmpty ? '' : this.productData.name, [Validators.required]),
+            name: this.formBuilder.control(isEmpty ? '' : this.productData.name, [Validators.required, Validators.maxLength(50)]),
             filename: this.formBuilder.control(isEmpty ? '' : this.productData.filename, [Validators.required]),
             category: this.formBuilder.control(isEmpty ? '' : this.productData.category.name, [Validators.required]),
             status: this.formBuilder.control(isEmpty ? ShopProductStatuses.AVAILABLE : this.productData.status.status, [Validators.required]),
@@ -104,15 +106,19 @@ export class ShopProductEditorComponent implements OnInit, OnDestroy {
     }
 
     public onSubmit(): void {
+        this.isSubmittingForm = true;
+
         const product = this.buildProduct();
 
         if(product.id === undefined) {
             this.shopApiService.createProduct(product).subscribe((res: ShopProduct) => {
+                this.isSubmittingForm = false;
                 this.notificationService.createNotification('Successfully created new shop product!');
                 this.router.navigate(['shop']);
             });
         } else {
             this.shopApiService.updateProduct(product).subscribe((res: ShopProduct) => {
+                this.isSubmittingForm = false;
                 this.notificationService.createNotification('Successfully updated existing shop product!');
                 this.router.navigate(['shop']);
             });

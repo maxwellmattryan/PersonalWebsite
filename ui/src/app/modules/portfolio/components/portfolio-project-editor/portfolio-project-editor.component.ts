@@ -33,6 +33,8 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
 
     isLoaded: boolean = false;
 
+    public isSubmittingForm: boolean = false;
+
     constructor(
         private authService: AuthService,
         private cdRef: ChangeDetectorRef,
@@ -109,7 +111,7 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
     private buildProjectForm(): void {
         if (this.projectData) {
             this.projectForm = this.formBuilder.group({
-                name: this.formBuilder.control(this.projectData.name, [Validators.required]),
+                name: this.formBuilder.control(this.projectData.name, [Validators.required, Validators.maxLength(50)]),
                 profiles: this.formBuilder.array(this.profileData, [this.validationService.hasMinElements()]),
                 tagline: this.formBuilder.control(this.projectData.tagline, [Validators.required]),
                 description: this.formBuilder.control(this.projectData.description, [Validators.required]),
@@ -119,7 +121,7 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
             });
         } else {
             this.projectForm = this.formBuilder.group({
-                name: this.formBuilder.control('', [Validators.required]),
+                name: this.formBuilder.control('', [Validators.required, Validators.maxLength(50)]),
                 profiles: this.formBuilder.array([], [this.validationService.hasMinElements()]),
                 tagline: this.formBuilder.control('', [Validators.required]),
                 description: this.formBuilder.control('', [Validators.required]),
@@ -131,15 +133,19 @@ export class PortfolioProjectEditorComponent implements OnDestroy, OnInit {
     }
 
     onSubmit(): void {
+        this.isSubmittingForm = true;
+
         const project = this.buildFormProjectData();
 
         if (project.id === undefined) {
             this.portfolioApiService.createProject(project).subscribe((res: PortfolioProject) => {
+                this.isSubmittingForm = false;
                 this.notificationService.createNotification(`Successfully created new portfolio project!`);
                 this.router.navigate([`projects/${ this.seoService.getCanonicalUrl(res.id, res.name) }`]);
             });
         } else {
             this.portfolioApiService.updateProject(project).subscribe((res: PortfolioProject) => {
+                this.isSubmittingForm = false;
                 this.notificationService.createNotification(`Successfully updated existing portfolio project!`);
                 this.router.navigate([`projects/${ this.seoService.getCanonicalUrl(res.id, res.name) }`]);
             });

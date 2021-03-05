@@ -95,11 +95,18 @@
 
         <button
                 aria-label='Submit profile'
-                [ngClass]="{'btn--inactive': !profileForm.valid}"
+                [ngClass]="{'btn-loading': isSubmittingForm, 'btn--inactive': !profileForm.valid}"
                 class='btn editor__form-btn  editor__form-btn--submit'
                 [disabled]='!profileForm.valid'
         >
-            Submit
+            <ng-container *ngIf='isSubmittingForm'>
+                <div class='btn-loader-container'>
+                    <div class='btn-loader'></div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf='!isSubmittingForm'>
+                Submit
+            </ng-container>
         </button>
     </form>
 </div>

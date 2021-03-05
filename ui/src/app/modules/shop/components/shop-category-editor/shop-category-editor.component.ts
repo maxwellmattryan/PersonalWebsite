@@ -22,6 +22,8 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
     private categoryData: ShopCategory;
     public categoryForm: FormGroup;
 
+    public isSubmittingForm: boolean = false;
+
     constructor(
         private readonly authService: AuthService,
         private readonly notificationService: NotificationService,
@@ -97,21 +99,25 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
         const isEmpty: boolean = !this.shopEditorService.hasCategory();
 
         this.categoryForm = this.formBuilder.group({
-            name: this.formBuilder.control(isEmpty ? '' : this.categoryData.name, [Validators.required]),
+            name: this.formBuilder.control(isEmpty ? '' : this.categoryData.name, [Validators.required, Validators.maxLength(50)]),
             products: this.formBuilder.array([], [])
         });
     }
 
     public onSubmit(): void {
+        this.isSubmittingForm = true;
+
         const category = this.buildCategory();
 
         if(category.id === undefined) {
             this.shopApiService.createCategory(category).subscribe((res: ShopCategory) => {
+                this.isSubmittingForm = false;
                 this.notificationService.createNotification('Successfully created shop category!');
                 this.router.navigate(['shop']);
             });
         } else {
             this.shopApiService.updateCategory(category).subscribe((res: ShopCategory) => {
+                this.isSubmittingForm = false;
                 this.notificationService.createNotification('Successfully updated existing shop category!');
                 this.router.navigate(['shop']);
             });

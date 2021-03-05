@@ -28,6 +28,8 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
 
     isLoaded: boolean = false;
 
+    public isSubmittingForm: boolean = false;
+
     constructor(
         private authService: AuthService,
         private blogApiService: BlogApiService,
@@ -116,7 +118,7 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
     private buildPostForm(): void {
         if(this.postData) {
             this.postForm = this.formBuilder.group({
-                title:      this.formBuilder.control(this.postData.title,                        [Validators.required]),
+                title:      this.formBuilder.control(this.postData.title,                        [Validators.required, Validators.maxLength(255)]),
                 subtitle:   this.formBuilder.control(this.postData.subtitle,                     [Validators.required]),
                 author:     this.formBuilder.control(this.buildAuthorName(this.postData.author), [Validators.required]),
                 status:     this.formBuilder.control(this.postData.status.status,                [Validators.required]),
@@ -127,7 +129,7 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
             });
         } else {
             this.postForm = this.formBuilder.group({
-                title:      this.formBuilder.control('',                [Validators.required]),
+                title:      this.formBuilder.control('',                [Validators.required, Validators.maxLength(255)]),
                 subtitle:   this.formBuilder.control('',                [Validators.required]),
                 author:     this.formBuilder.control('Matthew Maxwell', [Validators.required]),
                 status:     this.formBuilder.control('DRAFT',           [Validators.required]),
@@ -144,15 +146,19 @@ export class BlogPostEditorComponent implements OnDestroy, OnInit {
     }
 
     onSubmit(): void {
+        this.isSubmittingForm = true;
+
         const post = this.buildFormPostData();
 
         if(post.id === undefined) {
             this.blogApiService.createPost(post).subscribe((res: BlogPost) => {
+                this.isSubmittingForm = false;
                 this.notificationService.createNotification('Successfully created new post!');
                 this.router.navigate([`blog/posts/${this.seoService.getCanonicalUrl(res.id, res.title)}`]);
             });
         } else {
             this.blogApiService.updatePost(post).subscribe((res: BlogPost) => {
+                this.isSubmittingForm = false;
                 this.notificationService.createNotification('Successfully updated existing post!');
                 this.router.navigate([`blog/posts/${this.seoService.getCanonicalUrl(res.id, res.title)}`]);
             });

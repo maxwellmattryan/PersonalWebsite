@@ -20,6 +20,8 @@ export class BlogTopicEditorComponent implements OnInit, OnDestroy {
 
     isLoaded: boolean = false;
 
+    public isSubmittingForm: boolean = false;
+
     constructor(
         private authService: AuthService,
         private blogApiService: BlogApiService,
@@ -69,27 +71,31 @@ export class BlogTopicEditorComponent implements OnInit, OnDestroy {
     private buildTopicForm(): void {
         if(this.topicData) {
             this.topicForm = this.formBuilder.group({
-                name:        this.formBuilder.control(this.topicData.name,        [Validators.required]),
+                name:        this.formBuilder.control(this.topicData.name,        [Validators.required, Validators.maxLength(50)]),
                 description: this.formBuilder.control(this.topicData.description, [Validators.required]),
             });
         } else {
             this.topicForm = this.formBuilder.group({
-                name:        this.formBuilder.control('', [Validators.required]),
+                name:        this.formBuilder.control('', [Validators.required, Validators.maxLength(50)]),
                 description: this.formBuilder.control('', [Validators.required]),
             });
         }
     }
 
     onSubmit(): void {
+        this.isSubmittingForm = true;
+
         const topic = this.buildFormTopicData();
 
         if(topic.id === undefined) {
             this.blogApiService.createTopic(topic).subscribe((res: BlogTopic) => {
+                this.isSubmittingForm = false;
                 this.notificationService.createNotification('Successfully created new topic.');
                 this.router.navigate(['blog']);
             });
         } else {
             this.blogApiService.updateTopic(topic).subscribe((res: BlogTopic) => {
+                this.isSubmittingForm = false;
                 this.notificationService.createNotification('Successfully updated existing topic.');
                 this.router.navigate(['blog']);
             });

@@ -1,6 +1,11 @@
 <div class='section checkout' *ngIf='isLoaded; else loading'>
     <h1 class='checkout__header'>
-        Thanks for your purchase!
+        <ng-container *ngIf='order.amount > 0.0'>
+            Thanks for your purchase!
+        </ng-container>
+        <ng-container *ngIf='order.amount <= 0.0'>
+            Thanks for downloading!
+        </ng-container>
     </h1>
 
     <h3 class='checkout__order-number'>
