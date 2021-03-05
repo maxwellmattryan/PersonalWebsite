@@ -16,11 +16,8 @@ export class EntityService<T> {
 
     public createEntity(entityData: T, uniqueProperties: string[]): T {
         uniqueProperties.forEach(p => {
-            if(!entityData[p]) {
-                console.log(entityData);
-                console.log(p);
+            if(!entityData[p])
                 throw new InvalidEntityPropertyException();
-            }
         });
 
         const identifier: string = uniqueProperties.map(p => entityData[p]).join(' ');
