@@ -105,14 +105,19 @@ export class PortfolioProfileService extends EntityService<PortfolioProfile> {
         `);
     }
 
-    public async updateProfile(id: Id, profileData: PortfolioProfile): Promise<void | PortfolioProfile> {
+    public async updateProfile(id: Id, profileData: PortfolioProfile): Promise<PortfolioProfile> {
         // CAUTION: Make sure to activate profile if it was set in the editor and / or verify that at least one profile is always active
-        if(id == (await this.getProfileByStatus('ACTIVE')).id)
-            if(profileData.status.status === 'INACTIVE')
+        const activeProfile = await this.getProfileByStatus('ACTIVE');
+        if(id === activeProfile.id) {
+            if(profileData.status.status === 'INACTIVE') {
                 await this.resetProfileStatuses((await this.getProfileByStatus('INACTIVE')).id);
-        else
-            if(profileData.status.status === 'ACTIVE')
+            }
+        }
+        else {
+            if(profileData.status.status === 'ACTIVE') {
                 await this.resetProfileStatuses(id);
+            }
+        }
 
         await this.portfolioProfileTechnologyService.deleteTechnologies(id);
         await this.portfolioProfileTechnologyService.createTechnologies(profileData.technologies, id);
