@@ -17,6 +17,8 @@ GCP_PLATFORM=managed
 GCP_REGION=us-central1
 GCP_PROJECT_ID=mattmaxwell-304801
 GCP_VPC_CONNECTOR=mattmaxwell-api
+GCP_SERVICE_ACCOUNT=gcloud-api@mattmaxwell-304801.iam.gserviceaccount.com
+GCP_AUTH_KEY_FILE=./conf/gcloud/gcloud-api.json
 GCP_API_SERVICE=mattmaxwell-api
 GCP_UI_SERVICE=mattmaxwell-ui
 GCP_API_IMAGE_PATH="$GCP_HOSTNAME/$GCP_PROJECT_ID/$API_IMAGE"
@@ -63,16 +65,31 @@ if [ "$BRANCH" != "main" ];
 then
     echo -e "\t[✘] Branch is set to \"main\"\n"
     echo -e "To switch to the correct branch, please use:\n\n\tgit checkout main"
+
     exit 1;
 else
     echo -e "\t[✔] Branch is set to \"main\""
 fi
 
-CURRENT_GCP_PROJECT=$(gcloud config get-value project)
-if [ "$CURRENT_GCP_PROJECT" != "$GCP_PROJECT_ID" ];
+CURRENT_GCP_ACCOUNT=$(gcloud config list account --format "value(core.account)")
+if [ "$CURRENT_GCP_ACCOUNT" != "$GCP_SERVICE_ACCOUNT" ]
 then
-    echo -e "\n\t[✘] Cloud SDK's configuration is set for $GCP_PROJECT_ID\n"
+    echo -e "\t[✘] Cloud IAM service account is set to $GCP_SERVICE_ACCOUNT\n"
+    echo -e "To properly set the service account for this project, use:\n\n\tgcloud config set account $GCP_SERVICE_ACCOUNT"
+    echo -e "and"
+    echo -e "\tgcloud auth activate-service-account $GCP_SERVICE_ACCOUNT --key-file=$GCP_AUTH_KEY_FILE"
+
+    exit 1;
+else
+    echo -e "\t[✔] Cloud IAM service account is set to $GCP_SERVICE_ACCOUNT"
+fi
+
+CURRENT_GCP_PROJECT=$(gcloud config get-value project)
+if [ "$CURRENT_GCP_PROJECT" != "$GCP_PROJECT_ID" ]
+then
+    echo -e "\t[✘] Cloud SDK's configuration is set for $GCP_PROJECT_ID\n"
     echo -e "To properly configure the SDK for this project, use:\n\n\tgcloud config set project $GCP_PROJECT_ID"
+
     exit 1;
 else
     echo -e "\t[✔] Cloud SDK's configuration is set for $GCP_PROJECT_ID\n"
@@ -80,7 +97,8 @@ fi
 
 echo -e "[Success]: Pre-build checks passed!\n"
 
-if [ "$API_ACTION" = true ]; then
+if [ "$API_ACTION" = true ]
+then
     cd api/ || echo -e "\nERROR: API folder does not exist" | exit
 
     echo -e "($(expr $START)/$STEPS) Building local API image...\n"
@@ -109,7 +127,8 @@ if [ "$API_ACTION" = true ]; then
     cd ../
 fi
 
-if [ "$UI_ACTION" = true ]; then
+if [ "$UI_ACTION" = true ]
+then
     cd ui/ || echo -e "\nERROR: UI folder does not exist" | exit
 
     echo -e "($(expr $START)/$STEPS) Building local UI image...\n"

@@ -25,6 +25,11 @@ RUNNING_PID
 **/.env.**
 
 # My folders
-data
 conf
 design
+
+# Data
+data/admin
+data/**/backups
+data/**/*.md
+data/**/*.prod.sql
