@@ -9,10 +9,10 @@ convertsecs() {
 POSTGRES_PORT=5432
 POSTGRES_DB=mattmaxwell
 POSTGRES_PASSWORD=password
-POSTGRES_CONTAINER_NAME=mattmaxwell-db
+POSTGRES_CONTAINER_NAME=postgres
 
 REDIS_PORT=6379
-REDIS_CONTAINER_NAME=mattmaxwell-mailer-queue
+REDIS_CONTAINER_NAME=redis
 
 start_time=$(date +%s)
 
@@ -25,7 +25,7 @@ if [ ! "$(docker ps -q -f name=$POSTGRES_CONTAINER_NAME)" ]; then
     if [ "$(docker ps -aq -f status=exited -f name=$POSTGRES_CONTAINER_NAME)" ]; then
         docker rm $POSTGRES_CONTAINER_NAME
     fi
-    docker run -p $POSTGRES_PORT:$POSTGRES_PORT --name $POSTGRES_CONTAINER_NAME -e POSTGRES_USER="$POSTGRES_USER" -e POSTGRES_PASSWORD="$POSTGRES_PASSWORD" -e POSTGRES_DB="$POSTGRES_DB" -d postgres
+    docker run -p $POSTGRES_PORT:$POSTGRES_PORT --name $POSTGRES_CONTAINER_NAME -e POSTGRES_USER="$POSTGRES_USER" -e POSTGRES_PASSWORD="$POSTGRES_PASSWORD" -e POSTGRES_DB="$POSTGRES_DB" -d postgres:alpine
     echo -e "\t[✔]: Initiated PostgreSQL container named \"$POSTGRES_CONTAINER_NAME\" @ port $POSTGRES_PORT"
 else
     echo -e "\t[✔]: PostgreSQL container is already running"
@@ -35,7 +35,7 @@ if [ ! "$(docker ps -q -f name=$REDIS_CONTAINER_NAME)" ]; then
     if [ "$(docker ps -aq -f status=exited -f name=$REDIS_CONTAINER_NAME)" ]; then
         docker rm $REDIS_CONTAINER_NAME
     fi
-    docker run -p $REDIS_PORT:$REDIS_PORT --name $REDIS_CONTAINER_NAME -d redis
+    docker run -p $REDIS_PORT:$REDIS_PORT --name $REDIS_CONTAINER_NAME -d redis:alpine
     echo -e "\t[✔]: Initiated Redis container named \"$REDIS_CONTAINER_NAME\" @ port $REDIS_PORT\n"
 else
     echo -e "\t[✔]: Redis container is already running\n"
