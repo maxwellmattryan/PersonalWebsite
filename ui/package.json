@@ -6,9 +6,9 @@
     "private": true,
     "scripts": {
         "ng": "ng",
-        "start": "ng serve",
-        "start:prod": "serve dist -l $PORT -s",
-        "build:prod": "ng build --prod",
+        "start": "serve dist -l $PORT -s",
+        "start:dev": "ng serve",
+        "build": "ng build --prod",
         "build:dev": "ng build",
         "test": "ng test",
         "lint": "ng lint",
