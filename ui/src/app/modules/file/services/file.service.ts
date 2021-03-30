@@ -9,6 +9,10 @@ import { Observable } from 'rxjs';
 
 export type ImageFormat = 'png' | 'webp';
 
+export type FileResponse = {
+    [url: string]: string
+};
+
 @Injectable({
     providedIn: 'root'
 })
@@ -27,13 +31,13 @@ export class FileService extends ApiService {
         return `${this.assetsBucketPrefix}/${noExt}.${format}`;
     }
 
-    public uploadFile(formData: FormData, fileData: FileData): Observable<void> {
+    public uploadFile(formData: FormData, fileData: FileData): Observable<FileResponse> {
         const headers = this.contentTypeHeader('multipart/form-data');
 
         let params = new HttpParams();
-        params = params.set('folder', fileData.folder);
+        params = params.set('dir', fileData.folder);
 
-        return this.http.post<void>(
+        return this.http.post<FileResponse>(
             `${environment.API_URL}/files/upload`,
             formData,
             { headers: headers, params: params }
