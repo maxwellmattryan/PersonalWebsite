@@ -26,7 +26,9 @@ RUNNING_PID
 
 # My folders
 conf
-design
+design/blog
+design/seo
+design/store.md
 
 # Data
 data/admin

@@ -109,8 +109,12 @@
 }
 
 .navbar__toggle-btn {
+    align-items: center;
     background-color: $color-dark;
+    display: flex;
+    flex-direction: column;
     height: $header-height;
+    justify-content: center;
     width: $header-height;
 }
 

@@ -13,6 +13,8 @@ export type ImageFormat = 'png' | 'webp';
     providedIn: 'root'
 })
 export class FileService extends ApiService {
+    private assetsBucketPrefix: string = 'https://storage.googleapis.com/mattmaxwell-assets';
+
     constructor(http: HttpClient) {
         super(http);
     }
@@ -22,7 +24,7 @@ export class FileService extends ApiService {
     public getImageUri(relativeUri: string = '', format: ImageFormat): string {
         const noExt = relativeUri.match(/[^.]*/)[0];
 
-        return `${environment.API_URL}/files?uri=${noExt}.${format}`;
+        return `${this.assetsBucketPrefix}/${noExt}.${format}`;
     }
 
     public uploadFile(formData: FormData, fileData: FileData): Observable<void> {

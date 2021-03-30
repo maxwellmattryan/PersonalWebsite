@@ -98,6 +98,6 @@ export class FileUploadModalComponent extends ModalComponent<File> {
     }
 
     public filename(): string {
-        return this.file ? this.file.name : 'Select All'
+        return this.file ? this.file.name : 'Select File'
     };
 }
