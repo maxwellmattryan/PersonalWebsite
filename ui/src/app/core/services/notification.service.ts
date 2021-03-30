@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ObfuscationService } from '@ui/core/services/obfuscation.service';
 
-export type SnackBarAction = 'Email' | '';
+export type SnackBarAction = 'Email' | 'File' | '';
 
 @Injectable({
     providedIn: 'root'
@@ -23,7 +23,7 @@ export class NotificationService {
         return window.confirm(`Are you sure you want to delete this ${item}?`);
     }
 
-    createNotification(message: string, action: SnackBarAction = '', duration: number = 2400): void {
+    createNotification(message: string, action: SnackBarAction = '', duration: number = 2400, extra: string = ''): void {
         this.zone.run(() => {
             const ref = this.snackBar.open(message, action, {
                 duration: duration
@@ -36,6 +36,12 @@ export class NotificationService {
                 case 'Email':
                     ref.onAction().subscribe(() => {
                         this.obfuscationService.handleEmailClick();
+                    });
+                    break;
+
+                case 'File':
+                    ref.onAction().subscribe(() => {
+                        window.open(extra, '_blank');
                     });
                     break;
             }

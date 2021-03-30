@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { NotificationService } from '@ui/core/services';
+import { FileResponse } from '@ui/modules/file/services/file.service';
 
 import { FileService } from '../../services';
 
@@ -80,8 +81,8 @@ export class FileUploadModalComponent extends ModalComponent<File> {
         const formData = new FormData();
         formData.append('file', fileData.file, fileData.file.name);
 
-        this.fileService.uploadFile(formData, fileData).subscribe((res: void) => {
-            this.notificationService.createNotification('Successfully uploaded new file!');
+        this.fileService.uploadFile(formData, fileData).subscribe((res: FileResponse) => {
+            this.notificationService.createNotification('Successfully uploaded new file!', 'File', 2400, res.url);
             this.resetModal();
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);

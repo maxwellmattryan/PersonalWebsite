@@ -6,7 +6,6 @@ import * as Joi from '@hapi/joi';
 
 import { AuthModule } from '@api/core/auth/auth.module';
 import { DatabaseModule } from '@api/core/database/database.module';
-import { FileModule } from '@api/core/file/file.module';
 import { GCloudModule } from '@api/core/gcloud/gcloud.module';
 import { HttpModule } from '@api/core/http/http.module';
 import { UtilsModule } from '@api/core/utils/utils.module';
@@ -14,6 +13,7 @@ import { UtilsModule } from '@api/core/utils/utils.module';
 import { AdminModule } from '@api/modules/admin/admin.module';
 import { ApiModule } from '@api/modules/api/api.module';
 import { BlogModule } from '@api/modules/blog/blog.module';
+import { FileModule } from '@api/modules/file/file.module';
 import { PortfolioModule } from '@api/modules/portfolio/portfolio.module';
 import { ShopModule } from '@api/modules/shop/shop.module';
 import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
@@ -68,7 +68,6 @@ import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
 
         AuthModule,
         DatabaseModule,
-        FileModule,
         GCloudModule,
         HttpModule,
         UtilsModule,
@@ -76,6 +75,7 @@ import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
         AdminModule,
         ApiModule,
         BlogModule,
+        FileModule,
         PortfolioModule,
         ShopModule
     ],
