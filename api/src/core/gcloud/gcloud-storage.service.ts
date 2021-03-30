@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { Bucket, GetSignedUrlConfig, Storage } from '@google-cloud/storage';
+import { Bucket, DeleteFileResponse, GetSignedUrlConfig, Storage } from '@google-cloud/storage';
 
 type ApiStorageBucket = 'assets' | 'products';
 
@@ -53,10 +53,10 @@ export class GCloudStorageService {
 
     public uploadFile(file: Express.Multer.File, directory: string): string {
         const { originalname, buffer } = file;
-        const filePath: string = `${directory}/${originalname.replace(/ /g, '-')}`;
+        const uri: string = `${directory}/${originalname.replace(/ /g, '-')}`;
 
         const bucket = this.getBucket('assets');
-        const blob = bucket.file(filePath);
+        const blob = bucket.file(uri);
         const stream = blob.createWriteStream({
             gzip: true,
             resumable: false
@@ -71,6 +71,16 @@ export class GCloudStorageService {
             .end(buffer);
 
         return `${this.storageUrl}/${bucket.name}/${blob.name}`;
+    }
+
+    public deleteFile(uri: string): Promise<any> {
+        const bucket = this.getBucket('assets');
+        const blob = bucket.file(uri);
+
+        return blob.delete()
+            .catch((error) => {
+                throw new NotFoundException(error.errors[0].message);
+            });
     }
 
     private getBucket(bucketName: ApiStorageBucket): Bucket {

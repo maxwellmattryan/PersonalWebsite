@@ -51,17 +51,6 @@ export class FileController {
     public async deleteFile(@Query('uri') uri: string, @Req() request: Request): Promise<void> {
         if(!this.uriRegex.test(uri)) throw new InvalidFileUriException();
 
-        const fullUri: string = `files/${uri}`;
-        if(fs.existsSync(fullUri)) {
-            try {
-                fs.unlinkSync(fullUri);
-            } catch(err) {
-                throw new CannotDeleteFolderException();
-            }
-        }
-        else
-            throw new FileWasNotFoundException();
-
-        return;
+        await this.gCloudStorageService.deleteFile(uri);
     }
 }
