@@ -82,7 +82,7 @@ export class FileUploadModalComponent extends ModalComponent<File> {
         formData.append('file', fileData.file, fileData.file.name);
 
         this.fileService.uploadFile(formData, fileData).subscribe((res: FileResponse) => {
-            this.notificationService.createNotification('Successfully uploaded new file!', 'File', 2400, res.url);
+            this.notificationService.createNotification('Successfully uploaded new file!', 'file', 30000, res.url);
             this.resetModal();
         }, (error: HttpErrorResponse) => {
             this.notificationService.createNotification(error.error.message);
