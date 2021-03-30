@@ -48,7 +48,8 @@ import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
                 STRIPE_TAX_RATE_ID: Joi.string().required(),
 
                 GOOGLE_CLOUD_PROJECT: Joi.string().required(),
-                GCLOUD_STORAGE_BUCKET: Joi.string().required(),
+                GCLOUD_ASSETS_STORAGE_BUCKET: Joi.string().required(),
+                GCLOUD_PRODUCTS_STORAGE_BUCKET: Joi.string().required(),
                 GCLOUD_CREDENTIALS: Joi.string().required(),
 
                 MAILER_HOST: Joi.string().required(),

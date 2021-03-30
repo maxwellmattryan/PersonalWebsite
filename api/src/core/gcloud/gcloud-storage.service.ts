@@ -1,13 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { Bucket, File, GetSignedUrlConfig, GetSignedUrlResponse, Storage } from '@google-cloud/storage';
+import { Bucket, GetSignedUrlConfig, Storage } from '@google-cloud/storage';
+
+type ApiStorageBucket = 'assets' | 'products';
 
 @Injectable()
 export class GCloudStorageService {
     private readonly credentials: string;
     private readonly storage: Storage;
-    private readonly bucket: Bucket;
+
+    private readonly ApiStorageBuckets  = new Map<ApiStorageBucket, string>([
+        ['assets', this.configService.get('GCLOUD_ASSETS_STORAGE_BUCKET')],
+        ['products', this.configService.get('GCLOUD_PRODUCTS_STORAGE_BUCKET')]
+    ]);
 
     constructor(
         private readonly configService: ConfigService
@@ -16,19 +22,21 @@ export class GCloudStorageService {
         this.storage = new Storage({
             credentials: JSON.parse(this.credentials)
         });
-        this.bucket = this.storage.bucket(this.configService.get('GCLOUD_STORAGE_BUCKET'));
     }
 
-    public async getSignedUrl(filename: string): Promise<string> {
-        return (await this.bucket.file(filename).getSignedUrl(this.signedUrlOptions())).toString();
+    public async getSignedUrl(bucketName: ApiStorageBucket, filename: string): Promise<string> {
+        const bucket: Bucket = this.getBucket(bucketName);
+
+        return (await bucket.file(filename).getSignedUrl(this.signedUrlOptions())).toString();
     }
 
-    public async getSignedUrls(filenames: string[]): Promise<string[]> {
+    public async getSignedUrls(bucketname: ApiStorageBucket, filenames: string[]): Promise<string[]> {
+        const bucket: Bucket = this.getBucket(bucketname);
         const signedUrlOptions = this.signedUrlOptions();
 
         let signedUrls: string[] = [];
         for(const filename of filenames) {
-            const [signedUrl] = await this.bucket.file(filename).getSignedUrl(signedUrlOptions);
+            const [signedUrl] = await bucket.file(filename).getSignedUrl(signedUrlOptions);
             signedUrls.push(signedUrl);
         }
 
@@ -40,5 +48,11 @@ export class GCloudStorageService {
             action: 'read',
             expires: Date.now() + duration * 60 * 60 * 1000 // NOTE: h * m * s * ms
         }
+    }
+
+    public uploadFile() { }
+
+    private getBucket(bucketName: ApiStorageBucket): Bucket {
+        return this.storage.bucket(this.ApiStorageBuckets.get(bucketName));
     }
 }

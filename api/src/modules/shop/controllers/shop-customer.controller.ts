@@ -45,7 +45,7 @@ export class ShopCustomerController {
         if(!orders) throw new ShopOrdersWereNotFoundException();
 
         const productFilenames = orders.map(so => so.product.filename);
-        const signedUrls = await this.gCloudStorageService.getSignedUrls(productFilenames);
+        const signedUrls = await this.gCloudStorageService.getSignedUrls('products', productFilenames);
 
         await this.mailService.sendMultiDownloadEmail(customer, orders, signedUrls);
     }
