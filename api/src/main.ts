@@ -2,19 +2,16 @@ import { ClassSerializerInterceptor } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 
-import { join } from 'path';
-
 import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
 import * as helmet from 'helmet';
 
 import { AppModule } from '@api/app.module';
-import { HttpLoggingInterceptor } from '@api/core/http/http-logging.interceptor';
+import { ExtendedLogger } from '@api/core/utils/extended-logger';
 
 async function bootstrap() {
-    const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-        logger: ['log', 'error', 'warn'],
-    });
+    const app = await NestFactory.create<NestExpressApplication>(AppModule);
+    app.useLogger(app.get(ExtendedLogger));
 
     app.enableCors({
         origin: true,
@@ -22,18 +19,14 @@ async function bootstrap() {
         credentials: true
     });
 
-    app.use(helmet());
-
     app.use(cookieParser(process.env.JWT_SECRET));
 
-    app.useGlobalInterceptors(new HttpLoggingInterceptor());
     app.useGlobalInterceptors(new ClassSerializerInterceptor(
         app.get(Reflector)
     ));
 
     app.use(compression());
-
-    app.useStaticAssets(join(__dirname, '..', 'files'));
+    app.use(helmet());
 
     app.setGlobalPrefix('api');
 
