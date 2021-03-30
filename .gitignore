@@ -22,7 +22,7 @@ RUNNING_PID
 **/dist
 
 # Environment vars
-**/.env.**
+**/*.env
 
 # My folders
 conf
