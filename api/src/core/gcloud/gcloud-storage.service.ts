@@ -1,12 +1,17 @@
+import { ExtendedLogger } from '@api/core/utils/extended-logger';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { Bucket, DeleteFileResponse, GetSignedUrlConfig, Storage } from '@google-cloud/storage';
+import { Bucket, File, GetSignedUrlConfig, Storage } from '@google-cloud/storage';
+
+import internal from 'stream';
 
 type ApiStorageBucket = 'assets' | 'products';
 
 @Injectable()
 export class GCloudStorageService {
+    private readonly logger = new ExtendedLogger('GCloudStorageService');
+
     private readonly credentials: string;
     private readonly storage: Storage;
     private readonly storageUrl: string = 'https://storage.googleapis.com'
@@ -27,8 +32,13 @@ export class GCloudStorageService {
 
     public async getSignedUrl(bucketName: ApiStorageBucket, filename: string): Promise<string> {
         const bucket: Bucket = this.getBucket(bucketName);
+        const blob = bucket.file(filename);
 
-        return (await bucket.file(filename).getSignedUrl(this.signedUrlOptions())).toString();
+        const signedUrl = (await blob.getSignedUrl(this.signedUrlOptions())).toString();
+
+        this.logger.info(`Generated signed URL for resource: ${filename}`);
+
+        return signedUrl;
     }
 
     public async getSignedUrls(bucketname: ApiStorageBucket, filenames: string[]): Promise<string[]> {
@@ -40,6 +50,8 @@ export class GCloudStorageService {
             const [signedUrl] = await bucket.file(filename).getSignedUrl(signedUrlOptions);
             signedUrls.push(signedUrl);
         }
+
+        this.logger.info(`Generated ${signedUrls.length} signed URL(s) for resource(s): ${filenames.join(', ')}`);
 
         return signedUrls;
     }
@@ -55,9 +67,9 @@ export class GCloudStorageService {
         const { originalname, buffer } = file;
         const uri: string = `${directory}/${originalname.replace(/ /g, '-')}`;
 
-        const bucket = this.getBucket('assets');
-        const blob = bucket.file(uri);
-        const stream = blob.createWriteStream({
+        const bucket: Bucket = this.getBucket('assets');
+        const blob: File = bucket.file(uri);
+        const stream: internal.Writable = blob.createWriteStream({
             gzip: true,
             resumable: false
         });
@@ -70,14 +82,19 @@ export class GCloudStorageService {
             })
             .end(buffer);
 
+        this.logger.info(`Uploaded file of URI: ${directory}/${originalname}`);
+
         return `${this.storageUrl}/${bucket.name}/${blob.name}`;
     }
 
     public deleteFile(uri: string): Promise<any> {
-        const bucket = this.getBucket('assets');
-        const blob = bucket.file(uri);
+        const bucket: Bucket = this.getBucket('assets');
+        const blob: File = bucket.file(uri);
 
         return blob.delete()
+            .then(() => {
+                this.logger.info(`Deleted file of URI: ${blob.name}`)
+            })
             .catch((error) => {
                 throw new NotFoundException(error.errors[0].message);
             });
