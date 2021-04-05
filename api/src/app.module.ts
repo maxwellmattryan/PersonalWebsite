@@ -48,8 +48,10 @@ import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
                 MAILER_USER: Joi.string().required(),
                 MAILER_PASS: Joi.string().required(),
 
-                REDIS_URL: Joi.string().required(),
-                REDIS_TLS_URL: Joi.string().required(),
+                REDIS_HOST: Joi.string().required(),
+                REDIS_PORT: Joi.string().required(),
+                REDIS_PASS: Joi.string().required(),
+                REDIS_NAME: Joi.string().required(),
 
                 JWT_SECRET: Joi.string().required(),
                 JWT_EXPIRES_IN: Joi.string().required()

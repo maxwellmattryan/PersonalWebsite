@@ -43,10 +43,14 @@ MailModule = __decorate([
                 })
             }),
             bull_1.BullModule.registerQueue({
-                name: process.env.MAILER_QUEUE_NAME,
+                name: process.env.REDIS_NAME,
                 redis: {
-                    host: process.env.MAILER_QUEUE_HOST,
-                    port: Number(process.env.MAILER_QUEUE_PORT) || 6379
+                    host: process.env.REDIS_HOST,
+                    port: Number(process.env.REDIS_PORT) || 6379,
+                    password: process.env.REDIS_PASS,
+                    tls: {
+                        rejectUnauthorized: false
+                    }
                 }
             }),
             utils_module_1.UtilsModule

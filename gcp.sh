@@ -66,7 +66,7 @@ then
     echo -e "\t[✘] Branch is set to \"main\"\n"
     echo -e "To switch to the correct branch, please use:\n\n\tgit checkout main"
 
-    exit 1;
+#    exit 1;
 else
     echo -e "\t[✔] Branch is set to \"main\""
 fi
