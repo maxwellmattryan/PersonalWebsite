@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <style>
+        html, body {
+            font-family: arial, verdana, sans-serif;
+        }
+
+        .email__intro,
+        .email__first,
+        .email__last {
+            margin-bottom: 3rem;
+        }
+
+        .email__last {
+            margin-top: 3rem;
+        }
+
+        .email__link--download {
+            display: block;
+            margin: 1.2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class='email'>
+        <div class='email__body'>
+            <p class='email__intro'>Hello!</p>
+            
+            <p class='email__first'>
+                Please click on the filename(s) to begin downloading (the URL(s) are accessible for 12 hours). If you have any questions, take a look at the
+                <a class='email__link' href='https://mattmaxwell.dev/shop/faq' target='_blank'>
+                    shop's FAQ page
+                </a>
+                or feel free to send me an
+                <a class='email__link' href='mailto:maxwellmattryan@gmail.com' target='_blank'>
+                    email
+                </a>
+                if you just wanna chat!
+            </p>
+
+            {{#each orders}}
+                <a class='email__link email__link--download' href={{ this.[1] }} target='_blank'>
+                    {{ this.[0].product.filename }}
+                </a>
+                <br>
+            {{/each}}
+
+            <p class='email__last'>Thank you for your support and as always I hope you enjoy using my products. I would love to hear what you make with them in the future, so feel free to share. Cheers!</p>
+
+            <p class='email__outro'>Sincerely,</p>
+
+            <p class='email__outro'>Matthew</p>
+        </div>
+    </div>
+</body>
+</html>

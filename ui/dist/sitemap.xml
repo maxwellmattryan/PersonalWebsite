@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- CAUTION: The information in here needs to be changed every time that any content titles or names used in the uri changes,
+the information in here has to be consistent to have proper SEO optimization -->
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Static URLs -->
+    <url>
+        <loc>https://mattmaxwell.dev</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://mattmaxwell.dev/blog</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://mattmaxwell.dev/shop</loc>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://mattmaxwell.dev/shop/faq</loc>
+        <priority>0.3</priority>
+    </url>
+
+    <!-- Projects -->
+    <url>
+        <loc>https://mattmaxwell.dev/portfolio/projects/EPTXIK/rotor</loc>
+        <lastmod>2020-09-13T00:05:09.366202</lastmod>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://mattmaxwell.dev/portfolio/projects/AMIBQH/counterplay</loc>
+        <lastmod>2020-09-13T00:05:09.366202</lastmod>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://mattmaxwell.dev/portfolio/projects/WTWJN9/operation-home</loc>
+        <lastmod>2020-09-13T00:05:09.366202</lastmod>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://mattmaxwell.dev/portfolio/projects/45G83G/cozy-cat-cafe</loc>
+        <lastmod>2020-09-13T00:05:09.366202</lastmod>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://mattmaxwell.dev/portfolio/projects/LRJXCE/green-foot</loc>
+        <lastmod>2020-09-13T00:05:09.366202</lastmod>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://mattmaxwell.dev/portfolio/projects/B45U65/hellotangle</loc>
+        <lastmod>2021-03-30T00:05:09.366202</lastmod>
+        <priority>0.3</priority>
+    </url>
+
+    <!-- Blog posts -->
+    <url>
+        <loc>https://mattmaxwell.dev/blog/posts/Q1ANDW/json-web-token-jwt-authentication-with-nestjs</loc>
+        <lastmod>2020-09-14T00:51:32.093600</lastmod>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <loc>https://mattmaxwell.dev/blog/posts/465KY4/the-fundamental-concepts-of-audio-programming</loc>
+        <lastmod>2020-09-14T01:05:29.653050</lastmod>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <loc>https://mattmaxwell.dev/blog/posts/568221/creating-a-continuous-integration-ci-pipeline-for-juce-plugins</loc>
+        <lastmod>2020-10-15 02:27:25.907561</lastmod>
+        <priority>0.4</priority>
+    </url>
+</urlset>

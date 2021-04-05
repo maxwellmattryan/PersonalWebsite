@@ -18,9 +18,6 @@ RUNNING_PID
 # MacOS-related files
 **/.DS_Store
 
-# Build bundles / packages
-**/dist
-
 # Environment vars
 **/*.env
 
