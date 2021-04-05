@@ -9,9 +9,9 @@ convertsecs() {
 NODE_VERSION=15.10.0-alpine3.10
 
 API_PROJECT=mattmaxwell-api
-HEROKU_API_PROJECT_PATH="heroku/$API_PROJECT"
+HEROKU_API_IMAGE="heroku_$API_PROJECT:$(date +%s)"
 UI_PROJECT=mattmaxwell-ui
-HEROKU_UI_PROJECT_PATH="heroku/$UI_PROJECT"
+HEROKU_UI_IMAGE="heroku_$UI_PROJECT:$(date +%s)"
 DOMAIN=mattmaxwell.dev
 
 API_ACTION=false
@@ -72,20 +72,20 @@ then
     echo -e "[Success]: Built local API image!\n"
 
     echo -e "($(expr $START + 1)/$STEPS) Tagging local API image for Container Registry ..."
-    docker tag "$API_PROJECT" "$HEROKU_API_PROJECT_PATH"
+    docker tag "$API_PROJECT" "$HEROKU_API_IMAGE"
     echo -e "[Success]: Tagged local API image!\n"
 
     echo -e "($(expr $START + 2)/$STEPS) Pushing local API image to Container Registry ...\n"
-    heroku container:push "$HEROKU_API_PROJECT_PATH"
+    heroku container:push "$HEROKU_API_IMAGE" -a "$API_PROJECT"
     echo -e "[Success]: Pushed local API image!\n"
 
     echo -e "($(expr $START + 3)/$STEPS) Deploying to Heroku API project ...\n"
-    heroku container:release "$HEROKU_API_PROJECT_PATH"
+    heroku container:release "$HEROKU_API_IMAGE" -a "$API_PROJECT"
     echo -e "[Success]: Deployed app!\n"
 
     echo -e "($(expr $START + 4)/$STEPS) Removing API images from Docker...\n"
     docker rmi "$API_PROJECT:latest"
-    docker rmi "$HEROKU_API_PROJECT_PATH:latest"
+    docker rmi "$HEROKU_API_IMAGE:latest"
     echo -e "[Success]: Removed API image(s)!\n"
 
     START=7
@@ -102,20 +102,20 @@ then
     echo -e "[Success]: Built local UI image!\n"
 
     echo -e "($(expr $START + 1)/$STEPS) Tagging local UI image for Container Registry ..."
-    docker tag "$UI_PROJECT" "$HEROKU_UI_PROJECT_PATH"
+    docker tag "$UI_PROJECT" "$HEROKU_UI_IMAGE"
     echo -e "[Success]: Tagged local UI image!\n"
 
     echo -e "($(expr $START + 2)/$STEPS) Pushing local UI image to Container Registry ...\n"
-    heroku container:push "$HEROKU_UI_PROJECT_PATH"
+    heroku container:push "$HEROKU_UI_IMAGE" -a "$UI_PROJECT"
     echo -e "[Success]: Pushed local UI image!\n"
 
     echo -e "($(expr $START + 3)/$STEPS) Deploying to Heroku UI project ...\n"
-    heroku container:release "$HEROKU_UI_PROJECT_PATH"
+    heroku container:release "$HEROKU_UI_IMAGE" -a "$UI_PROJECT"
     echo -e "[Success]: Deployed app!\n"
 
     echo -e "($(expr $START + 4)/$STEPS) Removing UI images from Docker...\n"
     docker rmi "$UI_PROJECT:latest"
-    docker rmi "$HEROKU_UI_PROJECT_PATH:latest"
+    docker rmi "$HEROKU_UI_IMAGE:latest"
     echo -e "[Success]: Removed UI image(s)!\n"
 
     if [ "$STEPS" = 12 ]

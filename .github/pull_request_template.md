@@ -7,6 +7,7 @@
 - [ ] _sandbox_ - prototyping, designing, or testing new things
 - [ ] _spike_ - massive codebase changes, usually merging develop into main
 - [ ] _test_ - things related to tests
+- [ ] _update_ - making updates to something that like a refactor, do not change external behavior
 
 ## Summary
 
