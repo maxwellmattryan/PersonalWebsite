@@ -12,7 +12,6 @@ type ApiStorageBucket = 'assets' | 'products';
 export class GCloudStorageService {
     private readonly logger = new ExtendedLogger('GCloudStorageService');
 
-    private readonly credentials: string;
     private readonly storage: Storage;
     private readonly storageUrl: string = 'https://storage.googleapis.com'
 
@@ -24,9 +23,9 @@ export class GCloudStorageService {
     constructor(
         private readonly configService: ConfigService
     ) {
-        this.credentials = Buffer.from(this.configService.get<string>('GCLOUD_CREDENTIALS'), 'base64').toString();
+        const credentials = Buffer.from(this.configService.get<string>('GCLOUD_CREDENTIALS'), 'base64').toString();
         this.storage = new Storage({
-            credentials: JSON.parse(this.credentials)
+            credentials: JSON.parse(credentials)
         });
     }
 

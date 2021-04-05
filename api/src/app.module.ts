@@ -25,8 +25,8 @@ import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
         }),
         ConfigModule.forRoot({
             validationSchema: Joi.object({
-                JWT_SECRET: Joi.string().required(),
-                JWT_EXPIRES_IN: Joi.string().required(),
+                BASE_URL: Joi.string().required(),
+                API_URL: Joi.string().required(),
 
                 DB_HOST: Joi.string().required(),
                 DB_PORT: Joi.number().required(),
@@ -34,30 +34,25 @@ import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
                 DB_PASS: Joi.string().required(),
                 DB_NAME: Joi.string().required(),
 
-                DB_SOCKET_PATH: Joi.string(),
-                DB_SSL_CA: Joi.string(),
-                DB_SSL_CERT: Joi.string(),
-                DB_SSL_KEY: Joi.string(),
-
-                BASE_URL: Joi.string().required(),
-                API_URL: Joi.string().required(),
+                GCLOUD_CREDENTIALS: Joi.string().required(),
+                GCLOUD_ASSETS_STORAGE_BUCKET: Joi.string().required(),
+                GCLOUD_PRODUCTS_STORAGE_BUCKET: Joi.string().required(),
 
                 STRIPE_API_URL: Joi.string().required(),
                 STRIPE_SK: Joi.string().required(),
                 STRIPE_PK: Joi.string().required(),
                 STRIPE_TAX_RATE_ID: Joi.string().required(),
 
-                GCLOUD_CREDENTIALS: Joi.string().required(),
-                GCLOUD_ASSETS_STORAGE_BUCKET: Joi.string().required(),
-                GCLOUD_PRODUCTS_STORAGE_BUCKET: Joi.string().required(),
-
                 MAILER_HOST: Joi.string().required(),
                 MAILER_PORT: Joi.string().required(),
                 MAILER_USER: Joi.string().required(),
                 MAILER_PASS: Joi.string().required(),
-                MAILER_QUEUE_NAME: Joi.string().required(),
-                MAILER_QUEUE_HOST: Joi.string().required(),
-                MAILER_QUEUE_PORT: Joi.number().required()
+
+                REDIS_URL: Joi.string().required(),
+                REDIS_TLS_URL: Joi.string().required(),
+
+                JWT_SECRET: Joi.string().required(),
+                JWT_EXPIRES_IN: Joi.string().required()
             })
         }),
         ThrottlerModule.forRoot({
