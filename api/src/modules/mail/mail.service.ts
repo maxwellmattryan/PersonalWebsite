@@ -9,7 +9,7 @@ import { ShopOrder } from '@api/modules/shop/entities/shop-order.entity';
 @Injectable()
 export class MailService {
     constructor(
-        @InjectQueue(process.env.MAILER_QUEUE_NAME)
+        @InjectQueue(process.env.REDIS_NAME)
         private mailQueue: Queue
     ) { }
 
