@@ -37,7 +37,11 @@ import { MailService } from './mail.service';
             name: process.env.MAILER_QUEUE_NAME,
             redis: {
                 host: process.env.MAILER_QUEUE_HOST,
-                port: Number(process.env.MAILER_QUEUE_PORT) || 6379
+                port: Number(process.env.MAILER_QUEUE_PORT) || 6379,
+                password: process.env.MAILER_QUEUE_PASS,
+                tls: {
+                    rejectUnauthorized: false
+                }
             }
         }),
         UtilsModule

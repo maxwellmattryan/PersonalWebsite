@@ -26,7 +26,11 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
                     username: configService.get('DB_USER'),
                     password: configService.get('DB_PASS'),
                     database: configService.get('DB_NAME'),
-                    extra: extraOptions,
+                    extra: {
+                        ssl: {
+                            rejectUnauthorized: false
+                        }
+                    },
                     entities: [__dirname + '/../../modules/**/*.entity{.ts,.js}'],
                     namingStrategy: new SnakeNamingStrategy(),
                     synchronize: true
