@@ -51,8 +51,10 @@ AppModule = __decorate([
                     MAILER_PORT: Joi.string().required(),
                     MAILER_USER: Joi.string().required(),
                     MAILER_PASS: Joi.string().required(),
-                    REDIS_URL: Joi.string().required(),
-                    REDIS_NAME: Joi.string().required(),
+                    MAILER_QUEUE_NAME: Joi.string().required(),
+                    MAILER_QUEUE_HOST: Joi.string().required(),
+                    MAILER_QUEUE_PORT: Joi.number().required(),
+                    MAILER_QUEUE_PASS: Joi.string().required(),
                     JWT_SECRET: Joi.string().required(),
                     JWT_EXPIRES_IN: Joi.string().required()
                 })

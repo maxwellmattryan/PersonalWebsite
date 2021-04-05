@@ -76,17 +76,17 @@ if [ "$API_ACTION" = true ]
 then
     cd api/ || echo -e "\nERROR: API folder does not exist" | exit
 
-    echo -e "Building source code for API ..."
+    echo -e "($(expr $START)/$STEPS) Building source code for API ..."
     npm run build
     echo -e "[Success]: Built API source code!\n"
 
-    echo -e "($(expr $START)/$STEPS) Tagging local API image for Container Registry ..."
+    echo -e "($(expr $START + 1)/$STEPS) Tagging local API image for Container Registry ..."
     git commit --allow-empty -m "BUILD: $HEROKU_API_IMAGE"
     echo -e "[Success]: Tagged local API image!\n"
 
     cd ../
 
-    echo -e "($(expr $START + 1)/$STEPS) Pushing local API image to Container Registry ...\n"
+    echo -e "($(expr $START + 2)/$STEPS) Pushing local API image to Container Registry ...\n"
     git subtree push --prefix api heroku-api main
     echo -e "[Success]: Pushed local API image!\n"
 
@@ -97,17 +97,17 @@ if [ "$UI_ACTION" = true ]
 then
     cd ui/ || echo -e "\nERROR: UI folder does not exist" | exit
 
-    echo -e "Building source code for UI ..."
+    echo -e "($(expr $START)/$STEPS) Building source code for UI ..."
     npm run build
     echo -e "[Success]: Built UI source code!\n"
 
-    echo -e "($(expr $START)/$STEPS) Tagging local UI image for Container Registry ..."
+    echo -e "($(expr $START + 1)/$STEPS) Tagging local UI image for Container Registry ..."
     git commit --allow-empty -m "BUILD: $HEROKU_UI_IMAGE"
     echo -e "[Success]: Tagged local API image!\n"
 
     cd ../
 
-    echo -e "($(expr $START + 1)/$STEPS) Pushing local UI image to Container Registry ...\n"
+    echo -e "($(expr $START + 2)/$STEPS) Pushing local UI image to Container Registry ...\n"
     git subtree push --prefix ui heroku-ui main
     echo -e "[Success]: Pushed local UI image!\n"
 

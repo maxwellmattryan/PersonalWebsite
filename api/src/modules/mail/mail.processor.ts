@@ -15,7 +15,7 @@ import {
     FailedToSendOrderConfirmationEmailException
 } from './mail.exception';
 
-@Processor(process.env.REDIS_NAME)
+@Processor(process.env.MAILER_QUEUE_NAME)
 export class MailProcessor {
     private readonly logger = new ExtendedLogger(this.constructor.name)
 

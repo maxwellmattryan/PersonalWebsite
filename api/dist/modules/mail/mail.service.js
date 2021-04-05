@@ -32,7 +32,7 @@ let MailService = class MailService {
 };
 MailService = __decorate([
     common_1.Injectable(),
-    __param(0, bull_1.InjectQueue(process.env.REDIS_NAME)),
+    __param(0, bull_1.InjectQueue(process.env.MAILER_QUEUE_NAME)),
     __metadata("design:paramtypes", [Object])
 ], MailService);
 exports.MailService = MailService;

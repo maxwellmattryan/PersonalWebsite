@@ -98,7 +98,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], MailProcessor.prototype, "sendOrderConfirmationEmail", null);
 MailProcessor = __decorate([
-    bull_1.Processor(process.env.REDIS_NAME),
+    bull_1.Processor(process.env.MAILER_QUEUE_NAME),
     __metadata("design:paramtypes", [mailer_1.MailerService,
         utils_service_1.UtilsService])
 ], MailProcessor);

@@ -33,11 +33,16 @@ import { MailService } from './mail.service';
                 }
             })
         }),
-        BullModule.registerQueueAsync({
-            name: process.env.REDIS_NAME,
-            useFactory: () => ({
-                redis: process.env.REDIS_URL
-            })
+        BullModule.registerQueue({
+            name: process.env.MAILER_QUEUE_NAME,
+            redis: {
+                host: process.env.MAILER_QUEUE_HOST,
+                port: Number(process.env.MAILER_QUEUE_PORT) || 6379,
+                password: process.env.MAILER_QUEUE_PASS,
+                tls: {
+                    rejectUnauthorized: false
+                }
+            }
         }),
         UtilsModule
     ],
