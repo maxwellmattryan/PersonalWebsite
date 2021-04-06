@@ -79,7 +79,7 @@ then
 
     exit 1;
 else
-    echo -e "\t[✔] Cloud SDK's configuration is set for $GCP_PROJECT_ID\n"
+    echo -e "\t[✔] Cloud SDK's configuration is set for $GCP_PROJECT_ID"
 fi
 
 CURRENT_GCP_ACCOUNT=$(gcloud config list account --format "value(core.account)")
@@ -92,7 +92,7 @@ then
 
     exit 1;
 else
-    echo -e "\t[✔] Cloud IAM service account is set to $GCP_SERVICE_ACCOUNT"
+    echo -e "\t[✔] Cloud IAM service account is set to $GCP_SERVICE_ACCOUNT\n"
 fi
 
 echo -e "[Success]: Pre-build checks passed!\n"
