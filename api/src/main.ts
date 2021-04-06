@@ -14,8 +14,8 @@ async function bootstrap() {
     app.useLogger(app.get(ExtendedLogger));
 
     app.enableCors({
-        origin: [/localhost/, /mattmaxwell\.dev/],
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        origin: [/localhost$/, /mattmaxwell\.dev$/],
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         credentials: true
     });
 
