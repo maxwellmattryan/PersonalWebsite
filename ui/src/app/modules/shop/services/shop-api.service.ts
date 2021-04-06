@@ -97,7 +97,7 @@ export class ShopApiService extends ApiService {
 
         return this.http.post<void>(
             `${environment.API_URL}/shop/customers/help`,
-            { ...customerData },
+            customerData,
             { headers }
         );
     }

@@ -51,7 +51,7 @@ import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
                 MAILER_QUEUE_NAME: Joi.string().required(),
                 MAILER_QUEUE_HOST: Joi.string().required(),
                 MAILER_QUEUE_PORT: Joi.number().required(),
-                MAILER_QUEUE_PASS: Joi.string().required(),
+                MAILER_QUEUE_PASS: Joi.string(),
 
                 JWT_SECRET: Joi.string().required(),
                 JWT_EXPIRES_IN: Joi.string().required()

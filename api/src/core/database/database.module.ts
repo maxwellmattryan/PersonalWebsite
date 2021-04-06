@@ -10,14 +10,8 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
             imports: [ConfigModule],
             inject: [ConfigService],
             useFactory: (configService: ConfigService) => {
-                const socketPath = configService.get('DB_SOCKET_PATH');
-                const sslOptions = socketPath ? {
-                    rejectUnauthorized: false,
-                    ca: Buffer.from(process.env.DB_SSL_CA, 'base64').toString('ascii'),
-                    cert: Buffer.from(process.env.DB_SSL_CERT, 'base64').toString('ascii'),
-                    key: Buffer.from(process.env.DB_SSL_KEY, 'base64').toString('ascii'),
-                } : { };
-                const extraOptions = socketPath ? { socketPath: socketPath, ssl: sslOptions } : { };
+                const isLocal: boolean = Boolean(configService.get('DB_HOST') === 'localhost');
+                const extraOptions = isLocal ? { } : { ssl: { rejectUnauthorized: false }};
 
                 return ({
                     type: 'postgres',
@@ -26,11 +20,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
                     username: configService.get('DB_USER'),
                     password: configService.get('DB_PASS'),
                     database: configService.get('DB_NAME'),
-                    extra: {
-                        ssl: {
-                            rejectUnauthorized: false
-                        }
-                    },
+                    extra: extraOptions,
                     entities: [__dirname + '/../../modules/**/*.entity{.ts,.js}'],
                     namingStrategy: new SnakeNamingStrategy(),
                     synchronize: true

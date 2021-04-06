@@ -19,7 +19,7 @@ export class AuthController {
     async register(
         @Body() adminData: Admin
     ): Promise<Admin> {
-        // return await this.authService.registerAdmin(adminData);
+        return await this.authService.registerAdmin(adminData);
         throw new NotAllowedToRegisterException();
     }
 
