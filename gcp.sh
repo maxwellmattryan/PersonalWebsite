@@ -102,7 +102,7 @@ then
     cd api/ || echo -e "\nERROR: API folder does not exist" | exit
 
     echo -e "($(expr $START)/$STEPS) Building local API image...\n"
-    docker build . --tag "$API_IMAGE"
+    docker build . --no-cache --tag "$API_IMAGE"
     echo -e "[Success]: Built local API image!\n"
 
     echo -e "($(expr $START + 1)/$STEPS) Tagging local API image for Container Registry..."
@@ -132,7 +132,7 @@ then
     cd ui/ || echo -e "\nERROR: UI folder does not exist" | exit
 
     echo -e "($(expr $START)/$STEPS) Building local UI image...\n"
-    docker build . --tag "$UI_IMAGE"
+    docker build . --no-cache --tag "$UI_IMAGE"
     echo -e "[Success]: Built local UI image!\n"
 
     echo -e "($(expr $START + 1)/$STEPS) Tagging local UI image for Container Registry..."

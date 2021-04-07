@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 @Injectable({
     providedIn: 'root'
 })
-export class AuthInterceptorService implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
     constructor(
         private router: Router,
         private authService: AuthService,
@@ -19,8 +19,6 @@ export class AuthInterceptorService implements HttpInterceptor {
     ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        req = req.clone({ withCredentials: true });
-
         return next.handle(req).pipe(catchError(err => this.handleAuthError(err)));
     }
 

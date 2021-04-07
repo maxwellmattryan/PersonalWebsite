@@ -8,7 +8,7 @@ import { NotificationService } from '../services';
 @Injectable({
     providedIn: 'root'
 })
-export class HttpErrorInterceptorService implements HttpInterceptor {
+export class HttpErrorInterceptor implements HttpInterceptor {
     constructor(
         private notificationService: NotificationService
     ) { }
