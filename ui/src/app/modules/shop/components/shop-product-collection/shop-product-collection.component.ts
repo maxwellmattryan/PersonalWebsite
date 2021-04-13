@@ -87,7 +87,7 @@ export class ShopProductCollectionComponent implements OnInit {
             this.showDialog();
         } else {
             this.isStartingCheckout = true;
-            this.shopCheckoutService.goToCheckout(productData).subscribe((res: any) => {
+            this.shopCheckoutService.goToCheckout(productData.id).subscribe((res: any) => {
                 this.isStartingCheckout = false;
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);

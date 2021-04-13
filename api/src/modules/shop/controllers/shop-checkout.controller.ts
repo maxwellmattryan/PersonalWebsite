@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpService, HttpStatus, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpService, HttpStatus, Post, Query } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import { GCloudStorageService } from '@api/core/gcloud/gcloud-storage.service';
@@ -11,8 +11,10 @@ import { ShopProduct } from "../entities/shop-product.entity";
 
 import { ShopCheckoutService } from '../services/shop-checkout.service';
 import { ShopOrderService } from '../services/shop-order.service';
+import { ShopProductService } from '@api/modules/shop/services/shop-product.service';
 
 import { InvalidCheckoutSessionException } from '../exceptions/shop-checkout.exception';
+import { ShopProductWasNotFoundException } from '@api/modules/shop/exceptions/shop-product.exception';
 
 @Controller('shop/checkout')
 export class ShopCheckoutController {
@@ -22,19 +24,23 @@ export class ShopCheckoutController {
         private readonly httpService: HttpService,
         private readonly mailService: MailService,
         private readonly shopCheckoutService: ShopCheckoutService,
-        private readonly shopOrderService: ShopOrderService
+        private readonly shopOrderService: ShopOrderService,
+        private readonly shopProductService: ShopProductService
     ) { }
 
-    @Post('init')
-    @HttpCode(HttpStatus.CREATED)
+    @Get('init')
+    @HttpCode(HttpStatus.OK)
     public async createCheckoutSession(
-        @Body() productData: ShopProduct
+        @Query('productId') productId: Id
     ): Promise<{id: string}> {
-        return this.shopCheckoutService.getCheckoutSessionId(productData);
+        const product: ShopProduct = await this.shopProductService.getProduct(productId);
+        if(!product) throw new ShopProductWasNotFoundException();
+
+        return this.shopCheckoutService.getCheckoutSessionId(product);
     }
 
     @Post('complete')
-    @HttpCode(HttpStatus.OK)
+    @HttpCode(HttpStatus.CREATED)
     public async completeCheckoutSession(
         @Query('isFreeProduct') isFreeProduct: boolean,
         @Query('productId') productId: Id,

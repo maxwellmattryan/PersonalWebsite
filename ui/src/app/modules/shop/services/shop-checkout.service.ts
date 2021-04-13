@@ -23,21 +23,21 @@ export class ShopCheckoutService extends ApiService {
 
     stripe$ = from(loadStripe(environment.STRIPE_PK));
 
-    goToCheckout(productData: ShopProduct) {
-        return this.getSession(productData).pipe(
+    goToCheckout(productId: Id) {
+        return this.getSession(productId).pipe(
             mergeMap((sessionId: string) =>
                 this.redirectToCheckout(sessionId)
             )
         );
     }
 
-    getSession(productData: ShopProduct): Observable<string> {
-        const headers = this.contentTypeHeader();
+    getSession(productId: Id): Observable<string> {
+        let params = new HttpParams();
+        params = params.set('productId', <string>productId);
 
-        return this.http.post<{id: string}>(
+        return this.http.get<{id: string}>(
             `${environment.API_URL}/shop/checkout/init`,
-            productData,
-            { headers }
+            { params: params }
         ).pipe(map(res => res.id));
     }
 
