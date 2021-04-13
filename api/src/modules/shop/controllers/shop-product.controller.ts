@@ -1,4 +1,16 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    HttpCode,
+    HttpStatus,
+    Param,
+    Post,
+    Put,
+    Query,
+    UseGuards
+} from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 import { Id } from '@api/core/database/entity.service';
@@ -13,8 +25,8 @@ export class ShopProductController {
         private readonly shopProductService: ShopProductService
     ) { }
 
-    @Get('')
-    @HttpCode(200)
+    @Get()
+    @HttpCode(HttpStatus.OK)
     public async getProducts(
         @Query('statusId') statusId: Id,
         @Query('categoryId') categoryId: Id
@@ -40,8 +52,8 @@ export class ShopProductController {
         return products;
     }
 
-    @Post('')
-    @HttpCode(201)
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
     @UseGuards(JwtAuthGuard)
     public async createProduct(
         @Body() productData: ShopProduct
@@ -50,7 +62,7 @@ export class ShopProductController {
     }
 
     @Get(':id')
-    @HttpCode(200)
+    @HttpCode(HttpStatus.OK)
     public async getProduct(
         @Param('id') id: Id,
     ): Promise<ShopProduct> {
@@ -61,7 +73,7 @@ export class ShopProductController {
     }
 
     @Put(':id')
-    @HttpCode(200)
+    @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
     public async updateProduct(
         @Param('id') id: Id,
@@ -74,7 +86,7 @@ export class ShopProductController {
     }
 
     @Delete(':id')
-    @HttpCode(204)
+    @HttpCode(HttpStatus.NO_CONTENT)
     @UseGuards(JwtAuthGuard)
     public async deleteProduct(
         @Param('id') id: Id,

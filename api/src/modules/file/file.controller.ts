@@ -3,7 +3,7 @@ import {
     Controller,
     Delete,
     Get,
-    HttpCode,
+    HttpCode, HttpStatus,
     Post,
     Query,
     Req,
@@ -32,7 +32,7 @@ export class FileController {
     constructor(private readonly gCloudStorageService: GCloudStorageService) { }
 
     @Post('upload')
-    @HttpCode(201)
+    @HttpCode(HttpStatus.CREATED)
     @UseGuards(JwtAuthGuard)
     @UseInterceptors(FileInterceptor('file'))
     public async uploadFile(
@@ -46,7 +46,7 @@ export class FileController {
     }
 
     @Delete('delete')
-    @HttpCode(204)
+    @HttpCode(HttpStatus.NO_CONTENT)
     @UseGuards(JwtAuthGuard)
     public async deleteFile(@Query('uri') uri: string, @Req() request: Request): Promise<void> {
         if(!this.uriRegex.test(uri)) throw new InvalidFileUriException();

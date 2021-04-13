@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 import { Id } from '@api/core/database/entity.service';
@@ -13,8 +13,8 @@ export class ShopCategoryController {
         private readonly shopCategoryService: ShopCategoryService
     ) { }
 
-    @Get('')
-    @HttpCode(200)
+    @Get()
+    @HttpCode(HttpStatus.OK)
     public async getCategories(): Promise<ShopCategory[]> {
         const categories = await this.shopCategoryService.getCategories();
         if(categories.length === 0) throw new ShopCategoriesWereNotFoundException();
@@ -22,8 +22,8 @@ export class ShopCategoryController {
         return categories;
     }
 
-    @Post('')
-    @HttpCode(201)
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
     @UseGuards(JwtAuthGuard)
     public async createCategory(
         @Body() categoryData: ShopCategory
@@ -32,7 +32,7 @@ export class ShopCategoryController {
     }
 
     @Get(':id')
-    @HttpCode(200)
+    @HttpCode(HttpStatus.OK)
     public async getCategory(
         @Param('id') id: Id
     ): Promise<ShopCategory> {
@@ -43,7 +43,7 @@ export class ShopCategoryController {
     }
 
     @Put(':id')
-    @HttpCode(200)
+    @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
     public async updateCategory(
         @Param('id') id: Id,
@@ -56,7 +56,7 @@ export class ShopCategoryController {
     }
 
     @Delete(':id')
-    @HttpCode(204)
+    @HttpCode(HttpStatus.NO_CONTENT)
     @UseGuards(JwtAuthGuard)
     public async deleteCategory(
         @Param('id') id: Id

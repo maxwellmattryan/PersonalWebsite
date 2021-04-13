@@ -1,3 +1,4 @@
+import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
 import { CacheInterceptor, CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
@@ -16,7 +17,6 @@ import { BlogModule } from '@api/modules/blog/blog.module';
 import { FileModule } from '@api/modules/file/file.module';
 import { PortfolioModule } from '@api/modules/portfolio/portfolio.module';
 import { ShopModule } from '@api/modules/shop/shop.module';
-import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
 
 @Module({
     imports: [
@@ -75,8 +75,6 @@ import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
         PortfolioModule,
         ShopModule
     ],
-    exports: [],
-    controllers: [],
     providers: [
         {
             provide: APP_INTERCEPTOR,

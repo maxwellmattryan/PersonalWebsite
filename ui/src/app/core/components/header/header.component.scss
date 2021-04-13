@@ -194,6 +194,11 @@
     text-align: right;
 }
 
+.navbar__link-item,
+.sidebar__link-item {
+    font-weight: 500;
+}
+
 @media only screen and (min-width: 768px) {
     .navbar__logo-icon:hover {
         background-color: $color-primary;

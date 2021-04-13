@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpService, Post, Query } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpService, HttpStatus, Post, Query } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import { GCloudStorageService } from '@api/core/gcloud/gcloud-storage.service';
@@ -26,7 +26,7 @@ export class ShopCheckoutController {
     ) { }
 
     @Post('init')
-    @HttpCode(201)
+    @HttpCode(HttpStatus.CREATED)
     public async createCheckoutSession(
         @Body() productData: ShopProduct
     ): Promise<{id: string}> {
@@ -34,7 +34,7 @@ export class ShopCheckoutController {
     }
 
     @Post('complete')
-    @HttpCode(200)
+    @HttpCode(HttpStatus.OK)
     public async completeCheckoutSession(
         @Query('isFreeProduct') isFreeProduct: boolean,
         @Query('productId') productId: Id,

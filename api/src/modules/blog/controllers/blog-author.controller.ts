@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
@@ -12,8 +12,8 @@ export class BlogAuthorController {
         private readonly blogAuthorService: BlogAuthorService
     ) { }
 
-    @Get('')
-    @HttpCode(200)
+    @Get()
+    @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
     async getAuthors(): Promise<BlogAuthor[]> {
         const authors = await this.blogAuthorService.getAuthors();

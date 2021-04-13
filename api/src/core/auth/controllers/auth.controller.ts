@@ -1,4 +1,4 @@
-import { Controller, HttpCode, Post, UseGuards, Body, Res } from '@nestjs/common';
+import { Controller, HttpCode, Post, UseGuards, Body, Res, HttpStatus } from '@nestjs/common';
 
 import { Response } from 'express';
 
@@ -15,7 +15,7 @@ export class AuthController {
     ) { }
 
     @Post('register')
-    @HttpCode(201)
+    @HttpCode(HttpStatus.CREATED)
     async register(
         @Body() adminData: Admin
     ): Promise<Admin> {
@@ -24,7 +24,7 @@ export class AuthController {
     }
 
     @Post('login')
-    @HttpCode(200)
+    @HttpCode(HttpStatus.OK)
     async login(
         @Body() adminData: Admin,
         @Res() response: Response
@@ -39,7 +39,7 @@ export class AuthController {
     }
 
     @Post('logout')
-    @HttpCode(204)
+    @HttpCode(HttpStatus.NO_CONTENT)
     @UseGuards(JwtAuthGuard)
     async logout(
         @Res() response: Response

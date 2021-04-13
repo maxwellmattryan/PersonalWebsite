@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 
 import { GCloudStorageService } from '@api/core/gcloud/gcloud-storage.service';
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
@@ -23,8 +23,8 @@ export class ShopCustomerController {
         private readonly shopOrderService: ShopOrderService
     ) { }
 
-    @Post('')
-    @HttpCode(201)
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
     @UseGuards(JwtAuthGuard)
     public async createCustomer(
         @Body() customerData: ShopCustomer
@@ -33,7 +33,7 @@ export class ShopCustomerController {
     }
 
     @Post('help')
-    @HttpCode(201)
+    @HttpCode(HttpStatus.CREATED)
     public async helpCustomer(
         @Body() customerData: ShopCustomer
     ): Promise<void> {

@@ -1,4 +1,4 @@
-import { Controller, HttpCode, Post, Req, UseGuards } from '@nestjs/common';
+import { Controller, HttpCode, HttpStatus, Post, Req, UseGuards } from '@nestjs/common';
 
 import { Request } from 'express';
 
@@ -13,8 +13,8 @@ export class ShopOrderController {
         private readonly shopOrderService: ShopOrderService
     ) { }
 
-    @Post('')
-    @HttpCode(201)
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
     @UseGuards(JwtAuthGuard)
     public async createOrder(@Req() request: Request): Promise<ShopOrder> {
         return this.shopOrderService.createOrder(request.body);

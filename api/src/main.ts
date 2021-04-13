@@ -14,12 +14,9 @@ async function bootstrap() {
     app.useLogger(app.get(ExtendedLogger));
 
     app.enableCors({
-        origin: [/localhost$/, /([a-z0-9]+[.])*mattmaxwell.dev$/],
+        origin: true,
         credentials: true,
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'BATCH'],
-        allowedHeaders: ['X-Requested-With', 'Content-Type', 'Authorization'],
-        preflightContinue: true,
-        optionsSuccessStatus: 200
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'BATCH', 'OPTIONS']
     });
 
     app.use(cookieParser(process.env.JWT_SECRET));

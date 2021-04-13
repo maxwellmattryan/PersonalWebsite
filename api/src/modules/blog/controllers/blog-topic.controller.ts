@@ -7,7 +7,7 @@ import {
     Param,
     Delete,
     Get,
-    Body,
+    Body, HttpStatus,
 } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
@@ -23,8 +23,8 @@ export class BlogTopicController {
         private readonly blogTopicService: BlogTopicService
     ) { }
 
-    @Get('')
-    @HttpCode(200)
+    @Get()
+    @HttpCode(HttpStatus.OK)
     async getTopics(): Promise<BlogTopic[]> {
         const topics = await this.blogTopicService.getTopics();
         if(topics.length == 0) throw new BlogTopicsWereNotFoundException();
@@ -32,8 +32,8 @@ export class BlogTopicController {
         return topics;
     }
 
-    @Post('')
-    @HttpCode(201)
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
     @UseGuards(JwtAuthGuard)
     async createTopic(
         @Body() topicData: BlogTopic
@@ -53,7 +53,7 @@ export class BlogTopicController {
     }
 
     @Put(':id')
-    @HttpCode(200)
+    @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
     async updateTopic(
         @Param('id') id: Id,
@@ -66,7 +66,7 @@ export class BlogTopicController {
     }
 
     @Delete(':id')
-    @HttpCode(204)
+    @HttpCode(HttpStatus.NO_CONTENT)
     @UseGuards(JwtAuthGuard)
     async deleteTopic(
         @Param('id') id: Id

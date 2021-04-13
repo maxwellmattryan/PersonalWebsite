@@ -8,7 +8,7 @@ import {
     UseGuards,
     Post,
     Delete,
-    Body
+    Body, HttpStatus
 } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
@@ -28,8 +28,8 @@ export class BlogPostController {
         private readonly blogPostService: BlogPostService
     ) { }
 
-    @Get('')
-    @HttpCode(200)
+    @Get()
+    @HttpCode(HttpStatus.OK)
     async getPosts(
         @Query('topicId') topicId: Id,
         @Query('isPublished') isPublished: string
@@ -53,8 +53,8 @@ export class BlogPostController {
         return posts;
     }
 
-    @Post('')
-    @HttpCode(201)
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
     @UseGuards(JwtAuthGuard)
     async createPost(
         @Body() postData: BlogPost
@@ -63,7 +63,7 @@ export class BlogPostController {
     }
 
     @Get(':id')
-    @HttpCode(200)
+    @HttpCode(HttpStatus.OK)
     async getPost(
         @Param('id') id: Id
     ): Promise<BlogPost> {
@@ -74,7 +74,7 @@ export class BlogPostController {
     }
 
     @Put(':id')
-    @HttpCode(200)
+    @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
     async updatePost(
         @Param('id') id: Id,
@@ -87,7 +87,7 @@ export class BlogPostController {
     }
 
     @Delete(':id')
-    @HttpCode(204)
+    @HttpCode(HttpStatus.NO_CONTENT)
     @UseGuards(JwtAuthGuard)
     async deletePost(
         @Param('id') id: Id

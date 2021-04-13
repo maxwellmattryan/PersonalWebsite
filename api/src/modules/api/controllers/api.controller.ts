@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common';
 
 import { BlogPost } from "@api/modules/blog/entities/blog-post.entity";
 import { PortfolioProfile } from "@api/modules/portfolio/entities/portfolio-profile.entity";
@@ -19,8 +19,16 @@ export class ApiController {
         private readonly projectService: PortfolioProjectService
     ) { }
 
+    @Get()
+    @HttpCode(HttpStatus.OK)
+    async getApi(): Promise<{ message: string }> {
+        return {
+            message: 'Welcome to the API for mattmaxwell.dev!'
+        }
+    }
+
     @Get('home')
-    @HttpCode(200)
+    @HttpCode(HttpStatus.OK)
     async getHomepage(): Promise<{ profile: PortfolioProfile, posts: BlogPost[] }> {
         const profile = await this.profileService.getProfileByStatus('ACTIVE');
         if(!profile) throw new ActivePortfolioProfileWasNotFoundException();

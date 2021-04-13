@@ -1,4 +1,4 @@
-import { Controller, Put, HttpCode, UseGuards, Param, Post, Get, Delete, Body } from '@nestjs/common';
+import { Controller, Put, HttpCode, UseGuards, Param, Post, Get, Delete, Body, HttpStatus } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 import { Id } from '@api/core/database/entity.service';
@@ -20,8 +20,8 @@ export class PortfolioProjectController {
         private readonly projectService: PortfolioProjectService
     ) { }
 
-    @Get('')
-    @HttpCode(200)
+    @Get()
+    @HttpCode(HttpStatus.OK)
     async getProjects(): Promise<PortfolioProject[]> {
         const projects = await this.projectService.getProjects();
         if(projects.length === 0) throw new PortfolioProjectsWereNotFoundException();
@@ -29,8 +29,8 @@ export class PortfolioProjectController {
         return projects;
     }
 
-    @Post('')
-    @HttpCode(201)
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
     @UseGuards(JwtAuthGuard)
     async createProject(
         @Body() projectData: PortfolioProject
@@ -39,7 +39,7 @@ export class PortfolioProjectController {
     }
 
     @Get(':id')
-    @HttpCode(200)
+    @HttpCode(HttpStatus.OK)
     async getProject(
         @Param('id') id: Id,
     ): Promise<PortfolioProject> {
@@ -50,7 +50,7 @@ export class PortfolioProjectController {
     }
 
     @Put(':id')
-    @HttpCode(200)
+    @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
     async updateProject(
         @Param('id') id: Id,
@@ -63,7 +63,7 @@ export class PortfolioProjectController {
     }
 
     @Delete(':id')
-    @HttpCode(204)
+    @HttpCode(HttpStatus.NO_CONTENT)
     @UseGuards(JwtAuthGuard)
     async deleteProject(
         @Param('id') id: Id

@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Param, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
@@ -12,8 +12,8 @@ export class PortfolioProfileTechnologyController {
         private readonly profileTechnologyService: PortfolioProfileTechnologyService
     ) { }
 
-    @Get('')
-    @HttpCode(200)
+    @Get()
+    @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
     async getProfileTechnologies(
         @Param('id') id: number

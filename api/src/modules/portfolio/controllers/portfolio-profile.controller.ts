@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, Param, Post, Put, UseGuards, Delete, Body } from '@nestjs/common';
+import { Controller, Get, HttpCode, Param, Post, Put, UseGuards, Delete, Body, HttpStatus } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 import { Id } from '@api/core/database/entity.service';
@@ -17,8 +17,8 @@ export class PortfolioProfileController {
         private readonly profileService: PortfolioProfileService
     ) { }
 
-    @Get('')
-    @HttpCode(200)
+    @Get()
+    @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
     async getProfiles(): Promise<PortfolioProfile[]> {
         const profiles = await this.profileService.getProfiles();
@@ -27,8 +27,8 @@ export class PortfolioProfileController {
         return profiles;
     }
 
-    @Post('')
-    @HttpCode(201)
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
     @UseGuards(JwtAuthGuard)
     async createProfile(
         @Body() profileData: PortfolioProfile
@@ -37,7 +37,7 @@ export class PortfolioProfileController {
     }
 
     @Put(':id')
-    @HttpCode(200)
+    @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
     async updateProfile(
         @Param('id') id: Id,
@@ -50,7 +50,7 @@ export class PortfolioProfileController {
     }
 
     @Delete(':id')
-    @HttpCode(204)
+    @HttpCode(HttpStatus.NO_CONTENT)
     @UseGuards(JwtAuthGuard)
     async deleteProfile(
         @Param('id') id: Id
@@ -62,7 +62,7 @@ export class PortfolioProfileController {
     }
 
     @Put(':id/activate')
-    @HttpCode(200)
+    @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
     async activateProfile(
         @Param('id') id: Id

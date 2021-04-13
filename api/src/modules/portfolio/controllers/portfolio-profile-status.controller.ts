@@ -1,5 +1,5 @@
 import { PortfolioProfileStatusService } from '../services/portfolio-profile-status.service';
-import { Controller, Get, HttpCode, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
@@ -12,8 +12,8 @@ export class PortfolioProfileStatusController {
         private readonly profileStatusService: PortfolioProfileStatusService
     ) { }
 
-    @Get('')
-    @HttpCode(200)
+    @Get()
+    @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
     async getProfileStatuses(): Promise<PortfolioProfileStatus[]> {
         const statuses = await this.profileStatusService.getStatuses();

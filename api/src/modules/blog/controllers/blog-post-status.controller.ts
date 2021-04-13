@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
@@ -12,8 +12,8 @@ export class BlogPostStatusController {
         private readonly blogPostStatusService: BlogPostStatusService
     ) { }
 
-    @Get('')
-    @HttpCode(200)
+    @Get()
+    @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
     async getPostStatuses(): Promise<BlogPostStatus[]> {
         const statuses = await this.blogPostStatusService.getStatuses();
