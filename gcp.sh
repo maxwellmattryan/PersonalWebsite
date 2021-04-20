@@ -16,7 +16,6 @@ GCP_HOSTNAME=gcr.io
 GCP_PLATFORM=managed
 GCP_REGION=us-central1
 GCP_PROJECT_ID=mattmaxwell-304801
-GCP_VPC_CONNECTOR=mattmaxwell-api
 GCP_SERVICE_ACCOUNT=gcloud-api@mattmaxwell-304801.iam.gserviceaccount.com
 GCP_AUTH_KEY_FILE=./conf/gcloud/gcloud-api.json
 GCP_API_SERVICE=mattmaxwell-api
@@ -114,7 +113,7 @@ then
     echo -e "[Success]: Pushed local API image!\n"
 
     echo -e "($(expr $START + 3)/$STEPS) Deploying to Cloud Run service ($GCP_API_SERVICE)...\n"
-    gcloud run deploy "$GCP_API_SERVICE" --image="$GCP_API_IMAGE_PATH" --platform="$GCP_PLATFORM" --region="$GCP_REGION" --vpc-connector="$GCP_VPC_CONNECTOR" --vpc-egress=all
+    gcloud run deploy "$GCP_API_SERVICE" --image="$GCP_API_IMAGE_PATH" --platform="$GCP_PLATFORM" --region="$GCP_REGION"
     echo -e "[Success]: Deployed service!\n"
 
     echo -e "($(expr $START + 4)/$STEPS) Removing API images from Docker...\n"

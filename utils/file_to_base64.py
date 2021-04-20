@@ -8,22 +8,22 @@ SSL_CA_PATH = '../conf/ssl/api-service/server-ca.pem'
 SSL_CERT_PATH = '../conf/ssl/api-service/client-cert.pem'
 SSL_KEY_PATH = '../conf/ssl/api-service/client-key.pem'
 
-GCLOUD_CREDENTIALS_PATH = '../conf/gcloud/mattmaxwell-c33f23ca6057.json'
+GCLOUD_CREDENTIALS_PATH = '../conf/gcloud/gcloud-api.json'
 
 def to_base_64(filepath: str) -> str:
     script_dir = os.path.dirname(__file__)
     path = os.path.join(script_dir, filepath) 
 
     in_file = open(path, 'rb')
-    data = in_file.read()
+    data_raw = in_file.read()
     in_file.close()
 
-    encoded = base64.b64encode(data)
+    data_encoded = base64.b64encode(data_raw)
 
     print(f"Encoding for \"{path}\":")
-    print(f"{encoded.decode('utf-8')}\n")
+    print(f"{data_encoded.decode('utf-8')}\n")
 
-    return encoded
+    return data_encoded
 
 def main():
     gcloud_credentials = to_base_64(GCLOUD_CREDENTIALS_PATH)

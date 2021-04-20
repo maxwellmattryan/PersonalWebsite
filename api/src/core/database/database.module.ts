@@ -23,7 +23,8 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
                     extra: extraOptions,
                     entities: [__dirname + '/../../modules/**/*.entity{.ts,.js}'],
                     namingStrategy: new SnakeNamingStrategy(),
-                    synchronize: true
+                    synchronize: true,
+                    keepConnectionAlive: true
                 });
             }
         })

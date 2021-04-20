@@ -11,20 +11,19 @@ import { ExtendedLogger } from '@api/core/utils/extended-logger';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
-    app.useLogger(app.get(ExtendedLogger));
 
     app.enableCors({
-        origin: true,
+        origin: [/http:\/\/localhost/, /https?:\/\/([a-z0-9]+[.])*mattmaxwell.dev/],
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         credentials: true,
-        methods: 'GET,POST,PUT,DELETE,BATCH,OPTIONS'
     });
 
-    app.use(cookieParser(process.env.JWT_SECRET));
-
+    app.useLogger(app.get(ExtendedLogger));
     app.useGlobalInterceptors(new ClassSerializerInterceptor(
         app.get(Reflector)
     ));
 
+    app.use(cookieParser(process.env.JWT_SECRET));
     app.use(compression());
     app.use(helmet());
 
