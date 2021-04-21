@@ -8,7 +8,7 @@ SSL_CA_PATH = '../conf/ssl/api-service/server-ca.pem'
 SSL_CERT_PATH = '../conf/ssl/api-service/client-cert.pem'
 SSL_KEY_PATH = '../conf/ssl/api-service/client-key.pem'
 
-GCLOUD_CREDENTIALS_PATH = '../conf/gcloud/gcloud-api.json'
+GCLOUD_CREDENTIALS_PATH = '../conf/gcloud/customer.json'
 
 def to_base_64(filepath: str) -> str:
     script_dir = os.path.dirname(__file__)
