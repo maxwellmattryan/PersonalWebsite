@@ -4,11 +4,7 @@
 import base64
 import os
 
-SSL_CA_PATH = '../conf/ssl/api-service/server-ca.pem'
-SSL_CERT_PATH = '../conf/ssl/api-service/client-cert.pem'
-SSL_KEY_PATH = '../conf/ssl/api-service/client-key.pem'
-
-GCLOUD_CREDENTIALS_PATH = '../conf/gcloud/customer.json'
+CREDENTIALS = '../conf/gcloud/administrator.json'
 
 def to_base_64(filepath: str) -> str:
     script_dir = os.path.dirname(__file__)
@@ -26,7 +22,7 @@ def to_base_64(filepath: str) -> str:
     return data_encoded
 
 def main():
-    gcloud_credentials = to_base_64(GCLOUD_CREDENTIALS_PATH)
+    result = to_base_64(CREDENTIALS)
 
 if __name__ == '__main__':
     main()

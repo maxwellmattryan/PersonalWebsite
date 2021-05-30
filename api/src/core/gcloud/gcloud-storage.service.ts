@@ -6,32 +6,40 @@ import { Bucket, File, GetSignedUrlConfig, Storage } from '@google-cloud/storage
 
 import internal from 'stream';
 
-type ApiStorageBucket = 'assets' | 'products';
+type BucketType = 'assets' | 'files' | 'products';
+
+type BucketObject = {
+    name: string,
+    credentials: string
+}
 
 @Injectable()
 export class GCloudStorageService {
     private readonly logger = new ExtendedLogger('GCloudStorageService');
 
-    private readonly credentials: string;
-    private readonly storage: Storage;
     private readonly storageUrl: string = 'https://storage.googleapis.com'
 
-    private readonly ApiStorageBuckets  = new Map<ApiStorageBucket, string>([
-        ['assets', this.configService.get('GCLOUD_ASSETS_STORAGE_BUCKET')],
-        ['products', this.configService.get('GCLOUD_PRODUCTS_STORAGE_BUCKET')]
+    private readonly BucketObjects  = new Map<BucketType, BucketObject>([
+        ['assets', {
+            name: this.configService.get('GCLOUD_ASSETS_STORAGE_BUCKET'),
+            credentials: this.configService.get('GCLOUD_ADMIN_CREDENTIALS')
+        }],
+        ['files', {
+            name: this.configService.get('GCLOUD_FILES_STORAGE_BUCKET'),
+            credentials: this.configService.get('GCLOUD_ADMIN_CREDENTIALS')
+        }],
+        ['products', {
+            name: this.configService.get('GCLOUD_PRODUCTS_STORAGE_BUCKET'),
+            credentials: this.configService.get('GCLOUD_CUSTOMER_CREDENTIALS')
+        }],
     ]);
 
     constructor(
         private readonly configService: ConfigService
-    ) {
-        this.credentials = Buffer.from(this.configService.get<string>('GCLOUD_CREDENTIALS'), 'base64').toString();
-        this.storage = new Storage({
-            credentials: JSON.parse(this.credentials)
-        });
-    }
+    ) { }
 
-    public async getSignedUrl(bucketName: ApiStorageBucket, filename: string): Promise<string> {
-        const bucket: Bucket = this.getBucket(bucketName);
+    public async getSignedUrl(bucketType: BucketType, filename: string): Promise<string> {
+        const bucket: Bucket = this.getBucket(bucketType);
         const blob = bucket.file(filename);
 
         const signedUrl = (await blob.getSignedUrl(this.signedUrlOptions())).toString();
@@ -41,8 +49,8 @@ export class GCloudStorageService {
         return signedUrl;
     }
 
-    public async getSignedUrls(bucketname: ApiStorageBucket, filenames: string[]): Promise<string[]> {
-        const bucket: Bucket = this.getBucket(bucketname);
+    public async getSignedUrls(bucketType: BucketType, filenames: string[]): Promise<string[]> {
+        const bucket: Bucket = this.getBucket(bucketType);
         const signedUrlOptions = this.signedUrlOptions();
 
         let signedUrls: string[] = [];
@@ -100,7 +108,12 @@ export class GCloudStorageService {
             });
     }
 
-    private getBucket(bucketName: ApiStorageBucket): Bucket {
-        return this.storage.bucket(this.ApiStorageBuckets.get(bucketName));
+    private getBucket(bucketType: BucketType): Bucket {
+        const { name, credentials } = this.BucketObjects.get(bucketType);
+        const storage = new Storage({
+            credentials: JSON.parse(Buffer.from(credentials, 'base64').toString())
+        })
+
+        return storage.bucket(name);
     }
 }

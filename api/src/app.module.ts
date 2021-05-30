@@ -34,7 +34,9 @@ import { ShopModule } from '@api/modules/shop/shop.module';
                 DB_PASS: Joi.string().required(),
                 DB_NAME: Joi.string().required(),
 
-                GCLOUD_CREDENTIALS: Joi.string().required(),
+                GCLOUD_ADMIN_CREDENTIALS: Joi.string().required(),
+                GCLOUD_CUSTOMER_CREDENTIALS: Joi.string().required(),
+
                 GCLOUD_ASSETS_STORAGE_BUCKET: Joi.string().required(),
                 GCLOUD_PRODUCTS_STORAGE_BUCKET: Joi.string().required(),
 
