@@ -21,6 +21,30 @@
     }
 }
 
+.file-input__label {
+    background-color: $color-primary;
+    border: 0.1rem solid $color-primary;
+    border-radius: 0.2rem;
+    color: $color-dark;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+
+    &:active {
+        //background-color: $color-dark;
+        //border-color: $color-dark;
+        //color: $color-primary;
+        transform: scale(0.9);
+        -webkit-transform: scale(0.9);
+        transition: transform $btn-active-transition-duration ease;
+        -webkit-transition: transform $btn-active-transition-duration ease;
+    }
+}
+
+.file-input__field {
+    display: none;
+}
+
 .editor__form-btn-container {
     width: $btn-height;
 }
@@ -95,6 +119,10 @@
 }
 
 @media only screen and (min-width: 768px) {
+    ::ng-deep .section-divider {
+        height: 14vh !important;
+    }
+
     .editor__profile-btn {
         &--edit, &--warn {
             font-size: 120%;

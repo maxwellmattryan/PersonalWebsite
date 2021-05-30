@@ -1,3 +1,4 @@
+import { Id } from '@ui/core/models/model';
 import { Deserializable } from '@ui/core/models/deserializable.model';
 
 export class ShopCustomer implements Deserializable {
@@ -10,7 +11,7 @@ export class ShopCustomer implements Deserializable {
         return this;
     }
 
-    public id?: number;
+    public id?: Id;
 
     public email: string;
 

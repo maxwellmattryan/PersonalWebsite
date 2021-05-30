@@ -31,7 +31,7 @@
             <picture>
                 <source [srcset]='fileService.getImageUri(imageUrl, "webp")' type="image/webp">
                 <source [srcset]='fileService.getImageUri(imageUrl, "png")' type='image/png'>
-                <img class='about__portrait' alt='Profile image' [src]='imageUrl.substring(0, imageUrl.length - 4) + "png"'>
+                <img class='about__portrait' alt='Profile image' [src]='fileService.getImageUri(imageUrl, "png")'>
             </picture>
         </div>
     </div>

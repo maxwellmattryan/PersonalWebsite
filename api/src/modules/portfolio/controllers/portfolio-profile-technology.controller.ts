@@ -1,6 +1,4 @@
-import { Controller, Get, HttpCode, Param, Req, UseGuards } from '@nestjs/common';
-
-import { Request } from 'express';
+import { Controller, Get, HttpCode, HttpStatus, Param, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
@@ -14,10 +12,12 @@ export class PortfolioProfileTechnologyController {
         private readonly profileTechnologyService: PortfolioProfileTechnologyService
     ) { }
 
-    @Get('')
-    @HttpCode(200)
+    @Get()
+    @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
-    async getProfileTechnologies(@Param('id') id: number, @Req() request: Request): Promise<PortfolioProfileTechnology[]> {
+    async getProfileTechnologies(
+        @Param('id') id: number
+    ): Promise<PortfolioProfileTechnology[]> {
         const technologies = await this.profileTechnologyService.getTechnologies(id);
         if(technologies.length === 0) throw new PortfolioProfileTechnologiesWereNotFoundException();
 

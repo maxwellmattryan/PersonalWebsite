@@ -3,7 +3,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { AuthService } from '@ui/core/auth';
-import { FileService, NotificationService, SeoService, TrackingService } from '@ui/core/services';
+import { Id } from '@ui/core/models/model';
+import { NotificationService, SeoService, TrackingService } from '@ui/core/services';
+
+import { FileService } from '@ui/modules/file/services';
 
 import { ShopCustomer, ShopProduct, ShopProductStatuses } from '../../models';
 import { ShopApiService, ShopCheckoutService, ShopEditorService } from '../../services';
@@ -22,7 +25,7 @@ export class ShopProductCollectionComponent implements OnInit {
 
     public isAdmin: boolean = false;
     public isStartingCheckout: boolean = false;
-    public checkoutProductId: number = -1;
+    public checkoutProductId: Id = -1;
     public modalId: string = 'shop-checkout-modal';
 
     constructor(
@@ -53,13 +56,6 @@ export class ShopProductCollectionComponent implements OnInit {
         modal.classList.add('show');
     }
 
-    public closeDialog(): void {
-        let modal = document.getElementById(this.modalId);
-
-        modal.classList.remove('show');
-        modal.classList.add('hidden');
-    }
-
     public sendProductToEditor(product: ShopProduct): void {
         this.shopEditorService.setProduct(product);
     }
@@ -80,7 +76,7 @@ export class ShopProductCollectionComponent implements OnInit {
     }
 
     public startCheckout(productData: ShopProduct): void {
-        if(productData.status.status != ShopProductStatuses.AVAILABLE) {
+        if(productData.status.id != ShopProductStatuses.AVAILABLE) {
             this.notificationService.createNotification(`Sorry, unable to buy product because it is ${productData.status.status.toLowerCase()}.`, '', 3600);
             return;
         }
@@ -91,7 +87,10 @@ export class ShopProductCollectionComponent implements OnInit {
             this.showDialog();
         } else {
             this.isStartingCheckout = true;
-            this.shopCheckoutService.goToCheckout(productData).subscribe((res: any) => {
+            this.shopCheckoutService.goToCheckout(productData.id).subscribe((res: any) => {
+                this.isStartingCheckout = false;
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
                 this.isStartingCheckout = false;
             });
 
@@ -113,7 +112,7 @@ export class ShopProductCollectionComponent implements OnInit {
 
         this.router.navigate(
             ['shop/checkout'],
-            { queryParams: { success: 'true', productId: this.checkoutProductId, freeProduct: 'true' }}
+            { queryParams: { success: 'true', productId: this.checkoutProductId, isFreeProduct: 'true' }}
         );
     }
 }

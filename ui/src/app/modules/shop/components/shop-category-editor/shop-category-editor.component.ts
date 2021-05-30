@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '@ui/core/auth';
+import { Id } from '@ui/core/models/model';
 
-import { ShopCategory, ShopProduct } from '../../models';
+import { ShopCategory, ShopProduct, ShopProductStatuses } from '../../models';
 import { ShopApiService, ShopComparisonService, ShopEditorService } from '../../services';
 import { NotificationService, TrackingService } from '@ui/core/services';
 
@@ -20,6 +21,8 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
 
     private categoryData: ShopCategory;
     public categoryForm: FormGroup;
+
+    public isSubmittingForm: boolean = false;
 
     constructor(
         private readonly authService: AuthService,
@@ -71,7 +74,7 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
     }
 
     private loadProductData(): void {
-        this.shopApiService.getProducts('AVAILABLE').subscribe((res: ShopProduct[]) => {
+        this.shopApiService.getProducts(ShopProductStatuses.AVAILABLE.toString()).subscribe((res: ShopProduct[]) => {
             this.productData = res.sort(this.shopComparisonService.products);
 
             if(this.categoryData) {
@@ -84,7 +87,7 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
         });
     }
 
-    private setProductControls(associatedProductIds: number[]): void {
+    private setProductControls(associatedProductIds: Id[]): void {
         this.productData.forEach(p => {
             const isAssociated = associatedProductIds.includes(p.id);
             const control: FormControl = this.formBuilder.control({ value: isAssociated, disabled: isAssociated });
@@ -96,21 +99,25 @@ export class ShopCategoryEditorComponent implements OnInit, OnDestroy {
         const isEmpty: boolean = !this.shopEditorService.hasCategory();
 
         this.categoryForm = this.formBuilder.group({
-            name: this.formBuilder.control(isEmpty ? '' : this.categoryData.name, [Validators.required]),
+            name: this.formBuilder.control(isEmpty ? '' : this.categoryData.name, [Validators.required, Validators.maxLength(50)]),
             products: this.formBuilder.array([], [])
         });
     }
 
     public onSubmit(): void {
+        this.isSubmittingForm = true;
+
         const category = this.buildCategory();
 
         if(category.id === undefined) {
             this.shopApiService.createCategory(category).subscribe((res: ShopCategory) => {
+                this.isSubmittingForm = false;
                 this.notificationService.createNotification('Successfully created shop category!');
                 this.router.navigate(['shop']);
             });
         } else {
             this.shopApiService.updateCategory(category).subscribe((res: ShopCategory) => {
+                this.isSubmittingForm = false;
                 this.notificationService.createNotification('Successfully updated existing shop category!');
                 this.router.navigate(['shop']);
             });

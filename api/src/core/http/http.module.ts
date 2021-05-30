@@ -1,14 +1,23 @@
-import { Module } from '@nestjs/common';
+import { HttpExceptionFilter } from '@api/core/http/http-exception.filter';
+import { UtilsModule } from '@api/core/utils/utils.module';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+
+import { HttpLogger } from '@api/core/http/http.logger';
 import { APP_FILTER } from '@nestjs/core';
 
-import { ExceptionsLoggerFilter } from './filters/exceptions-logger.filter';
-
 @Module({
+    imports: [
+        UtilsModule
+    ],
     providers: [
         {
             provide: APP_FILTER,
-            useClass: ExceptionsLoggerFilter
+            useClass: HttpExceptionFilter
         }
     ]
 })
-export class HttpModule { }
+export class HttpModule implements NestModule {
+    configure(consumer: MiddlewareConsumer): any {
+        consumer.apply(HttpLogger).forRoutes('*');
+    }
+}

@@ -3,8 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { getConnection, In, Repository } from 'typeorm';
 
+import { EntityService, Id } from '@api/core/database/entity.service';
 import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
-import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
+import { InternalServerErrorException } from '@api/core/http/http.exception';
 
 import { ShopCategory } from '../entities/shop-category.entity';
 import {
@@ -14,13 +15,13 @@ import {
 import { ShopProduct } from '../entities/shop-product.entity';
 
 @Injectable()
-export class ShopCategoryService {
+export class ShopCategoryService extends EntityService<ShopCategory> {
     constructor(
         @InjectRepository(ShopCategory)
         private readonly shopCategoryRepository: Repository<ShopCategory>
-    ) { }
+    ) { super(); }
 
-    public async existsInTable(id: number): Promise<boolean> {
+    public async existsInTable(id: Id): Promise<boolean> {
         return await this.shopCategoryRepository
             .createQueryBuilder('sc')
             .where('sc.id = :id', { id: id })
@@ -28,40 +29,35 @@ export class ShopCategoryService {
     }
 
     public async createCategory(categoryData: ShopCategory): Promise<ShopCategory> {
-        const category: ShopCategory = this.shopCategoryRepository.create(categoryData);
-        await this.shopCategoryRepository.save(category)
+        const category: ShopCategory = this.createEntity(
+            this.shopCategoryRepository.create(categoryData),
+            ['name']
+        );
+
+        return this.shopCategoryRepository.save(category)
             .catch((error) => {
                if(error.code === PostgresErrorCodes.UNIQUE_VIOLATION)
                    throw new ShopCategoryAlreadyExistsException();
                else
                    throw new InternalServerErrorException();
             });
-
-        return await this.getCategory(category.id);
     }
 
-    public async getCategory(id: number): Promise<ShopCategory> {
-        return await this.shopCategoryRepository
+    public async getCategory(id: Id): Promise<ShopCategory> {
+        return this.shopCategoryRepository
             .createQueryBuilder('sc')
             .where('sc.id = :id', { id: id })
             .getOne();
     }
 
     public async getCategories(): Promise<ShopCategory[]> {
-        return await this.shopCategoryRepository
+        return this.shopCategoryRepository
             .createQueryBuilder('sc')
             .getMany();
     }
 
-    public async updateCategory(id: number, categoryData: ShopCategory): Promise<ShopCategory> {
+    public async updateCategory(id: Id, categoryData: ShopCategory): Promise<ShopCategory> {
         const newCategory = new ShopCategory({ id: id, name: categoryData.name });
-        await this.shopCategoryRepository.update(id, newCategory)
-            .catch((error) => {
-                if(error.code === PostgresErrorCodes.NOT_NULL_VIOLATION)
-                    throw new ShopCategoryCouldNotBeUpdatedException();
-                else
-                    throw new InternalServerErrorException();
-            });
 
         if(categoryData.products) {
             await getConnection()
@@ -72,10 +68,16 @@ export class ShopCategoryService {
                 .execute();
         }
 
-        return await this.getCategory(id);
+        return this.shopCategoryRepository.save(newCategory)
+            .catch((error) => {
+                if(error.code === PostgresErrorCodes.NOT_NULL_VIOLATION)
+                    throw new ShopCategoryCouldNotBeUpdatedException();
+                else
+                    throw new InternalServerErrorException();
+            });
     }
 
-    public async deleteCategory(id: number): Promise<void> {
+    public async deleteCategory(id: Id): Promise<void> {
         await this.shopCategoryRepository
             .createQueryBuilder()
             .delete()

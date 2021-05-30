@@ -33,11 +33,20 @@ import { MailService } from './mail.service';
                 }
             })
         }),
-        BullModule.registerQueue({
+        BullModule.registerQueueAsync({
             name: process.env.MAILER_QUEUE_NAME,
-            redis: {
-                host: process.env.MAILER_QUEUE_HOST,
-                port: Number(process.env.MAILER_QUEUE_PORT) || 6379
+            useFactory: () => {
+                const isLocal: boolean = Boolean(process.env.MAILER_QUEUE_HOST === 'localhost');
+                const tlsOptions = isLocal ? { } : { tls: { rejectUnauthorized: false }};
+
+                return ({
+                    redis: {
+                        host: process.env.MAILER_QUEUE_HOST,
+                        port: Number(process.env.MAILER_QUEUE_PORT) || 6379,
+                        password: process.env.MAILER_QUEUE_PASS || '',
+                        ...tlsOptions
+                    }
+                });
             }
         }),
         UtilsModule

@@ -109,8 +109,12 @@
 }
 
 .navbar__toggle-btn {
+    align-items: center;
     background-color: $color-dark;
+    display: flex;
+    flex-direction: column;
     height: $header-height;
+    justify-content: center;
     width: $header-height;
 }
 
@@ -188,6 +192,11 @@
     cursor: pointer;
     font-size: 150%;
     text-align: right;
+}
+
+.navbar__link-item,
+.sidebar__link-item {
+    font-weight: 500;
 }
 
 @media only screen and (min-width: 768px) {

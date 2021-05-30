@@ -5,40 +5,27 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
 import * as helmet from 'helmet';
-import * as morgan from 'morgan';
-import * as rateLimit from 'express-rate-limit';
-import { join } from 'path';
 
 import { AppModule } from '@api/app.module';
+import { ExtendedLogger } from '@api/core/utils/extended-logger';
 
 async function bootstrap() {
-    const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-        logger: ['log', 'error', 'warn'],
-    });
+    const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
     app.enableCors({
-        origin: true,
-        methods: 'GET,POST,PUT,DELETE,BATCH,OPTIONS',
-        credentials: true
+        origin: [/http:\/\/localhost/, /https?:\/\/([a-z0-9]+[.])*mattmaxwell.dev/],
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        credentials: true,
     });
 
-    app.use(rateLimit({
-        windowMs: 15 * 60 * 1000,
-        max: 100
-    }));
-
-    app.use(helmet());
-
-    app.use(morgan('tiny'));
-    app.use(cookieParser(process.env.JWT_SECRET));
-
+    app.useLogger(app.get(ExtendedLogger));
     app.useGlobalInterceptors(new ClassSerializerInterceptor(
         app.get(Reflector)
     ));
 
+    app.use(cookieParser(process.env.JWT_SECRET));
     app.use(compression());
-
-    app.useStaticAssets(join(__dirname, '..', 'assets'));
+    app.use(helmet());
 
     app.setGlobalPrefix('api');
 

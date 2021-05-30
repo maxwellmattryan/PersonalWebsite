@@ -6,8 +6,8 @@ import { map, mergeMap } from 'rxjs/operators';
 import { loadStripe } from '@stripe/stripe-js/pure';
 
 import { environment } from '@ui/environments/environment';
-
 import { ApiService } from '@ui/core/http';
+import { Id } from '@ui/core/models/model';
 
 import { ShopCustomer, ShopOrder, ShopProduct } from '../models';
 
@@ -23,21 +23,21 @@ export class ShopCheckoutService extends ApiService {
 
     stripe$ = from(loadStripe(environment.STRIPE_PK));
 
-    goToCheckout(productData: ShopProduct) {
-        return this.getSession(productData).pipe(
+    goToCheckout(productId: Id) {
+        return this.getSession(productId).pipe(
             mergeMap((sessionId: string) =>
                 this.redirectToCheckout(sessionId)
             )
         );
     }
 
-    getSession(productData: ShopProduct): Observable<string> {
-        const headers = this.contentTypeHeader();
+    getSession(productId: Id): Observable<string> {
+        let params = new HttpParams();
+        params = params.set('productId', <string>productId);
 
-        return this.http.post<{id: string}>(
+        return this.http.get<{id: string}>(
             `${environment.API_URL}/shop/checkout/init`,
-            productData,
-            { headers }
+            { params: params }
         ).pipe(map(res => res.id));
     }
 
@@ -49,10 +49,11 @@ export class ShopCheckoutService extends ApiService {
         );
     }
 
-    completeCheckout(productId: number, sessionId: string): Observable<ShopOrder> {
+    completeCheckout(productId: Id, sessionId: string): Observable<ShopOrder> {
         let params = new HttpParams();
-        params = params.set('productId', productId.toString());
+        params = params.set('productId', <string>productId);
         params = params.set('sessionId', sessionId);
+        console.log(params);
 
         return this.http.post<ShopOrder>(
             `${environment.API_URL}/shop/checkout/complete`,
@@ -61,10 +62,10 @@ export class ShopCheckoutService extends ApiService {
         );
     }
 
-    completeFreeCheckout(productId: number, customerEmail: string): Observable<ShopOrder> {
+    completeFreeCheckout(productId: Id, customerEmail: string): Observable<ShopOrder> {
         let params = new HttpParams();
-        params = params.set('productId', productId.toString());
-        params = params.set('freeProduct', 'true');
+        params = params.set('productId', <string>productId);
+        params = params.set('isFreeProduct', 'true');
 
         return this.http.post<ShopOrder>(
             `${environment.API_URL}/shop/checkout/complete`,

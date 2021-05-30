@@ -15,13 +15,23 @@
 
 RUNNING_PID
 
+# MacOS-related files
+**/.DS_Store
+
 # Build bundles / packages
 **/dist
 
 # Environment vars
 **/*.env
 
-# My folders 
+# My folders
 conf
-data
-design
+design/blog
+design/seo
+design/store.md
+
+# Data
+data/admin
+data/**/backups
+data/**/*.md
+data/**/*.prod.sql

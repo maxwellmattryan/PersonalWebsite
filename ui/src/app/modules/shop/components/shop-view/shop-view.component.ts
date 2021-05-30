@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '@ui/core/auth';
+import { Id } from '@ui/core/models/model';
 import { NotificationService, TrackingService } from '@ui/core/services';
 
 import { ShopApiService, ShopCategoryService, ShopComparisonService, ShopEditorService } from '../../services';
@@ -22,8 +23,11 @@ export class ShopViewComponent implements OnInit {
     public products: ShopProduct[];
     public statuses: ShopProductStatus[];
 
-    activeCategoryId: number = -1;
-    activeStatusId: number = 1;
+    activeCategoryId: Id = -1;
+    activeStatusId: Id = ShopProductStatuses.AVAILABLE;
+
+    public isLoadingByCategory: boolean = false;
+    public isLoadingByStatus: boolean = false;
 
     constructor(
         private router: Router,
@@ -38,7 +42,7 @@ export class ShopViewComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.titleService.setTitle(`Shop | Matthew Maxwell`);
+        this.titleService.setTitle(`Digital Audio Shop | Matthew Maxwell`);
 
         this.isAdmin = this.authService.isLoggedIn();
 
@@ -76,36 +80,27 @@ export class ShopViewComponent implements OnInit {
         return Array.from(categories.values()).sort(this.shopComparisonService.categories);
     }
 
-    public setActiveCategory(category: ShopCategory, reset: boolean = false): void {
-        if(reset) {
-            this.activeCategoryId = -1;
-        } else {
-            if(this.products.filter(p => p.category.id === category.id).length < 1) {
-                this.notificationService.createNotification('No shop products are in this category.');
-                return;
-            }
+    public filterProductsByCategory(categoryId: Id): void {
+        const previousCategoryId = this.activeCategoryId;
+        this.activeCategoryId = categoryId;
+        this.isLoadingByCategory = true;
 
-            this.shopCategoryService.setActiveCategory(category);
-            this.activeCategoryId = category.id;
-        }
+        this.shopApiService.getProducts(this.activeStatusId.toString(), this.activeCategoryId.toString()).subscribe((res: ShopProduct[]) => {
+            this.products = res;
+            this.isLoadingByCategory = false;
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+            this.isLoadingByCategory = false;
+            this.activeCategoryId = previousCategoryId;
+        });
     }
 
-    public filterProducts(): ShopProduct[] {
-        if(this.activeCategoryId === -1)
-            return this.products;
-        else {
-            const activeProducts = this.products.filter(p => p.category.id === this.activeCategoryId);
-            if(activeProducts.length < 1) {
-                this.activeCategoryId = -1;
-                return this.products;
-            } else {
-                return activeProducts;
-            }
-        }
-    }
+    public loadProductsByStatus(statusId: Id): void {
+        const previousStatusId = this.activeStatusId;
+        this.activeStatusId = statusId;
+        this.isLoadingByStatus = true;
 
-    public loadProductsByStatus(statusId: number): void {
-        this.shopApiService.getProducts(statusId.toString()).subscribe((res: ShopProduct[]) => {
+        this.shopApiService.getProducts(this.activeStatusId.toString(), '').subscribe((res: ShopProduct[]) => {
             if(res.length < 1) {
                 this.notificationService.createNotification('No shop products contain this status.');
                 return;
@@ -113,7 +108,11 @@ export class ShopViewComponent implements OnInit {
 
             this.products = res.sort(this.shopComparisonService.products);
             this.activeCategoryId = -1;
-            this.activeStatusId = statusId;
+            this.isLoadingByStatus = false;
+        }, (error: HttpErrorResponse) => {
+            this.notificationService.createNotification(error.error.message);
+            this.activeStatusId = previousStatusId;
+            this.isLoadingByStatus = false;
         });
     }
 

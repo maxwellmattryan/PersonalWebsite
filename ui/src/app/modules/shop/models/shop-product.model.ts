@@ -1,3 +1,4 @@
+import { Id } from '@ui/core/models/model';
 import { Deserializable } from '@ui/core/models/deserializable.model';
 
 import { ShopCategory } from './shop-category.model';
@@ -17,7 +18,7 @@ export class ShopProduct implements Deserializable {
         return this;
     }
 
-    public id?: number;
+    public id?: Id;
 
     public status: ShopProductStatus;
     public category: ShopCategory;

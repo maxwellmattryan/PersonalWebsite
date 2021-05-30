@@ -1,6 +1,4 @@
-import { Controller, Get, HttpCode, Req, UseGuards } from '@nestjs/common';
-
-import { Request } from 'express';
+import { Controller, Get, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
 
@@ -14,10 +12,10 @@ export class BlogAuthorController {
         private readonly blogAuthorService: BlogAuthorService
     ) { }
 
-    @Get('')
-    @HttpCode(200)
+    @Get()
+    @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
-    async getAuthors(@Req() request: Request): Promise<BlogAuthor[]> {
+    async getAuthors(): Promise<BlogAuthor[]> {
         const authors = await this.blogAuthorService.getAuthors();
         if(authors.length === 0) throw new BlogAuthorsWereNotFoundException();
 

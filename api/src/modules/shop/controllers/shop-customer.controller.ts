@@ -1,6 +1,4 @@
-import { Controller, Get, HttpCode, Post, Req, UseGuards } from '@nestjs/common';
-
-import { Request } from 'express';
+import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 
 import { GCloudStorageService } from '@api/core/gcloud/gcloud-storage.service';
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
@@ -25,17 +23,21 @@ export class ShopCustomerController {
         private readonly shopOrderService: ShopOrderService
     ) { }
 
-    @Post('')
-    @HttpCode(201)
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
     @UseGuards(JwtAuthGuard)
-    public async createCustomer(@Req() request: Request): Promise<ShopCustomer> {
-        return await this.shopCustomerService.createCustomer(request.body);
+    public async createCustomer(
+        @Body() customerData: ShopCustomer
+    ): Promise<ShopCustomer> {
+        return this.shopCustomerService.createCustomer(customerData);
     }
 
     @Post('help')
-    @HttpCode(201)
-    public async helpCustomer(@Req() request: Request): Promise<void> {
-        const email: string = request.body.email;
+    @HttpCode(HttpStatus.CREATED)
+    public async helpCustomer(
+        @Body() customerData: ShopCustomer
+    ): Promise<void> {
+        const email: string = customerData.email;
         const customer: ShopCustomer = await this.shopCustomerService.getCustomer(-1, email);
         if(!customer) throw new ShopCustomerWasNotFoundException();
 
@@ -43,7 +45,7 @@ export class ShopCustomerController {
         if(!orders) throw new ShopOrdersWereNotFoundException();
 
         const productFilenames = orders.map(so => so.product.filename);
-        const signedUrls = await this.gCloudStorageService.getSignedUrls(productFilenames);
+        const signedUrls = await this.gCloudStorageService.getSignedUrls('products', productFilenames);
 
         await this.mailService.sendMultiDownloadEmail(customer, orders, signedUrls);
     }

@@ -27,8 +27,8 @@ export class PortfolioComparisonService extends ComparisonService {
     };
 
     projects = (p1: PortfolioProject, p2: PortfolioProject) => {
-        if(p1.name > p2.name) return 1;
-        if(p1.name < p2.name) return -1;
+        if(p1.updated_at < p2.updated_at) return 1;
+        if(p1.updated_at > p2.updated_at) return -1;
 
         return 0;
     };

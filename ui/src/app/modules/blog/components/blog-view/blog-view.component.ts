@@ -3,11 +3,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '@ui/core/auth';
+import { Id } from '@ui/core/models/model';
+import { PortfolioProfileService } from '@ui/modules/portfolio/services';
 import {
     NotificationService,
     TrackingService
 } from '@ui/core/services';
-import { PortfolioProfileService } from '@ui/modules/portfolio/services';
 
 import { BlogPost, BlogTopic } from '../../models';
 import {
@@ -29,7 +30,9 @@ export class BlogViewComponent implements OnInit {
     posts: BlogPost[];
     topics: BlogTopic[];
 
-    activeTopicId: number = -1;
+    activeTopicId: Id = -1;
+
+    public isFilteringPosts: boolean = false;
 
     constructor(
         private authService: AuthService,
@@ -73,18 +76,27 @@ export class BlogViewComponent implements OnInit {
         return result;
     }
 
-    filterPosts(topicId: number): void {
+    filterPosts(topicId: Id): void {
+        this.activeTopicId = topicId;
+        this.isFilteringPosts = true;
+
         if(this.isAdmin) {
             this.blogApiService.getPosts(topicId, false).subscribe((res: BlogPost[]) => {
                 this.posts = res;
-                this.activeTopicId = topicId;
+                this.isFilteringPosts = false;
+            }, (error: HttpErrorResponse) => {
+                this.notificationService.createNotification(error.error.message);
+                this.isFilteringPosts = false;
+                this.activeTopicId = -1;
             });
         } else {
             this.blogApiService.getPosts(topicId).subscribe((res: BlogPost[]) => {
                 this.posts = res;
-                this.activeTopicId = topicId;
+                this.isFilteringPosts = false;
             }, (error: HttpErrorResponse) => {
                 this.notificationService.createNotification(error.error.message);
+                this.isFilteringPosts = false;
+                this.activeTopicId = -1;
             });
         }
     }
@@ -105,7 +117,7 @@ export class BlogViewComponent implements OnInit {
         });
     }
 
-    private removeTopic(id: number): void {
+    private removeTopic(id: Id): void {
         this.topics = this.topics.filter(t => t.id != id);
 
         this.posts = this.posts.filter(p => !p.topics.map(t => t.id).includes(id));

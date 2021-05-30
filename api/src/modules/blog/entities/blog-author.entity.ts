@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
+
+import { Id } from '@api/core/database/entity.service';
 
 @Entity('blog_author')
 export class BlogAuthor {
@@ -6,8 +8,8 @@ export class BlogAuthor {
         Object.assign(this, partial);
     }
 
-    @PrimaryGeneratedColumn()
-    public id?: number;
+    @PrimaryColumn({ type: 'varchar', length: 6 })
+    public id?: Id;
 
     @Column({ type: 'varchar', length: 50, nullable: false })
     public first_name: string;

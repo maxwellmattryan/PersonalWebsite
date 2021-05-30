@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { Id } from '@ui/core/models/model';
+
 @Injectable({
     providedIn: 'root'
 })
@@ -14,8 +16,8 @@ export class AuthService {
         return localStorage.getItem('id') != undefined && localStorage.getItem('username') != undefined;
     }
 
-    loginAdmin(id: number, username: string): void {
-        localStorage.setItem('id', id.toString());
+    loginAdmin(id: Id, username: string): void {
+        localStorage.setItem('id', <string>id);
         localStorage.setItem('username', username);
     }
 

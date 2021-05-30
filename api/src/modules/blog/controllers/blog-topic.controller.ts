@@ -1,8 +1,17 @@
-import { Controller, Post, HttpCode, UseGuards, Req, Put, Param, Delete, Get } from '@nestjs/common';
-
-import { Request } from 'express'
+import {
+    Controller,
+    Post,
+    HttpCode,
+    UseGuards,
+    Put,
+    Param,
+    Delete,
+    Get,
+    Body, HttpStatus,
+} from '@nestjs/common';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
+import { Id } from '@api/core/database/entity.service';
 
 import { BlogTopic } from '../entities/blog-topic.entity';
 import { BlogTopicService } from '../services/blog-topic.service';
@@ -14,25 +23,29 @@ export class BlogTopicController {
         private readonly blogTopicService: BlogTopicService
     ) { }
 
-    @Get('')
-    @HttpCode(200)
-    async getTopics(@Req() request: Request): Promise<BlogTopic[]> {
+    @Get()
+    @HttpCode(HttpStatus.OK)
+    async getTopics(): Promise<BlogTopic[]> {
         const topics = await this.blogTopicService.getTopics();
         if(topics.length == 0) throw new BlogTopicsWereNotFoundException();
 
         return topics;
     }
 
-    @Post('')
-    @HttpCode(201)
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
     @UseGuards(JwtAuthGuard)
-    async createTopic(@Req() request: Request): Promise<BlogTopic> {
-        return await this.blogTopicService.createTopic(request.body);
+    async createTopic(
+        @Body() topicData: BlogTopic
+    ): Promise<BlogTopic> {
+        return this.blogTopicService.createTopic(topicData);
     }
 
     @Get(':id')
     @HttpCode(200)
-    async getTopic(@Param('id') id: number, @Req() request: Request): Promise<BlogTopic> {
+    async getTopic(
+        @Param('id') id: Id
+    ): Promise<BlogTopic> {
         const topic = await this.blogTopicService.getTopic(id);
         if(!topic) throw new BlogTopicWasNotFoundException();
 
@@ -40,20 +53,26 @@ export class BlogTopicController {
     }
 
     @Put(':id')
-    @HttpCode(200)
+    @HttpCode(HttpStatus.OK)
     @UseGuards(JwtAuthGuard)
-    async updateTopic(@Param('id') id: number, @Req() request: Request): Promise<BlogTopic> {
-        const topic = await this.blogTopicService.updateTopic(id, request.body);
+    async updateTopic(
+        @Param('id') id: Id,
+        @Body() topicData: BlogTopic
+    ): Promise<BlogTopic> {
+        const topic = await this.blogTopicService.updateTopic(id, topicData);
         if(!topic) throw new BlogTopicCouldNotBeUpdated();
 
         return topic;
     }
 
     @Delete(':id')
-    @HttpCode(204)
+    @HttpCode(HttpStatus.NO_CONTENT)
     @UseGuards(JwtAuthGuard)
-    async deleteTopic(@Param('id') id: number, @Req() request: Request): Promise<void> {
-        if(!(await this.blogTopicService.existsInTable(id))) throw new BlogTopicWasNotFoundException();
+    async deleteTopic(
+        @Param('id') id: Id
+    ): Promise<void> {
+        if(!(await this.blogTopicService.existsInTable(id)))
+            throw new BlogTopicWasNotFoundException();
 
         await this.blogTopicService.deleteTopic(id);
     }

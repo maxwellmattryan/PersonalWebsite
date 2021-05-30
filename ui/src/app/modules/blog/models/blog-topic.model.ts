@@ -1,3 +1,4 @@
+import { Id } from '@ui/core/models/model';
 import { Deserializable } from '@ui/core/models/deserializable.model';
 
 export class BlogTopic implements Deserializable {
@@ -11,7 +12,7 @@ export class BlogTopic implements Deserializable {
         return this;
     }
 
-    id?: number;
+    id?: Id;
 
     name: string;
     description: string;

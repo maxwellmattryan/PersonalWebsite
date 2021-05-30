@@ -1,4 +1,6 @@
+import { Id } from '@api/core/database/entity.service';
+
 export interface TokenPayload {
-    adminId: number;
+    id: Id;
     username: string;
 }

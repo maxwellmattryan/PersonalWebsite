@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '@ui/core/auth';
+import { Id } from '@ui/core/models/model';
 import {
     NotificationService,
     ValidationService,
@@ -36,6 +37,8 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
     profileForm: FormGroup;
 
     isLoaded: boolean = false;
+
+    public isSubmittingForm: boolean = false;
 
     constructor(
         private router: Router,
@@ -106,7 +109,7 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
         });
     }
 
-    private setProjectControls(associatedProjectIds: number[]): void {
+    private setProjectControls(associatedProjectIds: Id[]): void {
         this.projectData.forEach(p => {
             const control: FormControl = this.formBuilder.control(associatedProjectIds.includes(p.id));
             (this.profileForm.controls.projects as FormArray).push(control);
@@ -126,7 +129,7 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
     private buildProfileForm(): void {
         if(this.profileData) {
             this.profileForm = this.formBuilder.group({
-                name:         this.formBuilder.control(this.profileData.name,                [Validators.required]),
+                name:         this.formBuilder.control(this.profileData.name,                [Validators.required, Validators.maxLength(50)]),
                 status:       this.formBuilder.control(this.profileData.status.status,       [Validators.required]),
                 projects:     this.formBuilder.array  (this.projectData,                     [this.validationService.hasMinElements(1)]),
                 tagline:      this.formBuilder.control(this.profileData.tagline,             [Validators.required]),
@@ -137,7 +140,7 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
             });
         } else {
             this.profileForm = this.formBuilder.group({
-                name:         this.formBuilder.control('',         [Validators.required]),
+                name:         this.formBuilder.control('',         [Validators.required, Validators.maxLength(50)]),
                 status:       this.formBuilder.control('ACTIVE',   [Validators.required]),
                 projects:     this.formBuilder.array  ([],         [this.validationService.hasMinElements(1)]),
                 tagline:      this.formBuilder.control('',         [Validators.required]),
@@ -150,6 +153,8 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
     }
 
     onSubmit(): void {
+        this.isSubmittingForm = true;
+
         const profile = this.buildFormProfileData();
 
         if(profile.status.status === 'ACTIVE')
@@ -157,11 +162,13 @@ export class PortfolioProfileEditorComponent implements OnDestroy, OnInit {
 
         if(profile.id === undefined) {
             this.portfolioApiService.createProfile(profile).subscribe((res: PortfolioProfile) => {
+                this.isSubmittingForm = false;
                 this.notificationService.createNotification('Successfully created new profile!');
                 this.router.navigate(['admin']);
             });
         } else {
             this.portfolioApiService.updateProfile(profile).subscribe((res: PortfolioProfile) => {
+                this.isSubmittingForm = false;
                 this.notificationService.createNotification('Successfully updated existing profile!');
                 this.router.navigate(['admin']);
             });

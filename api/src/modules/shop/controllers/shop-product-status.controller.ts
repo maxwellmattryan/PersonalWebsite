@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, Req } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Req } from '@nestjs/common';
 
 import { Request } from 'express';
 
@@ -12,11 +12,11 @@ export class ShopProductStatusController {
         private readonly shopProductStatusService: ShopProductStatusService
     ) { }
 
-    @Get('')
-    @HttpCode(200)
+    @Get()
+    @HttpCode(HttpStatus.OK)
     public async getStatuses(@Req() request: Request): Promise<ShopProductStatus[]> {
         const statuses = await this.shopProductStatusService.getStatuses();
-        if(!statuses) throw new ShopProductStatusesWereNotFoundException();
+        if(statuses.length === 0) throw new ShopProductStatusesWereNotFoundException();
 
         return statuses;
     }

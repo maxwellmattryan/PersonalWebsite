@@ -10,12 +10,19 @@
             <div class='blog__filter-btn-row blog__filter-btn-row--all'>
                 <button
                         aria-label='Select all topics'
-                        [ngClass]="{'btn--active': activeTopicId === -1, 'blog__filter-btn--half': isAdmin}"
+                        [ngClass]="{'btn-loading': isFilteringPosts && activeTopicId === -1, 'btn--active': activeTopicId === -1, 'blog__filter-btn--half': isAdmin}"
                         class='btn blog__filter-btn blog__filter-btn--all'
                         (click)='filterPosts(-1)'
                         type='button'
                 >
-                    All
+                    <ng-container *ngIf='isFilteringPosts && activeTopicId === -1'>
+                        <div class='btn-loader-container'>
+                            <div class='btn-loader'></div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf='!(isFilteringPosts && activeTopicId === -1)'>
+                        All
+                    </ng-container>
                 </button>
 
                 <ng-container *ngIf='isAdmin'>
@@ -28,12 +35,19 @@
             <div class='blog__filter-btn-row' *ngFor='let topic of topics trackBy: this.trackingService.objectById'>
                 <button
                     aria-label='Filter blog topic'
-                    [ngClass]="{'btn--active': topic.id === activeTopicId, 'blog__filter-btn--half': isAdmin}"
+                    [ngClass]="{'btn-loading': isFilteringPosts && topic.id === activeTopicId, 'btn--active': topic.id === activeTopicId, 'blog__filter-btn--half': isAdmin}"
                     class='btn blog__filter-btn'
                     (click)='filterPosts(topic.id)'
                     type='button'
                 >
-                    {{ topic.name }}
+                    <ng-container *ngIf='isFilteringPosts && topic.id === activeTopicId'>
+                        <div class='btn-loader-container'>
+                            <div class='btn-loader'></div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf='!(isFilteringPosts && topic.id === activeTopicId)'>
+                        {{ topic.name }}
+                    </ng-container>
                 </button>
     
                 <ng-container *ngIf='isAdmin'>

@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
@@ -33,7 +32,7 @@ export class HomeComponent implements OnInit {
             this.homepage.profile.technologies = res.profile.technologies.sort(this.portfolioComparisonService.profileTechnologies);
 
             this.portfolioProfileService.setActiveProfile(this.homepage.profile);
-            this.titleService.setTitle(`${this.homepage.profile.name} Blog & Portfolio | Matthew Maxwell`);
+            this.titleService.setTitle(`${this.homepage.profile.name} Blog, Portfolio, and Shop | Matthew Maxwell`);
 
             this.isLoaded = true;
         });

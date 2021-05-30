@@ -24,4 +24,4 @@ COPY . .
 
 COPY --from=builder /usr/src/app/dist ./dist
 
-CMD ["npm", "run", "start:prod"]
+CMD ["npm", "run", "start"]

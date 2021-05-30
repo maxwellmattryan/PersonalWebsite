@@ -4,26 +4,29 @@ import { NgModule } from '@angular/core';
 
 import { CoreModule } from '@ui/core/core.module';
 
+import { FileModule } from '@ui/modules/file/file.module';
+
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
 
 import {
-    DashboardComponent,
-    LoginComponent,
-    RegisterComponent
+    DashboardViewComponent,
+    LoginViewComponent,
+    RegisterViewComponent
 } from './components';
 
 @NgModule({
     declarations: [
         AdminComponent,
-        DashboardComponent,
-        LoginComponent,
-        RegisterComponent
+        DashboardViewComponent,
+        LoginViewComponent,
+        RegisterViewComponent
     ],
     imports: [
         AdminRoutingModule,
         CommonModule,
         CoreModule,
+        FileModule,
         FormsModule
     ]
 })

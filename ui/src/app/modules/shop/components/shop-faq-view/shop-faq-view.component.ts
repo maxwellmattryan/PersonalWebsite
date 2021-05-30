@@ -5,9 +5,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { NotificationService, ObfuscationService } from '@ui/core/services';
 
+import { ShopCustomer } from '../../models';
 import { ShopApiService } from '../../services';
 
-export type FaqCategory = 'bugs' | 'compatibility' | 'installation' | 'purchasing';
+export type FaqCategory = | 'compatibility' | 'installation' | 'purchasing' | 'troubleshooting';
 
 @Component({
     selector: 'ui-shop-faq-view',
@@ -51,8 +52,8 @@ export class ShopFaqViewComponent implements OnInit {
 
         setTimeout(this.timeoutFn, 10000);
 
-        const email = (this.emailForm.value as any).email;
-        this.shopApiService.helpCustomer(email).subscribe((res: void) => {
+        const customerData = new ShopCustomer({ email: (this.emailForm.value as any).email });
+        this.shopApiService.helpCustomer(customerData).subscribe((res: void) => {
             this.isSubmittingEmail = false;
             this.initEmailForm();
             this.notificationService.createNotification('Successfully sent download URL(s) to your email! It may take a moment to show up in your inbox.', '', 3600);

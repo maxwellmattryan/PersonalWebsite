@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
+import { Id } from '@ui/core/models/model';
 import { SeoService, TrackingService } from '@ui/core/services';
 
 import { BlogPost } from '../../models';
@@ -13,7 +14,7 @@ import { BlogComparisonService, BlogTopicService } from '../../services';
 })
 export class BlogPostCollectionComponent implements OnInit {
     @Input() posts: BlogPost[];
-    
+
     @Input() showPreview: boolean;
     @Input() showTopics: boolean;
     @Input() showReadmore: boolean;
@@ -48,7 +49,7 @@ export class BlogPostCollectionComponent implements OnInit {
         }
     }
 
-    getPostUrl(id: number, name: string): string {
+    getPostUrl(id: Id, name: string): string {
         return `${this.baseRoute}/${this.seoService.getCanonicalUrl(id, name)}`;
     }
 }

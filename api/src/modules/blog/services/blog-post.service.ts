@@ -3,20 +3,21 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
+import { EntityService, Id } from '@api/core/database/entity.service';
 import { PostgresErrorCodes } from '@api/core/database/postgres-error-codes.enum';
-import { InternalServerErrorException } from '@api/core/http/exceptions/http.exception';
+import { InternalServerErrorException } from '@api/core/http/http.exception';
 import { BlogPostAlreadyExistsException } from '../exceptions/blog-post.exception';
 
 import { BlogPost } from '../entities/blog-post.entity';
 
 @Injectable()
-export class BlogPostService {
+export class BlogPostService extends EntityService<BlogPost> {
     constructor(
         @InjectRepository(BlogPost)
         private readonly blogPostRepository: Repository<BlogPost>
-    ) { }
+    ) { super(); }
 
-    public async existsInTable(id: number): Promise<boolean> {
+    public async existsInTable(id: Id): Promise<boolean> {
         return await this.blogPostRepository
             .createQueryBuilder('bp')
             .where('bp.id = :id', { id: id })
@@ -24,9 +25,12 @@ export class BlogPostService {
     }
 
     public async createPost(postData: BlogPost): Promise<BlogPost> {
-        const post: BlogPost = this.blogPostRepository.create(postData);
+        const post: BlogPost = this.createEntity(
+            this.blogPostRepository.create(postData),
+            ['title']
+        );
 
-        return await this.blogPostRepository.save(post)
+        return this.blogPostRepository.save(post)
             .catch((error) => {
                 if(error.code === PostgresErrorCodes.UNIQUE_VIOLATION) {
                     throw new BlogPostAlreadyExistsException();
@@ -36,7 +40,7 @@ export class BlogPostService {
             })
     }
 
-    public async deletePost(id: number): Promise<void> {
+    public async deletePost(id: Id): Promise<void> {
         await this.blogPostRepository
             .createQueryBuilder()
             .delete()
@@ -45,8 +49,8 @@ export class BlogPostService {
             .execute();
     }
 
-    public async getPost(id: number): Promise<BlogPost> {
-        return await this.blogPostRepository
+    public async getPost(id: Id): Promise<BlogPost> {
+        return this.blogPostRepository
             .createQueryBuilder('bp')
             .leftJoinAndSelect('bp.author', 'ba')
             .leftJoinAndSelect('bp.status', 'bps')
@@ -56,7 +60,7 @@ export class BlogPostService {
     }
 
     public async getPosts(): Promise<BlogPost[]> {
-        return await this.blogPostRepository
+        return this.blogPostRepository
             .createQueryBuilder('bp')
             .leftJoinAndSelect('bp.author', 'ba')
             .leftJoinAndSelect('bp.status', 'bps')
@@ -66,28 +70,30 @@ export class BlogPostService {
     }
 
     public async getPostsByStatus(status: string): Promise<BlogPost[]> {
-        return (await this.blogPostRepository
+        return this.blogPostRepository
             .createQueryBuilder('bp')
             .leftJoinAndSelect('bp.author', 'ba')
             .leftJoinAndSelect('bp.status', 'bps')
             .innerJoinAndSelect('bp.topics', 'bt')
+            .where('bps.status = :status', { status: status })
             .orderBy('bp.updated_at', 'DESC')
-            .getMany()).filter(p => p.status.status === status);
+            .getMany();
     }
 
-    public async getPostsByStatusAndTopic(status: string, topicId: number): Promise<BlogPost[]> {
-        return (await this.blogPostRepository
+    public async getPostsByStatusAndTopic(status: string, topicId: Id): Promise<BlogPost[]> {
+        return this.blogPostRepository
             .createQueryBuilder('bp')
             .leftJoinAndSelect('bp.author', 'ba')
             .leftJoinAndSelect('bp.status', 'bps')
             .innerJoinAndSelect('bp.topics', 'bt')
             .where('bt.id = :id', { id: topicId })
+            .andWhere('bps.status = :status', { status: status })
             .orderBy('bp.updated_at', 'DESC')
-            .getMany()).filter(p => p.status.status === status);
+            .getMany();
     }
 
-    public async getPostsByTopic(topicId: number): Promise<BlogPost[]> {
-        return await this.blogPostRepository
+    public async getPostsByTopic(topicId: Id): Promise<BlogPost[]> {
+        return this.blogPostRepository
             .createQueryBuilder('bp')
             .leftJoinAndSelect('bp.author', 'ba')
             .leftJoinAndSelect('bp.status', 'bps')
@@ -97,9 +103,7 @@ export class BlogPostService {
             .getMany();
     }
 
-    public async updatePost(id: number, postData: BlogPost): Promise<BlogPost> {
-        await this.blogPostRepository.save(postData);
-
-        return this.getPost(id);
+    public async updatePost(id: Id, postData: BlogPost): Promise<BlogPost> {
+        return this.blogPostRepository.save(postData);
     }
 }

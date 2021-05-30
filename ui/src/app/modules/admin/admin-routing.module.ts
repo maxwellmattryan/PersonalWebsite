@@ -4,9 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 
 import {
-    DashboardComponent,
-    LoginComponent,
-    RegisterComponent
+    DashboardViewComponent,
+    LoginViewComponent,
+    RegisterViewComponent
 } from './components';
 
 const routes: Routes = [
@@ -16,15 +16,15 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                component: DashboardComponent
+                component: DashboardViewComponent
             },
             {
                 path: 'login',
-                component: LoginComponent
+                component: LoginViewComponent
             },
             {
                 path: 'register',
-                component: RegisterComponent
+                component: RegisterViewComponent
             }
         ]
     }

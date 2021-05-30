@@ -10,7 +10,7 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build:prod
+RUN npm run build
 
 ## PRODUCTION STAGE ##
 FROM node:15.10.0-alpine3.10 AS prod
@@ -26,4 +26,4 @@ COPY . .
 
 COPY --from=builder /usr/src/app/dist ./dist
 
-CMD ["npm", "run", "start:prod"]
+CMD ["npm", "run", "start"]

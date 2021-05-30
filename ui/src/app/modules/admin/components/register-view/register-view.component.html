@@ -1,0 +1,37 @@
+<div class='section register'>
+    <h1 class='register__header'>Register</h1>
+
+    <div class="line-divider"></div>
+
+    <form class='register__form' (ngSubmit)='onRegisterSubmit()'>
+        <div class='form-field register__form-field'>
+            <label>Username</label>
+            <br><br>
+            <input [(ngModel)]='username' name='username' required autofocus>
+        </div>
+        <br>
+
+        <div class='form-field form-field--password register__form-field'>
+            <label>Password</label>
+            <br><br>
+            <input [(ngModel)]='password' name='password' type='password' required>
+        </div>
+        <br>
+            
+        <button
+            aria-label='Register submit'
+            [ngClass]="{'btn-loading': isRegistering, 'btn--inactive': !validationService.hasValidAdminCredentials(username, password)}"
+            class='btn register__form-btn'
+            [disabled]='!validationService.hasValidAdminCredentials(username, password)'
+        >
+            <ng-container *ngIf='isRegistering'>
+                <div class='btn-loader-container'>
+                    <div class='btn-loader'></div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf='!isRegistering'>
+                Submit
+            </ng-container>
+        </button>
+    </form>
+</div>

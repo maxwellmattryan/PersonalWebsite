@@ -1,3 +1,4 @@
+import { Id } from '@ui/core/models/model';
 import { Deserializable } from '@ui/core/models/deserializable.model';
 
 import { BlogAuthor } from './blog-author.model';
@@ -20,7 +21,7 @@ export class BlogPost implements Deserializable {
         return this;
     }
 
-    id?: number;
+    id?: Id;
 
     author: BlogAuthor;
     status: BlogPostStatus;

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from '@ui/environments/environment';
 import { ApiService } from '@ui/core/http';
+import { Id } from '@ui/core/models/model';
 
 import { BlogAuthor, BlogPost, BlogPostStatus, BlogTopic } from '../models';
 
@@ -29,19 +30,19 @@ export class BlogApiService extends ApiService {
         );
     }
 
-    deletePost(id: number): Observable<any> {
+    deletePost(id: Id): Observable<any> {
         return this.http.delete<any>(`${environment.API_URL}/blog/posts/${id}`);
     }
 
-    getPost(id: number): Observable<BlogPost> {
+    getPost(id: Id): Observable<BlogPost> {
         return this.http.get<BlogPost>(`${environment.API_URL}/blog/posts/${id}`);
     }
 
-    getPosts(topicId: number = -1, publishedOnly: boolean = true): Observable<BlogPost[]> {
+    getPosts(topicId: Id = -1, publishedOnly: boolean = true): Observable<BlogPost[]> {
         let params = new HttpParams();
 
-        if(topicId != -1) params = params.set('topic_id', topicId.toString());
-        if(publishedOnly) params = params.set('published', 'true');
+        if(topicId != -1) params = params.set('topicId', topicId.toString());
+        if(publishedOnly) params = params.set('isPublished', 'true');
 
         return this.http.get<BlogPost[]>(
             `${environment.API_URL}/blog/posts`,
@@ -50,7 +51,7 @@ export class BlogApiService extends ApiService {
     }
 
     getPostStatuses(): Observable<BlogPostStatus[]> {
-        return this.http.get<BlogPostStatus[]>(`${environment.API_URL}/blog/posts/statuses`);
+        return this.http.get<BlogPostStatus[]>(`${environment.API_URL}/blog/post-statuses`);
     }
 
     updatePost(post: BlogPost): Observable<BlogPost> {
@@ -73,7 +74,7 @@ export class BlogApiService extends ApiService {
         );
     }
 
-    deleteTopic(id: number): Observable<any> {
+    deleteTopic(id: Id): Observable<any> {
         return this.http.delete<any>(`${environment.API_URL}/blog/topics/${id}`);
     }
 

@@ -23,48 +23,54 @@ the information in here has to be consistent to have proper SEO optimization -->
 
     <!-- Projects -->
     <url>
-        <loc>https://mattmaxwell.dev/projects/1/rotor</loc>
+        <loc>https://mattmaxwell.dev/portfolio/projects/EPTXIK/rotor</loc>
         <lastmod>2020-09-13T00:05:09.366202</lastmod>
         <priority>0.3</priority>
     </url>
 
     <url>
-        <loc>https://mattmaxwell.dev/projects/2/counterplay</loc>
+        <loc>https://mattmaxwell.dev/portfolio/projects/AMIBQH/counterplay</loc>
         <lastmod>2020-09-13T00:05:09.366202</lastmod>
         <priority>0.3</priority>
     </url>
 
     <url>
-        <loc>https://mattmaxwell.dev/projects/3/operation-home</loc>
+        <loc>https://mattmaxwell.dev/portfolio/projects/WTWJN9/operation-home</loc>
         <lastmod>2020-09-13T00:05:09.366202</lastmod>
         <priority>0.3</priority>
     </url>
 
     <url>
-        <loc>https://mattmaxwell.dev/projects/4/cozy-cat-cafe</loc>
+        <loc>https://mattmaxwell.dev/portfolio/projects/45G83G/cozy-cat-cafe</loc>
         <lastmod>2020-09-13T00:05:09.366202</lastmod>
         <priority>0.3</priority>
     </url>
 
     <url>
-        <loc>https://mattmaxwell.dev/projects/5/green-foot</loc>
+        <loc>https://mattmaxwell.dev/portfolio/projects/LRJXCE/green-foot</loc>
         <lastmod>2020-09-13T00:05:09.366202</lastmod>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://mattmaxwell.dev/portfolio/projects/B45U65/hellotangle</loc>
+        <lastmod>2021-03-30T00:05:09.366202</lastmod>
         <priority>0.3</priority>
     </url>
 
     <!-- Blog posts -->
     <url>
-        <loc>https://mattmaxwell.dev/blog/posts/1/json-web-token-jwt-authentication-with-nestjs</loc>
+        <loc>https://mattmaxwell.dev/blog/posts/Q1ANDW/json-web-token-jwt-authentication-with-nestjs</loc>
         <lastmod>2020-09-14T00:51:32.093600</lastmod>
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>https://mattmaxwell.dev/blog/posts/2/the-fundamental-concepts-of-audio-programming</loc>
+        <loc>https://mattmaxwell.dev/blog/posts/465KY4/the-fundamental-concepts-of-audio-programming</loc>
         <lastmod>2020-09-14T01:05:29.653050</lastmod>
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>https://mattmaxwell.dev/blog/posts/3/creating-a-continuous-integration-ci-pipeline-for-juce-plugins</loc>
+        <loc>https://mattmaxwell.dev/blog/posts/568221/creating-a-continuous-integration-ci-pipeline-for-juce-plugins</loc>
         <lastmod>2020-10-15 02:27:25.907561</lastmod>
         <priority>0.4</priority>
     </url>
