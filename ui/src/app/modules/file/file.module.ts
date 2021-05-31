@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { MaterialModule } from "@ui/modules";
+
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { FileUploadModalComponent } from './components';
-
-import { FileService } from './services';
+import { FileApiService } from './services';
 import { FileDeleteModalComponent } from './components/file-delete-modal/file-delete-modal.component';
 
 @NgModule({
     imports: [
         CommonModule,
+        MaterialModule,
         ReactiveFormsModule
     ],
     exports: [
@@ -21,7 +24,7 @@ import { FileDeleteModalComponent } from './components/file-delete-modal/file-de
         FileDeleteModalComponent
     ],
     providers: [
-        FileService
+        FileApiService
     ]
 })
 export class FileModule { }

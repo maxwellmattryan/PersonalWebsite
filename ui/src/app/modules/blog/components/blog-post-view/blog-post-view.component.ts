@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '@ui/core/auth';
 import { NotificationService, SeoService, TrackingService } from '@ui/core/services';
 
-import { FileService } from '@ui/modules/file/services';
+import { FileApiService } from '@ui/modules/file/services';
 
 import { BlogPost } from '../../models';
 import { BlogApiService, BlogComparisonService, BlogEditorService, BlogTopicService } from '../../services';
@@ -30,7 +30,7 @@ export class BlogPostViewComponent implements OnInit {
         private blogComparisonService: BlogComparisonService,
         public blogTopicService: BlogTopicService,
         private changeDetectorRef: ChangeDetectorRef,
-        public fileService: FileService,
+        public fileService: FileApiService,
         private notificationService: NotificationService,
         public seoService: SeoService,
         private titleService: Title,

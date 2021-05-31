@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import { NotificationService } from '@ui/core/services';
 
-import { FileService } from '../../services';
+import { FileApiService } from '../../services';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -19,7 +19,7 @@ export class FileDeleteModalComponent extends ModalComponent<string> {
         private readonly changeDetectorRef: ChangeDetectorRef,
         protected readonly elem: ElementRef,
         protected readonly formBuilder: FormBuilder,
-        private readonly fileService: FileService,
+        private readonly fileService: FileApiService,
         private readonly notificationService: NotificationService
     ) {
         super(elem, formBuilder);

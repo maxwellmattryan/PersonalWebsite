@@ -3,7 +3,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 import { AuthService } from '@ui/core/auth';
 import { SeoService, TrackingService } from '@ui/core/services';
 
-import { FileService } from '@ui/modules/file/services';
+import { FileApiService } from '@ui/modules/file/services';
 import { PortfolioComparisonService } from '@ui/modules/portfolio/services';
 
 import { PortfolioProject } from '../../models';
@@ -19,7 +19,7 @@ export class PortfolioProjectCollectionComponent implements OnInit {
 
     constructor(
         public readonly authService: AuthService,
-        public readonly fileService: FileService,
+        public readonly fileService: FileApiService,
         private readonly portfolioComparisonService: PortfolioComparisonService,
         private readonly seoService: SeoService,
         public readonly trackingService: TrackingService

@@ -118,6 +118,13 @@
     margin-right: $half-margin;
 }
 
+.editor__form-field-row {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 @media only screen and (min-width: 768px) {
     ::ng-deep .section-divider {
         height: 14vh !important;
