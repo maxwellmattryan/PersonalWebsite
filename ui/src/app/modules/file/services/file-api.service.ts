@@ -6,6 +6,7 @@ import { ApiService } from '@ui/core/http';
 
 import { FileData } from '../components/file-upload-modal/file-upload-modal.component';
 import { Observable } from 'rxjs';
+import { Bucket } from "@ui/modules/file/file.type";
 
 export type ImageFormat = 'png' | 'webp';
 
@@ -34,11 +35,10 @@ export class FileApiService extends ApiService {
     public uploadFile(formData: FormData, fileData: FileData): Observable<FileResponse> {
         const headers = this.contentTypeHeader('multipart/form-data');
 
-        let params = new HttpParams();
-        params = params
-            .set('type', fileData.type)
+        let params = new HttpParams()
+            .set('bucket', fileData.bucket)
             .set('visibility', fileData.visibility)
-            .set('dir', fileData.dir)
+            .set('dir', fileData.dir);
 
         return this.http.post<FileResponse>(
             `${environment.API_URL}/files/upload`,
@@ -47,9 +47,10 @@ export class FileApiService extends ApiService {
         );
     }
 
-    public deleteFile(uri: string): Observable<void> {
-        let params = new HttpParams();
-        params = params.set('uri', uri);
+    public deleteFile(bucket: string, uri: string): Observable<void> {
+        let params = new HttpParams()
+            .set('bucket', bucket)
+            .set('uri', uri);
 
         return this.http.delete<void>(
             `${environment.API_URL}/files/delete`,

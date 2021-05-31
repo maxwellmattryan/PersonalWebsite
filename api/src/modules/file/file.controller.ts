@@ -36,26 +36,26 @@ export class FileController {
     @UseInterceptors(FileInterceptor('file'))
     public async uploadFile(
         @UploadedFile() file: Express.Multer.File,
-        @Query('type') type: BucketType,
+        @Query('bucket') bucket: BucketType,
         @Query('visibility') visibility: BucketVisibility,
         @Query('dir') directory: string,
         @Req() request: Request
     ): Promise<FileResponse> {
         if(!this.uriRegex.test(directory)) throw new InvalidFileUriException();
 
-        return { url: await this.gCloudStorageService.uploadFile(type, visibility, file, directory) };
+        return { url: await this.gCloudStorageService.uploadFile(bucket, visibility, file, directory) };
     }
 
     @Delete('delete')
     @HttpCode(HttpStatus.NO_CONTENT)
     @UseGuards(JwtAuthGuard)
     public async deleteFile(
-        @Query('type') type: BucketType,
+        @Query('bucket') bucket: BucketType,
         @Query('uri') uri: string,
         @Req() request: Request
     ): Promise<void> {
         if(!this.uriRegex.test(uri)) throw new InvalidFileUriException();
 
-        await this.gCloudStorageService.deleteFile(type, uri);
+        await this.gCloudStorageService.deleteFile(bucket, uri);
     }
 }

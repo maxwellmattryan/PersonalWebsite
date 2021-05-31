@@ -11,6 +11,9 @@
 
         <div class='modal__content'>
             <h1 class='modal__header'>Upload File</h1>
+            <div class='modal__info'>
+                Please select a file and specify a bucket, visibility, and path for it, and it will be uploaded to Cloud Storage.
+            </div>
 
             <form class='editor__form' [formGroup]='modalForm' (ngSubmit)='submitModalForm()' enctype='multipart/form-data'>
                 <div class='form-field editor__form-field'>
@@ -36,9 +39,9 @@
 
                 <div class='form-field editor__form-field-row'>
                     <div class="form-field editor__form-field">
-                        <label class='form-field-label editor__form-field-label'>Type</label>
+                        <label class='form-field-label editor__form-field-label'>Bucket</label>
                         <br><br>
-                        <mat-radio-group formControlName='type' name='type' required>
+                        <mat-radio-group formControlName='bucket' name='bucket' required>
                             <mat-radio-button
                                 *ngFor='let b of buckets trackBy: this.trackingService.objectById'
                                 [value]='b'
