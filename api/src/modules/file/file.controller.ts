@@ -43,7 +43,7 @@ export class FileController {
     ): Promise<FileResponse> {
         if(!this.uriRegex.test(directory)) throw new InvalidFileUriException();
 
-        return { url: this.gCloudStorageService.uploadFile(type, visibility, file, directory) };
+        return { url: await this.gCloudStorageService.uploadFile(type, visibility, file, directory) };
     }
 
     @Delete('delete')

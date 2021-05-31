@@ -5,6 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { Bucket, File, GetSignedUrlConfig, Storage } from '@google-cloud/storage';
 
 import internal from 'stream';
+import { CannotModifyFilePermissions } from "@api/modules/file/file.exception";
 
 export type BucketCredentials = 'admin' | 'customer';
 export type BucketType = 'assets' | 'files' | 'products';
@@ -53,18 +54,31 @@ export class GCloudStorageService {
         }
     }
 
-    public uploadFile(bucketType: BucketType, visibility: BucketVisibility, file: Express.Multer.File, directory: string): string {
+    public async uploadFile(bucketType: BucketType, visibility: BucketVisibility, file: Express.Multer.File, directory: string): Promise<string> {
         const { originalname, buffer } = file;
         const uri: string = `${directory}/${originalname.replace(/ /g, '-')}`;
 
         const bucket: Bucket = this.getBucket(bucketType, 'admin');
         const blob: File = bucket.file(uri);
+
         const stream: internal.Writable = blob.createWriteStream({
             gzip: true,
             resumable: false
         });
-        stream
-            .on('finish', () => {
+        await stream
+            .on('finish', async () => {
+                const isPublic = visibility === 'public';
+                if(isPublic)
+                    await blob.makePublic()
+                        .catch((err) => {
+                            throw new CannotModifyFilePermissions();
+                        });
+                else
+                    await blob.makePrivate()
+                        .catch((err) => {
+                            throw new CannotModifyFilePermissions();
+                        });
+
                 return Promise.resolve(`${this.storageUrl}/${bucket.name}/${blob.name}`);
             })
             .on('error', () => {
@@ -77,7 +91,7 @@ export class GCloudStorageService {
         return `${this.storageUrl}/${bucket.name}/${blob.name}`;
     }
 
-    public deleteFile(bucketType: BucketType, uri: string): Promise<any> {
+    public async deleteFile(bucketType: BucketType, uri: string): Promise<any> {
         const bucket: Bucket = this.getBucket(bucketType, 'admin');
         const blob: File = bucket.file(uri);
 
