@@ -35,7 +35,10 @@ export class FileApiService extends ApiService {
         const headers = this.contentTypeHeader('multipart/form-data');
 
         let params = new HttpParams();
-        params = params.set('dir', fileData.dir);
+        params = params
+            .set('type', fileData.type)
+            .set('visibility', fileData.visibility)
+            .set('dir', fileData.dir)
 
         return this.http.post<FileResponse>(
             `${environment.API_URL}/files/upload`,

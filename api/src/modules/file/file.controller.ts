@@ -14,7 +14,7 @@ import { Request, Express } from 'express';
 import { Multer } from 'multer';
 
 import { JwtAuthGuard } from '@api/core/auth/jwt/jwt-auth.guard';
-import {BucketType, GCloudStorageService} from '@api/core/gcloud/gcloud-storage.service';
+import { BucketType, BucketVisibility, GCloudStorageService } from '@api/core/gcloud/gcloud-storage.service';
 
 import { InvalidFileUriException } from './file.exception';
 
@@ -37,12 +37,13 @@ export class FileController {
     public async uploadFile(
         @UploadedFile() file: Express.Multer.File,
         @Query('type') type: BucketType,
+        @Query('visibility') visibility: BucketVisibility,
         @Query('dir') directory: string,
         @Req() request: Request
     ): Promise<FileResponse> {
         if(!this.uriRegex.test(directory)) throw new InvalidFileUriException();
 
-        return { url: this.gCloudStorageService.uploadFile(type, file, directory) };
+        return { url: this.gCloudStorageService.uploadFile(type, visibility, file, directory) };
     }
 
     @Delete('delete')

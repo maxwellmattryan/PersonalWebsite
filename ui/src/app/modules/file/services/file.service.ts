@@ -6,7 +6,7 @@ import { Bucket, BucketVisibility } from "@ui/modules/file/file.type";
 })
 export class FileService {
     getBucketName(bucket: Bucket): string {
-        return `mattmaxwell-${bucket.charAt(0).toLowerCase()}${bucket.slice(1)}`;
+        return `${bucket.charAt(0).toLowerCase()}${bucket.slice(1)}`;
     }
 
     getBucketVisibility(visibility: BucketVisibility): string {

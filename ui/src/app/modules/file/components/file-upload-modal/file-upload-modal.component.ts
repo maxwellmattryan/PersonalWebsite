@@ -13,7 +13,7 @@ import { FileService } from "@ui/modules/file/services/file.service";
 
 export type FileData = {
     file: File,
-    bucket: string,
+    type: string,
     visibility: string,
     dir: string
 };
@@ -111,7 +111,7 @@ export class FileUploadModalComponent extends ModalComponent<File> {
     private buildModalFormData(): FileData {
         return {
             file: this.file,
-            bucket: this.fileService.getBucketName(this.modalForm.value.type),
+            type: this.fileService.getBucketName(this.modalForm.value.type),
             visibility: this.fileService.getBucketVisibility(this.modalForm.value.visibility),
             dir: this.modalForm.value.dir
         }

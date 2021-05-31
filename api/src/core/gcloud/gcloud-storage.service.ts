@@ -6,8 +6,9 @@ import { Bucket, File, GetSignedUrlConfig, Storage } from '@google-cloud/storage
 
 import internal from 'stream';
 
-export type BucketType = 'assets' | 'files' | 'products';
 export type BucketCredentials = 'admin' | 'customer';
+export type BucketType = 'assets' | 'files' | 'products';
+export type BucketVisibility = 'private' | 'public';
 
 @Injectable()
 export class GCloudStorageService {
@@ -52,7 +53,7 @@ export class GCloudStorageService {
         }
     }
 
-    public uploadFile(bucketType: BucketType, file: Express.Multer.File, directory: string): string {
+    public uploadFile(bucketType: BucketType, visibility: BucketVisibility, file: Express.Multer.File, directory: string): string {
         const { originalname, buffer } = file;
         const uri: string = `${directory}/${originalname.replace(/ /g, '-')}`;
 
