@@ -58,7 +58,7 @@ export class FileUploadModalComponent extends ModalComponent<File> {
 
         this.modalForm = this.formBuilder.group({
             file: this.formBuilder.control('', [Validators.required]),
-            bucket: this.formBuilder.control(Buckets[0], [Validators.required]),
+            bucket: this.formBuilder.control(this.buckets[0], [Validators.required]),
             visibility: this.formBuilder.control(BucketVisibilities[0], [Validators.required]),
             dir: this.formBuilder.control('', [Validators.required, Validators.pattern(pathRegex)])
         });

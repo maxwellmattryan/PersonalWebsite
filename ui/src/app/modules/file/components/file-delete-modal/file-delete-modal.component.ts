@@ -43,7 +43,7 @@ export class FileDeleteModalComponent extends ModalComponent<string> {
         const pathRegex: RegExp = /^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$))+/;
 
         this.modalForm = this.formBuilder.group({
-            bucket: this.formBuilder.control(Buckets[0], [Validators.required]),
+            bucket: this.formBuilder.control(this.buckets[0], [Validators.required]),
             uri: this.formBuilder.control('', [Validators.required, Validators.pattern(pathRegex)]),
         });
     }
