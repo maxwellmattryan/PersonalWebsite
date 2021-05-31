@@ -1,5 +1,11 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 
+export class CannotModifyFilePermissions extends BadRequestException {
+    constructor() {
+        super('Cannot modify the file\'s permissions (likely to due bucket ACL settings).');
+    }
+}
+
 export class CannotDeleteFolderException extends BadRequestException {
     constructor() {
         super('Cannot delete entire folders - only individual files.');

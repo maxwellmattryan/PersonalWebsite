@@ -5,34 +5,25 @@ import { ConfigService } from '@nestjs/config';
 import { Bucket, File, GetSignedUrlConfig, Storage } from '@google-cloud/storage';
 
 import internal from 'stream';
+import { CannotModifyFilePermissions } from "@api/modules/file/file.exception";
 
-type ApiStorageBucket = 'assets' | 'products';
+export type BucketCredentials = 'admin' | 'customer';
+export type BucketType = 'assets' | 'files' | 'products';
+export type BucketVisibility = 'private' | 'public';
 
 @Injectable()
 export class GCloudStorageService {
     private readonly logger = new ExtendedLogger('GCloudStorageService');
 
-    private readonly credentials: string;
-    private readonly storage: Storage;
     private readonly storageUrl: string = 'https://storage.googleapis.com'
-
-    private readonly ApiStorageBuckets  = new Map<ApiStorageBucket, string>([
-        ['assets', this.configService.get('GCLOUD_ASSETS_STORAGE_BUCKET')],
-        ['products', this.configService.get('GCLOUD_PRODUCTS_STORAGE_BUCKET')]
-    ]);
 
     constructor(
         private readonly configService: ConfigService
-    ) {
-        this.credentials = Buffer.from(this.configService.get<string>('GCLOUD_CREDENTIALS'), 'base64').toString();
-        this.storage = new Storage({
-            credentials: JSON.parse(this.credentials)
-        });
-    }
+    ) { }
 
-    public async getSignedUrl(bucketName: ApiStorageBucket, filename: string): Promise<string> {
-        const bucket: Bucket = this.getBucket(bucketName);
-        const blob = bucket.file(filename);
+    public async getSignedUrl(bucketType: BucketType, filename: string): Promise<string> {
+        const bucket: Bucket = this.getBucket(bucketType, 'customer');
+        const blob = bucket.file(`dist/${filename}`);
 
         const signedUrl = (await blob.getSignedUrl(this.signedUrlOptions())).toString();
 
@@ -41,8 +32,8 @@ export class GCloudStorageService {
         return signedUrl;
     }
 
-    public async getSignedUrls(bucketname: ApiStorageBucket, filenames: string[]): Promise<string[]> {
-        const bucket: Bucket = this.getBucket(bucketname);
+    public async getSignedUrls(bucketType: BucketType, filenames: string[]): Promise<string[]> {
+        const bucket: Bucket = this.getBucket(bucketType, 'customer');
         const signedUrlOptions = this.signedUrlOptions();
 
         let signedUrls: string[] = [];
@@ -63,18 +54,31 @@ export class GCloudStorageService {
         }
     }
 
-    public uploadFile(file: Express.Multer.File, directory: string): string {
+    public async uploadFile(bucketType: BucketType, visibility: BucketVisibility, file: Express.Multer.File, directory: string): Promise<string> {
         const { originalname, buffer } = file;
         const uri: string = `${directory}/${originalname.replace(/ /g, '-')}`;
 
-        const bucket: Bucket = this.getBucket('assets');
+        const bucket: Bucket = this.getBucket(bucketType, 'admin');
         const blob: File = bucket.file(uri);
+
         const stream: internal.Writable = blob.createWriteStream({
             gzip: true,
             resumable: false
         });
-        stream
-            .on('finish', () => {
+        await stream
+            .on('finish', async () => {
+                const isPublic = visibility === 'public';
+                if(isPublic)
+                    await blob.makePublic()
+                        .catch((err) => {
+                            throw new CannotModifyFilePermissions();
+                        });
+                else
+                    await blob.makePrivate()
+                        .catch((err) => {
+                            throw new CannotModifyFilePermissions();
+                        });
+
                 return Promise.resolve(`${this.storageUrl}/${bucket.name}/${blob.name}`);
             })
             .on('error', () => {
@@ -87,8 +91,8 @@ export class GCloudStorageService {
         return `${this.storageUrl}/${bucket.name}/${blob.name}`;
     }
 
-    public deleteFile(uri: string): Promise<any> {
-        const bucket: Bucket = this.getBucket('assets');
+    public async deleteFile(bucketType: BucketType, uri: string): Promise<any> {
+        const bucket: Bucket = this.getBucket(bucketType, 'admin');
         const blob: File = bucket.file(uri);
 
         return blob.delete()
@@ -100,7 +104,39 @@ export class GCloudStorageService {
             });
     }
 
-    private getBucket(bucketName: ApiStorageBucket): Bucket {
-        return this.storage.bucket(this.ApiStorageBuckets.get(bucketName));
+    private getBucket(bucketType: BucketType, bucketCredentials: BucketCredentials): Bucket {
+        const name = this.getBucketName(bucketType);
+        const credentials = this.getBucketCredentials(bucketCredentials);
+
+        const storage = new Storage({
+            credentials: JSON.parse(Buffer.from(credentials, 'base64').toString())
+        })
+
+        return storage.bucket(name);
+    }
+
+    private getBucketName(bucketType: BucketType): string {
+        switch(bucketType) {
+            default:
+            case 'assets':
+                return this.configService.get('GCLOUD_ASSETS_STORAGE_BUCKET');
+
+            case 'files':
+                return this.configService.get('GCLOUD_FILES_STORAGE_BUCKET');
+
+            case 'products':
+                return this.configService.get('GCLOUD_PRODUCTS_STORAGE_BUCKET');
+        }
+    }
+
+    private getBucketCredentials(bucketCredentials: BucketCredentials): string {
+        switch(bucketCredentials) {
+            default:
+            case 'admin':
+                return this.configService.get<string>('GCLOUD_ADMIN_CREDENTIALS');
+
+            case 'customer':
+                return this.configService.get<string>('GCLOUD_CUSTOMER_CREDENTIALS')
+        }
     }
 }

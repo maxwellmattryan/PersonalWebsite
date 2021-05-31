@@ -6,7 +6,7 @@ import { AuthService } from '@ui/core/auth';
 import { Id } from '@ui/core/models/model';
 import { NotificationService, SeoService, TrackingService } from '@ui/core/services';
 
-import { FileService } from '@ui/modules/file/services';
+import { FileApiService } from '@ui/modules/file/services';
 
 import { ShopCustomer, ShopProduct, ShopProductStatuses } from '../../models';
 import { ShopApiService, ShopCheckoutService, ShopEditorService } from '../../services';
@@ -30,7 +30,7 @@ export class ShopProductCollectionComponent implements OnInit {
 
     constructor(
         private readonly authService: AuthService,
-        public readonly fileService: FileService,
+        public readonly fileService: FileApiService,
         private readonly notificationService: NotificationService,
         private readonly seoService: SeoService,
         private readonly shopApiService: ShopApiService,

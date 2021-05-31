@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 
 import { TrackingService } from '@ui/core/services';
 
-import { FileService } from '@ui/modules/file/services';
+import { FileApiService } from '@ui/modules/file/services';
 
 import { PortfolioProfileTechnology } from '@ui/modules/portfolio/models';
 
@@ -18,7 +18,7 @@ export class HomeAboutComponent implements OnInit {
     @Input() imageUrl: string;
 
     constructor(
-        public readonly fileService: FileService,
+        public readonly fileService: FileApiService,
         public readonly trackingService: TrackingService
     ) { }
 

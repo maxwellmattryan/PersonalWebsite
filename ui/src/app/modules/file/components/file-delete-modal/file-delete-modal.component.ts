@@ -1,11 +1,12 @@
 import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 import { ModalComponent } from '@ui/core/components/modal/modal.component';
+import { HttpErrorResponse } from '@angular/common/http';
+
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { NotificationService } from '@ui/core/services';
-
-import { FileService } from '../../services';
-import { HttpErrorResponse } from '@angular/common/http';
+import { NotificationService, TrackingService } from '@ui/core/services';
+import { FileApiService, FileService } from '../../services';
+import { Buckets } from "@ui/modules/file/file.type";
 
 @Component({
     selector: 'ui-file-delete-modal',
@@ -15,12 +16,21 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class FileDeleteModalComponent extends ModalComponent<string> {
     public isDeletingFile: boolean = false;
 
+    /**
+     * NOTE: The buckets and visibilities are both copied so that they are
+     * accessible from the HTML template.
+     */
+
+    public buckets = Buckets;
+
     constructor(
         private readonly changeDetectorRef: ChangeDetectorRef,
         protected readonly elem: ElementRef,
         protected readonly formBuilder: FormBuilder,
+        private readonly fileApiService: FileApiService,
         private readonly fileService: FileService,
-        private readonly notificationService: NotificationService
+        private readonly notificationService: NotificationService,
+        public readonly trackingService: TrackingService
     ) {
         super(elem, formBuilder);
     }
@@ -30,9 +40,10 @@ export class FileDeleteModalComponent extends ModalComponent<string> {
     }
 
     protected buildModalForm(): void {
-        const pathRegex: RegExp = /^(?!\/)(?!.*(?:^|\/)\.\.\/).+/;
+        const pathRegex: RegExp = /^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$))+/;
 
         this.modalForm = this.formBuilder.group({
+            bucket: this.formBuilder.control(Buckets[0], [Validators.required]),
             uri: this.formBuilder.control('', [Validators.required, Validators.pattern(pathRegex)]),
         });
     }
@@ -54,8 +65,8 @@ export class FileDeleteModalComponent extends ModalComponent<string> {
     public submitModalForm() {
         this.isDeletingFile = true;
 
-        const uri = this.buildModalFormData();
-        this.fileService.deleteFile(uri).subscribe((res: void) => {
+        const { bucket, uri } = this.buildModalFormData();
+        this.fileApiService.deleteFile(bucket, uri).subscribe((res: void) => {
             this.notificationService.createNotification('Successfully deleted existing file!');
             this.resetModal();
         }, (error: HttpErrorResponse) => {
@@ -64,7 +75,10 @@ export class FileDeleteModalComponent extends ModalComponent<string> {
         });
     }
 
-    private buildModalFormData(): string {
-        return this.modalForm.value.uri;
+    private buildModalFormData(): { bucket: string, uri: string } {
+        return {
+            bucket: this.fileService.getBucketName(this.modalForm.value.bucket),
+            uri: this.modalForm.value.uri
+        };
     }
 }

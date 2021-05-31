@@ -3,14 +3,19 @@ import { ModalComponent } from '@ui/core/components/modal/modal.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { NotificationService } from '@ui/core/services';
-import { FileResponse } from '@ui/modules/file/services/file.service';
+import {NotificationService, TrackingService} from '@ui/core/services';
+import { FileResponse } from '@ui/modules/file/services/file-api.service';
 
-import { FileService } from '../../services';
+import { FileApiService } from '../../services';
+
+import { Buckets, BucketVisibilities } from "@ui/modules/file/file.type";
+import { FileService } from "@ui/modules/file/services/file.service";
 
 export type FileData = {
     file: File,
-    folder: string
+    bucket: string,
+    visibility: string,
+    dir: string
 };
 
 @Component({
@@ -24,12 +29,22 @@ export class FileUploadModalComponent extends ModalComponent<File> {
 
     private file: File;
 
+    /**
+     * NOTE: The buckets and visibilities are both copied so that they are
+     * accessible from the HTML template.
+     */
+
+    public buckets = Buckets;
+    public visibilities = BucketVisibilities;
+
     constructor(
         private readonly changeDetectorRef: ChangeDetectorRef,
         protected readonly elem: ElementRef,
+        private readonly fileApiService: FileApiService,
         private readonly fileService: FileService,
         protected readonly formBuilder: FormBuilder,
-        private readonly notificationService: NotificationService
+        private readonly notificationService: NotificationService,
+        public readonly trackingService: TrackingService
     ) {
         super(elem, formBuilder);
     }
@@ -39,11 +54,13 @@ export class FileUploadModalComponent extends ModalComponent<File> {
     }
 
     protected buildModalForm(): void {
-        const pathRegex: RegExp = /^(?!\/)(?!.*(?:^|\/)\.\.\/).+/;
+        const pathRegex: RegExp = /^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$))+/;
 
         this.modalForm = this.formBuilder.group({
             file: this.formBuilder.control('', [Validators.required]),
-            folder: this.formBuilder.control('', [Validators.required, Validators.pattern(pathRegex)])
+            bucket: this.formBuilder.control(Buckets[0], [Validators.required]),
+            visibility: this.formBuilder.control(BucketVisibilities[0], [Validators.required]),
+            dir: this.formBuilder.control('', [Validators.required, Validators.pattern(pathRegex)])
         });
     }
 
@@ -81,7 +98,7 @@ export class FileUploadModalComponent extends ModalComponent<File> {
         const formData = new FormData();
         formData.append('file', fileData.file, fileData.file.name);
 
-        this.fileService.uploadFile(formData, fileData).subscribe((res: FileResponse) => {
+        this.fileApiService.uploadFile(formData, fileData).subscribe((res: FileResponse) => {
             this.notificationService.createNotification('Successfully uploaded new file!', 'file', 30000, res.url);
             this.resetModal();
         }, (error: HttpErrorResponse) => {
@@ -94,7 +111,9 @@ export class FileUploadModalComponent extends ModalComponent<File> {
     private buildModalFormData(): FileData {
         return {
             file: this.file,
-            folder: this.modalForm.value.folder
+            bucket: this.fileService.getBucketName(this.modalForm.value.bucket),
+            visibility: this.fileService.getBucketVisibility(this.modalForm.value.visibility),
+            dir: this.modalForm.value.dir
         }
     }
 
