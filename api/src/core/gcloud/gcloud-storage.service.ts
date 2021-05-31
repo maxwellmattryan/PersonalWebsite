@@ -23,7 +23,7 @@ export class GCloudStorageService {
 
     public async getSignedUrl(bucketType: BucketType, filename: string): Promise<string> {
         const bucket: Bucket = this.getBucket(bucketType, 'customer');
-        const blob = bucket.file(filename);
+        const blob = bucket.file(`dist/${filename}`);
 
         const signedUrl = (await blob.getSignedUrl(this.signedUrlOptions())).toString();
 
