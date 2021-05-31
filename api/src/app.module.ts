@@ -38,6 +38,7 @@ import { ShopModule } from '@api/modules/shop/shop.module';
                 GCLOUD_CUSTOMER_CREDENTIALS: Joi.string().required(),
 
                 GCLOUD_ASSETS_STORAGE_BUCKET: Joi.string().required(),
+                GCLOUD_FILES_STORAGE_BUCKET: Joi.string().required(),
                 GCLOUD_PRODUCTS_STORAGE_BUCKET: Joi.string().required(),
 
                 STRIPE_API_URL: Joi.string().required(),

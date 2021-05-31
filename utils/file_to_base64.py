@@ -4,7 +4,7 @@
 import base64
 import os
 
-CREDENTIALS = '../conf/gcloud/administrator.json'
+CREDENTIALS = '../conf/gcloud/customer.json'
 
 def to_base_64(filepath: str) -> str:
     script_dir = os.path.dirname(__file__)
