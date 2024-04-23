@@ -20,7 +20,7 @@
                         "outputPath": "./dist",
                         "index": "src/index.html",
                         "main": "src/main.ts",
-                        "polyfills": "src/polyfills.ts",
+                        "polyfills": ["zone.js"],
                         "tsConfig": "tsconfig.app.json",
                         "aot": true,
                         "assets": [
@@ -42,7 +42,7 @@
                             ]
                         },
                         "scripts": [
-                            "node_modules/marked/lib/marked.js",
+                            "node_modules/marked/lib/marked.esm.js",
                             "node_modules/prismjs/prism.js",
                             "node_modules/prismjs/components/prism-markdown.min.js",
                             "node_modules/prismjs/components/prism-css.min.js",
@@ -166,5 +166,8 @@
             }
         }
     },
-    "defaultProject": "ui"
+    "defaultProject": "ui",
+    "cli": {
+      "analytics": false
+    }
 }

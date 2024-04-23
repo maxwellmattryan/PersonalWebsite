@@ -50,8 +50,8 @@ export function markedOptionsFactory(): MarkedOptions {
         gfm: true,
         breaks: false,
         pedantic: false,
-        smartLists: true,
-        smartypants: false,
+        // smartLists: true,
+        // smartypants: false,
     };
 }
 
@@ -66,10 +66,10 @@ export function markedOptionsFactory(): MarkedOptions {
         HttpClientModule,
         MarkdownModule.forRoot({
             loader: HttpClient,
-            markedOptions: {
-                provide: MarkedOptions,
-                useFactory: markedOptionsFactory
-            }
+            // markedOptions: {
+            //     provide: MarkedOptions,
+            //     useFactory: markedOptionsFactory
+            // }
         }),
         MaterialModule,
         ReactiveFormsModule,

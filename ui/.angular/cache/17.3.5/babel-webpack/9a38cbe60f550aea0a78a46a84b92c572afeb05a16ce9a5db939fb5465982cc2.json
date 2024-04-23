@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const Buckets = ['Assets', 'Files', 'Products'];\nexport const BucketVisibilities = ['Private', 'Public'];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
