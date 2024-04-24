@@ -61,7 +61,7 @@ echo -e "\n($START/$STEPS) Initiating pre-build checks...\n"
 START=2
 
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-if [ "$BRANCH" != "main" ];
+if [ "$BRANCH" != "develop" ];
 then
     echo -e "\t[✘] Branch is set to \"main\"\n"
     echo -e "To switch to the correct branch, please use:\n\n\tgit checkout main"
