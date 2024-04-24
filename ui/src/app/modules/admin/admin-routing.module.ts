@@ -22,10 +22,10 @@ const routes: Routes = [
                 path: 'login',
                 component: LoginViewComponent
             },
-            {
-                path: 'register',
-                component: RegisterViewComponent
-            }
+            // {
+            //     path: 'register',
+            //     component: RegisterViewComponent
+            // }
         ]
     }
 ];

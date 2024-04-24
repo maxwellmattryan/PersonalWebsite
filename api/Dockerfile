@@ -1,6 +1,5 @@
 ## BUILD STAGE ##
 FROM node:18.20.2-alpine3.18 AS builder
-RUN npm install -g yarn
 
 WORKDIR /usr/src/app
 

@@ -6,7 +6,7 @@ convertsecs() {
     printf "%02dm %02ds\n" $m $s
 }
 
-NODE_VERSION=15.10.0-alpine3.10
+NODE_VERSION=18.20.0-alpine3.18
 
 API_IMAGE=mattmaxwell-api
 UI_IMAGE=mattmaxwell-ui
@@ -21,8 +21,11 @@ GCP_SERVICE_ACCOUNT=gcloud-api@mattmaxwell-304801.iam.gserviceaccount.com
 GCP_AUTH_KEY_FILE=./conf/gcloud/gcloud-api.json
 GCP_API_SERVICE=mattmaxwell-api
 GCP_UI_SERVICE=mattmaxwell-ui
-GCP_API_IMAGE_PATH="$GCP_HOSTNAME/$GCP_PROJECT_ID/$API_IMAGE"
-GCP_UI_IMAGE_PATH="$GCP_HOSTNAME/$GCP_PROJECT_ID/$UI_IMAGE"
+
+GCP_API_IMAGE_REPO="$GCP_REGION-docker.pkg.dev/$GCP_PROJECT_ID/mattmaxwell-api"
+GCP_UI_IMAGE_REPO="$GCP_REGION-docker.pkg.dev/$GCP_PROJECT_ID/mattmaxwell-ui"
+GCP_API_IMAGE="$GCP_API_IMAGE_REPO/$API_IMAGE"
+GCP_UI_IMAGE="$GCP_UI_IMAGE_REPO/$UI_IMAGE"
 
 API_ACTION=false
 UI_ACTION=false
@@ -105,21 +108,21 @@ then
     docker build . --no-cache --tag "$API_IMAGE"
     echo -e "[Success]: Built local API image!\n"
 
-    echo -e "($(expr $START + 1)/$STEPS) Tagging local API image for Container Registry..."
-    docker tag "$API_IMAGE" "$GCP_API_IMAGE_PATH"
+    echo -e "($(expr $START + 1)/$STEPS) Tagging local API image for Artifact Registry..."
+    docker tag "$API_IMAGE" "$GCP_API_IMAGE:latest"
     echo -e "[Success]: Tagged local API image!\n"
 
-    echo -e "($(expr $START + 2)/$STEPS) Pushing local API image to Container Registry...\n"
-    docker push "$GCP_API_IMAGE_PATH"
+    echo -e "($(expr $START + 2)/$STEPS) Pushing local API image to Artifact Registry...\n"
+    docker push "$GCP_API_IMAGE"
     echo -e "[Success]: Pushed local API image!\n"
 
     echo -e "($(expr $START + 3)/$STEPS) Deploying to Cloud Run service ($GCP_API_SERVICE)...\n"
-    gcloud run deploy "$GCP_API_SERVICE" --image="$GCP_API_IMAGE_PATH" --platform="$GCP_PLATFORM" --region="$GCP_REGION"
+    gcloud run deploy "$GCP_API_SERVICE" --image="$GCP_API_IMAGE" --platform="$GCP_PLATFORM" --region="$GCP_REGION"
     echo -e "[Success]: Deployed service!\n"
 
     echo -e "($(expr $START + 4)/$STEPS) Removing API images from Docker...\n"
     docker rmi "$API_IMAGE:latest"
-    docker rmi "$GCP_API_IMAGE_PATH:latest"
+    docker rmi "$GCP_API_IMAGE:latest"
     echo -e "[Success]: Removed API image(s)!\n"
 
     START=7
@@ -135,21 +138,21 @@ then
     docker build . --no-cache --tag "$UI_IMAGE"
     echo -e "[Success]: Built local UI image!\n"
 
-    echo -e "($(expr $START + 1)/$STEPS) Tagging local UI image for Container Registry..."
-    docker tag "$UI_IMAGE" "$GCP_UI_IMAGE_PATH"
+    echo -e "($(expr $START + 1)/$STEPS) Tagging local UI image for Artifact Registry..."
+    docker tag "$UI_IMAGE" "$GCP_UI_IMAGE:latest"
     echo -e "[Success]: Tagged local UI image!\n"
 
-    echo -e "($(expr $START + 2)/$STEPS) Pushing local UI image to Container Registry...\n"
-    docker push "$GCP_UI_IMAGE_PATH"
+    echo -e "($(expr $START + 2)/$STEPS) Pushing local UI image to Artifact Registry...\n"
+    docker push "$GCP_UI_IMAGE"
     echo -e "[Success]: Pushed local UI image!\n"
 
     echo -e "($(expr $START + 3)/$STEPS) Deploying to Cloud Run service ($GCP_UI_SERVICE)...\n"
-    gcloud run deploy "$GCP_UI_SERVICE" --image="$GCP_UI_IMAGE_PATH" --platform="$GCP_PLATFORM" --region="$GCP_REGION"
+    gcloud run deploy "$GCP_UI_SERVICE" --image="$GCP_UI_IMAGE" --platform="$GCP_PLATFORM" --region="$GCP_REGION"
     echo -e "[Success]: Deployed service!\n"
 
     echo -e "($(expr $START + 4)/$STEPS) Removing UI images from Docker...\n"
     docker rmi "$UI_IMAGE:latest"
-    docker rmi "$GCP_UI_IMAGE_PATH:latest"
+    docker rmi "$GCP_UI_IMAGE:latest"
     echo -e "[Success]: Removed UI image(s)!\n"
 
     if [ "$STEPS" = 12 ]
