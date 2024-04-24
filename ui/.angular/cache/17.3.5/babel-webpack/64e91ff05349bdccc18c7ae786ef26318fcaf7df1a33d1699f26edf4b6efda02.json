@@ -1,1 +1,0 @@
-{"ast":null,"code":"export class PortfolioProfileStatus {\n  constructor(partial) {\n    Object.assign(this, partial);\n  }\n  deserialize(input) {\n    Object.assign(this, input);\n    return this;\n  }\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
