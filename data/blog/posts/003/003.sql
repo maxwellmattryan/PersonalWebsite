@@ -6,7 +6,7 @@ VALUES ('Z5XU26',
         'A consistent way to guarantee painless code merges',
         'A continuous integration (CI) pipeline is crucial for creating an environment where developers can work on creating new features without having to worry about how their individual changes will be integrated into the codebase.',
         'MARKDOWN HERE',
-        'assets/images/blog/003/cmake-juce.webp',
+        'images/blog/003/cmake-juce.webp',
         '2023-11-15 20:23:37.026956',
         '2023-11-18 20:23:37.026956');
 
