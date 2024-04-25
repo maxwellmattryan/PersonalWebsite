@@ -24,7 +24,7 @@ VALUES ('BZFVBL',
 INSERT INTO shop_product(id, category_id, status_id, name, filename, amount, preview, description, image_url)
 VALUES ('VDUI6X',
         '4MCZ11',
-        '5Z06AN',
+        'AXQBK7',
         'Recur',
         'recur.zip',
         3.00,
