@@ -97,7 +97,7 @@ VALUES ('BZ3NMN',
        'Software Engineer',
        'Crafting seamless full-stack experiences in the cloud.',
        'Building software isn''t just a job; it''s an opportunity to shape a better world. Let''s connect and explore how we can make a difference together!',
-       CONCAT('Based in Austin, TX, I thrive on the dynamic challenges full-stack web development. Whether it''s crafting response front-end experiences, architecting scalable backend systems, or fine-tuning databases and cloud infrastructure, I deliver robust solutions that drive business growth.', CHR(13), CHR(10), CHR(13), CHR(10), 'My approach blends technical finesse with an entrepreneurial mindset. I''ve navigated roles that demanded varied expertise - architecting and designing solutions for many problems that haven''t been solved yet, designing and iterating back and forth on product requirements, and being a thorough QA tester when a product is nearing a new release.'),
+       CONCAT('Based in Austin, TX, I thrive on the dynamic challenges full-stack web development. Whether it''s crafting responsive front-end experiences, architecting scalable backend systems, or fine-tuning databases and cloud infrastructure, I deliver robust solutions that drive business growth.', CHR(13), CHR(10), CHR(13), CHR(10), 'My approach blends technical finesse with an entrepreneurial mindset. I''ve navigated roles that demanded varied expertise - architecting and designing solutions for many problems that haven''t been solved yet, designing and iterating back and forth on product requirements, and being a thorough QA tester when a product is nearing a new release.'),
        'images/portfolio/profiles/portrait.webp');
 
 -- Software Engineer Profile Technologies

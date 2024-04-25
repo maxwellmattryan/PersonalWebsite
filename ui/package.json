@@ -6,10 +6,12 @@
     "private": true,
     "scripts": {
         "ng": "ng",
-        "start": "serve dist -l $PORT -s",
+        "start": "yarn start:dev",
         "start:dev": "ng serve",
-        "build": "ng build --configuration production",
+        "start:prod": "serve dist -l $PORT -s",
+        "build": "yarn build:dev",
         "build:dev": "ng build",
+        "build:prod": "ng build --configuration production",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e"
