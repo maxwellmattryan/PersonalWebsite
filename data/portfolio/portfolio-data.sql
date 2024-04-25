@@ -13,14 +13,14 @@ VALUES ('KV66DJ',
         'https://github.com/bloomwalletio/bloom');
 
 -- Firefly Project
-INSERT INTO portfolio_project(id, name, tagline, description, image_url, link_name, link_url)
-VALUES ('7UBH3P',
-        'Firefly',
-        'Cross-platform cryptocurrency wallet',
-        'firefly.md',
-        'images/portfolio/projects/firefly.webp',
-        'GitHub',
-        'https://github.com/iotaledger/firefly');
+-- INSERT INTO portfolio_project(id, name, tagline, description, image_url, link_name, link_url)
+-- VALUES ('7UBH3P',
+--         'Firefly',
+--         'Cross-platform cryptocurrency wallet',
+--         'firefly.md',
+--         'images/portfolio/projects/firefly.webp',
+--         'GitHub',
+--         'https://github.com/iotaledger/firefly');
 
 -- Phantom Project
 INSERT INTO portfolio_project(id, name, tagline, description, image_url, link_name, link_url)
@@ -117,5 +117,5 @@ INSERT INTO portfolio_profile_technology(id, profile_id, name, display_order) VA
 INSERT INTO portfolio_profile_technology(id, profile_id, name, display_order) VALUES ('DL2Q3Y', 'BZ3NMN', 'Sentry', 14);
 
 -- Software Engineer Profile-Project Mappings
-INSERT INTO portfolio_profile_projects_portfolio_project(portfolio_profile_id, portfolio_project_id) VALUES ('BZ3NMN', 'EPTXIK'), ('BZ3NMN', 'KV66DJ');
+INSERT INTO portfolio_profile_projects_portfolio_project(portfolio_profile_id, portfolio_project_id) VALUES ('BZ3NMN', 'CC5STB'), ('BZ3NMN', 'EPTXIK'), ('BZ3NMN', 'KV66DJ');
 -- -- -- -- --

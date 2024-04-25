@@ -12,6 +12,6 @@ oscilloscope. It is built with the following components:
 - **Low-Frequency Oscillators (LFOs)**: modulates various synth parameters, namely oscillators, phasors, and the filter, with sample and hold functionality
 - **Amplifier**: controls the level of the overall output signal
 
-Checkout the [GitHub](https://github.com/blackboxdsp/phantom){:target="_blank"} repository to see more!
+Checkout the [GitHub](https://github.com/blackboxdsp/phantom) repository to see more!
 
 Cheers!

@@ -6,8 +6,8 @@ and smart contracts from within the web browser, transfer tokens and NFTs
 (including ERC20 and ERC721 assets), vote on governance proposals, and buy
 tokens with fiat directly in-app.
 
-You can see their beautiful [website](https://bloomwallet.io){:target="_blank"} for more
-information or visit their [GitHub](https://github.com/bloomwalletio){:target="_blank"} to 
+You can see their beautiful [website](https://bloomwallet.io) for more
+information or visit their [GitHub](https://github.com/bloomwalletio) to 
 dive into the source code.
 
 Cheers!

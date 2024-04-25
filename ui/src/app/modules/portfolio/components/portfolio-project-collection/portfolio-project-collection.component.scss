@@ -40,7 +40,13 @@
     &-name,
     &-tagline,
     &-description,
-    markdown ::ng-deep p {
+    markdown ::ng-deep p,
+    markdown ::ng-deep h1,
+    markdown ::ng-deep h2,
+    markdown ::ng-deep h3,
+    markdown ::ng-deep h4,
+    markdown ::ng-deep h5,
+    markdown ::ng-deep h6 {
         padding: $half-padding $padding;
     }
 

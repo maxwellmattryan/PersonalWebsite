@@ -1,6 +1,6 @@
 Rotor is a variable waveform ring modulation plugin targeting VST3 and AU for OS X and Windows platforms. It uses wavetable synthesis to generate various simple waveforms that act as the modulation signal for the input. It is compiled using the JUCE framework for C++.
 
-If you're wanting to see the source for this plugin, check out the [GitHub repository](https://github.com/blackboxdsp/rotor){:target="_blank"}. In this example of the wavetable synthesis code, the "wavetable" is initialized in the header file with the body of the initialization contained in the cpp file:
+If you're wanting to see the source for this plugin, check out the [GitHub repository](https://github.com/blackboxdsp/rotor). In this example of the wavetable synthesis code, the "wavetable" is initialized in the header file with the body of the initialization contained in the cpp file:
 
 ```cpp
 // RotorAudioProcessor.h
@@ -75,4 +75,5 @@ void RotorAudioProcessor::setWavetable(int waveformIndex)
 }
 ```
 
-Please checkout the [Google Drive folder](https://drive.google.com/drive/folders/1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2?usp=sharing){:target="_blank"} and download the files you need to get started and use Rotor. Unfortunately at the moment, I do not have any builds available for VST, but the AU and VST3 builds work quite well!
+Please checkout the [Google Drive folder](https://drive.google.com/drive/folders/1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2?usp=sharing) and download the files you need to get started and use Rotor. Unfortunately at the moment, I do not have any builds available for VST, but the AU and VST3 builds work quite well!
+

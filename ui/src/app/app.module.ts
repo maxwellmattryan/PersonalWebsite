@@ -10,7 +10,7 @@ import { HttpErrorInterceptor } from '@ui/core/http/http-error.interceptor';
 import { HttpRequestInterceptor } from '@ui/core/http/http-request.interceptor';
 import { NotificationService } from '@ui/core/services';
 
-import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
+import { MarkdownModule, MarkedOptions, MARKED_OPTIONS, MarkedRenderer } from 'ngx-markdown';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -50,8 +50,6 @@ export function markedOptionsFactory(): MarkedOptions {
         gfm: true,
         breaks: false,
         pedantic: false,
-        // smartLists: true,
-        // smartypants: false,
     };
 }
 
@@ -66,10 +64,10 @@ export function markedOptionsFactory(): MarkedOptions {
         HttpClientModule,
         MarkdownModule.forRoot({
             loader: HttpClient,
-            // markedOptions: {
-            //     provide: MarkedOptions,
-            //     useFactory: markedOptionsFactory
-            // }
+            markedOptions: {
+                provide: MARKED_OPTIONS,
+                useFactory: markedOptionsFactory,
+            }
         }),
         MaterialModule,
         ReactiveFormsModule,
