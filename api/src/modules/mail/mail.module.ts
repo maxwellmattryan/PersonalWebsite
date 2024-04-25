@@ -14,7 +14,7 @@ import { MailService } from './mail.service';
             useFactory: () => ({
                 transport: {
                     host: process.env.MAILER_HOST,
-                    port: process.env.MAILER_PORT,
+                    port: Number(process.env.MAILER_PORT),
                     secure: true,
                     auth: {
                         user: process.env.MAILER_USER,

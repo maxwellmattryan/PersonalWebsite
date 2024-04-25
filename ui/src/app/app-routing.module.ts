@@ -19,10 +19,10 @@ const routes: Routes = [
         path: 'portfolio',
         loadChildren: () => import('@ui/modules/portfolio/portfolio.module').then(m => m.PortfolioModule)
     },
-    // {
-    //     path: 'shop',
-    //     loadChildren: () => import('@ui/modules/shop/shop.module').then(m => m.ShopModule)
-    // },
+    {
+        path: 'shop',
+        loadChildren: () => import('@ui/modules/shop/shop.module').then(m => m.ShopModule)
+    },
     {
         path: '**',
         redirectTo: '/'

@@ -37,24 +37,24 @@ import { ShopModule } from '@api/modules/shop/shop.module';
                 // GCLOUD_ADMIN_CREDENTIALS: Joi.string().required(),
                 // GCLOUD_CUSTOMER_CREDENTIALS: Joi.string().required(),
 
-                // GCLOUD_ASSETS_STORAGE_BUCKET: Joi.string().required(),
-                // GCLOUD_FILES_STORAGE_BUCKET: Joi.string().required(),
-                // GCLOUD_PRODUCTS_STORAGE_BUCKET: Joi.string().required(),
+                GCLOUD_ASSETS_STORAGE_BUCKET: Joi.string().required(),
+                GCLOUD_FILES_STORAGE_BUCKET: Joi.string().required(),
+                GCLOUD_PRODUCTS_STORAGE_BUCKET: Joi.string().required(),
 
                 // STRIPE_API_URL: Joi.string().required(),
                 // STRIPE_SK: Joi.string().required(),
                 // STRIPE_PK: Joi.string().required(),
                 // STRIPE_TAX_RATE_ID: Joi.string().required(),
 
-                // MAILER_HOST: Joi.string().required(),
-                // MAILER_PORT: Joi.string().required(),
-                // MAILER_USER: Joi.string().required(),
-                // MAILER_PASS: Joi.string().required(),
+                MAILER_HOST: Joi.string().required(),
+                MAILER_PORT: Joi.number().required(),
+                MAILER_USER: Joi.string().required(),
+                MAILER_PASS: Joi.string().required(),
 
-                // MAILER_QUEUE_NAME: Joi.string().required(),
-                // MAILER_QUEUE_HOST: Joi.string().required(),
-                // MAILER_QUEUE_PORT: Joi.number().required(),
-                // MAILER_QUEUE_PASS: Joi.string(),
+                MAILER_QUEUE_NAME: Joi.string().required(),
+                MAILER_QUEUE_HOST: Joi.string().required(),
+                MAILER_QUEUE_PORT: Joi.number().required(),
+                MAILER_QUEUE_PASS: Joi.string(),
 
                 JWT_SECRET: Joi.string().required(),
                 JWT_EXPIRES_IN: Joi.string().required()
