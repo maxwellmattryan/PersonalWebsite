@@ -71,8 +71,8 @@ INSERT INTO portfolio_profile(id, status_id, name, tagline, landing, about, imag
 VALUES ('5JKLFR',
         'G3SU5I',
         'Blockchain Developer',
-        'I build decentralized software on top of blockchain protocols.',
-        'I''m a software engineer and blockchain developer based in Austin, TX.',
+        'Building user-friendly, decentralized software for web3.',
+        CONCAT('I''m a software engineer and blockchain developer based in Austin, TX.'),
         'I write cool code.',
         'images/portfolio/profiles/portrait.webp');
 
