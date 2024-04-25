@@ -33,5 +33,3 @@ design/store.md
 # Data
 data/admin
 data/**/backups
-data/**/*.md
-data/**/*.prod.sql

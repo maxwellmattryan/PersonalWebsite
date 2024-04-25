@@ -3,13 +3,22 @@ INSERT INTO portfolio_profile_status(id, status) VALUES ('G3SU5I', 'INACTIVE');
 
 -- CAUTION: The following data is starter data - NOT intended for production
 INSERT INTO portfolio_project(id, name, tagline, description, image_url, link_name, link_url)
+VALUES ('CC5STB',
+        'Phantom',
+        'Modern C++ phase distortion synthesizer plugin',
+        'phantom.md',
+        'images/portfolio/projects/phantom.webp',
+        'GitHub',
+        'https://github.com/blackboxdsp/phantom');
+
+INSERT INTO portfolio_project(id, name, tagline, description, image_url, link_name, link_url)
 VALUES ('EPTXIK',
         'Rotor',
-        'Modern C++ ring modulation plugin',
+        'Modern C++ ring modulation effect plugin',
         'rotor.md',
         'images/portfolio/projects/rotor.webp',
-        'Google Drive',
-        'https://drive.google.com/drive/folders/1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2?usp=sharing');
+        'GitHub',
+        'https://github.com/blackboxdsp/rotor');
 
 INSERT INTO portfolio_project(id, name, tagline, description, image_url, link_name, link_url)
 VALUES ('WTWJN9',

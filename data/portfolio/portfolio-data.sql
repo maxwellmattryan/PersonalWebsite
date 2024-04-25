@@ -29,8 +29,8 @@ VALUES ('CC5STB',
         'Modern C++ phase distortion synthesizer plugin',
         'phantom.md',
         'images/portfolio/projects/phantom.webp',
-        'Google Drive',
-        'https://drive.google.com/drive/folders/1v_42K9S5zXPQSAnKNQml_hGD5UT6elxs?usp=sharing');
+        'GitHub',
+        'https://github.com/blackboxdsp/phantom');
 
 -- Rotor Project
 INSERT INTO portfolio_project(id, name, tagline, description, image_url, link_name, link_url)
@@ -39,8 +39,8 @@ VALUES ('EPTXIK',
         'Modern C++ ring modulation effect plugin',
         'rotor.md',
         'images/portfolio/projects/rotor.webp',
-        'Google Drive',
-        'https://drive.google.com/drive/folders/1Vt5EhEqqlEPCf3kp-zyU0TGP6DlU1NL2?usp=sharing');
+        'GitHub',
+        'https://github.com/blackboxdsp/rotor');
 
 -- Audio Developer Profile
 INSERT INTO portfolio_profile(id, status_id, name, tagline, landing, about, image_url)
