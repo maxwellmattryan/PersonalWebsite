@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as *;
 
 markdown ::ng-deep h1,
 markdown ::ng-deep h2,
@@ -15,7 +15,7 @@ markdown ::ng-deep img {
 }
 
 markdown ::ng-deep pre {
-    margin: calc(#{$half-margin} * 1.0) 0 calc(#{$half-margin} * 1.5); 
+    margin: calc(#{$half-margin} * 1.0) 0 calc(#{$half-margin} * 1.5);
 }
 
 markdown ::ng-deep a {

@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as *;
 
 .fill-space {
     flex: 1;
@@ -134,8 +134,8 @@
         opacity: 0.5;
         width: 0vw;
     }
-    
-    &--open { 
+
+    &--open {
         opacity: 1;
         width: 50vw;
     }

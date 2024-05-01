@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as *;
 
 .posts {
     min-height: calc(41vh + 1px);

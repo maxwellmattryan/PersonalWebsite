@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as *;
 
 .faq {
     min-height: calc(99vh - #{$header-height} - #{$footer-height} * 1 - #{$section-divider-height});

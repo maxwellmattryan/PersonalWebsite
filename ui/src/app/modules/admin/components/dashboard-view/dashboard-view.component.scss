@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as *;
 
 .dashboard {
     min-height: calc(99vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});

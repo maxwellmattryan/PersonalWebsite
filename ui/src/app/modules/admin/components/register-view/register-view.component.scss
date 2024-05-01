@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as *;
 
 .register {
     min-height: calc(100vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});
@@ -14,7 +14,7 @@
 }
 
 .register__form-field {
-    
+
 }
 
 .register__form-btn {

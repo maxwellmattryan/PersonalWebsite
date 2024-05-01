@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as *;
 
 .editor {
     min-height: calc(100vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});

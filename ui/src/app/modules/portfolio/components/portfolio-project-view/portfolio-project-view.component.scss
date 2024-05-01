@@ -1,5 +1,5 @@
-@import 'markdown';
-@import 'variables';
+@use  'markdown';
+@use 'variables' as *;
 
 .project {
     min-height: calc(100vh - #{$header-height} - #{$footer-height} * 2 - #{$section-divider-height});

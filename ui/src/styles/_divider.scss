@@ -1,5 +1,5 @@
-@import 'mixins';
-@import 'variables';
+@use 'mixins';
+@use 'variables' as *;
 
 .line-divider {
     background: $color-light;
